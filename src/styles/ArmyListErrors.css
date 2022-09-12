@@ -1,0 +1,9 @@
+.army-list-errors {
+  color: #D0312d;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 10px;
+  padding-left: 25px;
+}

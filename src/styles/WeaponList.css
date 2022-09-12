@@ -1,0 +1,35 @@
+.equipment-list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.equipment-list {
+    display: flex;
+    gap: 10px;  
+    justify-content: center;
+}
+
+.equipment-list-name {
+    text-align: center;
+}
+
+.equipment-type-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    white-space: nowrap;
+}
+.equipment-type-list h4 {
+   text-align: center;
+}
+
+
+.equipment-type-list ul {
+    font-size: 0.8rem;
+}
+
+.equipment-type-list input {
+margin-right: 3px;
+}

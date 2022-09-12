@@ -1,0 +1,11 @@
+.army-list-header {
+    box-sizing: border-box;
+    padding: 5px;
+    width: 670px;
+    font-size: 0.8rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border: 2px solid black;
+}

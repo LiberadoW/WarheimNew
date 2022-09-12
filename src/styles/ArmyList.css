@@ -1,0 +1,15 @@
+.army-list-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.print-a4-page {
+  size: 21cm 29.7cm;
+  margin: 10mm 10mm 0mm 10mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 7px;
+}

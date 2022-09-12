@@ -1,0 +1,66 @@
+.builder {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.unit {
+    width: 100%;
+    border: 2px solid black;
+    padding: 20px;
+
+    li {
+        width: 100%;
+        display: flex;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-style: hidden;
+        font-size: 0.8rem;
+
+        thead {
+            font-weight: bold;
+            text-align: center;
+
+            tr td {
+                width: 30px;
+                text-align: center;
+                border: 1px solid black;
+            }
+        }
+
+        tbody tr td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid black;
+        }
+    }
+}
+
+
+.unit-info-container {
+    color: #2B0702;
+    font-weight: bold;
+}
+
+.unit table thead tr td:nth-of-type(1) {
+    padding: 5px;
+    text-align: left;
+}
+
+
+.unit table tbody tr td:nth-of-type(1) {
+    padding: 5px;
+    text-align: left;
+}
+
+.unit-info {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.unit-info span:nth-of-type(2),
+.unit-info span:nth-of-type(3) {
+    cursor: pointer;
+}

@@ -1,0 +1,42 @@
+.unit-stats-rules-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.unit-rules-container {
+    flex: 1;
+    font-size: 0.8rem;
+}
+
+.unit-rules-container span {
+    font-weight: bold;
+}
+
+.unit-stats-table-container {
+    flex: 1
+}
+
+.number-of-henchmen {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-unit-container {
+    padding: 20px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.unit-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-builder-wrapper {
+    display: flex;
+
+}

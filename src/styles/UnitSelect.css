@@ -1,0 +1,11 @@
+.unit-select-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.unit-select-container p {
+    display: flex;
+    gap: 5px;
+}

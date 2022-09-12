@@ -1,0 +1,86 @@
+.campaign-points-container {
+    box-sizing: border-box;
+    width: 670px;
+    margin: 0 auto;
+    background-color: white;
+    height: 210px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .campaign-points-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: 1px solid black;
+  }
+
+  .campaign-points-title {
+      text-align: center;
+      padding: 2px;
+      border-bottom: 1px solid black;
+      background-color: gray;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8rem;
+  }
+
+  .campaign-points-rules {
+    display: flex;
+  }
+
+  .campaign-points {
+    flex: 3;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .special-rules {
+    flex: 3;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .campaign-points-sum {
+    flex: 1;
+    text-align: center;
+    font-size: 0.55rem;
+    padding: 5px;
+  }
+
+  .campaign-points-boxes-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+  }
+
+  .campaing-points-boxes {
+    box-sizing: border-box;
+    font-size: 0.55rem;
+    padding: 2px;
+    grid-area: 7 / 1 / span 11 / 7;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 1px;
+    grid-row-gap: 3px;
+    margin-bottom: -1px;
+  }
+
+  .campaing-points-boxes-name {
+    font-size: 0.55rem;
+  }
+
+  .campaing-points-boxes span {
+    box-sizing: border-box;
+    width: 8px;
+    height: 8px;
+  }
+
+
