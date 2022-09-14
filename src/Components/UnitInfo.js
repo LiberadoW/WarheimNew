@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import WeaponList from "../layouts/WeaponList";
 import UnitTable from "./UnitTable";
 
@@ -28,6 +28,7 @@ const UnitInfo = ({
               className={`unit ${index}`}
               id={index}
               handleClick={handleClickShow}
+              key={index}
             >
               <div className="edit-unit-container">
                 <div className="unit-name-input">
@@ -43,6 +44,7 @@ const UnitInfo = ({
                         ? unit.unitDisplayName
                         : ""
                     }
+                    key={index}
                   />
                 </div>
                 <WeaponList

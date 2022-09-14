@@ -1,5 +1,4 @@
 import React from "react";
-import { armies } from "../layouts/Builder";
 import "../styles/ArmyListHeader.css";
 
 const ArmyListHeader = ({ army, prestige, armyName }) => {

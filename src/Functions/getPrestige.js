@@ -77,9 +77,7 @@ export const getPrestige = (arr, army) => {
           const equipment = item.startingEquipment.concat(
             item.optionalEquipment
           );
-          const equipmentList =
-           army.heroes[item.unitName].equipmentList;
-
+          const equipmentList = item.equipmentList;
           const keys = Object.keys(equipmentList);
           const keysSplit = keys.map((key, index) => {
             if (key.includes("/")) {
@@ -106,7 +104,12 @@ export const getPrestige = (arr, army) => {
 
           equipment.forEach((eq) => {
             keysSplit.forEach((key) => {
-              if (key[0] === eq) {
+              if (typeof key[0] == "object") {
+                if (key[0].includes(eq)) {
+                  prestigeValues.equipmentTotalValue +=
+                    equipmentList[keys[key[1]]][0] * item.selectedNumber;
+                }
+              } else if (key[0] === eq) {
                 prestigeValues.equipmentTotalValue +=
                   equipmentList[keys[key[1]]][0] * item.selectedNumber;
               }

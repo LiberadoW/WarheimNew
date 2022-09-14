@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "../styles/WeaponList.css";
 import { disableButtons } from "../Functions/disableButtons";
+import mageEquipmentList from "../Data.js/MageEquipmentList";
 
-
-const WeaponList = (props) => {
-  const commandGroupUnit = props.unitList[props.id];
-
+const WeaponList = ({
+  heroEquipment,
+  heroes,
+  id,
+  unitList,
+  unitName,
+  setUnitList,
+  rules,
+}) => {
+  const commandGroupUnit = unitList[id];
   const findCommonElements = (arr1, arr2) => {
-    const index = arr1.some((item) => arr2.includes(item))
-
+    const index = arr1.some((item) => arr2.includes(item));
     return index;
   };
+
   const [checked, setChecked] = useState(
     commandGroupUnit.commandGroup ? commandGroupUnit : ""
   );
 
   const [isCommandGroup, setCommandGroup] = useState(
-    props.unitList[props.id].rules.includes("Chorążowie & sygnaliści")
+    unitList[id].rules.includes("Chorążowie & sygnaliści")
   );
 
   const unitArray = Array.from(document.querySelectorAll(".unit"));
@@ -85,14 +92,80 @@ const WeaponList = (props) => {
       disableButtons("Zbroja", index);
       disableButtons("Tarcza", index);
       disableButtons("Choice", index);
+      disableButtons("Tradycja", index);
     });
   });
 
   const handleWeaponListClick = (e) => {
-    const unit = props.unitList[e.target.className];
-    const equipmentList = props.unitList[e.target.className].optionalEquipment;
+    const unit = unitList[e.target.className];
+    const equipmentList = unitList[e.target.className].optionalEquipment;
 
-    if (equipmentList.includes(e.target.name)) {
+    if (e.target.name.includes("Tradycja")) {
+      if (unit.rules.includes(e.target.name)) {
+        unit.rules.splice(unit.rules.indexOf(e.target.name), 1);
+      } else {
+        unit.rules.push(e.target.name);
+      }
+
+      if (e.target.checked === true) {
+        Object.entries(mageEquipmentList[e.target.name].equipment).forEach(
+          ([key, value]) => {
+            unit.equipmentList[key] = value;
+          }
+        );
+        unit.skills = mageEquipmentList[e.target.name].skills;
+      } else {
+        unit.equipmentList = {
+          "Tradycja Bestii": [0, 4, "Tradycja"],
+          "Tradycja Cienia": [0, 4, "Tradycja"],
+          "Tradycja Metalu": [0, 4, "Tradycja"],
+          "Tradycja Niebios": [0, 4, "Tradycja"],
+          "Tradycja Ognia": [0, 4, "Tradycja"],
+          "Tradycja Śmierci": [0, 4, "Tradycja"],
+          "Tradycja Światła": [0, 4, "Tradycja"],
+          "Tradycja Życia": [0, 4, "Tradycja"],
+        };
+        unit.optionalEquipment = [];
+        unit.skills = [];
+      }
+    } else {
+      if (equipmentList.includes(e.target.name)) {
+        equipmentList.splice(equipmentList.indexOf(e.target.name), 1);
+      } else {
+        equipmentList.push(e.target.name);
+      }
+
+      unit.cost = e.target.checked
+        ? unit.cost + Number(e.target.value)
+        : unit.cost - Number(e.target.value);
+
+      if (isCommandGroup) {
+        const commandGroupArray = Array.from(
+          document.querySelectorAll("input[data='Dowodzenie']")
+        );
+        const howManyCommandChecked = commandGroupArray.filter(
+          (x) => x.checked === true
+        ).length;
+        unit.totalCost =
+          unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
+      } else {
+        unit.totalCost = unit.cost * unit.selectedNumber;
+      }
+    }
+
+    const newUnitList = [...unitList];
+    setUnitList(newUnitList);
+  };
+
+  const handleWeaponListClick2 = (e) => {
+    const unit = unitList[e.target.className];
+    const equipmentList = unitList[e.target.className].optionalEquipment;
+
+    if (
+      equipmentList
+        .concat(unitList[id].startingEquipment)
+        .filter((x) => x === e.target.name).length === 2
+    ) {
       equipmentList.splice(equipmentList.indexOf(e.target.name), 1);
     } else {
       equipmentList.push(e.target.name);
@@ -115,13 +188,13 @@ const WeaponList = (props) => {
       unit.totalCost = unit.cost * unit.selectedNumber;
     }
 
-    const newUnitList = [...props.unitList];
-    props.setUnitList(newUnitList);
+    const newUnitList = [...unitList];
+    setUnitList(newUnitList);
   };
 
   const handleCommandGroupClick = (e) => {
     const commandGroupButton = document.querySelector(
-      `div[id='${props.id}'] input[name='command-group-checkbox']`
+      `div[id='${id}'] input[name='command-group-checkbox']`
     );
 
     const allCommandGroupButtonsArray = Array.from(
@@ -141,9 +214,9 @@ const WeaponList = (props) => {
     }
 
     setChecked(commandGroupButton.checked);
-    const unit = props.unitList[e.target.className];
+    const unit = unitList[e.target.className];
     unit.commandGroup = commandGroupButton.checked;
-    const equipmentList = props.unitList[e.target.className].optionalEquipment;
+    const equipmentList = unitList[e.target.className].optionalEquipment;
 
     if (e.target.name != "command-group-checkbox") {
       if (equipmentList.includes(e.target.name)) {
@@ -176,29 +249,32 @@ const WeaponList = (props) => {
       unit.totalCost = unit.cost * unit.selectedNumber;
     }
 
-    unit.number = unit.commandGroup ? 2 : props.heroes[unit.unitName].number;
+    unit.number = unit.commandGroup ? 2 : heroes[unit.unitName].number;
 
-    const newUnitList = [...props.unitList];
-    props.setUnitList(newUnitList);
+    const newUnitList = [...unitList];
+    setUnitList(newUnitList);
   };
 
-  const equipmentTypeArr = [{}, {}, {}, {}];
+  const equipmentTypeArr = [{}, {}, {}, {}, {}];
   const equipmentTypeNames = [
     "Broń do walki wręcz",
     "Broń dystansowa",
     "Pancerz",
     "Specjalne",
+    "Kolegia magii",
   ];
 
-  Object.keys(props.heroEquipment).forEach((item) => {
-    equipmentTypeArr[props.heroEquipment[item][1]][item] =
-      props.heroEquipment[item];
+  Object.keys(unitList[id].equipmentList).forEach((item) => {
+    equipmentTypeArr[unitList[id].equipmentList[item][1]][item] =
+      unitList[id].equipmentList[item];
   });
 
   return (
     <div className="equipment-list-container">
       <div className="equipment-list-name">
-        {Object.keys(props.heroEquipment).length === 0 ? null : <h4>Lista ekiwpunku</h4>}
+        {Object.keys(unitList[id].equipmentList).length === 0 ? null : (
+          <h4>Lista ekiwpunku</h4>
+        )}
       </div>
       <div className="equipment-list">
         {equipmentTypeArr.map((item, indexMain) => {
@@ -215,34 +291,58 @@ const WeaponList = (props) => {
                       keyArr = [key];
                     }
                     const isStartingEquipment = findCommonElements(
-                      props.unitList[props.id].startingEquipment,
+                      unitList[id].startingEquipment,
                       keyArr
                     );
+
                     return (
-                      <li>
+                      <li key={`${index}3`}>
                         <span
-                          style={{ marginRight: value[0] < 9 ? "15px" : "8.6px" }}
+                          style={{
+                            marginRight: value[0] < 9 ? "15px" : "8.6px",
+                          }}
                         >{`${value[0]} zk `}</span>
                         <input
                           onClick={handleWeaponListClick}
                           checked={
-                            props.unitList[props.id].optionalEquipment.includes(
-                              key
-                            ) || isStartingEquipment
+                            unitList[id].optionalEquipment.includes(key) ||
+                            isStartingEquipment ||
+                            unitList[id].rules.includes(key)
                           }
                           data={value[2]}
                           name={key}
                           value={value[0]}
-                          className={props.id}
+                          className={id}
                           key={index}
                           type="checkbox"
                           disabled={
-                            props.unitList[props.id].startingEquipment.includes(
-                              key
-                            ) || isStartingEquipment
+                            unitList[id].startingEquipment.includes(key) ||
+                            isStartingEquipment
                           }
                           readOnly
                         ></input>
+                        {indexMain <= 1 && (
+                          <input
+                            onClick={handleWeaponListClick2}
+                            checked={
+                              unitList[id].optionalEquipment
+                                .concat(unitList[id].startingEquipment)
+                                .filter((x) => x === key).length === 2
+                            }
+                            data={value[2]}
+                            name={key}
+                            value={value[0]}
+                            className={id}
+                            key={`${index}2`}
+                            type="checkbox"
+                            disabled={
+                              unitList[id].startingEquipment.filter(
+                                (x) => x === key
+                              ).length === 2
+                            }
+                            readOnly
+                          ></input>
+                        )}
                         {key}
                       </li>
                     );
@@ -260,7 +360,7 @@ const WeaponList = (props) => {
                 <input
                   type="checkbox"
                   checked={checked}
-                  className={props.id}
+                  className={id}
                   name="command-group-checkbox"
                   readOnly
                 ></input>
@@ -271,11 +371,11 @@ const WeaponList = (props) => {
                   <li>
                     <input
                       type="checkbox"
-                      className={props.id}
+                      className={id}
                       name="Chorąży"
-                      checked={props.unitList[
-                        props.id
-                      ].optionalEquipment.includes("Chorąży")}
+                      checked={unitList[id].optionalEquipment.includes(
+                        "Chorąży"
+                      )}
                       data="Dowodzenie"
                       readOnly
                     />
@@ -284,11 +384,11 @@ const WeaponList = (props) => {
                   <li>
                     <input
                       type="checkbox"
-                      className={props.id}
+                      className={id}
                       name="Sygnalista"
-                      checked={props.unitList[
-                        props.id
-                      ].optionalEquipment.includes("Sygnalista")}
+                      checked={unitList[id].optionalEquipment.includes(
+                        "Sygnalista"
+                      )}
                       data="Dowodzenie"
                       readOnly
                     />

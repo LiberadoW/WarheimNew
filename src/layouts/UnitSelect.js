@@ -36,6 +36,7 @@ const UnitSelect = ({
           cost: heroes[unitName].cost,
           totalCost: heroes[unitName].cost,
           startingEquipment: heroes[unitName].startingEquipment,
+          equipmentList: heroes[unitName].equipmentList,
           stats: heroes[unitName].stats,
           rules: heroes[unitName].rules,
           exp: heroes[unitName].exp,
@@ -46,31 +47,6 @@ const UnitSelect = ({
         },
       ]);
     }
-  };
-
-  const handleClick2 = () => {
-    setUnitList((oldUnitList) => [
-      ...oldUnitList,
-      {
-        unitName: "",
-        unitDisplayName: "",
-        id: 1000,
-        optionalEquipment: [],
-        cost: 0,
-        totalCost: 0,
-        startingEquipment: [],
-        stats: {
-          Początkowa: ["", "", "", "", "", "", "", "", ""],
-          Maksymalna: ["", "", "", "", "", "", "", "", ""],
-        },
-        rules: [],
-        exp: "",
-        skills: [""],
-        type: "Bohater",
-        number: "",
-        selectedNumber: 1,
-      },
-    ]);
   };
 
   const groups = [{}, {}, {}];
@@ -93,16 +69,14 @@ const UnitSelect = ({
   return (
     <div className="unit-select-container">
       <span className="bold">Postać:</span>
-      {/* <button onClick={handleClick2}>Dodaj puste</button> */}
-
       <p>
-      <select name="" id="unit-selection" onChange={handleOnChange}>
-        <option value="" selected="selected" disabled>
+      <select name="" id="unit-selection" onChange={handleOnChange} value={unitName}>
+        <option value=""  disabled>
           Wybierz postać
         </option>
         {groupedHeroes.map((item, index) => {
           return (
-            <optgroup label={labels[index]}>
+            <optgroup label={labels[index]} key={index}>
               {Object.entries(groupedHeroes[index]).map(([key, value]) => {
                 return (
                   <option
@@ -121,7 +95,7 @@ const UnitSelect = ({
           );
         })}
       </select>
-      <button onClick={handleClick}>Dodaj</button>
+      <button className="button"onClick={handleClick}>Dodaj</button>
       </p>
     </div>
   );

@@ -5,7 +5,7 @@ const getModelAmount = (unitList, army) => {
     const unitNumbers = getUnitNumbers(unitList);
     //filter out mercenaries, they don't count towards model limit
     const filteredUnits = Object.keys(unitNumbers).filter((unit) =>
-      Object.keys(armies[army].heroes).includes(unit)
+      Object.keys(army.heroes).includes(unit)
     );
   
     const filteredUnitNumbers = {};

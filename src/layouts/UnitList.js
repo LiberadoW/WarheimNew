@@ -2,8 +2,8 @@ import React from "react";
 import "../styles/UnitList.css";
 
 const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
-  const handleClick = (e) => {
-    const unitIndex = e.target.className;
+  const handleDeleteClick = (e) => {
+    const unitIndex = e.target.parentNode.className;
     unitList.splice(unitIndex, 1);
     const newUnitList = [...unitList];
     setUnitList(newUnitList);
@@ -29,6 +29,7 @@ const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
             backgroundColor:
               unitList.indexOf(unit) == idShown ? "#A9A9A9" : "white",
           }}
+          key={index}
         >
           <li
             key={index}
@@ -65,8 +66,8 @@ const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
               <span>{`${
                 unit.selectedNumber === 1 ? unit.totalCost : unit.totalCost
               } zk`}</span>
-              <span className={index} onClick={handleClick}>
-                <i class="fa-solid fa-trash-can"></i>
+              <span className={index} onClick={handleDeleteClick}>
+                <i className="fa-solid fa-trash-can"></i>
               </span>
             </p>
           </li>

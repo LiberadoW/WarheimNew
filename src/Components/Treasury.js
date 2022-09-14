@@ -2,9 +2,9 @@ import React from "react";
 import "../styles/Treasury.css";
 import { getPrestige } from "../Functions/getPrestige";
 
-const Treasury = ({ army, unitList, heroesUnitList, henchmenUnitList }) => {
-  const prestigeValues = getPrestige(unitList, army);
+const Treasury = ({ army, unitList }) => {
 
+  const prestigeValues = getPrestige(unitList, army);
   return (
     <div className="treasury-container">
       <div className="big-prestige">

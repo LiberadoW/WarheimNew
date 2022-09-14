@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { armies } from "./Builder";
-import UnitTable from "../Components/UnitTable";
 import Builder from "./Builder";
 import "../styles/style.css";
 import ArmyList from "../Components/ArmyList";
 import useShareStatesBetweenTabs from "react-share-states-between-tabs";
+import armies from "../Data.js/Armies";
+
 
 const App = () => {
   const [unitList, setUnitList] = useShareStatesBetweenTabs("unitList", []);
-  const [army, setArmy] = useState("cyrkowcy");
+  const [army, setArmy] = useShareStatesBetweenTabs(
+    "army",
+    window.localStorage.hasOwnProperty("army")
+      ? JSON.parse(window.localStorage.getItem("army"))
+      : "Cyrkowcy z Ligii Ostermarku"
+  );
   const [unitName, setUnitName] = useState("");
+  const [mercenaryUnitName,setMercenaryUnitName] = useState("")
   const [prestige, setPrestige] = useShareStatesBetweenTabs("prestige", 0);
   const [armyName, setArmyName] = useShareStatesBetweenTabs("army-name", "");
   const newUnitList = [...unitList];
@@ -78,10 +84,12 @@ const App = () => {
               <Builder
                 unitList={unitList}
                 setUnitList={setUnitList}
-                army={army}
+                army={armies[army]}
                 setArmy={setArmy}
                 unitName={unitName}
                 setUnitName={setUnitName}
+                mercenaryUnitName = {mercenaryUnitName}
+                setMercenaryUnitName = {setMercenaryUnitName}
                 prestige={prestige}
                 setPrestige={setPrestige}
                 setArmyName={setArmyName}

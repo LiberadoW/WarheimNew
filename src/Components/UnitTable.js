@@ -3,34 +3,42 @@ import "../styles/UnitTable.css";
 import { getModifiers } from "../Functions/getModifiers";
 import StatsTable from "./StatsTable";
 
+const experienceBold = [
+  2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 41, 46, 51, 57, 63, 69, 76, 83,
+  90,
+];
+
+const experienceBoldHenchmen = [2,5,9,14]
+
+
+const statsHeaders = [
+  "Statystyka",
+  "Sz",
+  "WW",
+  "US",
+  "S",
+  "Wt",
+  "Żw",
+  "I",
+  "A",
+  "CP",
+  "OP",
+];
+const skills = [
+  "Walki",
+  "Strzeleckie",
+  "Akademickie",
+  "Siłowe",
+  "Szybkościowe",
+  "Specjalne",
+];
+
+
+
+
 const UnitTable = ({ unitList, heroes }) => {
 
-  const experienceBold = [
-    2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 41, 46, 51, 57, 63, 69, 76, 83,
-    90,
-  ];
-  const statsHeaders = [
-    "Statystyka",
-    "Sz",
-    "WW",
-    "US",
-    "S",
-    "Wt",
-    "Żw",
-    "I",
-    "A",
-    "CP",
-    "OP",
-  ];
-  const skills = [
-    "Walki",
-    "Strzeleckie",
-    "Akademickie",
-    "Siłowe",
-    "Szybkościowe",
-    "Specjalne",
-  ];
-
+  
   return (
     <div className="army-list-container">
       <div className="army-list">
@@ -71,8 +79,9 @@ const UnitTable = ({ unitList, heroes }) => {
                   <div className="unit-table-skills">
                     {skills.map((skill, index) => {
                       return (
-                        <span>
+                        <span key={index} >
                           <i
+                          
                             className={
                               item.skills.includes(index)
                                 ? "fa-solid fa-square-full"
@@ -189,7 +198,7 @@ const UnitTable = ({ unitList, heroes }) => {
                     {[...Array(14)].map((e, i) => (
                       <span
                         className={
-                          experienceBold.includes(i + 1)
+                          experienceBoldHenchmen.includes(i + 1)
                             ? "experience-box-bold"
                             : "experience-box"
                         }
@@ -229,7 +238,7 @@ const UnitTable = ({ unitList, heroes }) => {
                 <div className="equipment-table-henchmen">
                   <div className="skills-henchmen">
                     <span className="bold">
-                      {"Umiejętności & zaklęcia/modlitwy: "}
+                      {"Umiejętności & zasady specjalne: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
@@ -246,7 +255,7 @@ const UnitTable = ({ unitList, heroes }) => {
                     {[...Array(14)].map((e, i) => (
                       <span
                         className={
-                          experienceBold.includes(i + 1)
+                          experienceBoldHenchmen.includes(i + 1)
                             ? "experience-box-bold"
                             : "experience-box"
                         }

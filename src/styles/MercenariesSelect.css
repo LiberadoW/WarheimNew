@@ -4,3 +4,8 @@
     align-items: center;
     gap: 5px;
 }
+
+.mercenaries-select-container p {
+    display: flex;
+    gap: 5px;
+}

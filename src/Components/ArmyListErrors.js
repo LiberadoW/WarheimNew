@@ -1,5 +1,4 @@
 import React from "react";
-import { armies } from "../layouts/Builder";
 import "../styles/ArmyListErrors.css";
 import isGeneral from "../Functions/isGeneral";
 import getModelAmount from "../Functions/getModelAmount";
@@ -9,9 +8,9 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
 
   return (
     <div className="army-list-errors">
-      {totalCost > armies[army].limit && (
+      {totalCost > army.limit && (
         <p className="bold">
-          <i class="fa-solid fa-triangle-exclamation"></i> Przekroczono liczbę
+          <i className="fa-solid fa-triangle-exclamation"></i> Przekroczono liczbę
           złotych koron.
         </p>
       )}
@@ -19,24 +18,24 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
       {!isGeneral(unitList) && (
         <p className="bold">
           {" "}
-          <i class="fa-solid fa-triangle-exclamation"></i> Banda musi posiadać
+          <i className="fa-solid fa-triangle-exclamation"></i> Banda musi posiadać
           dowódcę.
         </p>
       )}
 
-      {modelAmount < armies[army].minModels && (
+      {modelAmount < army.minModels && (
         <p className="bold">
           {" "}
-          <i class="fa-solid fa-triangle-exclamation"></i>{" "}
-          {`Banda musi składać się z przynajmniej ${armies[army].minModels} modeli.`}
+          <i className="fa-solid fa-triangle-exclamation"></i>{" "}
+          {`Banda musi składać się z przynajmniej ${army.minModels} modeli.`}
         </p>
       )}
 
-      {modelAmount > armies[army].maxModels && (
+      {modelAmount > army.maxModels && (
         <p className="bold">
           {" "}
-          <i class="fa-solid fa-triangle-exclamation"></i>{" "}
-          {`Banda musi składać się z maksymalnie ${armies[army].maxModels} modeli.`}
+          <i className="fa-solid fa-triangle-exclamation"></i>{" "}
+          {`Banda musi składać się z maksymalnie ${army.maxModels} modeli.`}
         </p>
       )}
     </div>

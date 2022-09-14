@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ArmyListErrors from "./ArmyListErrors";
-import { armies } from "../layouts/Builder";
+import armies from "../Data.js/Armies";
 import "../styles/ArmyInfo.css";
 import getErrors from "../Functions/getErrors";
 import getModelAmount from "../Functions/getModelAmount";
-import { Route, Routes, Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const ArmyInfo = ({ totalCost, prestige, army, unitList,setArmyName}) => {
+const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName }) => {
   const [clicked, setClicked] = useState(false);
   const [errors, setErrors] = useState(0);
 
@@ -16,30 +16,36 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList,setArmyName}) => {
 
   const modelAmount = getModelAmount(unitList, army);
 
-  useEffect(()=> {
+  useEffect(() => {
     setErrors(getErrors(armies, army, totalCost, modelAmount, unitList));
-  })
+  },[army, totalCost, modelAmount, unitList]);
 
   const handleArmyNameChange = (e) => {
-    setArmyName(e.target.value)
-  }
+    setArmyName(e.target.value);
+  };
 
   return (
     <div className="army-info-alerts-container">
       <div className="army-info-container">
         <div className="army-info-left">
-          {errors > 0 && <p className="alerts" onClick={handleClick}>
-            {clicked ? (
-              <i class="fa-solid fa-caret-down fa-xl"></i>
-            ) : (
-              <i class="fa-solid fa-caret-right fa-xl"></i>
-            )}
-            <span><i class="fa-solid fa-triangle-exclamation"></i> Liczba błędów: {errors} </span>
-          </p> }
+          {errors > 0 && (
+            <p className="alerts" onClick={handleClick}>
+              {clicked ? (
+                <i className="fa-solid fa-caret-down fa-xl"></i>
+              ) : (
+                <i className="fa-solid fa-caret-right fa-xl"></i>
+              )}
+              <span>
+                <i className="fa-solid fa-triangle-exclamation"></i> Liczba błędów:{" "}
+                {errors}{" "}
+              </span>
+            </p>
+          )}
         </div>
         <div className="army-info-right">
           <p className="army-name-input">
-            <span>Nazwa kompanii:</span> <input onChange={handleArmyNameChange} type="text" />
+            <span>Nazwa kompanii:</span>{" "}
+            <input onChange={handleArmyNameChange} type="text" />
           </p>
           <p className="prestige">
             <span className="bold">Prestiż:</span> {prestige}
@@ -47,17 +53,18 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList,setArmyName}) => {
           <p
             className="total-cost"
             style={{
-              color: totalCost > armies[army].limit ? "red" : "black",
+              color: totalCost > army.limit ? "red" : "black",
             }}
           >
             <span className="bold">Suma:</span>{" "}
-            {`${totalCost} / ${armies[army].limit} zk`}
+            {`${totalCost} / ${army.limit} zk`}
           </p>
           <p>
-          <Link to="/armylist" target="_blank"><button>Eksportuj</button></Link>
+            <Link to="/armylist" target="_blank">
+              <button className="button">Eksportuj</button>
+            </Link>
           </p>
         </div>
-
       </div>
       {clicked && (
         <ArmyListErrors army={army} unitList={unitList} totalCost={totalCost} />
