@@ -51,10 +51,7 @@ const UnitTable = ({ unitList, heroes }) => {
           let [armour, speedModifier, initativeModifier] =
             getModifiers(equipmentString,item);
 
-            if (item.rules.includes("Krzepki")) {
-              speedModifier = 0;
-              initativeModifier = 0;
-            }
+            
 
           if (item.type !== "Najemne Ostrze") {
             equipmentString.sort(
