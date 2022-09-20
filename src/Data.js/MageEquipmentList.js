@@ -5,7 +5,7 @@ const mageEquipmentList = {
       Bicz: [15, 0],
       Kostur: [5, 0],
       Sztylet: [2, 0],
-      "Topór bojowy": [5, 0],
+      "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
       "Broń miotana": [10, 1],
       Łuk: [10, 1],

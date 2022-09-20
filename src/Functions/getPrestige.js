@@ -13,7 +13,7 @@ const mountList = {
   "Obmierzły pajonk": 50,
   Rumak: 65,
   "Rumak chaosu": 65,
-  "Rumak elfów": 70,
+  "Rumak Elfów": 70,
   "Rumek Slaanesha": 60,
   Terradon: 70,
   "Wielki wilk": 65,
@@ -70,6 +70,9 @@ export const getPrestige = (arr, army) => {
           prestigeValues.modelsNumber += Number(item.selectedNumber);
           if (item.rules.includes("Duży cel")) {
             prestigeValues.bigTargetsNumber += Number(item.selectedNumber);
+          }
+          if (item.rules.includes("Potwór")) {
+            prestigeValues.monstersNumber += Number(item.selectedNumber);
           }
           if (item.rules.includes("Machina wojenna")) {
             prestigeValues.warmachinesNumber += Number(item.selectedNumber);

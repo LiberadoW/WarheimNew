@@ -29,20 +29,21 @@ const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
             backgroundColor:
               unitList.indexOf(unit) == idShown ? "#A9A9A9" : "white",
           }}
-          key={index}
+          key={`${index}1`}
         >
           <li
-            key={index}
+            key={`${index}2`}
             className={`unit-info-container ${index}`}
             onClick={handleClickId}
           >
-            <span className="unit-name">{unit.unitName} </span>
-            <p className="unit-info">
-              <span className="number-of-henchmen">
+            <span key={`${index}3`} className="unit-name">{unit.unitName} </span>
+            <p key={`${index}4`} className="unit-info">
+              <span className="number-of-henchmen" key={`${index}5`}>
                 {unit.type === "Stronnik" || unit.type === "Machina" ? (
                   <>
-                    <span>Liczba:</span>
+                    <span key={`${index}6`}>Liczba:</span>
                     <select
+                    key={`${index}7`}
                       onChange={(e) => {
                         unit.selectedNumber = e.target.value;
                         unit.totalCost = unit.cost * unit.selectedNumber;
@@ -63,10 +64,10 @@ const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
                   ""
                 )}
               </span>
-              <span>{`${
+              <span key={`${index}8`}>{`${
                 unit.selectedNumber === 1 ? unit.totalCost : unit.totalCost
               } zk`}</span>
-              <span className={index} onClick={handleDeleteClick}>
+              <span key={`${index}9`}className={index} onClick={handleDeleteClick}>
                 <i className="fa-solid fa-trash-can"></i>
               </span>
             </p>

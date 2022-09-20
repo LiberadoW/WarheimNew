@@ -23,7 +23,7 @@ const UnitInfo = ({
     if (unit != null) {
       return (
         unitList.indexOf(unit) == idShown && (
-          <div className="side-builder-right">
+          <div className="side-builder-right" key={`${index}1`}>
             <div
               className={`unit ${index}`}
               id={index}

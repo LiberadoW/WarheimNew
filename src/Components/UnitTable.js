@@ -42,13 +42,19 @@ const UnitTable = ({ unitList, heroes }) => {
   return (
     <div className="army-list-container">
       <div className="army-list">
-        {unitList.map((item) => {
+        {unitList.map((item,index) => {
+         
           const equipmentString = item.startingEquipment.concat(
             item.optionalEquipment
           );
 
-          const [armour, speedModifier, initativeModifier] =
-            getModifiers(equipmentString);
+          let [armour, speedModifier, initativeModifier] =
+            getModifiers(equipmentString,item);
+
+            if (item.rules.includes("Krzepki")) {
+              speedModifier = 0;
+              initativeModifier = 0;
+            }
 
           if (item.type !== "Najemne Ostrze") {
             equipmentString.sort(
@@ -66,7 +72,7 @@ const UnitTable = ({ unitList, heroes }) => {
 
           if (item.type === "Bohater") {
             return (
-              <div className="unit-table">
+              <div className="unit-table" key={index}>
                 <div className="stats-table">
                   <div className="unit-table-name">
                     <span className="bold">Imię: </span>
@@ -140,7 +146,7 @@ const UnitTable = ({ unitList, heroes }) => {
             );
           } else if (item.type === "Najemne Ostrze") {
             return (
-              <div className="unit-table">
+              <div className="unit-table" key={`${index}1`}>
                 <div className="stats-table">
                   <div className="unit-table-name">
                     <span className="bold">Imię: </span>
@@ -157,7 +163,7 @@ const UnitTable = ({ unitList, heroes }) => {
                   <div className="unit-table-skills">
                     {skills.map((skill, index) => {
                       return (
-                        <span>
+                        <span key={`${index}1`}>
                           <i
                             className={
                               item.skills.includes(index)
@@ -214,7 +220,7 @@ const UnitTable = ({ unitList, heroes }) => {
             );
           } else {
             return (
-              <div className="unit-table-henchmen">
+              <div className="unit-table-henchmen" key={`${index}2`}>
                 <div className="stats-table-henchmen">
                   <div className="unit-table-name">
                     <span className="bold">Imię: </span>

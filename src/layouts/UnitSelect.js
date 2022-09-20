@@ -23,6 +23,9 @@ const UnitSelect = ({
   const unitNumbers = getUnitNumbers(unitList);
 
   const handleClick = () => {
+   if (unitName==="") {
+    alert("Wybierz jednostkę")
+   } else {
     if (heroes[unitName].number <= unitNumbers[unitName]) {
       alert("Osiągnąłeś limit dla tej jednostki");
     } else {
@@ -47,6 +50,7 @@ const UnitSelect = ({
         },
       ]);
     }
+   }
   };
 
   const groups = [{}, {}, {}];

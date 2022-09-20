@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/WeaponList.css";
 import { disableButtons } from "../Functions/disableButtons";
 import mageEquipmentList from "../Data.js/MageEquipmentList";
+import findCommonElements from "../Functions/findCommonElements";
 
 const WeaponList = ({
   heroEquipment,
@@ -13,10 +14,7 @@ const WeaponList = ({
   rules,
 }) => {
   const commandGroupUnit = unitList[id];
-  const findCommonElements = (arr1, arr2) => {
-    const index = arr1.some((item) => arr2.includes(item));
-    return index;
-  };
+
 
   const [checked, setChecked] = useState(
     commandGroupUnit.commandGroup ? commandGroupUnit : ""
@@ -134,23 +132,48 @@ const WeaponList = ({
       } else {
         equipmentList.push(e.target.name);
       }
+    }
 
+    // for units which have options for starting weapons
+    const startingWeapons = Array.from(
+      document.querySelectorAll(
+        `div.unit[id='${String(id)}'] [data='Startowy']`
+      )
+    );
+
+    if (startingWeapons.includes(e.target)) {
+      const howManyChecked = startingWeapons.filter(
+        (x) => x.checked === true
+      ).length;
+
+      if (howManyChecked === 1) {
+        unit.cost = e.target.checked
+          ? unit.cost + 0
+          : unit.cost - Number(e.target.value);
+      } else if (howManyChecked === 0) {
+        unit.cost = e.target.checked ? unit.cost + 0 : unit.cost - 0;
+      } else {
+        unit.cost = e.target.checked
+          ? unit.cost + Number(e.target.value)
+          : unit.cost - Number(e.target.value);
+      }
+    } else {
       unit.cost = e.target.checked
         ? unit.cost + Number(e.target.value)
         : unit.cost - Number(e.target.value);
+    }
 
-      if (isCommandGroup) {
-        const commandGroupArray = Array.from(
-          document.querySelectorAll("input[data='Dowodzenie']")
-        );
-        const howManyCommandChecked = commandGroupArray.filter(
-          (x) => x.checked === true
-        ).length;
-        unit.totalCost =
-          unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
-      } else {
-        unit.totalCost = unit.cost * unit.selectedNumber;
-      }
+    if (isCommandGroup) {
+      const commandGroupArray = Array.from(
+        document.querySelectorAll("input[data='Dowodzenie']")
+      );
+      const howManyCommandChecked = commandGroupArray.filter(
+        (x) => x.checked === true
+      ).length;
+      unit.totalCost =
+        unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
+    } else {
+      unit.totalCost = unit.cost * unit.selectedNumber;
     }
 
     const newUnitList = [...unitList];
@@ -171,9 +194,34 @@ const WeaponList = ({
       equipmentList.push(e.target.name);
     }
 
-    unit.cost = e.target.checked
-      ? unit.cost + Number(e.target.value)
-      : unit.cost - Number(e.target.value);
+     // for units which have options for starting weapons
+     const startingWeapons = Array.from(
+      document.querySelectorAll(
+        `div.unit[id='${String(id)}'] [data='Startowy']`
+      )
+    );
+
+    if (startingWeapons.includes(e.target)) {
+      const howManyChecked = startingWeapons.filter(
+        (x) => x.checked === true
+      ).length;
+
+      if (howManyChecked === 1) {
+        unit.cost = e.target.checked
+          ? unit.cost + 0
+          : unit.cost - Number(e.target.value);
+      } else if (howManyChecked === 0) {
+        unit.cost = e.target.checked ? unit.cost + 0 : unit.cost - 0;
+      } else {
+        unit.cost = e.target.checked
+          ? unit.cost + Number(e.target.value)
+          : unit.cost - Number(e.target.value);
+      }
+    } else {
+      unit.cost = e.target.checked
+        ? unit.cost + Number(e.target.value)
+        : unit.cost - Number(e.target.value);
+    }
 
     if (isCommandGroup) {
       const commandGroupArray = Array.from(
@@ -280,19 +328,13 @@ const WeaponList = ({
         {equipmentTypeArr.map((item, indexMain) => {
           if (Object.keys(item).length > 0) {
             return (
-              <div className="equipment-type-list">
+              <div className="equipment-type-list" key={`${indexMain}1`}>
                 <h4>{equipmentTypeNames[indexMain]}</h4>
                 <ul className={indexMain}>
                   {Object.entries(item).map(([key, value], index) => {
-                    let keyArr = [];
-                    if (key.includes("/")) {
-                      keyArr = key.split("/");
-                    } else {
-                      keyArr = [key];
-                    }
                     const isStartingEquipment = findCommonElements(
                       unitList[id].startingEquipment,
-                      keyArr
+                      key
                     );
 
                     return (

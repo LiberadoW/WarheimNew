@@ -29,6 +29,10 @@ const ArmySelect = ({
         <option value="Piechota Morska z Marienburga">
           Piechota Morska z Marienburga
         </option>
+        <option value="Leśni Elfowie z Athel Loren">
+          Leśni Elfowie z Athel Loren
+        </option>
+        <option value="Khazadzi z Gór Krańca Świata">Khazadzi z Gór Krańca Świata</option>
       </select>
     </div>
   );

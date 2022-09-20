@@ -55,6 +55,14 @@ export const getOneOfChoices = (army, unitList) => {
     ],
     "Piechota Morska z Marienburga": [
       ["Czarownik", "Kapłan Mannana"]
+    ],
+    "Leśni Elfowie z Athel Loren": [
+      ["Tancerz Wojny","Driada"],
+      ["Jeździec Polany","Drzewoduch"]
+    ],
+    "Khazadzi z Gór Krańca Świata": [
+      ["Kowal Run","Mistrz Inżynier"],
+      ["Strzelec","Górnik"]
     ]
   };
 
