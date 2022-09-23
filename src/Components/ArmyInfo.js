@@ -24,6 +24,14 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName }) => {
     setArmyName(e.target.value);
   };
 
+  if (army.armyRules.includes("Zamożność")) {
+    army.limit = 600;
+  }
+
+  unitList.forEach(unit=>{
+    
+  })
+
   return (
     <div className="army-info-alerts-container">
       <div className="army-info-container">
