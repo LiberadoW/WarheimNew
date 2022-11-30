@@ -1,0 +1,133 @@
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.registration {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #f3e9dc;
+}
+
+.registration-title {
+  text-align: center;
+}
+
+.registration-text {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ gap: 1rem;
+ align-items: center;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+}
+
+a,
+a:visited {
+  color: #fff;
+}
+
+.registration-input,
+.registration-button,
+textarea {
+  font-family: "Nunito", sans-serif;
+  padding: 0.25rem;
+}
+
+label,
+.registration-button {
+  margin-top: 1rem;
+}
+
+.registration-button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #5e3023;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.registration-button:disabled {
+  background-color: grey;
+  cursor: auto;
+}
+
+.registration-button:hover:not([disabled]) {
+  background-color: #895737;
+  transition: all 0.5s ease;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.line {
+  display: inline-block;
+}
+
+.link-text {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}

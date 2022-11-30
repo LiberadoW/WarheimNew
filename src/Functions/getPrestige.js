@@ -49,7 +49,7 @@ const specialEquipmentList = {
   "Woda błogosławiona": 5,
 };
 
-export const getPrestige = (arr, army) => {
+export const getPrestige = (arr) => {
   const prestigeValues = {
     heroesTotalExp: 0,
     modelsNumber: 0,
@@ -61,8 +61,7 @@ export const getPrestige = (arr, army) => {
     mercenariesTotalPrestige: 0,
   };
   arr.forEach((item) => {
-    if (item.unitName !== "") {
-      if (item !== null) {
+    if (item.unitName !== "" && item !== null) {
         if (item.type !== "Najemne Ostrze") {
           if (item.type === "Bohater") {
             prestigeValues.heroesTotalExp += item.exp;
@@ -121,7 +120,7 @@ export const getPrestige = (arr, army) => {
         } else {
           prestigeValues.mercenariesTotalPrestige += item.prestige;
         }
-      }
+      
     }
   });
   const prestige =

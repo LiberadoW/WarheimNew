@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Header from "./Header";
 import ArmySelect from "../Components/ArmySelect";
 import UnitSelect from "./UnitSelect";
@@ -10,6 +10,9 @@ import MercenariesSelect from "./MercenariesSelect";
 import { mercenaries } from "../Data.js/Mercenaries";
 import ArmyInfo from "../Components/ArmyInfo";
 import UnitInfo from "../Components/UnitInfo";
+import { db } from "../Database/database";
+import { doc, setDoc } from "firebase/firestore";
+import { AuthContext } from "../Context/AuthContext";
 
 const getTotalCost = (arr) => {
   let cost = 0;
@@ -36,6 +39,7 @@ const Builder = ({
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -55,7 +59,7 @@ const Builder = ({
     inputsNumberHenchmenArray.forEach((item, index) => {
       item.value = unitList[henchmenIndexList[index]].selectedNumber;
     });
-  },[unitList]);
+  }, [unitList]);
 
   useEffect(() => {
     setPrestige(getPrestige(unitList, army)[0]);
@@ -77,66 +81,80 @@ const Builder = ({
     setUnitList(newUnitList);
   };
 
+
+  const saveArmy = async (e) => {
+    e.preventDefault();
+    console.log(db);
+    const list = Object.assign({}, unitList)
+    try {
+      const res = await setDoc(doc(db, "lists", currentUser.user.uid), list);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div className="builder">
+    <>
       <Header />
-      <div className="builder-select-container">
-        <ArmySelect
-          army={army}
-          setArmy={setArmy}
-          setUnitList={setUnitList}
-          setUnitName={setUnitName}
-          setIdShown={setIdShown}
-          setMercenaryUnitName={setMercenaryUnitName}
-        />
+      <div className="builder">
+        <button onClick={saveArmy}>Add</button>
+        <div className="builder-select-container">
+          <ArmySelect
+            army={army}
+            setArmy={setArmy}
+            setUnitList={setUnitList}
+            setUnitName={setUnitName}
+            setIdShown={setIdShown}
+            setMercenaryUnitName={setMercenaryUnitName}
+          />
 
-        <UnitSelect
-          heroes={army.heroes}
-          setUnitName={setUnitName}
-          unitName={unitName}
-          unitList={unitList}
-          setUnitList={setUnitList}
-        />
-
-        <MercenariesSelect
-          mercenaries={mercenaries}
-          setMercenaryUnitName={setMercenaryUnitName}
-          mercenaryUnitName={mercenaryUnitName}
-          unitList={unitList}
-          setUnitList={setUnitList}
-        />
-      </div>
-
-      <ArmyInfo
-        prestige={prestige}
-        totalCost={totalCost}
-        army={army}
-        unitList={unitList}
-        setArmyName={setArmyName}
-      />
-
-      <div className="main-builder-container">
-        <div className="side-builder-left">
-          <UnitList
+          <UnitSelect
+            heroes={army.heroes}
+            setUnitName={setUnitName}
+            unitName={unitName}
             unitList={unitList}
             setUnitList={setUnitList}
-            idShown={idShown}
-            setIdShown={setIdShown}
+          />
+
+          <MercenariesSelect
+            mercenaries={mercenaries}
+            setMercenaryUnitName={setMercenaryUnitName}
+            mercenaryUnitName={mercenaryUnitName}
+            unitList={unitList}
+            setUnitList={setUnitList}
           />
         </div>
 
-        <UnitInfo
-          heroes={army.heroes}
-          mercenaries={mercenaries}
-          unitName={unitName}
+        <ArmyInfo
+          prestige={prestige}
+          totalCost={totalCost}
+          army={army}
           unitList={unitList}
-          setUnitList={setUnitList}
-          handleClickShow={handleClickShow}
-          idShown={idShown}
+          setArmyName={setArmyName}
         />
 
+        <div className="main-builder-container">
+          <div className="side-builder-left">
+            <UnitList
+              unitList={unitList}
+              setUnitList={setUnitList}
+              idShown={idShown}
+              setIdShown={setIdShown}
+            />
+          </div>
+
+          <UnitInfo
+            heroes={army.heroes}
+            mercenaries={mercenaries}
+            unitName={unitName}
+            unitList={unitList}
+            setUnitList={setUnitList}
+            handleClickShow={handleClickShow}
+            idShown={idShown}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

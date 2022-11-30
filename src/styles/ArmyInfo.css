@@ -1,13 +1,12 @@
 .army-info-alerts-container  {
     background-color: white;
     box-sizing: border-box;
-    width: 100%;
+    width: 95%;
     border: 1px solid black;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: column;
-    
 } 
 
 .army-info-container {

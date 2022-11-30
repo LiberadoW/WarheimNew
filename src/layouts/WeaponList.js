@@ -4,17 +4,8 @@ import { disableButtons } from "../Functions/disableButtons";
 import mageEquipmentList from "../Data.js/MageEquipmentList";
 import findCommonElements from "../Functions/findCommonElements";
 
-const WeaponList = ({
-  heroEquipment,
-  heroes,
-  id,
-  unitList,
-  unitName,
-  setUnitList,
-  rules,
-}) => {
+const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
   const commandGroupUnit = unitList[id];
-
 
   const [checked, setChecked] = useState(
     commandGroupUnit.commandGroup ? commandGroupUnit : ""
@@ -23,7 +14,7 @@ const WeaponList = ({
   const [isCommandGroup, setCommandGroup] = useState(
     unitList[id].rules.includes("Chorążowie & sygnaliści")
   );
-
+  
   const unitArray = Array.from(document.querySelectorAll(".unit"));
 
   useEffect(() => {
@@ -194,8 +185,8 @@ const WeaponList = ({
       equipmentList.push(e.target.name);
     }
 
-     // for units which have options for starting weapons
-     const startingWeapons = Array.from(
+    // for units which have options for starting weapons
+    const startingWeapons = Array.from(
       document.querySelectorAll(
         `div.unit[id='${String(id)}'] [data='Startowy']`
       )

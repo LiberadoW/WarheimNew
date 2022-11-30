@@ -30,6 +30,7 @@ const ArmySelect = ({
           Piechota Morska z Marienburga
         </option>
         <option value="Gladiatorzy z Jałowej Krainy">Gladiatorzy z Jałowej Krainy</option>
+        <option value="Siostry Sigmara">Siostry Sigmara</option>
         <option value="Leśni Elfowie z Athel Loren">
           Leśni Elfowie z Athel Loren
         </option>

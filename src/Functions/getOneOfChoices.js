@@ -1,27 +1,25 @@
-import { getUnitNumbers } from "./getUnitNumbers";
-
 const disableOneOfChoices = (unitArr, unitList) => {
   const unitNames = unitList.map((a) => a.unitName);
   const optionsArray = Array.from(
     document.querySelectorAll("#unit-selection option")
   );
 
-  if (unitList.length>0) {
+  if (unitArr.some((item) => unitNames.includes(item))) {
     unitArr.forEach((mainUnit) => {
       const removedUnitArr = unitArr.filter((e) => e !== mainUnit);
-  
+
       if (unitNames.includes(mainUnit)) {
         removedUnitArr.forEach((unit) => {
           const opt = optionsArray.filter((x) => x.value === unit);
           opt[0].disabled = true;
         });
-      } else {
-        if (!unitArr.some((item) => unitNames.includes(item))) {
-          const opt = optionsArray.filter((x) => x.value === mainUnit);
-          opt[0].disabled = false;
-        }
       }
     });
+  } else {
+    unitArr.forEach(mainUnit=>{
+      const opt = optionsArray.filter((x) => x.value === mainUnit);
+      opt[0].disabled = false;
+    })
   }
 };
 
@@ -44,11 +42,14 @@ export const getOneOfChoices = (army, unitList) => {
       ["Niedźwiedź", "Nomada", "Ogr"],
       ["Więźniarka", "Rydwan"],
     ],
+    "Siostry Sigmara": [["Bitewny Ołtarz Sigmara", "Rydwan"]],
     "Leśni Elfowie z Athel Loren": [
       ["Tancerz Wojny", "Driada"],
       ["Jeździec Polany", "Drzewoduch"],
     ],
-    "Elfowie Wysokiego Rodu z Ulthuan": [["Rydwan z Tiranoc","Lwi Rydwan z Chrace"]],
+    "Elfowie Wysokiego Rodu z Ulthuan": [
+      ["Rydwan z Tiranoc", "Lwi Rydwan z Chrace"],
+    ],
     "Khazadzi z Gór Krańca Świata": [
       ["Kowal Run", "Mistrz Inżynier"],
       ["Strzelec", "Górnik"],

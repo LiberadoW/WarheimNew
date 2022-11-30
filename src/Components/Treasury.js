@@ -74,7 +74,7 @@ const Treasury = ({ army, unitList }) => {
               <span>0</span>
             </div>
             <div>
-              <span>{prestigeValues[1].bigTargetsNumber*10}</span>
+              <span>{prestigeValues[1].bigTargetsNumber*20}</span>
             </div>
             <div>
               <span>{prestigeValues[1].warmachinesNumber*25}</span>

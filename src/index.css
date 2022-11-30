@@ -11,13 +11,29 @@ body {
 }
 
 .app {
-  background-color: #E7E9EB;
+  background-color: #E9E9E9;
   min-height: 100vh;
 }
 
-
+.site-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #FAF9F6;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
 li {
   list-style: none;
+}
+
+.page-section {
+  background-color: #f3e9dc;
+  min-height: calc(100vh - 50px);
+  box-sizing: border-box;
+  padding: 1rem 0.5rem;
+}
+
+.bold-text {
+  font-weight: bold;
 }
 
