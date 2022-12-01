@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <ul className="navbar">
       <li>
-        <Link to="/"> Builder</Link>
+        <Link to="/">Kreator armii</Link>
       </li>
       {currentUser === null && (
         <li>

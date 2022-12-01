@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Navigate } from "react-router-dom";
 import Header from "./Header";
 import ArmySelect from "../Components/ArmySelect";
 import UnitSelect from "./UnitSelect";
@@ -11,7 +12,7 @@ import { mercenaries } from "../Data.js/Mercenaries";
 import ArmyInfo from "../Components/ArmyInfo";
 import UnitInfo from "../Components/UnitInfo";
 import { db } from "../Database/database";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc, Timestamp } from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
 
 const getTotalCost = (arr) => {
@@ -35,11 +36,16 @@ const Builder = ({
   setMercenaryUnitName,
   prestige,
   setPrestige,
+  armyName,
   setArmyName,
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
+
+  const RequireAuth = ({ children }) => {
+    return currentUser ? children : <Navigate to="/login"></Navigate>;
+  };
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -81,13 +87,24 @@ const Builder = ({
     setUnitList(newUnitList);
   };
 
-
   const saveArmy = async (e) => {
     e.preventDefault();
-    console.log(db);
-    const list = Object.assign({}, unitList)
     try {
-      const res = await setDoc(doc(db, "lists", currentUser.user.uid), list);
+      const savedLists = await getDoc(doc(db, "lists", currentUser.user.uid));
+      const arrayOfSavedLists = savedLists.data().lists;
+
+      const armyObj = {
+        armyType: army.name,
+        armyName: armyName,
+        armyList: unitList,
+        timestamp: Timestamp.now(),
+        totalCost: totalCost,
+        prestige: prestige,
+      };
+      arrayOfSavedLists.push(armyObj);
+      await updateDoc(doc(db, "lists", currentUser.user.uid), {
+        lists: arrayOfSavedLists,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -97,7 +114,12 @@ const Builder = ({
     <>
       <Header />
       <div className="builder">
-        <button onClick={saveArmy}>Add</button>
+        {currentUser && (
+          <button className="button" onClick={saveArmy}>
+            Zapisz armię
+          </button>
+        )}
+
         <div className="builder-select-container">
           <ArmySelect
             army={army}

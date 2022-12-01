@@ -9,6 +9,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
 import Header from "../layouts/Header";
 import "../styles/Registration.css";
+import { doc,setDoc } from "firebase/firestore";
+import { db } from "../Database/database";
 
 const USER_REGEX = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -74,6 +76,10 @@ const Register = () => {
       const userLogin = await createUserWithEmailAndPassword(auth, email, pwd);
       await updateProfile(userLogin.user, {
         displayName: user,
+      });
+      console.log(userLogin)
+      await setDoc(doc(db, "lists", userLogin.user.uid ), {
+        lists: []
       });
       setSuccess(true);
       //clear state and controlled inputs

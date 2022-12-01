@@ -2,6 +2,7 @@ import Header from "../layouts/Header";
 import "../styles/UserDashboard.css";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 const UserDashboard = () => {
   const {currentUser} = useContext(AuthContext);
@@ -15,6 +16,11 @@ const UserDashboard = () => {
           <p>
             Witaj, <span className="bold-text">{currentUser.user.displayName}!</span>
           </p>
+        </div>
+        <div className="dashboard-menu">
+          <Link to="/myLists"><button className="button">
+            Moje rozpiski
+          </button></Link>
         </div>
       </div>
     </>

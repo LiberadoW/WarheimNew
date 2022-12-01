@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="registration-container">
+      <div className="registration-container page-section">
         <div className="registration">
           <p ref={errorRef} className={errorMsg ? "errmsg" : "offscreen"}>
             {errorMsg}

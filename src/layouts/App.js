@@ -13,9 +13,12 @@ import Login from "../Registration/Login";
 import armies from "../Data.js/Armies";
 import { AuthContext } from "../Context/AuthContext";
 import UserDashboard from "../Components/UserDashboard";
-
+import MyLists from "../User/MyLists";
 
 const App = () => {
+  const RequireAuth = ({ children }) => {
+    return currentUser ? children : <Navigate to="/login"></Navigate>;
+  };
   const [unitList, setUnitList] = useShareStatesBetweenTabs("unitList", []);
   const [army, setArmy] = useShareStatesBetweenTabs(
     "army",
@@ -24,11 +27,7 @@ const App = () => {
       : "Cyrkowcy z Ligii Ostermarku"
   );
 
-  const {currentUser} = useContext(AuthContext)
-
-  const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="/login"></Navigate>;
-  };
+  const { currentUser } = useContext(AuthContext);
 
   const [unitName, setUnitName] = useState("");
   const [mercenaryUnitName, setMercenaryUnitName] = useState("");
@@ -109,6 +108,7 @@ const App = () => {
                   prestige={prestige}
                   setPrestige={setPrestige}
                   setArmyName={setArmyName}
+                  armyName={armyName}
                 />
               }
             />
@@ -128,7 +128,22 @@ const App = () => {
             />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/userDashboard" element={<RequireAuth><UserDashboard/></RequireAuth>}/>
+            <Route
+              path="/userDashboard"
+              element={
+                <RequireAuth>
+                  <UserDashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/myLists"
+              element={
+                <RequireAuth>
+                  <MyLists setUnitList={setUnitList} setArmy={setArmy} />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </Router>
       </main>
