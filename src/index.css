@@ -37,3 +37,7 @@ li {
   font-weight: bold;
 }
 
+input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+}

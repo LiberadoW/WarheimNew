@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/UnitList.css";
 
-const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
+const UnitList = ({ unitList, setUnitList, setIdShown, idShown, setShowModal}) => {
   const handleDeleteClick = (e) => {
     const unitIndex = e.target.parentNode.className;
     unitList.splice(unitIndex, 1);
@@ -16,6 +16,7 @@ const UnitList = ({ unitList, setUnitList, setIdShown, idShown }) => {
           ? e.target.parentNode.parentNode.id
           : null
       );
+      setShowModal(true)
     } 
   };
 

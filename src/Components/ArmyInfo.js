@@ -6,7 +6,7 @@ import getErrors from "../Functions/getErrors";
 import getModelAmount from "../Functions/getModelAmount";
 import { Link } from "react-router-dom";
 
-const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName }) => {
+const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }) => {
   const [clicked, setClicked] = useState(false);
   const [errors, setErrors] = useState(0);
 
@@ -53,7 +53,7 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName }) => {
         <div className="army-info-right">
           <p className="army-name-input">
             <span>Nazwa kompanii:</span>{" "}
-            <input onChange={handleArmyNameChange} type="text" />
+            <input onChange={handleArmyNameChange} type="text" value={armyName}/>
           </p>
           <p className="prestige">
             <span className="bold">Prestiż:</span> {prestige}

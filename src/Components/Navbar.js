@@ -6,7 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  }
 
   return (
     <ul className="navbar">
@@ -18,9 +22,18 @@ const Navbar = () => {
           <Link to="/login">Zaloguj się</Link>
         </li>
       )}
-      {currentUser && (<li>
-        <Link to="/userDashboard"><FontAwesomeIcon icon={faCircleUser} size="2xl"></FontAwesomeIcon></Link>
-      </li>)}
+      {currentUser && (
+        <>
+          <li>
+            <Link to="/userDashboard">
+              <FontAwesomeIcon icon={faCircleUser} size="2xl"></FontAwesomeIcon>
+            </Link>
+          </li>
+          <li>
+            <button className="logout-button" onClick={handleLogout}>Wyloguj się</button>
+          </li>
+        </>
+      )}
     </ul>
   );
 };

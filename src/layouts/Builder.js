@@ -42,6 +42,7 @@ const Builder = ({
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
 
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login"></Navigate>;
@@ -92,6 +93,14 @@ const Builder = ({
     try {
       const savedLists = await getDoc(doc(db, "lists", currentUser.user.uid));
       const arrayOfSavedLists = savedLists.data().lists;
+      const arrayArmyNames = savedLists.data().armyNames;
+
+      if(armyName.trim().length===0) {
+        alert("Nazwij swoją kompanię")
+        return;
+      }
+
+  
 
       const armyObj = {
         armyType: army.name,
@@ -101,10 +110,22 @@ const Builder = ({
         totalCost: totalCost,
         prestige: prestige,
       };
-      arrayOfSavedLists.push(armyObj);
+
+      if (arrayArmyNames.includes(armyName.trim())) {
+        const index = arrayOfSavedLists
+          .map((e) => e.armyName)
+          .indexOf(armyName);
+        arrayOfSavedLists[index] = armyObj;
+      } else {
+        arrayOfSavedLists.push(armyObj);
+        arrayArmyNames.push(armyName);
+      }
+
       await updateDoc(doc(db, "lists", currentUser.user.uid), {
         lists: arrayOfSavedLists,
+        armyNames: arrayArmyNames,
       });
+      alert("Armia została zapisana.");
     } catch (err) {
       console.log(err);
     }
@@ -114,12 +135,7 @@ const Builder = ({
     <>
       <Header />
       <div className="builder">
-        {currentUser && (
-          <button className="button" onClick={saveArmy}>
-            Zapisz armię
-          </button>
-        )}
-
+      
         <div className="builder-select-container">
           <ArmySelect
             army={army}
@@ -147,12 +163,19 @@ const Builder = ({
           />
         </div>
 
+        {currentUser && (
+          <button className="button save-army-button" onClick={saveArmy}>
+            Zapisz armię
+          </button>
+        )}
+
         <ArmyInfo
           prestige={prestige}
           totalCost={totalCost}
           army={army}
           unitList={unitList}
           setArmyName={setArmyName}
+          armyName={armyName}
         />
 
         <div className="main-builder-container">
@@ -162,6 +185,8 @@ const Builder = ({
               setUnitList={setUnitList}
               idShown={idShown}
               setIdShown={setIdShown}
+              showModal={showModal}
+              setShowModal={setShowModal}
             />
           </div>
 
@@ -173,6 +198,9 @@ const Builder = ({
             setUnitList={setUnitList}
             handleClickShow={handleClickShow}
             idShown={idShown}
+            setIdShown={setIdShown}
+            showModal={showModal}
+            setShowModal={setShowModal}
           />
         </div>
       </div>

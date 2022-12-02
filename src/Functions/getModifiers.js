@@ -3,6 +3,10 @@ export const getModifiers = (arr,unit) => {
   let speedModifier = 0;
   let initativeModifier = 0;
 
+
+  if (unit.rules.includes("Żelazoskóry")) {
+    armour -=1
+  }
   if (arr.includes("Lekki")) {
     armour -= 1;
   }

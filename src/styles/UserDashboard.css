@@ -1,9 +1,21 @@
 .user-dashboard {
- 
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
 }
 
 .dashboard-welcome {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.dashboard-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-button {
+    padding: 10px 20px;
 }

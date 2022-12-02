@@ -18,9 +18,10 @@ const UserDashboard = () => {
           </p>
         </div>
         <div className="dashboard-menu">
-          <Link to="/myLists"><button className="button">
+          <Link to="/myLists"><button className="button dashboard-button">
             Moje rozpiski
           </button></Link>
+
         </div>
       </div>
     </>

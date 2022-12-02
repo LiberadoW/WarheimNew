@@ -11,15 +11,38 @@
   flex: 1;
 }
 
-.navbar a {
+.navbar li {
+  height: 50px;
+
+  align-items: center;
+}
+
+.navbar li a {
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: white;
-  padding: 15px;
+  height: 50px;
+  padding: 0 10px 0 10px;
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
 
 .navbar a:hover {
   background-color: #895737;
-  color: white;
+}
+
+.logout-button {
+height: 50px;
+border: none;
+background-color: transparent;
+transition: background-color 0.5s ease;
+cursor: pointer;
+color: white;
+padding: 0 10px 0 10px;
+}
+
+.logout-button:hover {
+  background-color: #895737;
 }

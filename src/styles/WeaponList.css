@@ -28,6 +28,9 @@
 
 .equipment-type-list ul {
     font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .equipment-type-list input {

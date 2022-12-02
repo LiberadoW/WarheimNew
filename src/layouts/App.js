@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -140,7 +140,11 @@ const App = () => {
               path="/myLists"
               element={
                 <RequireAuth>
-                  <MyLists setUnitList={setUnitList} setArmy={setArmy} />
+                  <MyLists
+                    setUnitList={setUnitList}
+                    setArmy={setArmy}
+                    setArmyName={setArmyName}
+                  />
                 </RequireAuth>
               }
             />

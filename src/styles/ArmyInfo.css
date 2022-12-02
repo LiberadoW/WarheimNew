@@ -1,39 +1,52 @@
-.army-info-alerts-container  {
-    background-color: white;
-    box-sizing: border-box;
-    width: 95%;
-    border: 1px solid black;
-    padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    display: flex;
-    flex-direction: column;
-} 
+.army-info-alerts-container {
+  background-color: white;
+  box-sizing: border-box;
+  width: 95%;
+  border: 1px solid black;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  flex-direction: column;
+}
 
 .army-info-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .army-info-right {
-    display: flex;
-    margin-left: auto;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+
+  gap: 10px;
 }
 
 .alerts {
-    color: #D0312d;
-    cursor: pointer;
+  color: #d0312d;
+  cursor: pointer;
 }
 
 .fa-caret-down {
-    color: black;
+  color: black;
 }
 
 .fa-caret-right {
-    color: black;
+  color: black;
 }
 
 .alerts i {
-    margin-right: 10px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .army-info-container {
+flex-direction: column;
+gap: 10px;
+
+    }
+    .army-info-right {
+        flex-direction: column;
+        margin: 0 auto;
+    }
 }

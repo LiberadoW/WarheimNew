@@ -1,18 +1,24 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import {
   faCheck,
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../Firebase/firebase";
 import Header from "../layouts/Header";
 import "../styles/Registration.css";
-import { doc,setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../Database/database";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
-const USER_REGEX = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
+const USER_REGEX = /^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PASSWORD_REGEX = /^(?=.*\d).{6,24}$/;
 
@@ -36,8 +42,10 @@ const Register = () => {
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("ass");
   const [success, setSuccess] = useState(false);
+
+  const { dispatch } = useContext(AuthContext);
 
   useEffect(() => {
     userRef.current.focus();
@@ -62,6 +70,8 @@ const Register = () => {
     setErrorMsg("");
   }, [email, user, pwd, matchPwd]);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const v1 = USER_REGEX.test(user);
@@ -73,13 +83,19 @@ const Register = () => {
     }
 
     try {
-      const userLogin = await createUserWithEmailAndPassword(auth, email, pwd);
-      await updateProfile(userLogin.user, {
+      const userRegister = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        pwd
+      );
+      await updateProfile(userRegister.user, {
         displayName: user,
       });
-      console.log(userLogin)
-      await setDoc(doc(db, "lists", userLogin.user.uid ), {
-        lists: []
+      const userLogin = await signInWithEmailAndPassword(auth, email, pwd);
+      dispatch({ type: "LOGIN", payload: userLogin });
+      await setDoc(doc(db, "lists", userLogin.user.uid), {
+        lists: [],
+        armyNames: [],
       });
       setSuccess(true);
       //clear state and controlled inputs
@@ -88,11 +104,14 @@ const Register = () => {
       setPwd("");
       setMatchPwd("");
       setEmail("");
-      console.log(userLogin.user.displayName);
+      navigate("/");
     } catch (error) {
       console.log(error.message);
+      if (error.message === "Firebase: Error (auth/email-already-in-use).")
+      setErrorMsg("Podany adres e-mail jest już w użyciu.")
     }
   };
+
 
   return (
     <>
@@ -102,6 +121,7 @@ const Register = () => {
           <p ref={errorRef} className={errorMsg ? "errmsg" : "offscreen"}>
             {errorMsg}
           </p>
+          
           <h1 className="registration-title">Stwórz konto</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
@@ -134,11 +154,9 @@ const Register = () => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
+              4 do 20 znaków.
               <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
+              Dozwolone jedynie litery i cyfry.
             </p>
 
             <label htmlFor="email">
@@ -156,7 +174,6 @@ const Register = () => {
               className="registration-input"
               type="text"
               id="email"
-              ref={userRef}
               autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -173,11 +190,7 @@ const Register = () => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters.
-              <br />
-              Must begin with a letter.
-              <br />
-              Letters, numbers, underscores, hyphens allowed.
+              Niepoprawny adres e-mail.
             </p>
 
             <label htmlFor="password">

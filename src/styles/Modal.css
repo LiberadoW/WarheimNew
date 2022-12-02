@@ -1,0 +1,47 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-main {
+  position: fixed;
+  background: white;
+  width: 95%;
+  max-width: 1000px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.modal-main .unit {
+  border: none;
+  box-shadow: none;
+}
+
+.display-block {
+  display: flex;
+}
+
+.display-none {
+  display: none;
+}
+
+.close-modal-button {
+  padding: 10px;
+  margin: 10px;
+}
+
+.close-modal-button:hover {
+  font-weight: bold;
+  background-color: red;
+}
