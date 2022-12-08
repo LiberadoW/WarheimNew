@@ -1,8 +1,7 @@
-import Header from "../layouts/Header";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../Database/database";
-import { getDoc, doc, updateDoc, deleteField } from "firebase/firestore";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
 import "../styles/MyLists.css";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +10,6 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
   const [lists, setLists] = useState([]);
   const [arrayArmyNames, setArrayArmyNames] = useState([]);
   const [groupedLists, setGroupedLists] = useState({});
-
-  console.log(groupedLists)
 
   const sortArmylists = (armylists) => {
     const groupedLists = armylists.reduce((groups, item) => {
@@ -46,7 +43,7 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
 
   const handleLoadListClick = (e) => {
     const number = e.target.className;
-    const army = e.target.parentNode.parentNode.parentNode.id;
+    const army = e.target.parentNode.parentNode.parentNode.parentNode.id;
     setUnitList(groupedLists[army][number].armyList);
     setArmy(army);
     setArmyName(groupedLists[army][number].armyName);
@@ -66,28 +63,25 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
       armyNames: arrayArmyNames,
     });
 
-    setGroupedLists([...arrayOfSavedLists])
-    
-    console.log(arrayOfSavedLists)
-   
+    setGroupedLists(sortArmylists(arrayOfSavedLists))
+
   };
 
   return (
-    <>
-      <Header />
-      <div className="page-section">
-        <h2 className="armylists-title">Moje rozpiski</h2>
-        <div className="my-armylists">
-          {Object.keys(groupedLists).map((armies, index) => {
-            return (
-              <div className="armylist-container">
-                <h3>{armies}</h3>
-                <ul key={index} id={armies}>
-                  {groupedLists[armies].map((list, index) => {
-                    return (
-                      <li key={index} className={index}>
-                        <div className="armylist-info">
-                          <div className="armylists-text-container">
+    <div className="page-section">
+      <h2 className="armylists-title">Moje rozpiski</h2>
+      <div className="my-armylists">
+        {Object.keys(groupedLists).map((armies, index) => {
+          console.log(armies);
+          return (
+            <div className="armylist-container" key={index}>
+              <h3>{armies}</h3>
+              <ul key={index} id={armies}>
+                {groupedLists[armies].map((list, index) => {
+                  return (
+                    <li key={index} className={index}>
+                      <div className="armylist-info">
+                        <div className="armylists-text-container">
                           <p className="bold-text">{list.armyName}</p>
                           <p>{`${list.totalCost} zk`}</p>
                           <p>{`Prestiż: ${list.prestige}`}</p>
@@ -96,9 +90,9 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                               list.timestamp.seconds * 1000
                             ).toLocaleString()}
                           </p>
-                          </div>
+                        </div>
 
-                          <div className="armylists-button-container">
+                        <div className="armylists-button-container">
                           <button
                             className={index}
                             onClick={handleLoadListClick}
@@ -112,18 +106,17 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                           >
                             Usuń
                           </button>
-                          </div>
                         </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 

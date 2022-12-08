@@ -18,7 +18,6 @@
   width: 100%;
   padding: 3px 3px 4px 3px;
   gap: 3px;
-  height: 110px;
 }
 
 .unit-table-henchmen {
@@ -41,7 +40,6 @@
 .stats-table-henchmen {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
-
   width: 250px;
 }
 
@@ -98,13 +96,18 @@
   font-size: 0.6rem;
   margin-bottom: -1px;
   margin-right: -1px;
+
 }
 
-.stats-table div:nth-of-type(25) {
-  margin-right: 0px;
+.stats-table div:nth-of-type(15),
+.stats-table div:nth-of-type(26),
+.stats-table div:nth-of-type(37) {
+   font-size: 0.48rem;
 }
 
-.stats-table div:nth-of-type(36) {
+.stats-table div:nth-of-type(25),
+.stats-table div:nth-of-type(36),
+.stats-table div:nth-of-type(47) {
   margin-right: 0px;
 }
 
@@ -232,4 +235,16 @@
   box-sizing: border-box;
   width: 9px;
   height: 9px;
+}
+
+.unit-table-height2 {
+  height: 120px;
+}
+
+.unit-table-height3 {
+  height: 128px;
+}
+
+.unit-table-henchmen2 {
+  height: 120px;
 }

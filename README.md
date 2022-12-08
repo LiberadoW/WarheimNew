@@ -11,4 +11,3 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [React Router](https://reactrouter.com/en/main)
 
-[React share state between tabs](https://www.npmjs.com/package/react-share-states-between-tabs)

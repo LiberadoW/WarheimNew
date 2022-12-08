@@ -6,10 +6,10 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: #F3E9DC;
+  background-color: var(--secondary);
   flex: 1;
   min-height: calc(100vh - 50px);
-  padding-top: 50px;
+  padding-top: 10px;
 }
 
 .main-builder-container {
@@ -106,7 +106,6 @@
   gap: 5px;
 }
 
-
 .unit-info span:nth-of-type(3),
 .unit-info span:nth-of-type(4) {
   cursor: pointer;
@@ -117,14 +116,14 @@
   padding: 5px;
   border-radius: 5px;
   display: inline-block;
-  background-color: #5E3023;
+  background-color: var(--main);
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #895737;
+  background-color: var(--hover);
 }
 
 .save-army-button {
@@ -132,6 +131,15 @@
   margin: 10px;
 }
 
+.builder-controls {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.builder-controls button {
+  padding: 10px;
+}
 
 @media screen and (max-width: 768px) {
   .main-builder-container {
@@ -139,7 +147,7 @@
   }
 
   .side-builder-right .army-list-container {
-display: none;
+    display: none;
   }
 
   .side-builder-right {

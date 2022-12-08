@@ -10,7 +10,7 @@ header h1 {
 }
 
 .site-logo {
-  background-color: #5E3023;
+  background-color: var(--main);
   color: white;
   display: flex;
   align-items: center;

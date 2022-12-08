@@ -40,3 +40,7 @@
     display: flex;
 
 }
+
+.unit-list-divider{ 
+    margin-bottom: 5px;
+}

@@ -8,8 +8,7 @@ const experienceBold = [
   90,
 ];
 
-const experienceBoldHenchmen = [2,5,9,14]
-
+const experienceBoldHenchmen = [2, 5, 9, 14];
 
 const statsHeaders = [
   "Statystyka",
@@ -33,25 +32,22 @@ const skills = [
   "Specjalne",
 ];
 
-
-
-
 const UnitTable = ({ unitList, heroes }) => {
 
-  
+  unitList.sort((a, b) => a.id - b.id);
+
   return (
     <div className="army-list-container">
       <div className="army-list">
-        {unitList.map((item,index) => {
-         
+        {unitList.map((item, index) => {
           const equipmentString = item.startingEquipment.concat(
             item.optionalEquipment
           );
 
-          let [armour, speedModifier, initativeModifier] =
-            getModifiers(equipmentString,item);
-
-            
+          let [armour, speedModifier, initativeModifier] = getModifiers(
+            equipmentString,
+            item
+          );
 
           if (item.type !== "Najemne Ostrze") {
             equipmentString.sort(
@@ -69,7 +65,7 @@ const UnitTable = ({ unitList, heroes }) => {
 
           if (item.type === "Bohater") {
             return (
-              <div className="unit-table" key={index}>
+              <div className={`unit-table ${Object.keys(item.stats).length === 3 ? "unit-table-height3" : "unit-table-height2"}`} key={index}>
                 <div className="stats-table">
                   <div className="unit-table-name">
                     <span className="bold">Imię: </span>
@@ -82,9 +78,8 @@ const UnitTable = ({ unitList, heroes }) => {
                   <div className="unit-table-skills">
                     {skills.map((skill, index) => {
                       return (
-                        <span key={index} >
+                        <span key={index}>
                           <i
-                          
                             className={
                               item.skills.includes(index)
                                 ? "fa-solid fa-square-full"
@@ -143,7 +138,7 @@ const UnitTable = ({ unitList, heroes }) => {
             );
           } else if (item.type === "Najemne Ostrze") {
             return (
-              <div className="unit-table" key={`${index}1`}>
+              <div className={`unit-table ${Object.keys(item.stats).length === 3 ? "unit-table-height3" : "unit-table-height2"}`} key={`${index}1`}>
                 <div className="stats-table">
                   <div className="unit-table-name">
                     <span className="bold">Imię: </span>
@@ -217,7 +212,7 @@ const UnitTable = ({ unitList, heroes }) => {
             );
           } else {
             return (
-              <div className="unit-table-henchmen" key={`${index}2`}>
+              <div className={`unit-table-henchmen ${Object.keys(item.stats).length === 3 ? "unit-table-henchmen-height3" : "unit-table-henchmen-height2"}`} key={`${index}2`}>
                 <div className="stats-table-henchmen">
                   <div className="unit-table-name">
                     <span className="bold">Imię: </span>
@@ -226,7 +221,13 @@ const UnitTable = ({ unitList, heroes }) => {
                   <div className="unit-table-type-henchmen">
                     <span className="bold">Typ: </span>
                     <span>{item.unitName}</span>
-                    <span className="number-henchmen bold" style={{marginRight: item.selectedNumber >0 ? "15px" : "24.6px"}}>
+                    <span
+                      className="number-henchmen bold"
+                      style={{
+                        marginRight:
+                          item.selectedNumber > 0 ? "15px" : "24.6px",
+                      }}
+                    >
                       Liczba: {item.selectedNumber}
                     </span>
                   </div>

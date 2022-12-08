@@ -1,6 +1,7 @@
 import React from "react";
 import { getUnitNumbers } from "../Functions/getUnitNumbers";
 import "../styles/UnitSelect.css"
+import { uuidv4 } from "@firebase/util";
 
 const UnitSelect = ({
   heroes,
@@ -47,6 +48,7 @@ const UnitSelect = ({
           type: heroes[unitName].type,
           number: heroes[unitName].number,
           selectedNumber: 1,
+          uniqueId: uuidv4()
         },
       ]);
     }

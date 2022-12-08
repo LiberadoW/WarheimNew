@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/MercenariesSelect.css";
+import { uuidv4 } from "@firebase/util";
 
 const MercenariesSelect = ({
   mercenaries,
@@ -44,6 +45,7 @@ const MercenariesSelect = ({
             type: mercenaries[mercenaryUnitName].type,
             number: mercenaries[mercenaryUnitName].number,
             selectedNumber: 1,
+            uniqueId: uuidv4()
           },
         ]);
       }

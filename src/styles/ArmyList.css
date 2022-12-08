@@ -2,7 +2,8 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 70px;
+  left: 1000px;
 }
 
 .print-a4-page {
@@ -12,4 +13,8 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 7px;
+}
+
+#armylist {
+  display: none;
 }

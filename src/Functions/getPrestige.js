@@ -62,65 +62,65 @@ export const getPrestige = (arr) => {
   };
   arr.forEach((item) => {
     if (item.unitName !== "" && item !== null) {
-        if (item.type !== "Najemne Ostrze") {
-          if (item.type === "Bohater") {
-            prestigeValues.heroesTotalExp += item.exp;
-          }
-          prestigeValues.modelsNumber += Number(item.selectedNumber);
-          if (item.rules.includes("Duży cel")) {
-            prestigeValues.bigTargetsNumber += Number(item.selectedNumber);
-          }
-          if (item.rules.includes("Potwór")) {
-            prestigeValues.monstersNumber += Number(item.selectedNumber);
-          }
-          if (item.rules.includes("Machina wojenna")) {
-            prestigeValues.warmachinesNumber += Number(item.selectedNumber);
-          }
-          const equipment = item.startingEquipment.concat(
-            item.optionalEquipment
-          );
-          const equipmentList = item.equipmentList;
-          const keys = Object.keys(equipmentList);
-          const keysSplit = keys.map((key, index) => {
-            if (key.includes("/")) {
-              return [key.split("/"), index];
-            } else {
-              return [key, index];
-            }
-          });
-
-          equipment.forEach((eq) => {
-            if (Object.keys(mountList).includes(eq)) {
-              prestigeValues.mountsNumber += Number(item.selectedNumber);
-              prestigeValues.equipmentTotalValue +=
-                mountList[eq] * item.selectedNumber;
-            }
-          });
-
-          equipment.forEach((eq) => {
-            if (Object.keys(specialEquipmentList).includes(eq)) {
-              prestigeValues.equipmentTotalValue +=
-                specialEquipmentList[eq] * item.selectedNumber;
-            }
-          });
-
-          equipment.forEach((eq) => {
-            keysSplit.forEach((key) => {
-              if (typeof key[0] == "object") {
-                if (key[0].includes(eq)) {
-                  prestigeValues.equipmentTotalValue +=
-                    equipmentList[keys[key[1]]][0] * item.selectedNumber;
-                }
-              } else if (key[0] === eq) {
-                prestigeValues.equipmentTotalValue +=
-                  equipmentList[keys[key[1]]][0] * item.selectedNumber;
-              }
-            });
-          });
-        } else {
-          prestigeValues.mercenariesTotalPrestige += item.prestige;
+      if (item.type !== "Najemne Ostrze") {
+        if (item.type === "Bohater") {
+          prestigeValues.heroesTotalExp += item.exp;
         }
-      
+        prestigeValues.modelsNumber += Number(item.selectedNumber);
+        if (item.rules.includes("Duży cel")) {
+          prestigeValues.bigTargetsNumber += Number(item.selectedNumber);
+        }
+        if (item.rules.includes("Potwór")) {
+          prestigeValues.monstersNumber += Number(item.selectedNumber);
+        }
+        if (item.rules.includes("Machina wojenna")) {
+          prestigeValues.warmachinesNumber += Number(item.selectedNumber);
+        }
+        const equipment = item.startingEquipment.concat(item.optionalEquipment);
+
+        const equipmentList = item.equipmentList;
+
+        equipment.forEach((eq) => {
+          if (Object.keys(mountList).includes(eq)) {
+            prestigeValues.mountsNumber += Number(item.selectedNumber);
+            prestigeValues.equipmentTotalValue +=
+              mountList[eq] * item.selectedNumber;
+          }
+        });
+
+        equipment.forEach((eq) => {
+          if (Object.keys(specialEquipmentList).includes(eq)) {
+            prestigeValues.equipmentTotalValue +=
+              specialEquipmentList[eq] * item.selectedNumber;
+          }
+        });
+
+
+          equipment.forEach((eq) => {
+            if (Object.keys(equipmentList).includes(eq)) {
+              prestigeValues.equipmentTotalValue +=
+              equipmentList[eq][0] * item.selectedNumber;
+            }
+       
+          });
+        
+
+        // equipment.forEach((eq) => {
+        //   keysSplit.forEach((key) => {
+        //     if (typeof key[0] == "object") {
+        //       if (key[0].includes(eq)) {
+        //         prestigeValues.equipmentTotalValue +=
+        //           equipmentList[keys[key[1]]][0] * item.selectedNumber;
+        //       }
+        //     } else if (key[0] === eq) {
+        //       prestigeValues.equipmentTotalValue +=
+        //         equipmentList[keys[key[1]]][0] * item.selectedNumber;
+        //     }
+        //   });
+        // });
+      } else {
+        prestigeValues.mercenariesTotalPrestige += item.prestige;
+      }
     }
   });
   const prestige =

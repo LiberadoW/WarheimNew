@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/ArmyListErrors.css";
 import isGeneral from "../Functions/isGeneral";
 import getModelAmount from "../Functions/getModelAmount";
+import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
 
 const ArmyListErrors = ({ army, unitList, totalCost }) => {
   const modelAmount = getModelAmount(unitList, army);
@@ -39,6 +40,12 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
         </p>
       )}
 
+      {(army.armyRules.includes("Zamożność") && totalCost > 500) && (getValueOfOptionalEquipment(unitList) < totalCost - 500 ) && (
+        <p className="bold"><i className="fa-solid fa-triangle-exclamation"> {" "} </i> Dodatkowe 100 zk z zasady "Zamożność" musi być przeznaczone na zakup ekwipunku.</p>
+      )}
+
+
+
       {unitList.map((item) => {
         const startingWeaponsOptions = Object.entries(
           item.equipmentList
@@ -49,14 +56,15 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
             startingWeaponsOptions.flat().includes(element)
           );
 
-          console.log(intersection.length);
-
           if (intersection.length < 1) {
             return (
               <p className="bold">
-                <i className="fa-solid fa-triangle-exclamation"></i>  
-                {" "}
-                {`${item.unitName} musi posiadać przynajmniej 1 wybór z listy startowych broni: ${startingWeaponsOptions.map(item=>item[0]).join(", ")}.`}
+                <i className="fa-solid fa-triangle-exclamation"></i>{" "}
+                {`${
+                  item.unitName
+                } musi posiadać przynajmniej 1 wybór z listy startowych broni: ${startingWeaponsOptions
+                  .map((item) => item[0])
+                  .join(", ")}.`}
               </p>
             );
           }

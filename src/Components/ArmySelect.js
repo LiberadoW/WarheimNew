@@ -36,6 +36,7 @@ const ArmySelect = ({
         </option>
         <option value="Elfowie Wysokiego Rodu z Ulthuan">Elfowie Wysokiego Rodu z Ulthuan</option>
         <option value="Khazadzi z Gór Krańca Świata">Khazadzi z Gór Krańca Świata</option>
+        <option value="Nieumarła Świta Hrabiego Von Carstein">Nieumarła Świta Hrabiego Von Carstein</option>
         
       </select>
     </div>

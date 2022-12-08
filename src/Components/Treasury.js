@@ -3,7 +3,6 @@ import "../styles/Treasury.css";
 import { getPrestige } from "../Functions/getPrestige";
 
 const Treasury = ({ army, unitList }) => {
-
   const prestigeValues = getPrestige(unitList, army);
   return (
     <div className="treasury-container">
@@ -68,19 +67,19 @@ const Treasury = ({ army, unitList }) => {
               <span>{prestigeValues[1].mountsNumber * 5}</span>
             </div>
             <div>
-              <span>{prestigeValues[1].equipmentTotalValue/10}</span>
+              <span>{prestigeValues[1].equipmentTotalValue / 10}</span>
             </div>
             <div>
               <span>0</span>
             </div>
             <div>
-              <span>{prestigeValues[1].bigTargetsNumber*20}</span>
+              <span>{prestigeValues[1].bigTargetsNumber * 20}</span>
             </div>
             <div>
-              <span>{prestigeValues[1].warmachinesNumber*25}</span>
+              <span>{prestigeValues[1].warmachinesNumber * 25}</span>
             </div>
             <div>
-              <span>{prestigeValues[1].monstersNumber*50}</span>
+              <span>{prestigeValues[1].monstersNumber * 50}</span>
             </div>
             <div>
               <span>{prestigeValues[1].mercenariesTotalPrestige}</span>

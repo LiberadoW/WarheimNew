@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Navigate } from "react-router-dom";
-import Header from "./Header";
 import ArmySelect from "../Components/ArmySelect";
 import UnitSelect from "./UnitSelect";
 import UnitList from "./UnitList";
@@ -8,12 +6,13 @@ import "../styles/Builder.css";
 import { getPrestige } from "../Functions/getPrestige";
 import { getOneOfChoices } from "../Functions/getOneOfChoices";
 import MercenariesSelect from "./MercenariesSelect";
-import { mercenaries } from "../Data.js/Mercenaries";
 import ArmyInfo from "../Components/ArmyInfo";
 import UnitInfo from "../Components/UnitInfo";
 import { db } from "../Database/database";
 import { doc, updateDoc, getDoc, Timestamp } from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
+import html2pdf from "html2pdf.js";
+import "@sweetalert2/themes/bootstrap-4";
 
 const getTotalCost = (arr) => {
   let cost = 0;
@@ -24,6 +23,22 @@ const getTotalCost = (arr) => {
   });
   return cost;
 };
+
+const OPTIONS = {
+  image: {
+    type: "jpeg",
+    quality: 500,
+  },
+  html2canvas: {
+    scale: 6,
+  },
+  jsPDF: {
+    unit: "cm",
+    format: "a4",
+    orientation: "portrait",
+  },
+};
+
 
 const Builder = ({
   unitList,
@@ -38,34 +53,16 @@ const Builder = ({
   setPrestige,
   armyName,
   setArmyName,
+  mercenaries,
+  setMercenaries
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
 
-  const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="/login"></Navigate>;
-  };
-
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
-    const inputsNumberHenchmenArray = Array.from(
-      document.querySelectorAll(
-        `div.unit li.unit-info-container p.unit-info span select`
-      )
-    );
-    unitList.sort((a, b) => a.id - b.id);
-
-    const filteredList = unitList.filter(
-      (x) => x.type === "Stronnik" || x.type === "Machina"
-    );
-    const henchmenIndexList = filteredList.map((item) =>
-      unitList.indexOf(item)
-    );
-    inputsNumberHenchmenArray.forEach((item, index) => {
-      item.value = unitList[henchmenIndexList[index]].selectedNumber;
-    });
   }, [unitList]);
 
   useEffect(() => {
@@ -95,12 +92,10 @@ const Builder = ({
       const arrayOfSavedLists = savedLists.data().lists;
       const arrayArmyNames = savedLists.data().armyNames;
 
-      if(armyName.trim().length===0) {
-        alert("Nazwij swoją kompanię")
+      if (armyName.trim().length === 0) {
+        alert("Nazwij swoją kompanię");
         return;
       }
-
-  
 
       const armyObj = {
         armyType: army.name,
@@ -112,10 +107,18 @@ const Builder = ({
       };
 
       if (arrayArmyNames.includes(armyName.trim())) {
-        const index = arrayOfSavedLists
-          .map((e) => e.armyName)
-          .indexOf(armyName);
-        arrayOfSavedLists[index] = armyObj;
+        if (
+          window.confirm(
+            "Rozpiska o podanej nazwie już istnieje. Czy chcesz ją zastąpić?"
+          )
+        ) {
+          const index = arrayOfSavedLists
+            .map((e) => e.armyName)
+            .indexOf(armyName);
+          arrayOfSavedLists[index] = armyObj;
+        } else {
+          return;
+        }
       } else {
         arrayOfSavedLists.push(armyObj);
         arrayArmyNames.push(armyName);
@@ -125,86 +128,107 @@ const Builder = ({
         lists: arrayOfSavedLists,
         armyNames: arrayArmyNames,
       });
-      alert("Armia została zapisana.");
+      alert("Armia została zapisana");
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleSavePDFClick = (e) => {
+    e.preventDefault();
+    OPTIONS.filename = armyName;
+    const element = document.getElementById("armylist").innerHTML;
+    html2pdf().from(element).set(OPTIONS).save();
+  };
+
+  const handleResetArmyClick = () => {
+    if (window.confirm("Czy na pewno chcesz zresetować rozpiskę?")) {
+      setUnitList([]);
+      setUnitName("");
+      setMercenaryUnitName("");
+      setArmyName("");
+    }
+  };
+
   return (
-    <>
-      <Header />
-      <div className="builder">
-      
-        <div className="builder-select-container">
-          <ArmySelect
-            army={army}
-            setArmy={setArmy}
-            setUnitList={setUnitList}
-            setUnitName={setUnitName}
-            setIdShown={setIdShown}
-            setMercenaryUnitName={setMercenaryUnitName}
-          />
-
-          <UnitSelect
-            heroes={army.heroes}
-            setUnitName={setUnitName}
-            unitName={unitName}
-            unitList={unitList}
-            setUnitList={setUnitList}
-          />
-
-          <MercenariesSelect
-            mercenaries={mercenaries}
-            setMercenaryUnitName={setMercenaryUnitName}
-            mercenaryUnitName={mercenaryUnitName}
-            unitList={unitList}
-            setUnitList={setUnitList}
-          />
-        </div>
+    <div className="builder">
+      <div className="builder-controls">
+        <button className="button" onClick={handleResetArmyClick}>
+          Resetuj rozpiskę
+        </button>
+        <button className="button" onClick={handleSavePDFClick}>
+          Zapisz jako PDF
+        </button>
 
         {currentUser && (
-          <button className="button save-army-button" onClick={saveArmy}>
+          <button className="button " onClick={saveArmy}>
             Zapisz armię
           </button>
         )}
-
-        <ArmyInfo
-          prestige={prestige}
-          totalCost={totalCost}
+      </div>
+      <div className="builder-select-container">
+        <ArmySelect
           army={army}
-          unitList={unitList}
-          setArmyName={setArmyName}
-          armyName={armyName}
+          setArmy={setArmy}
+          setUnitList={setUnitList}
+          setUnitName={setUnitName}
+          setIdShown={setIdShown}
+          setMercenaryUnitName={setMercenaryUnitName}
+          setMercenaries={setMercenaries}
         />
 
-        <div className="main-builder-container">
-          <div className="side-builder-left">
-            <UnitList
-              unitList={unitList}
-              setUnitList={setUnitList}
-              idShown={idShown}
-              setIdShown={setIdShown}
-              showModal={showModal}
-              setShowModal={setShowModal}
-            />
-          </div>
+        <UnitSelect
+          heroes={army.heroes}
+          setUnitName={setUnitName}
+          unitName={unitName}
+          unitList={unitList}
+          setUnitList={setUnitList}
+        />
 
-          <UnitInfo
-            heroes={army.heroes}
-            mercenaries={mercenaries}
-            unitName={unitName}
+        <MercenariesSelect
+          mercenaries={mercenaries}
+          setMercenaryUnitName={setMercenaryUnitName}
+          mercenaryUnitName={mercenaryUnitName}
+          unitList={unitList}
+          setUnitList={setUnitList}
+        />
+      </div>
+
+      <ArmyInfo
+        prestige={prestige}
+        totalCost={totalCost}
+        army={army}
+        unitList={unitList}
+        setArmyName={setArmyName}
+        armyName={armyName}
+      />
+
+      <div className="main-builder-container">
+        <div className="side-builder-left">
+          <UnitList
             unitList={unitList}
             setUnitList={setUnitList}
-            handleClickShow={handleClickShow}
             idShown={idShown}
             setIdShown={setIdShown}
             showModal={showModal}
             setShowModal={setShowModal}
           />
         </div>
+
+        <UnitInfo
+          heroes={army.heroes}
+          mercenaries={mercenaries}
+          unitName={unitName}
+          unitList={unitList}
+          setUnitList={setUnitList}
+          handleClickShow={handleClickShow}
+          idShown={idShown}
+          setIdShown={setIdShown}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </div>
-    </>
+    </div>
   );
 };
 

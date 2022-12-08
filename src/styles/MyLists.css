@@ -7,17 +7,19 @@
   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
   margin-bottom: 10px;
   align-items: center;
-  flex-direction: column;
+  
 }
 
 .armylists-text-container {
   display: flex;
   gap: 5px;
+  flex: 1;
 }
 
 .armylists-button-container {
   display: flex;
   gap: 5px;
+  justify-self: end;
 }
 
 .armylist-info button {
@@ -25,7 +27,7 @@
   padding: 5px;
   border-radius: 5px;
   display: inline-block;
-  background-color: #5e3023;
+  background-color: var(--main);
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -63,5 +65,7 @@
 @media screen and (max-width: 768px) {
   .armylist-info {
     gap: 2px;
+    flex-direction: column;
   }
+  
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,35 +7,37 @@ import {
 } from "react-router-dom";
 import Builder from "./Builder";
 import ArmyList from "../Components/ArmyList";
-import useShareStatesBetweenTabs from "react-share-states-between-tabs";
 import Register from "../Registration/Register";
 import Login from "../Registration/Login";
 import armies from "../Data.js/Armies";
 import { AuthContext } from "../Context/AuthContext";
 import UserDashboard from "../Components/UserDashboard";
 import MyLists from "../User/MyLists";
+import Header from "./Header";
+import { mercenariesList } from "../Data.js/Mercenaries";
+import { filterMercenaries } from "../Functions/filterMercenaries";
 
 const App = () => {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login"></Navigate>;
   };
-  const [unitList, setUnitList] = useShareStatesBetweenTabs("unitList", []);
-  const [army, setArmy] = useShareStatesBetweenTabs(
-    "army",
-    window.localStorage.hasOwnProperty("army")
-      ? JSON.parse(window.localStorage.getItem("army"))
-      : "Cyrkowcy z Ligii Ostermarku"
-  );
-
+  const [unitList, setUnitList] = useState([]);
+  const [army, setArmy] = useState("Cyrkowcy z Ligii Ostermarku");
   const { currentUser } = useContext(AuthContext);
-
   const [unitName, setUnitName] = useState("");
+  const [mercenaries, setMercenaries] = useState(() =>
+    filterMercenaries(mercenariesList, armies[army])
+  );
   const [mercenaryUnitName, setMercenaryUnitName] = useState("");
-  const [prestige, setPrestige] = useShareStatesBetweenTabs("prestige", 0);
-  const [armyName, setArmyName] = useShareStatesBetweenTabs("army-name", "");
+  const [prestige, setPrestige] = useState(0);
+  const [armyName, setArmyName] = useState("");
   const newUnitList = [...unitList];
 
   const numberOfHeroes = newUnitList.filter((x) => x.type === "Bohater").length;
+
+  useEffect(() => {
+    setMercenaries(filterMercenaries(mercenariesList, armies[army]));
+  }, [army]);
 
   for (let i = 0; i < 6 - numberOfHeroes; i++) {
     newUnitList.push({
@@ -89,9 +91,10 @@ const App = () => {
   }
 
   return (
-    <div className="app">
+    <div className="app" id="app">
       <main className="site-wrapper">
         <Router>
+          <Header />
           <Routes>
             <Route
               path="/"
@@ -103,6 +106,8 @@ const App = () => {
                   setArmy={setArmy}
                   unitName={unitName}
                   setUnitName={setUnitName}
+                  mercenaries={mercenaries}
+                  setMercenaries={setMercenaries}
                   mercenaryUnitName={mercenaryUnitName}
                   setMercenaryUnitName={setMercenaryUnitName}
                   prestige={prestige}
@@ -112,20 +117,7 @@ const App = () => {
                 />
               }
             />
-            <Route
-              path="/armylist"
-              element={
-                <ArmyList
-                  unitList={newUnitList}
-                  heroes={armies[army].heroes}
-                  unitName={unitName}
-                  setUnitList={setUnitList}
-                  army={armies[army]}
-                  prestige={prestige}
-                  armyName={armyName}
-                />
-              }
-            />
+
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route
@@ -151,6 +143,17 @@ const App = () => {
           </Routes>
         </Router>
       </main>
+      <div id="armylist">
+        <ArmyList
+          unitList={newUnitList}
+          heroes={armies[army].heroes}
+          unitName={unitName}
+          setUnitList={setUnitList}
+          army={armies[army]}
+          prestige={prestige}
+          armyName={armyName}
+        />
+      </div>
     </div>
   );
 };

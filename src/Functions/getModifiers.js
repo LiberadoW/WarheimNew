@@ -1,12 +1,19 @@
-export const getModifiers = (arr,unit) => {
+export const getModifiers = (arr, unit) => {
   let armour = 7;
   let speedModifier = 0;
   let initativeModifier = 0;
 
-
   if (unit.rules.includes("Żelazoskóry")) {
-    armour -=1
+    armour -= 1;
   }
+
+  const scalySkin = unit.rules.find((x) => x.includes("Łuskowata skóra"));
+
+  if (scalySkin) {
+    const scalySkinValue = scalySkin.match(/\d+/g);
+    armour -= 7 - scalySkinValue;
+  }
+
   if (arr.includes("Lekki")) {
     armour -= 1;
   }
@@ -36,13 +43,17 @@ export const getModifiers = (arr,unit) => {
 
   if (
     (arr.includes("Średni") && arr.includes("Tarcza")) ||
-    arr.includes("Ciężki") || arr.includes("Pancerz z Gromrilu")
+    arr.includes("Ciężki") ||
+    arr.includes("Pancerz z Gromrilu")
   ) {
     speedModifier = 1;
     initativeModifier = 1;
   }
 
-  if (arr.includes("Ciężki") && arr.includes("Tarcza") || arr.includes("Pancerz z Gromrilu") && arr.includes("Tarcza"))  {
+  if (
+    (arr.includes("Ciężki") && arr.includes("Tarcza")) ||
+    (arr.includes("Pancerz z Gromrilu") && arr.includes("Tarcza"))
+  ) {
     speedModifier = 1;
     initativeModifier = 2;
   }

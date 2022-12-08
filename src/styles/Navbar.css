@@ -1,6 +1,6 @@
 .navbar {
   height: 50px;
-  background-color: #5E3023;
+  background-color: var(--main);
   max-width: 1200px;
   color: white;
   display: flex;
@@ -30,7 +30,7 @@
 }
 
 .navbar a:hover {
-  background-color: #895737;
+  background-color: var(--hover);
 }
 
 .logout-button {
@@ -44,5 +44,5 @@ padding: 0 10px 0 10px;
 }
 
 .logout-button:hover {
-  background-color: #895737;
+  background-color: var(--hover);
 }

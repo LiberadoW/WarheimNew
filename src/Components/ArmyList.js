@@ -16,7 +16,10 @@ const ArmyList = ({
 }) => {
   const heroesUnitList = unitList.filter((unit) => unit.type === "Bohater");
   const henchmenUnitList = unitList.filter(
-    (unit) => unit.type === "Stronnik" || unit.type === "Machina" || unit.type === "Najemne Ostrze"
+    (unit) =>
+      unit.type === "Stronnik" ||
+      unit.type === "Machina" ||
+      unit.type === "Najemne Ostrze"
   );
   return (
     <div className="army-list-container">
@@ -28,7 +31,12 @@ const ArmyList = ({
           unitName={unitName}
           setUnitList={setUnitList}
         />
-        <Treasury army={army} unitList={unitList} heroesUnitList={heroesUnitList} henchmenUnitList={henchmenUnitList}/>
+        <Treasury
+          army={army}
+          unitList={unitList}
+          heroesUnitList={heroesUnitList}
+          henchmenUnitList={henchmenUnitList}
+        />
       </div>
       <div className="print-a4-page">
         <UnitTable
@@ -37,7 +45,7 @@ const ArmyList = ({
           unitName={unitName}
           setUnitList={setUnitList}
         />
-        <CampaignPoints army={army}/>
+        <CampaignPoints army={army} />
       </div>
     </div>
   );

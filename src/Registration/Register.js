@@ -11,7 +11,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
-import Header from "../layouts/Header";
 import "../styles/Registration.css";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../Database/database";
@@ -114,8 +113,6 @@ const Register = () => {
 
 
   return (
-    <>
-      <Header />
       <div className="registration-container page-section">
         <div className="registration">
           <p ref={errorRef} className={errorMsg ? "errmsg" : "offscreen"}>
@@ -264,7 +261,6 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </>
   );
 };
 

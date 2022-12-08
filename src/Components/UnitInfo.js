@@ -28,26 +28,25 @@ const UnitInfo = ({
       e.target.className.includes("close-modal-button")
     ) {
       setShowModal(!showModal);
-      setIdShown(null);
+      setIdShown(1);
     }
   };
 
   return unitList.map((unit, index) => {
     if (unit != null) {
       return (
-        unitList.indexOf(unit) == idShown && (
+        unit.uniqueId == idShown && (
           <Modal show={showModal} handleClose={handleClick}>
             <div className="side-builder-right" key={`${index}1`}>
               <div
                 className={`unit ${index}`}
                 id={index}
                 handleClick={handleClickShow}
-                key={index}
               >
                 <div className="edit-unit-container">
                   <div className="modal-unit-info">
                       <h2>{unit.unitName}</h2>
-                    <span><span className="bold-text">Koszt:</span> {`${unit.cost} zk`} </span>
+                    <span><span className="bold-text">Koszt:</span> {`${unit.totalCost} zk`} </span>
                    
                   </div>
                   <div className="unit-name-input">
@@ -63,7 +62,6 @@ const UnitInfo = ({
                           ? unit.unitDisplayName
                           : ""
                       }
-                      key={index}
                     />
                   </div>
                   <WeaponList

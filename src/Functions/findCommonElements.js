@@ -1,6 +1,5 @@
 const findCommonElements = (arr1, arr2) => {
-    const index = arr1.some((item) => arr2.includes(item));
-    return index;
-  };
+  return arr1.includes(arr2);
+};
 
-  export default findCommonElements
+export default findCommonElements;

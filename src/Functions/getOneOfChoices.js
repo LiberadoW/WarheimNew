@@ -16,10 +16,10 @@ const disableOneOfChoices = (unitArr, unitList) => {
       }
     });
   } else {
-    unitArr.forEach(mainUnit=>{
+    unitArr.forEach((mainUnit) => {
       const opt = optionsArray.filter((x) => x.value === mainUnit);
       opt[0].disabled = false;
-    })
+    });
   }
 };
 
@@ -53,6 +53,10 @@ export const getOneOfChoices = (army, unitList) => {
     "Khazadzi z Gór Krańca Świata": [
       ["Kowal Run", "Mistrz Inżynier"],
       ["Strzelec", "Górnik"],
+    ],
+    "Nieumarła Świta Hrabiego Von Carstein": [
+      ["Graveir", "Mroczny wilk"],
+      ["Czarna Karoca", "Ścierwowóz"],
     ],
   };
 

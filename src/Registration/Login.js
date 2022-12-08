@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import Header from "../layouts/Header";
 import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
@@ -48,8 +47,6 @@ const Login = () => {
   };
 
   return (
-    <>
-      <Header />
       <div className="registration-container page-section">
         <div className="registration">
           <p ref={errorRef} className={errorMsg ? "errmsg" : "offscreen"}>
@@ -102,7 +99,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

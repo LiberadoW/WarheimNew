@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+:root {
+  --main: #212529;
+  --secondary: #F8F9FA;
+  --hover: #6C757D;
+}
+
 body {
   margin: 0;
   font-family: 'Times New Roman', Times, serif;
@@ -13,6 +19,7 @@ body {
 .app {
   background-color: #E9E9E9;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .site-wrapper {
@@ -27,7 +34,7 @@ li {
 }
 
 .page-section {
-  background-color: #f3e9dc;
+  background-color: var(--secondary);
   min-height: calc(100vh - 50px);
   box-sizing: border-box;
   padding: 1rem 0.5rem;

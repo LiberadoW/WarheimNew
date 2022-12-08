@@ -68,9 +68,6 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }
             {`${totalCost} / ${army.limit} zk`}
           </p>
           <p>
-            <Link to="/armylist" target="_blank">
-              <button className="button">Eksportuj</button>
-            </Link>
           </p>
         </div>
       </div>
