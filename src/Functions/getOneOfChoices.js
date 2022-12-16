@@ -37,6 +37,54 @@ export const getOneOfChoices = (army, unitList) => {
       ["Wóz bojowy", "Rydwan"],
     ],
     "Piechota Morska z Marienburga": [["Czarownik", "Kapłan Mannana"]],
+    "Strażnicy dróg z Averlandu": [
+      ["Magister magii", "Prezbiter Sigmara"],
+      ["Rajtar", "Pogromca Trolli"],
+      ["Zaprzęg", "Rydwan"],
+    ],
+    "Zbrojna kompania z Ostlandu": [
+      ["Magister magii", "Prezbiter Sigmara"],
+      ["Ogr", "Przepatrywacz"],
+      ["Więźniarka", "Rydwan"],
+    ],
+    "Zbrojni z Middenheim": [
+      ["Magister magii","Kapłan Ulryka"],
+      ["Wilczarz", "Przepatrywacz"],
+      ["Zaprzęg", "Rydwan"],
+    ],
+    "Żołnierze z Reiklandu": [
+      ["Rajtar", "Flagelant"],
+      ["Zaprzęg", "Rydwan"],
+    ],
+    "Zbrojna chorągiew z Kisleva": [
+      ["Kapłan Ursuna", "Magister Lodu"],
+      ["Kozak", "Myśliwy"],
+      ["Husarz", "Nomada"],
+      ["Zaprzęg", "Rydwan"],
+    ],
+    "Piraci z Sartosy": [
+      ["Kapłan Mannana", "Czarownik"],
+      ["Przepatrywacz", "Ogr"],
+      ["Więźniarka", "Rydwan"],
+    ],
+    "Psy Wojny": [
+      ["Czarownik", "Kapłan Myrmidii"],
+      ["Lansjer", "Ogr", "Ptasznik z Catrazzy"],
+      ["Wóz bojowy", "Rydwan"],
+    ],
+    "Raubritterzy z Księstw Granicznych": [
+      ["Myśliwy", "Zbójca"],
+      ["Rozbójnik", "Ogr"],
+      ["Więźniarka", "Rydwan"],
+    ],
+    "Kupiecka karawana z Arabii": [
+      ["Dżinn", "Nomada"],
+      ["Więźniarka", "Latający dywan"],
+    ],
+    "Amazonki z Lustrii": [
+      ["Mara", "Zmora"],
+      ["Więźniarka", "Rydwan"],
+    ],
     "Gladiatorzy z Jałowej Krainy": [
       ["Szablozębny", "Pogromca Trolli"],
       ["Niedźwiedź", "Nomada", "Ogr"],

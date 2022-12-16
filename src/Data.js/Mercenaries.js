@@ -707,7 +707,7 @@ export const mercenariesList = {
   },
   "Strażnik Morski z Lothern": {
     id: 131,
-    startingEquipment: ["Miecz", "Długi łuk", "Lekki", "Balista powtarzalna"],
+    startingEquipment: ["Miecz", "Łuk długi", "Lekki", "Balista powtarzalna"],
     cost: 95,
     pay: 40,
     prestige: 40,

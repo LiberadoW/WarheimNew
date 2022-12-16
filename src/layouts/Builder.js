@@ -66,7 +66,7 @@ const Builder = ({
   }, [unitList]);
 
   useEffect(() => {
-    setPrestige(getPrestige(unitList, army)[0]);
+    setPrestige(getPrestige(unitList)[0]);
     getOneOfChoices(army, unitList);
   });
 

@@ -1,5 +1,3 @@
-import { armies } from "../layouts/Builder";
-
 const mountList = {
   Dzik: 50,
   "Jaskiniowy squig": 50,
@@ -14,7 +12,7 @@ const mountList = {
   Rumak: 65,
   "Rumak chaosu": 65,
   "Rumak Elfów": 70,
-  "Rumek Slaanesha": 60,
+  "Rumak Slaanesha": 60,
   Terradon: 70,
   "Wielki wilk": 65,
   Tuskgor: 60,
@@ -95,15 +93,12 @@ export const getPrestige = (arr) => {
           }
         });
 
-
-          equipment.forEach((eq) => {
-            if (Object.keys(equipmentList).includes(eq)) {
-              prestigeValues.equipmentTotalValue +=
+        equipment.forEach((eq) => {
+          if (Object.keys(equipmentList).includes(eq) && !Object.keys(mountList).includes(eq)) {
+            prestigeValues.equipmentTotalValue +=
               equipmentList[eq][0] * item.selectedNumber;
-            }
-       
-          });
-        
+          }
+        });
 
         // equipment.forEach((eq) => {
         //   keysSplit.forEach((key) => {
@@ -126,6 +121,7 @@ export const getPrestige = (arr) => {
   const prestige =
     prestigeValues.heroesTotalExp +
     prestigeValues.modelsNumber * 5 +
+    prestigeValues.mountsNumber * 5 +
     prestigeValues.bigTargetsNumber * 20 +
     prestigeValues.warmachinesNumber * 25 +
     prestigeValues.monstersNumber * 50 +

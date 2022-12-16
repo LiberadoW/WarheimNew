@@ -96,19 +96,27 @@
   font-size: 0.6rem;
   margin-bottom: -1px;
   margin-right: -1px;
+  white-space: nowrap;
 
 }
 
 .stats-table div:nth-of-type(15),
 .stats-table div:nth-of-type(26),
 .stats-table div:nth-of-type(37) {
-   font-size: 0.48rem;
+   font-size: 0.55rem;
 }
 
 .stats-table div:nth-of-type(25),
 .stats-table div:nth-of-type(36),
 .stats-table div:nth-of-type(47) {
   margin-right: 0px;
+}
+
+.stats-table-henchmen div:nth-of-type(14),
+.stats-table-henchmen div:nth-of-type(25),
+.stats-table-henchmen div:nth-of-type(36)
+{
+  font-size: 0.55rem;
 }
 
 .stats-table-henchmen div:nth-of-type(24) {

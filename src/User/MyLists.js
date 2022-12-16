@@ -72,7 +72,6 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
       <h2 className="armylists-title">Moje rozpiski</h2>
       <div className="my-armylists">
         {Object.keys(groupedLists).map((armies, index) => {
-          console.log(armies);
           return (
             <div className="armylist-container" key={index}>
               <h3>{armies}</h3>

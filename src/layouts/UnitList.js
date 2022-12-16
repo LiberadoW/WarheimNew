@@ -58,7 +58,7 @@ const UnitList = ({
     return (
       <>
         {unitList.length !== 0 && (
-          <h3 className="unit-list-divider">{ARRAY_OF_TYPES_DISPLAY[index]}</h3>
+          <h3 className="unit-list-divider" key={`${index} 1`}>{ARRAY_OF_TYPES_DISPLAY[index]}</h3>
         )}
         {unitList.length !== 0 &&
           unitList.map((unit, index) => {
@@ -70,7 +70,7 @@ const UnitList = ({
                   backgroundColor:
                     unit.uniqueId == idShown ? "#A9A9A9" : "white",
                 }}
-                key={index}
+                key={unit.uniqueId}
               >
                 <li
                   className={`unit-info-container ${index}`}

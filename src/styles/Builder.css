@@ -152,6 +152,7 @@
 
   .side-builder-right {
     padding: 10px;
+    overflow-y: auto;
   }
 
   .equipment-list {

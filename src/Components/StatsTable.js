@@ -11,15 +11,16 @@ const StatsTable = ({
     <>
       {statsHeaders.map((statHeader, index) => {
         return (
-          <div key={`${index}11`} className="unit-table-stats-headers">
+          <div key={index} className="unit-table-stats-headers">
             {statHeader}
           </div>
         );
       })}
       {Object.entries(item.stats).map(([key, value], mainIndex) => {
+        
         return (
-          <React.Fragment key={`${mainIndex}12`}>
-            <div key={`${mainIndex}1`} className="unit-table-stats">
+          <React.Fragment key={`${mainIndex}1`}>
+            <div className="unit-table-stats">
               {key}
             </div>
             {value.map((stat, index) => {
@@ -52,7 +53,7 @@ const StatsTable = ({
               }
             })}
             <div className="unit-table-stats" key={`${mainIndex}5`}>
-              {item.unitName === "" ? "" : armour < 7 ? `${armour}+` : "-"}
+               {mainIndex === 0 ? item.unitName === "" ? "" : armour < 7 ? `${armour}+` : "-" : "-"}
             </div>
           </React.Fragment>
         );

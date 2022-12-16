@@ -72,11 +72,20 @@ const mageEquipmentList = {
   },
   "Tradycja Życia": {
     equipment: {
-        Kostur: [5, 0],
+      Kostur: [5, 0],
       Sztylet: [2, 0],
       "Broń miotana": [10, 1],
     },
     skills: [0, 2, 3, 5],
+  },
+  "Magia Żywiołów": {
+    equipment: {
+      Kostur: [5,0],
+      Chopesz: [10,0],
+      Sztylet: [2,0],
+      "Broń miotana (noże)": [10,1]
+    },
+    skills: [0, 2, 4, 5],
   },
 };
 

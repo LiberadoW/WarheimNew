@@ -36,7 +36,7 @@ const UnitInfo = ({
     if (unit != null) {
       return (
         unit.uniqueId == idShown && (
-          <Modal show={showModal} handleClose={handleClick}>
+          <Modal show={showModal} handleClose={handleClick} key={index}>
             <div className="side-builder-right" key={`${index}1`}>
               <div
                 className={`unit ${index}`}

@@ -46,7 +46,7 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
 
 
 
-      {unitList.map((item) => {
+      {unitList.map((item,index) => {
         const startingWeaponsOptions = Object.entries(
           item.equipmentList
         ).filter(([key, value]) => value[2] === "Startowy");
@@ -58,7 +58,7 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
 
           if (intersection.length < 1) {
             return (
-              <p className="bold">
+              <p className="bold" key={index}>
                 <i className="fa-solid fa-triangle-exclamation"></i>{" "}
                 {`${
                   item.unitName

@@ -3,6 +3,8 @@ import "../styles/WeaponList.css";
 import { disableButtons } from "../Functions/disableButtons";
 import mageEquipmentList from "../Data.js/MageEquipmentList";
 import findCommonElements from "../Functions/findCommonElements";
+import { items } from "../Data.js/Items";
+import { getItemText } from "../Functions/getItemText";
 
 const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
   const commandGroupUnit = unitList[id];
@@ -14,7 +16,29 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
   const [isCommandGroup, setCommandGroup] = useState(
     unitList[id].rules.includes("Chorążowie & sygnaliści")
   );
-  
+
+  const [isPromptShown, setIsPromptShown] = useState(null);
+  const [promptUnit, setPromptUnit] = useState(null);
+  const [delayHandler, setDelayHandler] = useState(null);
+
+  const handleMouseEnter = (e) => {
+    setPromptUnit(
+      e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+        .parentNode.id
+    );
+    setDelayHandler(
+      setTimeout(() => {
+        setIsPromptShown(e.target.id);
+      }, 1000)
+    );
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(delayHandler);
+    setIsPromptShown(null);
+    setPromptUnit(null);
+  };
+
   const unitArray = Array.from(document.querySelectorAll(".unit"));
 
   useEffect(() => {
@@ -87,9 +111,18 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
 
   const handleWeaponListClick = (e) => {
     const unit = unitList[e.target.className];
-    const equipmentList = unitList[e.target.className].optionalEquipment;
+    const equipmentList = unit.optionalEquipment;
 
-    if (e.target.name.includes("Tradycja")) {
+
+    const spellSchools = Object.fromEntries(
+      Object.entries(unit.equipmentList).filter(
+        ([key]) => key.includes("Tradycja") || key.includes("Magia")
+      )
+    );
+
+    if (e.target.name.includes("Tradycja") || e.target.name.includes("Magia")) {
+      const mageEquipment = mageEquipmentList[e.target.name].equipment;
+    
       if (unit.rules.includes(e.target.name)) {
         unit.rules.splice(unit.rules.indexOf(e.target.name), 1);
       } else {
@@ -97,31 +130,60 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       }
 
       if (e.target.checked === true) {
-        Object.entries(mageEquipmentList[e.target.name].equipment).forEach(
-          ([key, value]) => {
+        if (
+          Object.values(unit.equipmentList).filter((x) => x.length === 2)
+            .length === 0
+        ) {
+          Object.entries(mageEquipment).forEach(([key, value]) => {
             unit.equipmentList[key] = value;
+          });
+        }
+
+        if (unit.unitName !== "Panna Graala") {
+          if (heroes[unit.unitName].skills.length === 0) {
+            unit.skills = mageEquipmentList[e.target.name].skills;
           }
-        );
-        unit.skills = mageEquipmentList[e.target.name].skills;
+        } else {
+          unit.equipmentList["Rumak"] = [55, 3];
+        }
       } else {
-        unit.equipmentList = {
-          "Tradycja Bestii": [0, 4, "Tradycja"],
-          "Tradycja Cienia": [0, 4, "Tradycja"],
-          "Tradycja Metalu": [0, 4, "Tradycja"],
-          "Tradycja Niebios": [0, 4, "Tradycja"],
-          "Tradycja Ognia": [0, 4, "Tradycja"],
-          "Tradycja Śmierci": [0, 4, "Tradycja"],
-          "Tradycja Światła": [0, 4, "Tradycja"],
-          "Tradycja Życia": [0, 4, "Tradycja"],
-        };
+
+        const differentEquipmentNames = Object.keys(unit.equipmentList).filter(
+          (x) => Object.keys(mageEquipment).includes(x)
+        );
+  
+        if (JSON.stringify(differentEquipmentNames) == JSON.stringify(Object.keys(mageEquipment))) {
+          unit.equipmentList = spellSchools;
+        }
+
+
+
+        
+
         unit.optionalEquipment = [];
-        unit.skills = [];
+        unit.cost = heroes[unit.unitName].cost;
+
+        if (unit.unitName !== "Panna Graala") {
+          if (heroes[unit.unitName].skills.length === 0) {
+            unit.skills = [];
+          }
+        } else {
+          unit.equipmentList["Rumak"] = [55, 3];
+        }
       }
     } else {
       if (equipmentList.includes(e.target.name)) {
         equipmentList.splice(equipmentList.indexOf(e.target.name), 1);
       } else {
         equipmentList.push(e.target.name);
+      }
+    }
+
+    if (e.target.name === "Rumak") {
+      if (e.target.checked === true) {
+        unit.stats["Rumak"] = [8, 3, 0, 3, "-", "-", 3, 1, 5];
+      } else {
+        delete unit.stats["Rumak"];
       }
     }
 
@@ -376,7 +438,19 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                             readOnly
                           ></input>
                         )}
-                        {key}
+                        <span
+                          className="equipment-text"
+                          onMouseEnter={handleMouseEnter}
+                          onMouseLeave={handleMouseLeave}
+                          id={key}
+                        >
+                          {key}
+                        </span>
+                        {isPromptShown == key && (
+                          <p className="equipment-tooltip">
+                            {getItemText(key, unitList[promptUnit])}
+                          </p>
+                        )}
                       </li>
                     );
                   })}
