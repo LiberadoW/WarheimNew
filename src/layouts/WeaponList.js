@@ -187,6 +187,14 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       }
     }
 
+    if (e.target.name === "Wielki wilk") {
+      if (e.target.checked === true) {
+        unit.stats["Wielki wilk"] = [9,3,0,4, "-", "-", 3, 1, 3];
+      } else {
+        delete unit.stats["Wielki wilk"];
+      }
+    }
+
     // for units which have options for starting weapons
     const startingWeapons = Array.from(
       document.querySelectorAll(

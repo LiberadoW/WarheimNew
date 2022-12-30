@@ -473,8 +473,8 @@ export const mercenariesList = {
   "Pogromca Trolli": {
     id: 123,
     startingEquipment: [
-      "Topór krasnoludzki",
-      "Topór krasnoludzki",
+      "Topór krasnoludów",
+      "Topór krasnoludów",
       "Broń wielka",
     ],
     cost: 25,

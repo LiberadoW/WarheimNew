@@ -1,5 +1,7 @@
 import isGeneral from "./isGeneral";
 import { getValueOfOptionalEquipment } from "./getValueOfOptionalEquipment";
+import { getAllEquipment } from "./getAllEquipment";
+import { getUnitNumbers } from "./getUnitNumbers";
 
 const getErrors = (armies, army, totalCost, modelAmount, unitList) => {
   let errors = 0;
@@ -17,6 +19,26 @@ const getErrors = (armies, army, totalCost, modelAmount, unitList) => {
       if (intersection.length < 1) {
         errors += 1;
       }
+    }
+  });
+
+
+
+  const unitNumbers = getUnitNumbers(unitList)
+
+ Object.keys(unitNumbers).forEach(unit=>{
+  if (unitNumbers[unit]>army.heroes[unit].number) {
+    errors +=1
+  }
+ })
+
+  const equipmentList = getAllEquipment(unitList);
+
+  const oneOfItems = ["Harpun", "Ołowiomiotacz"];
+
+  oneOfItems.forEach((item) => {
+    if (equipmentList.filter((x) => x === item).length > 1) {
+      errors += 1;
     }
   });
 

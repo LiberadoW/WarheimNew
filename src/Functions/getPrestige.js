@@ -1,4 +1,4 @@
-const mountList = {
+export const mountList = {
   Dzik: 50,
   "Jaskiniowy squig": 50,
   "Koń bojowy": 50,

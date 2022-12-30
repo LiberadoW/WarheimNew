@@ -147,7 +147,7 @@ export const ostland = {
           "Bycza szarża",
           "Duży cel",
           "Głód trzewi",
-          "Oznakowany gnoblar (gnobal-uwaga)",
+          "Oznakowany gnoblar (gnoblar-uwaga)",
           "Przepastne trzewia",
           "Strach",
           "Tempy",

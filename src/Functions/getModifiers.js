@@ -1,7 +1,13 @@
+import { mountList } from "./getPrestige";
+
 export const getModifiers = (arr, unit) => {
   let armour = 7;
   let speedModifier = 0;
   let initativeModifier = 0;
+
+  if (unit.startingEquipment.concat(unit.optionalEquipment).some(item=>Object.keys(mountList).includes(item))) {
+    armour -=1;
+  }
 
   if (unit.rules.includes("Żelazoskóry")) {
     armour -= 1;
@@ -12,6 +18,10 @@ export const getModifiers = (arr, unit) => {
   if (scalySkin) {
     const scalySkinValue = scalySkin.match(/\d+/g);
     armour -= 7 - scalySkinValue;
+  }
+
+  if (unit.rules.includes("Czołg parowy")) {
+    armour -= 6;
   }
 
   if (arr.includes("Lekki")) {

@@ -48,7 +48,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Więźniarka", "Rydwan"],
     ],
     "Zbrojni z Middenheim": [
-      ["Magister magii","Kapłan Ulryka"],
+      ["Magister magii", "Kapłan Ulryka"],
       ["Wilczarz", "Przepatrywacz"],
       ["Zaprzęg", "Rydwan"],
     ],
@@ -101,6 +101,22 @@ export const getOneOfChoices = (army, unitList) => {
     "Khazadzi z Gór Krańca Świata": [
       ["Kowal Run", "Mistrz Inżynier"],
       ["Strzelec", "Górnik"],
+    ],
+    "Kult Pogromców z Karak Kadrin": [["Kowal Run", "Mistrz Inżynier"]],
+    "Kompania Krasnoludzkich Piwowarów": [
+      ["Kowal Run", "Mistrz Inżynier"],
+      ["Pogromca Trolli", "Krasnoludzki Przepatrywacz"],
+      ["Zaprzęg", "Powóz piwny"],
+    ],
+    "Szkutnicy z Barak Varr": [
+      ["Kowal Run", "Mistrz Inżynier"],
+      ["Ogr", "Ptasznik z Barak Varr"],
+      ["Balon bojowy", "Żyrokopter"],
+    ],
+    "Jeźdzcy Wilków": [["Więźniarka", "Rydwan"]],
+    "Zwiadowcza kompania z Królestw Ogrów": [
+      ["Ogniobrzuchy", "Rzeźnik"],
+      ["Gorger", "Yeti"],
     ],
     "Nieumarła Świta Hrabiego Von Carstein": [
       ["Graveir", "Mroczny wilk"],

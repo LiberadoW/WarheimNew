@@ -4,11 +4,19 @@ import armies from "../Data.js/Armies";
 import "../styles/ArmyInfo.css";
 import getErrors from "../Functions/getErrors";
 import getModelAmount from "../Functions/getModelAmount";
-import { Link } from "react-router-dom";
 
-const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }) => {
+const ArmyInfo = ({
+  totalCost,
+  prestige,
+  army,
+  unitList,
+  setArmyName,
+  armyName,
+  errors,
+  setErrors
+}) => {
   const [clicked, setClicked] = useState(false);
-  const [errors, setErrors] = useState(0);
+  
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -18,7 +26,7 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }
 
   useEffect(() => {
     setErrors(getErrors(armies, army, totalCost, modelAmount, unitList));
-  },[army, totalCost, modelAmount, unitList]);
+  }, [army, totalCost, modelAmount, unitList]);
 
   const handleArmyNameChange = (e) => {
     setArmyName(e.target.value);
@@ -28,9 +36,7 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }
     army.limit = 600;
   }
 
-  unitList.forEach(unit=>{
-    
-  })
+  unitList.forEach((unit) => {});
 
   return (
     <div className="army-info-alerts-container">
@@ -44,8 +50,8 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }
                 <i className="fa-solid fa-caret-right fa-xl"></i>
               )}
               <span>
-                <i className="fa-solid fa-triangle-exclamation"></i> Liczba błędów:{" "}
-                {errors}{" "}
+                <i className="fa-solid fa-triangle-exclamation"></i> Liczba
+                błędów: {errors}{" "}
               </span>
             </p>
           )}
@@ -53,7 +59,11 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }
         <div className="army-info-right">
           <p className="army-name-input">
             <span>Nazwa kompanii:</span>{" "}
-            <input onChange={handleArmyNameChange} type="text" value={armyName}/>
+            <input
+              onChange={handleArmyNameChange}
+              type="text"
+              value={armyName}
+            />
           </p>
           <p className="prestige">
             <span className="bold">Prestiż:</span> {prestige}
@@ -67,8 +77,7 @@ const ArmyInfo = ({ totalCost, prestige, army, unitList, setArmyName, armyName }
             <span className="bold">Suma:</span>{" "}
             {`${totalCost} / ${army.limit} zk`}
           </p>
-          <p>
-          </p>
+          <p></p>
         </div>
       </div>
       {clicked && (

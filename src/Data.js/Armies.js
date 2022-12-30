@@ -19,6 +19,12 @@ import { raubritterzy } from "./Armies/Raubritterzy";
 import { arabia } from "./Armies/Arabia";
 import { amazonki } from "./Armies/Amazonki";
 import { nizolki } from "./Armies/Nizolki";
+import { pogromcy } from "./Armies/Pogromcy";
+import { piwowarzy } from "./Armies/Piwowarzy";
+import { szkutnicy } from "./Armies/Szkutnicy";
+import { krasnoludyChaosu } from "./Armies/KrasnoludyChaosu";
+import { jeźdzcyWilków } from "./Armies/JeźdzcyWilków";
+import { ogry } from "./Armies/Ogry";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -41,6 +47,12 @@ const armies = {
   "Leśni Elfowie z Athel Loren": leśne,
   "Elfowie Wysokiego Rodu z Ulthuan": wysokie,
   "Khazadzi z Gór Krańca Świata": khazadzi,
+  "Kompania Krasnoludzkich Piwowarów": piwowarzy,
+  "Kult Pogromców z Karak Kadrin": pogromcy,
+  "Szkutnicy z Barak Varr": szkutnicy,
+  "Krasnoludowie Chaosu z Zorn Uzkul": krasnoludyChaosu,
+  "Jeźdzcy Wilków": jeźdzcyWilków,
+  "Zwiadowcza kompania z Królestw Ogrów": ogry,
   "Nieumarła Świta Hrabiego Von Carstein": vonCarstein,
 };
 

@@ -60,6 +60,7 @@ const Builder = ({
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+  const [errors, setErrors] = useState(0);
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -136,9 +137,13 @@ const Builder = ({
 
   const handleSavePDFClick = (e) => {
     e.preventDefault();
-    OPTIONS.filename = armyName;
+    if (errors === 0) {
+      OPTIONS.filename = armyName;
     const element = document.getElementById("armylist").innerHTML;
     html2pdf().from(element).set(OPTIONS).save();
+    } else {
+      alert(`Napraw występujące błędy aby zapisać rozpiskę.`)
+    }
   };
 
   const handleResetArmyClick = () => {
@@ -201,6 +206,8 @@ const Builder = ({
         unitList={unitList}
         setArmyName={setArmyName}
         armyName={armyName}
+        errors={errors}
+        setErrors={setErrors}
       />
 
       <div className="main-builder-container">

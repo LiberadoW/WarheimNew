@@ -3,9 +3,17 @@ import "../styles/ArmyListErrors.css";
 import isGeneral from "../Functions/isGeneral";
 import getModelAmount from "../Functions/getModelAmount";
 import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
+import { getAllEquipment } from "../Functions/getAllEquipment";
+import { getUnitNumbers } from "../Functions/getUnitNumbers";
 
 const ArmyListErrors = ({ army, unitList, totalCost }) => {
   const modelAmount = getModelAmount(unitList, army);
+
+  const equipmentList = getAllEquipment(unitList);
+
+  const oneOfItems = ["Harpun", "Ołowiomiotacz"];
+
+  const unitNumbers = getUnitNumbers(unitList);
 
   return (
     <div className="army-list-errors">
@@ -40,13 +48,37 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
         </p>
       )}
 
-      {(army.armyRules.includes("Zamożność") && totalCost > 500) && (getValueOfOptionalEquipment(unitList) < totalCost - 500 ) && (
-        <p className="bold"><i className="fa-solid fa-triangle-exclamation"> {" "} </i> Dodatkowe 100 zk z zasady "Zamożność" musi być przeznaczone na zakup ekwipunku.</p>
-      )}
+      {army.armyRules.includes("Zamożność") &&
+        totalCost > 500 &&
+        getValueOfOptionalEquipment(unitList) < totalCost - 500 && (
+          <p className="bold">
+            <i className="fa-solid fa-triangle-exclamation"> </i> Dodatkowe 100
+            zk z zasady "Zamożność" musi być przeznaczone na zakup ekwipunku.
+          </p>
+        )}
 
+      {oneOfItems.map((item, index) => {
+        if (equipmentList.filter((x) => x === item).length > 1) {
+          return (
+            <p className="bold" key={index}>
+              <i className="fa-solid fa-triangle-exclamation"> </i>{" "}
+              {`Banda może posiadać maksymalnie 1 ${item}.`}
+            </p>
+          );
+        }
+      })}
 
+      {Object.keys(unitNumbers).map((unit, index) => {
+        if (unitNumbers[unit] > army.heroes[unit].number) {
+          return (
+          <p className="bold" key={index}>
+            <i className="fa-solid fa-triangle-exclamation"> </i>{" "}
+            {`Banda może posiadać maksymalnie ${army.heroes[unit].number} ${army.heroes[unit].number === 1 ? "jednostkę" : army.heroes[unit].number > 4 ? "jednostek" : "jednostki"} ${unit}.`}
+          </p>);
+        }
+      })}
 
-      {unitList.map((item,index) => {
+      {unitList.map((item, index) => {
         const startingWeaponsOptions = Object.entries(
           item.equipmentList
         ).filter(([key, value]) => value[2] === "Startowy");
