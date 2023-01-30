@@ -93,7 +93,7 @@ const UnitSelect = ({
                       heroes[key].number
                     }
                   >
-                    {key}
+                    {`${key} (${value.cost} zk) `}
                   </option>
                 );
               })}

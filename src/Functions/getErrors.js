@@ -22,15 +22,15 @@ const getErrors = (armies, army, totalCost, modelAmount, unitList) => {
     }
   });
 
+  const unitNumbers = getUnitNumbers(
+    unitList.filter((unit) => unit.type !== "Najemne Ostrze")
+  );
 
-
-  const unitNumbers = getUnitNumbers(unitList)
-
- Object.keys(unitNumbers).forEach(unit=>{
-  if (unitNumbers[unit]>army.heroes[unit].number) {
-    errors +=1
-  }
- })
+  Object.keys(unitNumbers).forEach((unit) => {
+    if (unitNumbers[unit] > army.heroes[unit].number) {
+      errors += 1;
+    }
+  });
 
   const equipmentList = getAllEquipment(unitList);
 

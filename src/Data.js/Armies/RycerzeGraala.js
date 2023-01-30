@@ -84,7 +84,7 @@ export const graal = {
       id: 4,
       startingEquipment: ["Sztylet"],
       cost: 15,
-      number: 1,
+      number: 15,
       equipmentList: heroEquipment["Rycerze Graala"].Stronnicy,
       type: "Stronnik",
       stats: {
