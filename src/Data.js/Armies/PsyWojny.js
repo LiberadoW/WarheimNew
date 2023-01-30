@@ -120,7 +120,7 @@ export const psyWojny = {
         ],
         cost: 80,
         number: 3,
-        equipmentList: heroEquipment["Psy Wojny"].Rajtar,
+        equipmentList: heroEquipment["Psy Wojny"].Stronnicy,
         type: "Stronnik",
         stats: {
           Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
