@@ -32,7 +32,7 @@ const skills = [
   "Specjalne",
 ];
 
-const UnitTable = ({ unitList, heroes }) => {
+const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
 
   unitList.sort((a, b) => a.id - b.id);
 
@@ -116,19 +116,24 @@ const UnitTable = ({ unitList, heroes }) => {
                         {(i + 1) % 5 === 0 ? i + 1 : ""}
                       </span>
                     ))}
-                    {[...Array(90)].map((e, i) => (
-                      <span
+                    {[...Array(90)].map((e, i) => {
+                      const setExp = () => {
+                        handleSetUnitExp(item.uniqueId, i + 1);
+                      };
+                    return (
+                    <span
+                        onClick={setExp}
                         className={
                           experienceBold.includes(i + 1)
-                            ? "experience-box-bold"
-                            : "experience-box"
+                              ? "experience-box-bold"
+                              : "experience-box"
                         }
                         style={{
                           backgroundColor: i < item.exp ? "gray" : "white",
                         }}
                         key={i}
-                      ></span>
-                    ))}
+                    ></span>)
+                    })}
                   </div>
                   <div className="injuries">
                     <span className="bold">Poważne obrażenia:</span>
@@ -193,19 +198,24 @@ const UnitTable = ({ unitList, heroes }) => {
                         {(i + 1) % 5 === 0 ? i + 1 : ""}
                       </span>
                     ))}
-                    {[...Array(14)].map((e, i) => (
-                      <span
-                        className={
-                          experienceBoldHenchmen.includes(i + 1)
-                            ? "experience-box-bold"
-                            : "experience-box"
-                        }
-                        style={{
-                          backgroundColor: i < item.exp ? "gray" : "white",
-                        }}
-                        key={i}
-                      ></span>
-                    ))}
+                    {[...Array(14)].map((e, i) => {
+                        const setExp = () => {
+                            handleSetUnitExp(item.uniqueId, i + 1);
+                        };
+
+                        return (<span
+                            onClick={setExp}
+                            className={
+                              experienceBoldHenchmen.includes(i + 1)
+                                ? "experience-box-bold"
+                                : "experience-box"
+                            }
+                            style={{
+                              backgroundColor: i < item.exp ? "gray" : "white",
+                            }}
+                            key={i}
+                      ></span>)
+                    })}
                   </div>
                 </div>
               </div>
@@ -256,19 +266,25 @@ const UnitTable = ({ unitList, heroes }) => {
                         {(i + 1) % 5 === 0 ? i + 1 : ""}
                       </span>
                     ))}
-                    {[...Array(14)].map((e, i) => (
-                      <span
-                        className={
-                          experienceBoldHenchmen.includes(i + 1)
-                            ? "experience-box-bold"
-                            : "experience-box"
-                        }
-                        style={{
-                          backgroundColor: i < item.exp ? "gray" : "white",
-                        }}
-                        key={i}
-                      ></span>
-                    ))}
+                    {[...Array(14)].map((e, i) => {
+
+                        const setExp = () => {
+                            handleSetUnitExp(item.uniqueId, i + 1);
+                        };
+
+                        return (<span
+                            onClick={setExp}
+                            className={
+                              experienceBoldHenchmen.includes(i + 1)
+                                ? "experience-box-bold"
+                                : "experience-box"
+                            }
+                            style={{
+                              backgroundColor: i < item.exp ? "gray" : "white",
+                            }}
+                            key={i}
+                      ></span>)
+                    })}
                   </div>
                 </div>
               </div>

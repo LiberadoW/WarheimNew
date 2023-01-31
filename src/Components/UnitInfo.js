@@ -10,6 +10,7 @@ const UnitInfo = ({
   unitList,
   setUnitList,
   handleClickShow,
+  handleSetUnitExp,
   idShown,
   setIdShown,
   showModal,
@@ -85,6 +86,7 @@ const UnitInfo = ({
                     unitList={unitList.filter(
                       (x) => unitList.indexOf(x) === index
                     )}
+                    handleSetUnitExp={handleSetUnitExp}
                     heroes={heroes}
                     unitName={unitName}
                   />

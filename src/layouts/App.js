@@ -35,6 +35,12 @@ const App = () => {
 
   const numberOfHeroes = newUnitList.filter((x) => x.type === "Bohater").length;
 
+  const handleSetUnitExp = (unitId, exp) => {
+    const newUnitList = [...unitList];
+    newUnitList.find((unit) => unit.uniqueId === unitId).exp = exp
+    setUnitList([...newUnitList])
+  }
+
   useEffect(() => {
     setMercenaries(filterMercenaries(mercenariesList, armies[army]));
   }, [army]);
@@ -114,6 +120,7 @@ const App = () => {
                   setPrestige={setPrestige}
                   setArmyName={setArmyName}
                   armyName={armyName}
+                  handleSetUnitExp={handleSetUnitExp}
                 />
               }
             />

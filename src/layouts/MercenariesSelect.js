@@ -63,7 +63,6 @@ const MercenariesSelect = ({
           </option>
           <optgroup label={"Najemne Ostrza"}>
             {Object.entries(mercenaries).map(([key, value], index) => {
-              console.log(value)
               return (
                 <option key={index} value={key}>
                   {`${key} (${value.cost} zk) `}
