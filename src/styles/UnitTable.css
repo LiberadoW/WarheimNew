@@ -109,7 +109,7 @@
 .stats-table div:nth-of-type(25),
 .stats-table div:nth-of-type(36),
 .stats-table div:nth-of-type(47) {
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 .stats-table-henchmen div:nth-of-type(14),
@@ -119,24 +119,18 @@
   font-size: 0.55rem;
 }
 
-.stats-table-henchmen div:nth-of-type(24) {
-  margin-right: 0px;
-}
-
-.stats-table-henchmen div:nth-of-type(35) {
-  margin-right: 0px;
-}
-
+.stats-table-henchmen div:nth-of-type(24),
+.stats-table-henchmen div:nth-of-type(35),
 .stats-table-henchmen div:nth-of-type(46) {
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 .equipment-table {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(11, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
   flex: 3;
 }
 
@@ -174,14 +168,17 @@
   box-sizing: border-box;
   width: 8px;
   height: 8px;
+
 }
 
 .experience-box {
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .experience-box-bold {
   border: 2px solid black;
+  cursor: pointer;
 }
 .injuries {
   box-sizing: border-box;
@@ -196,8 +193,8 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
   flex: 3;
   margin-bottom: -1px;
 }

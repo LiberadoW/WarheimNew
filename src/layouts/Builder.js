@@ -65,7 +65,8 @@ const Builder = ({
   armyName,
   setArmyName,
   mercenaries,
-  setMercenaries
+  setMercenaries,
+  handleSetUnitExp
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
@@ -240,6 +241,7 @@ const Builder = ({
           unitList={unitList}
           setUnitList={setUnitList}
           handleClickShow={handleClickShow}
+          handleSetUnitExp={handleSetUnitExp}
           idShown={idShown}
           setIdShown={setIdShown}
           showModal={showModal}
