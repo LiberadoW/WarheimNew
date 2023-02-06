@@ -39,6 +39,17 @@ const OPTIONS = {
   },
 };
 
+const normalizeUnitList = (unitList) => {
+  unitList.forEach( unit => {
+      Object.keys(unit).forEach(key => {
+        if (unit[key] === undefined) {
+          delete unit[key];
+        }
+      });
+    }
+  )
+  return unitList;
+}
 
 const Builder = ({
   unitList,
@@ -101,7 +112,7 @@ const Builder = ({
       const armyObj = {
         armyType: army.name,
         armyName: armyName,
-        armyList: unitList,
+        armyList: normalizeUnitList(unitList),
         timestamp: Timestamp.now(),
         totalCost: totalCost,
         prestige: prestige,
