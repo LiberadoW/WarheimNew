@@ -25,6 +25,7 @@ import { szkutnicy } from "./Armies/Szkutnicy";
 import { krasnoludyChaosu } from "./Armies/KrasnoludyChaosu";
 import { jeźdzcyWilków } from "./Armies/JeźdzcyWilków";
 import { ogry } from "./Armies/Ogry";
+import { duchChaosu } from "./Armies/DuchChaosu";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -53,6 +54,7 @@ const armies = {
   "Krasnoludowie Chaosu z Zorn Uzkul": krasnoludyChaosu,
   "Jeźdzcy Wilków": jeźdzcyWilków,
   "Zwiadowcza kompania z Królestw Ogrów": ogry,
+  "Kult Ducha Chaosu": duchChaosu,
   "Nieumarła Świta Hrabiego Von Carstein": vonCarstein,
 };
 

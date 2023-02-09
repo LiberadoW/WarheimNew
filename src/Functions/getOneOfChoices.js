@@ -118,6 +118,11 @@ export const getOneOfChoices = (army, unitList) => {
       ["Ogniobrzuchy", "Rzeźnik"],
       ["Gorger", "Yeti"],
     ],
+    "Kult Ducha Chaosu": [
+      ["Furia Chaosu", "Zwierzoczłek"],
+      ["Ogr Chaosu", "Troll Chaosu"],
+      ["Zaprzęg", "Rydwan Chaosu"],
+    ],
     "Nieumarła Świta Hrabiego Von Carstein": [
       ["Graveir", "Mroczny wilk"],
       ["Czarna Karoca", "Ścierwowóz"],
