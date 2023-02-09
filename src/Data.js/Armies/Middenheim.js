@@ -14,7 +14,7 @@ export const middenheim = {
         equipmentList: heroEquipment["Zbrojni z Middenheim"].Bohaterowie,
         type: "Bohater",
         stats: {
-          Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
+          Początkowa: [4, 4, 4, 4, 3, 2, 4, 1, 8],
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
         },
         rules: ["Dowódca"],
@@ -23,7 +23,7 @@ export const middenheim = {
       },
       "Magister magii": {
         id: 1,
-        startingEquipment: ["Sztylet"],
+        startingEquipment: ["Sztylet","Kostur"],
         cost: 40,
         number: 1,
         equipmentList: {
