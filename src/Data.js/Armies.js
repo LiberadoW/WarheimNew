@@ -26,6 +26,8 @@ import { krasnoludyChaosu } from "./Armies/KrasnoludyChaosu";
 import { jeźdzcyWilków } from "./Armies/JeźdzcyWilków";
 import { ogry } from "./Armies/Ogry";
 import { duchChaosu } from "./Armies/DuchChaosu";
+import { karmazynowaCzaszka } from "./Armies/KarmazynowaCzaszka";
+import { dzieciZagłady } from "./Armies/DzieciZagłady";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -55,6 +57,8 @@ const armies = {
   "Jeźdzcy Wilków": jeźdzcyWilków,
   "Zwiadowcza kompania z Królestw Ogrów": ogry,
   "Kult Ducha Chaosu": duchChaosu,
+  "Kult Karmazynowej Czaszki": karmazynowaCzaszka,
+  "Kult Dzieci Zagłady": dzieciZagłady,
   "Nieumarła Świta Hrabiego Von Carstein": vonCarstein,
 };
 

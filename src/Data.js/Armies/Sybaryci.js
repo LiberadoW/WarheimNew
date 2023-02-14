@@ -1,13 +1,13 @@
 import { heroEquipment } from "../HeroEquipment";
 
-export const duchChaosu = {
+export const dzieciZagłady = {
   heroes: {
     Wtajemiczony: {
       id: 0,
-      startingEquipment: ["Sztylet", "Kostur"],
+      startingEquipment: ["Sztylet", "Bicz"],
       cost: 85,
       number: 1,
-      equipmentList: heroEquipment["Kult Ducha Chaosu"].Bohaterowie,
+      equipmentList: heroEquipment["Kult Sybarytów"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
@@ -17,18 +17,18 @@ export const duchChaosu = {
         "Czarnoksięstwo",
         "Dowodzenie",
         "Dowódca",
-        "Mag (Dziedzina Chaosu Niepodzielonego)",
+        "Mag (Dziedzina Slaanesha)",
         "Stygmat Chaosu",
       ],
       exp: 20,
-      skills: [0, 2, 4, 5],
+      skills: [0,1,2,4,5],
     },
     Akolita: {
       id: 1,
-      startingEquipment: ["Sztylet", "Gwiazda zaranna"],
+      startingEquipment: ["Sztylet", "Rapier"],
       cost: 45,
       number: 2,
-      equipmentList: heroEquipment["Kult Ducha Chaosu"].Bohaterowie,
+      equipmentList: heroEquipment["Kult Sybarytów"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -36,7 +36,7 @@ export const duchChaosu = {
       },
       rules: ["Stygmat Chaosu"],
       exp: 8,
-      skills: [0, 4, 5],
+      skills: [0,1,4,5],
     },
     Opętany: {
       id: 2,
@@ -62,14 +62,14 @@ export const duchChaosu = {
         "Opętany",
       ],
       exp: 8,
-      skills: [0, 3, 4, 5],
+      skills: [0,1,3,4,5],
     },
     Kultysta: {
       id: 3,
       startingEquipment: ["Chorążowie & sygnaliści", "Żywa tarcza"],
       cost: 30,
       number: 12,
-      equipmentList: heroEquipment["Kult Ducha Chaosu"].Stronnicy,
+      equipmentList: heroEquipment["Kult Sybarytów"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -77,28 +77,28 @@ export const duchChaosu = {
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
     },
-    "Furia Chaosu": {
+    "Bólożądna Pieszczota": {
       id: 4,
-      startingEquipment: ["Broń naturalna (szybki)"],
-      cost: 45,
+      startingEquipment: ["Broń naturalna (przebicie pancerza)"],
+      cost: 35,
       number: 5,
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 4, 0, 4, 3, 1, 4, 2, 6],
-        Maksymalna: [4, 4, 0, 4, 3, 1, 4, 2, 6],
+        Początkowa: [4,2,0,3,4,1,3,1,7],
+        Maksymalna: [4,2,0,3,4,1,3,1,7],
       },
-      rules: ["Demon", "Głód krwi", "Strach", "Lot"],
+      rules: ["Demon", "Strach","Stygmaty Nurgla (odór, rój much)"],
     },
-    Zwierzoczłek: {
+    Plagogor: {
       id: 5,
       startingEquipment: ["Sztylet", "Broń wielka"],
       cost: 55,
       number: 3,
-      equipmentList: heroEquipment["Kult Ducha Chaosu"].Stronnicy,
+      equipmentList: heroEquipment["Kult Dzieci Zagłady"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [5, 4, 3, 4, 4, 1, 3, 1, 7],
+        Początkowa: [5, 4, 3, 4, 5, 1, 3, 1, 7],
         Maksymalna: [6, 7, 6, 4, 5, 4, 6, 4, 9],
       },
       rules: ["Pomiot kniei", "Stygmat Chaosu"],
@@ -108,7 +108,7 @@ export const duchChaosu = {
       startingEquipment: ["Broń wielka"],
       cost: 180,
       number: 1,
-      equipmentList: heroEquipment["Kult Ducha Chaosu"].Ogr,
+      equipmentList: heroEquipment["Kult Dzieci Zagłady"].Ogr,
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],
@@ -184,14 +184,14 @@ export const duchChaosu = {
   limit: 600,
   minModels: 3,
   maxModels: 12,
-  name: "Kult Ducha Chaosu",
+  name: "Kult Dzieci Zagłady",
   nature: "Chaotyczna",
   armyRules: [
     "Kontakty handlowe (1)",
     "Oko Chaosu",
     "Rozrzutni",
     "Zamożność",
-    "Znak Chaosu (Niewolnicy Ciemności)",
+    "Znak Chaosu (Potworny Lud Nurgla)",
   ],
   mercenaries: ["Skryba", "Szpieg", "Trefniś", "Woźnica"],
 };
