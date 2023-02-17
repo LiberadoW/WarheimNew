@@ -5,8 +5,12 @@ export const getModifiers = (arr, unit) => {
   let speedModifier = 0;
   let initativeModifier = 0;
 
-  if (unit.startingEquipment.concat(unit.optionalEquipment).some(item=>Object.keys(mountList).includes(item))) {
-    armour -=1;
+  if (
+    unit.startingEquipment
+      .concat(unit.optionalEquipment)
+      .some((item) => Object.keys(mountList).includes(item))
+  ) {
+    armour -= 1;
   }
 
   if (unit.rules.includes("Żelazoskóry")) {
@@ -38,6 +42,9 @@ export const getModifiers = (arr, unit) => {
   }
   if (arr.includes("Pancerz z Ithilmaru")) {
     armour -= 3;
+  }
+  if (arr.includes("Zbroja Chaosu")) {
+    armour -= 4;
   }
 
   if (arr.includes("Pancerz z Gromrilu")) {

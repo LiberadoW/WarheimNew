@@ -66,7 +66,7 @@ export const duchChaosu = {
     },
     Kultysta: {
       id: 3,
-      startingEquipment: ["Chorążowie & sygnaliści", "Żywa tarcza"],
+      startingEquipment: ["Sztylet"],
       cost: 30,
       number: 12,
       equipmentList: heroEquipment["Kult Ducha Chaosu"].Stronnicy,
