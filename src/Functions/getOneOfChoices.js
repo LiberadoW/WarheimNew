@@ -156,6 +156,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Tyralier", "Ogar Chaosu"],
       ["Ogr Chaosu", "Troll Chaosu"],
     ],
+    "Zbrojne Stadio Zwierzoludzi": [["Grabieżcy", "Harpia"]],
     "Nieumarła Świta Hrabiego Von Carstein": [
       ["Graveir", "Mroczny wilk"],
       ["Czarna Karoca", "Ścierwowóz"],

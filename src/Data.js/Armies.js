@@ -31,6 +31,7 @@ import { dzieciZagłady } from "./Armies/DzieciZagłady";
 import { purpurowaDłoń } from "./Armies/PurpurowaDłoń";
 import { grasanciChaosu } from "./Armies/Grasanci";
 import { karnawałChaosu } from "./Armies/Karnawał";
+import { zwierzoludzie } from "./Armies/Zwierzoludzie";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -65,6 +66,7 @@ const armies = {
   "Kult Purpurowej Dłoni": purpurowaDłoń,
   "Grasanci Chaosu": grasanciChaosu,
   "Karnawał Chaosu": karnawałChaosu,
+  "Zbrojne Stadio Zwierzoludzi": zwierzoludzie,
   "Nieumarła Świta Hrabiego Von Carstein": vonCarstein,
 };
 

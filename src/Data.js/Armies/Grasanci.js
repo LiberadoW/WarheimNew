@@ -172,7 +172,7 @@ export const grasanciChaosu = {
       rules: [
         "Bycza szarża",
         "Duży cel",
-        "Głod trzewi",
+        "Głód trzewi",
         "Ograniczony",
         "Przepastne trzewia",
         "Strach",
@@ -220,7 +220,7 @@ export const grasanciChaosu = {
       rules: [
         "Bycza szarża",
         "Duży cel",
-        "Głod trzewi",
+        "Głód trzewi",
         "Głupota",
         "Nieświadomy",
         "Niezłomność",

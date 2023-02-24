@@ -126,7 +126,7 @@ export const vonCarstein = {
         rules: [
           "Bycza szarża",
           "Duży cel",
-          "Głod krwi",
+          "Głód krwi",
           "Łuskowata skóra (5+)",
           "Murołaz",
           "Ograniczony",

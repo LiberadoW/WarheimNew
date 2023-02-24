@@ -117,7 +117,7 @@ export const dzieciZagłady = {
       rules: [
         "Bycza szarża",
         "Duży cel",
-        "Głod trzewi",
+        "Głód trzewi",
         "Ograniczony",
         "Przepastne trzewia",
         "Strach",
@@ -140,7 +140,7 @@ export const dzieciZagłady = {
       rules: [
         "Bycza szarża",
         "Duży cel",
-        "Głod trzewi",
+        "Głód trzewi",
         "Głupota",
         "Nieświadomy",
         "Niezłomność",
