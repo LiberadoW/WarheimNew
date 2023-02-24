@@ -133,6 +133,29 @@ export const getOneOfChoices = (army, unitList) => {
       ["Ogr Chaosu", "Troll Chaosu"],
       ["Zaprzęg", "Rydwan Chaosu"],
     ],
+    "Kult Purporowej Dłoni": [
+      ["Tzaangor", "Różowy Strachulec"],
+      ["Ogr Chaosu", "Smoczy Ogr", "Troll Chaosu"],
+      ["Zaprzęg", "Rydwan Chaosu"],
+    ],
+    "Grasanci Chaosu": [
+      ["Odrzucony", "Zwierzoczłek"],
+      ["Kawalerzysta Chaosu", "Ogar Chaosu"],
+      ["Ogr Chaosu", "Smoczy Ogr", "Troll Chaosu"],
+      ["Więźniarka", "Rydwan Chaosu"],
+    ],
+    "Karnawał Chaosu": [
+      ["Harlekin", "Mocarz"],
+      [
+        "Furia Chaosu",
+        "Piekielny Ogar",
+        "Nurglingi",
+        "Bólożądna Pieszczota",
+        "Różowy Strachulec",
+      ],
+      ["Tyralier", "Ogar Chaosu"],
+      ["Ogr Chaosu", "Troll Chaosu"],
+    ],
     "Nieumarła Świta Hrabiego Von Carstein": [
       ["Graveir", "Mroczny wilk"],
       ["Czarna Karoca", "Ścierwowóz"],

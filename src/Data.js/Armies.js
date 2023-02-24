@@ -28,6 +28,8 @@ import { ogry } from "./Armies/Ogry";
 import { duchChaosu } from "./Armies/DuchChaosu";
 import { karmazynowaCzaszka } from "./Armies/KarmazynowaCzaszka";
 import { dzieciZagłady } from "./Armies/DzieciZagłady";
+import { purpurowaDłoń } from "./Armies/PurpurowaDłoń";
+import { grasanciChaosu } from "./Armies/Grasanci";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -59,6 +61,8 @@ const armies = {
   "Kult Ducha Chaosu": duchChaosu,
   "Kult Karmazynowej Czaszki": karmazynowaCzaszka,
   "Kult Dzieci Zagłady": dzieciZagłady,
+  "Kult Purpurowej Dłoni": purpurowaDłoń,
+  "Grasanci Chaosu": grasanciChaosu,
   "Nieumarła Świta Hrabiego Von Carstein": vonCarstein,
 };
 
