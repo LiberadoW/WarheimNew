@@ -50,6 +50,7 @@ export const grasanciChaosu = {
     "Łowca niewolników": {
       id: 3,
       startingEquipment: ["Sztylet", "Łapacz"],
+      cost: 40,
       number: 1,
       equipmentList: heroEquipment["Grasanci Chaosu"].Bohaterowie,
       type: "Bohater",
