@@ -54,6 +54,7 @@ export const zwierzoludzie = {
     Centigor: {
       id: 3,
       startingEquipment: ["Sztylet", "Włócznia"],
+      cost: 90,
       number: 1,
       equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Bohaterowie,
       type: "Bohater",
