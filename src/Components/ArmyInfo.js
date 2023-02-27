@@ -13,31 +13,33 @@ const ArmyInfo = ({
   setArmyName,
   armyName,
   errors,
-  setErrors
+  setErrors,
+  isCustomArmyCost,
+  customArmyCost,
 }) => {
   const [clicked, setClicked] = useState(false);
-  
 
   const handleClick = () => {
     setClicked(!clicked);
   };
 
+  if (army.armyRules.includes("Zamożność")) {
+    customArmyCost = 1.2 * customArmyCost
+  }
+
   const modelAmount = getModelAmount(unitList, army);
 
+  const limit = isCustomArmyCost ? customArmyCost : army.limit;
+
   useEffect(() => {
-    setErrors(getErrors(armies, army, totalCost, modelAmount, unitList));
+    setErrors(getErrors(army, totalCost, modelAmount, unitList, limit));
   }, [army, totalCost, modelAmount, unitList]);
 
   const handleArmyNameChange = (e) => {
     setArmyName(e.target.value);
   };
 
-  if (army.armyRules.includes("Zamożność")) {
-    army.limit = 600;
-  }
-
-  unitList.forEach((unit) => {});
-
+  
   return (
     <div className="army-info-alerts-container">
       <div className="army-info-container">
@@ -71,17 +73,21 @@ const ArmyInfo = ({
           <p
             className="total-cost"
             style={{
-              color: totalCost > army.limit ? "red" : "black",
+              color: totalCost > limit ? "red" : "black",
             }}
           >
-            <span className="bold">Suma:</span>{" "}
-            {`${totalCost} / ${army.limit} zk`}
+            <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
           </p>
           <p></p>
         </div>
       </div>
       {clicked && (
-        <ArmyListErrors army={army} unitList={unitList} totalCost={totalCost} />
+        <ArmyListErrors
+          army={army}
+          unitList={unitList}
+          totalCost={totalCost}
+          limit={limit}
+        />
       )}
     </div>
   );

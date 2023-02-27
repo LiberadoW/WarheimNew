@@ -6,7 +6,7 @@ import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEqui
 import { getAllEquipment } from "../Functions/getAllEquipment";
 import { getUnitNumbers } from "../Functions/getUnitNumbers";
 
-const ArmyListErrors = ({ army, unitList, totalCost }) => {
+const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
   const modelAmount = getModelAmount(unitList, army);
 
   const equipmentList = getAllEquipment(unitList);
@@ -15,9 +15,11 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
 
   const unitNumbers = getUnitNumbers(unitList);
 
+  console.log(limit)
+
   return (
     <div className="army-list-errors">
-      {totalCost > army.limit && (
+      {totalCost > limit && (
         <p className="bold">
           <i className="fa-solid fa-triangle-exclamation"></i> Przekroczono
           liczbę złotych koron.
@@ -49,10 +51,10 @@ const ArmyListErrors = ({ army, unitList, totalCost }) => {
       )}
 
       {army.armyRules.includes("Zamożność") &&
-        totalCost > 500 &&
-        getValueOfOptionalEquipment(unitList) < totalCost - 500 && (
+        totalCost > limit * 0.8 &&
+        getValueOfOptionalEquipment(unitList) < limit * 0.2 && (
           <p className="bold">
-            <i className="fa-solid fa-triangle-exclamation"> </i> Dodatkowe 100
+            <i className="fa-solid fa-triangle-exclamation"> </i> Dodatkowe 20%
             zk z zasady "Zamożność" musi być przeznaczone na zakup ekwipunku.
           </p>
         )}

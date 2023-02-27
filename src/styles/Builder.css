@@ -133,8 +133,25 @@
 
 .builder-controls {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.builder-controls div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.builder-controls input {
+  margin-right: 5px;
+}
+
+.builder-controls-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .builder-controls button {

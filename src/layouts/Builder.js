@@ -40,16 +40,15 @@ const OPTIONS = {
 };
 
 const normalizeUnitList = (unitList) => {
-  unitList.forEach( unit => {
-      Object.keys(unit).forEach(key => {
-        if (unit[key] === undefined) {
-          delete unit[key];
-        }
-      });
-    }
-  )
+  unitList.forEach((unit) => {
+    Object.keys(unit).forEach((key) => {
+      if (unit[key] === undefined) {
+        delete unit[key];
+      }
+    });
+  });
   return unitList;
-}
+};
 
 const Builder = ({
   unitList,
@@ -66,13 +65,15 @@ const Builder = ({
   setArmyName,
   mercenaries,
   setMercenaries,
-  handleSetUnitExp
+  handleSetUnitExp,
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [errors, setErrors] = useState(0);
+  const [customArmyCost, setCustomArmyCost] = useState(0);
+  const [isCustomArmyCost, setIsCustomArmyCost] = useState(false);
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -151,10 +152,10 @@ const Builder = ({
     e.preventDefault();
     if (errors === 0) {
       OPTIONS.filename = armyName;
-    const element = document.getElementById("armylist").innerHTML;
-    html2pdf().from(element).set(OPTIONS).save();
+      const element = document.getElementById("armylist").innerHTML;
+      html2pdf().from(element).set(OPTIONS).save();
     } else {
-      alert(`Napraw występujące błędy aby zapisać rozpiskę.`)
+      alert(`Napraw występujące błędy aby zapisać rozpiskę.`);
     }
   };
 
@@ -167,20 +168,40 @@ const Builder = ({
     }
   };
 
+  const handleCustomArmyCostClick = () => {
+    setIsCustomArmyCost(!isCustomArmyCost);
+    setCustomArmyCost(0)
+  };
+
+  const handleCustomArmyCostChange = (e) => {
+    e.preventDefault();
+    setCustomArmyCost(e.target.value);
+  };
+
   return (
     <div className="builder">
       <div className="builder-controls">
-        <button className="button" onClick={handleResetArmyClick}>
-          Resetuj rozpiskę
-        </button>
-        <button className="button" onClick={handleSavePDFClick}>
-          Zapisz jako PDF
-        </button>
-
-        {currentUser && (
-          <button className="button " onClick={saveArmy}>
-            Zapisz armię
+        <div className="builder-controls-buttons">
+          <button className="button" onClick={handleResetArmyClick}>
+            Resetuj rozpiskę
           </button>
+          <button className="button" onClick={handleSavePDFClick}>
+            Zapisz jako PDF
+          </button>
+          {currentUser && (
+            <button className="button " onClick={saveArmy}>
+              Zapisz armię
+            </button>
+          )}
+        </div>
+        <div>
+          <input type="checkbox" onClick={handleCustomArmyCostClick}></input>
+          Zmień startową liczbę ZK
+        </div>
+        {isCustomArmyCost && (
+          <div>
+            <input type="text" onChange={handleCustomArmyCostChange} />
+          </div>
         )}
       </div>
       <div className="builder-select-container">
@@ -215,6 +236,8 @@ const Builder = ({
         prestige={prestige}
         totalCost={totalCost}
         army={army}
+        isCustomArmyCost = {isCustomArmyCost}
+        customArmyCost = {customArmyCost}
         unitList={unitList}
         setArmyName={setArmyName}
         armyName={armyName}

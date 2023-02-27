@@ -3,7 +3,7 @@ import { getValueOfOptionalEquipment } from "./getValueOfOptionalEquipment";
 import { getAllEquipment } from "./getAllEquipment";
 import { getUnitNumbers } from "./getUnitNumbers";
 
-const getErrors = (armies, army, totalCost, modelAmount, unitList) => {
+const getErrors = (army, totalCost, modelAmount, unitList, limit) => {
   let errors = 0;
 
   unitList.forEach((item, index) => {
@@ -42,7 +42,7 @@ const getErrors = (armies, army, totalCost, modelAmount, unitList) => {
     }
   });
 
-  if (totalCost > army.limit) {
+  if (totalCost > limit) {
     errors += 1;
   }
   if (!isGeneral(unitList)) {
