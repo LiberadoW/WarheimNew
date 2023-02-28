@@ -104,7 +104,7 @@ export const grasanciChaosu = {
         "Fanatyk",
         "Furia",
         "Stygmat Chaosu",
-        "Szaleńcy gniew",
+        "Szaleńczy gniew",
       ],
     },
     Zwierzoczłek: {
