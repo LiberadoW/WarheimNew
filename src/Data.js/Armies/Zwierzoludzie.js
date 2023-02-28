@@ -7,7 +7,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Sztylet", "Broń wielka"],
       cost: 80,
       number: 1,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Bohaterowie,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [5, 4, 3, 4, 4, 2, 4, 1, 7],
@@ -17,12 +17,12 @@ export const zwierzoludzie = {
       exp: 20,
       skills: [0, 3, 4, 5],
     },
-    "szaman Zwierzoludzi": {
+    "Szaman Zwierzoludzi": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur Rykowca"],
       cost: 55,
       number: 1,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Szaman,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Szaman,
       type: "Bohater",
       stats: {
         Początkowa: [5, 4, 3, 3, 4, 1, 4, 1, 6],
@@ -41,7 +41,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Sztylet", "Topór bojowy/Nadziak"],
       cost: 55,
       number: 2,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Bohaterowie,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [5, 4, 3, 4, 4, 1, 3, 1, 7],
@@ -56,7 +56,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Sztylet", "Włócznia"],
       cost: 90,
       number: 1,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Bohaterowie,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [8, 4, 3, 4, 4, 1, 2, 1, 7],
@@ -71,7 +71,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Sztylet"],
       cost: 30,
       number: 15,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Ungor,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Ungor,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 3, 3, 3, 3, 1, 3, 1, 6],
@@ -91,7 +91,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Sztylet", "Krótki łuk"],
       cost: 35,
       number: 5,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Ungor,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Ungor,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 3, 3, 3, 3, 1, 3, 1, 6],
@@ -132,7 +132,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Sztylet", "Topór bojowy/Nadziak"],
       cost: 45,
       number: 5,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Stronnicy,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 3, 3, 4, 1, 3, 1, 6],
@@ -158,7 +158,7 @@ export const zwierzoludzie = {
       startingEquipment: ["Broń wielka"],
       cost: 200,
       number: 1,
-      equipmentList: heroEquipment["Zbrojne Stado Zwierzoludzi"].Minotaur,
+      equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Minotaur,
       type: "Stronnik",
       stats: {
         Początkowa: [6, 4, 3, 4, 4, 3, 4, 2, 8],
@@ -195,7 +195,7 @@ export const zwierzoludzie = {
   limit: 500,
   minModels: 3,
   maxModels: 15,
-  name: "Zbrojne Stadio Zwierzoludzi",
+  name: "Zbrojne stado Zwierzoludzi",
   nature: "Chaotyczna",
   armyRules: ["Oko Chaosu", "Podatek", "Rozrzutni", "Znak Chaosu"],
   mercenaries: [],

@@ -29,7 +29,7 @@ export const marienburg = {
           Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
         },
-        rules: ["Guślarstwo", "Mag(Kolegia Magii)"],
+        rules: ["Guślarstwo", "Mag (Kolegia Magii)"],
         exp: 12,
         skills: [2,4,5],
       },

@@ -622,7 +622,7 @@ export const mercenariesList = {
     exp: 0,
     skills: [0, 3, 5],
   },
-  "Rycerz na zimnokrwistym": {
+  "Rycerz na Zimnokrwistym": {
     id: 128,
     startingEquipment: [
       "Sztylet",

@@ -98,6 +98,11 @@ export const getOneOfChoices = (army, unitList) => {
     "Elfowie Wysokiego Rodu z Ulthuan": [
       ["Rydwan z Tiranoc", "Lwi Rydwan z Chrace"],
     ],
+    "Mroczni Elfowie z Naggaroth": [
+      ["Widmo", "Wiedźma Khaina"],
+      ["Jeździec Mroku", "Harpia"],
+      ["Rydwan Zimnokrwistych", "Więźniarka"],
+    ],
     "Khazadzi z Gór Krańca Świata": [
       ["Kowal Run", "Mistrz Inżynier"],
       ["Strzelec", "Górnik"],
@@ -156,10 +161,37 @@ export const getOneOfChoices = (army, unitList) => {
       ["Tyralier", "Ogar Chaosu"],
       ["Ogr Chaosu", "Troll Chaosu"],
     ],
-    "Zbrojne Stadio Zwierzoludzi": [["Grabieżcy", "Harpia"]],
-    "Nieumarła Świta Hrabiego Von Carstein": [
+    "Zbrojne stado Zwierzoludzi": [["Grabieżcy", "Harpia"]],
+    "Nieumarła świta Hrabiego Von Carstein": [
       ["Graveir", "Mroczny wilk"],
       ["Czarna Karoca", "Ścierwowóz"],
+    ],
+    "Nieumarły orszak księżnej Lahmi": [
+      ["Gnilec", "Graveir"],
+      ["Czarna Karoca", "Ścierwowóz"],
+    ],
+    "Nieumarły poczet Krwawych Smoków": [
+      ["Ghoul", "Upiór"],
+      ["Czarny Rycerz", "Graveir"],
+      ["Czarna Karoca", "Ścierwowóz"],
+    ],
+    "Nieumarły sabat rodu Nekrarch": [
+      ["Ghoul", "Upiór"],
+      ["Graveir", "Rój nietoperzy"],
+      ["Czarna Karoca", "Ścierwowóz"],
+    ],
+    "Nieumarły tabor ludu Strigosu": [
+      ["Graveir", "Stregoica"],
+      ["Czarna Karoca", "Ścierwowóz"],
+    ],
+    "Nieumarła horda Liczmistrza": [
+      ["Ghoul", "Upiór"],
+      ["Czarny Rycerz", "Graveir", "Mroczny wilk", "Rój nietoperzy"],
+      ["Czarna Karoca", "Ścierwowóz"],
+    ],
+    "Nieumarły zastęp z Nehekhary": [
+      ["Rój", "Nieumarły Nomada"],
+      ["Gnilec", "Ushabti", "Grobowy Skorpion"],
     ],
   };
 

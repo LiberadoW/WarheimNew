@@ -125,7 +125,7 @@ export const siostry = {
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
           "Koń bojowy": [8, 3, 0, 3, "-", "-", 3, 1, 5],
         },
-        rules: ["Duży cel(wierzchem)", "Kawalerzysta", "Szermierz"],
+        rules: ["Duży cel (wierzchem)", "Kawalerzysta", "Szermierz"],
       },
       "Bitewny Ołtarz Sigmara": {
         id: 8,

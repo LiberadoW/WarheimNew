@@ -32,6 +32,11 @@ import { purpurowaDłoń } from "./Armies/PurpurowaDłoń";
 import { grasanciChaosu } from "./Armies/Grasanci";
 import { karnawałChaosu } from "./Armies/Karnawał";
 import { zwierzoludzie } from "./Armies/Zwierzoludzie";
+import { lahmia } from "./Armies/Lahmia";
+import { krwaweSmoki } from "./Armies/krwaweSmoki";
+import { nekrarcha } from "./Armies/Nekrarcha";
+import { strigos } from "./Armies/Strigos";
+import { mroczne } from "./Armies/MroczneElfy";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -53,6 +58,7 @@ const armies = {
   "Niziołki z Krainy Zgromadzenia": nizolki,
   "Leśni Elfowie z Athel Loren": leśne,
   "Elfowie Wysokiego Rodu z Ulthuan": wysokie,
+  "Mroczni Elfowie z Naggaroth": mroczne,
   "Khazadzi z Gór Krańca Świata": khazadzi,
   "Kompania Krasnoludzkich Piwowarów": piwowarzy,
   "Kult Pogromców z Karak Kadrin": pogromcy,
@@ -66,8 +72,12 @@ const armies = {
   "Kult Purpurowej Dłoni": purpurowaDłoń,
   "Grasanci Chaosu": grasanciChaosu,
   "Karnawał Chaosu": karnawałChaosu,
-  "Zbrojne Stadio Zwierzoludzi": zwierzoludzie,
-  "Nieumarła Świta Hrabiego Von Carstein": vonCarstein,
+  "Zbrojne stado Zwierzoludzi": zwierzoludzie,
+  "Nieumarła świta Hrabiego Von Carstein": vonCarstein,
+  "Nieumarły orszak księżnej Lahmi": lahmia,
+  "Nieumarły poczet Krwawych Smoków": krwaweSmoki,
+  "Nieumarły sabat rodu Nekrarch": nekrarcha,
+  "Nieumarły tabor ludu Strigosu": strigos,
 };
 
 export default armies;
