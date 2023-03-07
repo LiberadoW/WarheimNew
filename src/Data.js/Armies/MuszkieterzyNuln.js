@@ -55,7 +55,7 @@ export const muszkieterzyNuln = {
         rules: [
           "Błogosławieństwo bogów",
           "Czarostwo",
-          "Duchwony (modlitwy do Sigmara)",
+          "Duchowny (modlitwy do Sigmara)",
           "Modlitwa",
           "Nienawiść",
           "Przepastne trzewia",
@@ -89,7 +89,7 @@ export const muszkieterzyNuln = {
           Początkowa: [4, 4, 3, 3, 3, 1, 3, 1, 7],
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
         },
-        rules: ["Podofier"],
+        rules: ["Podoficer"],
         exp: 8,
         skills: [0, 3, 4, 5],
       },
@@ -181,7 +181,7 @@ export const muszkieterzyNuln = {
         rules: [
           "Krzepki",
           "Nieustępliwość",
-          "Odporność na magię(2)",
+          "Odporność na magię (2)",
           "Pomiot podmroku",
           "Ranger",
           "Rankor",

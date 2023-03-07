@@ -35,11 +35,33 @@ const App = () => {
 
   const numberOfHeroes = newUnitList.filter((x) => x.type === "Bohater").length;
 
+  const allRules = [];
+
+  for (const [key, value1] of Object.entries(armies)) {
+    for (const [key, value] of Object.entries(value1.heroes)) {
+      value.rules.forEach((rule) => allRules.push(rule));
+    }
+  }
+
+  const uniqueAllRulesArray = [...new Set(allRules)];
+
+  const filteredElements = uniqueAllRulesArray.filter(
+    (e) =>
+      e.includes("Łuskowata") ||
+      e.includes("Mag (") ||
+      e.includes("Duchowny") ||
+      e.includes("Odporność na magię")
+  );
+
+  const cleanedArray = uniqueAllRulesArray.filter(
+    (el) => !filteredElements.includes(el)
+  );
+
   const handleSetUnitExp = (unitId, exp) => {
     const newUnitList = [...unitList];
-    newUnitList.find((unit) => unit.uniqueId === unitId).exp = exp
-    setUnitList([...newUnitList])
-  }
+    newUnitList.find((unit) => unit.uniqueId === unitId).exp = exp;
+    setUnitList([...newUnitList]);
+  };
 
   useEffect(() => {
     setMercenaries(filterMercenaries(mercenariesList, armies[army]));

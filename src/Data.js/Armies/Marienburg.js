@@ -97,7 +97,7 @@ export const marienburg = {
           Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
         },
-        rules: ["Chorążowe & sygnaliści", "Drużyna obsługi"],
+        rules: ["Chorążowie & sygnaliści", "Drużyna obsługi"],
       },
       Harpunnik: {
         id: 6,
@@ -162,7 +162,7 @@ export const marienburg = {
           "Nieustępliwość",
           "Nurek",
           "Ochronne tatuaże",
-          "Odporność na magię(2)",
+          "Odporność na magię (2)",
           "Pogromca",
           "Pomiot podmroku",
           "Rajtar",
@@ -185,7 +185,7 @@ export const marienburg = {
           Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
           "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
         },
-        rules: ["Duży cel", "Kontakty handlowe(3)", "Machina wojenna", "Powóz"],
+        rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
       },
       Rydwan: {
         id: 11,
@@ -207,7 +207,7 @@ export const marienburg = {
     maxModels: 15,
     name: "Piechota Morska z Marienburga",
     nature: "Neutralna",
-    armyRules: ["Kontakty handlowe(3)", "Zamożność"],
+    armyRules: ["Kontakty handlowe (3)", "Zamożność"],
     mercenaries: [
       "Balistyk",
       "Bombardier",

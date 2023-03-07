@@ -31,8 +31,8 @@ export const wysokie = {
       },
       rules: [
         "Mag (Wysokia Magia)",
-        "Mistrz magii",
-        "Wiedza tajemnca (Kolegia magii)",
+        "Mistrz Magii",
+        "Wiedza tajemna (Kolegia Magii)",
         "Szósty zmysł",
       ],
       exp: 12,
@@ -178,6 +178,6 @@ export const wysokie = {
   maxModels: 12,
   name: "Elfowie Wysokiego Rodu z Ulthuan",
   nature: "Neutralna",
-  armyRules: ["Kontakty handlowe(3)", "Podatek", "Rozrzutni", "Zamożność"],
+  armyRules: ["Kontakty handlowe (3)", "Podatek", "Rozrzutni", "Zamożność"],
   mercenaries: ["Minstrel", "Strażnik Morski z Lothern", "Zwiadowca"],
 };

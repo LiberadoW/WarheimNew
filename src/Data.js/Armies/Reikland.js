@@ -163,7 +163,7 @@ export const reikland = {
           Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
         },
-        rules: ["Fanatyk, Furia"],
+        rules: ["Fanatyk", "Furia"],
       },
       Zaprzęg: {
         id: 11,
@@ -177,7 +177,7 @@ export const reikland = {
           Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
           "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
         },
-        rules: ["Duży cel", "Kontakty handlowe(3)", "Machina wojenna", "Powóz"],
+        rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
       },
       Rydwan: {
         id: 12,

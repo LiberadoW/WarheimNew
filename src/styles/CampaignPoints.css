@@ -3,7 +3,7 @@
     width: 670px;
     margin: 0 auto;
     background-color: white;
-    height: 210px;
+    height: 250px;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
@@ -30,6 +30,7 @@
 
   .campaign-points-rules {
     display: flex;
+    height: 100%;
   }
 
   .campaign-points {

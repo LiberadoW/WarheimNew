@@ -64,7 +64,7 @@ export const psyWojny = {
         Początkowa: [4, 4, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Podofier"],
+      rules: ["Podoficer"],
       exp: 8,
       skills: [0, 3, 4, 5],
     },

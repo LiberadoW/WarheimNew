@@ -23,7 +23,7 @@ export const nekrarcha = {
         "Liczmistrz",
         "Łatwopalność",
         "Mag (Dziedzina Nekromancji)",
-        "Mistrz magii",
+        "Mistrz Magii",
         "Nieumarły",
         "Strach",
         "Wiedza tajemna (Kolegia Magii)",

@@ -46,7 +46,7 @@ export const krasnoludyChaosu = {
         Maksymalna: [4, 7, 6, 4, 5, 3, 5, 4, 10],
       },
       rules: [
-        "Drużyna obłsugi",
+        "Drużyna obsługi",
         "Inżynier",
         "Krzepki",
         "Nieustępliwość",

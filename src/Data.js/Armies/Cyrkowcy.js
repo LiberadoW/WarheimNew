@@ -235,7 +235,7 @@ export const cyrkowcy = {
         Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
         "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
       },
-      rules: ["Duży cel", "Kontakty handlowe(3)", "Machina wojenna", "Powóz"],
+      rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },
     Rydwan: {
       id: 13,

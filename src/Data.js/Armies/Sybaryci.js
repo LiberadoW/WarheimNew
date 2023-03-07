@@ -164,7 +164,7 @@ export const dzieciZagłady = {
         "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
         "Rumak Chaosu ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
       },
-      rules: ["Duży cel", "Kontakty handlowe(3)", "Machina wojenna", "Powóz"],
+      rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },
     "Rydwan Chaosu": {
       id: 9,

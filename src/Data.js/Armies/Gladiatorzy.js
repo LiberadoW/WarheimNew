@@ -148,7 +148,7 @@ export const gladiatorzy = {
           "Krzepki",
           "Nieustępliwość",
           "Ochronne tatuaże",
-          "Odporność na magię(2)",
+          "Odporność na magię (2)",
           "Pogromca",
           "Pomiot podmroku",
           "Rankor",
@@ -259,7 +259,7 @@ export const gladiatorzy = {
     maxModels: 15,
     name: "Gladiatorzy z Jałowej Krainy",
     nature: "Neutralna",
-    armyRules: ["Kontakty handlowe(3)", "Rozrzutni", "Zamożność"],
+    armyRules: ["Kontakty handlowe (3)", "Rozrzutni", "Zamożność"],
     mercenaries: [
       "Balistyk",
       "Bombardier",

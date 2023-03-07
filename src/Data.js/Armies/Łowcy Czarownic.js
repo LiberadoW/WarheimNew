@@ -87,7 +87,7 @@ export const łowcyCzarownic =  {
           Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
           Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
         },
-        rules: ["Fanatyk, Furia"],
+        rules: ["Fanatyk", "Furia"],
       },
       "Pies bojowy": {
         id: 5,

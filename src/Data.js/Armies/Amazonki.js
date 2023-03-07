@@ -172,7 +172,7 @@ export const amazonki = {
         "Kawalerzysta",
         "Lekka jazda",
         "Nienawiść",
-        "Ochronne tauaże",
+        "Ochronne tatuaże",
         "Zabobonny lęk",
         "Zasadzka",
       ],

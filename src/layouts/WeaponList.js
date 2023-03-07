@@ -3,7 +3,6 @@ import "../styles/WeaponList.css";
 import { disableButtons } from "../Functions/disableButtons";
 import mageEquipmentList from "../Data.js/MageEquipmentList";
 import findCommonElements from "../Functions/findCommonElements";
-import { items } from "../Data.js/Items";
 import { getItemText } from "../Functions/getItemText";
 
 const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
@@ -106,6 +105,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       disableButtons("Tarcza", index);
       disableButtons("Choice", index);
       disableButtons("Tradycja", index);
+      disableButtons("Startowy1", index);
     });
   });
 
@@ -113,6 +113,66 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
     const unit = unitList[e.target.className];
     const equipmentList = unit.optionalEquipment;
 
+    const trollRaces = Object.fromEntries(
+      Object.entries(unit.equipmentList).filter(([key]) =>
+        key.includes("Troll")
+      )
+    );
+
+    if (unit.unitName === "Troll") {
+      if (e.target.name === "Troll Górski" && e.target.checked === true) {
+        unit.rules = [
+          "Bycza szarża",
+          "Duży cel",
+          "Głód trzewi",
+          "Głupota",
+          "Nieświadomy",
+          "Niezłomność",
+          "Ochronne tatuaże",
+          "Przepastne trzewia",
+          "Regeneracja",
+          "Strach",
+          "Wielkolud",
+          "Żrąca plwocina",
+          "Odporność na magię (2)",
+          "Łuskowata skóra (5+)",
+          "Pomiot podmroku",
+        ];
+      } else if (e.target.name === "Troll Rzeczny"&& e.target.checked === true) {
+        unit.rules = [
+          "Bycza szarża",
+          "Duży cel",
+          "Głód trzewi",
+          "Głupota",
+          "Nieświadomy",
+          "Niezłomność",
+          "Ochronne tatuaże",
+          "Przepastne trzewia",
+          "Regeneracja",
+          "Strach",
+          "Wielkolud",
+          "Żrąca plwocina",
+          "Nurek",
+          "Stygmat Nurgla (odór)",
+          "Wodny",
+        ];
+      } else {
+        unit.rules = [
+          "Bycza szarża",
+          "Duży cel",
+          "Głód trzewi",
+          "Głupota",
+          "Nieświadomy",
+          "Niezłomność",
+          "Ochronne tatuaże",
+          "Przepastne trzewia",
+          "Regeneracja",
+          "Strach",
+          "Wielkolud",
+          "Żrąca plwocina",
+        ];
+      }
+    }
 
     const spellSchools = Object.fromEntries(
       Object.entries(unit.equipmentList).filter(
@@ -122,7 +182,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
 
     if (e.target.name.includes("Tradycja") || e.target.name.includes("Magia")) {
       const mageEquipment = mageEquipmentList[e.target.name].equipment;
-    
+
       if (unit.rules.includes(e.target.name)) {
         unit.rules.splice(unit.rules.indexOf(e.target.name), 1);
       } else {
@@ -147,18 +207,16 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
           unit.equipmentList["Rumak"] = [55, 3];
         }
       } else {
-
         const differentEquipmentNames = Object.keys(unit.equipmentList).filter(
           (x) => Object.keys(mageEquipment).includes(x)
         );
-  
-        if (JSON.stringify(differentEquipmentNames) == JSON.stringify(Object.keys(mageEquipment))) {
+
+        if (
+          JSON.stringify(differentEquipmentNames) ==
+          JSON.stringify(Object.keys(mageEquipment))
+        ) {
           unit.equipmentList = spellSchools;
         }
-
-
-
-        
 
         unit.optionalEquipment = [];
         unit.cost = heroes[unit.unitName].cost;
@@ -189,7 +247,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
 
     if (e.target.name === "Wielki wilk") {
       if (e.target.checked === true) {
-        unit.stats["Wielki wilk"] = [9,3,0,4, "-", "-", 3, 1, 3];
+        unit.stats["Wielki wilk"] = [9, 3, 0, 4, "-", "-", 3, 1, 3];
       } else {
         delete unit.stats["Wielki wilk"];
       }
@@ -199,6 +257,12 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
     const startingWeapons = Array.from(
       document.querySelectorAll(
         `div.unit[id='${String(id)}'] [data='Startowy']`
+      )
+    ).concat(
+      Array.from(
+        document.querySelectorAll(
+          `div.unit[id='${String(id)}'] [data='Startowy1']`
+        )
       )
     );
 
@@ -259,6 +323,12 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
     const startingWeapons = Array.from(
       document.querySelectorAll(
         `div.unit[id='${String(id)}'] [data='Startowy']`
+      )
+    ).concat(
+      Array.from(
+        document.querySelectorAll(
+          `div.unit[id='${String(id)}'] [data='Startowy1']`
+        )
       )
     );
 
@@ -370,7 +440,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
     "Broń dystansowa",
     "Pancerz",
     "Specjalne",
-    "Kolegia magii",
+    "Kolegia Magii",
   ];
 
   Object.keys(unitList[id].equipmentList).forEach((item) => {
@@ -409,14 +479,12 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                           onClick={handleWeaponListClick}
                           checked={
                             unitList[id].optionalEquipment.includes(key) ||
-                            isStartingEquipment ||
-                            unitList[id].rules.includes(key)
+                            isStartingEquipment 
                           }
                           data={value[2]}
                           name={key}
                           value={value[0]}
                           className={id}
-                          key={index}
                           type="checkbox"
                           disabled={
                             unitList[id].startingEquipment.includes(key) ||
@@ -436,7 +504,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                             name={key}
                             value={value[0]}
                             className={id}
-                            key={`${index}2`}
                             type="checkbox"
                             disabled={
                               unitList[id].startingEquipment.filter(

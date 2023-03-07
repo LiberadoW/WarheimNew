@@ -193,6 +193,14 @@ export const getOneOfChoices = (army, unitList) => {
       ["Rój", "Nieumarły Nomada"],
       ["Gnilec", "Ushabti", "Grobowy Skorpion"],
     ],
+    "Zwiadowcze stado klanu Eshin": [["Rydwan", "Więźniarka"]],
+    "Poganiacze klanu Moulder": [["Rydwan", "Więźniarka"]],
+    "Kult Zarazy klanu Pestilens": [["Rydwan", "Więźniarka"]],
+    "Harcownicy klanu Skryre": [["Koło Zagłady", "Więźniarka"]],
+    "Zbrojne stado klanu Mors": [["Rydwan", "Więźniarka"]],
+    "Łowcze plemię Dzikich Orków": [
+      ["Dziki Ork na Dziku", "Troll", "Wielki Pajonk"],
+    ],
   };
 
   if (choices[army.name] !== undefined) {

@@ -19,7 +19,7 @@ const StatsTable = ({
       {Object.entries(item.stats).map(([key, value], mainIndex) => {
         
         return (
-          <React.Fragment key={`${mainIndex}1`}>
+          <React.Fragment>
             <div className="unit-table-stats">
               {key}
             </div>
@@ -31,7 +31,7 @@ const StatsTable = ({
                     className="unit-table-stats"
                     style={{ fontWeight: "bold", color: "red" }}
                   >
-                    {stat - initativeModifier}
+                    {stat - initativeModifier === 0 ? 1 : stat - initativeModifier}
                   </div>
                 );
               } else if (index === 0 && mainIndex === 0 && speedModifier > 0) {
@@ -41,7 +41,7 @@ const StatsTable = ({
                     className="unit-table-stats"
                     style={{ fontWeight: "bold", color: "red" }}
                   >
-                    {stat - speedModifier}
+                    {stat - speedModifier === 0 ? 1 : stat - speedModifier}
                   </div>
                 );
               } else {

@@ -29,7 +29,7 @@ export const zwierzoludzie = {
         Maksymalna: [6, 7, 6, 4, 5, 4, 6, 4, 9],
       },
       rules: [
-        "Mag (Dziedzina Chaosu albo Dziedzina Dziczy",
+        "Mag (Dziedzina Chaosu albo Dziedzina Dziczy)",
         "Pomiot kniei",
         "Zasadzka",
       ],
@@ -153,7 +153,7 @@ export const zwierzoludzie = {
       },
       rules: ["Pomiot kniei", "Rączy", "Zasadzka", "Zwierzę"],
     },
-    "Ogr Chaosu": {
+    "Minotaur": {
       id: 9,
       startingEquipment: ["Broń wielka"],
       cost: 200,

@@ -31,7 +31,7 @@ export const siostry = {
         rules: [
           "Błogosławieństwo bogów",
           "Czarostwo",
-          "Duchwony (modlitwy do Sigmara)",
+          "Duchowny (modlitwy do Sigmara)",
           "Modlitwa",
           "Nienawiść",
           "Przepastne trzewia",
@@ -167,7 +167,7 @@ export const siostry = {
     maxModels: 15,
     name: "Siostry Sigmara",
     nature: "Neutralna",
-    armyRules: ["Kontakty handlowe(3)", "Podatek", "Rozrzutni"],
+    armyRules: ["Kontakty handlowe (3)", "Podatek", "Rozrzutni"],
     mercenaries: [
       "Kartograf",
       "Kupiec",

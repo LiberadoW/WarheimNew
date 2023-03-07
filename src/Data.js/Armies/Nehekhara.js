@@ -1,13 +1,13 @@
 import { heroEquipment } from "../HeroEquipment";
 
-export const nekrarcha = {
+export const nehekhara = {
   heroes: {
     "Książe Grobowców": {
       id: 0,
       startingEquipment: ["Sztylet", "Chopesz"],
       cost: 80,
       number: 1,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Bohaterowie,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 5, 3, 4, 4, 2, 3, 1, 9],
@@ -30,7 +30,7 @@ export const nekrarcha = {
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 55,
       number: 1,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Bohaterowie,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
@@ -52,7 +52,7 @@ export const nekrarcha = {
       startingEquipment: ["Sztylet", "Bicz"],
       cost: 45,
       number: 1,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Bohaterowie,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 7],
@@ -74,7 +74,7 @@ export const nekrarcha = {
       startingEquipment: ["Sztylet", "Chopesz"],
       cost: 55,
       number: 2,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Bohaterowie,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 4, 4, 1, 3, 1, 8],
@@ -95,7 +95,7 @@ export const nekrarcha = {
       startingEquipment: ["Sztylet"],
       cost: 15,
       number: 15,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Stronnicy,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 2, 2, 3, 3, 1, 2, 1, 3],
@@ -115,7 +115,7 @@ export const nekrarcha = {
       startingEquipment: ["Chopesz", "Średni pancerz", "Tarcza"],
       cost: 50,
       number: 3,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Stronnicy,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
@@ -155,7 +155,7 @@ export const nekrarcha = {
       ],
       cost: 80,
       number: 3,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Stronnicy,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 2, 2, 3, 3, 1, 2, 1, 3],
@@ -201,7 +201,7 @@ export const nekrarcha = {
       startingEquipment: ["Broń wielka", "Łuk długi"],
       cost: 200,
       number: 1,
-      equipmentList: heroEquipment["Nieumarły zastęp Nehekhary"].Ushabti,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Ushabti,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 2, 4, 4, 3, 3, 3, 8],
@@ -265,7 +265,7 @@ export const nekrarcha = {
   limit: 500,
   minModels: 3,
   maxModels: 15,
-  name: "Nieumarły zastęp Nehekhary",
+  name: "Nieumarły zastęp z Nehekhary",
   nature: "Praworządna",
   armyRules: ["Kontrolowanie ożywieńców", "Podatek", "Rozrzutni"],
   mercenaries: [],

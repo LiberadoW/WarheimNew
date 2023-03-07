@@ -11,11 +11,9 @@ const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
 
   const equipmentList = getAllEquipment(unitList);
 
-  const oneOfItems = ["Harpun", "Ołowiomiotacz"];
+  const oneOfItems = ["Harpun", "Ołowiomiotacz","Kadzielnica zarazy","Kula trującego wichru"];
 
   const unitNumbers = getUnitNumbers(unitList);
-
-  console.log(limit)
 
   return (
     <div className="army-list-errors">
@@ -83,7 +81,7 @@ const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
       {unitList.map((item, index) => {
         const startingWeaponsOptions = Object.entries(
           item.equipmentList
-        ).filter(([key, value]) => value[2] === "Startowy");
+        ).filter(([key, value]) => value[2] === "Startowy" || value[2] === "Startowy1");
 
         if (startingWeaponsOptions.length > 0) {
           const intersection = item.optionalEquipment.filter((element) =>

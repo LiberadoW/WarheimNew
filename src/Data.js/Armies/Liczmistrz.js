@@ -21,7 +21,7 @@ export const liczmistrz = {
         "Liczmistrz",
         "Łatwopalność",
         "Mag (Dziedzina Nekromancji)",
-        "Mistrz magii",
+        "Mistrz Magii",
         "Nekrokleta",
         "Nieumarły",
         "Strach",

@@ -37,6 +37,13 @@ import { krwaweSmoki } from "./Armies/krwaweSmoki";
 import { nekrarcha } from "./Armies/Nekrarcha";
 import { strigos } from "./Armies/Strigos";
 import { mroczne } from "./Armies/MroczneElfy";
+import { eshin } from "./Armies/Eshin";
+import { moulder } from "./Armies/Moulder";
+import { pestilens } from "./Armies/Pestilens";
+import { skryre } from "./Armies/Skryre";
+import { nehekhara } from "./Armies/Nehekhara";
+import { mors } from "./Armies/Mors";
+import { dzikieOrki } from "./Armies/DzikieOrki";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -78,6 +85,14 @@ const armies = {
   "Nieumarły poczet Krwawych Smoków": krwaweSmoki,
   "Nieumarły sabat rodu Nekrarch": nekrarcha,
   "Nieumarły tabor ludu Strigosu": strigos,
+  "Nieumarły zastęp z Nehekhary": nehekhara,
+  "Zwiadowcze stado klanu Eshin": eshin,
+  "Poganiacze klanu Moulder": moulder,
+  "Kult Zarazy klanu Pestilens": pestilens,
+  "Harcownicy klanu Skryre": skryre,
+  "Zbrojne stado klanu Mors": mors,
+  "Łowcze plemię Dzikich Orków": dzikieOrki,
+  
 };
 
 export default armies;
