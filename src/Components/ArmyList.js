@@ -55,7 +55,7 @@ const ArmyList = ({
         <div className="rules-box">
           {uniqueRulesList.map((rule) => {
             return (
-              <div className="rule">
+              <div className="rule" key={rule}>
                 <span className="rule-title">{`${rule}: `}</span>
 
                 <span className="rule-body">{rulesObject[rule]}</span>

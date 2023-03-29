@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  createContext,
+  useReducer,
+} from "react";
 import ArmySelect from "../Components/ArmySelect";
 import UnitSelect from "./UnitSelect";
 import UnitList from "./UnitList";
@@ -13,6 +19,8 @@ import { doc, updateDoc, getDoc, Timestamp } from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
 import html2pdf from "html2pdf.js";
 import "@sweetalert2/themes/bootstrap-4";
+
+export const CommandContext = createContext();
 
 const getTotalCost = (arr) => {
   let cost = 0;
@@ -74,6 +82,9 @@ const Builder = ({
   const [errors, setErrors] = useState(0);
   const [customArmyCost, setCustomArmyCost] = useState(0);
   const [isCustomArmyCost, setIsCustomArmyCost] = useState(false);
+
+  const [standardBearer, setStandardBearer] = useState(null);
+  const [musician, setMusician] = useState(null);
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -165,12 +176,14 @@ const Builder = ({
       setUnitName("");
       setMercenaryUnitName("");
       setArmyName("");
+      setStandardBearer(null);
+      setMusician(null);
     }
   };
 
   const handleCustomArmyCostClick = () => {
     setIsCustomArmyCost(!isCustomArmyCost);
-    setCustomArmyCost(0)
+    setCustomArmyCost(0);
   };
 
   const handleCustomArmyCostChange = (e) => {
@@ -179,99 +192,103 @@ const Builder = ({
   };
 
   return (
-    <div className="builder">
-      <div className="builder-controls">
-        <div className="builder-controls-buttons">
-          <button className="button" onClick={handleResetArmyClick}>
-            Resetuj rozpiskę
-          </button>
-          <button className="button" onClick={handleSavePDFClick}>
-            Zapisz jako PDF
-          </button>
-          {currentUser && (
-            <button className="button " onClick={saveArmy}>
-              Zapisz armię
+    <CommandContext.Provider
+      value={{ standardBearer, setStandardBearer, musician, setMusician }}
+    >
+      <div className="builder">
+        <div className="builder-controls">
+          <div className="builder-controls-buttons">
+            <button className="button" onClick={handleResetArmyClick}>
+              Resetuj rozpiskę
             </button>
+            <button className="button" onClick={handleSavePDFClick}>
+              Zapisz jako PDF
+            </button>
+            {currentUser && (
+              <button className="button " onClick={saveArmy}>
+                Zapisz armię
+              </button>
+            )}
+          </div>
+          <div>
+            <input type="checkbox" onClick={handleCustomArmyCostClick}></input>
+            Zmień startową liczbę ZK
+          </div>
+          {isCustomArmyCost && (
+            <div>
+              <input type="text" onChange={handleCustomArmyCostChange} />
+            </div>
           )}
         </div>
-        <div>
-          <input type="checkbox" onClick={handleCustomArmyCostClick}></input>
-          Zmień startową liczbę ZK
-        </div>
-        {isCustomArmyCost && (
-          <div>
-            <input type="text" onChange={handleCustomArmyCostChange} />
-          </div>
-        )}
-      </div>
-      <div className="builder-select-container">
-        <ArmySelect
-          army={army}
-          setArmy={setArmy}
-          setUnitList={setUnitList}
-          setUnitName={setUnitName}
-          setIdShown={setIdShown}
-          setMercenaryUnitName={setMercenaryUnitName}
-          setMercenaries={setMercenaries}
-        />
+        <div className="builder-select-container">
+          <ArmySelect
+            army={army}
+            setArmy={setArmy}
+            setUnitList={setUnitList}
+            setUnitName={setUnitName}
+            setIdShown={setIdShown}
+            setMercenaryUnitName={setMercenaryUnitName}
+            setMercenaries={setMercenaries}
+          />
 
-        <UnitSelect
-          heroes={army.heroes}
-          setUnitName={setUnitName}
-          unitName={unitName}
-          unitList={unitList}
-          setUnitList={setUnitList}
-        />
-
-        <MercenariesSelect
-          mercenaries={mercenaries}
-          setMercenaryUnitName={setMercenaryUnitName}
-          mercenaryUnitName={mercenaryUnitName}
-          unitList={unitList}
-          setUnitList={setUnitList}
-        />
-      </div>
-
-      <ArmyInfo
-        prestige={prestige}
-        totalCost={totalCost}
-        army={army}
-        isCustomArmyCost = {isCustomArmyCost}
-        customArmyCost = {customArmyCost}
-        unitList={unitList}
-        setArmyName={setArmyName}
-        armyName={armyName}
-        errors={errors}
-        setErrors={setErrors}
-      />
-
-      <div className="main-builder-container">
-        <div className="side-builder-left">
-          <UnitList
+          <UnitSelect
+            heroes={army.heroes}
+            setUnitName={setUnitName}
+            unitName={unitName}
             unitList={unitList}
             setUnitList={setUnitList}
+          />
+
+          <MercenariesSelect
+            mercenaries={mercenaries}
+            setMercenaryUnitName={setMercenaryUnitName}
+            mercenaryUnitName={mercenaryUnitName}
+            unitList={unitList}
+            setUnitList={setUnitList}
+          />
+        </div>
+
+        <ArmyInfo
+          prestige={prestige}
+          totalCost={totalCost}
+          army={army}
+          isCustomArmyCost={isCustomArmyCost}
+          customArmyCost={customArmyCost}
+          unitList={unitList}
+          setArmyName={setArmyName}
+          armyName={armyName}
+          errors={errors}
+          setErrors={setErrors}
+        />
+
+        <div className="main-builder-container">
+          <div className="side-builder-left">
+            <UnitList
+              unitList={unitList}
+              setUnitList={setUnitList}
+              idShown={idShown}
+              setIdShown={setIdShown}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          </div>
+
+          <UnitInfo
+            heroes={army.heroes}
+            mercenaries={mercenaries}
+            unitName={unitName}
+            unitList={unitList}
+            setUnitList={setUnitList}
+            handleClickShow={handleClickShow}
+            handleSetUnitExp={handleSetUnitExp}
             idShown={idShown}
             setIdShown={setIdShown}
             showModal={showModal}
             setShowModal={setShowModal}
           />
         </div>
-
-        <UnitInfo
-          heroes={army.heroes}
-          mercenaries={mercenaries}
-          unitName={unitName}
-          unitList={unitList}
-          setUnitList={setUnitList}
-          handleClickShow={handleClickShow}
-          handleSetUnitExp={handleSetUnitExp}
-          idShown={idShown}
-          setIdShown={setIdShown}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
       </div>
-    </div>
+    </CommandContext.Provider>
   );
 };
 

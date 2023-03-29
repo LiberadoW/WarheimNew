@@ -23,21 +23,13 @@ const UnitInfo = ({
     setUnitList(newUnitList);
   };
 
-  const handleClick = (e) => {
-    if (
-      e.target.className.includes("modal display") ||
-      e.target.className.includes("close-modal-button")
-    ) {
-      setShowModal(!showModal);
-      setIdShown(1);
-    }
-  };
+  
 
   return unitList.map((unit, index) => {
     if (unit != null) {
       return (
         unit.uniqueId == idShown && (
-          <Modal show={showModal} handleClose={handleClick} key={index}>
+          <Modal show={showModal}  key={index} showModal={showModal} setShowModal={setShowModal} setIdShown={setIdShown}>
             <div className="side-builder-right" key={`${index}1`}>
               <div
                 className={`unit ${index}`}

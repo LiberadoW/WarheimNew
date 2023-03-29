@@ -19,7 +19,7 @@ const StatsTable = ({
       {Object.entries(item.stats).map(([key, value], mainIndex) => {
         
         return (
-          <React.Fragment>
+          <React.Fragment key={key}>
             <div className="unit-table-stats">
               {key}
             </div>

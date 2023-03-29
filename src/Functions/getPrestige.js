@@ -86,6 +86,7 @@ export const getPrestige = (arr) => {
           }
         });
 
+
         equipment.forEach((eq) => {
           if (Object.keys(specialEquipmentList).includes(eq)) {
             prestigeValues.equipmentTotalValue +=
@@ -99,6 +100,14 @@ export const getPrestige = (arr) => {
               equipmentList[eq][0] * item.selectedNumber;
           }
         });
+
+        if (item.unitName === "Duże Dźgacze") {
+          prestigeValues.equipmentTotalValue -= 30;
+        }
+
+        if (item.unitName === "Drużyna ciężkich broni") {
+          prestigeValues.equipmentTotalValue -= 50;
+        }
 
         // equipment.forEach((eq) => {
         //   keysSplit.forEach((key) => {

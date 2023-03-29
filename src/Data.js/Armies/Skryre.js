@@ -112,8 +112,26 @@ export const skryre = {
         "Szermierz",
       ],
     },
-    "Szczurogr klanu Skryre": {
+    "Drużyna ciężkich broni": {
       id: 7,
+      startingEquipment: ["Sztylet", "Miecz"],
+      cost: 70,
+      number: 2,
+      equipmentList: heroEquipment["Harcownicy klanu Skryre"].Ciężcy,
+      type: "Stronnik",
+      stats: {
+        Początkowa: [5, 4, 3, 3, 3, 1, 5, 1, 6],
+        Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
+      },
+      rules: [
+        "Drużyna ciężkich broni",
+        "Drużyna obsługi",
+        "Ranger",
+        "Szermierz",
+      ],
+    },
+    "Szczurogr klanu Skryre": {
+      id: 8,
       startingEquipment: ["Broń naturalna"],
       cost: 250,
       number: 1,
@@ -139,7 +157,7 @@ export const skryre = {
       ],
     },
     "Koło Zagłady": {
-      id: 8,
+      id: 9,
       startingEquipment: [],
       cost: 150,
       number: 1,
@@ -159,7 +177,7 @@ export const skryre = {
       ],
     },
     Więźniarka: {
-      id: 9,
+      id: 10,
       startingEquipment: [],
       cost: 175,
       number: 1,

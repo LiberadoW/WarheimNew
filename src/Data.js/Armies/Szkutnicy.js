@@ -2,10 +2,10 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const szkutnicy = {
   heroes: {
-    "Mistrz Piwowar": {
+    "Mistrz Szkutnik": {
       id: 0,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
-      cost: 85,
+      cost: 75,
       number: 1,
       equipmentList: heroEquipment["Szkutnicy z Barak Varr"].Bohaterowie,
       type: "Bohater",

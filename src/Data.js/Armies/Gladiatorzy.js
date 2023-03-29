@@ -254,7 +254,7 @@ export const gladiatorzy = {
         rules: ["Duży cel", "Machina wojenna", "Rydwan"],
       },
     },
-    limit: 500,
+    limit: 600,
     minModels: 3,
     maxModels: 15,
     name: "Gladiatorzy z Jałowej Krainy",

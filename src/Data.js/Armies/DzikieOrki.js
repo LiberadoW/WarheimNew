@@ -79,8 +79,27 @@ export const dzikieOrki = {
         "Zabobonny lęk",
       ],
     },
-    "Leśny Goblin": {
+    "Duże Dźgacze": {
       id: 4,
+      startingEquipment: ["Sztylet", "Rembak", "Duża dźgacz"],
+      cost: 100,
+      number: 2,
+      equipmentList: heroEquipment["Łowcze plemię Dzikich Orków"]["Dźgacze"],
+      type: "Stronnik",
+      stats: {
+        Początkowa: [4, 3, 3, 3, 4, 1, 2, 1, 7],
+        Maksymalna: [5, 7, 5, 4, 5, 3, 5, 4, 8],
+      },
+      rules: [
+        "Animozja",
+        "Duża dźgacz",
+        "Furia",
+        "Ochronne tautaże",
+        "Zabobonny lęk",
+      ],
+    },
+    "Leśny Goblin": {
+      id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
       number: 15,
@@ -100,7 +119,7 @@ export const dzikieOrki = {
       ],
     },
     Snotling: {
-      id: 5,
+      id: 6,
       startingEquipment: ["Broń improwizowana", "Wybuchowe zarodniki"],
       cost: 10,
       number: 15,
@@ -120,7 +139,7 @@ export const dzikieOrki = {
       ],
     },
     Pajonk: {
-      id: 6,
+      id: 7,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 25,
       number: 15,
@@ -139,7 +158,7 @@ export const dzikieOrki = {
       ],
     },
     "Dziki Ork na Dziku": {
-      id: 7,
+      id: 8,
       startingEquipment: ["Sztylet", "Rembak", "Dzik", "Siodło & uprząż"],
       cost: 100,
       number: 3,
@@ -160,7 +179,7 @@ export const dzikieOrki = {
       ],
     },
     Troll: {
-      id: 8,
+      id: 9,
       startingEquipment: ["Broń naturalna"],
       cost: 200,
       number: 1,
@@ -189,7 +208,7 @@ export const dzikieOrki = {
       ],
     },
     "Wielki Pajonk": {
-      id: 9,
+      id: 10,
       startingEquipment: ["Broń naturalna (zatruty atak"],
       cost: 180,
       number: 1,
@@ -217,7 +236,7 @@ export const dzikieOrki = {
       ],
     },
     "Rydwan Orków": {
-      id: 10,
+      id: 11,
       startingEquipment: [],
       cost: 125,
       number: 1,

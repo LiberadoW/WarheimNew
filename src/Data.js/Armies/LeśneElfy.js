@@ -61,7 +61,7 @@ export const leśne = {
       },
       "Strażnik Ścieżek": {
         id: 3,
-        startingEquipment: ["Sztylet", "Łuk Elfów"],
+        startingEquipment: ["Sztylet", "Łuk elfów"],
         cost: 45,
         number: 1,
         equipmentList: heroEquipment["Leśni Elfowie z Athel Loren"].Bohaterowie,

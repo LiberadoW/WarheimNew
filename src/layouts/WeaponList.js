@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/WeaponList.css";
+import { addCommandCost } from "../Functions/addCommandCost";
+import { setCommandNumberModels } from "../Functions/setCommandNumberModels";
 import { disableButtons } from "../Functions/disableButtons";
 import mageEquipmentList from "../Data.js/MageEquipmentList";
 import findCommonElements from "../Functions/findCommonElements";
 import { getItemText } from "../Functions/getItemText";
+import { CommandContext } from "./Builder";
 
 const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
-  const commandGroupUnit = unitList[id];
-
-  const [checked, setChecked] = useState(
-    commandGroupUnit.commandGroup ? commandGroupUnit : ""
-  );
-
-  const [isCommandGroup, setCommandGroup] = useState(
-    unitList[id].rules.includes("Chorążowie & sygnaliści")
-  );
+  const { standardBearer, setStandardBearer, musician, setMusician } =
+    useContext(CommandContext);
 
   const [isPromptShown, setIsPromptShown] = useState(null);
   const [promptUnit, setPromptUnit] = useState(null);
   const [delayHandler, setDelayHandler] = useState(null);
+
+  const isCommandGroup = unitList[id].rules.includes("Chorążowie & sygnaliści");
 
   const handleMouseEnter = (e) => {
     setPromptUnit(
@@ -52,6 +50,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       const number1 = shootingWeaponsArray.filter(
         (item) => item.checked === true
       ).length;
+
       numberOfShootingWeaponsArray.push(number1);
 
       if (number1 >= 2) {
@@ -138,7 +137,10 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
           "Łuskowata skóra (5+)",
           "Pomiot podmroku",
         ];
-      } else if (e.target.name === "Troll Rzeczny"&& e.target.checked === true) {
+      } else if (
+        e.target.name === "Troll Rzeczny" &&
+        e.target.checked === true
+      ) {
         unit.rules = [
           "Bycza szarża",
           "Duży cel",
@@ -287,7 +289,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         ? unit.cost + Number(e.target.value)
         : unit.cost - Number(e.target.value);
     }
-
     if (isCommandGroup) {
       const commandGroupArray = Array.from(
         document.querySelectorAll("input[data='Dowodzenie']")
@@ -297,6 +298,21 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       ).length;
       unit.totalCost =
         unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
+    } else if (unitList[id].unitName === "Duże Dźgacze") {
+      unit.totalCost = unit.cost * unit.selectedNumber - 100;
+    } else if (unitList[id].unitName === "Drużyna ciężkich broni") {
+      if (
+        [
+          "Kulomiot",
+          "Miotacz spaczognia",
+          "Moździerz trującego wichru",
+          "Spaczrusznica",
+        ].some((element) => unitList[id].optionalEquipment.includes(element))
+      ) {
+        unit.totalCost = unit.cost * unit.selectedNumber - 120;
+      } else {
+        unit.totalCost = unit.cost * unit.selectedNumber - 70;
+      }
     } else {
       unit.totalCost = unit.cost * unit.selectedNumber;
     }
@@ -371,66 +387,38 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
     setUnitList(newUnitList);
   };
 
-  const handleCommandGroupClick = (e) => {
-    const commandGroupButton = document.querySelector(
-      `div[id='${id}'] input[name='command-group-checkbox']`
-    );
-
-    const allCommandGroupButtonsArray = Array.from(
-      document.querySelectorAll("input[name='command-group-checkbox']")
-    );
-
-    if (
-      allCommandGroupButtonsArray.filter((x) => x.checked === true).length === 1
-    ) {
-      allCommandGroupButtonsArray
-        .filter((x) => x.checked === false)
-        .forEach((item) => {
-          item.disabled = true;
-        });
+  const handleCommandClick = (e) => {
+    const arr = unitList[id].optionalEquipment;
+    if (e.target.checked) {
+      arr.push(e.target.name);
+      e.target.name === "Chorąży"
+        ? setStandardBearer(e.target.className)
+        : setMusician(e.target.className);
     } else {
-      allCommandGroupButtonsArray.forEach((item) => (item.disabled = false));
+      arr.splice(arr.indexOf(e.target.name), 1);
+      e.target.name === "Chorąży" ? setStandardBearer(null) : setMusician(null);
     }
 
-    setChecked(commandGroupButton.checked);
-    const unit = unitList[e.target.className];
-    unit.commandGroup = commandGroupButton.checked;
-    const equipmentList = unitList[e.target.className].optionalEquipment;
-
-    if (e.target.name != "command-group-checkbox") {
-      if (equipmentList.includes(e.target.name)) {
-        equipmentList.splice(equipmentList.indexOf(e.target.name), 1);
-      } else {
-        equipmentList.push(e.target.name);
-      }
+    if (arr.includes("Chorąży") && arr.includes("Sygnalista")) {
+      unitList[id].number = 2;
+      unitList[id].selectedNumber = 2;
+    } else if (arr.includes("Chorąży") || arr.includes("Sygnalista")) {
+      unitList[id].number = 2;
+      unitList[id].selectedNumber = 1;
+    } else {
+      unitList[id].number = heroes[unitList[id].unitName].number;
     }
 
-    const commandGroupArray = Array.from(
-      document.querySelectorAll("input[data='Dowodzenie']")
+    unitList[id].selectedNumber = setCommandNumberModels(arr);
+
+    unitList[id].totalCost = addCommandCost(
+      unitList[id].cost,
+      unitList[id].selectedNumber,
+      arr
     );
-    const howManyCommandChecked = commandGroupArray.filter(
-      (x) => x.checked === true
-    ).length;
-
-    unit.selectedNumber = howManyCommandChecked > 0 ? howManyCommandChecked : 1;
-
-    unit.totalCost =
-      unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
-
-    if (!unit.commandGroup) {
-      if (equipmentList.includes("Chorąży")) {
-        equipmentList.splice(equipmentList.indexOf("Chorąży"), 1);
-      }
-      if (equipmentList.includes("Sygnalista")) {
-        equipmentList.splice(equipmentList.indexOf("Sygnalista"), 1);
-      }
-      unit.selectedNumber = 1;
-      unit.totalCost = unit.cost * unit.selectedNumber;
-    }
-
-    unit.number = unit.commandGroup ? 2 : heroes[unit.unitName].number;
 
     const newUnitList = [...unitList];
+    newUnitList.sort();
     setUnitList(newUnitList);
   };
 
@@ -479,7 +467,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                           onClick={handleWeaponListClick}
                           checked={
                             unitList[id].optionalEquipment.includes(key) ||
-                            isStartingEquipment 
+                            isStartingEquipment
                           }
                           data={value[2]}
                           name={key}
@@ -537,47 +525,41 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         {isCommandGroup && (
           <div className="equipment-type-list">
             <h4>Specjalne</h4>
-            <ul onChange={handleCommandGroupClick}>
+            <ul>
               <li>
                 <input
                   type="checkbox"
-                  checked={checked}
                   className={id}
-                  name="command-group-checkbox"
+                  name="Chorąży"
+                  checked={unitList[id].optionalEquipment.includes("Chorąży")}
+                  onChange={handleCommandClick}
+                  disabled={
+                    standardBearer &&
+                    !unitList[id].optionalEquipment.includes("Chorąży")
+                  }
+                  data="Dowodzenie"
                   readOnly
-                ></input>
-                Grupa dowodzenia
+                />
+                Chorąży
               </li>
-              {checked && (
-                <>
-                  <li>
-                    <input
-                      type="checkbox"
-                      className={id}
-                      name="Chorąży"
-                      checked={unitList[id].optionalEquipment.includes(
-                        "Chorąży"
-                      )}
-                      data="Dowodzenie"
-                      readOnly
-                    />
-                    Chorąży
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      className={id}
-                      name="Sygnalista"
-                      checked={unitList[id].optionalEquipment.includes(
-                        "Sygnalista"
-                      )}
-                      data="Dowodzenie"
-                      readOnly
-                    />
-                    Sygnalista
-                  </li>
-                </>
-              )}
+              <li>
+                <input
+                  type="checkbox"
+                  className={id}
+                  name="Sygnalista"
+                  checked={unitList[id].optionalEquipment.includes(
+                    "Sygnalista"
+                  )}
+                  onChange={handleCommandClick}
+                  disabled={
+                    musician &&
+                    !unitList[id].optionalEquipment.includes("Sygnalista")
+                  }
+                  data="Dowodzenie"
+                  readOnly
+                />
+                Sygnalista
+              </li>
             </ul>
           </div>
         )}

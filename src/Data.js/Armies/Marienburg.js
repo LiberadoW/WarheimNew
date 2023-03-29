@@ -202,7 +202,7 @@ export const marienburg = {
         rules: ["Duży cel", "Machina wojenna", "Rydwan"],
       },
     },
-    limit: 500,
+    limit: 600,
     minModels: 3,
     maxModels: 15,
     name: "Piechota Morska z Marienburga",

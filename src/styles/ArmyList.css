@@ -22,7 +22,7 @@
 
 .rules-box {
   font-size: 0.8rem;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 0.5rem;
 }

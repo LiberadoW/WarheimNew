@@ -1,18 +1,28 @@
-import "../styles/Modal.css"
+import "../styles/Modal.css";
 
-const Modal = ({ handleClose, show, children }) => {
-    const showHideClassName = show ? "modal display-block" : "modal display-none";
-  
-    return (
-      <div className={showHideClassName} onClick={handleClose}>
-        <section className="modal-main">
-          {children}
-          <button className="button close-modal-button" onClick={handleClose}>
-            Zamknij
-          </button>
-        </section>
-      </div>
-    );
+const Modal = ({ show, children, showModal, setShowModal, setIdShown }) => {
+  const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+  const handleclick = (e) => {
+    if (
+      e.target.className.includes("modal display") ||
+      e.target.className.includes("close-modal-button")
+    ) {
+      setShowModal(!showModal);
+      setIdShown(1);
+    }
   };
 
-  export default Modal
+  return (
+    <div className={showHideClassName} onClick={handleclick}>
+      <section className="modal-main">
+        {children}
+        <button className="button close-modal-button" onClick={handleclick}>
+          Zamknij
+        </button>
+      </section>
+    </div>
+  );
+};
+
+export default Modal;
