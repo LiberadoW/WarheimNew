@@ -81,7 +81,7 @@ const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
       {unitList.map((item, index) => {
         const startingWeaponsOptions = Object.entries(
           item.equipmentList
-        ).filter(([key, value]) => value[2] === "Startowy" || value[2] === "Startowy1");
+        ).filter(([key, value]) => value[2] === "Startowy");
 
         if (startingWeaponsOptions.length > 0) {
           const intersection = item.optionalEquipment.filter((element) =>

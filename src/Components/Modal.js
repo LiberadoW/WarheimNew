@@ -1,7 +1,7 @@
 import "../styles/Modal.css";
 
-const Modal = ({ show, children, showModal, setShowModal, setIdShown }) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+const Modal = ({children, showModal, setShowModal, setIdShown }) => {
+  const showHideClassName = showModal ? "modal display-block" : "modal display-none";
 
   const handleclick = (e) => {
     if (

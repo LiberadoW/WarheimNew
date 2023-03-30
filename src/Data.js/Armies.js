@@ -44,6 +44,10 @@ import { skryre } from "./Armies/Skryre";
 import { nehekhara } from "./Armies/Nehekhara";
 import { mors } from "./Armies/Mors";
 import { dzikieOrki } from "./Armies/DzikieOrki";
+import { leśneGobliny } from "./Armies/LeśneGobliny";
+import { orki } from "./Armies/Orkowie";
+import { kapry } from "./Armies/Kapry";
+import { jaszczuroludzie } from "./Armies/Jaszczuroludzie";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -92,7 +96,10 @@ const armies = {
   "Harcownicy klanu Skryre": skryre,
   "Zbrojne stado klanu Mors": mors,
   "Łowcze plemię Dzikich Orków": dzikieOrki,
-  
+  "Plemię Leśnych Goblinów": leśneGobliny,
+  "Orkowie & Gobliny": orki,
+  "Załoga Zielonoskórych Kaprów": kapry,
+  "Jaszczuroludzie z Lustrii": jaszczuroludzie,
 };
 
 export default armies;

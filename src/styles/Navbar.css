@@ -9,11 +9,11 @@
   margin: 0 auto;
   text-decoration: none;
   flex: 1;
+
 }
 
 .navbar li {
   height: 50px;
-
   align-items: center;
 }
 
@@ -40,7 +40,7 @@ background-color: transparent;
 transition: background-color 0.5s ease;
 cursor: pointer;
 color: white;
-padding: 0 10px 0 10px;
+
 }
 
 .logout-button:hover {

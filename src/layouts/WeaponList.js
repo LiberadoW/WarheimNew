@@ -53,7 +53,11 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
 
       numberOfShootingWeaponsArray.push(number1);
 
-      if (number1 >= 2) {
+      const maxShootingWeapons = unitList[id].rules.includes("Zbrojny po zemby")
+        ? 3
+        : 2;
+
+      if (number1 >= maxShootingWeapons) {
         shootingWeaponsArray.forEach((item) => {
           if (item.checked === false) {
             item.disabled = true;
@@ -82,7 +86,13 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       ).length;
       numberOfCloseCombatWeaponsArray.push(number2);
 
-      if (number2 >= 2) {
+      const maxCloseCombatWeapons = unitList[id].rules.includes(
+        "Zbrojny po zemby"
+      )
+        ? 3
+        : 2;
+
+      if (number2 >= maxCloseCombatWeapons) {
         closeCombatWeaponsArray.forEach((item) => {
           if (item.checked === false) {
             item.disabled = true;
@@ -104,7 +114,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       disableButtons("Tarcza", index);
       disableButtons("Choice", index);
       disableButtons("Tradycja", index);
-      disableButtons("Startowy1", index);
     });
   });
 
@@ -260,12 +269,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       document.querySelectorAll(
         `div.unit[id='${String(id)}'] [data='Startowy']`
       )
-    ).concat(
-      Array.from(
-        document.querySelectorAll(
-          `div.unit[id='${String(id)}'] [data='Startowy1']`
-        )
-      )
     );
 
     if (startingWeapons.includes(e.target)) {
@@ -278,7 +281,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
           ? unit.cost + 0
           : unit.cost - Number(e.target.value);
       } else if (howManyChecked === 0) {
-        unit.cost = e.target.checked ? unit.cost + 0 : unit.cost - 0;
+        
       } else {
         unit.cost = e.target.checked
           ? unit.cost + Number(e.target.value)
@@ -340,13 +343,8 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       document.querySelectorAll(
         `div.unit[id='${String(id)}'] [data='Startowy']`
       )
-    ).concat(
-      Array.from(
-        document.querySelectorAll(
-          `div.unit[id='${String(id)}'] [data='Startowy1']`
-        )
-      )
     );
+
 
     if (startingWeapons.includes(e.target)) {
       const howManyChecked = startingWeapons.filter(

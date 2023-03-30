@@ -90,11 +90,9 @@ const UnitSelect = ({
             Wybierz postać
           </option>
           {groupedHeroes.map((item, index) => {
-            console.log(unitNameArr.filter((x) => x === "Duże Dźgacze").length);
             return (
               <optgroup label={labels[index]} key={index}>
                 {Object.entries(groupedHeroes[index]).map(([key, value]) => {
-                  console.log(key);
                   return (
                     <option
                       key={key}

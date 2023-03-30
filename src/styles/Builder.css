@@ -135,9 +135,10 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
+  
 }
 .builder-controls div {
   display: flex;
@@ -157,6 +158,17 @@
 .builder-controls button {
   padding: 10px;
 }
+
+/* .builder-top-wrapper {
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 10px;
+  width: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  flex-direction: column;
+} */
 
 @media screen and (max-width: 768px) {
   .main-builder-container {
@@ -178,5 +190,9 @@
 
   .edit-unit-container {
     padding: 0;
+  }
+
+  .builder-top-wrapper {
+    width: 95%;
   }
 }

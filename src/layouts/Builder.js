@@ -3,7 +3,6 @@ import React, {
   useState,
   useContext,
   createContext,
-  useReducer,
 } from "react";
 import ArmySelect from "../Components/ArmySelect";
 import UnitSelect from "./UnitSelect";
@@ -19,6 +18,7 @@ import { doc, updateDoc, getDoc, Timestamp } from "firebase/firestore";
 import { AuthContext } from "../Context/AuthContext";
 import html2pdf from "html2pdf.js";
 import "@sweetalert2/themes/bootstrap-4";
+import Modal from "../Components/Modal";
 
 export const CommandContext = createContext();
 
@@ -79,6 +79,7 @@ const Builder = ({
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+  const [showNewArmyModal,setShowNewArmyModal] = useState(false);
   const [errors, setErrors] = useState(0);
   const [customArmyCost, setCustomArmyCost] = useState(0);
   const [isCustomArmyCost, setIsCustomArmyCost] = useState(false);
@@ -191,61 +192,74 @@ const Builder = ({
     setCustomArmyCost(e.target.value);
   };
 
+  const handleNewArmyClick = e => {
+
+  }
+
   return (
     <CommandContext.Provider
       value={{ standardBearer, setStandardBearer, musician, setMusician }}
     >
       <div className="builder">
-        <div className="builder-controls">
-          <div className="builder-controls-buttons">
-            <button className="button" onClick={handleResetArmyClick}>
-              Resetuj rozpiskę
-            </button>
-            <button className="button" onClick={handleSavePDFClick}>
-              Zapisz jako PDF
-            </button>
-            {currentUser && (
-              <button className="button " onClick={saveArmy}>
-                Zapisz armię
+        <div className="builder-top-wrapper">
+          <div className="builder-controls">
+            <div className="builder-controls-buttons">
+            {/* <button className="button" onClick={handleNewArmyClick}>
+                Nowa rozpiska
+              </button> */}
+              <button className="button" onClick={handleResetArmyClick}>
+                Resetuj
               </button>
+              <button className="button" onClick={handleSavePDFClick}>
+                Zapisz PDF
+              </button>
+              
+              {currentUser && (
+                <button className="button " onClick={saveArmy}>
+                  Zapisz armię
+                </button>
+              )}
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                onClick={handleCustomArmyCostClick}
+              ></input>
+              Zmień startową liczbę ZK
+            </div>
+            {isCustomArmyCost && (
+              <div>
+                <input type="text" onChange={handleCustomArmyCostChange} />
+              </div>
             )}
           </div>
-          <div>
-            <input type="checkbox" onClick={handleCustomArmyCostClick}></input>
-            Zmień startową liczbę ZK
+          <div className="builder-select-container">
+            <ArmySelect
+              army={army}
+              setArmy={setArmy}
+              setUnitList={setUnitList}
+              setUnitName={setUnitName}
+              setIdShown={setIdShown}
+              setMercenaryUnitName={setMercenaryUnitName}
+              setMercenaries={setMercenaries}
+            />
+
+            <UnitSelect
+              heroes={army.heroes}
+              setUnitName={setUnitName}
+              unitName={unitName}
+              unitList={unitList}
+              setUnitList={setUnitList}
+            />
+
+            <MercenariesSelect
+              mercenaries={mercenaries}
+              setMercenaryUnitName={setMercenaryUnitName}
+              mercenaryUnitName={mercenaryUnitName}
+              unitList={unitList}
+              setUnitList={setUnitList}
+            />
           </div>
-          {isCustomArmyCost && (
-            <div>
-              <input type="text" onChange={handleCustomArmyCostChange} />
-            </div>
-          )}
-        </div>
-        <div className="builder-select-container">
-          <ArmySelect
-            army={army}
-            setArmy={setArmy}
-            setUnitList={setUnitList}
-            setUnitName={setUnitName}
-            setIdShown={setIdShown}
-            setMercenaryUnitName={setMercenaryUnitName}
-            setMercenaries={setMercenaries}
-          />
-
-          <UnitSelect
-            heroes={army.heroes}
-            setUnitName={setUnitName}
-            unitName={unitName}
-            unitList={unitList}
-            setUnitList={setUnitList}
-          />
-
-          <MercenariesSelect
-            mercenaries={mercenaries}
-            setMercenaryUnitName={setMercenaryUnitName}
-            mercenaryUnitName={mercenaryUnitName}
-            unitList={unitList}
-            setUnitList={setUnitList}
-          />
         </div>
 
         <ArmyInfo
@@ -288,6 +302,8 @@ const Builder = ({
           />
         </div>
       </div>
+
+      <Modal showModal={showNewArmyModal} setShowModal={setShowNewArmyModal}></Modal>
     </CommandContext.Provider>
   );
 };

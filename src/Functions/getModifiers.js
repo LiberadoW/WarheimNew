@@ -13,6 +13,14 @@ export const getModifiers = (arr, unit) => {
     armour -= 1;
   }
 
+  if (
+    ["Dzik", "Obmierzły pajonk", "Zimnokrwisty"].some((element) =>
+      unit.startingEquipment.concat(unit.optionalEquipment).includes(element)
+    )
+  ) {
+    armour -= 1;
+  }
+
   if (unit.rules.includes("Żelazoskóry")) {
     armour -= 1;
   }
