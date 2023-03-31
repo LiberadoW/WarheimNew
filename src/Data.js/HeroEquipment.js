@@ -2391,7 +2391,7 @@ export const heroEquipment = {
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Ciężki: [30, 2, "Zrboja"],
+      Ciężki: [30, 2, "Zbroja"],
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
