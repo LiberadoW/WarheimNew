@@ -11,7 +11,7 @@ export const orki = {
       type: "Bohater",
       stats: {
         Początkowa: [4, 5, 3, 4, 4, 2, 3, 1, 8],
-        Maksymalna: [5, 8, 5, 4, 5, 3, 5, 4, 9],
+        Maksymalna: [5, 8, 4, 4, 5, 3, 5, 4, 9],
       },
       rules: ["Dowódca", "Zbrojny po zemby", "Do Łooomotu!"],
       exp: 20,
