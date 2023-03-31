@@ -7,10 +7,13 @@ import mageEquipmentList from "../Data.js/MageEquipmentList";
 import findCommonElements from "../Functions/findCommonElements";
 import { getItemText } from "../Functions/getItemText";
 import { CommandContext } from "./Builder";
+import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
 
 const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
   const { standardBearer, setStandardBearer, musician, setMusician } =
     useContext(CommandContext);
+
+  const baseCost = heroes[unitList[id].unitName].cost;
 
   const [isPromptShown, setIsPromptShown] = useState(null);
   const [promptUnit, setPromptUnit] = useState(null);
@@ -276,12 +279,23 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         (x) => x.checked === true
       ).length;
 
+      const valueOfOptionalEquipment = getValueOfOptionalEquipment([unitList[id]])
+
+
+        // if (unitList[id].unitName === "Debeściak" || unitList[id].unitName === "Debeściak Dzikich Orków") {
+        //   if (e.target.name === "Rembak" && e.target.checked === true) {
+        //     unitList[id].optionalEquipment.push("Sztylet")
+        //   } else if (e.target.name === "Rembak" && e.target.checked === false) {
+        //     unitList[id].optionalEquipment.splice(unitList[id].optionalEquipment.indexOf("Sztylet"),1)
+        //   }
+        // }
+
       if (howManyChecked === 1) {
         unit.cost = e.target.checked
           ? unit.cost + 0
           : unit.cost - Number(e.target.value);
       } else if (howManyChecked === 0) {
-        
+        unit.cost = baseCost + valueOfOptionalEquipment;
       } else {
         unit.cost = e.target.checked
           ? unit.cost + Number(e.target.value)
@@ -292,6 +306,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         ? unit.cost + Number(e.target.value)
         : unit.cost - Number(e.target.value);
     }
+
     if (isCommandGroup) {
       const commandGroupArray = Array.from(
         document.querySelectorAll("input[data='Dowodzenie']")
@@ -303,7 +318,10 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
     } else if (unitList[id].unitName === "Duże Dźgacze") {
       unit.totalCost = unit.cost * unit.selectedNumber - 100;
-    } else if (unitList[id].unitName === "Drużyna ciężkich broni") {
+    } else if (
+      unitList[id].unitName === "Drużyna ciężkich broni" &&
+      !unitList[id].rules.includes("Animozja")
+    ) {
       if (
         [
           "Kulomiot",
@@ -315,6 +333,19 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         unit.totalCost = unit.cost * unit.selectedNumber - 120;
       } else {
         unit.totalCost = unit.cost * unit.selectedNumber - 70;
+      }
+    } else if (
+      unitList[id].unitName === "Drużyna ciężkich broni" &&
+      unitList[id].rules.includes("Animozja")
+    ) {
+      if (
+        ["Harpun", "Ołowiomiotacz"].some((element) =>
+          unitList[id].optionalEquipment.includes(element)
+        )
+      ) {
+        unit.totalCost = unit.cost * unit.selectedNumber - 80;
+      } else {
+        unit.totalCost = unit.cost * unit.selectedNumber - 30;
       }
     } else {
       unit.totalCost = unit.cost * unit.selectedNumber;
@@ -344,7 +375,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         `div.unit[id='${String(id)}'] [data='Startowy']`
       )
     );
-
 
     if (startingWeapons.includes(e.target)) {
       const howManyChecked = startingWeapons.filter(

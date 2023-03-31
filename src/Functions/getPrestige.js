@@ -86,7 +86,6 @@ export const getPrestige = (arr) => {
           }
         });
 
-
         equipment.forEach((eq) => {
           if (Object.keys(specialEquipmentList).includes(eq)) {
             prestigeValues.equipmentTotalValue +=
@@ -95,9 +94,24 @@ export const getPrestige = (arr) => {
         });
 
         equipment.forEach((eq) => {
-          if (Object.keys(equipmentList).includes(eq) && !Object.keys(mountList).includes(eq)) {
-            prestigeValues.equipmentTotalValue +=
-              equipmentList[eq][0] * item.selectedNumber;
+          if (
+            Object.keys(equipmentList).includes(eq) &&
+            !Object.keys(mountList).includes(eq)
+          ) {
+            if (
+              [
+                "Harpun",
+                "Ołowiomiotacz",
+                "Kulomiot",
+                "Miotacz spaczognia",
+                "Moździerz trującego wichru",
+                "Spaczrusznica",
+              ].includes(eq)
+            ) {
+              prestigeValues.equipmentTotalValue += equipmentList[eq][0];
+            } else
+              prestigeValues.equipmentTotalValue +=
+                equipmentList[eq][0] * item.selectedNumber;
           }
         });
 
@@ -105,9 +119,9 @@ export const getPrestige = (arr) => {
           prestigeValues.equipmentTotalValue -= 30;
         }
 
-        if (item.unitName === "Drużyna ciężkich broni") {
-          prestigeValues.equipmentTotalValue -= 50;
-        }
+        // if (item.unitName === "Drużyna ciężkich broni") {
+        //   prestigeValues.equipmentTotalValue -= 50;
+        // }
 
         // equipment.forEach((eq) => {
         //   keysSplit.forEach((key) => {

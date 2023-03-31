@@ -3275,8 +3275,8 @@ export const heroEquipment = {
     },
     Ciężcy: {
       Sztylet: [2, 0],
-      Harpun: [50, 1],
-      Ołowiomiotacz: [50, 1],
+      Harpun: [50, 3, "Choice"],
+      Ołowiomiotacz: [50, 3, "Choice"],
       Lekki: [5, 2, "Zbroja"],
       Hełm: [5, 2],
     },

@@ -143,7 +143,7 @@ export const łowcyCzarownic =  {
     maxModels: 12,
     name: "Łowcy Czarownic",
     nature: "Neutralna",
-    armyRules: ["Kontakty handlowe (3)", "Rozrzutni"],
+    armyRules: ["Kontakty handlowe (3)", "Podatek","Rozrzutni"],
     mercenaries: [
       "Kartograf",
       "Kupiec",
