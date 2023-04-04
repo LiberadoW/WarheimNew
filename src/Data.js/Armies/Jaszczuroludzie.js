@@ -45,7 +45,7 @@ export const jaszczuroludzie = {
         "Zasadzka",
         "Zimnokrwisty",
       ],
-      exp: 20,
+      exp: 12,
       skills: [2, 4, 5],
     },
     Saurus: {
@@ -67,7 +67,7 @@ export const jaszczuroludzie = {
         "Zasadzka",
         "Zimnokrwisty",
       ],
-      exp: 20,
+      exp: 8,
       skills: [0, 3, 5],
     },
     Skink: {
