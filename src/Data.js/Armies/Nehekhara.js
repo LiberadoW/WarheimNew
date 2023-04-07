@@ -112,7 +112,7 @@ export const nehekhara = {
     },
     "Strażnik Grobowców": {
       id: 5,
-      startingEquipment: ["Chopesz", "Średni pancerz", "Tarcza"],
+      startingEquipment: ["Chopesz", "Średni", "Tarcza"],
       cost: 50,
       number: 3,
       equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Stronnicy,

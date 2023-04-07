@@ -17,7 +17,7 @@
 }
 
 #armylist {
-  display: none;
+  display: flex;
 }
 
 .rules-box {
@@ -32,5 +32,33 @@
 }
 
 .magic-box {
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spell-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.8rem;
+}
+
+.spell-card-title {
+
+}
+
+.spell-card-text {
+  font-size: 0.7rem;
+}
+
+.capitalize-first {
+  text-transform: lowercase;
+}
+.capitalize-first::first-letter {
+  text-transform: uppercase;
+}
+
+.italic {
+  font-style: italic;
 }

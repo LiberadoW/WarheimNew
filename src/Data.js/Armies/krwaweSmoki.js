@@ -111,7 +111,7 @@ export const krwaweSmoki = {
     },
     Upiór: {
       id: 6,
-      startingEquipment: ["Miecz", "Średni pancerz", "Tarcza"],
+      startingEquipment: ["Miecz", "Średni", "Tarcza"],
       cost: 50,
       number: 3,
       equipmentList: heroEquipment["Nieumarły poczet Krwawych Smoków"].Stronnicy,
