@@ -49,7 +49,8 @@ import { orki } from "./Armies/Orkowie";
 import { kapry } from "./Armies/Kapry";
 import { jaszczuroludzie } from "./Armies/Jaszczuroludzie";
 import { liczmistrz } from "./Armies/Liczmistrz";
-import {reikland} from "./Armies/Reikland"
+import {reikland} from "./Armies/Reikland";
+import { nocneGobliny } from "./Armies/NocneGobliny"
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -103,7 +104,8 @@ const armies = {
   "Załoga Zielonoskórych Kaprów": kapry,
   "Jaszczuroludzie z Lustrii": jaszczuroludzie,
   "Nieumarła horda Liczmistrza": liczmistrz,
-  "Żołnierze z Reiklandu": reikland 
+  "Żołnierze z Reiklandu": reikland,
+  "Nocne Gobliny": nocneGobliny
 };
 
 export default armies;
