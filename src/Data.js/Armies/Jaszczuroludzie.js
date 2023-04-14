@@ -27,7 +27,7 @@ export const jaszczuroludzie = {
     "Kapłan Skinków": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 60,
+      cost: 45,
       number: 1,
       equipmentList: heroEquipment["Jaszczuroludzie z Lustrii"].Kapłan,
       type: "Bohater",
