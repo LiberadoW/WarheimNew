@@ -83,7 +83,7 @@ export const getModifiers = (arr, unit) => {
     initativeModifier = 2;
   }
 
-  if (unit.rules.includes("Krzepki") || unit.rules.includes("Nieumarły") {
+  if (unit.rules.includes("Krzepki") || unit.rules.includes("Nieumarły")) {
     speedModifier = 0;
     initativeModifier = 0;
   }
