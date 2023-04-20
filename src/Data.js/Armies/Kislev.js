@@ -146,7 +146,7 @@ export const kislev = {
         "Koń bojowy",
         "Siodło & uprząż",
       ],
-      cost: 100,
+      cost: 80,
       number: 3,
       equipmentList: heroEquipment["Zbrojna chorągiew z Kisleva"].Husarz,
       type: "Stronnik",

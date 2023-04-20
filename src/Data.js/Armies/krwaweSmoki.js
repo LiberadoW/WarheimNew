@@ -149,7 +149,7 @@ export const krwaweSmoki = {
         "Nieumarły koń",
         "Siodło & uprząż",
       ],
-      cost: 100,
+      cost: 80,
       number: 3,
       equipmentList: heroEquipment["Nieumarły poczet Krwawych Smoków"].Rycerz,
       type: "Stronnik",

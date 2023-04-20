@@ -135,7 +135,7 @@ export const orki = {
     "Ork na Dziku": {
       id: 9,
       startingEquipment: ["Sztylet", "Rembak", "Dzik", "Siodło & uprząż"],
-      cost: 100,
+      cost: 80,
       number: 3,
       equipmentList: heroEquipment["Orkowie & Gobliny"].Ork,
       type: "Stronnik",

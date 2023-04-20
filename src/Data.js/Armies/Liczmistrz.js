@@ -5,7 +5,7 @@ export const liczmistrz = {
     Liczmistrz: {
       id: 0,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 100,
+      cost: 80,
       number: 1,
       equipmentList: heroEquipment["Nieumarła horda Liczmistrza"].Liczmistrz,
       type: "Bohater",
@@ -152,7 +152,7 @@ export const liczmistrz = {
         "Nieumarły koń",
         "Siodło & uprząż",
       ],
-      cost: 100,
+      cost: 80,
       number: 3,
       equipmentList: heroEquipment["Nieumarła horda Liczmistrza"].Rycerz,
       type: "Stronnik",

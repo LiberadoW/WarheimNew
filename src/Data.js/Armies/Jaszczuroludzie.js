@@ -122,7 +122,7 @@ export const jaszczuroludzie = {
         "Zimnokrwisty",
         "Siodło & uprząż",
       ],
-      cost: 100,
+      cost: 80,
       number: 3,
       equipmentList: heroEquipment["Jaszczuroludzie z Lustrii"].Saurus,
       type: "Stronnik",

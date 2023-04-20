@@ -107,7 +107,7 @@ export const wysokie = {
         "Rumak elfów",
         "Siodło & uprząż",
       ],
-      cost: 100,
+      cost: 80,
       number: 3,
       equipmentList: heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Srebrny,
       type: "Stronnik",
