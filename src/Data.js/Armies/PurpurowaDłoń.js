@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const purpurowaDłoń = {
   heroes: {
-    Wtajemiczony: {
+    Wtajemniczony: {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 85,

@@ -124,12 +124,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
     const unit = unitList[e.target.className];
     const equipmentList = unit.optionalEquipment;
 
-    const trollRaces = Object.fromEntries(
-      Object.entries(unit.equipmentList).filter(([key]) =>
-        key.includes("Troll")
-      )
-    );
-
     if (unit.unitName === "Troll") {
       if (e.target.name === "Troll Górski" && e.target.checked === true) {
         unit.rules = [
@@ -192,12 +186,12 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       Object.entries(unit.equipmentList).filter(
         ([key]) => key.includes("Tradycja") || key.includes("Magia")
       )
-    );
+    )
 
     if (e.target.name.includes("Tradycja") || e.target.name.includes("Magia")) {
       const mageEquipment = mageEquipmentList[e.target.name].equipment;
 
-      if (unit.rules.includes(e.target.name)) {
+      if (unit.rules.includes(e.target.name)) { 
         unit.rules.splice(unit.rules.indexOf(e.target.name), 1);
       } else {
         unit.rules.push(e.target.name);
@@ -495,7 +489,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                           onClick={handleWeaponListClick}
                           checked={
                             unitList[id].optionalEquipment.includes(key) ||
-                            isStartingEquipment
+                            isStartingEquipment || unitList[id].rules.includes(key)
                           }
                           data={value[2]}
                           name={key}

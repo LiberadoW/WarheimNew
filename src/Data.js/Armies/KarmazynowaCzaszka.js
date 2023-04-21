@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const karmazynowaCzaszka = {
   heroes: {
-    Wtajemiczony: {
+    Wtajemniczony: {
       id: 0,
       startingEquipment: ["Sztylet", "Broń wielka"],
       cost: 80,

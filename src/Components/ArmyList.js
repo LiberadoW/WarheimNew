@@ -7,6 +7,7 @@ import ArmyListHeader from "./ArmyListHeader";
 import CampaignPoints from "./CampaignPoints";
 import "../styles/ArmyList.css";
 import { magic } from "../Data.js/Magic";
+import { getMagicLore } from "../Functions/getMagicLore";
 
 const ArmyList = ({
   unitList,
@@ -26,9 +27,9 @@ const ArmyList = ({
   );
   const uniqueRulesList = getAllRules(unitList);
 
-  console.log(unitList.filter(item=>item.rules.includes("Tradycja")))
+  const mage = getMagicLore(unitList)
 
-  console.log(unitList[2].rules)
+  console.log(mage)
 
   return (
     <div className="army-list-container">
@@ -72,15 +73,19 @@ const ArmyList = ({
       <div className="print-a4-page">
         <div className="magic-box">
           {Object.keys(magic["Tradycja Bestii"])
-            .sort((a,b)=>(a-b))
+            .sort((a, b) => a - b)
             .map((spell) => {
               return (
                 <p className="spell-card">
-                  <span className="bold-text spell-card-title">{magic["Tradycja Bestii"][spell][0]}</span>
+                  <span className="bold-text spell-card-title">
+                    {magic["Tradycja Bestii"][spell][0]}
+                  </span>
                   <span className="capitalize-first italic">
                     {magic["Tradycja Bestii"][spell][1]}
                   </span>
-                  <span className="spell-card-text">{magic["Tradycja Bestii"][spell][2]}</span>
+                  <span className="spell-card-text">
+                    {magic["Tradycja Bestii"][spell][2]}
+                  </span>
                 </p>
               );
             })}

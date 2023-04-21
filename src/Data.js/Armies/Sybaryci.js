@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const dzieciZagłady = {
   heroes: {
-    Wtajemiczony: {
+    Wtajemniczony: {
       id: 0,
       startingEquipment: ["Sztylet", "Bicz"],
       cost: 85,
