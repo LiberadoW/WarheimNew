@@ -30,7 +30,7 @@ export const nehekhara = {
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 55,
       number: 1,
-      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Bohaterowie,
+      equipmentList: heroEquipment["Nieumarły zastęp z Nehekhary"].Licz,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],

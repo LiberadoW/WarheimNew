@@ -13,7 +13,10 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
   const { standardBearer, setStandardBearer, musician, setMusician } =
     useContext(CommandContext);
 
-  const baseCost = heroes[unitList[id].unitName].cost;
+  const baseCost =
+    unitList[id].type != "Najemne Ostrze"
+      ? heroes[unitList[id].unitName].cost
+      : null;
 
   const [isPromptShown, setIsPromptShown] = useState(null);
   const [promptUnit, setPromptUnit] = useState(null);
@@ -186,12 +189,16 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       Object.entries(unit.equipmentList).filter(
         ([key]) => key.includes("Tradycja") || key.includes("Magia")
       )
-    )
+    );
 
     if (e.target.name.includes("Tradycja") || e.target.name.includes("Magia")) {
       const mageEquipment = mageEquipmentList[e.target.name].equipment;
 
-      if (unit.rules.includes(e.target.name)) { 
+      const indexOfSpellSchool = unit.rules.findIndex(
+        (el) => el.indexOf("Mag") !== -1
+      );
+
+      if (unit.rules.includes(e.target.name)) {
         unit.rules.splice(unit.rules.indexOf(e.target.name), 1);
       } else {
         unit.rules.push(e.target.name);
@@ -273,16 +280,17 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         (x) => x.checked === true
       ).length;
 
-      const valueOfOptionalEquipment = getValueOfOptionalEquipment([unitList[id]])
+      const valueOfOptionalEquipment = getValueOfOptionalEquipment([
+        unitList[id],
+      ]);
 
-
-        // if (unitList[id].unitName === "Debeściak" || unitList[id].unitName === "Debeściak Dzikich Orków") {
-        //   if (e.target.name === "Rembak" && e.target.checked === true) {
-        //     unitList[id].optionalEquipment.push("Sztylet")
-        //   } else if (e.target.name === "Rembak" && e.target.checked === false) {
-        //     unitList[id].optionalEquipment.splice(unitList[id].optionalEquipment.indexOf("Sztylet"),1)
-        //   }
-        // }
+      // if (unitList[id].unitName === "Debeściak" || unitList[id].unitName === "Debeściak Dzikich Orków") {
+      //   if (e.target.name === "Rembak" && e.target.checked === true) {
+      //     unitList[id].optionalEquipment.push("Sztylet")
+      //   } else if (e.target.name === "Rembak" && e.target.checked === false) {
+      //     unitList[id].optionalEquipment.splice(unitList[id].optionalEquipment.indexOf("Sztylet"),1)
+      //   }
+      // }
 
       if (howManyChecked === 1) {
         unit.cost = e.target.checked
@@ -489,7 +497,8 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                           onClick={handleWeaponListClick}
                           checked={
                             unitList[id].optionalEquipment.includes(key) ||
-                            isStartingEquipment || unitList[id].rules.includes(key)
+                            isStartingEquipment ||
+                            unitList[id].rules.includes(key)
                           }
                           data={value[2]}
                           name={key}

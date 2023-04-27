@@ -27,33 +27,24 @@ const PATHS_OF_MAGIC = [
   "Tradycja Skrytości",
   "Tradycja Spaczmagii",
   "Tradycja Zarazy",
-  "Magia Łooomotu!",
+  "Magia Małego Łooomotu!",
+  "Magia Dużego Łooomotu!",
   "Dziedzina Boga-Pajonka",
   "Magia Pradawnych",
 ];
 
 export const getMagicLore = (unitList) => {
-  const mage = unitList.filter((item) =>
-    item.rules.some((el) => PATHS_OF_MAGIC.includes(el))
-  );
+  let magicPath = null;
 
-  console.log(mage)
-
-  unitList.forEach((item) =>
-    item.rules.forEach((el) => {
-        console.log("ass")
-    })
-  );
-
-  let pathOfMagic = null;
-
-  if (mage.length > 0) {
-    PATHS_OF_MAGIC.forEach((el) => {
-      if (mage[0].rules.join().indexOf(el) != -1) {
-        pathOfMagic = el;
-      }
+  unitList.forEach((unit) => {
+    PATHS_OF_MAGIC.forEach((path) => {
+      unit.rules.forEach((rule) => {
+        if (rule.includes(path)) {
+          magicPath = path;
+        }
+      });
     });
-  }
+  });
 
-  return pathOfMagic;
+  return magicPath;
 };

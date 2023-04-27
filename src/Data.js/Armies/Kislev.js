@@ -28,7 +28,7 @@ export const kislev = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Mag (Tradycja Magii Lodu)"],
+      rules: ["Mag (Tradycja Lodu)"],
       exp: 12,
       skills: [0, 2, 3, 5],
     },

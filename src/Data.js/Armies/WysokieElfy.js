@@ -30,7 +30,7 @@ export const wysokie = {
         Maksymalna: [6, 7, 7, 4, 3, 3, 9, 4, 10],
       },
       rules: [
-        "Mag (Wysokia Magia)",
+        "Mag (Wysoka Magia)",
         "Mistrz Magii",
         "Wiedza tajemna (Kolegia Magii)",
         "Szósty zmysł",

@@ -27,9 +27,9 @@ const ArmyList = ({
   );
   const uniqueRulesList = getAllRules(unitList);
 
-  const mage = getMagicLore(unitList)
+  const magicPath = getMagicLore(unitList);
 
-  console.log(mage)
+  console.log(unitList)
 
   return (
     <div className="army-list-container">
@@ -71,25 +71,28 @@ const ArmyList = ({
         </div>
       </div> */}
       <div className="print-a4-page">
-        <div className="magic-box">
-          {Object.keys(magic["Tradycja Bestii"])
-            .sort((a, b) => a - b)
-            .map((spell) => {
-              return (
-                <p className="spell-card">
-                  <span className="bold-text spell-card-title">
-                    {magic["Tradycja Bestii"][spell][0]}
-                  </span>
-                  <span className="capitalize-first italic">
-                    {magic["Tradycja Bestii"][spell][1]}
-                  </span>
-                  <span className="spell-card-text">
-                    {magic["Tradycja Bestii"][spell][2]}
-                  </span>
-                </p>
-              );
-            })}
-        </div>
+        {magicPath && (
+          <div className="magic-box">
+            <p className="spell-school-title">{magicPath}</p>
+            {Object.keys(magic[magicPath])
+              .sort((a, b) => a - b)
+              .map((spell) => {
+                return (
+                  <p className="spell-card">
+                    <span className="bold-text spell-card-title">
+                      {magic[magicPath][spell][0]}
+                    </span>
+                    <span className="capitalize-first italic">
+                      {magic[magicPath][spell][1]}
+                    </span>
+                    <span className="spell-card-text">
+                      {magic[magicPath][spell][2]}
+                    </span>
+                  </p>
+                );
+              })}
+          </div>
+        )}
       </div>
     </div>
   );

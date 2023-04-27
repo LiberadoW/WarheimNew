@@ -24,10 +24,10 @@ body {
 }
 
 .site-wrapper {
-  max-width: 1200px;
+
   margin: 0 auto;
   background-color: #FAF9F6;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 li {

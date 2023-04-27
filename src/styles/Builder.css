@@ -10,6 +10,7 @@
   flex: 1;
   min-height: calc(100vh - 50px);
   padding-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .main-builder-container {
@@ -28,8 +29,12 @@
 
 .builder-select-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
+}
+
+.builder-select-container div {
+  background-color: white;
 }
 
 .builder-select-container select {
