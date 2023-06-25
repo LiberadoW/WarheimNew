@@ -46,7 +46,7 @@ export const arabia = {
       equipmentList: heroEquipment["Kupiecka karawana z Arabii"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 2, 4, 1, 7],
+        Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: ["Handlarz niewolników", "Żyłka handlowa"],
@@ -61,7 +61,7 @@ export const arabia = {
       equipmentList: heroEquipment["Kupiecka karawana z Arabii"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 2, 2, 3, 3, 2, 4, 1, 6],
+        Początkowa: [4, 2, 2, 3, 3, 1, 4, 1, 6],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: ["Szczęście", "Tarot", "Wzgardzony", "Żyłka handlowa"],
