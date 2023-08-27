@@ -86,10 +86,6 @@ const UnitList = ({
               <div
                 className={`unit ${index} ${unit.type}`}
                 id={unit.uniqueId}
-                style={{
-                  backgroundColor:
-                    unit.uniqueId == idShown ? "#A9A9A9" : "white",
-                }}
                 key={unit.uniqueId}
               >
                 <li

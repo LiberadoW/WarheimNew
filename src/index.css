@@ -5,29 +5,43 @@
 
 :root {
   --main: #212529;
-  --secondary: #F8F9FA;
-  --hover: #6C757D;
+  --secondary: #f8f9fa;
+  --hover: #6c757d;
+  --tertiary: white;
+  --inputs: white;
+  --army-list: white;
+  --dark-text: black;
+  --error: red;
+}
+
+[data-theme="dark"] {
+  --main: #282828;
+  --secondary: #121212;
+  --hover: #6c757d;
+  --tertiary: #282828;
+  --inputs: #3f3f3f;
+  --army-list: #717171;
+  --dark-text: #f2f2f2;
+  --error: #b00020;
 }
 
 body {
   margin: 0;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 .app {
-  background-color: #E9E9E9;
+  background-color: #e9e9e9;
   min-height: 100vh;
   overflow: hidden;
+  color: var(--dark-text);
 }
 
 .site-wrapper {
-
   margin: 0 auto;
-  background-color: #FAF9F6;
-
+  background-color: #faf9f6;
 }
 
 li {
@@ -45,7 +59,16 @@ li {
   font-weight: bold;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
   width: 18px;
   height: 18px;
+}
+
+input,
+select {
+  background-color: var(--inputs);
+}
+
+select {
+  color: var(--dark-text);
 }

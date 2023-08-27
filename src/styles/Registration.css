@@ -20,15 +20,15 @@
 }
 
 .registration-text {
- display: flex;
- flex-direction: column;
- justify-content: center;
- gap: 1rem;
- align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
 }
 
 .error-message {
-  color: red;
+  color: var(--error);
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -110,7 +110,7 @@ label,
 }
 
 .invalid {
-  color: red;
+  color: var(--error);
   margin-left: 0.25rem;
 }
 
@@ -128,7 +128,7 @@ label,
 }
 
 .link-text {
-  color: black;
+  color: var(--dark-text);
   text-decoration: none;
   font-weight: bold;
 }

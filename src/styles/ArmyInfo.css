@@ -1,7 +1,8 @@
 .army-info-alerts-container {
-  background-color: white;
+  background-color: var(--tertiary);
   box-sizing: border-box;
   width: 95%;
+  max-width: 1200px;
   border: 1px solid black;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -27,11 +28,11 @@
 }
 
 .fa-caret-down {
-  color: black;
+  color: var(--dark-text);
 }
 
 .fa-caret-right {
-  color: black;
+  color: var(--dark-text);
 }
 
 .alerts i {
@@ -39,13 +40,12 @@
 }
 
 @media screen and (max-width: 768px) {
-    .army-info-container {
-flex-direction: column;
-gap: 10px;
-
-    }
-    .army-info-right {
-        flex-direction: column;
-        margin: 0 auto;
-    }
+  .army-info-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .army-info-right {
+    flex-direction: column;
+    margin: 0 auto;
+  }
 }

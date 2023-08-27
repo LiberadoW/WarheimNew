@@ -16,6 +16,8 @@ import MyLists from "../User/MyLists";
 import Header from "./Header";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { filterMercenaries } from "../Functions/filterMercenaries";
+import useLocalStorage from "use-local-storage";
+import "../index.css";
 
 const App = () => {
   const RequireAuth = ({ children }) => {
@@ -31,6 +33,16 @@ const App = () => {
   const [mercenaryUnitName, setMercenaryUnitName] = useState("");
   const [prestige, setPrestige] = useState(0);
   const [armyName, setArmyName] = useState("");
+  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [theme, setTheme] = useLocalStorage(
+    "theme",
+    defaultDark ? "dark" : "light"
+  );
+
+  const handleSwitchTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   const newUnitList = [...unitList];
 
   const numberOfHeroes = newUnitList.filter((x) => x.type === "Bohater").length;
@@ -51,10 +63,6 @@ const App = () => {
       e.includes("Mag (") ||
       e.includes("Duchowny") ||
       e.includes("Odporność na magię")
-  );
-
-  const cleanedArray = uniqueAllRulesArray.filter(
-    (el) => !filteredElements.includes(el)
   );
 
   const handleSetUnitExp = (unitId, exp) => {
@@ -119,10 +127,10 @@ const App = () => {
   }
 
   return (
-    <div className="app" id="app">
+    <div className="app" id="app" data-theme={theme}>
       <main className="site-wrapper">
         <Router>
-          <Header />
+          <Header handleSwitchTheme={handleSwitchTheme} theme={theme} />
           <Routes>
             <Route
               path="/"
@@ -143,6 +151,7 @@ const App = () => {
                   setArmyName={setArmyName}
                   armyName={armyName}
                   handleSetUnitExp={handleSetUnitExp}
+                  theme={theme}
                 />
               }
             />

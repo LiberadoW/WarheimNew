@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useContext,
-  createContext,
-} from "react";
+import React, { useEffect, useState, useContext, createContext } from "react";
 import ArmySelect from "../Components/ArmySelect";
 import UnitSelect from "./UnitSelect";
 import UnitList from "./UnitList";
@@ -74,12 +69,13 @@ const Builder = ({
   mercenaries,
   setMercenaries,
   handleSetUnitExp,
+  theme,
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const [showNewArmyModal,setShowNewArmyModal] = useState(false);
+  const [showNewArmyModal, setShowNewArmyModal] = useState(false);
   const [errors, setErrors] = useState(0);
   const [customArmyCost, setCustomArmyCost] = useState(0);
   const [isCustomArmyCost, setIsCustomArmyCost] = useState(false);
@@ -192,9 +188,7 @@ const Builder = ({
     setCustomArmyCost(e.target.value);
   };
 
-  const handleNewArmyClick = e => {
-
-  }
+  const handleNewArmyClick = (e) => {};
 
   return (
     <CommandContext.Provider
@@ -204,7 +198,7 @@ const Builder = ({
         <div className="builder-top-wrapper">
           <div className="builder-controls">
             <div className="builder-controls-buttons">
-            {/* <button className="button" onClick={handleNewArmyClick}>
+              {/* <button className="button" onClick={handleNewArmyClick}>
                 Nowa rozpiska
               </button> */}
               <button className="button" onClick={handleResetArmyClick}>
@@ -213,7 +207,7 @@ const Builder = ({
               <button className="button" onClick={handleSavePDFClick}>
                 Zapisz PDF
               </button>
-              
+
               {currentUser && (
                 <button className="button " onClick={saveArmy}>
                   Zapisz armię
@@ -273,6 +267,7 @@ const Builder = ({
           armyName={armyName}
           errors={errors}
           setErrors={setErrors}
+          theme={theme}
         />
 
         <div className="main-builder-container">
@@ -303,7 +298,10 @@ const Builder = ({
         </div>
       </div>
 
-      <Modal showModal={showNewArmyModal} setShowModal={setShowNewArmyModal}></Modal>
+      <Modal
+        showModal={showNewArmyModal}
+        setShowModal={setShowNewArmyModal}
+      ></Modal>
     </CommandContext.Provider>
   );
 };

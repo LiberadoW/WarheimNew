@@ -14,7 +14,7 @@
 
 .modal-main {
   position: fixed;
-  background: white;
+  background-color: var(--tertiary);
   width: 95%;
   max-width: 1000px;
   max-height: calc(100% - 50px);
@@ -42,9 +42,10 @@
 .close-modal-button {
   padding: 10px;
   margin: 10px;
+  background-color: var(--error);
 }
 
 .close-modal-button:hover {
   font-weight: bold;
-  background-color: red;
+  background-color: var(--error);
 }

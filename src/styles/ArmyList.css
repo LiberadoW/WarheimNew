@@ -1,5 +1,5 @@
 .army-list-container {
-  background-color: white;
+  background-color: var(--inputs);
   display: flex;
   flex-direction: column;
   /* gap: 70px; */
@@ -47,7 +47,7 @@
 .spell-school-title {
   font-weight: bold;
   text-transform: uppercase;
- margin: auto;
+  margin: auto;
 }
 
 .spell-card-text {

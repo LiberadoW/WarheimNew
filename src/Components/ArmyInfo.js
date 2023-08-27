@@ -16,6 +16,7 @@ const ArmyInfo = ({
   setErrors,
   isCustomArmyCost,
   customArmyCost,
+  theme,
 }) => {
   const [clicked, setClicked] = useState(false);
 
@@ -24,7 +25,7 @@ const ArmyInfo = ({
   };
 
   if (army.armyRules.includes("Zamożność")) {
-    customArmyCost = 1.2 * customArmyCost
+    customArmyCost = 1.2 * customArmyCost;
   }
 
   const modelAmount = getModelAmount(unitList, army);
@@ -39,7 +40,6 @@ const ArmyInfo = ({
     setArmyName(e.target.value);
   };
 
-  
   return (
     <div className="army-info-alerts-container">
       <div className="army-info-container">
@@ -73,7 +73,12 @@ const ArmyInfo = ({
           <p
             className="total-cost"
             style={{
-              color: totalCost > limit ? "red" : "black",
+              color:
+                totalCost > limit
+                  ? "red"
+                  : theme === "dark"
+                  ? "#f2f2f2"
+                  : "black",
             }}
           >
             <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
