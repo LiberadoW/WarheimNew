@@ -28,6 +28,8 @@ const UnitEditInjuries = ({ unitList, unit, setUnitList, heroes }) => {
     const isChecked = e.target.checked;
     const value = e.target.value;
 
+    const statsModifiers = unit.statsModifiers;
+
     if (isChecked) {
       if (!unit.injuries.includes(value)) {
         unit.injuries.push(value);
@@ -41,25 +43,29 @@ const UnitEditInjuries = ({ unitList, unit, setUnitList, heroes }) => {
 
     switch (value) {
       case "Rana nogi":
-        unit.stats.Aktualna[0] = isChecked
-          ? Math.floor(unit.stats.Aktualna[0] / 2)
-          : baseStats[0];
+        statsModifiers[0] = isChecked ? -Math.ceil(baseStats[0] / 2) : 0;
         break;
       case "Oślepiony":
-        unit.stats.Aktualna[2] += isChecked ? -1 : 1;
+        statsModifiers[2] += isChecked ? -1 : 1;
         break;
       case "Rana klatki piersiowej":
-        unit.stats.Aktualna[4] += isChecked ? -1 : 1;
+        statsModifiers[4] += isChecked ? -1 : 1;
         break;
       case "Uszkodzenie układu nerwowego":
-        unit.stats.Aktualna[6] += isChecked ? -1 : 1;
+        statsModifiers[6] += isChecked ? -1 : 1;
         break;
       case "Rana dłoni":
-        unit.stats.Aktualna[1] += isChecked ? -1 : 1;
+        statsModifiers[1] += isChecked ? -1 : 1;
         break;
       default:
         break;
     }
+
+    console.log(unit.statsModifiers);
+
+    unit.stats.Aktualna = baseStats.map(
+      (item, index) => item + statsModifiers[index]
+    );
 
     setUnitList([...unitList]);
   };

@@ -29,8 +29,6 @@ const ArmyList = ({
 
   const magicPath = getMagicLore(unitList);
 
-  console.log(unitList);
-
   return (
     <div className="army-list-container">
       <div className="print-a4-page">

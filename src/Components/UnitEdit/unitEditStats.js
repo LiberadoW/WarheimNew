@@ -25,6 +25,9 @@ const UnitEditStats = ({ unitList, unit, setUnitList, heroes }) => {
 
   //   }
   // }
+
+  console.log(statsModifiers, baseStats);
+
   unit.stats.Aktualna = baseStats.map(
     (item, index) => item + statsModifiers[index]
   );
@@ -88,7 +91,7 @@ const UnitEditStats = ({ unitList, unit, setUnitList, heroes }) => {
                 : ""
             }`}
           >
-            {currentStats[index]}
+            {baseStats[index] + statsModifiers[index]}
           </div>
           <button
             className="minus-button"

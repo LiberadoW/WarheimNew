@@ -24,11 +24,11 @@ const UnitList = ({
     const unitIndex = e.target.parentNode.parentNode.parentNode.parentNode.id;
     const element = unitList.filter((item) => item.uniqueId == unitIndex);
 
-    if (element[0].optionalEquipment.includes("Chorąży")) {
+    if (element[0].optionalEquipment?.includes("Chorąży")) {
       setStandardBearer(null);
     }
 
-    if (element[0].optionalEquipment.includes("Sygnalista")) {
+    if (element[0].optionalEquipment?.includes("Sygnalista")) {
       setMusician(null);
     }
 
