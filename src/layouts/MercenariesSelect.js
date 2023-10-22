@@ -20,8 +20,8 @@ const MercenariesSelect = ({
   const mercenariesListNames = mercenariesList.map((item) => item.unitName);
 
   const handleClick = () => {
-    if (mercenaryUnitName==="") {
-      alert("Wybierz jednostkę")
+    if (mercenaryUnitName === "") {
+      alert("Wybierz jednostkę");
     } else {
       if (mercenariesListNames.includes(mercenaryUnitName)) {
         alert("Osiągnięto limit dla tej jednostki");
@@ -38,6 +38,7 @@ const MercenariesSelect = ({
             equipmentList: mercenaries[mercenaryUnitName].equipmentList,
             stats: mercenaries[mercenaryUnitName].stats,
             rules: mercenaries[mercenaryUnitName].rules,
+            statsModifiers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             exp: mercenaries[mercenaryUnitName].exp,
             skills: mercenaries[mercenaryUnitName].skills,
             prestige: mercenaries[mercenaryUnitName].prestige,
@@ -45,19 +46,23 @@ const MercenariesSelect = ({
             type: mercenaries[mercenaryUnitName].type,
             number: mercenaries[mercenaryUnitName].number,
             selectedNumber: 1,
-            uniqueId: uuidv4()
+            uniqueId: uuidv4(),
           },
         ]);
       }
     }
-    
   };
 
   return (
     <div className="mercenaries-select-container">
       <span className="bold">Najemne Ostrza:</span>
       <p>
-        <select name="" id="unit-selection" onChange={handleOnChange} value={mercenaryUnitName}>
+        <select
+          name=""
+          id="unit-selection"
+          onChange={handleOnChange}
+          value={mercenaryUnitName}
+        >
           <option value="" disabled>
             Wybierz postać
           </option>
@@ -71,7 +76,9 @@ const MercenariesSelect = ({
             })}
           </optgroup>
         </select>
-        <button  className="button" onClick={handleClick}>Dodaj</button>
+        <button className="button" onClick={handleClick}>
+          Dodaj
+        </button>
       </p>
     </div>
   );

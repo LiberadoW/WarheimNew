@@ -16,10 +16,10 @@ const UnitList = ({
   setIdShown,
   idShown,
   setShowModal,
+  heroes,
 }) => {
   const { standardBearer, setStandardBearer, musician, setMusician } =
     useContext(CommandContext);
-
   const handleDeleteClick = (e) => {
     const unitIndex = e.target.parentNode.parentNode.parentNode.parentNode.id;
     const element = unitList.filter((item) => item.uniqueId == unitIndex);
@@ -30,6 +30,14 @@ const UnitList = ({
 
     if (element[0].optionalEquipment.includes("Sygnalista")) {
       setMusician(null);
+    }
+
+    if (element[0].stats.hasOwnProperty("Aktualna")) {
+      delete element[0].stats.Aktualna;
+    }
+
+    if (element[0].hasOwnProperty("newRules")) {
+      heroes[element[0].unitName].rules = element[0].baseRules;
     }
 
     const index = unitList.indexOf(element[0]);

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import WeaponList from "../layouts/WeaponList";
 import UnitTable from "./UnitTable";
 import Modal from "./Modal";
+import UnitEdit from "./UnitEdit";
+import { EditArmyContext } from "../layouts/App";
 
 const UnitInfo = ({
   heroes,
@@ -23,13 +25,19 @@ const UnitInfo = ({
     setUnitList(newUnitList);
   };
 
-  
+  const { isEditArmyView } = useContext(EditArmyContext);
 
   return unitList.map((unit, index) => {
     if (unit != null) {
       return (
         unit.uniqueId == idShown && (
-          <Modal show={showModal}  key={index} showModal={showModal} setShowModal={setShowModal} setIdShown={setIdShown}>
+          <Modal
+            show={showModal}
+            key={index}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            setIdShown={setIdShown}
+          >
             <div className="side-builder-right" key={`${index}1`}>
               <div
                 className={`unit ${index}`}
@@ -38,9 +46,11 @@ const UnitInfo = ({
               >
                 <div className="edit-unit-container">
                   <div className="modal-unit-info">
-                      <h2>{unit.unitName}</h2>
-                    <span><span className="bold-text">Koszt:</span> {`${unit.totalCost} zk`} </span>
-                   
+                    <h2>{unit.unitName}</h2>
+                    <span>
+                      <span className="bold-text">Koszt:</span>{" "}
+                      {`${unit.totalCost} zk`}{" "}
+                    </span>
                   </div>
                   <div className="unit-name-input">
                     <label htmlFor="unit-name-input">Imię: </label>
@@ -57,23 +67,35 @@ const UnitInfo = ({
                       }
                     />
                   </div>
-                  <WeaponList
-                    heroes={heroes}
-                    unitList={unitList}
-                    unitName={unitName}
-                    setUnitList={setUnitList}
-                    id={index}
-                    heroEquipment={
-                      Object.keys(heroes).includes(unit.unitName)
-                        ? heroes[unit.unitName].equipmentList
-                        : mercenaries[unit.unitName].equipmentList
-                    }
-                    rules={
-                      Object.keys(heroes).includes(unit.unitName)
-                        ? heroes[unit.unitName].rules
-                        : mercenaries[unit.unitName].rules
-                    }
-                  />
+                  {isEditArmyView &&
+                  unit.type != "Machina" &&
+                  !unit.rules.includes("Zwierzę") ? (
+                    <UnitEdit
+                      unitList={unitList}
+                      unitName={unitName}
+                      setUnitList={setUnitList}
+                      id={unit.uniqueId}
+                      heroes={heroes}
+                    />
+                  ) : (
+                    <WeaponList
+                      heroes={heroes}
+                      unitList={unitList}
+                      unitName={unitName}
+                      setUnitList={setUnitList}
+                      id={index}
+                      heroEquipment={
+                        Object.keys(heroes).includes(unit.unitName)
+                          ? heroes[unit.unitName].equipmentList
+                          : mercenaries[unit.unitName].equipmentList
+                      }
+                      rules={
+                        Object.keys(heroes).includes(unit.unitName)
+                          ? heroes[unit.unitName].rules
+                          : mercenaries[unit.unitName].rules
+                      }
+                    />
+                  )}
                   <UnitTable
                     unitList={unitList.filter(
                       (x) => unitList.indexOf(x) === index

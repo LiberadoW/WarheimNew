@@ -14,6 +14,8 @@ import { AuthContext } from "../Context/AuthContext";
 import html2pdf from "html2pdf.js";
 import "@sweetalert2/themes/bootstrap-4";
 import Modal from "../Components/Modal";
+import { EditArmyContext } from "./App";
+import { useLocation } from "react-router-dom";
 
 export const CommandContext = createContext();
 
@@ -82,10 +84,17 @@ const Builder = ({
 
   const [standardBearer, setStandardBearer] = useState(null);
   const [musician, setMusician] = useState(null);
+  const { isEditArmyView, setIsEditArmyView } = useContext(EditArmyContext);
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
   }, [unitList]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsEditArmyView(location.pathname.includes("edit"));
+  }, [location]);
 
   useEffect(() => {
     setPrestige(getPrestige(unitList)[0]);
@@ -188,8 +197,6 @@ const Builder = ({
     setCustomArmyCost(e.target.value);
   };
 
-  const handleNewArmyClick = (e) => {};
-
   return (
     <CommandContext.Provider
       value={{ standardBearer, setStandardBearer, musician, setMusician }}
@@ -214,13 +221,15 @@ const Builder = ({
                 </button>
               )}
             </div>
-            <div>
-              <input
-                type="checkbox"
-                onClick={handleCustomArmyCostClick}
-              ></input>
-              Zmień startową liczbę ZK
-            </div>
+            {!isEditArmyView && (
+              <div>
+                <input
+                  type="checkbox"
+                  onClick={handleCustomArmyCostClick}
+                ></input>
+                Zmień startową liczbę ZK
+              </div>
+            )}
             {isCustomArmyCost && (
               <div>
                 <input type="text" onChange={handleCustomArmyCostChange} />
@@ -228,15 +237,17 @@ const Builder = ({
             )}
           </div>
           <div className="builder-select-container">
-            <ArmySelect
-              army={army}
-              setArmy={setArmy}
-              setUnitList={setUnitList}
-              setUnitName={setUnitName}
-              setIdShown={setIdShown}
-              setMercenaryUnitName={setMercenaryUnitName}
-              setMercenaries={setMercenaries}
-            />
+            {!isEditArmyView && (
+              <ArmySelect
+                army={army}
+                setArmy={setArmy}
+                setUnitList={setUnitList}
+                setUnitName={setUnitName}
+                setIdShown={setIdShown}
+                setMercenaryUnitName={setMercenaryUnitName}
+                setMercenaries={setMercenaries}
+              />
+            )}
 
             <UnitSelect
               heroes={army.heroes}
@@ -279,6 +290,7 @@ const Builder = ({
               setIdShown={setIdShown}
               showModal={showModal}
               setShowModal={setShowModal}
+              heroes={army.heroes}
             />
           </div>
 

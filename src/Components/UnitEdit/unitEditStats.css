@@ -1,0 +1,49 @@
+.unit-edit-stats-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  max-width: 400px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.unit-edit-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 5px;
+}
+
+.unit-edit-stats-label {
+  margin-bottom: 5px;
+}
+
+.unit-edit-stats button {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--main);
+  transition: background-color 0.3s ease;
+  height: 20px;
+}
+
+.plus-button:hover {
+  background-color: green;
+}
+
+.minus-button:hover {
+  background-color: red;
+}
+
+.unit-edit-stats-value {
+  border: 1px solid var(--main);
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

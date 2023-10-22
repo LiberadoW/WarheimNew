@@ -1,0 +1,23 @@
+.unit-edit-injuries-container {
+  display: grid;
+  max-width: 670px;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 5px;
+}
+
+.injury-label {
+  display: flex;
+  gap: 5px;
+  margin-top: 0;
+  align-items: center;
+}
+
+.injury-checkbox {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .unit-edit-injuries-container {
+    grid-template-columns: 1fr;
+  }
+}

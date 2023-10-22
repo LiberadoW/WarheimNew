@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ArmyListErrors from "./ArmyListErrors";
 import armies from "../Data.js/Armies";
 import "../styles/ArmyInfo.css";
 import getErrors from "../Functions/getErrors";
 import getModelAmount from "../Functions/getModelAmount";
+import { EditArmyContext } from "../layouts/App";
 
 const ArmyInfo = ({
   totalCost,
@@ -19,6 +20,7 @@ const ArmyInfo = ({
   theme,
 }) => {
   const [clicked, setClicked] = useState(false);
+  const { isEditArmyView } = useContext(EditArmyContext);
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -70,20 +72,21 @@ const ArmyInfo = ({
           <p className="prestige">
             <span className="bold">Prestiż:</span> {prestige}
           </p>
-          <p
-            className="total-cost"
-            style={{
-              color:
-                totalCost > limit
-                  ? "red"
-                  : theme === "dark"
-                  ? "#f2f2f2"
-                  : "black",
-            }}
-          >
-            <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
-          </p>
-          <p></p>
+          {!isEditArmyView && (
+            <p
+              className="total-cost"
+              style={{
+                color:
+                  totalCost > limit
+                    ? "red"
+                    : theme === "dark"
+                    ? "#f2f2f2"
+                    : "black",
+              }}
+            >
+              <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
+            </p>
+          )}
         </div>
       </div>
       {clicked && (

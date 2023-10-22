@@ -50,6 +50,15 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
     navigate("/");
   };
 
+  const handleEditListClick = (e) => {
+    const number = e.target.className;
+    const army = e.target.parentNode.parentNode.parentNode.parentNode.id;
+    setUnitList(groupedLists[army][number].armyList);
+    setArmy(army);
+    setArmyName(groupedLists[army][number].armyName);
+    navigate("/edit");
+  };
+
   const handleDeleteListClick = async (e) => {
     const savedLists = await getDoc(doc(db, "lists", currentUser.user.uid));
     const arrayOfSavedLists = savedLists.data().lists;
@@ -63,8 +72,7 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
       armyNames: arrayArmyNames,
     });
 
-    setGroupedLists(sortArmylists(arrayOfSavedLists))
-
+    setGroupedLists(sortArmylists(arrayOfSavedLists));
   };
 
   return (
@@ -97,6 +105,12 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                             onClick={handleLoadListClick}
                           >
                             Wczytaj
+                          </button>
+                          <button
+                            className={index}
+                            onClick={handleEditListClick}
+                          >
+                            Edytuj
                           </button>
                           <button
                             className="delete-list-button"

@@ -25,11 +25,11 @@ const ArmyList = ({
       unit.type === "Machina" ||
       unit.type === "Najemne Ostrze"
   );
-  const uniqueRulesList = getAllRules(unitList);
+  // const uniqueRulesList = getAllRules(unitList);
 
   const magicPath = getMagicLore(unitList);
 
-  console.log(unitList)
+  console.log(unitList);
 
   return (
     <div className="army-list-container">

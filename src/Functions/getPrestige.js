@@ -50,6 +50,7 @@ const specialEquipmentList = {
 export const getPrestige = (arr) => {
   const prestigeValues = {
     heroesTotalExp: 0,
+    henchmenTotalExp: 0,
     modelsNumber: 0,
     mountsNumber: 0,
     bigTargetsNumber: 0,
@@ -60,10 +61,15 @@ export const getPrestige = (arr) => {
   };
   arr.forEach((item) => {
     if (item.unitName !== "" && item !== null) {
+      if (item.type === "Stronnik" || item.type === "Najemne Ostrze") {
+        prestigeValues.henchmenTotalExp += item.exp * item.selectedNumber;
+      }
+
       if (item.type !== "Najemne Ostrze") {
         if (item.type === "Bohater") {
           prestigeValues.heroesTotalExp += item.exp;
         }
+
         prestigeValues.modelsNumber += Number(item.selectedNumber);
         if (item.rules.includes("Duży cel")) {
           prestigeValues.bigTargetsNumber += Number(item.selectedNumber);
@@ -143,6 +149,7 @@ export const getPrestige = (arr) => {
   });
   const prestige =
     prestigeValues.heroesTotalExp +
+    prestigeValues.henchmenTotalExp +
     prestigeValues.modelsNumber * 5 +
     prestigeValues.mountsNumber * 5 +
     prestigeValues.bigTargetsNumber * 20 +

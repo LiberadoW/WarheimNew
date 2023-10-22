@@ -74,7 +74,6 @@ const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
       })}
 
       {Object.keys(unitNumbers).map((unit, index) => {
-        console.log(army.heroes[unit]);
         if (unitNumbers[unit] > army.heroes[unit]?.number) {
           return (
             <p className="bold" key={index}>

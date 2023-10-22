@@ -1,0 +1,30 @@
+.unit-edit {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.unit-edit-menu {
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.menu-button {
+  flex: 1 1 0px;
+  border: none;
+  padding: 10px;
+  background-color: var(--main);
+  color: white;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.active {
+  cursor: pointer;
+  background-color: var(--hover);
+}
+
+.menu-button:hover {
+  background-color: var(--hover);
+}

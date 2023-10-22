@@ -55,7 +55,7 @@ const Treasury = ({ army, unitList }) => {
               <span>{prestigeValues[1].heroesTotalExp}</span>
             </div>
             <div>
-              <span>0</span>
+              <span>{prestigeValues[1].henchmenTotalExp}</span>
             </div>
             <div>
               <span>0</span>

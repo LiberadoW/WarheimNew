@@ -42,8 +42,10 @@ const UnitSelect = ({
             startingEquipment: heroes[unitName].startingEquipment,
             equipmentList: heroes[unitName].equipmentList,
             stats: heroes[unitName].stats,
+            statsModifiers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            baseRules: [...heroes[unitName].rules],
             rules: heroes[unitName].rules,
-            exp: heroes[unitName].exp,
+            exp: heroes[unitName].exp ? heroes[unitName].exp : 0,
             skills: heroes[unitName].skills,
             type: heroes[unitName].type,
             number: heroes[unitName].number,
@@ -102,9 +104,11 @@ const UnitSelect = ({
                           heroes[key].number ||
                         (key === "Duże Dźgacze" &&
                           unitNameArr.filter((x) => x === "Duże Dźgacze")
-                            .length === 1) || (key === "Drużyna ciężkich broni" &&
-                            unitNameArr.filter((x) => x === "Drużyna ciężkich broni")
-                              .length === 1)
+                            .length === 1) ||
+                        (key === "Drużyna ciężkich broni" &&
+                          unitNameArr.filter(
+                            (x) => x === "Drużyna ciężkich broni"
+                          ).length === 1)
                       }
                     >
                       {`${key} (${value.cost} zk) `}

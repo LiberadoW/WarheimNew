@@ -97,13 +97,24 @@
   margin-bottom: -1px;
   margin-right: -1px;
   white-space: nowrap;
+}
 
+.green {
+  color: #018749;
+  background-color: #e6ffe3;
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+  background-color: #ffe6e6;
+  font-weight: bold;
 }
 
 .stats-table div:nth-of-type(15),
 .stats-table div:nth-of-type(26),
 .stats-table div:nth-of-type(37) {
-   font-size: 0.55rem;
+  font-size: 0.55rem;
 }
 
 .stats-table div:nth-of-type(25),
@@ -114,8 +125,7 @@
 
 .stats-table-henchmen div:nth-of-type(14),
 .stats-table-henchmen div:nth-of-type(25),
-.stats-table-henchmen div:nth-of-type(36)
-{
+.stats-table-henchmen div:nth-of-type(36) {
   font-size: 0.55rem;
 }
 
@@ -168,7 +178,6 @@
   box-sizing: border-box;
   width: 8px;
   height: 8px;
-
 }
 
 .experience-box {

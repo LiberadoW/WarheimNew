@@ -24,6 +24,7 @@
   justify-content: center;
   padding: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .modal-main .unit {

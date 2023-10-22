@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, createContext } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Builder from "./Builder";
 import ArmyList from "../Components/ArmyList";
@@ -18,6 +19,8 @@ import { mercenariesList } from "../Data.js/Mercenaries";
 import { filterMercenaries } from "../Functions/filterMercenaries";
 import useLocalStorage from "use-local-storage";
 import "../index.css";
+
+export const EditArmyContext = createContext();
 
 const App = () => {
   const RequireAuth = ({ children }) => {
@@ -39,6 +42,8 @@ const App = () => {
     defaultDark ? "dark" : "light"
   );
 
+  const [isEditArmyView, setIsEditArmyView] = useState(false);
+
   const handleSwitchTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
@@ -47,23 +52,23 @@ const App = () => {
 
   const numberOfHeroes = newUnitList.filter((x) => x.type === "Bohater").length;
 
-  const allRules = [];
+  // const allRules = [];
 
-  for (const [key, value1] of Object.entries(armies)) {
-    for (const [key, value] of Object.entries(value1.heroes)) {
-      value.rules.forEach((rule) => allRules.push(rule));
-    }
-  }
+  // for (const [key, value1] of Object.entries(armies)) {
+  //   for (const [key, value] of Object.entries(value1.heroes)) {
+  //     value.rules.forEach((rule) => allRules.push(rule));
+  //   }
+  // }
 
-  const uniqueAllRulesArray = [...new Set(allRules)];
+  // const uniqueAllRulesArray = [...new Set(allRules)];
 
-  const filteredElements = uniqueAllRulesArray.filter(
-    (e) =>
-      e.includes("Łuskowata") ||
-      e.includes("Mag (") ||
-      e.includes("Duchowny") ||
-      e.includes("Odporność na magię")
-  );
+  // const filteredElements = uniqueAllRulesArray.filter(
+  //   (e) =>
+  //     e.includes("Łuskowata") ||
+  //     e.includes("Mag (") ||
+  //     e.includes("Duchowny") ||
+  //     e.includes("Odporność na magię")
+  // );
 
   const handleSetUnitExp = (unitId, exp) => {
     const newUnitList = [...unitList];
@@ -91,6 +96,7 @@ const App = () => {
       rules: [],
       exp: "",
       skills: [""],
+      injuries: [],
       type: "Bohater",
       number: "",
       selectedNumber: "",
@@ -128,59 +134,84 @@ const App = () => {
 
   return (
     <div className="app" id="app" data-theme={theme}>
-      <main className="site-wrapper">
-        <Router>
-          <Header handleSwitchTheme={handleSwitchTheme} theme={theme} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Builder
-                  unitList={unitList}
-                  setUnitList={setUnitList}
-                  army={armies[army]}
-                  setArmy={setArmy}
-                  unitName={unitName}
-                  setUnitName={setUnitName}
-                  mercenaries={mercenaries}
-                  setMercenaries={setMercenaries}
-                  mercenaryUnitName={mercenaryUnitName}
-                  setMercenaryUnitName={setMercenaryUnitName}
-                  prestige={prestige}
-                  setPrestige={setPrestige}
-                  setArmyName={setArmyName}
-                  armyName={armyName}
-                  handleSetUnitExp={handleSetUnitExp}
-                  theme={theme}
-                />
-              }
-            />
-
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/userDashboard"
-              element={
-                <RequireAuth>
-                  <UserDashboard />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/myLists"
-              element={
-                <RequireAuth>
-                  <MyLists
+      <EditArmyContext.Provider value={{ isEditArmyView, setIsEditArmyView }}>
+        <main className="site-wrapper">
+          <Router>
+            <Header handleSwitchTheme={handleSwitchTheme} theme={theme} />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Builder
+                    unitList={unitList}
                     setUnitList={setUnitList}
+                    army={armies[army]}
                     setArmy={setArmy}
+                    unitName={unitName}
+                    setUnitName={setUnitName}
+                    mercenaries={mercenaries}
+                    setMercenaries={setMercenaries}
+                    mercenaryUnitName={mercenaryUnitName}
+                    setMercenaryUnitName={setMercenaryUnitName}
+                    prestige={prestige}
+                    setPrestige={setPrestige}
                     setArmyName={setArmyName}
+                    armyName={armyName}
+                    handleSetUnitExp={handleSetUnitExp}
+                    theme={theme}
                   />
-                </RequireAuth>
-              }
-            />
-          </Routes>
-        </Router>
-      </main>
+                }
+              />
+              <Route
+                path="/edit"
+                element={
+                  <Builder
+                    unitList={unitList}
+                    setUnitList={setUnitList}
+                    army={armies[army]}
+                    setArmy={setArmy}
+                    unitName={unitName}
+                    setUnitName={setUnitName}
+                    mercenaries={mercenaries}
+                    setMercenaries={setMercenaries}
+                    mercenaryUnitName={mercenaryUnitName}
+                    setMercenaryUnitName={setMercenaryUnitName}
+                    prestige={prestige}
+                    setPrestige={setPrestige}
+                    setArmyName={setArmyName}
+                    armyName={armyName}
+                    handleSetUnitExp={handleSetUnitExp}
+                    theme={theme}
+                  />
+                }
+              />
+
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/userDashboard"
+                element={
+                  <RequireAuth>
+                    <UserDashboard />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/myLists"
+                element={
+                  <RequireAuth>
+                    <MyLists
+                      setUnitList={setUnitList}
+                      setArmy={setArmy}
+                      setArmyName={setArmyName}
+                    />
+                  </RequireAuth>
+                }
+              />
+            </Routes>
+          </Router>
+        </main>
+      </EditArmyContext.Provider>
       <div id="armylist">
         <ArmyList
           unitList={newUnitList}
