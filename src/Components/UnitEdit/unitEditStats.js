@@ -8,17 +8,14 @@ const stats = ["Sz", "WW", "US", "S", "Wt", "Żw", "I", "A", "CP"];
 const UnitEditStats = ({ unitList, unit, setUnitList, heroes }) => {
   const maxStats = unit.stats.Maksymalna;
 
-  const currentStats = unit.stats.Aktualna;
-
   const baseStats =
     unit.type === "Najemne Ostrze"
       ? [...mercenariesList[unit.unitName].stats.Początkowa]
       : unit.stats.Początkowa;
 
-  console.log(baseStats);
-  console.log(unit);
-
-  const statsModifiers = unit.statsModifiers;
+  const statsModifiers = unit.statsModifiers
+    ? unit.statsModifiers
+    : [0, 0, 0, 0, 0, 0, 0, 0, 0];
   // if (!unit.stats.hasOwnProperty("Aktualna")) {
   //   if (unit.type === "Najemne Ostrze") {
   //     unit.stats.Aktualna = [
@@ -31,14 +28,15 @@ const UnitEditStats = ({ unitList, unit, setUnitList, heroes }) => {
   unit.stats.Aktualna = baseStats.map(
     (item, index) => item + statsModifiers[index]
   );
+
+  const currentStats = unit.stats.Aktualna;
+
   const equipmentString = unit.startingEquipment.concat(unit.optionalEquipment);
 
   const [armour, speedModifier, initativeModifier] = getModifiers(
     equipmentString,
     unit
   );
-
-  console.log(unit);
 
   const handleClickIncrease = (index) => {
     statsModifiers[index]++;
@@ -60,8 +58,6 @@ const UnitEditStats = ({ unitList, unit, setUnitList, heroes }) => {
     statsModifiers[index]--;
 
     const minModifier = 1 - baseStats[index];
-
-    console.log(minModifier);
 
     if (statsModifiers[index] < minModifier) {
       statsModifiers[index] = minModifier;
