@@ -501,7 +501,7 @@ CECHY PRZYWÓDCZE HANDLARZA NIEWOLNIKÓW. Należy pamiętać, że zasada ta
 nie ma zastosowania w przypadku, gdy HANDLARZ NIEWOLNIKÓW jest Oszołomiony!,
 został Powalony na ziemię! lub Ucieka!.`,
 
-"Hipnotyczne spojrzenie": `Jeżeli model podlegający zasadzie specjalnej HIPNOTYCZNE SPOJRZENIE nie jest związany
+  "Hipnotyczne spojrzenie": `Jeżeli model podlegający zasadzie specjalnej HIPNOTYCZNE SPOJRZENIE nie jest związany
 walką wręcz może użyć HIPNOTYCZNEGO SPOJRZENIA w fazie strzelania i obrać za cel
 dowolny niezwiązany walką model przeciwnika pozostający w polu widzenia, w
 odległości do 12”. Ofiara HIPNOTYCZNEGO SPOJRZENIA musi wykonać test CP.
@@ -512,7 +512,7 @@ ponadto hipnoza traci swą siłę, jeśli hipnotyzer wykona ruch poza zasięg
 HIPNOTYCZNEGO SPOJRZENIA, podejmie próbę rzucenia zaklęcia, użyje broni
 dystansowej, będzie walczył wręcz lub zostanie trafiony i zraniony. HIPNOTYCZNE
 SPOJRZENIE nie działa na istoty podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`,
-Inżynier: `Jedna z grup stronników, znajdująca się w odległości nieprzekraczającej 6” od modelu
+  Inżynier: `Jedna z grup stronników, znajdująca się w odległości nieprzekraczającej 6” od modelu
 podlegającego zasadzie specjalnej INŻYNIER, może użyć w fazie strzelania jako podstawę
 testu wartość współczynnika UMIEJĘTNOŚCI STRZELECKIE INŻYNIERA lub
 skorzystać z jednej, znanej przez INŻYNIERA zdolności z listy umiejętności
@@ -527,7 +527,7 @@ podlegającego zasadzie specjalnej INŻYNIER, mogą przerzucić nieudane testy S
 INICJATYWY w zależności od tego, który ze współczynników modelu jest większy,
 określające czy modelom udało się wykopać tunel, a następnie czy pojawią się na
 powierzchni stołu, wynik drugiego rzutu jest ostateczny.`,
-"Istota magiczna": `Wraz ze wzrostem liczebności w grupie rośnie ilość generowanych przez modele
+  "Istota magiczna": `Wraz ze wzrostem liczebności w grupie rośnie ilość generowanych przez modele
 podlegające zasadzie specjalnej ISTOTA MAGICZNA Kostek Mocy. Pojedynczy model
 generuje jedną Kostkę Mocy. Modele podlegające zasadzie specjalnej ISTOTA MAGICZNA
 pozostające w odległości do 1” od siebie nawzajem mogą łączyć kostki w Pulę Kostek
@@ -540,34 +540,34 @@ Modele podlegające zasadzie specjalnej ISTOTA MAGICZNA mogą też padać ofiar�
 Przekleństwa Tzeentcha, choć jego efekt jest krańcowo odmienny. Jeśli podczas próby
 rzucenia zaklęcia wypadną dwie lub więcej 1 rzucenie zaklęcia kończy się sukcesem
 (niezależnie od osiągniętego poziomu mocy).`,
-Kamuflaż: `Dopóki model podlegający zasadzie specjalnej KAMUFLAŻ pozostaje w odległości do 1”
+  Kamuflaż: `Dopóki model podlegający zasadzie specjalnej KAMUFLAŻ pozostaje w odległości do 1”
 od dowolnego elementu terenu, przeciwnik musi wykonać udany test I aby zaszarżować
 lub ostrzelać, także magicznymi pociskami, taki model (choć model podlegający zasadzie
 specjalnej KAMUFLAŻ nadal odczuwa skutki zaklęć obszarowych oraz takich, które nie
 wymagają by rzucający zaklęcie mag widział cel).`,
-Karawan: `Limit modeli kompanii, której DOWÓDCA posiada KARAWAN zostaje zwiększony o +3
+  Karawan: `Limit modeli kompanii, której DOWÓDCA posiada KARAWAN zostaje zwiększony o +3
 (należy jednocześnie zauważyć, że liczba modeli w kompanii nie może przekroczyć 20
 postaci).`,
-Kawalerzysta: `Model podlegający zasadzie specjalnej KAWALERZYSTA może przerzucić nieudany test
+  Kawalerzysta: `Model podlegający zasadzie specjalnej KAWALERZYSTA może przerzucić nieudany test
 jeździectwa, wynik drugiego rzutu jest ostateczny.`,
-"Klątwa Księcia Grobowców": `Model przeciwnika, który Wyłączy z akcji! model podlegają zasadzie specjalnej KLĄTWA
+  "Klątwa Księcia Grobowców": `Model przeciwnika, który Wyłączy z akcji! model podlegają zasadzie specjalnej KLĄTWA
 KSIĘGA GROBOWCÓW otrzymuje natychmiast trafienie o SILE K6 bez możliwości
 skorzystania z Ochrony Pancerza.`,
-Kieszonkowiec: `Dzięki zaangażowaniu modelu podlegającego zasadzie specjalnej KIESZONKOWIEC ilość
+  Kieszonkowiec: `Dzięki zaangażowaniu modelu podlegającego zasadzie specjalnej KIESZONKOWIEC ilość
 znalezionych przez kompanię w czasie fazie eksploracji Łupów! zostaje zwiększona o +1.`,
-Konstrukt: `Jeżeli na początku tury model podlegający zasadzie specjalnej KONSTRUKT nie znajduje
+  Konstrukt: `Jeżeli na początku tury model podlegający zasadzie specjalnej KONSTRUKT nie znajduje
 się w odległości do 6” od sprzymierzonego modelu DOWÓDCY lub MAGA popada w
 odrętwienie, stwór jest traktowany jest jak model Oszołomiony!. Ponadto, jeżeli
 DOWÓDCA lub MAG zostaną Wyłączeni z akcji! także KONSTRUKT uznaje się za
 Wyłączony z akcji!. Należy jednak zauważyć, że za wyłączony w ten sposób z potyczki
 model nie należy w trakcie sekwencji po potyczce wykonywać rzutów na TABELĘ
 POWAŻNYCH OBRAŻEŃ.`,
-"Kowal Run": `Model podlegający zasadzie specjalnej Kowal Run zna TRADYCJE RUNICZNE
+  "Kowal Run": `Model podlegający zasadzie specjalnej Kowal Run zna TRADYCJE RUNICZNE
 wyszczególnione w ROZDZIALE XXIIII: MAGIA.`,
-Krzepki: `Model podlegający zasadzie specjalnej KRZEPKI może nosić PANCERZ lub KROPIERZ
+  Krzepki: `Model podlegający zasadzie specjalnej KRZEPKI może nosić PANCERZ lub KROPIERZ
 ignorując ujemne modyfikatory do I i SZ. Ponadto, model wyekwipowany w PAWĘŻ
 (zobacz ROZDZIAŁ XV: EKWIPUNEK) może biegać.`,
-"Lekka jazda": `Modele LEKKIEJ JAZDY nie są DUŻYM CELEM i nie podlegają zasadom Ochrony Pancerza
+  "Lekka jazda": `Modele LEKKIEJ JAZDY nie są DUŻYM CELEM i nie podlegają zasadom Ochrony Pancerza
 dla modeli KAWALERYJSKICH. Ponadto modele LEKKIEJ JAZDY, które decydują się
 Uciekać! w reakcji na szarżę, a następnie mobilizują się w następnej turze, mają prawo
 wykonać ruch lub bieg w ramach pozostałych ruchów fazy ruchu. Model w fazie strzelania ma
@@ -576,7 +576,7 @@ przerzucenia nieudanego testu MOBILIZACJI, wynik drugiego rzutu jest ostateczny.
 Lekka jazda wyposażona w broń dystansową, która nie podlega zasadzie RUCH
 albo STRZAŁ może prowadzić ostrzał, nawet w czasie biegu. Nadal jednak podlega karze
 -1 do rzutu na trafienie za strzał po ruchu.`,
-"Leśny duch": `Modele LEŚNYCH DUCHÓW podlegają następującym zasadom specjalnym:
+  "Leśny duch": `Modele LEŚNYCH DUCHÓW podlegają następującym zasadom specjalnym:
 - posiadają Magiczną Ochronę na 6+, jednakże nie można z niej korzystać przeciwko
 atakom magicznym, takim jak zaklęcia czy magiczny ORĘŻ.
 - wszystkie ataki LEŚNYCH DUCHÓW uznawane są za magiczne. Obejmuje to
@@ -587,7 +587,7 @@ automatycznie zdają testy SAM W WALCE.
 - są niepodatne na TRUCIZNY za wyjątkiem grobowego korzenia (zobacz TRUCIZNY,
 MIKSTURY & NARKOTYKI w ROZDZIALE XV: EKWIPUNEK).
 - stronnicy podlegający nigdy nie zdobywają Punktów Doświadczenia.`,
-Liczmistrz: `W fazie magii zamiast rzucania zaklęć model podlegający zasadzie specjalnej LICZMISTRZ
+  Liczmistrz: `W fazie magii zamiast rzucania zaklęć model podlegający zasadzie specjalnej LICZMISTRZ
 może spróbować wskrzesić dowolny sprzymierzony model stronnika podlegający
 zasadzie specjalnej NIEUMARŁY wielkości człowieka lub mniejszy (wskrzeszenie nie
 będzie zatem skuteczne w przypadku modeli na podstawkach 40x40 mm i większych),
@@ -599,7 +599,7 @@ momentu powstania model należy traktować tak, jakby wciąż posiadał 1 punkt 
 Wskrzeszeni NIEUMARLI, jeśli przetrwają potyczkę rozpadają się w pył po zakończeniu
 rozgrywki, a w czasie sekwencji po potyczce dla każdego takiego modelu stronnika
 należy wykonać rzut na TABELĘ POWAŻNYCH OBRAŻEŃ.`,
-"Latający dywan": `nie podlega karom za ruch ponad elementami terenu
+  "Latający dywan": `nie podlega karom za ruch ponad elementami terenu
 trudnego, bardzo trudnego czy przeszkodami. Może również bezkarnie przelatywać
 nad innymi modelami, zarówno sprzymierzonymi jak i wrogimi. LATAJĄCY
 DYWAN nie może zatrzymywać się na modelach przeciwnika – jeżeli chce
@@ -611,9 +611,9 @@ Ponadto LATAJĄCY DYWAN może przewozić woźnicę i do 2 pasażerów
 wielkości człowieka lub mniejszych (na LATAJĄCY DYWAN nie może zatem
 wejść model na podstawce 40x40 mm i większej) lub do 2 SKRZYŃ
 ŁADUNKU.`,
-Mag: `Model podlegający zasadzie specjalnej MAG zna jedno z zaklęć z podanej w nawiasie tradycji
+  Mag: `Model podlegający zasadzie specjalnej MAG zna jedno z zaklęć z podanej w nawiasie tradycji
 lub dziedziny magii. Więcej informacji znajduje się w ROZDZIALE XXIIII: MAGIA.`,
-Nieumarły: `NIEUMARŁE modele podlegają następującym zasadom specjalnym:
+  Nieumarły: `NIEUMARŁE modele podlegają następującym zasadom specjalnym:
 - KRZEPKI oraz NIEZŁOMNOŚĆ i UPORCZYWOŚĆ, a także automatycznie zdają testy
 SAM W WALCE.
 - są całkowicie odporni na ból, w grze odzwierciedla to zasada według której wynik
@@ -694,4 +694,10 @@ lub MAG, podlega do końca tury efektom zasady specjalnej GŁUPOTA.
     nakarmiona, należy wykonać rzut K6. Wynik 1 oznacza, że Żelazny Demon
     chwilowo zapomina o trawiącym go głodzie; z kolei wynik 2+ oznacza, że
     machina musi opuścić następną potyczkę.`,
+  "Rozproszenie magii(2)": `Model z zasadą specjalną ROZPROSZENIE MAGII, który nie Ucieka! lub nie został
+Oszołomiony! lub Powalony na ziemię! lub umieszczony poza stołem, generuje na potrzeby
+gracza liczbę Kostek Rozproszenia równą wartości podanej w nawiasie.
+Reguła nie podlega kumulacji, jeśli model z zasadą specjalną ROZPROSZENIE
+MAGII podlega już regule z różnych źródeł to ROZPROSZENIE MAGII nie sumuje się,
+lecz używa się lepszej z nich.`,
 };
