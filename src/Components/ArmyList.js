@@ -25,7 +25,7 @@ const ArmyList = ({
       unit.type === "Machina" ||
       unit.type === "Najemne Ostrze"
   );
-  // const uniqueRulesList = getAllRules(unitList);
+  const uniqueRulesList = getAllRules(unitList);
 
   const magicPath = getMagicLore(unitList);
 
@@ -55,7 +55,7 @@ const ArmyList = ({
         />
         <CampaignPoints army={army} />
       </div>
-      {/* <div className="print-a4-page">
+      <div className="print-a4-page">
         <div className="rules-box">
           {uniqueRulesList.map((rule) => {
             return (
@@ -67,7 +67,7 @@ const ArmyList = ({
             );
           })}
         </div>
-      </div> */}
+      </div>
       <div className="print-a4-page">
         {magicPath && (
           <div className="magic-box">
