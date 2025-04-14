@@ -700,4 +700,37 @@ gracza liczbę Kostek Rozproszenia równą wartości podanej w nawiasie.
 Reguła nie podlega kumulacji, jeśli model z zasadą specjalną ROZPROSZENIE
 MAGII podlega już regule z różnych źródeł to ROZPROSZENIE MAGII nie sumuje się,
 lecz używa się lepszej z nich.`,
+  Modlitwa: `Model z zasadą specjalną MODLITWA może w fazie magii wznieść dwie różne modlitwy.
+Modlitwy działają tak samo jak zaklęte czary o wymaganym poziomie mocy 5. O ile nie podano
+inaczej w ich opisie, modlitw można użyć w stosunku do samego DUCHOWNEGO lub
+dowolnego bohatera lub stronnikaw odległości do 12” od DUCHOWNEGO.`,
+  Nienawiść: `Model podlega zasadzie specjalnej NIENAWIŚĆ. Więcej informacji znajduje się w
+ROZDZIALE 7:PSYCHOLOGIA`,
+  "Duchowny (modlitwy do Sigmara)": `Model z zasadą specjalną DUCHOWNY zna jedną z podanych w nawiasie modlitw
+wyszczególnioną w ROZDZIALE 23:MODLITWY`,
+  "Przepastne trzewia": `Model z zasadą specjalną PRZEPASTNE TRZEWIA automatycznie zdaje wszystkie testy SAM
+W WALCE, a w trakcie sekwencji po potyczce na potrzeby zasad sprzedaży Łupów! liczony
+jest podwójnie.`,
+  Sfora: `Każdy model z zasadą specjalną SFORA stojący bezpośrednio za innym modelem SFORY,
+który walczy wręcz może zaatakować i zostać zaatakowany przez związany walką wręcz
+model przeciwnika`,
+  "Spalić wiedźmę!": `Model z zasadą specjalną SPALIĆ WIEDŹMĘ! odczuwają NIENAWIŚĆ do wszystkich
+wrogich postaci z zasadą specjalną DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH
+lub MAG lub NIEUMARŁY lub OPĘTANY lub WZGARDZONY i wszystkich postaci o
+naturze CHAOTYCZNEJ.
+`,
+  Zwierzę: `ZWIERZĘ podlega zasadzie specjalnej RANGER, a także:
+- może przerzucić nieudany test pływania. Wynik drugiego rzutu jest ostateczny.
+- nigdy nie zdobywa Punktów Doświadczenia,
+- nie może WSPINAĆ i UKRYWAĆ się,
+- nie może użyć jako podstawy testu wartości współczynnika CP DOWÓDCY,
+-wrogie modele uzbrojone w broń do walki wręcz z zasadą specjalną PŁONĄCY ATAK lub
+modele podlegające zasadzie specjalnej PŁONĄCY ATAK wywołują STRACH w
+modelach z zasadą specjalną ZWIERZĘ.
+`,
+  "Latający dywan": `Latający dywan może przewozić woźnicę i do 2 PIESZYCH
+pasażerów wielkości człowieka lub mniejszych (reguła nie dotyczy modeli na
+podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej) lub
+do 2 SKRZYŃ ŁADUNKU.
+`,
 };

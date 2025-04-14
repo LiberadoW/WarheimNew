@@ -5,7 +5,7 @@ export const amazonki = {
     Królowa: {
       id: 0,
       startingEquipment: ["Sztylet", "Włócznia"],
-      cost: 65,
+      cost: 60,
       number: 1,
       equipmentList: heroEquipment["Amazonki z Lustrii"].Bohaterowie,
       type: "Bohater",
@@ -27,7 +27,7 @@ export const amazonki = {
     Megiera: {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 50,
+      cost: 40,
       number: 1,
       equipmentList: heroEquipment["Amazonki z Lustrii"].Bohaterowie,
       type: "Bohater",
@@ -46,7 +46,7 @@ export const amazonki = {
       exp: 12,
       skills: [0, 1, 4, 5],
     },
-    Memiroda: {
+    Memroda: {
       id: 2,
       startingEquipment: ["Sztylet", "Łapacz"],
       cost: 35,
@@ -54,7 +54,7 @@ export const amazonki = {
       equipmentList: heroEquipment["Amazonki z Lustrii"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
+        Początkowa: [4, 4, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: [
@@ -118,9 +118,9 @@ export const amazonki = {
     Mara: {
       id: 6,
       startingEquipment: ["Sztylet", "Włócznia"],
-      cost: 50,
+      cost: 45,
       number: 5,
-      equipmentList: heroEquipment["Amazonki z Lustrii"].Stronnicy,
+      equipmentList: heroEquipment["Amazonki z Lustrii"].Mara,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
@@ -131,7 +131,7 @@ export const amazonki = {
     Zmora: {
       id: 7,
       startingEquipment: ["Sztylet", "Łuk"],
-      cost: 40,
+      cost: 35,
       number: 5,
       equipmentList: heroEquipment["Amazonki z Lustrii"].Stronnicy,
       type: "Stronnik",
@@ -158,7 +158,7 @@ export const amazonki = {
         "Koń bojowy",
         "Siodło & uprząż",
       ],
-      cost: 80,
+      cost: 70,
       number: 3,
       equipmentList: heroEquipment["Amazonki z Lustrii"].Walkiria,
       type: "Stronnik",
@@ -180,7 +180,7 @@ export const amazonki = {
     Gorgona: {
       id: 9,
       startingEquipment: ["Sztylet", "Włócznia", "Mechaniczne skrzydła"],
-      cost: 55,
+      cost: 45,
       number: 3,
       equipmentList: heroEquipment["Amazonki z Lustrii"].Stronnicy,
       type: "Stronnik",
@@ -193,7 +193,7 @@ export const amazonki = {
     Więźniarka: {
       id: 10,
       startingEquipment: [],
-      cost: 185,
+      cost: 175,
       number: 1,
       equipmentList: {},
       type: "Machina",

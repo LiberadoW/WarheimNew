@@ -1284,14 +1284,25 @@ export const magic = {
     ],
   },
   "Wysoka Magia": {
-    1: ["1-2 SZAFIROWY PORTAL", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
+    1: [
+      "1-2 SZAFIROWY PORTAL",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
     znajdować się w odległości do 24” od MAGA. Wrota należy traktować jak ‘zwykłe’
     drzwi, przez które model może wykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
-    że nie można próbować przejąć szarży modelu, który przekroczył Szafirowy Portal).`],
-    2: ["3 WYSSANIE MAGII", "RZUCONY NA 6+", `Czar działa do początku następnej fazy magii MAGA. Wartość rzucenia wszystkich zaklęć
-    splatanych w czasie trwania Wyssania Magii zostaje zwiększony o +3.`],
-    3: ["4 SKRZYDŁA FENIKSA", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    że nie można próbować przejąć szarży modelu, który przekroczył Szafirowy Portal).`,
+    ],
+    2: [
+      "3 WYSSANIE MAGII",
+      "RZUCONY NA 6+",
+      `Czar działa do początku następnej fazy magii MAGA. Wartość rzucenia wszystkich zaklęć
+    splatanych w czasie trwania Wyssania Magii zostaje zwiększony o +3.`,
+    ],
+    3: [
+      "4 SKRZYDŁA FENIKSA",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1299,14 +1310,26 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 SZPONY FENIKSA", "RZUCONY NA 7+", `Szpony Feniksa są magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`],
-    5: ["6 TARCZA SAPHERY", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Moc zaklęcia oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 SZPONY FENIKSA",
+      "RZUCONY NA 7+",
+      `Szpony Feniksa są magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    5: [
+      "6 TARCZA SAPHERY",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Moc zaklęcia oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące
     się w odległości do 12" od Maga Elfów Wysokiego Rodu również takie, które walczą wręcz.
     Dopóki zaklęcie 'pozostaje w grze' objęte działaniem zaklęcia modele otrzymują
-    Magiczną Ochronę na 5+.`],
-    6: ["7 KLĄTWA QHAYSH", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Qhaysh ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
+    Magiczną Ochronę na 5+.`,
+    ],
+    6: [
+      "7 KLĄTWA QHAYSH",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Qhaysh ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Mag Elfów Wysokiego Rodu musi widzieć swój cel). Po
     udanym rzuceniu zaklęcia należy umieścić obok ofiary czaru sześciościenną kostkę, tak
@@ -1316,32 +1339,52 @@ export const magic = {
     otrzymuje ofiara klątwy oraz wszystkie sprzymierzone z postacią modele w odległości
     do 6". Należy zauważyć, że współczynniki mogą zostać obniżone do minimalnej
     wartości 1.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE QHAYSH", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE QHAYSH",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`],
-    8: ["9 OGIEŃ FENIKSA", "RZUCONY NA 11+", `Ogień Feniksa jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
+    otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    8: [
+      "9 OGIEŃ FENIKSA",
+      "RZUCONY NA 11+",
+      `Ogień Feniksa jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża PŁONĄCY ATAK.`],
-    9: ["10 ZBROJA QHAYSH", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    9: [
+      "10 ZBROJA QHAYSH",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Maga Elfów Wysokiego Rodu, na początku fazy walki wręcz otrzymują jedno trafienie o SILE
-    4 z cechą oręża PŁONĄCY ATAK.`],
-    10: ["11 OSTRZE QHAYSH", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    10: [
+      "11 OSTRZE QHAYSH",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PŁONĄCY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Mag Elfów Wysokiego Rodu władający Ostrzem Qhaysh otrzymuje dodatkowy +1
     ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Ostrza Qhaysh - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 PŁOMIENIE QHAYSH", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Zaklęcie Płomienie Qhaysh jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu
+    korzystać tylko z Ostrza Qhaysh - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 PŁOMIENIE QHAYSH",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Zaklęcie Płomienie Qhaysh jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu
     24”. Po udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim
     wybrany na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone),
     których podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem
@@ -1352,10 +1395,14 @@ export const magic = {
     grze', objęte działaniem czaru modele otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY
     ATAK. Jeśli czar 'pozostaje w grze' w kolejnej fazie magii rzucającego, modele otrzymują
     trafienie o SILE 5 z cechą oręża PŁONĄCY ATAK, SIŁA trafienia zwiększa się o +1 z każdą
-    kolejną turę.`],
+    kolejną turę.`,
+    ],
   },
   "Mroczna Magia": {
-    1: ["1-2 PIEKIELNY WRZASK", "RZUCONY NA 8+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    1: [
+      "1-2 PIEKIELNY WRZASK",
+      "RZUCONY NA 8+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
@@ -1363,15 +1410,23 @@ export const magic = {
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Modele objęte działaniem zaklęcia
     muszą wykonać test CP. Nieudany test oznacza, że modele Uciekają!. Zaklęcie nie
-    działa na istoty podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`],
-    2: ["3 POTĘGA MROKU", "RZUCONY NA 6+", `Po udanym rzuceniu zaklęcia Potęga Mroku, Wieszczka Khaina uzyskuje natychmiast
+    działa na istoty podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`,
+    ],
+    2: [
+      "3 POTĘGA MROKU",
+      "RZUCONY NA 6+",
+      `Po udanym rzuceniu zaklęcia Potęga Mroku, Wieszczka Khaina uzyskuje natychmiast
     dodatkowe K3 Kostki Mocy. Kostki te dodawane są do tych, które pozostają w
     dyspozycji Wieszczki Khaina, ale należy trzymać je oddzielnie lub użyć kostek innego
     koloru. Dodatkowych kostek nie można używać do rozpraszania czarów
     pozostających w grze, ani w jakikolwiek sposób przechowywać ich z tury na turę. Za
     każdą niewykorzystaną na koniec fazy magii Kostkę Mocy Wieszczka Khaina otrzymuje
-    automatyczne trafienie o SILE K6.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    automatyczne trafienie o SILE K6.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1379,45 +1434,77 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 POCISK ZAGŁADY", "RZUCONY NA 7+", `Pocisk Zagłady jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża SKRYTOBÓJCZY.`],
-    5: ["6 FANTASMAGORIA", "RZUCANY NA 10+, POZOSTAJE W GRZE", `Dopóki zaklęcie 'pozostaje w grze', wszystkie wrogie modele znajdujące się na stole
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 POCISK ZAGŁADY",
+      "RZUCONY NA 7+",
+      `Pocisk Zagłady jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża SKRYTOBÓJCZY.`,
+    ],
+    5: [
+      "6 FANTASMAGORIA",
+      "RZUCANY NA 10+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie 'pozostaje w grze', wszystkie wrogie modele znajdujące się na stole
     przeprowadzając test oparty na współczynniku CP wykonują rzut 3K6 odrzucając
     kostkę z najniższym wynikiem.
-    Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`],
-    6: ["7 KLĄTWA PANA WĘŻY", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Pana Węży ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`,
+    ],
+    6: [
+      "7 KLĄTWA PANA WĘŻY",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Pana Węży ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Wieszczka Khaina musi widzieć
     swój cel). Dopóki zaklęcie 'pozostaje w grze' wszystkie trafienia zadane ofierze klątwy
     oraz wszystkim sprzymierzonym z postacią modelom w odległości do 6” podlegają
     zasadzie specjalnej ZATRUTY ATAK.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 KORONA DHAR", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 KORONA DHAR",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 z cechą oręża SKRYTOBÓJCZY.`],
-    8: ["9 FURIA KHAINA", "RZUCONY NA 11+", `Furia Khaina jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE K6 z cechą oręża SKRYTOBÓJCZY.`,
+    ],
+    8: [
+      "9 FURIA KHAINA",
+      "RZUCONY NA 11+",
+      `Furia Khaina jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża SKRYTOBÓJCZY.`],
-    9: ["10 ZBROJA DHAR", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 z cechą oręża SKRYTOBÓJCZY.`,
+    ],
+    9: [
+      "10 ZBROJA DHAR",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Wieszczki Khaina, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6 z cechą
-    oręża PRECYZYJNE UDERZENIE.`],
-    10: ["11 OSTRZE PANA WĘŻY", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    oręża PRECYZYJNE UDERZENIE.`,
+    ],
+    10: [
+      "11 OSTRZE PANA WĘŻY",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża ZATRUTY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Wieszczka Khaina władająca Ostrzem Pana Węży otrzymuje dodatkowy +1
     ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Ostrza Pana Węży - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 POŚWIĘCENIE", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Wieszczka Khaina przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
+    korzystać tylko z Ostrza Pana Węży - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 POŚWIĘCENIE",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Wieszczka Khaina przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
     model bohatera lub stronnika znajdujący się w odległości do 12”. Czar może zostać
     rzucony na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem
     działał na modele na podstawkach 40x40 mm i większych), również związany walką
@@ -1429,76 +1516,128 @@ export const magic = {
     wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele, których
     podstawki są częściowo przykryte, dostają się pod działanie zaklęcia na 4+. Objęte
     działaniem zaklęcia modele otrzymują trafienie o SILE K6 z cechą oręża PRECYZYJNE
-    UDERZENIE.`],
+    UDERZENIE.`,
+    ],
   },
   "Magia Ognistej Paszczy": {
-    1: ["1-2 OGNISTA PASZCZA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    1: [
+      "1-2 OGNISTA PASZCZA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 8" od Ogniobrzuchego, również takie, które walczą wręcz. Dopóki zaklęcie
     'pozostaje w grze' modele objęte działaniem zaklęcia wykonują rzut na zranienie 3K6
-    odrzucając kostkę z najniższym wynikiem.`],
-    2: ["3 WROTA TRZEWIODOŁU", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy Wrota Trzewiodołu łączące dwa punkty na stole, które
+    odrzucając kostkę z najniższym wynikiem.`,
+    ],
+    2: [
+      "3 WROTA TRZEWIODOŁU",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy Wrota Trzewiodołu łączące dwa punkty na stole, które
     muszą znajdować się w odległości do 18” od MAGA. Wrota należy traktować jak
     ‘zwykłe’ drzwi, przez które model może wykonać ruch jak w fazie ruchu, który może być
     również ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z
     wyjątkiem tego, że nie można próbować przejąć szarży modelu, który przekroczył Wrota
-    Trzewiodołu).`],
-    3: ["4 PŁOMIENNA KLĄTWA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Płomienna klątwa ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    Trzewiodołu).`,
+    ],
+    3: [
+      "4 PŁOMIENNA KLĄTWA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Płomienna klątwa ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Ogniobrzuchy musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze' ofiara klątwy staje się ŁATWOPALNA.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    4: ["5 OGNISTA PLWOCINA", "RZUCONY NA 7+", `Ognista Plwocina jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`],
-    5: ["6 SKÓRA NOSOROŻNIKA", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    4: [
+      "5 OGNISTA PLWOCINA",
+      "RZUCONY NA 7+",
+      `Ognista Plwocina jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    5: [
+      "6 SKÓRA NOSOROŻNIKA",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 8" od Ogniobrzuchego, również takie, które walczą wręcz. Dopóki zaklęcie
     'pozostaje w grze' modele otrzymują premię +2 do Ochrony Pancerza (do maksymalnego
-    poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.`],
-    6: ["7 KLĄTWA OGNISTEJ PASZCZY", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Ognistej Paszczy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.`,
+    ],
+    6: [
+      "7 KLĄTWA OGNISTEJ PASZCZY",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Ognistej Paszczy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Ogniobrzuchy musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze' ofiara klątwy oraz wszystkie sprzymierzone z postacią modele w
     odległości do 4” mogą zostać obrane na cel czarów oraz ataków bronią dystansową, które
     podlegają zasadzie specjalnej PŁONĄCY ATAK nawet, jeśli atakujący nie widzi celu lub
     przeklęty model Ukrywa się.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE TRZEWIODOŁU", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE TRZEWIODOŁU",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`],
-    8: ["9 ŻAR I ZNISZCZENIE!", "RZUCONY NA 11+", `Żar i Zniszczenie! jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    8: [
+      "9 ŻAR I ZNISZCZENIE!",
+      "RZUCONY NA 11+",
+      `Żar i Zniszczenie! jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża PŁONĄCY ATAK.`],
-    9: ["10 GOREJĄCY NABRZUSZNIK", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    9: [
+      "10 GOREJĄCY NABRZUSZNIK",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Ogniobrzuchego, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4 z cechą oręża
-    PŁONĄCY ATAK.`],
-    10: ["11 ŁAMIGNAT", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    PŁONĄCY ATAK.`,
+    ],
+    10: [
+      "11 ŁAMIGNAT",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PŁONĄCY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Ogniobrzuchy władający Łamignatem otrzymuje dodatkowy +1 ATAK, a
     wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko
-    z Łamignata - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 KLĄTWA TRZEWIODOŁU", "RZUCONY NA 15+, POZOSTAJE W GRZE", `Klątwa Trzewiodołu ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    z Łamignata - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 KLĄTWA TRZEWIODOŁU",
+      "RZUCONY NA 15+, POZOSTAJE W GRZE",
+      `Klątwa Trzewiodołu ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Ogniobrzuchy musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze' ofiara klątwy zostaje automatycznie Wyłączona z akcji! jeżeli zostanie
     trafiona.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
   },
   "Magia Demonów": {
-    1: ["1-2 MGŁA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie modele (wrogie i sprzymierzone)
+    1: [
+      "1-2 MGŁA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie modele (wrogie i sprzymierzone)
     znajdujące się w odległości do 12" od rzucającego zaklęcie Fimira, również takie, które
     walczą wręcz. Dopóki zaklęcie 'pozostaje w grze' objęte działaniem zaklęcia modele
     zostają spowite MGŁĄ (zobacz ROZDZIAŁ XII: SCENARIUSZE paragraf POGODA W
-    STARYM ŚWIECIE).`],
-    2: ["3 PIEKIELNY WRZASK", "RZUCONY NA 8+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    STARYM ŚWIECIE).`,
+    ],
+    2: [
+      "3 PIEKIELNY WRZASK",
+      "RZUCONY NA 8+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
@@ -1506,8 +1645,12 @@ export const magic = {
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Modele objęte działaniem zaklęcia
     muszą wykonać test CP. Nieudany test oznacza, że modele Uciekają!. Zaklęcie nie
-    działa na istoty podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    działa na istoty podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1515,48 +1658,80 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 POCISK ZAGŁADY", "RZUCONY NA 7+", `Pocisk Zagłady jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża ZATRUTY ATAK.`],
-    5: ["6 PANDEMONIUM", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Dopóki zaklęcie 'pozostaje w grze' wrogie modele bohaterów i stronników nie mogą
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 POCISK ZAGŁADY",
+      "RZUCONY NA 7+",
+      `Pocisk Zagłady jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża ZATRUTY ATAK.`,
+    ],
+    5: [
+      "6 PANDEMONIUM",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie 'pozostaje w grze' wrogie modele bohaterów i stronników nie mogą
     używać jako podstawy testu wartości współczynnika CECHY PRZYWÓDCZE swojego
     DOWÓDCY. Należy zauważyć, że stronnicy nie mogą korzystać także z żadnych
     modyfikatorów oraz przerzutów testów CP wynikających z umiejętności i zasad
     specjalnych bohaterów. Ponadto, wrogie modele MAGÓW odczuwają PRZEKLEŃSTWO
     TZEENTCHA za każdym razem gdy podczas próby rzucenia zaklęcia wypadną dwa lub
-    więcej naturalne dublety.`],
-    6: ["7 KLĄTWA MROKU", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Mroku ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    więcej naturalne dublety.`,
+    ],
+    6: [
+      "7 KLĄTWA MROKU",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Mroku ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że czarnoksiężnik Fimirów musi
     widzieć swój cel). Dopóki zaklęcie 'pozostaje w grze' wszystkie trafienia zadane ofierze
     klątwy oraz wszystkim sprzymierzonym z postacią modelom w odległości do 6”
     podlegają zasadzie specjalnej ZATRUTY ATAK.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 DECH ŚMIERCI", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 DECH ŚMIERCI",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża ZATRUTY ATAK.`],
-    8: ["9 OKO CIEMNOŚCI", "RZUCONY NA 11+", `Oko Ciemności jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE 4 z cechą oręża ZATRUTY ATAK.`,
+    ],
+    8: [
+      "9 OKO CIEMNOŚCI",
+      "RZUCONY NA 11+",
+      `Oko Ciemności jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża ZATRUTY ATAK.`],
-    9: ["10 ZBROJA DEMONA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża ZATRUTY ATAK.`,
+    ],
+    9: [
+      "10 ZBROJA DEMONA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     rzucającego zaklęcie Fimira, na początku fazy walki wręcz otrzymują jedno trafienie o SILE
-    4 z cechą oręża ZATRUTY ATAK.`],
-    10: ["11 ŻĄDŁO DEMONA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    4 z cechą oręża ZATRUTY ATAK.`,
+    ],
+    10: [
+      "11 ŻĄDŁO DEMONA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża ZATRUTY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, rzucający zaklęcie Fimir władający Żądłem Demona otrzymuje dodatkowy +1
     ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Żądła Demona - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 KLĄTWA FATUM", "RZUCONY NA 15+, POZOSTAJE W GRZE", `Klątwa Fatum ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
+    korzystać tylko z Żądła Demona - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 KLĄTWA FATUM",
+      "RZUCONY NA 15+, POZOSTAJE W GRZE",
+      `Klątwa Fatum ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że czarnoksiężnik Fimirów musi widzieć swój cel). Dopóki
     zaklęcie 'pozostaje w grze' ofiara klątwy zostaje automatycznie Wyłączona z akcji! jeżeli
@@ -1566,10 +1741,14 @@ export const magic = {
     NA BAGNACH GDZIE MROK GĘSTEJ MGŁY
     SEN W PRZERAŹLIWY KOSZMAR ZMIENIA ZŁY
     ŻYJĄ PRZEKLĘTE DEMONY O OKU JEDNYM
-    ZŁOWIESZCZYM I ŚWIATŁOWSTRĘTNYM`],
+    ZŁOWIESZCZYM I ŚWIATŁOWSTRĘTNYM`,
+    ],
   },
   "Dziedzina Chaosu Niepodzielonego": {
-    1: ["1-2 CIĘTA RIPOSTA", "RZUCONY NA 6+", `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
+    1: [
+      "1-2 CIĘTA RIPOSTA",
+      "RZUCONY NA 6+",
+      `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
     model przeciwnika, także związany walką wręcz (wybrany przez kierującego MAGIEM
     gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Chaosu musi widzieć swój
     cel). Objęty działaniem zaklęcia model musi wykonać test WT. Nieudany test oznacza,
@@ -1579,14 +1758,22 @@ export const magic = {
     modele na podstawkach 40x40 mm i większych), który został naznaczony Piętnem
     Chaosu Niepodzielonego. Model taki automatycznie zdaje test WT, ponadto natychmiast
     odzyskuje wszystkie utracone punkty ŻYWOTNOŚCI, a jeśli model był Powalony na
-    ziemię! lub Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`],
-    2: ["3 WIZJA MĘKI", "RZUCONY NA 6+", `Wizja Męki ma zasięg 18” i po udanym rzuceniu może zostać skierowana na pojedynczy
+    ziemię! lub Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`,
+    ],
+    2: [
+      "3 WIZJA MĘKI",
+      "RZUCONY NA 6+",
+      `Wizja Męki ma zasięg 18” i po udanym rzuceniu może zostać skierowana na pojedynczy
     model przeciwnika, także związany walką wręcz (wybrany przez kierującego MAGIEM
     gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik musi widzieć swój cel).
     Ofiara zaklęcia musi wykonać test CP. Nieudany test oznacza, że model zostaje
     Powalony na ziemię!.
-    Czar nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    Czar nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1594,10 +1781,18 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 PALĄCA KREW", "RZUCONY NA 7+", `Paląca Krew jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
-    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY.`],
-    5: ["6 WEZWANIE MOCY", "RZUCONY NA 9+, POZOSTAJE W GRZE", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony lub wrogi model
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 PALĄCA KREW",
+      "RZUCONY NA 7+",
+      `Paląca Krew jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
+    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY.`,
+    ],
+    5: [
+      "6 WEZWANIE MOCY",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony lub wrogi model
     bohatera lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można
     rzucić na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał
     na modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1608,39 +1803,63 @@ export const magic = {
     zostaje zwiększona o +1; zaś 6 oznacza, że dopóki zaklęcie 'pozostaje w grze' wartość
     wszystkich współczynników zostaje zwiększona o +1.
     Należy zauważyć, że dzięki mocy zaklęcia wartość współczynników może zostać
-    zwiększona ponad rasowe maksimum (aż do maksymalnej wartości 10 punktów).`],
-    6: ["7 KLĄTWA DUCHA CHAOSU", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Ducha Chaosu ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    zwiększona ponad rasowe maksimum (aż do maksymalnej wartości 10 punktów).`,
+    ],
+    6: [
+      "7 KLĄTWA DUCHA CHAOSU",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Ducha Chaosu ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik musi widzieć swój
     cel). Dopóki zaklęcie 'pozostaje w grze' wszystkie trafienia zadane ofierze klątwy oraz
     wszystkim sprzymierzonym z postacią modelom w odległości do 6” podlegają zasadzie
     specjalnej OGŁUSZAJĄCY.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 SŁOWO BÓLU", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 SŁOWO BÓLU",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY.`],
-    8: ["9 ŁAŃCUCHY MĘKI", "RZUCONY NA 11+", `Łańcuchy Męki są niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY.`,
+    ],
+    8: [
+      "9 ŁAŃCUCHY MĘKI",
+      "RZUCONY NA 11+",
+      `Łańcuchy Męki są niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża OGŁUSZAJĄCY.`],
-    9: ["10 ZBROJA DUCHA CHAOSU", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 z cechą oręża OGŁUSZAJĄCY.`,
+    ],
+    9: [
+      "10 ZBROJA DUCHA CHAOSU",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarnoksiężnika, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6 z cechą
-    oręża OGŁUSZAJĄCY.`],
-    10: ["11 OSTRZE DUCHA CHAOSU", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    oręża OGŁUSZAJĄCY.`,
+    ],
+    10: [
+      "11 OSTRZE DUCHA CHAOSU",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża OGŁUSZAJĄCY oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Czarnoksiężnik władająca Ostrzem Ducha Chaosu otrzymuje dodatkowy +1
     ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Ostrza Ducha Chaosu - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 POŚWIECENIE", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Czarnoksiężnik przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
+    korzystać tylko z Ostrza Ducha Chaosu - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 POŚWIECENIE",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Czarnoksiężnik przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
     model bohatera lub stronnika znajdujący się w odległości do 12”. Czar może zostać
     rzucony na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem
     działał na modele na podstawkach 40x40 mm i większych), również związany walką
@@ -1651,10 +1870,14 @@ export const magic = {
     Wszystkie modele (wrogie i sprzymierzone), których podstawki są całkowicie przykryte
     wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele, których
     podstawki są częściowo przykryte, dostają się pod działanie zaklęcia na 4+. Objęte
-    działaniem zaklęcia modele otrzymują trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY.`],
+    działaniem zaklęcia modele otrzymują trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY.`,
+    ],
   },
   "Dziedzina Nurgla": {
-    1: ["1-2 WYBORNE WRZODY", "RZUCONY NA 6+", `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
+    1: [
+      "1-2 WYBORNE WRZODY",
+      "RZUCONY NA 6+",
+      `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
     model przeciwnika, także związany walką wręcz (wybrany przez kierującego MAGIEM
     gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Nurgla musi widzieć swój
     cel). Objęty działaniem zaklęcia model musi wykonać test WT. Nieudany test oznacza,
@@ -1664,14 +1887,22 @@ export const magic = {
     modele na podstawkach 40x40 mm i większych), który został naznaczony Piętnem
     Nurgla. Model taki automatycznie zdaje test WT, ponadto natychmiast odzyskuje
     wszystkie utracone punkty ŻYWOTNOŚCI, a jeśli model był Powalony na ziemię! lub
-    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`],
-    2: ["3 DOSKONAŁA LIMFA", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`,
+    ],
+    2: [
+      "3 DOSKONAŁA LIMFA",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz. Do
     początku następnej fazy magii MAGA, ofiara zaklęcia podlega zasadzie specjalnej
-    REGENERACJA.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    REGENERACJA.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1679,11 +1910,19 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 WYŚMIENITE CZYRAKI", "RZUCONY NA 7+", `Wyśmienite Czyraki są magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 WYŚMIENITE CZYRAKI",
+      "RZUCONY NA 7+",
+      `Wyśmienite Czyraki są magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
     magiczny pocisk uderza w cel powodując trafienie o SILE K6 bez możliwości skorzystania
-    z Ochrony Pancerza.`],
-    5: ["6 NAWAŁNICA ZARAZY", "RZUCONY NA 9+", `Nawałnica Zarazy jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    z Ochrony Pancerza.`,
+    ],
+    5: [
+      "6 NAWAŁNICA ZARAZY",
+      "RZUCONY NA 9+",
+      `Nawałnica Zarazy jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
@@ -1696,8 +1935,12 @@ export const magic = {
     modele na podstawkach 40x40 mm i większych), który został naznaczony Piętnem
     Nurgla. Model taki automatycznie zdaje test WT, ponadto natychmiast odzyskuje
     wszystkie utracone punkty ŻYWOTNOŚCI, a jeśli model był Powalony na ziemię! lub
-    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`],
-    6: ["7 KLĄTWA NURGLA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Nurgla ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`,
+    ],
+    6: [
+      "7 KLĄTWA NURGLA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Nurgla ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Nurgla musi
     widzieć swój cel). Dopóki zaklęcie 'pozostaje w grze' ofiara klątwy oraz wszystkie
@@ -1705,32 +1948,52 @@ export const magic = {
     współczynnika SZ zostaje zmniejszona o połowę (ewentualne ułamki należy zaokrąglić
     w górę). Modele podlegające zasadzie specjalnej LOT, nie mogą latać i biegać, jednak wartość
     ich współczynnika SZ pozostaje bez zmian.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 WIATR ZARAZY", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 WIATR ZARAZY",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 bez możliwości skorzystania z Ochrony Pancerza.`],
-    8: ["9 PRZEDNIA ZGNILIZNA", "RZUCONY NA 11+", `Przednia Zgnilizna jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE K6 bez możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    8: [
+      "9 PRZEDNIA ZGNILIZNA",
+      "RZUCONY NA 11+",
+      `Przednia Zgnilizna jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 bez możliwości skorzystania z Ochrony Pancerza.`],
-    9: ["10 ZBROJA NURGLA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 bez możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    9: [
+      "10 ZBROJA NURGLA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarnoksiężnika Nurgla, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6
-    bez możliwości skorzystania z Ochrony Pancerza`],
-    10: ["11 OSTRZE NURGLA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    bez możliwości skorzystania z Ochrony Pancerza`,
+    ],
+    10: [
+      "11 OSTRZE NURGLA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PRZEBICIE PANCERZA oraz premia +3 do SIŁY materializuje się w dłoni
     MAGA. Ponadto, Czarnoksiężnik Chaosu władająca Ostrzem Nurgla otrzymuje dodatkowy
     +1 ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Ostrza Nurgla - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 PRZEŚLICZNY TRĄD", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Prześliczny Trąd ma zasięg 18” i po udanym rzuceniu może zostać skierowany na
+    korzystać tylko z Ostrza Nurgla - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 PRZEŚLICZNY TRĄD",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Prześliczny Trąd ma zasięg 18” i po udanym rzuceniu może zostać skierowany na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Nurgla musi widzieć
     swój cel). Po udanym rzuceniu zaklęcia należy umieścić obok ofiary klątwy sześciościenną
@@ -1739,10 +2002,14 @@ export const magic = {
     większy. Wynik na kostce oznacza ujemny modyfikator do współczynników S i WT jaki
     otrzymuje ofiara klątwy. Jeśli w wyniku działania czaru wartość współczynników zostanie
     obniżona do 0, model zostaje natychmiast Wyłączony z akcji!.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
   },
   "Dziedzina Slaanesha": {
-    1: ["1-2 BŁOGA AGONIA", "RZUCONY NA 6+", `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
+    1: [
+      "1-2 BŁOGA AGONIA",
+      "RZUCONY NA 6+",
+      `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
     model przeciwnika, także związany walką wręcz (wybrany przez kierującego MAGIEM
     gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Chaosu musi widzieć swój
     cel). Objęty działaniem zaklęcia model musi wykonać test WT. Nieudany test oznacza,
@@ -1752,8 +2019,12 @@ export const magic = {
     modele na podstawkach 40x40 mm i większych), który został naznaczony Piętnem
     Slaanesha. Model taki automatycznie zdaje test WT, ponadto natychmiast odzyskuje
     wszystkie utracone punkty ŻYWOTNOŚCI, a jeśli model był Powalony na ziemię! lub
-    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`],
-    2: ["3 KLĄTWA TAŃCA ROZKOSZY", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Klątwa Tańca Rozkoszy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`,
+    ],
+    2: [
+      "3 KLĄTWA TAŃCA ROZKOSZY",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Klątwa Tańca Rozkoszy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Chaosu musi widzieć swój cel). Dopóki
     zaklęcie 'pozostaje w grze' ofiara klątwy w ramach ruchów przymusowych w czasie
@@ -1761,8 +2032,12 @@ export const magic = {
     gdy na Kostce Rozrzutu wypadnie wynik TRAFIENIE!, kierunek ruchu wybiera kierujący
     MAGIEM gracz). Jeżeli ruch oznaczałby wejście w kontakt z innym modelem, należy
     zatrzymać dotkniętą działaniem zaklęcia postać 1” od modelu.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1770,14 +2045,26 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 CUDOWNE MĘKI", "RZUCONY NA 7+", `Cudowne Męki są magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
-    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża PRECYZYJNE UDERZENIE.`],
-    5: ["6 FANTASMAGORIA", "RZUCANY NA 10+, POZOSTAJE W GRZE", `Dopóki zaklęcie 'pozostaje w grze', wszystkie wrogie modele znajdujące się na stole
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 CUDOWNE MĘKI",
+      "RZUCONY NA 7+",
+      `Cudowne Męki są magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
+    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża PRECYZYJNE UDERZENIE.`,
+    ],
+    5: [
+      "6 FANTASMAGORIA",
+      "RZUCANY NA 10+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie 'pozostaje w grze', wszystkie wrogie modele znajdujące się na stole
     przeprowadzając test oparty na współczynniku CP wykonują rzut 3K6 odrzucając
     kostkę z najniższym wynikiem.
-    Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`],
-    6: ["7 KLĄTWA SLAANESHA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Slaanesha ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.`,
+    ],
+    6: [
+      "7 KLĄTWA SLAANESHA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Slaanesha ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Chaosu musi
     widzieć swój cel). Dopóki zaklęcie 'pozostaje w grze' ofiara klątwy oraz wszystkie
@@ -1785,32 +2072,52 @@ export const magic = {
     GŁUPOTA. Ponadto, model przeprowadzając test oparty na współczynniku CP
     wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem. Zaklęcie nie działa na
     modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 PIEKIELNY KRZYK", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 PIEKIELNY KRZYK",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 z cechą oręża PRECYZYJNE UDERZENIE.`],
-    8: ["9 PIESZCZOTA SLAANESHA", "RZUCONY NA 11+", `Pieszczota Slaanesha jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE K6 z cechą oręża PRECYZYJNE UDERZENIE.`,
+    ],
+    8: [
+      "9 PIESZCZOTA SLAANESHA",
+      "RZUCONY NA 11+",
+      `Pieszczota Slaanesha jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża PRECYZYJNE UDERZENIE.`],
-    9: ["10 ZBROJA SLAANESHA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 z cechą oręża PRECYZYJNE UDERZENIE.`,
+    ],
+    9: [
+      "10 ZBROJA SLAANESHA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarnoksiężnika Slaanesha, na początku fazy walki wręcz otrzymują jedno trafienie o SILE
-    K6 z cechą oręża PRECYZYJNE UDERZENIE.`],
-    10: ["11 OSTRZE SLAANESHA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    K6 z cechą oręża PRECYZYJNE UDERZENIE.`,
+    ],
+    10: [
+      "11 OSTRZE SLAANESHA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PRECYZYJNE UDERZENIE oraz premia +3 do SIŁY materializuje się w dłoni
     MAGA. Ponadto, Czarnoksiężnik Chaosu władająca Ostrzem Slaanesha otrzymuje
     dodatkowy +1 ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem
-    może korzystać tylko z Ostrza Slaanesha - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 ZACHWYCAJĄCE SPAZMY", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Zachwycające Spazmy mają zasięg 18”. Po udanym rzuceniu zaklęcia należy użyć 3”
+    może korzystać tylko z Ostrza Slaanesha - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 ZACHWYCAJĄCE SPAZMY",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Zachwycające Spazmy mają zasięg 18”. Po udanym rzuceniu zaklęcia należy użyć 3”
     okrągłego wzornika i przykryć nim wybrany na cel model przeciwnika. Wszystkie
     modele (wrogie i sprzymierzone), których podstawki są całkowicie przykryte
     wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele, których
@@ -1820,10 +2127,14 @@ export const magic = {
     działaniu zaklęcia modele trafiają automatycznie (model traktowany jest tak, jakby
     wartość współczynnika WALKA WRĘCZ wynosiła 0). Zaklęcie nie działa na modele
     podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
   },
   "Dziedzina Tzeentcha": {
-    1: ["1-2 WEWNĘTRZNY OGIEŃ", "RZUCONY NA 6+", `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
+    1: [
+      "1-2 WEWNĘTRZNY OGIEŃ",
+      "RZUCONY NA 6+",
+      `Czar ma zasięg 12” i po udanym rzuceniu może zostać skierowany na pojedynczy
     model przeciwnika, także związany walką wręcz (wybrany przez kierującego MAGIEM
     gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Chaosu musi widzieć swój
     cel). Objęty działaniem zaklęcia model musi wykonać test WT. Nieudany test oznacza,
@@ -1833,15 +2144,23 @@ export const magic = {
     modele na podstawkach 40x40 mm i większych), który został naznaczony Piętnem
     Tzeentcha. Model taki automatycznie zdaje test WT, ponadto natychmiast odzyskuje
     wszystkie utracone punkty ŻYWOTNOŚCI, a jeśli model był Powalony na ziemię! lub
-    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`],
-    2: ["3 POMARAŃCZOWY OGIEŃ", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    Oszołomiony!, to natychmiast wstaje i kontynuuje turę normalnie.`,
+    ],
+    2: [
+      "3 POMARAŃCZOWY OGIEŃ",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz. Do
     początku następnej fazy magii MAGA, ofiara zaklęcia może przerzucić wszystkie
     nieudane testy na trafienie, zranienie oraz Ochronę Pancerza i Ochronę Magiczną. Wynik
-    drugiego rzutu jest ostateczny.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    drugiego rzutu jest ostateczny.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1849,49 +2168,81 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 BŁĘKITNY OGIEŃ", "RZUCONY NA 7+", `Błękitny Ogień jest magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`],
-    5: ["6 PANDEMONIUM", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Dopóki zaklęcie 'pozostaje w grze' wrogie modele bohaterów i stronników nie mogą
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 BŁĘKITNY OGIEŃ",
+      "RZUCONY NA 7+",
+      `Błękitny Ogień jest magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    5: [
+      "6 PANDEMONIUM",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie 'pozostaje w grze' wrogie modele bohaterów i stronników nie mogą
     używać jako podstawy testu wartość współczynnika CECHY PRZYWÓDCZE swojego
     DOWÓDCY. Należy zauważyć, że stronnicy nie mogą korzystać także z żadnych
     modyfikatorów oraz przerzutów testów CP wynikających z umiejętności i zasad
     specjalnych bohaterów. Ponadto, wrogie modele MAGÓW odczuwają PRZEKLEŃSTWO
     TZEENTCHA za każdym razem gdy podczas próby rzucenia zaklęcia wypadną dwa lub
-    więcej naturalne dublety.`],
-    6: ["7 KLĄTWA TZEENTCHA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Tzeentcha ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
+    więcej naturalne dublety.`,
+    ],
+    6: [
+      "7 KLĄTWA TZEENTCHA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Tzeentcha ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik Chaosu musi
     widzieć swój cel). Dopóki zaklęcie 'pozostaje w grze' ofiara klątwy oraz wszystkie
     sprzymierzone z postacią modele w odległości do 6” mogą zostać obrane na cel czarów
     oraz ataków bronią dystansową, które podlegają zasadzie specjalnej PŁONĄCY ATAK nawet,
     jeśli atakujący nie widzi celu lub przeklęty model Ukrywa się.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 OGNISTE TCHNIENIE", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 OGNISTE TCHNIENIE",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`],
-    8: ["9 RÓŻOWY OGIEŃ", "RZUCONY NA 11+", `Różowy Ogień jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
+    otrzymują trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    8: [
+      "9 RÓŻOWY OGIEŃ",
+      "RZUCONY NA 11+",
+      `Różowy Ogień jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża PŁONĄCY ATAK.`],
-    9: ["10 ZBROJA TZEENTCHA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    9: [
+      "10 ZBROJA TZEENTCHA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarnoksiężnika Chaosu, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6
-    z cechą oręża PŁONĄCY ATAK.`],
-    10: ["11 OSTRZE TZEENTCHA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    10: [
+      "11 OSTRZE TZEENTCHA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PŁONĄCY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Czarnoksiężnik Chaosu władający Ostrzem Tzeentcha otrzymuje dodatkowy +1
     ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Ostrza Tzeentcha - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 POKUSA TZEENTCHA", "RZUCONY NA 12+", `Pokusa Tzeentcha ma zasięg 24”. Po udanym rzuceniu zaklęcia należy użyć 3” okrągłego
+    korzystać tylko z Ostrza Tzeentcha - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 POKUSA TZEENTCHA",
+      "RZUCONY NA 12+",
+      `Pokusa Tzeentcha ma zasięg 24”. Po udanym rzuceniu zaklęcia należy użyć 3” okrągłego
     wzornika i przykryć nim wybrany na cel model przeciwnika. Wszystkie modele (wrogie
     i sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
@@ -1899,14 +2250,22 @@ export const magic = {
     zadaje sobie jedno automatyczne trafienie losowo określoną bronią do walki wręcz. Rzut
     na zranienie wykonuje się z SIŁĄ objętego działaniem klątwy modelu.
     Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
   },
   "Dziedzina Hashuta": {
-    1: ["1-2 WOLA HASHUTA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    1: [
+      "1-2 WOLA HASHUTA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 8" od Czarnoksiężnika, również takie, które walczą wręcz. Dopóki
     zaklęcie 'pozostaje w grze' modele objęte działaniem zaklęcia wykonują rzut na zranienie
-    3K6 odrzucając kostkę z najniższym wynikiem.`],
-    2: ["3 BYCZY PĘD", "RZUCONY NA 7+", `Każdy sprzymierzony model bohatera lub stronnika znajdujący się w odległości do 8" od
+    3K6 odrzucając kostkę z najniższym wynikiem.`,
+    ],
+    2: [
+      "3 BYCZY PĘD",
+      "RZUCONY NA 7+",
+      `Każdy sprzymierzony model bohatera lub stronnika znajdujący się w odległości do 8" od
     Czarnoksiężnika wykonuje niezwłocznie ruch o K6" (należy wykonać oddzielny rzut dla
     każdego modelu) w kierunku najbliższego widocznego wroga, najkrótszą możliwą
     drogą, stosując zwykłe kary za teren – jeśli objęty działaniem zaklęcia model nie widzi
@@ -1914,8 +2273,12 @@ export const magic = {
     kontaktu z wrogiem, to jest to równoznaczne z szarżą – wykonujący ruch model nie
     musi przeprowadzać żadnych testów PSYCHOLOGICZNYCH, które obowiązywały go
     podczas zwykłej szarży. Zaatakowana w ten sposób postać może wybrać jako reakcję na
-    szarżę jedynie trzymać pozycje bądź Uciekać!. Zaklęcie nie działa na modele, które Uciekają!.`],
-    3: ["4 SKRZYDŁA ZAGANA", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    szarżę jedynie trzymać pozycje bądź Uciekać!. Zaklęcie nie działa na modele, które Uciekają!.`,
+    ],
+    3: [
+      "4 SKRZYDŁA ZAGANA",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 8”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1923,10 +2286,18 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 CZARNY OGIEŃ", "RZUCONY NA 7+", `Czarny Ogień jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
-    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`],
-    5: ["6 WEZWANIE MOCY", "RZUCONY NA 9+, POZOSTAJE W GRZE", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony lub wrogi model
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 CZARNY OGIEŃ",
+      "RZUCONY NA 7+",
+      `Czarny Ogień jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
+    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    5: [
+      "6 WEZWANIE MOCY",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony lub wrogi model
     bohatera lub stronnika w odległości do 8”, nawet jeśli go nie widzi. Zaklęcie można rzucić
     na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -1937,39 +2308,63 @@ export const magic = {
     zostaje zwiększona o +1; zaś 6 oznacza, że dopóki zaklęcie 'pozostaje w grze' wartość
     wszystkich współczynników zostaje zwiększona o +1.
     Należy zauważyć, że dzięki mocy zaklęcia wartość współczynników może zostać
-    zwiększona ponad rasowe maksimum (aż do maksymalnej wartości 10 punktów).`],
-    6: ["7 KLĄTWA HASHUTA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Hashuta ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    zwiększona ponad rasowe maksimum (aż do maksymalnej wartości 10 punktów).`,
+    ],
+    6: [
+      "7 KLĄTWA HASHUTA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Hashuta ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Czarnoksiężnik musi widzieć swój
     cel). Dopóki zaklęcie 'pozostaje w grze' wszystkie trafienia zadane ofierze klątwy oraz
     wszystkim sprzymierzonym z postacią modelom w odległości do 4” podlegają zasadzie
     specjalnej PŁONĄCY ATAK.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE OJCA CIEMNOŚCI", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE OJCA CIEMNOŚCI",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`],
-    8: ["9 OGIEŃ HASHUTA", "RZUCONY NA 11+", `Ogień Hashuta jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    8: [
+      "9 OGIEŃ HASHUTA",
+      "RZUCONY NA 11+",
+      `Ogień Hashuta jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża PŁONĄCY ATAK.`],
-    9: ["10 ZBROJA HASHUTA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    9: [
+      "10 ZBROJA HASHUTA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarnoksiężnika Krasnoludów Chaosu, na początku fazy walki wręcz otrzymują jedno
-    trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`],
-    10: ["11 OSTRZE HASHUTA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    10: [
+      "11 OSTRZE HASHUTA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PŁONĄCY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Czarnoksiężnik władający Ostrzem Hashuta otrzymuje dodatkowy +1 ATAK, a
     wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko
-    z Ostrza Hashuta - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 POŚWIECENIE", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Czarnoksiężnik przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
+    z Ostrza Hashuta - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 POŚWIECENIE",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Czarnoksiężnik przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
     model bohatera lub stronnika znajdujący się w odległości do 12”. Czar może zostać
     rzucony na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem
     działał na modele na podstawkach 40x40 mm i większych), również związany walką
@@ -1980,12 +2375,20 @@ export const magic = {
     Wszystkie modele (wrogie i sprzymierzone), których podstawki są całkowicie przykryte
     wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele, których
     podstawki są częściowo przykryte, dostają się pod działanie zaklęcia na 4+. Objęte
-    działaniem zaklęcia modele otrzymują trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`],
+    działaniem zaklęcia modele otrzymują trafienie o SILE K6 z cechą oręża PŁONĄCY ATAK.`,
+    ],
   },
   "Dziedzina Dziczy": {
-    1: ["1-2 WŁADCA BESTII", "RZUCONY AUTOMATYCZNIE", `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
-    PRZYWOŁANIE (Wilczarz Chaosu).`],
-    2: ["3 ZWIERZĘCY PĘD", "RZUCONY NA 7+", `Każdy sprzymierzony model bohatera lub stronnika znajdujący się w odległości do 12"
+    1: [
+      "1-2 WŁADCA BESTII",
+      "RZUCONY AUTOMATYCZNIE",
+      `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
+    PRZYWOŁANIE (Wilczarz Chaosu).`,
+    ],
+    2: [
+      "3 ZWIERZĘCY PĘD",
+      "RZUCONY NA 7+",
+      `Każdy sprzymierzony model bohatera lub stronnika znajdujący się w odległości do 12"
     od Szamana Zwierzoludzi wykonuje niezwłocznie ruch o K6" (należy wykonać
     oddzielny rzut dla każdego modelu) w kierunku najbliższego widocznego wroga,
     najkrótszą możliwą drogą, stosując zwykłe kary za teren – jeśli objęty działaniem
@@ -1994,8 +2397,12 @@ export const magic = {
     wykonujący ruch model nie musi przeprowadzać żadnych testów
     PSYCHOLOGICZNYCH, które obowiązywały go podczas zwykłej szarży. Zaatakowana
     w ten sposób postać może wybrać jako reakcję na szarżę jedynie trzymać pozycje bądź
-    Uciekać!. Zaklęcie nie działa na modele, które Uciekają!.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    Uciekać!. Zaklęcie nie działa na modele, które Uciekają!.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2003,22 +2410,38 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 PLUGAWY RÓJ", "RZUCONY NA 7+", `Plugawy Rój jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 PLUGAWY RÓJ",
+      "RZUCONY NA 7+",
+      `Plugawy Rój jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
     pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY bez
-    możliwości skorzystania z Ochrony Pancerza.`],
-    5: ["6 SKÓRA RAZORGORA", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    5: [
+      "6 SKÓRA RAZORGORA",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 12" od Szamana Zwierzoludzi, również takie, które walczą wręcz. Dopóki
     zaklęcie 'pozostaje w grze' modele otrzymują premię +2 do Ochrony Pancerza (do
-    maksymalnego poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.`],
-    6: ["7 KLĄTWA DZICZY", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Dziczy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    maksymalnego poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.`,
+    ],
+    6: [
+      "7 KLĄTWA DZICZY",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Dziczy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Szaman Zwierzoludzi musi widzieć
     swój cel). Dopóki zaklęcie 'pozostaje w grze' ofiara klątwy oraz wszystkie sprzymierzone
     z postacią modele w odległości do 6” traktowane są tak jakby poruszały się po terenie
     bardzo trudnym i terenie niebezpiecznym.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE ENTROPII", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE ENTROPII",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
@@ -2026,42 +2449,70 @@ export const magic = {
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
     otrzymują trafienie o SILE K6 z cechą oręża OGŁUSZAJĄCY bez możliwości skorzystania z
-    Ochrony Pancerza.`],
-    8: ["9 CHMARA INSEKTÓW", "RZUCONY NA 11+", `Chmara Insektów jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    Ochrony Pancerza.`,
+    ],
+    8: [
+      "9 CHMARA INSEKTÓW",
+      "RZUCONY NA 11+",
+      `Chmara Insektów jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża OGŁUSZAJĄCY bez możliwości skorzystania z Ochrony Pancerza.`],
-    9: ["10 ZBROJA DZICZY", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
+    K6 z cechą oręża OGŁUSZAJĄCY bez możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    9: [
+      "10 ZBROJA DZICZY",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na K6+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Szamana Zwierzoludzi, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6 z
-    cechą oręża OGŁUSZAJĄCY bez możliwości skorzystania z Ochrony Pancerza.`],
-    10: ["11 OSTRZE RYKOWCA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    cechą oręża OGŁUSZAJĄCY bez możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    10: [
+      "11 OSTRZE RYKOWCA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża OGŁUSZAJĄCY oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Szaman Zwierzoludzi władająca Ostrzem Rykowca otrzymuje dodatkowy +1
     ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Ostrza Rykowca - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 GNIEW GHOROKA", "RZUCONY NA 13+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie lub też na dowolnego, sprzymierzonego bohatera
+    korzystać tylko z Ostrza Rykowca - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 GNIEW GHOROKA",
+      "RZUCONY NA 13+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie lub też na dowolnego, sprzymierzonego bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Czar może zostać rzucony
     na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
     Cel zaklęcia staje się dziki i potężny niczym Minotaur. Uzyskuje zdolność broń
     naturalna, +3 ATAKI, +2 do SIŁY oraz +1 do WT. Model pozostający pod wpływem
-    zaklęcia, nie może używać oręża, tarczy & pancerza.`],
+    zaklęcia, nie może używać oręża, tarczy & pancerza.`,
+    ],
   },
   "Dziedzina Nekromancji": {
-    1: ["1-2 INWOKACJA NEHEK", "RZUCONY AUTOMATYCZNIE", `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
-    PRZYWOŁANIE (Zombie).`],
-    2: ["3 MROK I ZAGŁADA!", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Mrok i Zagłada! ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    1: [
+      "1-2 INWOKACJA NEHEK",
+      "RZUCONY AUTOMATYCZNIE",
+      `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
+    PRZYWOŁANIE (Zombie).`,
+    ],
+    2: [
+      "3 MROK I ZAGŁADA!",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Mrok i Zagłada! ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Nekromanta musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze' ofiara klątwy przeprowadzając test oparty na współczynniku CP
     wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem.
     Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2069,24 +2520,40 @@ export const magic = {
     16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
-    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`],
-    4: ["5 ETERYCZNA ISKRA", "RZUCONY NA 7+", `Eteryczna Iskra jest magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
+    której brał udział, ale w takim wypadku nie będzie mógł szarżować.`,
+    ],
+    4: [
+      "5 ETERYCZNA ISKRA",
+      "RZUCONY NA 7+",
+      `Eteryczna Iskra jest magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
     magiczny pocisk uderza w cel powodując trafienie o SILE 4 bez możliwości skorzystania z
-    Ochrony Pancerza.`],
-    5: ["6 ZEW VANHELA", "RZUCONY NA 8+", `Czar oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się w
+    Ochrony Pancerza.`,
+    ],
+    5: [
+      "6 ZEW VANHELA",
+      "RZUCONY NA 8+",
+      `Czar oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się w
     odległości do 12" od Nekromanty, które podlegają zasadzie specjalnej NIEUMARŁY. Objęte
     działaniem czaru modele mogą wykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
-    że nie można próbować przejąć szarży modelu, który odpowiedział na Zew Vanhela).`],
-    6: ["7 KLĄTWA STAROŚCI", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
+    że nie można próbować przejąć szarży modelu, który odpowiedział na Zew Vanhela).`,
+    ],
+    6: [
+      "7 KLĄTWA STAROŚCI",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
     odległości do 18" i w polu widzenia MAGA. Po udanym rzuceniu zaklęcia należy umieścić
     obok ofiary czaru sześciościenną kostkę, tak aby wskazywała wynik ‘6’. Dopóki zaklęcie
     'pozostaje w grze', na początku każdej kolejnej fazy magii Nekromanty należy obracać
     kostkę tak, by wskazywała wynik o 1 mniejszy. Następnie należy wykonać rzut K6.
     Jeżeli wynik rzutu jest równy lub wyższy od wartości wskazywanej przez umieszczoną
     obok ofiary zaklęcia kostkę, to model zostaje natychmiast Wyłączony z akcji!.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 WSKRZESZENIE", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny sprzymierzony model stronnika podlegający
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 WSKRZESZENIE",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny sprzymierzony model stronnika podlegający
     zasadzie specjalnej NIEUMARŁY, który został Wyłączony z akcji!, a który znajduje się w polu
     widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć wzornika płomienia w ten
     sposób, że cieńszy jego koniec dotyka podstawki MAGA, a szeroki przykrywa wybrany
@@ -2099,24 +2566,40 @@ export const magic = {
     normalnie, od momentu powstania model należy traktować tak, jakby wciąż posiadał 1
     punkt ŻW. Wskrzeszeni NIEUMARLI, jeśli przetrwają potyczkę rozpadają się w pył po
     zakończeniu rozgrywki, a w czasie sekwencji po potyczce dla każdego takiego modelu
-    stronnika należy wykonać rzut na TABELĘ POWAŻNYCH OBRAŻEŃ.`],
-    8: ["9 CZEREP TRUPA", "RZUCONY NA 11+", `Czerep Trupa jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
+    stronnika należy wykonać rzut na TABELĘ POWAŻNYCH OBRAŻEŃ.`,
+    ],
+    8: [
+      "9 CZEREP TRUPA",
+      "RZUCONY NA 11+",
+      `Czerep Trupa jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 bez możliwości skorzystania z Ochrony Pancerza.`],
-    9: ["10 MARMUROWA SKÓRA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 bez możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    9: [
+      "10 MARMUROWA SKÓRA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Nekromanty, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4 bez
-    możliwości skorzystania z Ochrony Pancerza.`],
-    10: ["11 OSTRZE TRUPA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    10: [
+      "11 OSTRZE TRUPA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PRZEBICIE PANCERZA oraz premia +3 do SIŁY materializuje się w dłoni
     MAGA. Ponadto, Nekromanta władający Ostrzem Trupa otrzymuje dodatkowy +1 ATAK,
     a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko
-    z Ostrza Trupa - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 CIELESNA EKSPLOZJA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
+    z Ostrza Trupa - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 CIELESNA EKSPLOZJA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG przyzywa bluźnierczą moc Dhar, którą oplata dowolny sprzymierzony
     NIEUMARŁY model bohatera lub stronnika znajdujący się w odległości do 12”. Czar może
     zostać rzucony na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie
     zatem działał na modele na podstawkach 40x40 mm i większych), również związany
@@ -2128,19 +2611,31 @@ export const magic = {
     przykryte wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele,
     których podstawki są częściowo przykryte, dostają się pod działanie zaklęcia na 4+.
     Objęte działaniem zaklęcia modele otrzymują trafienie o SILE 4 bez możliwości
-    skorzystania z Ochrony Pancerza.`],
+    skorzystania z Ochrony Pancerza.`,
+    ],
   },
   "Dziedzina Nehekary": {
-    1: ["1-2 INKANTACJA KHEPRY", "RZUCONY AUTOMATYCZNIE", `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
-    PRZYWOŁANIE (Rój).`],
-    2: ["3 INKANTACJA USIRIANA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które
+    1: [
+      "1-2 INKANTACJA KHEPRY",
+      "RZUCONY AUTOMATYCZNIE",
+      `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
+    PRZYWOŁANIE (Rój).`,
+    ],
+    2: [
+      "3 INKANTACJA USIRIANA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które
     muszą znajdować się w odległości do 24” od MAGA. Wrota należy traktować jak
     ‘zwykłe’ drzwi, przez które modelmożewykonać ruch jak w fazie ruchu, który może być
     również ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z
     wyjątkiem tego, że nie można próbować przejąć szarżymodelu, który przekroczył wrota
     przywołane Inkantacją Usiriana).
-    `],
-    3: ["4 INKANTACJA PTRY", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    `,
+    ],
+    3: [
+      "4 INKANTACJA PTRY",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2149,26 +2644,42 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 INKANTACJA PHAKTHA", "RZUCONY NA 7+", `Inkantacja Phaktha jest magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
+    `,
+    ],
+    4: [
+      "5 INKANTACJA PHAKTHA",
+      "RZUCONY NA 7+",
+      `Inkantacja Phaktha jest magicznym pociskiem o zasięgu 24”. Po udanym rzuceniu zaklęcia
     magiczny pocisk uderza w cel powodując trafienie o SILE 4 bez możliwości skorzystania z
     Ochrony Pancerza.
-    `],
-    5: ["6 INKANTACJA KHSARA", "RZUCONY NA 8+", `Czar oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się w
+    `,
+    ],
+    5: [
+      "6 INKANTACJA KHSARA",
+      "RZUCONY NA 8+",
+      `Czar oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się w
     odległości do 12" od Nekromanty, które podlegają zasadzie specjalnej NIEUMARŁY. Objęte
     działaniem czaru modele mogą wykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
     że nie można próbować przejąć szarży modelu, który wykonał ruch dzięki Inkantacji
-    Khsara).`],
-    6: ["7 INKANTACJA USEKPHA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
+    Khsara).`,
+    ],
+    6: [
+      "7 INKANTACJA USEKPHA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
     odległości do 24" i w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy umieścić
     obok ofiary czaru sześciościenną kostkę, tak aby wskazywała wynik ‘6’. Dopóki zaklęcie
     'pozostaje w grze', na początku każdej kolejnej fazy magii Licza należy obracać kostkę
     tak, by wskazywała wynik o 1mniejszy. Następnie należy wykonać rzut K6. Jeżeli wynik
     rzutu jest równy lub wyższy od wartości wskazywanej przez umieszczoną obok ofiary
     zaklęcia kostkę, to model zostaje natychmiast Wyłączony z akcji!.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz`],
-    7: ["8 INKANTACJA SAKHMETY", "RZUCONY NA 11+", `Zaklęcie może zostać rzucone na dowolny sprzymierzony model stronnika podlegający
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz`,
+    ],
+    7: [
+      "8 INKANTACJA SAKHMETY",
+      "RZUCONY NA 11+",
+      `Zaklęcie może zostać rzucone na dowolny sprzymierzony model stronnika podlegający
     zasadzie specjalnej NIEUMARŁY, który został Wyłączony z akcji!, a który znajduje się w polu
     widzenia MAGA. Po udanym rzuceniu zaklęcia należy użyć wzornika płomienia w ten
     sposób, że cieńszy jego koniec dotyka podstawki MAGA, a szeroki przykrywa wybrany
@@ -2181,33 +2692,53 @@ export const magic = {
     normalnie, od momentu powstania model należy traktować tak, jakbywciąż posiadał 1
     punkt ŻW. Wskrzeszeni NIEUMARLI, jeśli przetrwają potyczkę rozpadają się w pył po
     zakończeniu rozgrywki, a w czasie sekwencji po potyczce dla każdego takiego modelu
-    stronnika należy wykonać rzut na TABELĘ POWAŻNYCH OBRAŻEŃ`],
-    8: ["9 INKANTACJA QU’APH", "RZUCONY NA 11+", `Inkantacja Qu’aph jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
+    stronnika należy wykonać rzut na TABELĘ POWAŻNYCH OBRAŻEŃ`,
+    ],
+    8: [
+      "9 INKANTACJA QU’APH",
+      "RZUCONY NA 11+",
+      `Inkantacja Qu’aph jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 bez możliwości skorzystania z Ochrony Pancerza.`],
-    9: ["10 INKANTACJA NERU", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 bez możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    9: [
+      "10 INKANTACJA NERU",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Licza, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4 bez możliwości
     skorzystania z Ochrony Pancerza.
-    `],
-    10: ["11 INKANTACJA DJAFA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    `,
+    ],
+    10: [
+      "11 INKANTACJA DJAFA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PRZEBICIE PANCERZA oraz premia +3 do SIŁY materializuje się w dłoni
     MAGA. Ponadto, Licz władający ostrzem Djafa otrzymuje dodatkowy +1 ATAK, a
     wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko
-    z ostrzem Djafa - magicznego oręża nie można łączyć z inną bronią`],
-    11: ["12 INKANTACJA SOKTHA", "RZUCONY NA 15+, POZOSTAJE W GRZE", `Inkantacja Soktha ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
+    z ostrzem Djafa - magicznego oręża nie można łączyć z inną bronią`,
+    ],
+    11: [
+      "12 INKANTACJA SOKTHA",
+      "RZUCONY NA 15+, POZOSTAJE W GRZE",
+      `Inkantacja Soktha ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Licz musi widzieć swój cel). Dopóki zaklęcie 'pozostaje
     w grze' ofiara klątwy zostaje automatycznie Wyłączona z akcji! jeżeli zostanie trafiona.
     Model może znajdować się pod działaniem tylko jednej klątwy na raz.
-    `],
+    `,
+    ],
   },
   "Tradycja Skrytości": {
-    1: ["1-2 ROZMYCIE POSTACI", "RZUCONY NA 7+, POZOSTAJE W GRZE", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    1: [
+      "1-2 ROZMYCIE POSTACI",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2215,13 +2746,21 @@ export const magic = {
     swojej prawdziwej pozycji, a wszystkie ataki (zarówno w fazie strzelania jak i w fazie walki
     wręcz) wymierzone w poddany działaniu zaklęcia model wykonywane są z karą -1 do
     rzutu na trafienie.
-    `],
-    2: ["3 SPACZPORTAL", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
+    `,
+    ],
+    2: [
+      "3 SPACZPORTAL",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
     znajdować się w odległości do 24” od MAGA. Wrota należy traktować jak ‘zwykłe’
     drzwi, przez które modelmożewykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
-    że nie można próbować przejąć szarży modelu, który przekroczył Spaczportal).`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    że nie można próbować przejąć szarży modelu, który przekroczył Spaczportal).`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2230,66 +2769,110 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 ODDECH ŚMIERCI", "RZUCONY NA 7+", `Czarny Ogień jest magicznym pociskiemo zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
-    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża SKRYTOBÓJCZY.`],
-    5: ["6 WIDMOWY MARSZ", "RZUCONY NA 9+", `Czar oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się w
+    `,
+    ],
+    4: [
+      "5 ODDECH ŚMIERCI",
+      "RZUCONY NA 7+",
+      `Czarny Ogień jest magicznym pociskiemo zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
+    pocisk uderza w cel powodując trafienie o SILE K6 z cechą oręża SKRYTOBÓJCZY.`,
+    ],
+    5: [
+      "6 WIDMOWY MARSZ",
+      "RZUCONY NA 9+",
+      `Czar oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się w
     odległości do 12" od Czarownika. Objęte działaniem czaru modele mogą wykonać ruch
     jak w fazie ruchu, który może być również ruchem szarży (szarża ta podlegać będzie
     wszystkim zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży
-    modelu, który wykonał Widmowy Ruch).`],
-    6: ["7 KLĄTWA SKRYTOBÓJCY", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Skrytobójcy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    modelu, który wykonał Widmowy Ruch).`,
+    ],
+    6: [
+      "7 KLĄTWA SKRYTOBÓJCY",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Skrytobójcy ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Czarownik musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze' ofiara klątwy oraz wszystkie sprzymierzone z postacią modele w
     odległości do 6” mogą zostać obrane na cel czarów typu magiczny pocisk oraz ataków
     bronią dystansową nawet, jeśli atakujący nie widzi celu lub przeklęty model Ukrywa się.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE ZNISZCZENIA", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE ZNISZCZENIA",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża SKRYTOBÓJCZY.`],
-    8: ["9 POCISK ZAGŁADY", "RZUCONY NA 11+", `Tnij-Rąb jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po udanym
+    otrzymują trafienie o SILE 4 z cechą oręża SKRYTOBÓJCZY.`,
+    ],
+    8: [
+      "9 POCISK ZAGŁADY",
+      "RZUCONY NA 11+",
+      `Tnij-Rąb jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po udanym
     rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany na cel
     model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których podstawki są
     całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te
     modele, których podstawki są częściowo przykryte, dostają się pod działanie zaklęcia
     na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE K6 z cechą oręża
-    SKRYTOBÓJCZY.`],
-    9: ["10 ZBROJA SKRYTOBÓJCY", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    SKRYTOBÓJCZY.`,
+    ],
+    9: [
+      "10 ZBROJA SKRYTOBÓJCY",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarownika, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6 z cechą oręża
-    SKRYTOBÓJCZY.`],
-    10: ["11 OSTRZE SKRYTOBÓJCY", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    SKRYTOBÓJCZY.`,
+    ],
+    10: [
+      "11 OSTRZE SKRYTOBÓJCY",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża ZATRUTY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Czarownikwładający Spaczostrzemotrzymuje dodatkowy +1 ATAK, a wszystkie
     ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko ze
-    Spaczostrza - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 TARCZA SKRYTOBÓJCÓW", "RZUCONY NA 15+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    Spaczostrza - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 TARCZA SKRYTOBÓJCÓW",
+      "RZUCONY NA 15+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 12" od Czarownika, również takie, które walczą wręcz. Dopóki zaklęcie
     'pozostaje w grze' modele pozostające w zasięgu działania zaklęcia otrzymują Magiczną
     Ochronę na 4+, ponadto wrogie postacie atakujące modele chronione Spacztarczą
     otrzymują modyfikator -1 do rzutu na trafienie.
-    `],
+    `,
+    ],
   },
   "Tradycja Spaczmagii": {
-    1: ["1-2 POTĘGA SPACZMAGII", "RZUCONY NA 6+", `Po udanym rzuceniu zaklęcia Potęga Spaczmagii, MAG uzyskuje natychmiast dodatkowe
+    1: [
+      "1-2 POTĘGA SPACZMAGII",
+      "RZUCONY NA 6+",
+      `Po udanym rzuceniu zaklęcia Potęga Spaczmagii, MAG uzyskuje natychmiast dodatkowe
     K3 Kostki Mocy. Kostki te dodawane są do tych, które pozostają w dyspozycji Szarego
     Proroka, ale należy trzymać je oddzielnie lub użyć kostek innego koloru. Dodatkowych
     kostek nie można używać do rozpraszania czarów pozostających w grze, ani w
     jakikolwiek sposób przechowywać ich z tury na turę. Za każdą niewykorzystaną na
     koniec fazy magii Kostkę Mocy MAG otrzymuje automatyczne trafienie o SILE K6.
-    `],
-    2: ["3 SPACZPORTAL", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
+    `,
+    ],
+    2: [
+      "3 SPACZPORTAL",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
     znajdować się w odległości do 24” od MAGA. Wrota należy traktować jak ‘zwykłe’
     drzwi, przez które modelmożewykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
-    że nie można próbować przejąć szarży modelu, który przekroczył Spaczportal).`],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    że nie można próbować przejąć szarży modelu, który przekroczył Spaczportal).`,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2298,68 +2881,112 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 SPACZBŁYSKAWICA", "RZUCONY NA 7+", `Spaczbłyskawica to magiczny pocisk o zasięgu 24”. Po udanym rzuceniu zaklęcia magiczny
+    `,
+    ],
+    4: [
+      "5 SPACZBŁYSKAWICA",
+      "RZUCONY NA 7+",
+      `Spaczbłyskawica to magiczny pocisk o zasięgu 24”. Po udanym rzuceniu zaklęcia magiczny
     pocisk uderza w cel powodując trafienie o SILE K6 bez możliwości skorzystania z Ochrony
     Pancerza.
-    `],
-    5: ["6 SKÓRA SZCZUROGRA", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    `,
+    ],
+    5: [
+      "6 SKÓRA SZCZUROGRA",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 12" od Szarego Proroka, również takie, które walczą wręcz. Dopóki
     zaklęcie 'pozostaje w grze' modele otrzymują premię +2 do Ochrony Pancerza (do
-    maksymalnego poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.`],
-    6: ["7 KLĄTWA NIEMOCY", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
+    maksymalnego poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.`,
+    ],
+    6: [
+      "7 KLĄTWA NIEMOCY",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
     odległości do 18" i w polu widzenia MAGA. Dopóki zaklęcie 'pozostaje w grze' ofiara
     klątwy oraz wszystkie sprzymierzone z postacią modele w odległości do 6” muszą
     przerzucić wszystkie udane rzuty na trafienie i zranienie.
     Model może znajdować się pod działaniem tylko jednej klątwy na raz.
-    `],
-    7: ["8 TCHNIENIE ŚMIERCI", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    `,
+    ],
+    7: [
+      "8 TCHNIENIE ŚMIERCI",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE K6 z cechą oręża PRZEBICIE PANCERZA.`],
-    8: ["9 SPACZGWIAZDKI", "RZUCONY NA 11+", `Spaczgwiazdki są niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
+    otrzymują trafienie o SILE K6 z cechą oręża PRZEBICIE PANCERZA.`,
+    ],
+    8: [
+      "9 SPACZGWIAZDKI",
+      "RZUCONY NA 11+",
+      `Spaczgwiazdki są niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 z cechą oręża PRZEBICIE PANCERZA. `],
-    9: ["10 SPACZZBROJA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    K6 z cechą oręża PRZEBICIE PANCERZA. `,
+    ],
+    9: [
+      "10 SPACZZBROJA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarownika, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6 z cechą oręża
     PRZEBICIE PANCERZA.
-    `],
-    10: ["11 SPACZOSTRZE", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    `,
+    ],
+    10: [
+      "11 SPACZOSTRZE",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PRZEBICIE PANCERZA oraz premia +3 do SIŁY materializuje się w dłoni
     MAGA. Ponadto, Czarownik władający Spaczostrzem otrzymuje dodatkowy +1 ATAK, a
     wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko
     ze Spaczostrza - magicznego oręża nie można łączyć z inną bronią.
-    `],
-    11: ["12 SIŁA SZCZUROGRA", "RZUCONY NA 13+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie lub też na dowolnego, sprzymierzonego bohatera
+    `,
+    ],
+    11: [
+      "12 SIŁA SZCZUROGRA",
+      "RZUCONY NA 13+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie lub też na dowolnego, sprzymierzonego bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Czar może zostać rzucony
     na PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
     Cel zaklęcia staje się dziki i potężny niczym Szczurogr. Uzyskuje zdolność broń
     naturalna, +3 ATAKI, +2 do SIŁY oraz +1 do WT. Model pozostający pod wpływem
-    zaklęcia, nie może używać oręża, tarczy & pancerza.`],
+    zaklęcia, nie może używać oręża, tarczy & pancerza.`,
+    ],
   },
   "Tradycja Zarazy": {
-    1: ["1-2 WOLA ROGATEGO SZCZURA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    1: [
+      "1-2 WOLA ROGATEGO SZCZURA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi, również takie, które walczą
     wręcz. Dopóki zaklęcie 'pozostaje w grze' model objęty działaniem zaklęcia może
-    przerzucić wszystkie nieudane rzuty na zranienie. Wynik drugiego rzutu jest ostateczny`],
-    2: ["3 PLUGAWA WITALNOŚĆ", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    przerzucić wszystkie nieudane rzuty na zranienie. Wynik drugiego rzutu jest ostateczny`,
+    ],
+    2: [
+      "3 PLUGAWA WITALNOŚĆ",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz. Do
     początku następnej fazy magii MAGA, ofiara zaklęcia podlega zasadzie specjalnej
     REGENERACJA.
-    `],
-    3: ["4 WIEDŹMI LOT", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    `,
+    ],
+    3: [
+      "4 WIEDŹMI LOT",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2368,16 +2995,28 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 CUCHNĄCE RANY", "RZUCONY NA 7+", `Cuchnące Rany są magicznym pociskiemo zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
+    `,
+    ],
+    4: [
+      "5 CUCHNĄCE RANY",
+      "RZUCONY NA 7+",
+      `Cuchnące Rany są magicznym pociskiemo zasięgu 18”. Po udanym rzuceniu zaklęcia magiczny
     pocisk uderza w cel powodując trafienie o SILE K6 bez możliwości skorzystania z Ochrony
-    Pancerza.`],
-    5: ["6 POTĘGA ROGATEGO SZCZURA", "RZUCONY NA 8+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    Pancerza.`,
+    ],
+    5: [
+      "6 POTĘGA ROGATEGO SZCZURA",
+      "RZUCONY NA 8+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 12" od Diakona Zarazy, również takie, które walczą wręcz. Dopóki
     zaklęcie 'pozostaje w grze' broń objętych działaniem czaru modeli otrzymuje cechę oręża
     ZATRUTY ATAK.
-    `],
-    6: ["7 KLĄTWA ROGATEGO SZCZURA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Rogatego Szczurama zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    `,
+    ],
+    6: [
+      "7 KLĄTWA ROGATEGO SZCZURA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Rogatego Szczurama zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Diakon Zarazy musi widzieć swój
     cel). Dopóki zaklęcie 'pozostaje w grze' ofiara klątwy oraz wszystkie sprzymierzone z
@@ -2385,8 +3024,12 @@ export const magic = {
     SZ zostaje zmniejszona o połowę (ewentualne ułamki należy zaokrąglić w górę).
     Modele podlegające zasadzie specjalnej LOT, nie mogą latać i biegać, jednak wartość ich
     współczynnika SZ pozostaje bez zmian.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE ZARAZY", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE ZARAZY",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
@@ -2394,25 +3037,41 @@ export const magic = {
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
     otrzymują trafienie o SILE K6 bez możliwości skorzystania z Ochrony Pancerza.
-    `],
-    8: ["9 ODDECH ZGNILIZNY", "RZUCONY NA 11+", `Oddech Zgnilizny jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    `,
+    ],
+    8: [
+      "9 ODDECH ZGNILIZNY",
+      "RZUCONY NA 11+",
+      `Oddech Zgnilizny jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    K6 bez możliwości skorzystania z Ochrony Pancerza. `],
-    9: ["10 ZBROJA ROGATEGO SZCZURA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    K6 bez możliwości skorzystania z Ochrony Pancerza. `,
+    ],
+    9: [
+      "10 ZBROJA ROGATEGO SZCZURA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Czarownika, na początku fazy walki wręcz otrzymują jedno trafienie o SILE K6 bez
-    możliwości skorzystania z Ochrony Pancerza.`],
-    10: ["11 OSTRZE ROGATEGO SZCZURA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    możliwości skorzystania z Ochrony Pancerza.`,
+    ],
+    10: [
+      "11 OSTRZE ROGATEGO SZCZURA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża ZATRUTY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Czarownikwładający Spaczostrzemotrzymuje dodatkowy +1 ATAK, a wszystkie
     ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko ze
     Spaczostrza - magicznego oręża nie można łączyć z inną bronią.
-    `],
-    11: ["12 KLĄTWA TRĄDU", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Klątwa Trądu ma zasięg 18” i po udanym rzuceniu może zostać skierowany na
+    `,
+    ],
+    11: [
+      "12 KLĄTWA TRĄDU",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Klątwa Trądu ma zasięg 18” i po udanym rzuceniu może zostać skierowany na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Diakon Zarazy musi widzieć swój
     cel). Po udanym rzuceniu zaklęcia należy umieścić obok ofiary klątwy sześciościenną
@@ -2421,17 +3080,29 @@ export const magic = {
     większy. Wynik na kostce oznacza ujemny modyfikator do współczynników S i WT
     jaki otrzymuje ofiara klątwy. Jeśli w wyniku działania czaru wartość współczynników
     zostanie obniżona do 0, model zostaje natychmiast Wyłączony z akcji!.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz. `],
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz. `,
+    ],
   },
   "Magia Małego Łooomotu!": {
-    1: ["1-2 WŁADCA SQUIGÓW", "RZUCONY AUTOMATYCZNIE", `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
-    PRZYWOŁANIE (Squig).`],
-    2: ["3 PRZESMYK MORKA", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
+    1: [
+      "1-2 WŁADCA SQUIGÓW",
+      "RZUCONY AUTOMATYCZNIE",
+      `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
+    PRZYWOŁANIE (Squig).`,
+    ],
+    2: [
+      "3 PRZESMYK MORKA",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
     znajdować się w odległości do 24” od MAGA. Wrota należy traktować jak ‘zwykłe’
     drzwi, przez które modelmożewykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
-    że nie można próbować przejąć szarży modelu, który przekroczył Przesmyk Morka).`],
-    3: ["4 RENKA MORKA", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    że nie można próbować przejąć szarży modelu, który przekroczył Przesmyk Morka).`,
+    ],
+    3: [
+      "4 RENKA MORKA",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 8”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2440,46 +3111,78 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 WEJRZENIE GORKA", "RZUCONY NA 7+", `Wejrzenie Gorka jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    `,
+    ],
+    4: [
+      "5 WEJRZENIE GORKA",
+      "RZUCONY NA 7+",
+      `Wejrzenie Gorka jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
     magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PRECYZYJNE
-    UDERZENIE.`],
-    5: ["6 FANTASMAGORIA", "RZUCANY NA 10+, POZOSTAJE W GRZE", `Dopóki zaklęcie 'pozostaje w grze', wszystkie wrogie modele znajdujące się na stole
+    UDERZENIE.`,
+    ],
+    5: [
+      "6 FANTASMAGORIA",
+      "RZUCANY NA 10+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie 'pozostaje w grze', wszystkie wrogie modele znajdujące się na stole
     przeprowadzając test oparty na współczynniku CP wykonują rzut 3K6 odrzucając
     kostkę z najniższym wynikiem.
     Zaklęcie nie działa na modele podlegające zasadzie specjalnej NIEZŁOMNOŚĆ.
-    `],
-    6: ["7 KLONTWA GORKA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
+    `,
+    ],
+    6: [
+      "7 KLONTWA GORKA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Zaklęcie może zostać rzucone na dowolny model przeciwnika znajdujący się w
     odległości do 18" i w polu widzenia MAGA. Dopóki zaklęcie 'pozostaje w grze' ofiara
     klątwy oraz wszystkie sprzymierzone z postacią modele w odległości do 6” muszą
     przerzucić wszystkie udane rzuty na trafienie i zranienie.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE GORKA", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE GORKA",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża PRECYZYJNE UDERZENIE.`],
-    8: ["9 CZACHA DYMI", "RZUCONY NA 11+", `Czacha dymi jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE 4 z cechą oręża PRECYZYJNE UDERZENIE.`,
+    ],
+    8: [
+      "9 CZACHA DYMI",
+      "RZUCONY NA 11+",
+      `Czacha dymi jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża PRECYZYJNE UDERZENIE. `],
-    9: ["10 ZBROJA GORKA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża PRECYZYJNE UDERZENIE. `,
+    ],
+    9: [
+      "10 ZBROJA GORKA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Szamana, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4 z cechą oręża
-    PRECYZYJNE UDERZENIE`],
-    10: ["11 OSTRZE MORKA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    PRECYZYJNE UDERZENIE`,
+    ],
+    10: [
+      "11 OSTRZE MORKA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża ZATRUTY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Szamanwładający Ostrzem Morkaotrzymuje dodatkowy +1 ATAK, a wszystkie
     ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko z Ostrza
     Morka - magicznego oręża nie można łączyć z inną bronią.
-    `],
-    11: ["12 MORK CIEM WYBRAĆ", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Szaman Goblinów wzywa moc Morka, którą oplata dowolny sprzymierzony model
+    `,
+    ],
+    11: [
+      "12 MORK CIEM WYBRAĆ",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Szaman Goblinów wzywa moc Morka, którą oplata dowolny sprzymierzony model
     bohatera lub stronnika znajdujący się w odległości do 12”. Czar może zostać rzucony na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2491,15 +3194,23 @@ export const magic = {
     wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele, których
     podstawki są częściowo przykryte, dostają się pod działanie zaklęcia na 4+. Objęte
     działaniem zaklęcia modele otrzymują trafienie o SILE 4 z cechą oręża PRECYZYJNE
-    UDERZENIE.`],
+    UDERZENIE.`,
+    ],
   },
   "Magia Dużego Łooomotu!": {
-    1: ["1-2 NAOSZCZENIE REMBAKÓW", "RZUCONY AUTOMATYCZNIE", `To zaklęcie musi zostać rzucone przed potyczką. Moc zaklęcia oddziałuje na K3 sztuki,
+    1: [
+      "1-2 NAOSZCZENIE REMBAKÓW",
+      "RZUCONY AUTOMATYCZNIE",
+      `To zaklęcie musi zostać rzucone przed potyczką. Moc zaklęcia oddziałuje na K3 sztuki,
     dzierżonego przez bohaterów lub stronników i wybranego przez gracza oręża. Do końca
     potyczki wszystkie rzuty na zranienie NAOSZCZONYMI REMBAKAMI wykonywane są z
     dodatnim modyfikatorem +1. Ponadto, jeśli broń nie posiadała takiej cechy wcześniej,
-    to zyskuje cechę oręża PRZEBICIE PANCERZA. `],
-    2: ["3 PRAĆ ICH", "RZUCONY NA 7+", `Każdy sprzymierzony model bohatera lub stronnika znajdujący się w odległości do 12"
+    to zyskuje cechę oręża PRZEBICIE PANCERZA. `,
+    ],
+    2: [
+      "3 PRAĆ ICH",
+      "RZUCONY NA 7+",
+      `Każdy sprzymierzony model bohatera lub stronnika znajdujący się w odległości do 12"
     od Szamana wykonuje niezwłocznie ruch o K6" (należy wykonać oddzielny rzut dla
     każdego modelu) w kierunku najbliższego widocznego wroga, najkrótszą możliwą
     drogą, stosując zwykłe kary za teren – jeśli objęty działaniem zaklęcia model nie widzi
@@ -2508,8 +3219,12 @@ export const magic = {
     musi przeprowadzać żadnych testów PSYCHOLOGICZNYCH, które obowiązywały go
     podczas zwykłej szarży. Zaatakowana w ten sposób postać może wybrać jako reakcję na
     szarżę jedynie trzymać pozycje bądź Uciekać!. Zaklęcie nie działa na modele, które Uciekają!.
-    `],
-    3: ["4 RENKA GORKA", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    `,
+    ],
+    3: [
+      "4 RENKA GORKA",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 8”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2518,15 +3233,27 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 WEJRZENIE MORKA", "RZUCONY NA 7+", `Wejrzenie Morka jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża DRUZGOCZĄCY`],
-    5: ["6 SKÓRA DZIKA", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    `,
+    ],
+    4: [
+      "5 WEJRZENIE MORKA",
+      "RZUCONY NA 7+",
+      `Wejrzenie Morka jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża DRUZGOCZĄCY`,
+    ],
+    5: [
+      "6 SKÓRA DZIKA",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 12" od Szamana, również takie, które walczą wręcz. Dopóki zaklęcie
     'pozostaje w grze' modele otrzymują premię +2 do Ochrony Pancerza (do maksymalnego
     poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają PANCERZA.
-    `],
-    6: ["7 GORK NAPRAWIĆ", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Gork Naprawić ma zasięg 18” i po udanym rzuceniu może zostać skierowany na
+    `,
+    ],
+    6: [
+      "7 GORK NAPRAWIĆ",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Gork Naprawić ma zasięg 18” i po udanym rzuceniu może zostać skierowany na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Szaman musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze', każda 6 w rzutach na trafienie, zranienie, Ochronę Pancerza czy Magiczną
@@ -2535,8 +3262,12 @@ export const magic = {
     się MAG przeciwnika, każda 6, jaką uzyska w trakcie rzucania czarów uznawana będzie
     za 1i może doprowadzić do Przekleństwa Tzeentcha, a także będzie zapobiegać rzuceniu
     czarów z Nieodpartą Siłą (oprócz innych skutków, jakie może przynieść).
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE MORKA", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE MORKA",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
@@ -2544,44 +3275,72 @@ export const magic = {
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
     otrzymują trafienie o SILE 4 z cechą oręża DRUZGOCZĄCY.
-    `],
-    8: ["9 Z BYKA GO", "RZUCONY NA 11+", `Zaklęcie Z byka go jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    `,
+    ],
+    8: [
+      "9 Z BYKA GO",
+      "RZUCONY NA 11+",
+      `Zaklęcie Z byka go jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża DRUZGOCZĄCY`],
-    9: ["10 ZBROJA MORKA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża DRUZGOCZĄCY`,
+    ],
+    9: [
+      "10 ZBROJA MORKA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Szamana, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4 z cechą oręża
     DRUZGOCZĄCY.
-    `],
-    10: ["11 OSTRZE GORKA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    `,
+    ],
+    10: [
+      "11 OSTRZE GORKA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża DRUZGOCZĄCY oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Szamanwładający Ostrzem Gorka otrzymuje dodatkowy +1 ATAK, a wszystkie
     ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko z Ostrza
-    Gorka - magicznego oręża nie można łączyć z inną bronią`],
-    11: ["12 KLONTWA ZŁEGO KSIENZYCA", "RZUCONY NA 15+, POZOSTAJE W GRZE", `Klontwa Złego Ksienzycama zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    Gorka - magicznego oręża nie można łączyć z inną bronią`,
+    ],
+    11: [
+      "12 KLONTWA ZŁEGO KSIENZYCA",
+      "RZUCONY NA 15+, POZOSTAJE W GRZE",
+      `Klontwa Złego Ksienzycama zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Szaman musi widzieć swój cel). Dopóki zaklęcie
     'pozostaje w grze' ofiara klątwy zostaje automatycznie Wyłączona z akcji! jeżeli zostanie
     trafiona.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
   },
   "Dziedzina Boga-Pajonka": {
-    1: ["1-2 WŁADCA PAJONKÓW", "RZUCONY AUTOMATYCZNIE", `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
+    1: [
+      "1-2 WŁADCA PAJONKÓW",
+      "RZUCONY AUTOMATYCZNIE",
+      `To zaklęcie musi zostać rzucone przed potyczką. MAG podlega zasadzie specjalnej
     PRZYWOŁANIE (Pajonki).
-    `],
-    2: ["3 MUROŁAZY", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    `,
+    ],
+    2: [
+      "3 MUROŁAZY",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 8" od Szamana Leśnych Goblinów, również takie, które walczą wręcz.
     Dopóki zaklęcie 'pozostaje w grze' modele automatycznie zdają wszystkie testy
     wspinaczki. Ponadto objęte działaniem zaklęcia modele w ramach fazy ruchu mogą się
     wspiąć lub zejść na dystans równy podwojonej wartości współczynnika SZYBKOŚĆ
     liczonej w calach. Jeśli dystans na jaki model zamierza się wspiąć przekracza wartość
     podwojonego współczynnika SZYBKOŚĆ, to wspinaczka nie może być kontynuowana.
-    `],
-    3: ["4 PRZĘDNE NICI", "RZUCONY NA 7    ", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    `,
+    ],
+    3: [
+      "4 PRZĘDNE NICI",
+      "RZUCONY NA 7    ",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 8”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2590,63 +3349,107 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 OBMIERZŁY RÓJ", "RZUCONY NA 7+", `Obmierzły Rój jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
-    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża ZATRUTY ATAK`],
-    5: ["6 CHITYNOWA SKÓRA", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
+    `,
+    ],
+    4: [
+      "5 OBMIERZŁY RÓJ",
+      "RZUCONY NA 7+",
+      `Obmierzły Rój jest magicznym pociskiem o zasięgu 18”. Po udanym rzuceniu zaklęcia
+    magiczny pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża ZATRUTY ATAK`,
+    ],
+    5: [
+      "6 CHITYNOWA SKÓRA",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Zaklęcie oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące się
     w odległości do 8" od Szamana Leśnych Goblinów, również takie, które walczą wręcz.
     Dopóki zaklęcie 'pozostaje w grze' modele otrzymują premię +2 do Ochrony Pancerza
     (do maksymalnego poziomu 0+) lub Ochronę Pancerza na 5+ jeśli nie posiadają
     PANCERZA.
-    `],
-    6: ["7 KLĄTWA BOGA-PAJONKA", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Boga-Pajonka ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
+    `,
+    ],
+    6: [
+      "7 KLĄTWA BOGA-PAJONKA",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Boga-Pajonka ma zasięg 18” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika, także związany walką wręcz (wybrany przez kierującego
     MAGIEM gracza bez ograniczeń, z wyjątkiem tego, że Szaman Leśnych Goblinów musi
     widzieć swój cel). Dopóki zaklęcie 'pozostaje w grze' wszystkie trafienia zadane ofierze
     klątwy oraz wszystkim sprzymierzonym z postacią modelom w odległości do 6”
     podlegają zasadzie specjalnej ZATRUTY ATAK.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE PAJONKA", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE PAJONKA",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża ZATRUTY ATAK.`],
-    8: ["9 JAD PAJONKA", "RZUCONY NA 11+    ", `Jad Pajonka jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
+    otrzymują trafienie o SILE 4 z cechą oręża ZATRUTY ATAK.`,
+    ],
+    8: [
+      "9 JAD PAJONKA",
+      "RZUCONY NA 11+    ",
+      `Jad Pajonka jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 18”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża ZATRUTY ATAK. `],
-    9: ["10 ZBROJA PAJONKA", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża ZATRUTY ATAK. `,
+    ],
+    9: [
+      "10 ZBROJA PAJONKA",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Szamana Leśnych Goblinów, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4
-    z cechą oręża DRUZGOCZĄCY.`],
-    10: ["11 JADOWITE ŻONDŁO", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    z cechą oręża DRUZGOCZĄCY.`,
+    ],
+    10: [
+      "11 JADOWITE ŻONDŁO",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża ZATRUTY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Szaman Leśnych Goblinów władający Jadowitym Żondłem otrzymuje dodatkowy
     +1 ATAK, a wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może
-    korzystać tylko z Jadowitego Żondła - magicznego oręża nie można łączyć z inną bronią.`],
-    11: ["12 GNIEW BOGA-PAJONKA", "RZUCONY NA 14+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie lub też na dowolnego, sprzymierzonego bohatera
+    korzystać tylko z Jadowitego Żondła - magicznego oręża nie można łączyć z inną bronią.`,
+    ],
+    11: [
+      "12 GNIEW BOGA-PAJONKA",
+      "RZUCONY NA 14+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie lub też na dowolnego, sprzymierzonego bohatera
     lub stronnikaw odległości do 8”, nawet jeśli go nie widzi. Czar może zostać rzucony na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
     Cel zaklęcia staje się dziki i potężny niczym Arachnarok. Uzyskuje zdolność broń
     naturalna z cechą oręża ZATRUTY ATAK, +3 ATAKI, +2 do SIŁYoraz +1 do WT. Model
-    pozostający pod wpływem zaklęcia, nie może używać oręża, tarczy & pancerza.`],
+    pozostający pod wpływem zaklęcia, nie może używać oręża, tarczy & pancerza.`,
+    ],
   },
   "Magia Pradawnych": {
-    1: ["1-2 WYSSANIE MAGII", "RZUCONY NA 6+", `Czar działa do początku następnej fazy magii MAGA. Wartość rzucenia wszystkich zaklęć
-    splatanych w czasie trwania Wyssania Magii zostaje zwiększony o +3.`],
-    2: ["3 GWIEZDNY PORTAL", "RZUCONY NA 7+, POZOSTAJE W GRZE", `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
+    1: [
+      "1-2 WYSSANIE MAGII",
+      "RZUCONY NA 6+",
+      `Czar działa do początku następnej fazy magii MAGA. Wartość rzucenia wszystkich zaklęć
+    splatanych w czasie trwania Wyssania Magii zostaje zwiększony o +3.`,
+    ],
+    2: [
+      "3 GWIEZDNY PORTAL",
+      "RZUCONY NA 7+, POZOSTAJE W GRZE",
+      `Udane rzucenie zaklęcia tworzy magiczne wrota łączące dwa punkty na stole, które muszą
     znajdować się w odległości do 24” od MAGA. Wrota należy traktować jak ‘zwykłe’
     drzwi, przez które modelmożewykonać ruch jak w fazie ruchu, który może być również
     ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego,
-    że nie można próbować przejąć szarży modelu, który przekroczył Gwiezdny Portal).`],
-    3: ["4 SKRZYDŁA TERRADONA", "RZUCONY NA 7+", `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
+    że nie można próbować przejąć szarży modelu, który przekroczył Gwiezdny Portal).`,
+    ],
+    3: [
+      "4 SKRZYDŁA TERRADONA",
+      "RZUCONY NA 7+",
+      `MAG może rzucić czar na samego siebie lub dowolny sprzymierzony model bohatera
     lub stronnika w odległości do 12”, nawet jeśli go nie widzi. Zaklęcie można rzucić na
     PIESZY model wielkości człowieka lub mniejszy (czar nie będzie zatem działał na
     modele na podstawkach 40x40 mm i większych), również związany walką wręcz.
@@ -2655,14 +3458,26 @@ export const magic = {
     zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który
     wykonał LOT). Model może nawet, jeśli gracz sobie tego życzy, przerwać walkę, w
     której brał udział, ale w takim wypadku nie będzie mógł szarżować.
-    `],
-    4: ["5 OGNISTY DECH", "RZUCONY NA 7+", `Ognisty Dech jest magicznym pociskiemo zasięgu 24”. Po udanym rzuceniu zaklęcia magiczny
-    pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`],
-    5: ["6 TRZECIE PROROCTWO", "RZUCONY NA 9+, POZOSTAJE W GRZE", `Moc zaklęcia oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące
+    `,
+    ],
+    4: [
+      "5 OGNISTY DECH",
+      "RZUCONY NA 7+",
+      `Ognisty Dech jest magicznym pociskiemo zasięgu 24”. Po udanym rzuceniu zaklęcia magiczny
+    pocisk uderza w cel powodując trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    5: [
+      "6 TRZECIE PROROCTWO",
+      "RZUCONY NA 9+, POZOSTAJE W GRZE",
+      `Moc zaklęcia oddziałuje na model MAGA i wszystkie sprzymierzone modele znajdujące
     się w odległości do 12" od Kapłana Skinka, również takie, które walczą wręcz. Dopóki
     zaklęcie 'pozostaje w grze' modele mogą przerzucić kostki w rzucie na trafienie, zranienie
-    oraz Ochronę Pancerza i Ochronę Magiczną`],
-    6: ["7 KLĄTWA QHAYSH", "RZUCONY NA 10+, POZOSTAJE W GRZE", `Klątwa Qhaysh ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
+    oraz Ochronę Pancerza i Ochronę Magiczną`,
+    ],
+    6: [
+      "7 KLĄTWA QHAYSH",
+      "RZUCONY NA 10+, POZOSTAJE W GRZE",
+      `Klątwa Qhaysh ma zasięg 24” i po udanym rzuceniu może zostać skierowana na
     pojedynczy model przeciwnika (wybrany przez kierującego MAGIEM gracza bez
     ograniczeń, z wyjątkiem tego, że Kapłan Skinków musi widzieć swój cel). Po udanym
     rzuceniu zaklęcia należy umieścić obok ofiary czaru sześciościenną kostkę, tak aby
@@ -2671,33 +3486,53 @@ export const magic = {
     na kostce oznacza ujemny modyfikator do współczynników SZ, S i WT jaki otrzymuje
     ofiara klątwy oraz wszystkie sprzymierzone z postacią modele w odległości do 6".
     Należy zauważyć, że współczynniki mogą zostać obniżone do minimalnej wartości 1.
-    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`],
-    7: ["8 TCHNIENIE QHAYSH", "RZUCONY NA 11+", `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
+    Model może znajdować się pod działaniem tylko jednej klątwy na raz.`,
+    ],
+    7: [
+      "8 TCHNIENIE QHAYSH",
+      "RZUCONY NA 11+",
+      `Zaklęciemoże zostać rzucone na dowolny model przeciwnika, również związany walką
     wręcz, który znajduje się w polu widzenia MAGA.Po udanym rzuceniu zaklęcia należy użyć
     wzornika płomienia w ten sposób, że cieńszy jego koniec dotyka podstawki MAGA, a
     szeroki przykrywa wybrany na cel model przeciwnika. Wszystkie modele (wrogie i
     sprzymierzone), których podstawki są całkowicie przykryte wzornikiem, zostają objęte
     działaniem zaklęcia automatycznie, te modele, których podstawki są częściowo
     przykryte, dostają się pod działanie zaklęcia na 4+. Objęte działaniem czaru modele
-    otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`],
-    8: ["9 OGIEŃ SALAMANDRY", "RZUCONY NA 11+", `Ogień Salamandry jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
+    otrzymują trafienie o SILE 4 z cechą oręża PŁONĄCY ATAK.`,
+    ],
+    8: [
+      "9 OGIEŃ SALAMANDRY",
+      "RZUCONY NA 11+",
+      `Ogień Salamandry jest niezwykle niebezpiecznym magicznym pociskiem o zasięgu 24”. Po
     udanym rzuceniu zaklęcia należy użyć 3” okrągłego wzornika i przykryć nim wybrany
     na cel model przeciwnika. Wszystkie modele (wrogie i sprzymierzone), których
     podstawki są całkowicie przykryte wzornikiem, zostają objęte działaniem zaklęcia
     automatycznie, te modele, których podstawki są częściowo przykryte, dostają się pod
     działanie zaklęcia na 4+. Objęte działaniem zaklęcia modele otrzymują trafienie o SILE
-    4 z cechą oręża PŁONĄCY ATAK. `],
-    9: ["10 ZBROJA QHAYSH", "RZUCONY NA 12+, POZOSTAJE W GRZE", `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
+    4 z cechą oręża PŁONĄCY ATAK. `,
+    ],
+    9: [
+      "10 ZBROJA QHAYSH",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `Dopóki zaklęcie ‘pozostaje w grze’ MAG otrzymuje Magiczną Ochronę na 4+. Ponadto,
     wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z podstawką
     Kapłana Skinków, na początku fazy walki wręcz otrzymują jedno trafienie o SILE 4 z cechą
     oręża PŁONĄCY ATAK.
-    `],
-    10: ["11 OSTRZE QHAYSH", "RZUCONY NA 12+, POZOSTAJE W GRZE", `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
+    `,
+    ],
+    10: [
+      "11 OSTRZE QHAYSH",
+      "RZUCONY NA 12+, POZOSTAJE W GRZE",
+      `MAG może rzucić zaklęcie na siebie. Dopóki zaklęcie ‘pozostaje w grze’ magiczne ostrze
     z cechą oręża PŁONĄCY ATAK oraz premia +3 do SIŁY materializuje się w dłoni MAGA.
     Ponadto, Kapłan Skinków władający Ostrzem Qhaysh otrzymuje dodatkowy +1 ATAK, a
     wszystkie ciosy trafiają na 4+. Póki MAG włada magicznym orężem może korzystać tylko
-    z Ostrza Qhaysh - magicznego oręża nie można łączyć z inną bronią`],
-    11: ["12 OGNISTE ODRODZENIE SALAMANDRY", "RZUCONY NA 14+, POZOSTAJE W GRZE", `Jeśli w trakcie rozgrywania potyczki MAG zostanie Wyłączony z akcji!, a zaklęcie 'pozostaje
+    z Ostrza Qhaysh - magicznego oręża nie można łączyć z inną bronią`,
+    ],
+    11: [
+      "12 OGNISTE ODRODZENIE SALAMANDRY",
+      "RZUCONY NA 14+, POZOSTAJE W GRZE",
+      `Jeśli w trakcie rozgrywania potyczki MAG zostanie Wyłączony z akcji!, a zaklęcie 'pozostaje
     w grze', należy użyć 3” okrągłego wzornika i przykryć nim model Kapłana Skinków.
     Wszystkie modele (wrogie i sprzymierzone), których podstawki są całkowicie przykryte
     wzornikiem, zostają objęte działaniem zaklęcia automatycznie, te modele, których
@@ -2710,8 +3545,103 @@ export const magic = {
     końca trwania tury w której powstał, będzie UDERZAŁ JAKO OSTATNI, bez względu na
     wartość I, oręż którym walczy lub inne zasady specjalne. Ponadto od momentu powstania
     Kapłana Skinków należy traktować tak, jakby wciąż posiadał 1 punkt ŻW.
-    `],
+    `,
+    ],
   },
+  "Duchowny (modlitwy do Sigmara)": {
+    1: [
+      "1-3 AURA ODWAGI",
+      "ODMÓWIONA PRZED ROZGRYWKĄ",
+      `Modlitwa musi zostać odmówiona przed rozgrywką i oddziałuje na DUCHOWNEGO lub K3
+dowolne sprzymierzone modele PIESZYCH bohaterów lub stronników wielkości człowieka
+lub mniejszych (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna
+krawędź mierzy 40 mm i więcej), które nie podlegają zasadzie specjalnej DEMON lub
+ISTOTA ETERYCZNA lub LEŚNY DUCH lub MAG lub NIEUMARŁY lub OPĘTANY.
+Do końca rozgrywki objęte działaniem modlitwy modele podlegają zasadzie
+specjalnej NIEZŁOMNY i ZIMNOKRWISTY.
+      `,
+    ],
+    2: [
+      "4 MŁOT NA CZAROWNICE",
+      "POZOSTAJE W GRZE",
+      `Moc modlitwy oddziałuje na DUCHOWNEGO.
+Dopóki modlitwa pozostaje w grze dzierżona przez DUCHOWNEGO młot bojowy
+lub młot ulrykański lub broń wielka traktowana jest jak broń z zasadą specjalną MAGICZNY
+ATAK oraz PAROWANIE i PŁONĄCY ATAK, a DUCHOWNY może przerzucić wszystkie
+nieudane rzuty na trafienie. Wynik drugiego rzutu jest ostateczny.
+Modele z zasadą specjalną DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub
+MAG lub NIEUMARŁY lub OPĘTANY otrzymują trafienie z zasadą specjalną
+DRUZGOCZĄCY.
+.
+      `,
+    ],
+    2: [
+      "5 KLĄTWA STOSU",
+      "",
+      `Moc modlitwy może zostać skierowana na pojedynczy model przeciwnika, także
+związany walką wręcz znajdujący się w odległości do 12” od DUCHOWNEGO (postać
+zostaje wybrana przez kierującego DUCHOWNYM bez ograniczeń, z wyjątkiem tego, że
+DUCHOWNY musi widzieć swój cel).Do początku następnej fazy magii DUCHOWNEGO
+ofiara klątwy podlega zasadzie specjalnej ŁATWOPALNY oraz musi przerzucić wszystkie
+udane rzuty naOchronę Pancerza i Magiczną Ochronę. Wynik drugiego rzutu jest ostateczny.
+Postać może znajdować się pod działaniem tylko jednej klątwy na raz.
+.
+      `,
+    ],
+    3: [
+      "6 ŚWIĘTY POGROM",
+      "POZOSTAJE W GRZE",
+      `Moc modlitwy oddziałuje na DUCHOWNEGO i wszystkie sprzymierzone modele
+znajdujące się w odległości do 12", również związane walczą wręcz.
+Dopóki modlitwa pozostaje w grze, objęte działaniem modlitwy modele podlegają
+zasadzie specjalnej FURIA i NIENAWIŚĆ.
+
+.
+      `,
+    ],
+    4: [
+      "7 GROZA SIGMARA",
+      "",
+      `Po udanym odmówieniu modlitwy kierujący DUCHOWNYM gracz wybiera dowolny,
+znajdujący się w polu widzenia i w odległości do 12” od DUCHOWNEGO wrogi model,
+który należy przykryć 3” okrągłym wzornikiem. Dopóki modlitwa pozostaje w grze
+DUCHOWNY wzbudza GROZĘ wobjętych klątwach wrogich modelach.
+Postać może znajdować się pod działaniem tylko jednej klątwy na raz.
+
+.
+      `,
+    ],
+    5: [
+      "8 KRĄG WIARY",
+      "POZOSTAJE W GRZE",
+      `Po udanym odmówieniu modlitwy kierujący DUCHOWNYM gracz wybiera dowolny,
+niezajęty przez wrogie postaci, znajdujący się w polu widzenia i w odległości do 18” od
+DUCHOWNEGO obszar na powierzchni stołu, który należy przykryć 5” okrągłym
+wzornikiem. Dopóki modlitwa pozostaje w grze pole wszystkie modele (wrogie i
+sprzymierzone), które podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub
+LEŚNY DUCH lub MAG lub NIEUMARŁY lub OPĘTANY traktują teren przykryty
+wzornikiem jako teren niedostępny.
 
 
+.
+      `,
+    ],
+    6: [
+      "9 ZBROJA SIGMARA",
+      "POZOSTAJE W GRZE",
+      `Moc modlitwy oddziałuje na DUCHOWNEGO.
+Dopóki modlitwa pozostaje w grze DUCHOWNY otrzymuje Magiczną Ochronę na
+4+, a wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z
+podstawką DUCHOWNEGO, na początku fazy walki wręcz otrzymują jedno trafienie o
+SILE 4 z zasadą specjalną PŁONĄCY ATAK.
+Modele z zasadą specjalną DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub
+MAG lub NIEUMARŁY lub OPĘTANY otrzymują trafienie o SILE 6 z zasadą specjalną
+PŁONĄCY ATAK.
+
+
+
+.
+      `,
+    ],
+  },
 };

@@ -2419,7 +2419,7 @@ export const heroEquipment = {
       "Broń miotana (noże)": [10, 1],
       Oszczep: [15, 1],
       "Zbroja Chaosu": [100, 2, "Zbroja"],
-      "Dziedzina Dziczy": [0,4,"Choice"],
+      "Dziedzina Dziczy": [0, 4, "Choice"],
     },
     Ungor: {
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -2755,8 +2755,8 @@ export const heroEquipment = {
       Ciężki: [30, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
-      "Tradycja Światła": [0,4,"Choice"],
-      "Tradycja Śmierci": [0,4,"Choice"]
+      "Tradycja Światła": [0, 4, "Choice"],
+      "Tradycja Śmierci": [0, 4, "Choice"],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
@@ -3032,7 +3032,7 @@ export const heroEquipment = {
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
       "Broń miotana (noże)": [10, 1],
-      Łuk: [10, 1,"Startowy"],
+      Łuk: [10, 1, "Startowy"],
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
@@ -3149,13 +3149,13 @@ export const heroEquipment = {
       "Gwiazda zaranna": [5, 0],
       Kostur: [5, 0],
       Miecz: [10, 0],
-      Rembak: [5, 0,"Startowy"],
-      Sztylet: [2, 0,"Startowy"],
+      Rembak: [5, 0, "Startowy"],
+      Sztylet: [2, 0, "Startowy"],
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
       "Broń miotana (noże)": [10, 1],
       Kusza: [25, 1],
-      Łuk: [10, 1,"Startowy"],
+      Łuk: [10, 1, "Startowy"],
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
@@ -3367,6 +3367,6 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       Włócznia: [10, 0],
       "Broń miotana (noże)": [10, 1],
-    }
+    },
   },
 };

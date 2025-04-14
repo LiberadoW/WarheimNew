@@ -88,5 +88,8 @@ export const getModifiers = (arr, unit) => {
     initativeModifier = 0;
   }
 
+  speedModifier = 0;
+  initativeModifier = 0;
+
   return [armour, speedModifier, initativeModifier];
 };

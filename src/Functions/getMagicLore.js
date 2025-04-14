@@ -31,6 +31,7 @@ const PATHS_OF_MAGIC = [
   "Magia Dużego Łooomotu!",
   "Dziedzina Boga-Pajonka",
   "Magia Pradawnych",
+  "Duchowny (modlitwy do Sigmara)",
 ];
 
 export const getMagicLore = (unitList) => {

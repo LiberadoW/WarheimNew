@@ -17,14 +17,13 @@
 }
 
 #armylist {
-  display: none;
 }
 
 .rules-box {
   font-size: 0.8rem;
-  display: none;
   flex-direction: column;
   gap: 0.5rem;
+  display: flex;
 }
 
 .rule-title {
@@ -41,7 +40,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .spell-school-title {
@@ -51,7 +50,7 @@
 }
 
 .spell-card-text {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
 }
 
 .capitalize-first {
