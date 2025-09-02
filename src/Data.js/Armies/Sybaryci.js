@@ -21,7 +21,7 @@ export const dzieciZagłady = {
         "Stygmat Chaosu",
       ],
       exp: 20,
-      skills: [0,1,2,4,5],
+      skills: [0, 1, 2, 4, 5],
     },
     Akolita: {
       id: 1,
@@ -36,7 +36,7 @@ export const dzieciZagłady = {
       },
       rules: ["Stygmat Chaosu"],
       exp: 8,
-      skills: [0,1,4,5],
+      skills: [0, 1, 4, 5],
     },
     Opętany: {
       id: 2,
@@ -62,7 +62,7 @@ export const dzieciZagłady = {
         "Opętany",
       ],
       exp: 8,
-      skills: [0,1,3,4,5],
+      skills: [0, 1, 3, 4, 5],
     },
     Kultysta: {
       id: 3,
@@ -85,10 +85,10 @@ export const dzieciZagłady = {
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: [4,2,0,3,4,1,3,1,7],
-        Maksymalna: [4,2,0,3,4,1,3,1,7],
+        Początkowa: [4, 2, 0, 3, 4, 1, 3, 1, 7],
+        Maksymalna: [4, 2, 0, 3, 4, 1, 3, 1, 7],
       },
-      rules: ["Demon", "Strach","Stygmaty Nurgla (odór, rój much)"],
+      rules: ["Demon", "Strach", "Stygmaty Nurgla (odór, rój much)"],
     },
     Plagogor: {
       id: 5,
@@ -143,7 +143,7 @@ export const dzieciZagłady = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Przepastne trzewia",
         "Regeneracja",
         "Strach",
@@ -189,7 +189,7 @@ export const dzieciZagłady = {
   armyRules: [
     "Kontakty handlowe (1)",
     "Oko Chaosu",
-    "Rozrzutni",
+    "Rozrzutność",
     "Zamożność",
     "Znak Chaosu (Potworny Lud Nurgla)",
   ],

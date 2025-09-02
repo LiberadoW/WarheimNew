@@ -188,7 +188,7 @@ export const nekrarcha = {
         "Rój nietoperzy",
         "Strach",
         "Wielkolud",
-        "Zwierzę"
+        "Zwierzę",
       ],
     },
     "Czarna Karoca": {
@@ -229,7 +229,7 @@ export const nekrarcha = {
     "Kontrolowanie ożywieńców",
     "Ofiarowanie",
     "Podatek",
-    "Rozrzutni",
+    "Rozrzutność",
   ],
   mercenaries: [
     "Czarownica",

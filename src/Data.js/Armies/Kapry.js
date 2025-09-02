@@ -145,7 +145,7 @@ export const kapry = {
       },
       rules: [
         "Dzikie squigi",
-        "Niezłomność",
+        "Niezłomny",
         "No to hooop!",
         "Pomiot podmroku",
         "Rozmiar rzondzi",
@@ -192,7 +192,7 @@ export const kapry = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Ochronne tatuaże",
         "Przepastne trzewia",
         "Regeneracja",
@@ -267,6 +267,6 @@ export const kapry = {
   maxModels: 15,
   name: "Załoga Zielonoskórych Kaprów",
   nature: "Zła",
-  armyRules: ["..Na ślinę i sznurek", "Podatek", "Rozrzutni"],
+  armyRules: ["..Na ślinę i sznurek", "Podatek", "Rozrzutność"],
   mercenaries: ["Mekaniak"],
 };

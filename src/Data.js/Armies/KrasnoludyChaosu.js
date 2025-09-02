@@ -256,7 +256,7 @@ export const krasnoludyChaosu = {
   maxModels: 15,
   name: "Krasnoludowie Chaosu z Zorn Uzkul",
   nature: "Zła",
-  armyRules: ["Palankin", "Podatek", "Reduta", "Rozrzutni"],
+  armyRules: ["Palankin", "Podatek", "Reduta", "Rozrzutność"],
   mercenaries: [
     "Czarownica",
     "Hiena cmentarna",

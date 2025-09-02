@@ -224,6 +224,6 @@ export const amazonki = {
   maxModels: 15,
   name: "Amazonki z Lustrii",
   nature: "Zła",
-  armyRules: ["Podatek", "Rozrzutni", "Żertwa"],
+  armyRules: ["Podatek", "Rozrzutność", "Żertwa"],
   mercenaries: ["Czarownica", "Magus", "Minstrel", "Szpieg", "Wróżbita"],
 };

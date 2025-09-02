@@ -165,6 +165,6 @@ export const moulder = {
   maxModels: 15,
   name: "Poganiacze klanu Moulder",
   nature: "Chaotyczna",
-  armyRules: ["Rozrzutni", "W nogi!"],
+  armyRules: ["Rozrzutność", "W nogi!"],
   mercenaries: ["Szczurogr", "Szpieg", "Złodziej"],
 };

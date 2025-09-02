@@ -198,7 +198,12 @@ export const raubritterzy = {
   maxModels: 15,
   name: "Raubritterzy z Księstw Granicznych",
   nature: "Zła",
-  armyRules: ["Kontakty handlowe (1)", "Raubritterzy", "Podatek", "Rozrzutni"],
+  armyRules: [
+    "Kontakty handlowe (1)",
+    "Raubritterzy",
+    "Podatek",
+    "Rozrzutność",
+  ],
   mercenaries: [
     "Balistyk",
     "Bombardier",

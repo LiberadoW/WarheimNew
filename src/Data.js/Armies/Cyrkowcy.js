@@ -5,7 +5,7 @@ export const cyrkowcy = {
     Mecenas: {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 60,
+      cost: 55,
       number: 1,
       equipmentList: heroEquipment["Cyrkowcy z Ligii Ostermarku"].Bohaterowie,
       type: "Bohater",
@@ -20,7 +20,7 @@ export const cyrkowcy = {
     "Magister magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 40,
+      cost: 35,
       number: 1,
       equipmentList:
         heroEquipment["Cyrkowcy z Ligii Ostermarku"]["Magister magii"],
@@ -36,7 +36,7 @@ export const cyrkowcy = {
     "Kapłan Ranalda": {
       id: 2,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 45,
+      cost: 35,
       number: 1,
       equipmentList:
         heroEquipment["Cyrkowcy z Ligii Ostermarku"]["Kapłan Ranalda"],
@@ -46,11 +46,11 @@ export const cyrkowcy = {
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: [
-        "Błogosławieństwo bogów",
         "Duchowny (modlitwy do Ranalda)",
         "Kamuflaż",
-        "Kieszonkowiec",
         "Modlitwa",
+        "Rewelator",
+        "Rozproszenie magii (2)",
         "Wzgardzony",
       ],
       exp: 12,
@@ -59,7 +59,7 @@ export const cyrkowcy = {
     Szarlatan: {
       id: 3,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 35,
+      cost: 25,
       number: 2,
       equipmentList: heroEquipment["Cyrkowcy z Ligii Ostermarku"].Bohaterowie,
       type: "Bohater",
@@ -89,7 +89,7 @@ export const cyrkowcy = {
     Cyrkowiec: {
       id: 5,
       startingEquipment: ["Sztylet"],
-      cost: 30,
+      cost: 20,
       number: 7,
       equipmentList: heroEquipment["Cyrkowcy z Ligii Ostermarku"].Stronnicy,
       type: "Stronnik",
@@ -107,7 +107,7 @@ export const cyrkowcy = {
     Siłacz: {
       id: 6,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 45,
+      cost: 35,
       number: 3,
       equipmentList: heroEquipment["Cyrkowcy z Ligii Ostermarku"].Stronnicy,
       type: "Stronnik",
@@ -120,7 +120,7 @@ export const cyrkowcy = {
     Żongler: {
       id: 7,
       startingEquipment: ["Sztylet", "Broń miotana (noże)"],
-      cost: 45,
+      cost: 35,
       number: 3,
       equipmentList: heroEquipment["Cyrkowcy z Ligii Ostermarku"].Stronnicy,
       type: "Stronnik",
@@ -139,7 +139,7 @@ export const cyrkowcy = {
         "Koń bojowy",
         "Siodło & uprząż",
       ],
-      cost: 80,
+      cost: 70,
       number: 3,
       equipmentList: heroEquipment["Cyrkowcy z Ligii Ostermarku"].Stronnicy,
       type: "Stronnik",
@@ -210,18 +210,7 @@ export const cyrkowcy = {
         Początkowa: [6, 4, 0, 5, 4, 3, 4, 3, 6],
         Maksymalna: [6, 4, 0, 5, 4, 3, 4, 3, 6],
       },
-      rules: [
-        "Bestia",
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Przepastne trzewia",
-        "Rączy",
-        "Strach",
-        "Wielkolud",
-        "Zwiadowca",
-        "Zwierzę",
-      ],
+      rules: ["Bestia", "Głód trzewi", "Potwór", "Zwiadowca", "Zwierzę"],
     },
     Zaprzęg: {
       id: 12,
@@ -254,10 +243,10 @@ export const cyrkowcy = {
   },
   limit: 500,
   minModels: 3,
-  maxModels: 12,
+  maxModels: 15,
   name: "Cyrkowcy z Ligii Ostermarku",
   nature: "Neutralna",
-  armyRules: ["Kontakty handlowe (3)", "Rozrzutni"],
+  armyRules: ["Kontakty handlowe (3)", "Rozrzutność"],
   mercenaries: [
     "Balistyk",
     "Bombardier",

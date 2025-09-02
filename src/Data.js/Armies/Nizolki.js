@@ -195,7 +195,7 @@ export const nizolki = {
   maxModels: 15,
   name: "Niziołki z Krainy Zgromadzenia",
   nature: "Neutralna",
-  armyRules: ["Kompania najemników", "Rozrzutni"],
+  armyRules: ["Kompania najemników", "Rozrzutność"],
   mercenaries: [
     "Balistyk",
     "Bombardier",

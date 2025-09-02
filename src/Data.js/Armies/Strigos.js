@@ -69,7 +69,7 @@ export const strigos = {
         Początkowa: [4, 3, 0, 3, 4, 1, 3, 2, 6],
         Maksymalna: [5, 6, 0, 4, 4, 3, 6, 4, 8],
       },
-      rules: ["Głód krwi", "Murołaz", "Strach", "Żywa tarcza","Ghast"],
+      rules: ["Głód krwi", "Murołaz", "Strach", "Żywa tarcza", "Ghast"],
       exp: 8,
       skills: [0, 3, 4, 5],
     },
@@ -211,7 +211,7 @@ export const strigos = {
     "Kontrolowanie ożywieńców",
     "Ofiarowanie",
     "Podatek",
-    "Rozrzutni",
+    "Rozrzutność",
   ],
   mercenaries: [
     "Czarownica",

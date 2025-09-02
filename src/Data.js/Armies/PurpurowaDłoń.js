@@ -175,7 +175,7 @@ export const purpurowaDłoń = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Przepastne trzewia",
         "Regeneracja",
         "Strach",
@@ -221,7 +221,7 @@ export const purpurowaDłoń = {
   armyRules: [
     "Kontakty handlowe (1)",
     "Oko Chaosu",
-    "Rozrzutni",
+    "Rozrzutność",
     "Zamożność",
     "Znak Chaosu (Uczniowie Tzeentcha)",
   ],

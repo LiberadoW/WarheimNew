@@ -213,7 +213,7 @@ export const lahmia = {
     "Kontrolowanie ożywieńców",
     "Ofiarowanie",
     "Podatek",
-    "Rozrzutni",
+    "Rozrzutność",
   ],
   mercenaries: [
     "Czarownica",

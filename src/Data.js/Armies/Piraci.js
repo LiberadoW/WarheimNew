@@ -30,7 +30,7 @@ export const piraci = {
       },
       rules: ["Guślarstwo", "Mag (Kolegia Magii)"],
       exp: 12,
-      skills: [2,4,5],
+      skills: [2, 4, 5],
     },
     "Kapłan Mannana": {
       id: 2,
@@ -213,7 +213,7 @@ export const piraci = {
   maxModels: 15,
   name: "Piraci z Sartosy",
   nature: "Zła",
-  armyRules: ["Kontakty handlowe (3)", "Rozrzutni"],
+  armyRules: ["Kontakty handlowe (3)", "Rozrzutność"],
   mercenaries: [
     "Balistyk",
     "Bombardier",

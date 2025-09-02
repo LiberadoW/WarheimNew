@@ -104,7 +104,7 @@ export const mors = {
         Początkowa: [5, 4, 3, 3, 3, 1, 4, 1, 5],
         Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
       },
-      rules: ["Ranger","Szermierz"],
+      rules: ["Ranger", "Szermierz"],
     },
     "Wielki szczur": {
       id: 7,
@@ -154,6 +154,6 @@ export const mors = {
   maxModels: 15,
   name: "Zbrojne stado klanu Mors",
   nature: "Chaotyczna",
-  armyRules: ["Rozrzutni", "W nogi!"],
+  armyRules: ["Rozrzutność", "W nogi!"],
   mercenaries: ["Szczurogr", "Szpieg", "Złodziej"],
 };

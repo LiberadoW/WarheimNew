@@ -245,7 +245,7 @@ export const mroczne = {
   maxModels: 12,
   name: "Mroczni Elfowie z Naggaroth",
   nature: "Chaotyczna",
-  armyRules: ["Podatek", "Rozrzutni"],
+  armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: [
     "Balistyk z Czarnej Arki",
     "Gwardzista",

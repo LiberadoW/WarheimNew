@@ -120,12 +120,12 @@ export const orki = {
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: ["2K6",4,0,5,3,1,3,2,3],
-        Maksymalna: ["2K6",4,0,5,3,1,3,2,3],
+        Początkowa: ["2K6", 4, 0, 5, 3, 1, 3, 2, 3],
+        Maksymalna: ["2K6", 4, 0, 5, 3, 1, 3, 2, 3],
       },
       rules: [
         "Dzikie squigi",
-        "Niezłomność",
+        "Niezłomny",
         "No to hooop!",
         "Pomiot podmroku",
         "Rozmiar rzondzi",
@@ -144,11 +144,7 @@ export const orki = {
         Maksymalna: [5, 7, 5, 4, 5, 3, 5, 4, 8],
         Dzik: [7, 3, 0, 3, 4, 1, 3, 1, 3],
       },
-      rules: [
-        "Animozja",
-        "Duży cel (wierzchem)",
-        "Kawalerzysta",
-      ],
+      rules: ["Animozja", "Duży cel (wierzchem)", "Kawalerzysta"],
     },
     Troll: {
       id: 10,
@@ -170,7 +166,7 @@ export const orki = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Ochronne tatuaże",
         "Przepastne trzewia",
         "Regeneracja",
@@ -199,6 +195,6 @@ export const orki = {
   maxModels: 15,
   name: "Orkowie & Gobliny",
   nature: "Zła",
-  armyRules: ["Podatek", "Rozrzutni"],
+  armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: ["Mekaniak", "Miotacz ołowiu", "Ochroniarz"],
 };

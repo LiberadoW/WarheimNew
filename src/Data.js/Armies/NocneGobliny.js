@@ -156,7 +156,7 @@ export const nocneGobliny = {
       },
       rules: [
         "Dzikie squigi",
-        "Niezłomność",
+        "Niezłomny",
         "No to hooop!",
         "Pomiot podmroku",
         "Rozmiar rzondzi",
@@ -212,7 +212,7 @@ export const nocneGobliny = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Ochronne tatuaże",
         "Przepastne trzewia",
         "Regeneracja",
@@ -235,7 +235,7 @@ export const nocneGobliny = {
       rules: [
         "Duży cel",
         "Głód trzewi",
-        "Niezłomność",
+        "Niezłomny",
         "No to hooop!",
         "Pomiot podmroku",
         "Potwór",
@@ -284,6 +284,6 @@ export const nocneGobliny = {
   maxModels: 15,
   name: "Nocne Gobliny",
   nature: "Zła",
-  armyRules: ["Podatek", "Rozrzutni"],
+  armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: ["Mekaniak"],
 };

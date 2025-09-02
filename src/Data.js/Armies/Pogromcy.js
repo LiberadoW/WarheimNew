@@ -280,6 +280,6 @@ export const pogromcy = {
   maxModels: 12,
   name: "Kult Pogromców z Karak Kadrin",
   nature: "Neutralna",
-  armyRules: ["Kontakty handlowe (1)", "Reduta", "Rozrzutni"],
+  armyRules: ["Kontakty handlowe (1)", "Reduta", "Rozrzutność"],
   mercenaries: [],
 };

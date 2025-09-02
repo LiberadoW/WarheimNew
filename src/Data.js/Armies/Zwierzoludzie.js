@@ -153,7 +153,7 @@ export const zwierzoludzie = {
       },
       rules: ["Pomiot kniei", "Rączy", "Zasadzka", "Zwierzę"],
     },
-    "Minotaur": {
+    Minotaur: {
       id: 9,
       startingEquipment: ["Broń wielka"],
       cost: 200,
@@ -197,6 +197,6 @@ export const zwierzoludzie = {
   maxModels: 15,
   name: "Zbrojne stado Zwierzoludzi",
   nature: "Chaotyczna",
-  armyRules: ["Oko Chaosu", "Podatek", "Rozrzutni", "Znak Chaosu"],
+  armyRules: ["Oko Chaosu", "Podatek", "Rozrzutność", "Znak Chaosu"],
   mercenaries: [],
 };

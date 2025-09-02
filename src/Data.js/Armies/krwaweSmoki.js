@@ -114,7 +114,8 @@ export const krwaweSmoki = {
       startingEquipment: ["Miecz", "Średni", "Tarcza"],
       cost: 50,
       number: 3,
-      equipmentList: heroEquipment["Nieumarły poczet Krwawych Smoków"].Stronnicy,
+      equipmentList:
+        heroEquipment["Nieumarły poczet Krwawych Smoków"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
@@ -232,7 +233,7 @@ export const krwaweSmoki = {
     "Kontrolowanie ożywieńców",
     "Ofiarowanie",
     "Podatek",
-    "Rozrzutni",
+    "Rozrzutność",
   ],
   mercenaries: [
     "Czarownica",

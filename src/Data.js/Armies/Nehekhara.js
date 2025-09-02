@@ -259,7 +259,7 @@ export const nehekhara = {
         "Nieumarły koń": [8, 2, 0, 3, "-", "-", 2, 1, 4],
         "Nieumarły koń  ": [8, 2, 0, 3, "-", "-", 2, 1, 4],
       },
-      rules: ["Duży cel", "Machina wojenna", "Pomiot pustyni","Rydwan"],
+      rules: ["Duży cel", "Machina wojenna", "Pomiot pustyni", "Rydwan"],
     },
   },
   limit: 500,
@@ -267,6 +267,6 @@ export const nehekhara = {
   maxModels: 15,
   name: "Nieumarły zastęp z Nehekhary",
   nature: "Praworządna",
-  armyRules: ["Kontrolowanie ożywieńców", "Podatek", "Rozrzutni"],
+  armyRules: ["Kontrolowanie ożywieńców", "Podatek", "Rozrzutność"],
   mercenaries: [],
 };

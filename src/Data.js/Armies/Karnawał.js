@@ -243,7 +243,7 @@ export const karnawałChaosu = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Przepastne trzewia",
         "Regeneracja",
         "Strach",
@@ -271,7 +271,7 @@ export const karnawałChaosu = {
         "Karawan",
         "Machina wojenna",
         "Powóz",
-        "Konsyliarz"
+        "Konsyliarz",
       ],
     },
   },
@@ -280,6 +280,6 @@ export const karnawałChaosu = {
   maxModels: 12,
   name: "Karnawał Chaosu",
   nature: "Chaotyczna",
-  armyRules: ["Oko Chaosu", "Podatek", "Rozrzutni", "Znak Chaosu"],
+  armyRules: ["Oko Chaosu", "Podatek", "Rozrzutność", "Znak Chaosu"],
   mercenaries: [],
 };

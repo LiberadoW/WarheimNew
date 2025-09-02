@@ -208,7 +208,7 @@ export const arabia = {
   maxModels: 15,
   name: "Kupiecka karawana z Arabii",
   nature: "Neutralna",
-  armyRules: ["Kontakty handlowe (2)", "Podatek", "Rozrzutni", "Zamożność"],
+  armyRules: ["Kontakty handlowe (2)", "Podatek", "Rozrzutność", "Zamożność"],
   mercenaries: [
     "Balistyk",
     "Bombardier",

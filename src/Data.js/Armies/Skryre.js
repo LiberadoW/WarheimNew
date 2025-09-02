@@ -148,7 +148,7 @@ export const skryre = {
         "Konstrukt",
         "Łuskowata skóra (4+)",
         "Murołaz",
-        "Niezłomność",
+        "Niezłomny",
         "Przepastne trzewia",
         "Strach",
         "Wielkolud",
@@ -196,6 +196,6 @@ export const skryre = {
   maxModels: 15,
   name: "Harcownicy klanu Skryre",
   nature: "Chaotyczna",
-  armyRules: ["Rozrzutni", "W nogi!"],
+  armyRules: ["Rozrzutność", "W nogi!"],
   mercenaries: ["Szczurogr", "Szpieg", "Złodziej"],
 };

@@ -166,6 +166,6 @@ export const pestilens = {
   maxModels: 15,
   name: "Kult Zarazy klanu Pestilens",
   nature: "Chaotyczna",
-  armyRules: ["Rozrzutni", "W nogi!"],
+  armyRules: ["Rozrzutność", "W nogi!"],
   mercenaries: ["Szczurogr", "Szpieg", "Złodziej"],
 };

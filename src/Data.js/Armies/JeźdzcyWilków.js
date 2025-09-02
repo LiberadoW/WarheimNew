@@ -187,7 +187,7 @@ export const jeźdzcyWilków = {
   maxModels: 15,
   name: "Jeźdzcy Wilków",
   nature: "Zła",
-  armyRules: ["Podatek", "Rozrzutni"],
+  armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: [
     "Czarownica",
     "Hiena cmentarna",

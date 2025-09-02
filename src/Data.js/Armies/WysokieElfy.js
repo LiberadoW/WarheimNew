@@ -178,6 +178,6 @@ export const wysokie = {
   maxModels: 12,
   name: "Elfowie Wysokiego Rodu z Ulthuan",
   nature: "Neutralna",
-  armyRules: ["Kontakty handlowe (3)", "Podatek", "Rozrzutni", "Zamożność"],
+  armyRules: ["Kontakty handlowe (3)", "Podatek", "Rozrzutność", "Zamożność"],
   mercenaries: ["Minstrel", "Strażnik Morski z Lothern", "Zwiadowca"],
 };

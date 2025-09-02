@@ -151,7 +151,7 @@ export const karmazynowaCzaszka = {
         "Głód trzewi",
         "Głupota",
         "Nieświadomy",
-        "Niezłomność",
+        "Niezłomny",
         "Przepastne trzewia",
         "Regeneracja",
         "Strach",
@@ -197,7 +197,7 @@ export const karmazynowaCzaszka = {
   armyRules: [
     "Kontakty handlowe (1)",
     "Oko Chaosu",
-    "Rozrzutni",
+    "Rozrzutność",
     "Zamożność",
     "Znak Chaosu (Wojownicy Khorna)",
   ],

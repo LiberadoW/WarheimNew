@@ -694,7 +694,7 @@ lub MAG, podlega do końca tury efektom zasady specjalnej GŁUPOTA.
     nakarmiona, należy wykonać rzut K6. Wynik 1 oznacza, że Żelazny Demon
     chwilowo zapomina o trawiącym go głodzie; z kolei wynik 2+ oznacza, że
     machina musi opuścić następną potyczkę.`,
-  "Rozproszenie magii(2)": `Model z zasadą specjalną ROZPROSZENIE MAGII, który nie Ucieka! lub nie został
+  "Rozproszenie magii (2)": `Model z zasadą specjalną ROZPROSZENIE MAGII, który nie Ucieka! lub nie został
 Oszołomiony! lub Powalony na ziemię! lub umieszczony poza stołem, generuje na potrzeby
 gracza liczbę Kostek Rozproszenia równą wartości podanej w nawiasie.
 Reguła nie podlega kumulacji, jeśli model z zasadą specjalną ROZPROSZENIE

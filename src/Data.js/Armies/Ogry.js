@@ -261,7 +261,7 @@ export const ogry = {
   maxModels: 12,
   name: "Zwiadowcza kompania z Królestw Ogrów",
   nature: "Zła",
-  armyRules: ["Rozrzutni"],
+  armyRules: ["Rozrzutność"],
   mercenaries: [
     "Czarownica",
     "Łowca nagród",
