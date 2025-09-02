@@ -203,9 +203,20 @@ export const getOneOfChoices = (army, unitList) => {
     ],
     "Plemię Leśnych Goblinów": [["Troll", "Wielki Pajonk"]],
     "Orkowie & Gobliny": [["Ork na Dziku", "Troll"]],
-    "Nocne Gobliny": [["Squig","Nocny Hop-Goblin"],["Troll","Wielki Squig"],["Rydwan Nocnych Goblinów","Więźniarka"]],
-    "Załoga Zielonoskórych Kaprów": [["Squig","Kaper"],["Troll","Ośmiornica Bagienna"],["Więźniarka","Rydwan"]],
-    "Jaszczuroludzie z Lustrii": [["Jeździec Zimnokrwistych","Jeźdzcy Terradonów"],["Salamandra","Kroxigor"]]
+    "Nocne Gobliny": [
+      ["Squig", "Nocny Hop-Goblin"],
+      ["Troll", "Wielki Squig"],
+      ["Rydwan Nocnych Goblinów", "Więźniarka"],
+    ],
+    "Załoga Zielonoskórych Kaprów": [
+      ["Squig", "Kaper"],
+      ["Troll", "Ośmiornica Bagienna"],
+      ["Więźniarka", "Rydwan"],
+    ],
+    "Jaszczuroludzie z Lustrii": [
+      ["Jeździec Zimnokrwistych", "Jeździec Terradonów"],
+      ["Salamandra", "Kroxigor"],
+    ],
   };
 
   if (choices[army.name] !== undefined) {
