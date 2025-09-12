@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const jeźdzcyWilków = {
   heroes: {
-    Herszt: {
+    "Herszt Hobgoblinów": {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 55,
@@ -20,7 +20,7 @@ export const jeźdzcyWilków = {
     "Szaman Hobgoblinów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 45,
+      cost: 40,
       number: 1,
       equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
       type: "Bohater",
@@ -37,10 +37,10 @@ export const jeźdzcyWilków = {
       exp: 10,
       skills: [0, 1, 4, 5],
     },
-    Siepacz: {
+    "Siepacz Hobgoblinów": {
       id: 2,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 35,
+      cost: 30,
       number: 1,
       equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
       type: "Bohater",
@@ -55,7 +55,7 @@ export const jeźdzcyWilków = {
     "Łowca niewolników": {
       id: 3,
       startingEquipment: ["Sztylet", "Łapacz"],
-      cost: 25,
+      cost: 30,
       number: 1,
       equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
       type: "Bohater",
@@ -107,7 +107,7 @@ export const jeźdzcyWilków = {
         "Wielki wilk",
         "Siodło & uprząż",
       ],
-      cost: 80,
+      cost: 70,
       number: 3,
       equipmentList: heroEquipment["Jeźdzcy Wilków"].Stronnicy,
       type: "Stronnik",

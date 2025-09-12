@@ -1870,6 +1870,7 @@ export const heroEquipment = {
   "Jeźdzcy Wilków": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
+      Bicz: [15, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Gwiazda zaranna": [5, 0],
       Kostur: [5, 0],
@@ -1879,6 +1880,7 @@ export const heroEquipment = {
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
       "Broń miotana (noże)": [10, 1],
+      "Arkan/Bolas/Sieć": [10, 1],
       Kusza: [25, 1],
       Łuk: [10, 1],
       Oszczep: [15, 1],
@@ -1899,6 +1901,7 @@ export const heroEquipment = {
       Oszczep: [15, 1],
       Sieć: [10, 1],
       Lekki: [5, 2, "Zbroja"],
+      Średni: [15, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
     },
@@ -2072,6 +2075,7 @@ export const heroEquipment = {
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
+      Ciężki: [30, 2, "Zbroja"],
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
@@ -2090,7 +2094,6 @@ export const heroEquipment = {
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
     },
@@ -3253,6 +3256,7 @@ export const heroEquipment = {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Gwiazda zaranna": [5, 0],
+      Halabarda: [10, 0],
       Kostur: [5, 0],
       Łapacz: [10, 0],
       Miecz: [10, 0],
@@ -3296,6 +3300,7 @@ export const heroEquipment = {
     },
     Ciężcy: {
       Sztylet: [2, 0],
+      "Buława/Maczuga/Młot bojowy": [5, 0],
       Harpun: [50, 3, "Choice"],
       Ołowiomiotacz: [50, 3, "Choice"],
       Lekki: [5, 2, "Zbroja"],

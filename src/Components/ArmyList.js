@@ -57,7 +57,7 @@ const ArmyList = ({
         />
         <CampaignPoints army={army} />
       </div>
-      <div className="print-a4-page">
+      {/* <div className="print-a4-page">
         <div className="rules-box">
           {uniqueRulesList.map((rule) => {
             return (
@@ -93,7 +93,7 @@ const ArmyList = ({
               })}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
