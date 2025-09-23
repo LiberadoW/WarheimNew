@@ -257,13 +257,13 @@ const Builder = ({
               setUnitList={setUnitList}
             />
 
-            <MercenariesSelect
+            {/* <MercenariesSelect
               mercenaries={mercenaries}
               setMercenaryUnitName={setMercenaryUnitName}
               mercenaryUnitName={mercenaryUnitName}
               unitList={unitList}
               setUnitList={setUnitList}
-            />
+            /> */}
           </div>
         </div>
 

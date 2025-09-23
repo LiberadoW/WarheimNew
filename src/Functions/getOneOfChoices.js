@@ -159,7 +159,6 @@ export const getOneOfChoices = (army, unitList) => {
         "Różowy Strachulec",
       ],
       ["Tyralier", "Ogar Chaosu"],
-      ["Ogr Chaosu", "Troll Chaosu"],
     ],
     "Zbrojne stado Zwierzoludzi": [["Grabieżcy", "Harpia"]],
     "Nieumarła świta Hrabiego Von Carstein": [

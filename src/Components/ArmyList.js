@@ -26,10 +26,8 @@ const ArmyList = ({
       unit.type === "Najemne Ostrze"
   );
   const uniqueRulesList = getAllRules(unitList);
-  console.log(uniqueRulesList);
 
   const magicPath = getMagicLore(unitList);
-  console.log(magicPath);
 
   return (
     <div className="army-list-container">
