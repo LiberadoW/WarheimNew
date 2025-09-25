@@ -101,7 +101,7 @@ export const getOneOfChoices = (army, unitList) => {
     "Mroczni Elfowie z Naggaroth": [
       ["Widmo", "Wiedźma Khaina"],
       ["Jeździec Mroku", "Harpia"],
-      ["Rydwan Zimnokrwistych", "Więźniarka"],
+      ["Rydwan", "Więźniarka"],
     ],
     "Khazadzi z Gór Krańca Świata": [
       ["Kowal Run", "Mistrz Inżynier"],
@@ -170,9 +170,9 @@ export const getOneOfChoices = (army, unitList) => {
       ["Czarna Karoca", "Ścierwowóz"],
     ],
     "Nieumarły poczet Krwawych Smoków": [
-      ["Ghoul", "Upiór"],
+      ["Ghoul", "Wicht"],
       ["Czarny Rycerz", "Graveir"],
-      ["Czarna Karoca", "Ścierwowóz"],
+      ["Rydwan", "Ścierwowóz"],
     ],
     "Nieumarły sabat rodu Nekrarch": [
       ["Ghoul", "Upiór"],

@@ -87,6 +87,21 @@ const ArmyInfo = ({
               <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
             </p>
           )}
+
+          <p
+            className="total-cost"
+            style={{
+              color:
+                totalCost > limit
+                  ? "red"
+                  : theme === "dark"
+                  ? "#f2f2f2"
+                  : "black",
+            }}
+          >
+            <span className="bold">Liczba modeli:</span>{" "}
+            {`${modelAmount} / ${army.maxModels}`}
+          </p>
         </div>
       </div>
       {clicked && (

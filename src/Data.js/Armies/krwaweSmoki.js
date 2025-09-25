@@ -20,10 +20,10 @@ export const krwaweSmoki = {
         "Dowodzenie",
         "Dowódca",
         "Głód krwi",
-        "Łatwopalność",
+        "Łatwopalny",
         "Mistrz miecza",
         "Nieumarły",
-        "Strach",
+        "Tempy",
         "Magia Krwi",
       ],
       exp: 20,
@@ -64,18 +64,18 @@ export const krwaweSmoki = {
     Dreg: {
       id: 3,
       startingEquipment: ["Sztylet"],
-      cost: 25,
+      cost: 15,
       number: 2,
       equipmentList:
         heroEquipment["Nieumarły poczet Krwawych Smoków"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
+        Początkowa: [4, 2, 2, 3, 3, 1, 3, 1, 6],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Żywa tarcza"],
-      exp: 8,
-      skills: [0, 3, 5],
+      rules: ["Przyboczny", "Żywa tarcza"],
+      exp: 0,
+      skills: [0, 4, 5],
     },
     Szkielet: {
       id: 4,
@@ -92,8 +92,10 @@ export const krwaweSmoki = {
       rules: [
         "Chorążowie & sygnaliści",
         "Drużyna obsługi",
+        "Martwe zło",
+        "Nieśmiertelny",
         "Nieumarły",
-        "Strach",
+        "Rozmiar rzondzi",
       ],
     },
     Ghoul: {
@@ -107,9 +109,9 @@ export const krwaweSmoki = {
         Początkowa: [4, 3, 0, 3, 4, 1, 3, 2, 6],
         Maksymalna: [5, 6, 0, 4, 4, 3, 6, 4, 8],
       },
-      rules: ["Głód krwi", "Murołaz", "Ograniczony", "Strach"],
+      rules: ["Głód krwi", "Murołaz", "Ograniczony", "Sfora", "Strach"],
     },
-    Upiór: {
+    Wicht: {
       id: 6,
       startingEquipment: ["Miecz", "Średni", "Tarcza"],
       cost: 50,
@@ -121,7 +123,7 @@ export const krwaweSmoki = {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
         Maksymalna: [5, 6, 0, 4, 4, 3, 6, 4, 8],
       },
-      rules: ["Nieumarły", "Strach", "Świadomy", "Zabójczy cios"],
+      rules: ["Nieumarły", "Świadomy", "Zabójczy cios"],
     },
     Zombie: {
       id: 7,
@@ -138,8 +140,8 @@ export const krwaweSmoki = {
         "Animacja",
         "Mięso armatnie",
         "Nieumarły",
-        "Strach",
         "Trudny do zabicia",
+        "Uderza jako ostatni",
       ],
     },
     "Czarny Rycerz": {
@@ -163,14 +165,13 @@ export const krwaweSmoki = {
         "Duży cel (wierzchem)",
         "Kawalerzysta",
         "Nieumarły",
-        "Strach",
         "Świadomy",
         "Zabójczy cios",
       ],
     },
     Graveir: {
       id: 9,
-      startingEquipment: ["Broń naturalna (przebicie pancerza, zatruty atak)"],
+      startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 150,
       number: 1,
       equipmentList: {},
@@ -182,6 +183,7 @@ export const krwaweSmoki = {
       rules: [
         "Bycza szarża",
         "Duży cel",
+        "Ghast",
         "Głód krwi",
         "Łuskowata skóra (5+)",
         "Murołaz",
@@ -189,25 +191,24 @@ export const krwaweSmoki = {
         "Przepastne trzewia",
         "Stan niższy",
         "Strach",
-        "Tempy",
         "Wielkolud",
         "Zabójczy cios",
       ],
     },
 
-    "Czarna Karoca": {
+    Rydwan: {
       id: 10,
       startingEquipment: [],
-      cost: 200,
+      cost: 125,
       number: 1,
       equipmentList: {},
       type: "Machina",
       stats: {
-        "Czarna Karoca": ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
+        "Czarna Karoca": ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
         "Nieumarły koń": [8, 2, 0, 3, "-", "-", 2, 1, 4],
         "Nieumarły koń  ": [8, 2, 0, 3, "-", "-", 2, 1, 4],
       },
-      rules: ["Duży cel", "Felczer", "Machina wojenna", "Powóz", "Strach"],
+      rules: ["Duży cel", "Machina wojenna", "Rydwan"],
     },
     Ścierwowóz: {
       id: 11,
@@ -229,12 +230,7 @@ export const krwaweSmoki = {
   maxModels: 15,
   name: "Nieumarły poczet Krwawych Smoków",
   nature: "Praworządna",
-  armyRules: [
-    "Kontrolowanie ożywieńców",
-    "Ofiarowanie",
-    "Podatek",
-    "Rozrzutność",
-  ],
+  armyRules: ["Kontrolowanie ożywieńców", "Podatek", "Rozrzutność"],
   mercenaries: [
     "Czarownica",
     "Hiena cmentarna",

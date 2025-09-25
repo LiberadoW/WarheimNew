@@ -32,7 +32,12 @@ const ArmyList = ({
   return (
     <div className="army-list-container">
       <div className="print-a4-page">
-        <ArmyListHeader army={army} prestige={prestige} armyName={armyName} />
+        <ArmyListHeader
+          army={army}
+          prestige={prestige}
+          armyName={armyName}
+          unitList={unitList}
+        />
         <UnitTable
           unitList={heroesUnitList}
           heroes={heroes}
