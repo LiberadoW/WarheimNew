@@ -225,7 +225,7 @@ export const nocneGobliny = {
         "Zwierzę",
       ],
     },
-    "Rydwan Nocnych Goblinów": {
+    Rydwan: {
       id: 12,
       startingEquipment: [],
       cost: 125,

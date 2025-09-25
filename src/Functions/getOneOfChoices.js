@@ -203,9 +203,8 @@ export const getOneOfChoices = (army, unitList) => {
     "Plemię Leśnych Goblinów": [["Troll", "Wielki Pajonk"]],
     "Orkowie & Gobliny": [["Ork na Dziku", "Troll"]],
     "Nocne Gobliny": [
-      ["Squig", "Nocny Hop-Goblin"],
       ["Troll", "Wielki Squig"],
-      ["Rydwan Nocnych Goblinów", "Więźniarka"],
+      ["Rydwan", "Więźniarka"],
     ],
     "Załoga Zielonoskórych Kaprów": [
       ["Squig", "Kaper"],
