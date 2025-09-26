@@ -17,6 +17,7 @@ const UnitInfo = ({
   setIdShown,
   showModal,
   setShowModal,
+  army,
 }) => {
   const handleOnChange = (e) => {
     const displayName = e.target.value;
@@ -94,6 +95,7 @@ const UnitInfo = ({
                           ? heroes[unit.unitName].rules
                           : mercenaries[unit.unitName].rules
                       }
+                      army={army}
                     />
                   )}
                   <UnitTable
