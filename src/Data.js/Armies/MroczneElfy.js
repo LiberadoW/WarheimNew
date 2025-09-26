@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const mroczne = {
   heroes: {
-    Szlachic: {
+    Szlachcic: {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 75,

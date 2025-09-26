@@ -74,11 +74,13 @@ const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
       })}
 
       {Object.keys(unitNumbers).map((unit, index) => {
-        if (unitNumbers[unit] > army.heroes[unit]?.number) {
+        if (unitNumbers[unit] > army?.heroes?.[unit]?.number) {
           return (
             <p className="bold" key={index}>
               <i className="fa-solid fa-triangle-exclamation"> </i>{" "}
-              {`Banda może posiadać maksymalnie ${army.heroes[unit].number} ${
+              {`Banda może posiadać maksymalnie ${
+                army?.heroes?.[unit].number
+              } ${
                 army.heroes[unit].number === 1
                   ? "jednostkę"
                   : army.heroes[unit].number > 4

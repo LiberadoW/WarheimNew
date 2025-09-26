@@ -3,6 +3,7 @@ import "../styles/ArmyListHeader.css";
 import getModelAmount from "../Functions/getModelAmount";
 
 const ArmyListHeader = ({ army, prestige, armyName, unitList }) => {
+  console.log(army, "Army");
   return (
     <div className="army-list-header">
       <p>

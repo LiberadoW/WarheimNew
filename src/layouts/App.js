@@ -215,10 +215,10 @@ const App = () => {
       <div id="armylist">
         <ArmyList
           unitList={newUnitList}
-          heroes={armies[army].heroes}
+          heroes={armies?.[army]?.heroes}
           unitName={unitName}
           setUnitList={setUnitList}
-          army={armies[army]}
+          army={armies?.[army]}
           prestige={prestige}
           armyName={armyName}
         />

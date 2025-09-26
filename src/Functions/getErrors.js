@@ -8,7 +8,7 @@ const getErrors = (army, totalCost, modelAmount, unitList, limit) => {
 
   unitList.forEach((item, index) => {
     const startingWeaponsOptions = Object.entries(item.equipmentList).filter(
-      ([key, value]) => value[2] === "Startowy" 
+      ([key, value]) => value[2] === "Startowy"
     );
 
     if (startingWeaponsOptions.length > 0) {
@@ -27,7 +27,7 @@ const getErrors = (army, totalCost, modelAmount, unitList, limit) => {
   );
 
   Object.keys(unitNumbers).forEach((unit) => {
-    if (unitNumbers[unit] > army.heroes[unit].number) {
+    if (unitNumbers[unit] > army?.heroes?.[unit]?.number) {
       errors += 1;
     }
   });

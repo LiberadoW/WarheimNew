@@ -250,7 +250,7 @@ const Builder = ({
             )}
 
             <UnitSelect
-              heroes={army.heroes}
+              heroes={army?.heroes}
               setUnitName={setUnitName}
               unitName={unitName}
               unitList={unitList}
@@ -290,12 +290,12 @@ const Builder = ({
               setIdShown={setIdShown}
               showModal={showModal}
               setShowModal={setShowModal}
-              heroes={army.heroes}
+              heroes={army?.heroes}
             />
           </div>
 
           <UnitInfo
-            heroes={army.heroes}
+            heroes={army?.heroes}
             mercenaries={mercenaries}
             unitName={unitName}
             unitList={unitList}

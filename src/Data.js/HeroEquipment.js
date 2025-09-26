@@ -2947,8 +2947,14 @@ export const heroEquipment = {
       Proca: [5, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+    },
+    Siewca: {
+      "Broń wielka": [10, 0],
+      "Buława/Maczuga/Młot bojowy": [5, 0],
+      "Cep bojowy": [10, 0],
+      "Gwiazda zaranna": [5, 0],
+      Korbacz: [5, 0],
     },
   },
   "Harcownicy klanu Skryre": {
@@ -3151,6 +3157,7 @@ export const heroEquipment = {
       Dmuchawka: [15, 1],
       "Łuk krótki": [5, 1],
       Łuk: [10, 1],
+      Proca: [5, 1],
       Sieć: [10, 1],
       Lekki: [5, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],

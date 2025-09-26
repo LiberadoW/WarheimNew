@@ -72,8 +72,8 @@ const ArmyList = ({
             );
           })}
         </div>
-      </div>
-      <div className="print-a4-page">
+      </div> */}
+      {/* <div className="print-a4-page">
         {magicPath && (
           <div className="magic-box">
             <p className="spell-school-title">{magicPath}</p>

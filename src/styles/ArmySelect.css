@@ -1,7 +1,10 @@
 .army-select-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-   
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.army-select-updated-option {
+  font-weight: bold;
 }

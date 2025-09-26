@@ -184,9 +184,9 @@ export const getOneOfChoices = (army, unitList) => {
       ["Czarna Karoca", "Ścierwowóz"],
     ],
     "Nieumarła horda Liczmistrza": [
-      ["Ghoul", "Upiór"],
+      ["Ghoul", "Wicht"],
       ["Czarny Rycerz", "Graveir", "Mroczny wilk", "Rój nietoperzy"],
-      ["Czarna Karoca", "Ścierwowóz"],
+      ["Rydwan", "Ścierwowóz"],
     ],
     "Nieumarły zastęp z Nehekhary": [
       ["Rój", "Nieumarły Nomada"],
@@ -194,7 +194,10 @@ export const getOneOfChoices = (army, unitList) => {
     ],
     "Zwiadowcze stado klanu Eshin": [["Rydwan", "Więźniarka"]],
     "Poganiacze klanu Moulder": [["Rydwan", "Więźniarka"]],
-    "Kult Zarazy klanu Pestilens": [["Rydwan", "Więźniarka"]],
+    "Kult Zarazy klanu Pestilens": [
+      ["Szczur zarazy", "Czerw zarazy"],
+      ["Zarazowóz", "Więźniarka"],
+    ],
     "Harcownicy klanu Skryre": [["Koło Zagłady", "Więźniarka"]],
     "Zbrojne stado klanu Mors": [["Rydwan", "Więźniarka"]],
     "Łowcze plemię Dzikich Orków": [
