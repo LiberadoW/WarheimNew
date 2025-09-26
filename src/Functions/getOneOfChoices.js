@@ -199,7 +199,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Zarazowóz", "Więźniarka"],
     ],
     "Harcownicy klanu Skryre": [["Koło Zagłady", "Więźniarka"]],
-    "Zbrojne stado klanu Mors": [["Rydwan", "Więźniarka"]],
+    "Zbrojne stado klanu Mors": [["Wóz bojowy", "Więźniarka"]],
     "Łowcze plemię Dzikich Orków": [
       ["Dziki Ork na Dziku", "Troll", "Wielki Pajonk"],
     ],

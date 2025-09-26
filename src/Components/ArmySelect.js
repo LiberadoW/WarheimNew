@@ -49,6 +49,8 @@ const ArmySelect = ({
     "Załoga Zielonoskórych Kaprów",
     "Nieumarła horda Liczmistrza",
     "Nocne Gobliny",
+    "Piechota Morska z Marienburga",
+    "Zbrojni z Middenheim",
   ];
 
   return (

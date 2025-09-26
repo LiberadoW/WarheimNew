@@ -306,6 +306,7 @@ const Builder = ({
             setIdShown={setIdShown}
             showModal={showModal}
             setShowModal={setShowModal}
+            army={army}
           />
         </div>
       </div>

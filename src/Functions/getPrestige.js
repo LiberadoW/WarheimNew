@@ -58,6 +58,7 @@ export const getPrestige = (arr) => {
     monstersNumber: 0,
     equipmentTotalValue: 0,
     mercenariesTotalPrestige: 0,
+    modelWithMountRule: 0,
   };
   arr.forEach((item) => {
     if (item.unitName !== "" && item !== null) {
@@ -70,8 +71,19 @@ export const getPrestige = (arr) => {
           prestigeValues.heroesTotalExp += item.exp;
         }
 
+        if (
+          item.rules.includes("Wierzchowiec") &&
+          !item.rules.includes("Potwór") &&
+          !item.rules.includes("Wielkolud")
+        ) {
+          prestigeValues.modelWithMountRule += Number(item.selectedNumber);
+        }
+
         prestigeValues.modelsNumber += Number(item.selectedNumber);
-        if (item.rules.includes("Duży cel")) {
+        if (
+          item.rules.includes("Wielkolud") &&
+          !item.rules.includes("Potwór")
+        ) {
           prestigeValues.bigTargetsNumber += Number(item.selectedNumber);
         }
         if (item.rules.includes("Potwór")) {
@@ -151,7 +163,7 @@ export const getPrestige = (arr) => {
     prestigeValues.heroesTotalExp +
     prestigeValues.henchmenTotalExp +
     prestigeValues.modelsNumber * 5 +
-    prestigeValues.mountsNumber * 5 +
+    (prestigeValues.mountsNumber + prestigeValues.modelWithMountRule) * 5 +
     prestigeValues.bigTargetsNumber * 20 +
     prestigeValues.warmachinesNumber * 25 +
     prestigeValues.monstersNumber * 50 +

@@ -9,7 +9,7 @@ import { getItemText } from "../Functions/getItemText";
 import { CommandContext } from "./Builder";
 import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
 
-const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
+const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
   const { standardBearer, setStandardBearer, musician, setMusician } =
     useContext(CommandContext);
 
@@ -322,7 +322,8 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
       unit.totalCost = unit.cost * unit.selectedNumber - 100;
     } else if (
       unitList[id].unitName === "Drużyna ciężkich broni" &&
-      !unitList[id].rules.includes("Animozja")
+      !unitList[id].rules.includes("Animozja") &&
+      army.name !== "Piechota Morska z Marienburga"
     ) {
       if (
         [
@@ -348,6 +349,19 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
         unit.totalCost = unit.cost * unit.selectedNumber - 80;
       } else {
         unit.totalCost = unit.cost * unit.selectedNumber - 30;
+      }
+    } else if (
+      unitList[id].unitName === "Drużyna ciężkich broni" &&
+      army.name === "Piechota Morska z Marienburga"
+    ) {
+      if (
+        ["Harpun", "Ołowiomiotacz"].some((element) =>
+          unitList[id].optionalEquipment.includes(element)
+        )
+      ) {
+        unit.totalCost = unit.cost * unit.selectedNumber - 110;
+      } else {
+        unit.totalCost = unit.cost * unit.selectedNumber - 60;
       }
     } else {
       unit.totalCost = unit.cost * unit.selectedNumber;
@@ -511,27 +525,35 @@ const WeaponList = ({ heroes, id, unitList, setUnitList }) => {
                           }
                           readOnly
                         ></input>
-                        {indexMain <= 1 && (
-                          <input
-                            onClick={handleWeaponListClick2}
-                            checked={
-                              unitList[id].optionalEquipment
-                                .concat(unitList[id].startingEquipment)
-                                .filter((x) => x === key).length === 2
-                            }
-                            data={value[2]}
-                            name={key}
-                            value={value[0]}
-                            className={id}
-                            type="checkbox"
-                            disabled={
-                              unitList[id].startingEquipment.filter(
-                                (x) => x === key
-                              ).length === 2
-                            }
-                            readOnly
-                          ></input>
-                        )}
+                        {indexMain <= 1 &&
+                          ![
+                            "Harpun",
+                            "Ołowiomiotacz",
+                            "Kulomiot",
+                            "Miotacz spaczognia",
+                            "Moździerz trującego wichru",
+                            "Spaczrusznica",
+                          ].includes(key) && (
+                            <input
+                              onClick={handleWeaponListClick2}
+                              checked={
+                                unitList[id].optionalEquipment
+                                  .concat(unitList[id].startingEquipment)
+                                  .filter((x) => x === key).length === 2
+                              }
+                              data={value[2]}
+                              name={key}
+                              value={value[0]}
+                              className={id}
+                              type="checkbox"
+                              disabled={
+                                unitList[id].startingEquipment.filter(
+                                  (x) => x === key
+                                ).length === 2
+                              }
+                              readOnly
+                            ></input>
+                          )}
                         <span
                           className="equipment-text"
                           onMouseEnter={handleMouseEnter}

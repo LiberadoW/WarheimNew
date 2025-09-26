@@ -23,7 +23,10 @@ const Treasury = ({ army, unitList }) => {
               <span>{`Liczba modeli (${prestigeValues[1].modelsNumber})x5:`}</span>
             </div>
             <div>
-              <span>{`Wierzchowce (${prestigeValues[1].mountsNumber})x5:`}</span>
+              <span>{`Wierzchowiec (${
+                prestigeValues[1].mountsNumber +
+                prestigeValues[1].modelWithMountRule
+              })x5:`}</span>
             </div>
             <div>
               <span>{`Wartość ekwipunku (${prestigeValues[1].equipmentTotalValue})x1/10:`}</span>
@@ -32,7 +35,7 @@ const Treasury = ({ army, unitList }) => {
               <span>{`Magiczne przedmioty (${0})x5:`}</span>
             </div>
             <div>
-              <span>{`Duże cele (${prestigeValues[1].bigTargetsNumber})x20:`}</span>
+              <span>{`Wielkolud (${prestigeValues[1].bigTargetsNumber})x20:`}</span>
             </div>
             <div>
               <span>{`Machiny (${prestigeValues[1].warmachinesNumber})x25:`}</span>
