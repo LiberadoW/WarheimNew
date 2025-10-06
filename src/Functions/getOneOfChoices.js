@@ -193,7 +193,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Gnilec", "Ushabti", "Grobowy Skorpion"],
     ],
     "Zwiadowcze stado klanu Eshin": [["Rydwan", "Więźniarka"]],
-    "Poganiacze klanu Moulder": [["Rydwan", "Więźniarka"]],
+    "Poganiacze klanu Moulder": [["Ambulatorium", "Więźniarka"]],
     "Kult Zarazy klanu Pestilens": [
       ["Szczur zarazy", "Czerw zarazy"],
       ["Zarazowóz", "Więźniarka"],

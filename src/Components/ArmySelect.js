@@ -51,6 +51,9 @@ const ArmySelect = ({
     "Nocne Gobliny",
     "Piechota Morska z Marienburga",
     "Zbrojni z Middenheim",
+    "Zbrojne stado klanu Mors",
+    "Poganiacze klanu Moulder",
+    "Muszkieterzy z Nuln",
   ];
 
   return (

@@ -167,7 +167,7 @@ export const mors = {
   maxModels: 15,
   name: "Zbrojne stado klanu Mors",
   nature: "Chaotyczna",
-  armyRules: ["Rozrzutność", "W nogi!"],
+  armyRules: ["Rozrzutność"],
   mercenaries: [
     "Czarownica",
     "Gladiator",
