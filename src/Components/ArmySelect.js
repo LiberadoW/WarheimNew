@@ -54,6 +54,8 @@ const ArmySelect = ({
     "Zbrojne stado klanu Mors",
     "Poganiacze klanu Moulder",
     "Muszkieterzy z Nuln",
+    "Nieumarły zastęp z Nehekhary",
+    "Nieumarły sabat rodu Nekrarch",
   ];
 
   return (

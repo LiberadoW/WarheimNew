@@ -175,7 +175,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Rydwan", "Ścierwowóz"],
     ],
     "Nieumarły sabat rodu Nekrarch": [
-      ["Ghoul", "Upiór"],
+      ["Ghoul", "Wicht"],
       ["Graveir", "Rój nietoperzy"],
       ["Czarna Karoca", "Ścierwowóz"],
     ],
@@ -189,7 +189,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Rydwan", "Ścierwowóz"],
     ],
     "Nieumarły zastęp z Nehekhary": [
-      ["Rój", "Nieumarły Nomada"],
+      ["Nieumarły rój", "Nieumarły Nomada"],
       ["Gnilec", "Ushabti", "Grobowy Skorpion"],
     ],
     "Zwiadowcze stado klanu Eshin": [["Rydwan", "Więźniarka"]],
