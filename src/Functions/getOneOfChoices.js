@@ -140,8 +140,7 @@ export const getOneOfChoices = (army, unitList) => {
     ],
     "Kult Purporowej Dłoni": [
       ["Tzaangor", "Różowy Strachulec"],
-      ["Ogr Chaosu", "Smoczy Ogr", "Troll Chaosu"],
-      ["Zaprzęg", "Rydwan Chaosu"],
+      ["Smoczy Ogr", "Troll Chaosu"],
     ],
     "Grasanci Chaosu": [
       ["Odrzucony", "Zwierzoczłek"],
@@ -195,7 +194,7 @@ export const getOneOfChoices = (army, unitList) => {
     "Zwiadowcze stado klanu Eshin": [["Rydwan", "Więźniarka"]],
     "Poganiacze klanu Moulder": [["Ambulatorium", "Więźniarka"]],
     "Kult Zarazy klanu Pestilens": [
-      ["Szczur zarazy", "Czerw zarazy"],
+      ["Szczur Zarazy", "Czerw Zarazy"],
       ["Zarazowóz", "Więźniarka"],
     ],
     "Harcownicy klanu Skryre": [["Koło Zagłady", "Więźniarka"]],

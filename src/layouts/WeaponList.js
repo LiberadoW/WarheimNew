@@ -323,7 +323,8 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
     } else if (
       unitList[id].unitName === "Drużyna ciężkich broni" &&
       !unitList[id].rules.includes("Animozja") &&
-      army.name !== "Piechota Morska z Marienburga"
+      army.name !== "Piechota Morska z Marienburga" &&
+      army.name !== "Piraci z Sartosy"
     ) {
       if (
         [
@@ -362,6 +363,19 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
         unit.totalCost = unit.cost * unit.selectedNumber - 110;
       } else {
         unit.totalCost = unit.cost * unit.selectedNumber - 60;
+      }
+    } else if (
+      unitList[id].unitName === "Drużyna ciężkich broni" &&
+      army.name === "Piraci z Sartosy"
+    ) {
+      if (
+        ["Harpun", "Ołowiomiotacz"].some((element) =>
+          unitList[id].optionalEquipment.includes(element)
+        )
+      ) {
+        unit.totalCost = unit.cost * unit.selectedNumber - 90;
+      } else {
+        unit.totalCost = unit.cost * unit.selectedNumber - 40;
       }
     } else {
       unit.totalCost = unit.cost * unit.selectedNumber;

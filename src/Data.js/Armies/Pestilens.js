@@ -135,7 +135,7 @@ export const pestilens = {
         "Zwierzę",
       ],
     },
-    "Czerw zarazy": {
+    "Czerw Zarazy": {
       id: 8,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 200,

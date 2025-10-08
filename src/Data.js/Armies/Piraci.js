@@ -2,10 +2,10 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const piraci = {
   heroes: {
-    Kapitan: {
+    "Kapitan Piratów": {
       id: 0,
       startingEquipment: ["Sztylet", "Rapier"],
-      cost: 60,
+      cost: 55,
       number: 1,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
@@ -20,7 +20,7 @@ export const piraci = {
     Czarownik: {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 45,
+      cost: 35,
       number: 1,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
@@ -35,7 +35,7 @@ export const piraci = {
     "Kapłan Mannana": {
       id: 2,
       startingEquipment: ["Sztylet", "Trójząb"],
-      cost: 40,
+      cost: 35,
       number: 1,
       equipmentList: heroEquipment["Piraci z Sartosy"].Kapłan,
       type: "Bohater",
@@ -44,11 +44,11 @@ export const piraci = {
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: [
-        "Błogosławieństwo bogów",
         "Czarostwo",
         "Duchowny (modlity do Mannana)",
         "Modlitwa",
         "Pogarda",
+        "Rozproszenie magii (2)",
       ],
       exp: 12,
       skills: [0, 2, 3, 5],
@@ -56,7 +56,7 @@ export const piraci = {
     Bosman: {
       id: 3,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
-      cost: 35,
+      cost: 25,
       number: 1,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
@@ -68,10 +68,10 @@ export const piraci = {
       exp: 8,
       skills: [0, 3, 4, 5],
     },
-    "Handlarz niewolników": {
+    "Łowca niewolników": {
       id: 4,
       startingEquipment: ["Sztylet", "Łapacz"],
-      cost: 30,
+      cost: 25,
       number: 2,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
@@ -86,12 +86,12 @@ export const piraci = {
     Mat: {
       id: 5,
       startingEquipment: ["Sztylet"],
-      cost: 20,
+      cost: 15,
       number: 2,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 2, 3, 3, 1, 3, 1, 6],
+        Początkowa: [4, 2, 2, 3, 3, 1, 3, 1, 6],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: ["Przyboczny"],
@@ -124,10 +124,23 @@ export const piraci = {
       },
       rules: ["Chorążowie & sygnaliści", "Drużyna obsługi"],
     },
-    "Żołnierz okrętowy": {
+    "Drużyna ciężkich broni": {
       id: 7,
+      startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
+      cost: 40,
+      number: 2,
+      equipmentList: heroEquipment["Piraci z Sartosy"].Ciężcy,
+      type: "Stronnik",
+      stats: {
+        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
+        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+      },
+      rules: ["Drużyna ciężkich broni", "Drużyna wsparcia"],
+    },
+    "Żołnierz okrętowy": {
+      id: 8,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 35,
+      cost: 30,
       number: 5,
       equipmentList: heroEquipment["Piraci z Sartosy"].Stronnicy,
       type: "Stronnik",
@@ -135,10 +148,10 @@ export const piraci = {
         Początkowa: [4, 4, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Szermierz"],
+      rules: ["Drużyna wsparcia", "Szermierz"],
     },
     Przepatrywacz: {
-      id: 8,
+      id: 9,
       startingEquipment: [
         "Sztylet",
         "Miecz",
@@ -146,7 +159,7 @@ export const piraci = {
         "Koń bojowy",
         "Siodło & uprząż",
       ],
-      cost: 80,
+      cost: 70,
       number: 3,
       equipmentList: heroEquipment["Piraci z Sartosy"].Stronnicy,
       type: "Stronnik",
@@ -158,7 +171,7 @@ export const piraci = {
       rules: ["Kawalerzysta", "Lekka jazda", "Ranger", "Zwiadowca"],
     },
     Ogr: {
-      id: 9,
+      id: 10,
       startingEquipment: ["Maczuga ogrów"],
       cost: 160,
       number: 1,
@@ -180,9 +193,9 @@ export const piraci = {
       ],
     },
     Więźniarka: {
-      id: 10,
+      id: 11,
       startingEquipment: [],
-      cost: 185,
+      cost: 175,
       number: 1,
       equipmentList: {},
       type: "Machina",
@@ -194,7 +207,7 @@ export const piraci = {
       rules: ["Duży cel", "Machina wojenna", "Powóz", "Więźniarka"],
     },
     Rydwan: {
-      id: 11,
+      id: 12,
       startingEquipment: [],
       cost: 125,
       number: 1,

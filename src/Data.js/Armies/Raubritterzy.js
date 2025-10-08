@@ -5,7 +5,7 @@ export const raubritterzy = {
     "Herszt Raubritterów": {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 60,
+      cost: 55,
       number: 1,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Bohaterowie,
@@ -14,14 +14,14 @@ export const raubritterzy = {
         Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Dowódca"],
+      rules: ["Dowódca", "Zasadzka"],
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
     Czarownik: {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
-      cost: 45,
+      cost: 35,
       number: 1,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Bohaterowie,
@@ -30,14 +30,14 @@ export const raubritterzy = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Guślarstwo", "Mag (Kolegia Magii)"],
+      rules: ["Guślarstwo", "Mag (Kolegia Magii)", "Zasadzka"],
       exp: 12,
       skills: [2, 4, 5],
     },
     Kłusownik: {
       id: 2,
       startingEquipment: ["Sztylet", "Kusza"],
-      cost: 45,
+      cost: 25,
       number: 2,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Bohaterowie,
@@ -46,14 +46,14 @@ export const raubritterzy = {
         Początkowa: [4, 3, 4, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Ranger", "Zasadzka", "Zastawianie pułapek", "Zwiadowca"],
+      rules: ["Pułapkarz", "Ranger", "Zasadzka", "Zwiadowca"],
       exp: 8,
       skills: [0, 1, 4, 5],
     },
     Raubritter: {
       id: 3,
       startingEquipment: ["Sztylet", "Łapacz"],
-      cost: 30,
+      cost: 25,
       number: 1,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Bohaterowie,
@@ -96,7 +96,7 @@ export const raubritterzy = {
     Myśliwy: {
       id: 6,
       startingEquipment: ["Sztylet", "Łuk"],
-      cost: 25,
+      cost: 20,
       number: 7,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Stronnicy,
@@ -110,7 +110,7 @@ export const raubritterzy = {
     Zbójca: {
       id: 7,
       startingEquipment: ["Sztylet", "Miecz"],
-      cost: 35,
+      cost: 30,
       number: 5,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Stronnicy,
@@ -130,7 +130,7 @@ export const raubritterzy = {
         "Koń bojowy",
         "Siodło & uprząż",
       ],
-      cost: 80,
+      cost: 70,
       number: 3,
       equipmentList:
         heroEquipment["Raubritterzy z Księstw Granicznych"].Rozbójnik,
@@ -167,7 +167,7 @@ export const raubritterzy = {
     Więźniarka: {
       id: 10,
       startingEquipment: [],
-      cost: 185,
+      cost: 175,
       number: 1,
       equipmentList: {},
       type: "Machina",

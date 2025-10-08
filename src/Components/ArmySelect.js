@@ -56,6 +56,14 @@ const ArmySelect = ({
     "Muszkieterzy z Nuln",
     "Nieumarły zastęp z Nehekhary",
     "Nieumarły sabat rodu Nekrarch",
+    "Niziołki z Krainy Zgromadzenia",
+    "Zwiadowcza kompania z Królestw Ogrów",
+    "Zbrojna kompania z Ostlandu",
+    "Piraci z Sartosy",
+    "Kompania Krasnoludzkich Piwowarów",
+    "Kult Pogromców z Karak Kadrin",
+    "Psy Wojny",
+    "Kult Purpurowej Dłoni",
   ];
 
   return (
