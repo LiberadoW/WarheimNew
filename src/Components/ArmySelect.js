@@ -64,6 +64,7 @@ const ArmySelect = ({
     "Kult Pogromców z Karak Kadrin",
     "Psy Wojny",
     "Kult Purpurowej Dłoni",
+    "Zbrojne stado Zwierzoludzi",
   ];
 
   return (
