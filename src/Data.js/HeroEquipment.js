@@ -2484,12 +2484,17 @@ export const heroEquipment = {
     Szaman: {
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Gwiazda zaranna": [5, 0],
+      "Kostur Rykowca": [10, 0],
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
       "Broń miotana (noże)": [10, 1],
       Oszczep: [15, 1],
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       "Dziedzina Dziczy": [0, 4, "Choice"],
+      "Dziedzina Chaosu": [0, 4, "Choice"],
+      "Dziedzina Nurgla": [0, 4, "Choice"],
+      "Dziedzina Slaneesha": [0, 4, "Choice"],
+      "Dziedzina Tzeentcha": [0, 4, "Choice"],
     },
     Ungor: {
       "Buława/Maczuga/Młot bojowy": [5, 0],
