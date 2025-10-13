@@ -28,6 +28,11 @@ const StatsTable = ({
     }
   });
 
+  sortedEntries.splice(1, 0, [
+    "Aktualna",
+    ["", "", "", "", "", "", "", "", ""],
+  ]);
+
   return (
     <>
       {statsHeaders.map((statHeader, index) => {
@@ -47,54 +52,33 @@ const StatsTable = ({
           <React.Fragment key={key}>
             <div className="unit-table-stats">{key}</div>
             {value.map((stat, index) => {
-              if (
-                index === 6 &&
-                (key === "Początkowa" || key === "Aktualna") &&
-                initativeModifier > 0
-              ) {
-                return (
-                  <div key={`${mainIndex}2`} className={`unit-table-stats red`}>
-                    {stat - initativeModifier === 0
-                      ? 1
-                      : stat - initativeModifier}
-                  </div>
-                );
-              } else if (
-                index === 0 &&
-                (key === "Początkowa" || key === "Aktualna") &&
-                speedModifier > 0
-              ) {
-                return (
-                  <div key={`${mainIndex}3`} className={`unit-table-stats red`}>
-                    {stat - speedModifier === 0 ? 1 : stat - speedModifier}
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    key={`${index} ${mainIndex}4`}
-                    className={`unit-table-stats ${
-                      (key === "Początkowa" || key === "Aktualna") &&
-                      stat > startingStats[index]
-                        ? "green"
-                        : (key === "Początkowa" || key === "Aktualna") &&
-                          stat < startingStats[index]
-                        ? "red"
-                        : ""
-                    }`}
-                  >
-                    {stat}
-                  </div>
-                );
-              }
+              return (
+                <div
+                  key={`${index} ${mainIndex}4`}
+                  className={`unit-table-stats ${
+                    key === "Początkowa" && stat > startingStats[index]
+                      ? "green"
+                      : key === "Początkowa" && stat < startingStats[index]
+                      ? "red"
+                      : ""
+                  }`}
+                >
+                  {stat}
+                </div>
+              );
             })}
+
             <div className="unit-table-stats" key={`${mainIndex}5`}>
               {mainIndex === 0
                 ? item.unitName === ""
                   ? ""
                   : armour < 7
                   ? `${armour}+`
+                  : mainIndex === 1
+                  ? ""
                   : "-"
+                : mainIndex === 1
+                ? ""
                 : "-"}
             </div>
           </React.Fragment>
