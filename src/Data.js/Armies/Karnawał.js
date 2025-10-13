@@ -24,7 +24,7 @@ export const karnawałChaosu = {
     },
     Poskramiacz: {
       id: 1,
-      startingEquipment: ["Treser", "Stygmat Chaosu"],
+      startingEquipment: ["Sztylet", "Łapacz"],
       cost: 35,
       number: 1,
       equipmentList: heroEquipment["Karnawał Chaosu"].Bohaterowie,
