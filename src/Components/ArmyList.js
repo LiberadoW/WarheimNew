@@ -8,6 +8,8 @@ import CampaignPoints from "./CampaignPoints";
 import "../styles/ArmyList.css";
 import { magic } from "../Data.js/Magic";
 import { getMagicLore } from "../Functions/getMagicLore";
+import { getAllUniqueEquipment } from "../Functions/getAllUniqueEquipment";
+import { getItemText } from "../Functions/getItemText";
 
 const ArmyList = ({
   unitList,
@@ -28,6 +30,10 @@ const ArmyList = ({
   const uniqueRulesList = getAllRules(unitList);
 
   const magicPath = getMagicLore(unitList);
+
+  const uniqueEquipmentArray = getAllUniqueEquipment(unitList);
+
+  console.log(uniqueEquipmentArray);
 
   return (
     <div className="army-list-container">
@@ -97,6 +103,20 @@ const ArmyList = ({
           </div>
         )}
       </div> */}
+      {/* {uniqueEquipmentArray && (
+        <div className="print-a4-page">
+          <div className="magic-box">
+            {uniqueEquipmentArray.map((item) => {
+              return (
+                <p className="spell-card">
+                  <span className="bold-text">{item}</span>
+                  <span className="">{getItemText(item)}</span>
+                </p>
+              );
+            })}
+          </div>
+        </div>
+      )} */}
     </div>
   );
 };

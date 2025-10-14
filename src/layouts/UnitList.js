@@ -115,13 +115,15 @@ const UnitList = ({
                             unit.unitName == "Drużyna ciężkich broni" ? (
                               <option value={2}>2</option>
                             ) : (
-                              [...Array(unit.number)].map((e, i) => {
-                                return (
-                                  <option key={i} value={i + 1}>
-                                    {i + 1}
-                                  </option>
-                                );
-                              })
+                              [...Array(Math.min(unit.number, 5))].map(
+                                (e, i) => {
+                                  return (
+                                    <option key={i} value={i + 1}>
+                                      {i + 1}
+                                    </option>
+                                  );
+                                }
+                              )
                             )}
                           </select>
                         </>

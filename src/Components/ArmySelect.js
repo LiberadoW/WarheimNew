@@ -65,6 +65,18 @@ const ArmySelect = ({
     "Psy Wojny",
     "Kult Purpurowej Dłoni",
     "Zbrojne stado Zwierzoludzi",
+    "Raubritterzy z Księstw Granicznych",
+    "Żołnierze z Reiklandu",
+    "Rycerze Graala",
+    "Siostry Sigmara",
+    "Harcownicy klanu Skryre",
+    "Nieumarły tabor ludu Strigosu",
+    "Kult Sybarytów",
+    "Elfowie Wysokiego Rodu z Ulthuan",
+    "Jaszczuroludzie z Lustrii",
+    "Szkutnicy z Barak Varr",
+    "Nieumarły poczet Krwawych Smoków",
+    "Nieumarła świta Hrabiego Von Carstein",
   ];
 
   return (

@@ -51,6 +51,7 @@ import { jaszczuroludzie } from "./Armies/Jaszczuroludzie";
 import { liczmistrz } from "./Armies/Liczmistrz";
 import { reikland } from "./Armies/Reikland";
 import { nocneGobliny } from "./Armies/NocneGobliny";
+import { sybaryci } from "./Armies/Sybaryci";
 
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
@@ -106,6 +107,7 @@ const armies = {
   "Nieumarła horda Liczmistrza": liczmistrz,
   "Żołnierze z Reiklandu": reikland,
   "Nocne Gobliny": nocneGobliny,
+  "Kult Sybarytów": sybaryci,
 };
 
 export default armies;

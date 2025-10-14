@@ -280,6 +280,7 @@ const Builder = ({
           setErrors={setErrors}
           theme={theme}
         />
+        {/* {army.armyRules.includes("Znak Chaosu") && <div>bam</div>} */}
 
         <div className="main-builder-container">
           <div className="side-builder-left">

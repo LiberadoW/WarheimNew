@@ -334,9 +334,9 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
           "Spaczrusznica",
         ].some((element) => unitList[id].optionalEquipment.includes(element))
       ) {
-        unit.totalCost = unit.cost * unit.selectedNumber - 120;
+        unit.totalCost = unit.cost * unit.selectedNumber - 110;
       } else {
-        unit.totalCost = unit.cost * unit.selectedNumber - 70;
+        unit.totalCost = unit.cost * unit.selectedNumber - 60;
       }
     } else if (
       unitList[id].unitName === "Drużyna ciężkich broni" &&

@@ -90,7 +90,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Niedźwiedź", "Nomada", "Ogr"],
       ["Więźniarka", "Rydwan"],
     ],
-    "Siostry Sigmara": [["Bitewny Ołtarz Sigmara", "Rydwan"]],
+    "Siostry Sigmara": [["Bitewny Ołtarz", "Rydwan"]],
     "Leśni Elfowie z Athel Loren": [
       ["Tancerz Wojny", "Driada"],
       ["Jeździec Polany", "Drzewoduch"],
@@ -217,6 +217,7 @@ export const getOneOfChoices = (army, unitList) => {
       ["Jeździec Zimnokrwistych", "Jeździec Terradonów"],
       ["Salamandra", "Kroxigor"],
     ],
+    "Kult Sybarytów": [["Bólożądna Pieszczota", "Slaangor"]],
   };
 
   if (choices[army.name] !== undefined) {
