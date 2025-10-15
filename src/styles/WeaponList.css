@@ -40,7 +40,8 @@
 }
 
 .equipment-tooltip {
-  background-color: white;
+  background-color: var(--secondary);
+  color: var(--dark-text);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 8px;
   padding: 5px;
   border-radius: 6px;
@@ -49,4 +50,3 @@
   top: 20px;
   border: 1px solid black;
 }
-
