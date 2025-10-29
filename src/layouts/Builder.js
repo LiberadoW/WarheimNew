@@ -168,9 +168,11 @@ const Builder = ({
   const handleSavePDFClick = (e) => {
     e.preventDefault();
     if (errors === 0) {
-      OPTIONS.filename = armyName;
-      const element = document.getElementById("armylist").innerHTML;
-      html2pdf().from(element).set(OPTIONS).save();
+      OPTIONS.filename = `${armyName || "Moja rozpiska"}.pdf`;
+      const element = document.getElementById("armylist");
+      setTimeout(() => {
+        html2pdf().from(element).set(OPTIONS).save();
+      }, 100);
     } else {
       alert(`Napraw występujące błędy aby zapisać rozpiskę.`);
     }
