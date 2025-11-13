@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const orki = {
   heroes: {
-    Herszt: {
+    "Herszt Orków": {
       id: 0,
       startingEquipment: ["Sztylet", "Rembak", "Rembak", "Broń wielka"],
       cost: 85,
@@ -10,14 +10,14 @@ export const orki = {
       equipmentList: heroEquipment["Orkowie & Gobliny"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 5, 3, 4, 4, 2, 3, 1, 8],
+        Początkowa: [4, 5, 3, 4, 4, 2, 2, 1, 8],
         Maksymalna: [5, 8, 4, 4, 5, 3, 5, 4, 9],
       },
-      rules: ["Dowódca", "Zbrojny po zemby", "Do Łooomotu!"],
+      rules: ["Dowódca", "Zbrojny po zemby", "Do Łooomotu!", "Za mną!"],
       exp: 20,
       skills: [0, 3, 4, 5],
     },
-    Szaman: {
+    "Szaman Orków": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 45,
@@ -32,12 +32,12 @@ export const orki = {
       exp: 10,
       skills: [0, 3, 4, 5],
     },
-    Debeściak: {
+    "Burszuj Orków": {
       id: 2,
       startingEquipment: [],
-      cost: 55,
+      cost: 40,
       number: 2,
-      equipmentList: heroEquipment["Orkowie & Gobliny"].Debeściak,
+      equipmentList: heroEquipment["Orkowie & Gobliny"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 3, 4, 1, 3, 1, 7],
@@ -127,7 +127,6 @@ export const orki = {
         "Dzikie squigi",
         "Niezłomny",
         "No to hooop!",
-        "Pomiot podmroku",
         "Rozmiar rzondzi",
         "Zwierzę",
       ],
@@ -167,7 +166,6 @@ export const orki = {
         "Głupota",
         "Nieświadomy",
         "Niezłomny",
-        "Ochronne tatuaże",
         "Przepastne trzewia",
         "Regeneracja",
         "Strach",
@@ -175,7 +173,7 @@ export const orki = {
         "Żrąca plwocina",
       ],
     },
-    "Rydwan Orków": {
+    Rydwan: {
       id: 11,
       startingEquipment: [],
       cost: 125,
@@ -196,5 +194,11 @@ export const orki = {
   name: "Orkowie & Gobliny",
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
-  mercenaries: ["Mekaniak", "Miotacz ołowiu", "Ochroniarz"],
+  mercenaries: [
+    "Czarny Ork",
+    "Grzybowar",
+    "Mekaniak",
+    "Miotacz ołowiu",
+    "Ochroniarz",
+  ],
 };

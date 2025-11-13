@@ -10,12 +10,11 @@ export const dzieciZagłady = {
       equipmentList: heroEquipment["Kult Dzieci Zagłady"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 4, 4, 3, 4, 2, 4, 1, 8],
+        Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: [
         "Czarnoksięstwo",
-        "Dowodzenie",
         "Dowódca",
         "Mag (Dziedzina Nurgla)",
         "Stygmat Chaosu",
@@ -32,7 +31,7 @@ export const dzieciZagłady = {
       equipmentList: heroEquipment["Kult Dzieci Zagłady"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 7],
+        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: ["Stygmat Chaosu", "Twardziel"],
@@ -61,6 +60,7 @@ export const dzieciZagłady = {
         "Strach",
         "Tempy",
         "Wielkolud",
+        "Żywiołak Chaosu",
       ],
       exp: 8,
       skills: [0, 3, 5],
@@ -73,7 +73,7 @@ export const dzieciZagłady = {
       equipmentList: heroEquipment["Kult Dzieci Zagłady"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 7],
+        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
@@ -106,7 +106,7 @@ export const dzieciZagłady = {
     },
     "Ogr Chaosu": {
       id: 6,
-      startingEquipment: ["Broń wielka"],
+      startingEquipment: ["Sztlet", "Broń wielka"],
       cost: 180,
       number: 1,
       equipmentList: heroEquipment["Kult Dzieci Zagłady"].Ogr,
@@ -151,9 +151,10 @@ export const dzieciZagłady = {
         "Stygmat Chaosu",
         "Wielkolud",
         "Żrąca plwocina",
+        "Żywiołak Chaosu",
       ],
     },
-    Zaprzęg: {
+    Zarazowóz: {
       id: 8,
       startingEquipment: [],
       cost: 175,
@@ -162,24 +163,10 @@ export const dzieciZagłady = {
       type: "Machina",
       stats: {
         Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Rumak Chaosu ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Rumak Chaosu": [8, 3, 0, 4, "-", "-", 3, 1, 5],
+        "Rumak Chaosu ": [8, 3, 0, 4, "-", "-", 3, 1, 5],
       },
-      rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
-    },
-    "Rydwan Chaosu": {
-      id: 9,
-      startingEquipment: [],
-      cost: 125,
-      number: 1,
-      equipmentList: {},
-      type: "Machina",
-      stats: {
-        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
-        "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Rumak Chaosu ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-      },
-      rules: ["Duży cel", "Machina wojenna", "Rydwan"],
+      rules: ["Duży cel", "Machina wojenna", "Powóz", "Zarazowóz"],
     },
   },
   limit: 600,
