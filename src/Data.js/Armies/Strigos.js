@@ -62,7 +62,7 @@ export const strigos = {
       id: 3,
       startingEquipment: ["Sztylet"],
       cost: 15,
-      number: 1,
+      number: 2,
       equipmentList: heroEquipment["Nieumarły tabor ludu Strigosu"].Bohaterowie,
       type: "Bohater",
       stats: {
