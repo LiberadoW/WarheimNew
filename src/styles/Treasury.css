@@ -49,7 +49,7 @@
   grid-template-rows: repeat(13, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  font-size: 0.6rem;
+  font-size: 9.5px;
   border-right: 1px solid black;
 }
 
@@ -58,7 +58,6 @@
 }
 .prestige-values-left div:nth-of-type(13) {
   border-top: 1px solid black;
-
 }
 
 .prestige-values-right {
@@ -68,7 +67,7 @@
   grid-template-rows: repeat(13, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  font-size: 0.7rem;
+  font-size: 11px;
 }
 
 .treasury-title {
@@ -78,5 +77,5 @@
   background-color: gray;
   color: white;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 12.5px;
 }

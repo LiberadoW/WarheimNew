@@ -5,6 +5,7 @@ import getModelAmount from "../Functions/getModelAmount";
 import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
 import { getAllEquipment } from "../Functions/getAllEquipment";
 import { getUnitNumbers } from "../Functions/getUnitNumbers";
+import { useState } from "react";
 
 const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
   const modelAmount = getModelAmount(unitList, army);
@@ -18,7 +19,18 @@ const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
     "Kula trującego wichru",
   ];
 
+  console.log(army, unitList);
+
   const unitNumbers = getUnitNumbers(unitList);
+
+  let areMoreGoblinsThanOrks = false;
+
+  if (army?.name === "Orkowie & Gobliny") {
+    const numberOfOrks = unitList.map((unit) =>
+      unit.unitName.toLowerCase().includes("ork")
+    );
+    console.log(numberOfOrks, "orks");
+  }
 
   return (
     <div className="army-list-errors">

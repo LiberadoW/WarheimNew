@@ -60,14 +60,14 @@
 .unit-table-name {
   grid-column: 1 / span 11;
   margin-bottom: -1px;
-  font-size: 0.8rem;
+  font-size: 12px;
   gap: 2px;
   border-bottom: 0cm;
 }
 
 .unit-table-type {
   grid-column: 1 / span 11;
-  font-size: 0.8rem;
+  font-size: 12px;
   gap: 2px;
   margin-bottom: -1px;
 }
@@ -76,7 +76,7 @@
   display: flex;
   gap: 2px;
   grid-column: 1 / span 11;
-  font-size: 0.45rem;
+  font-size: 7px;
   margin-bottom: -1px;
 }
 .unit-table-skills i {
@@ -87,13 +87,13 @@
   background-color: black;
   color: white;
   font-weight: bold;
-  font-size: 0.45rem;
+  font-size: 7px;
   margin-bottom: -1px;
 }
 
 .unit-table-stats {
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 9.5px;
   margin-bottom: -1px;
   margin-right: -1px;
   white-space: nowrap;
@@ -114,7 +114,7 @@
 .stats-table div:nth-of-type(15),
 .stats-table div:nth-of-type(26),
 .stats-table div:nth-of-type(37) {
-  font-size: 0.55rem;
+  font-size: 8.5px;
 }
 
 .stats-table div:nth-of-type(25),
@@ -126,7 +126,7 @@
 .stats-table-henchmen div:nth-of-type(14),
 .stats-table-henchmen div:nth-of-type(25),
 .stats-table-henchmen div:nth-of-type(36) {
-  font-size: 0.55rem;
+  font-size: 8.5px;
 }
 
 .stats-table-henchmen div:nth-of-type(24),
@@ -146,7 +146,7 @@
 
 .equipment-table div {
   border: 1px solid black;
-  font-size: 0.55rem;
+  font-size: 8.5px;
 }
 
 .skills {
@@ -210,7 +210,7 @@
 
 .unit-table-type-henchmen {
   grid-column: 1 / span 11;
-  font-size: 0.8rem;
+  font-size: 12.5px;
   gap: 2px;
 }
 
@@ -220,7 +220,7 @@
 
 .equipment-table-henchmen div {
   border: 1px solid black;
-  font-size: 0.55rem;
+  font-size: 8.5px;
 }
 
 .skills-henchmen {

@@ -20,7 +20,7 @@
 }
 
 .rules-box {
-  font-size: 0.8rem;
+  font-size: 12px;
   flex-direction: column;
   gap: 0.5rem;
   display: flex;

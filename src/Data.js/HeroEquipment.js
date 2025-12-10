@@ -646,7 +646,7 @@ export const heroEquipment = {
       Halabarda: [10, 0],
       Miecz: [10, 0],
       Sztylet: [2, 0],
-      "Topór bojowy/Nadziak": [5, 1],
+      "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
       "Broń miotana (noże)": [10, 1],
       Garłacz: [30, 1],
