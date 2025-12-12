@@ -19,7 +19,7 @@ export const averland = {
     },
     "Magister magii": {
       id: 1,
-      startingEquipment: ["Sztylet"],
+      startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
       number: 1,
       equipmentList: {
