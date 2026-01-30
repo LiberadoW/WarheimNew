@@ -1,7 +1,7 @@
 const disableOneOfChoices = (unitArr, unitList) => {
   const unitNames = unitList.map((a) => a.unitName);
   const optionsArray = Array.from(
-    document.querySelectorAll("#unit-selection option")
+    document.querySelectorAll("#unit-selection option"),
   );
 
   if (unitArr.some((item) => unitNames.includes(item))) {
@@ -131,12 +131,11 @@ export const getOneOfChoices = (army, unitList) => {
     "Kult Karmazynowej Czaski": [
       ["Piekielny Ogar", "Khorngor"],
       ["Ogr Chaosu", "Troll Chaosu"],
-      ["Zaprzęg", "Rydwan Chaosu"],
+      ["Zaprzęg", "Rydwan"],
     ],
     "Kult Dzieci Zagłady": [
       ["Nurglingi", "Plagogor"],
       ["Ogr Chaosu", "Troll Chaosu"],
-      ["Zaprzęg", "Rydwan Chaosu"],
     ],
     "Kult Purporowej Dłoni": [
       ["Tzaangor", "Różowy Strachulec"],
