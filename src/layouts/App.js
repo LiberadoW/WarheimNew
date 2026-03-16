@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  useLocation,
 } from "react-router-dom";
 import Builder from "./Builder";
 import ArmyList from "../Components/ArmyList";
@@ -43,6 +42,7 @@ const App = () => {
   );
 
   const [isEditArmyView, setIsEditArmyView] = useState(false);
+  const [isPlayArmyView, setIsPlayArmyView] = useState(false);
 
   const handleSwitchTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -134,7 +134,14 @@ const App = () => {
 
   return (
     <div className="app" id="app" data-theme={theme}>
-      <EditArmyContext.Provider value={{ isEditArmyView, setIsEditArmyView }}>
+      <EditArmyContext.Provider
+        value={{
+          isEditArmyView,
+          setIsEditArmyView,
+          isPlayArmyView,
+          setIsPlayArmyView,
+        }}
+      >
         <main className="site-wrapper">
           <Router>
             <Header handleSwitchTheme={handleSwitchTheme} theme={theme} />
@@ -164,6 +171,29 @@ const App = () => {
               />
               <Route
                 path="/edit"
+                element={
+                  <Builder
+                    unitList={unitList}
+                    setUnitList={setUnitList}
+                    army={armies[army]}
+                    setArmy={setArmy}
+                    unitName={unitName}
+                    setUnitName={setUnitName}
+                    mercenaries={mercenaries}
+                    setMercenaries={setMercenaries}
+                    mercenaryUnitName={mercenaryUnitName}
+                    setMercenaryUnitName={setMercenaryUnitName}
+                    prestige={prestige}
+                    setPrestige={setPrestige}
+                    setArmyName={setArmyName}
+                    armyName={armyName}
+                    handleSetUnitExp={handleSetUnitExp}
+                    theme={theme}
+                  />
+                }
+              />
+              <Route
+                path="/play"
                 element={
                   <Builder
                     unitList={unitList}

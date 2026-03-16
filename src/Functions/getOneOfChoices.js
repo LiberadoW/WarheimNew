@@ -1,8 +1,23 @@
+const setOptionDisabled = (optionsArray, unitName, disabled) => {
+  const option = optionsArray.find((item) => item.value === unitName);
+  if (option) {
+    option.disabled = disabled;
+  }
+};
+
 const disableOneOfChoices = (unitArr, unitList) => {
+  if (!Array.isArray(unitArr) || unitArr.length === 0) {
+    return;
+  }
+
   const unitNames = unitList.map((a) => a.unitName);
   const optionsArray = Array.from(
     document.querySelectorAll("#unit-selection option"),
   );
+
+  if (optionsArray.length === 0) {
+    return;
+  }
 
   if (unitArr.some((item) => unitNames.includes(item))) {
     unitArr.forEach((mainUnit) => {
@@ -10,15 +25,13 @@ const disableOneOfChoices = (unitArr, unitList) => {
 
       if (unitNames.includes(mainUnit)) {
         removedUnitArr.forEach((unit) => {
-          const opt = optionsArray.filter((x) => x.value === unit);
-          opt[0].disabled = true;
+          setOptionDisabled(optionsArray, unit, true);
         });
       }
     });
   } else {
     unitArr.forEach((mainUnit) => {
-      const opt = optionsArray.filter((x) => x.value === mainUnit);
-      opt[0].disabled = false;
+      setOptionDisabled(optionsArray, mainUnit, false);
     });
   }
 };
@@ -219,8 +232,10 @@ export const getOneOfChoices = (army, unitList) => {
     "Kult Sybarytów": [["Bólożądna Pieszczota", "Slaangor"]],
   };
 
-  if (choices[army.name] !== undefined) {
-    choices[army.name].forEach((unit) => {
+  const armyChoices = choices?.[army?.name];
+
+  if (Array.isArray(armyChoices)) {
+    armyChoices.forEach((unit) => {
       disableOneOfChoices(unit, unitList);
     });
   }

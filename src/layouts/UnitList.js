@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../styles/UnitList.css";
 import { CommandContext } from "../layouts/Builder";
+import UnitInfo from "../Components/UnitInfo";
+import { EditArmyContext } from "./App";
 
 const ARRAY_OF_TYPES = ["Bohater", "Stronnik", "Machina", "Najemne Ostrze"];
 const ARRAY_OF_TYPES_DISPLAY = [
@@ -15,136 +17,155 @@ const UnitList = ({
   setUnitList,
   setIdShown,
   idShown,
-  setShowModal,
   heroes,
+  handleSetUnitExp,
+  army,
 }) => {
-  const { standardBearer, setStandardBearer, musician, setMusician } =
-    useContext(CommandContext);
-  const handleDeleteClick = (e) => {
-    const unitIndex = e.target.parentNode.parentNode.parentNode.parentNode.id;
-    const element = unitList.filter((item) => item.uniqueId == unitIndex);
+  const { setStandardBearer, setMusician } = useContext(CommandContext);
+  const { isPlayArmyView } = useContext(EditArmyContext);
+  const [groupedUnits, setGroupedUnits] = useState([]);
 
-    if (element[0].optionalEquipment?.includes("Chorąży")) {
+  const handleDeleteClick = (unitId) => {
+    const unitToDelete = unitList.find((item) => item.uniqueId === unitId);
+    if (!unitToDelete) {
+      return;
+    }
+
+    if (unitToDelete.optionalEquipment?.includes("Chorąży")) {
       setStandardBearer(null);
     }
 
-    if (element[0].optionalEquipment?.includes("Sygnalista")) {
+    if (unitToDelete.optionalEquipment?.includes("Sygnalista")) {
       setMusician(null);
     }
 
-    if (element[0].stats.hasOwnProperty("Aktualna")) {
-      delete element[0].stats.Aktualna;
+    if (unitToDelete.stats?.hasOwnProperty("Aktualna")) {
+      delete unitToDelete.stats.Aktualna;
     }
 
     if (
-      element[0].hasOwnProperty("newRules") &&
-      heroes?.[element[0].unitName]?.rules
+      unitToDelete.hasOwnProperty("newRules") &&
+      heroes?.[unitToDelete.unitName]?.rules
     ) {
-      heroes[element[0].unitName].rules = element[0].baseRules;
+      heroes[unitToDelete.unitName].rules = unitToDelete.baseRules;
     }
 
-    const index = unitList.indexOf(element[0]);
-    unitList.splice(index, 1);
-    const newUnitList = [...unitList];
+    const newUnitList = unitList.filter((item) => item.uniqueId !== unitId);
     setUnitList(newUnitList);
+
+    if (idShown === unitId) {
+      setIdShown(null);
+    }
   };
 
-  const [arrayToDisplay, setArrayToDisplay] = useState([]);
-
   useEffect(() => {
-    const arr = [];
-    ARRAY_OF_TYPES.forEach((type) => {
-      const filteredArray = unitList.filter((x) => x.type === type);
-      const sortedArray = filteredArray.sort((a, b) => a.id - b.id);
-      arr.push(sortedArray);
-    });
-    setArrayToDisplay(arr);
+    const nextGroups = ARRAY_OF_TYPES.map((type) =>
+      unitList
+        .filter((unit) => unit.type === type)
+        .sort((a, b) => a.id - b.id)
+    );
+    setGroupedUnits(nextGroups);
   }, [unitList]);
 
   const handleClickId = (e) => {
-    if (e.target.className === "unit-name") {
-      setIdShown(
-        idShown != e.target.parentNode.parentNode.id
-          ? e.target.parentNode.parentNode.id
-          : null
-      );
-      setShowModal(true);
+    if (!e.target.classList.contains("unit-name")) {
+      return;
     }
+
+    const selectedUnitId = e.target.closest(".unit")?.id;
+    if (!selectedUnitId) {
+      return;
+    }
+
+    setIdShown(idShown !== selectedUnitId ? selectedUnitId : null);
   };
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
-    const id = e.target.parentNode.parentNode.parentNode.parentNode.id;
-    const unit = unitList.filter((x) => x.uniqueId == id);
-    unit[0].selectedNumber = value;
-    unit[0].totalCost = unit[0].cost * value;
-    const newUnitList = [...unitList];
-    setUnitList(newUnitList);
+  const handleChange = (unitId, value) => {
+    const unit = unitList.find((item) => item.uniqueId === unitId);
+    if (!unit) {
+      return;
+    }
+
+    unit.selectedNumber = value;
+    unit.totalCost = unit.cost * value;
+    setUnitList([...unitList]);
   };
 
-  return arrayToDisplay.map((unitList, index) => {
-    return (
-      <>
-        {unitList.length !== 0 && (
-          <h3 className="unit-list-divider" key={`${index} 1`}>
-            {ARRAY_OF_TYPES_DISPLAY[index]}
-          </h3>
-        )}
-        {unitList.length !== 0 &&
-          unitList.map((unit, index) => {
-            return (
-              <div
-                className={`unit ${index} ${unit.type}`}
-                id={unit.uniqueId}
-                key={unit.uniqueId}
-              >
-                <li
-                  className={`unit-info-container ${index}`}
-                  onClick={handleClickId}
-                >
-                  <span className="unit-name">{unit.unitName} </span>
-                  <p className="unit-info">
-                    <span className="number-of-henchmen">
-                      {unit.type === "Stronnik" || unit.type === "Machina" ? (
-                        <>
-                          <span>Liczba:</span>
+  return groupedUnits.map((unitsOfType, groupIndex) => (
+    <React.Fragment key={`group-${ARRAY_OF_TYPES[groupIndex]}`}>
+      {unitsOfType.length !== 0 && (
+        <h3 className="unit-list-divider">{ARRAY_OF_TYPES_DISPLAY[groupIndex]}</h3>
+      )}
+      {unitsOfType.map((unit, unitIndex) => {
+        const unitGlobalIndex = unitList.findIndex(
+          (item) => item.uniqueId === unit.uniqueId
+        );
+
+        return (
+          <React.Fragment key={unit.uniqueId}>
+            <div className={`unit ${unitIndex} ${unit.type}`} id={unit.uniqueId}>
+              <li className={`unit-info-container ${unitIndex}`} onClick={handleClickId}>
+                <span className="unit-name">{unit.unitName} </span>
+                <p className="unit-info">
+                  <span className="number-of-henchmen">
+                    {unit.type === "Stronnik" || unit.type === "Machina" ? (
+                      <>
+                        <span>Liczba:</span>
+                        {isPlayArmyView ? (
+                          <span>{unit.selectedNumber}</span>
+                        ) : (
                           <select
-                            onChange={handleChange}
+                            onChange={(e) =>
+                              handleChange(unit.uniqueId, Number(e.target.value))
+                            }
                             name="number-of-henchmen"
                             value={unit.selectedNumber}
                           >
-                            {unit.unitName == "Duże Dźgacze" ||
-                            unit.unitName == "Drużyna ciężkich broni" ? (
+                            {unit.unitName === "Duże Dżgacze" ||
+                            unit.unitName === "Drużyna ciężkich broni" ? (
                               <option value={2}>2</option>
                             ) : (
-                              [...Array(Math.min(unit.number, 5))].map(
-                                (e, i) => {
-                                  return (
-                                    <option key={i} value={i + 1}>
-                                      {i + 1}
-                                    </option>
-                                  );
-                                }
-                              )
+                              [...Array(Math.min(unit.number, 5))].map((_, i) => (
+                                <option key={i} value={i + 1}>
+                                  {i + 1}
+                                </option>
+                              ))
                             )}
                           </select>
-                        </>
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <span>{`${unit.totalCost} zk`}</span>
-                    <span className={index} onClick={handleDeleteClick}>
+                        )}
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </span>
+                  <span>{`${unit.totalCost} zk`}</span>
+                  {!isPlayArmyView && (
+                    <span
+                      className={String(unitIndex)}
+                      onClick={() => handleDeleteClick(unit.uniqueId)}
+                    >
                       <i className="fa-solid fa-trash-can"></i>
                     </span>
-                  </p>
-                </li>
-              </div>
-            );
-          })}
-      </>
-    );
-  });
+                  )}
+                </p>
+              </li>
+            </div>
+            {idShown === unit.uniqueId && unitGlobalIndex !== -1 && (
+              <UnitInfo
+                heroes={heroes}
+                unit={unit}
+                unitIndex={unitGlobalIndex}
+                unitList={unitList}
+                setUnitList={setUnitList}
+                handleSetUnitExp={handleSetUnitExp}
+                army={army}
+              />
+            )}
+          </React.Fragment>
+        );
+      })}
+    </React.Fragment>
+  ));
 };
+
 export default UnitList;

@@ -10,14 +10,16 @@ const StatsTable = ({
   armour,
   speedModifier,
   initativeModifier,
+  showOnlyCurrentStats = false,
 }) => {
-  const entries = Object.entries(item.stats);
+  const entries = Object.entries(item.stats || {});
   const hasCurrentStats = Object.prototype.hasOwnProperty.call(
-    item.stats,
+    item.stats || {},
     "Aktualna"
   );
-  const startingStats = item.stats.Początkowa;
-  const baseArmourRowKey = hasCurrentStats ? "Aktualna" : "Początkowa";
+  const startingStats = Array.isArray(item.stats?.Początkowa)
+    ? item.stats.Początkowa
+    : [];
 
   const sortedEntries = [...entries].sort((a, b) => {
     const indexA = ITEM_STATS_ORDER.indexOf(a[0]);
@@ -34,6 +36,15 @@ const StatsTable = ({
     }
   });
 
+  const currentStatsEntry = sortedEntries.find(([key]) => key === "Aktualna");
+  const entriesToRender = showOnlyCurrentStats
+    ? currentStatsEntry
+      ? [currentStatsEntry]
+      : sortedEntries.slice(0, 1)
+    : sortedEntries;
+  const baseArmourRowKey =
+    entriesToRender[0]?.[0] || (hasCurrentStats ? "Aktualna" : "Początkowa");
+
   return (
     <>
       {statsHeaders.map((statHeader, index) => {
@@ -43,7 +54,7 @@ const StatsTable = ({
           </div>
         );
       })}
-      {sortedEntries.map(([key, value], mainIndex) => {
+      {entriesToRender.map(([key, value], mainIndex) => {
         return (
           <React.Fragment key={key}>
             <div className="unit-table-stats">{key}</div>

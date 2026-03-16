@@ -1,0 +1,127 @@
+.unit-play {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.unit-play-stats-table-wrapper {
+  overflow-x: auto;
+}
+
+.unit-play-stats-table {
+  width: 100%;
+  border: 1px solid var(--main);
+  border-style: solid !important;
+}
+
+.unit-play-stats-table thead td {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+.unit-play-stats-table tbody td {
+  text-align: center;
+}
+
+.unit-play-stats-table tbody td:first-of-type {
+  text-align: left;
+}
+
+.unit-play-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unit-play-list-item {
+  display: flex;
+
+  padding: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.unit-play-empty {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.unit-play-battle-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.unit-play-counter {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 8px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 40px 40px 40px minmax(120px, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.unit-play-counter-label {
+  font-weight: 700;
+}
+
+.unit-play-counter-value {
+  text-align: center;
+  font-weight: 700;
+}
+
+.unit-play-counter-summary {
+  text-align: right;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.unit-play-counter .button {
+  padding: 8px;
+}
+
+.unit-play-counter .button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.unit-play-wza-container {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.unit-play-wza-title {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+.unit-play-wza-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.unit-play-wza-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  .unit-play-counter {
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: auto auto;
+  }
+
+  .unit-play-counter-label {
+    grid-column: 1 / span 3;
+  }
+
+  .unit-play-counter-summary {
+    grid-column: 1 / span 3;
+    text-align: left;
+  }
+}

@@ -1,3 +1,9 @@
+@media screen and (max-width: 768px) {
+  .unit-edit-menu {
+    flex-direction: column;
+  }
+}
+
 .unit-edit {
   display: flex;
   flex-direction: column;

@@ -29,8 +29,6 @@ const normalizeCustomEquipment = (entry, index) => {
   return null;
 };
 
-const formatPrice = (price) => `${price} zk`;
-
 const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
   if (!Array.isArray(unit.customEquipment)) {
     unit.customEquipment = [];
@@ -132,7 +130,7 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
             <div key={`core-equipment-${index}`} className="unit-edit-equipment-item">
               <span>{item}</span>
               <span className="unit-edit-pill unit-edit-pill-core">
-                początkowa
+                {"początkowa"}
               </span>
             </div>
           )
@@ -140,16 +138,16 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
 
         {coreCustomEquipment.map((item) => (
           <div key={item.id} className="unit-edit-equipment-item">
-            <span>{`${item.name} (${formatPrice(item.price)})`}</span>
+            <span>{item.name}</span>
             <span className="unit-edit-pill unit-edit-pill-core">
-              początkowa
+              {"początkowa"}
             </span>
           </div>
         ))}
 
         {addedEquipment.map((item) => (
           <div key={item.id} className="unit-edit-equipment-item">
-            <span>{`${item.name} (${formatPrice(item.price)})`}</span>
+            <span>{item.name}</span>
             <span className="unit-edit-pill unit-edit-pill-added">dodane</span>
             <button onClick={() => handleDeleteEquipment(item.id)}>
               <i className="fa-solid fa-trash-can"></i>

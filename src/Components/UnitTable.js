@@ -17,7 +17,7 @@ const statsHeaders = [
   "US",
   "S",
   "Wt",
-  "\u017Bw",
+  "Żw",
   "I",
   "A",
   "CP",
@@ -27,8 +27,8 @@ const skills = [
   "Walki",
   "Strzeleckie",
   "Akademickie",
-  "Si\u0142owe",
-  "Szybko\u015Bciowe",
+  "Siłowe",
+  "Szybkościowe",
   "Specjalne",
 ];
 
@@ -88,7 +88,7 @@ const getDisplayEquipment = (unit, equipmentList) => {
     if (!aliasQueues[equipment]) {
       aliasQueues[equipment] = getAliasSelectionQueue(
         unit.equipmentAliasSelections,
-        equipment
+        equipment,
       );
     }
 
@@ -103,14 +103,9 @@ const getDisplayEquipment = (unit, equipmentList) => {
 const formatCustomEquipmentEntry = (entry) => {
   if (entry && typeof entry === "object" && !Array.isArray(entry)) {
     const name = String(entry.name || "").trim();
-    const price = Number(entry.price);
 
     if (name.length === 0) {
       return null;
-    }
-
-    if (Number.isFinite(price) && price >= 0) {
-      return `${name} (${price} zk)`;
     }
 
     return name;
@@ -123,37 +118,39 @@ const formatCustomEquipmentEntry = (entry) => {
   return null;
 };
 
-const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
+const UnitTable = ({ unitList, heroes, handleSetUnitExp, disableExpEdit = false }) => {
   unitList.sort((a, b) => a.id - b.id);
+  const isExpEditable =
+    !disableExpEdit && typeof handleSetUnitExp === "function";
 
   return (
     <div className="army-list-container">
       <div className="army-list">
         {unitList.map((item, index) => {
           const standardEquipment = item.startingEquipment.concat(
-            item.optionalEquipment
+            item.optionalEquipment,
           );
 
           let [armour, speedModifier, initativeModifier] = getModifiers(
             standardEquipment,
-            item
+            item,
           );
 
           if (item.type !== "Najemne Ostrze") {
             standardEquipment.sort(
               (a, b) =>
                 Object.keys(heroes[item.unitName].equipmentList).indexOf(a) -
-                Object.keys(heroes[item.unitName].equipmentList).indexOf(b)
+                Object.keys(heroes[item.unitName].equipmentList).indexOf(b),
             );
           }
 
           const standardEquipmentString = getDisplayEquipment(
             item,
-            standardEquipment
+            standardEquipment,
           );
 
           standardEquipmentString.forEach((item, index) => {
-            if (["Lekki", "\u015Aredni", "Ci\u0119\u017Cki"].includes(item)) {
+            if (["Lekki", "Średni", "Ciężki"].includes(item)) {
               standardEquipmentString[index] = `${item} pancerz`;
             }
           });
@@ -163,7 +160,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
             .filter((entry) => entry !== null);
 
           const equipmentString = standardEquipmentString.concat(
-            customEquipmentString
+            customEquipmentString,
           );
 
           if (item.type === "Bohater") {
@@ -178,7 +175,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
               >
                 <div className="stats-table">
                   <div className="unit-table-name">
-                    <span className="bold">Imi\u0119: </span>
+                    <span className="bold">Imię: </span>
                     <span>{item.unitDisplayName}</span>
                   </div>
                   <div className="unit-table-type">
@@ -208,12 +205,13 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     speedModifier={speedModifier}
                     initativeModifier={initativeModifier}
                     heroes={heroes}
+                    showOnlyCurrentStats={disableExpEdit}
                   />
                 </div>
                 <div className="equipment-table">
                   <div className="skills">
                     <span className="bold">
-                      {"Umiej\u0119tno\u015Bci & zakl\u0119cia/modlitwy: "}
+                      {"Umiejętności & zaklęcia/modlitwy: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
@@ -229,6 +227,9 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     ))}
                     {[...Array(90)].map((e, i) => {
                       const setExp = () => {
+                        if (!isExpEditable) {
+                          return;
+                        }
                         handleSetUnitExp(item.uniqueId, i + 1);
                       };
                       return (
@@ -241,6 +242,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                           }
                           style={{
                             backgroundColor: i < item.exp ? "gray" : "white",
+                            cursor: isExpEditable ? "pointer" : "default",
                           }}
                           key={i}
                         ></span>
@@ -248,7 +250,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     })}
                   </div>
                   <div className="injuries">
-                    <span className="bold">Powa\u017Cne obra\u017Cenia:</span>
+                    <span className="bold">Poważne obrażenia:</span>
                     <span>{item.injuries?.join(", ")}</span>
                   </div>
                 </div>
@@ -266,14 +268,14 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
               >
                 <div className="stats-table">
                   <div className="unit-table-name">
-                    <span className="bold">Imi\u0119: </span>
+                    <span className="bold">Imię: </span>
                     <span>{item.unitDisplayName}</span>
                   </div>
                   <div className="unit-table-type-henchmen">
                     <span className="bold">Typ: </span>
                     <span>{item.unitName}</span>
                     <span className="number-henchmen">
-                      <span className="bold">\u017Bo\u0142d:</span>{" "}
+                      <span className="bold">Żołd:</span>{" "}
                       <span>{`${item.pay} zk`}</span>
                     </span>
                   </div>
@@ -299,12 +301,13 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     armour={armour}
                     speedModifier={speedModifier}
                     initativeModifier={initativeModifier}
+                    showOnlyCurrentStats={disableExpEdit}
                   />
                 </div>
                 <div className="equipment-table-henchmen">
                   <div className="skills-henchmen">
                     <span className="bold">
-                      {"Umiej\u0119tno\u015Bci & zasady specjalne: "}
+                      {"Umiejętności & zasady specjalne: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
@@ -320,6 +323,9 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     ))}
                     {[...Array(14)].map((e, i) => {
                       const setExp = () => {
+                        if (!isExpEditable) {
+                          return;
+                        }
                         handleSetUnitExp(item.uniqueId, i + 1);
                       };
 
@@ -333,6 +339,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                           }
                           style={{
                             backgroundColor: i < item.exp ? "gray" : "white",
+                            cursor: isExpEditable ? "pointer" : "default",
                           }}
                           key={i}
                         ></span>
@@ -354,7 +361,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
               >
                 <div className="stats-table-henchmen">
                   <div className="unit-table-name">
-                    <span className="bold">Imi\u0119: </span>
+                    <span className="bold">Imię: </span>
                     <span>{item.unitDisplayName}</span>
                   </div>
                   <div className="unit-table-type-henchmen">
@@ -376,12 +383,13 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     armour={armour}
                     speedModifier={speedModifier}
                     initativeModifier={initativeModifier}
+                    showOnlyCurrentStats={disableExpEdit}
                   />
                 </div>
                 <div className="equipment-table-henchmen">
                   <div className="skills-henchmen">
                     <span className="bold">
-                      {"Umiej\u0119tno\u015Bci & zasady specjalne: "}
+                      {"Umiejętności & zasady specjalne: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
@@ -397,6 +405,9 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     ))}
                     {[...Array(14)].map((e, i) => {
                       const setExp = () => {
+                        if (!isExpEditable) {
+                          return;
+                        }
                         handleSetUnitExp(item.uniqueId, i + 1);
                       };
 
@@ -410,6 +421,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                           }
                           style={{
                             backgroundColor: i < item.exp ? "gray" : "white",
+                            cursor: isExpEditable ? "pointer" : "default",
                           }}
                           key={i}
                         ></span>

@@ -61,9 +61,90 @@
   cursor: pointer;
 }
 
+.armylist-history {
+  background-color: var(--tertiary);
+  border: 1px solid black;
+  border-top: 0;
+  padding: 10px;
+  margin: -10px 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.armylist-history-empty {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.armylist-history-item {
+  border: 1px solid var(--main);
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.armylist-history-item p {
+  margin: 0;
+}
+
+.armylist-history-details {
+  border-top: 1px dashed var(--main);
+  padding-top: 8px;
+}
+
+.armylist-history-details summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.armylist-history-details-body {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.armylist-history-unit-details {
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  padding: 6px;
+}
+
+.armylist-history-unit-details summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.armylist-history-unit-details p {
+  margin: 6px 0 0 0;
+}
+
+.armylist-history-model-list {
+  margin: 6px 0 0 16px;
+  padding: 0;
+}
+
 @media screen and (max-width: 768px) {
   .armylist-info {
     gap: 2px;
     flex-direction: column;
+  }
+
+  .armylists-text-container {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .armylist-date {
+    margin-left: 0;
+  }
+
+  .armylists-button-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
