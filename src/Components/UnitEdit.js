@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UnitEditStats from "./UnitEdit/unitEditStats";
 import UnitEditInjuries from "./UnitEdit/unitEditInjuries";
 import UnitEditRules from "./UnitEdit/unitEditRules";
+import UnitEditEquipment from "./UnitEdit/unitEditEquipment";
 import "../styles/UnitEdit.css";
 
 const MENU = ["Poważne obrażenia", "Statystyki", "Umiejętności", "Ekwipunek"];
@@ -45,6 +46,15 @@ const UnitEdit = ({ unitList, unitName, setUnitList, id, heroes }) => {
           unit={unit}
           setUnitList={setUnitList}
           heroes={heroes}
+        />
+      );
+      break;
+    case "Ekwipunek":
+      menuComponent = (
+        <UnitEditEquipment
+          unitList={unitList}
+          unit={unit}
+          setUnitList={setUnitList}
         />
       );
       break;

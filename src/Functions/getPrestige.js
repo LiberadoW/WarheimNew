@@ -47,6 +47,15 @@ const specialEquipmentList = {
   "Woda błogosławiona": 5,
 };
 
+const getCustomEquipmentPrice = (equipment) => {
+  if (!equipment || typeof equipment !== "object" || Array.isArray(equipment)) {
+    return 0;
+  }
+
+  const parsedPrice = Number(equipment.price);
+  return Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : 0;
+};
+
 export const getPrestige = (arr) => {
   const prestigeValues = {
     heroesTotalExp: 0,
@@ -133,6 +142,15 @@ export const getPrestige = (arr) => {
           }
         });
 
+        if (Array.isArray(item.customEquipment)) {
+          const modelCount = Number(item.selectedNumber) || 1;
+          item.customEquipment.forEach((equipment) => {
+            prestigeValues.equipmentTotalValue += getCustomEquipmentPrice(
+              equipment
+            ) * modelCount;
+          });
+        }
+
         if (item.unitName === "Duże Dźgacze") {
           prestigeValues.equipmentTotalValue -= 30;
         }
@@ -156,6 +174,14 @@ export const getPrestige = (arr) => {
         // });
       } else {
         prestigeValues.mercenariesTotalPrestige += item.prestige;
+        if (Array.isArray(item.customEquipment)) {
+          const modelCount = Number(item.selectedNumber) || 1;
+          item.customEquipment.forEach((equipment) => {
+            prestigeValues.equipmentTotalValue += getCustomEquipmentPrice(
+              equipment
+            ) * modelCount;
+          });
+        }
       }
     }
   });

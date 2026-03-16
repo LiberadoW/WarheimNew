@@ -1,6 +1,8 @@
 import React from "react";
 
-const ITEM_STATS_ORDER = ["Aktualna", "Początkowa", "Maksymalna"];
+const ITEM_STATS_ORDER = ["Początkowa", "Aktualna", "Maksymalna"];
+const isNumberStat = (value) =>
+  typeof value === "number" && Number.isFinite(value);
 
 const StatsTable = ({
   item,
@@ -10,10 +12,14 @@ const StatsTable = ({
   initativeModifier,
 }) => {
   const entries = Object.entries(item.stats);
-
+  const hasCurrentStats = Object.prototype.hasOwnProperty.call(
+    item.stats,
+    "Aktualna"
+  );
   const startingStats = item.stats.Początkowa;
+  const baseArmourRowKey = hasCurrentStats ? "Aktualna" : "Początkowa";
 
-  const sortedEntries = entries.sort((a, b) => {
+  const sortedEntries = [...entries].sort((a, b) => {
     const indexA = ITEM_STATS_ORDER.indexOf(a[0]);
     const indexB = ITEM_STATS_ORDER.indexOf(b[0]);
 
@@ -28,11 +34,6 @@ const StatsTable = ({
     }
   });
 
-  sortedEntries.splice(1, 0, [
-    "Aktualna",
-    ["", "", "", "", "", "", "", "", ""],
-  ]);
-
   return (
     <>
       {statsHeaders.map((statHeader, index) => {
@@ -43,22 +44,25 @@ const StatsTable = ({
         );
       })}
       {sortedEntries.map(([key, value], mainIndex) => {
-        if (Object.keys(item.stats).includes("Aktualna")) {
-          if (key === "Początkowa") {
-            return null;
-          }
-        }
         return (
           <React.Fragment key={key}>
             <div className="unit-table-stats">{key}</div>
             {value.map((stat, index) => {
+              const baseStat = startingStats[index];
+              const isCurrentStatRow = key === "Aktualna";
               return (
                 <div
                   key={`${index} ${mainIndex}4`}
                   className={`unit-table-stats ${
-                    key === "Początkowa" && stat > startingStats[index]
+                    isCurrentStatRow &&
+                    isNumberStat(stat) &&
+                    isNumberStat(baseStat) &&
+                    stat > baseStat
                       ? "green"
-                      : key === "Początkowa" && stat < startingStats[index]
+                      : isCurrentStatRow &&
+                        isNumberStat(stat) &&
+                        isNumberStat(baseStat) &&
+                        stat < baseStat
                       ? "red"
                       : ""
                   }`}
@@ -69,16 +73,12 @@ const StatsTable = ({
             })}
 
             <div className="unit-table-stats" key={`${mainIndex}5`}>
-              {mainIndex === 0
+              {key === baseArmourRowKey
                 ? item.unitName === ""
                   ? ""
                   : armour < 7
                   ? `${armour}+`
-                  : mainIndex === 1
-                  ? ""
                   : "-"
-                : mainIndex === 1
-                ? ""
                 : "-"}
             </div>
           </React.Fragment>

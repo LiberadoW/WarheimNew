@@ -31,12 +31,22 @@
   height: 20px;
 }
 
+.unit-edit-stats button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .plus-button:hover {
   background-color: green;
 }
 
 .minus-button:hover {
   background-color: red;
+}
+
+.plus-button:disabled:hover,
+.minus-button:disabled:hover {
+  background-color: var(--main);
 }
 
 .unit-edit-stats-value {

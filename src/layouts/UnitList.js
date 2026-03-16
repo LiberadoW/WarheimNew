@@ -36,7 +36,10 @@ const UnitList = ({
       delete element[0].stats.Aktualna;
     }
 
-    if (element[0].hasOwnProperty("newRules")) {
+    if (
+      element[0].hasOwnProperty("newRules") &&
+      heroes?.[element[0].unitName]?.rules
+    ) {
       heroes[element[0].unitName].rules = element[0].baseRules;
     }
 

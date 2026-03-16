@@ -2,6 +2,14 @@ import React from "react";
 import "../styles/MercenariesSelect.css";
 import { uuidv4 } from "@firebase/util";
 
+const cloneStats = (statsObject) =>
+  Object.fromEntries(
+    Object.entries(statsObject || {}).map(([key, value]) => [
+      key,
+      Array.isArray(value) ? [...value] : value,
+    ])
+  );
+
 const MercenariesSelect = ({
   mercenaries,
   setMercenaryUnitName,
@@ -34,13 +42,23 @@ const MercenariesSelect = ({
             optionalEquipment: [],
             cost: mercenaries[mercenaryUnitName].cost,
             totalCost: mercenaries[mercenaryUnitName].cost,
-            startingEquipment: mercenaries[mercenaryUnitName].startingEquipment,
+            startingEquipment: [
+              ...(mercenaries[mercenaryUnitName].startingEquipment || []),
+            ],
             equipmentList: mercenaries[mercenaryUnitName].equipmentList,
-            stats: mercenaries[mercenaryUnitName].stats,
-            rules: mercenaries[mercenaryUnitName].rules,
+            stats: cloneStats(mercenaries[mercenaryUnitName].stats),
+            baseRules: Array.isArray(mercenaries[mercenaryUnitName].rules)
+              ? [...mercenaries[mercenaryUnitName].rules]
+              : [],
+            rules: Array.isArray(mercenaries[mercenaryUnitName].rules)
+              ? [...mercenaries[mercenaryUnitName].rules]
+              : [],
             statsModifiers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            customEquipment: [],
             exp: mercenaries[mercenaryUnitName].exp,
-            skills: mercenaries[mercenaryUnitName].skills,
+            skills: Array.isArray(mercenaries[mercenaryUnitName].skills)
+              ? [...mercenaries[mercenaryUnitName].skills]
+              : [],
             prestige: mercenaries[mercenaryUnitName].prestige,
             pay: mercenaries[mercenaryUnitName].pay,
             type: mercenaries[mercenaryUnitName].type,

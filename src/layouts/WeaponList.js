@@ -9,6 +9,53 @@ import { getItemText } from "../Functions/getItemText";
 import { CommandContext } from "./Builder";
 import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
 
+const shouldSplitEquipmentName = (name) =>
+  name.includes("/") && !name.includes("(") && !name.includes(")");
+
+const getEquipmentAliases = (name) => {
+  if (!shouldSplitEquipmentName(name)) {
+    return [name];
+  }
+
+  return name
+    .split("/")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+};
+
+const getSelectedAliases = (unit, canonicalName) => {
+  const aliases = getEquipmentAliases(canonicalName);
+  const rawSelection = unit.equipmentAliasSelections?.[canonicalName];
+
+  if (aliases.length === 1) {
+    return aliases;
+  }
+
+  if (Array.isArray(rawSelection)) {
+    return rawSelection.filter((alias) => aliases.includes(alias));
+  }
+
+  if (typeof rawSelection === "string" && aliases.includes(rawSelection)) {
+    return [rawSelection];
+  }
+
+  return [];
+};
+
+const getDefaultAlias = (canonicalName) => getEquipmentAliases(canonicalName)[0];
+
+const countOccurrences = (arr, value) =>
+  arr.filter((item) => item === value).length;
+
+const DOUBLE_PICK_BLOCKLIST = [
+  "Harpun",
+  "Ołowiomiotacz",
+  "Kulomiot",
+  "Miotacz spaczognia",
+  "Moździerz trującego wichru",
+  "Spaczrusznica",
+];
+
 const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
   const { standardBearer, setStandardBearer, musician, setMusician } =
     useContext(CommandContext);
@@ -126,6 +173,57 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
   const handleWeaponListClick = (e) => {
     const unit = unitList[e.target.className];
     const equipmentList = unit.optionalEquipment;
+    const canonicalName = e.target.name;
+    const selectedAlias = e.target.getAttribute("data-alias");
+    const equipmentAliases = getEquipmentAliases(canonicalName);
+    const hasStartingCanonical = unit.startingEquipment.includes(canonicalName);
+    const defaultAlias = getDefaultAlias(canonicalName);
+    const isSplitAliasOption = Boolean(
+      selectedAlias && equipmentAliases.includes(selectedAlias)
+    );
+    let isHandledByAliasLogic = false;
+
+    if (isSplitAliasOption) {
+      if (!unit.equipmentAliasSelections) {
+        unit.equipmentAliasSelections = {};
+      }
+
+      const selectedAliases = getSelectedAliases(unit, canonicalName);
+      const isBaseStartingAlias =
+        hasStartingCanonical &&
+        selectedAlias === defaultAlias &&
+        !selectedAliases.includes(selectedAlias);
+
+      if (!e.target.checked && isBaseStartingAlias) {
+        setUnitList([...unitList]);
+        return;
+      }
+
+      if (e.target.checked) {
+        if (!selectedAliases.includes(selectedAlias)) {
+          selectedAliases.push(selectedAlias);
+          equipmentList.push(canonicalName);
+        }
+      } else {
+        const aliasIndex = selectedAliases.indexOf(selectedAlias);
+        if (aliasIndex !== -1) {
+          selectedAliases.splice(aliasIndex, 1);
+        }
+
+        const canonicalIndex = equipmentList.indexOf(canonicalName);
+        if (canonicalIndex !== -1) {
+          equipmentList.splice(canonicalIndex, 1);
+        }
+      }
+
+      if (selectedAliases.length > 0) {
+        unit.equipmentAliasSelections[canonicalName] = selectedAliases;
+      } else {
+        delete unit.equipmentAliasSelections[canonicalName];
+      }
+
+      isHandledByAliasLogic = true;
+    }
 
     if (unit.unitName === "Troll") {
       if (e.target.name === "Troll Górski" && e.target.checked === true) {
@@ -244,11 +342,11 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
           unit.equipmentList["Rumak"] = [55, 3];
         }
       }
-    } else {
-      if (equipmentList.includes(e.target.name)) {
-        equipmentList.splice(equipmentList.indexOf(e.target.name), 1);
+    } else if (!isHandledByAliasLogic) {
+      if (equipmentList.includes(canonicalName)) {
+        equipmentList.splice(equipmentList.indexOf(canonicalName), 1);
       } else {
-        equipmentList.push(e.target.name);
+        equipmentList.push(canonicalName);
       }
     }
 
@@ -388,8 +486,58 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
   const handleWeaponListClick2 = (e) => {
     const unit = unitList[e.target.className];
     const equipmentList = unitList[e.target.className].optionalEquipment;
+    const canonicalName = e.target.name;
+    const selectedAlias = e.target.getAttribute("data-alias");
+    const equipmentAliases = getEquipmentAliases(canonicalName);
+    const isSplitAliasOption = Boolean(
+      selectedAlias && equipmentAliases.includes(selectedAlias)
+    );
 
-    if (
+    if (isSplitAliasOption) {
+      if (!unit.equipmentAliasSelections) {
+        unit.equipmentAliasSelections = {};
+      }
+
+      const selectedAliases = getSelectedAliases(unit, canonicalName);
+      const hasStartingCanonical = unit.startingEquipment.includes(canonicalName);
+      const defaultAlias = getDefaultAlias(canonicalName);
+      const startingAliasCount =
+        hasStartingCanonical && selectedAlias === defaultAlias
+          ? countOccurrences(unit.startingEquipment, canonicalName)
+          : 0;
+      const selectedAliasCount = countOccurrences(selectedAliases, selectedAlias);
+      const totalAliasCount = startingAliasCount + selectedAliasCount;
+
+      // second checkbox can only extend an already-selected alias
+      if (e.target.checked && totalAliasCount < 1) {
+        setUnitList([...unitList]);
+        return;
+      }
+
+      if (e.target.checked) {
+        selectedAliases.push(selectedAlias);
+        equipmentList.push(canonicalName);
+      } else if (selectedAliasCount > 0) {
+        const aliasIndex = selectedAliases.lastIndexOf(selectedAlias);
+        if (aliasIndex !== -1) {
+          selectedAliases.splice(aliasIndex, 1);
+        }
+
+        const canonicalIndex = equipmentList.indexOf(canonicalName);
+        if (canonicalIndex !== -1) {
+          equipmentList.splice(canonicalIndex, 1);
+        }
+      } else {
+        setUnitList([...unitList]);
+        return;
+      }
+
+      if (selectedAliases.length > 0) {
+        unit.equipmentAliasSelections[canonicalName] = selectedAliases;
+      } else {
+        delete unit.equipmentAliasSelections[canonicalName];
+      }
+    } else if (
       equipmentList
         .concat(unitList[id].startingEquipment)
         .filter((x) => x === e.target.name).length === 2
@@ -508,82 +656,145 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
               <div className="equipment-type-list" key={`${indexMain}1`}>
                 <h4>{equipmentTypeNames[indexMain]}</h4>
                 <ul className={indexMain}>
-                  {Object.entries(item).map(([key, value], index) => {
-                    const isStartingEquipment = findCommonElements(
-                      unitList[id].startingEquipment,
-                      key
-                    );
+                  {Object.entries(item)
+                    .reduce((options, [canonicalName, value]) => {
+                      const aliases = getEquipmentAliases(canonicalName);
+                      aliases.forEach((displayName, aliasIndex) => {
+                        options.push({
+                          canonicalName,
+                          displayName,
+                          aliasIndex,
+                          value,
+                          isSplitOption: aliases.length > 1,
+                        });
+                      });
+                      return options;
+                    }, [])
+                    .map(
+                      (
+                        {
+                          canonicalName,
+                          displayName,
+                          aliasIndex,
+                          value,
+                          isSplitOption,
+                        },
+                        index
+                      ) => {
+                        const isStartingEquipment = findCommonElements(
+                          unitList[id].startingEquipment,
+                          canonicalName
+                        );
 
-                    return (
-                      <li key={`${index}3`}>
-                        <span
-                          style={{
-                            marginRight: value[0] < 9 ? "15px" : "8.6px",
-                          }}
-                        >{`${value[0]} zk `}</span>
-                        <input
-                          onClick={handleWeaponListClick}
-                          checked={
-                            unitList[id].optionalEquipment.includes(key) ||
-                            isStartingEquipment ||
-                            unitList[id].rules.includes(key)
-                          }
-                          data={value[2]}
-                          name={key}
-                          value={value[0]}
-                          className={id}
-                          type="checkbox"
-                          disabled={
-                            unitList[id].startingEquipment.includes(key) ||
-                            isStartingEquipment
-                          }
-                          readOnly
-                        ></input>
-                        {indexMain <= 1 &&
-                          ![
-                            "Harpun",
-                            "Ołowiomiotacz",
-                            "Kulomiot",
-                            "Miotacz spaczognia",
-                            "Moździerz trującego wichru",
-                            "Spaczrusznica",
-                          ].includes(key) && (
+                        const selectedAliases = getSelectedAliases(
+                          unitList[id],
+                          canonicalName
+                        );
+                        const defaultAlias = getDefaultAlias(canonicalName);
+                        const hasStartingCanonical =
+                          unitList[id].startingEquipment.includes(canonicalName);
+                        const startingAliasCount =
+                          hasStartingCanonical && displayName === defaultAlias
+                            ? countOccurrences(
+                                unitList[id].startingEquipment,
+                                canonicalName
+                              )
+                            : 0;
+                        const selectedAliasCount = countOccurrences(
+                          selectedAliases,
+                          displayName
+                        );
+                        const totalAliasCount =
+                          startingAliasCount + selectedAliasCount;
+
+                        const isCanonicalSelected =
+                          unitList[id].optionalEquipment.includes(canonicalName) ||
+                          isStartingEquipment ||
+                          unitList[id].rules.includes(canonicalName);
+
+                        const isChecked = isSplitOption
+                          ? selectedAliases.includes(displayName) ||
+                            (hasStartingCanonical &&
+                              displayName === defaultAlias)
+                          : isCanonicalSelected;
+
+                        const showDoublePickCheckbox =
+                          indexMain <= 1 &&
+                          !DOUBLE_PICK_BLOCKLIST.includes(canonicalName);
+
+                        return (
+                          <li key={`${canonicalName}-${aliasIndex}-${index}`}>
+                            <span
+                              style={{
+                                marginRight: value[0] < 9 ? "15px" : "8.6px",
+                              }}
+                            >{`${value[0]} zk `}</span>
                             <input
-                              onClick={handleWeaponListClick2}
-                              checked={
-                                unitList[id].optionalEquipment
-                                  .concat(unitList[id].startingEquipment)
-                                  .filter((x) => x === key).length === 2
-                              }
+                              onClick={handleWeaponListClick}
+                              checked={isChecked}
                               data={value[2]}
-                              name={key}
+                              data-alias={
+                                isSplitOption ? displayName : undefined
+                              }
+                              name={canonicalName}
                               value={value[0]}
                               className={id}
                               type="checkbox"
                               disabled={
-                                unitList[id].startingEquipment.filter(
-                                  (x) => x === key
-                                ).length === 2
+                                isSplitOption
+                                  ? false
+                                  : unitList[id].startingEquipment.includes(
+                                      canonicalName
+                                    ) || isStartingEquipment
                               }
                               readOnly
                             ></input>
-                          )}
-                        <span
-                          className="equipment-text"
-                          onMouseEnter={handleMouseEnter}
-                          onMouseLeave={handleMouseLeave}
-                          id={key}
-                        >
-                          {key}
-                        </span>
-                        {isPromptShown == key && (
-                          <p className="equipment-tooltip">
-                            {getItemText(key, unitList[promptUnit])}
-                          </p>
-                        )}
-                      </li>
-                    );
-                  })}
+                            {showDoublePickCheckbox && (
+                              <input
+                                onClick={handleWeaponListClick2}
+                                checked={
+                                  isSplitOption
+                                    ? totalAliasCount >= 2
+                                    : unitList[id].optionalEquipment
+                                        .concat(unitList[id].startingEquipment)
+                                        .filter((x) => x === canonicalName)
+                                        .length === 2
+                                }
+                                data={value[2]}
+                                data-alias={
+                                  isSplitOption ? displayName : undefined
+                                }
+                                name={canonicalName}
+                                value={value[0]}
+                                className={id}
+                                type="checkbox"
+                                disabled={
+                                  isSplitOption
+                                    ? totalAliasCount < 1
+                                    : unitList[id].startingEquipment.filter(
+                                        (x) => x === canonicalName
+                                      ).length === 2
+                                }
+                                readOnly
+                              ></input>
+                            )}
+                            <span
+                              className="equipment-text"
+                              onMouseEnter={handleMouseEnter}
+                              onMouseLeave={handleMouseLeave}
+                              id={canonicalName}
+                            >
+                              {displayName}
+                            </span>
+                            {isPromptShown == canonicalName && (
+                              <p className="equipment-tooltip">
+                                {getItemText(canonicalName, unitList[promptUnit])}
+                              </p>
+                            )}
+                          </li>
+                        );
+                      }
+                    )}
                 </ul>
               </div>
             );

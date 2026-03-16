@@ -3,6 +3,14 @@ import { getUnitNumbers } from "../Functions/getUnitNumbers";
 import "../styles/UnitSelect.css";
 import { uuidv4 } from "@firebase/util";
 
+const cloneStats = (statsObject) =>
+  Object.fromEntries(
+    Object.entries(statsObject || {}).map(([key, value]) => [
+      key,
+      Array.isArray(value) ? [...value] : value,
+    ])
+  );
+
 const UnitSelect = ({
   heroes,
   setUnitName,
@@ -39,14 +47,21 @@ const UnitSelect = ({
             optionalEquipment: [],
             cost: heroes[unitName].cost,
             totalCost: heroes[unitName].cost,
-            startingEquipment: heroes[unitName].startingEquipment,
+            startingEquipment: [...(heroes[unitName].startingEquipment || [])],
             equipmentList: heroes[unitName].equipmentList,
-            stats: heroes[unitName].stats,
+            stats: cloneStats(heroes[unitName].stats),
             statsModifiers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            baseRules: [...heroes[unitName].rules],
-            rules: heroes[unitName].rules,
+            baseRules: Array.isArray(heroes[unitName].rules)
+              ? [...heroes[unitName].rules]
+              : [],
+            rules: Array.isArray(heroes[unitName].rules)
+              ? [...heroes[unitName].rules]
+              : [],
+            customEquipment: [],
             exp: heroes[unitName].exp ? heroes[unitName].exp : 0,
-            skills: heroes[unitName].skills,
+            skills: Array.isArray(heroes[unitName].skills)
+              ? [...heroes[unitName].skills]
+              : [],
             type: heroes[unitName].type,
             number: heroes[unitName].number,
             selectedNumber:

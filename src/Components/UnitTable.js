@@ -17,7 +17,7 @@ const statsHeaders = [
   "US",
   "S",
   "Wt",
-  "Żw",
+  "\u017Bw",
   "I",
   "A",
   "CP",
@@ -27,10 +27,101 @@ const skills = [
   "Walki",
   "Strzeleckie",
   "Akademickie",
-  "Siłowe",
-  "Szybkościowe",
+  "Si\u0142owe",
+  "Szybko\u015Bciowe",
   "Specjalne",
 ];
+
+const shouldSplitEquipmentName = (name) =>
+  typeof name === "string" &&
+  name.includes("/") &&
+  !name.includes("(") &&
+  !name.includes(")");
+
+const getEquipmentAliases = (name) => {
+  if (!shouldSplitEquipmentName(name)) {
+    return [name];
+  }
+
+  return name
+    .split("/")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+};
+
+const getAliasSelectionQueue = (aliasSelections, canonicalName) => {
+  const selected = aliasSelections?.[canonicalName];
+
+  if (Array.isArray(selected)) {
+    return [...selected];
+  }
+
+  if (typeof selected === "string" && selected.length > 0) {
+    return [selected];
+  }
+
+  return [];
+};
+
+const getDisplayEquipment = (unit, equipmentList) => {
+  const aliasQueues = {};
+  const startingCounts = unit.startingEquipment.reduce((acc, equipment) => {
+    acc[equipment] = (acc[equipment] || 0) + 1;
+    return acc;
+  }, {});
+  const seenCounts = {};
+
+  return equipmentList.map((equipment) => {
+    const aliases = getEquipmentAliases(equipment);
+
+    if (aliases.length === 1) {
+      return equipment;
+    }
+
+    const seenCount = seenCounts[equipment] || 0;
+    seenCounts[equipment] = seenCount + 1;
+
+    if (seenCount < (startingCounts[equipment] || 0)) {
+      return aliases[0];
+    }
+
+    if (!aliasQueues[equipment]) {
+      aliasQueues[equipment] = getAliasSelectionQueue(
+        unit.equipmentAliasSelections,
+        equipment
+      );
+    }
+
+    if (aliasQueues[equipment].length > 0) {
+      return aliasQueues[equipment].shift();
+    }
+
+    return aliases[0];
+  });
+};
+
+const formatCustomEquipmentEntry = (entry) => {
+  if (entry && typeof entry === "object" && !Array.isArray(entry)) {
+    const name = String(entry.name || "").trim();
+    const price = Number(entry.price);
+
+    if (name.length === 0) {
+      return null;
+    }
+
+    if (Number.isFinite(price) && price >= 0) {
+      return `${name} (${price} zk)`;
+    }
+
+    return name;
+  }
+
+  if (typeof entry === "string" && entry.trim().length > 0) {
+    return entry.trim();
+  }
+
+  return null;
+};
 
 const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
   unitList.sort((a, b) => a.id - b.id);
@@ -39,28 +130,41 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
     <div className="army-list-container">
       <div className="army-list">
         {unitList.map((item, index) => {
-          const equipmentString = item.startingEquipment.concat(
+          const standardEquipment = item.startingEquipment.concat(
             item.optionalEquipment
           );
 
           let [armour, speedModifier, initativeModifier] = getModifiers(
-            equipmentString,
+            standardEquipment,
             item
           );
 
           if (item.type !== "Najemne Ostrze") {
-            equipmentString.sort(
+            standardEquipment.sort(
               (a, b) =>
                 Object.keys(heroes[item.unitName].equipmentList).indexOf(a) -
                 Object.keys(heroes[item.unitName].equipmentList).indexOf(b)
             );
           }
 
-          equipmentString.forEach((item, index) => {
-            if (["Lekki", "Średni", "Ciężki"].includes(item)) {
-              equipmentString[index] = `${item} pancerz`;
+          const standardEquipmentString = getDisplayEquipment(
+            item,
+            standardEquipment
+          );
+
+          standardEquipmentString.forEach((item, index) => {
+            if (["Lekki", "\u015Aredni", "Ci\u0119\u017Cki"].includes(item)) {
+              standardEquipmentString[index] = `${item} pancerz`;
             }
           });
+
+          const customEquipmentString = (item.customEquipment || [])
+            .map((entry) => formatCustomEquipmentEntry(entry))
+            .filter((entry) => entry !== null);
+
+          const equipmentString = standardEquipmentString.concat(
+            customEquipmentString
+          );
 
           if (item.type === "Bohater") {
             return (
@@ -74,7 +178,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
               >
                 <div className="stats-table">
                   <div className="unit-table-name">
-                    <span className="bold">Imię: </span>
+                    <span className="bold">Imi\u0119: </span>
                     <span>{item.unitDisplayName}</span>
                   </div>
                   <div className="unit-table-type">
@@ -109,7 +213,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                 <div className="equipment-table">
                   <div className="skills">
                     <span className="bold">
-                      {"Umiejętności & zaklęcia/modlitwy: "}
+                      {"Umiej\u0119tno\u015Bci & zakl\u0119cia/modlitwy: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
@@ -144,7 +248,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                     })}
                   </div>
                   <div className="injuries">
-                    <span className="bold">Poważne obrażenia:</span>
+                    <span className="bold">Powa\u017Cne obra\u017Cenia:</span>
                     <span>{item.injuries?.join(", ")}</span>
                   </div>
                 </div>
@@ -162,14 +266,14 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
               >
                 <div className="stats-table">
                   <div className="unit-table-name">
-                    <span className="bold">Imię: </span>
+                    <span className="bold">Imi\u0119: </span>
                     <span>{item.unitDisplayName}</span>
                   </div>
                   <div className="unit-table-type-henchmen">
                     <span className="bold">Typ: </span>
                     <span>{item.unitName}</span>
                     <span className="number-henchmen">
-                      <span className="bold">Żołd:</span>{" "}
+                      <span className="bold">\u017Bo\u0142d:</span>{" "}
                       <span>{`${item.pay} zk`}</span>
                     </span>
                   </div>
@@ -200,7 +304,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                 <div className="equipment-table-henchmen">
                   <div className="skills-henchmen">
                     <span className="bold">
-                      {"Umiejętności & zasady specjalne: "}
+                      {"Umiej\u0119tno\u015Bci & zasady specjalne: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
@@ -250,7 +354,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
               >
                 <div className="stats-table-henchmen">
                   <div className="unit-table-name">
-                    <span className="bold">Imię: </span>
+                    <span className="bold">Imi\u0119: </span>
                     <span>{item.unitDisplayName}</span>
                   </div>
                   <div className="unit-table-type-henchmen">
@@ -277,7 +381,7 @@ const UnitTable = ({ unitList, heroes, handleSetUnitExp }) => {
                 <div className="equipment-table-henchmen">
                   <div className="skills-henchmen">
                     <span className="bold">
-                      {"Umiejętności & zasady specjalne: "}
+                      {"Umiej\u0119tno\u015Bci & zasady specjalne: "}
                     </span>
                     <span>{item.rules.join(", ")}</span>
                   </div>
