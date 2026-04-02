@@ -42,15 +42,6 @@ const OPTIONS = {
   },
 };
 
-const waitForPaint = () =>
-  new Promise((resolve) => {
-    if (typeof requestAnimationFrame === "function") {
-      requestAnimationFrame(() => requestAnimationFrame(resolve));
-      return;
-    }
-    setTimeout(resolve, 32);
-  });
-
 const normalizeUnitList = (unitList) => {
   unitList.forEach((unit) => {
     Object.keys(unit).forEach((key) => {
@@ -349,36 +340,11 @@ const Builder = ({
       filename: `${armyName || "Moja rozpiska"}.pdf`,
     };
 
-    const previousStyles = {
-      display: element.style.display,
-      position: element.style.position,
-      left: element.style.left,
-      top: element.style.top,
-      opacity: element.style.opacity,
-      pointerEvents: element.style.pointerEvents,
-    };
-
     try {
-      // #armylist is hidden by default; render it off-screen so html2pdf can capture it.
-      element.style.display = "block";
-      element.style.position = "fixed";
-      element.style.left = "-10000px";
-      element.style.top = "0";
-      element.style.opacity = "1";
-      element.style.pointerEvents = "none";
-
-      await waitForPaint();
       await html2pdf().from(element).set(options).save();
     } catch (err) {
       console.log(err);
       alert("Nie udało się zapisać PDF.");
-    } finally {
-      element.style.display = previousStyles.display;
-      element.style.position = previousStyles.position;
-      element.style.left = previousStyles.left;
-      element.style.top = previousStyles.top;
-      element.style.opacity = previousStyles.opacity;
-      element.style.pointerEvents = previousStyles.pointerEvents;
     }
   };
 

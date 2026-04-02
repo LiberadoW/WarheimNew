@@ -17,7 +17,10 @@
 }
 
 #armylist {
-  display: none;
+}
+
+#app {
+  position: relative;
 }
 
 .rules-box {
