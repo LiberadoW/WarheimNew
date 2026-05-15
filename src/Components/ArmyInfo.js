@@ -35,8 +35,14 @@ const ArmyInfo = ({
   const limit = isCustomArmyCost ? customArmyCost : army.limit;
 
   useEffect(() => {
-    setErrors(getErrors(army, totalCost, modelAmount, unitList, limit));
-  }, [army, totalCost, modelAmount, unitList]);
+    if (isEditArmyView) {
+      setErrors(0);
+      return;
+    } else {
+      setErrors(getErrors(army, totalCost, modelAmount, unitList, limit));
+      return;
+    }
+  }, [army, totalCost, modelAmount, unitList, isEditArmyView, limit]);
 
   const handleArmyNameChange = (e) => {
     setArmyName(e.target.value);
@@ -80,8 +86,8 @@ const ArmyInfo = ({
                   totalCost > limit
                     ? "red"
                     : theme === "dark"
-                    ? "#f2f2f2"
-                    : "black",
+                      ? "#f2f2f2"
+                      : "black",
               }}
             >
               <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
@@ -92,15 +98,17 @@ const ArmyInfo = ({
             className="total-cost"
             style={{
               color:
-                totalCost > limit
+                totalCost > limit && !isEditArmyView
                   ? "red"
                   : theme === "dark"
-                  ? "#f2f2f2"
-                  : "black",
+                    ? "#f2f2f2"
+                    : "black",
             }}
           >
             <span className="bold">Liczba modeli:</span>{" "}
-            {`${modelAmount} / ${army.maxModels}`}
+            {isEditArmyView
+              ? modelAmount
+              : `${modelAmount} / ${army.maxModels}`}
           </p>
         </div>
       </div>
