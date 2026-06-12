@@ -175,7 +175,7 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
           <div key={item.id} className="unit-edit-equipment-item">
             <span>{item.name}</span>
             <span className="unit-edit-pill unit-edit-pill-core">
-              {"początkowaa"}
+              {"początkowa"}
             </span>
             <button onClick={() => handleDeleteEquipment(item.id)}>
               <i className="fa-solid fa-trash-can"></i>
