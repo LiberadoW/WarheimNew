@@ -1,0 +1,175 @@
+.campaign-notes-editor {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.campaign-points-editor {
+  box-sizing: border-box;
+  width: 100%;
+
+  display: flex;
+  gap: 12px;
+}
+
+.campaign-points-editor-fields {
+  gap: 8px;
+  flex: 1;
+  display: flex;
+  border: 1px solid black;
+  background-color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
+  flex-direction: column;
+}
+
+.campaign-points-editor-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin-top: 0 !important;
+}
+
+.campaign-points-editor-field input {
+  box-sizing: border-box;
+  height: 32px;
+  border: 1px solid black;
+  padding: 0 6px;
+  font-size: 14px;
+}
+
+.campaign-points-editor-sum {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+
+.campaign-points-editor-sum span:last-child {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.campaign-points-editor-rules {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  box-sizing: border-box;
+  flex: 1;
+  border: 1px solid black;
+  background-color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
+}
+
+.campaign-points-editor-rules-form {
+  display: flex;
+  gap: 6px;
+  flex-grow: 0 !important;
+}
+
+.campaign-points-editor-rules-form input {
+  box-sizing: border-box;
+  min-width: 0;
+  height: 30px;
+  border: 1px solid black;
+  padding: 0 6px;
+  font: inherit;
+  font-weight: normal;
+}
+
+.campaign-points-editor-rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 130px;
+  overflow: auto;
+  flex: 1;
+}
+
+.campaign-points-editor-rule {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid black;
+  padding: 4px 6px;
+  font-weight: normal;
+}
+
+.campaign-points-editor-rule > span:first-child {
+  flex: 1;
+}
+
+.campaign-points-editor-rule button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.campaign-points-editor .unit-edit-pill {
+  border-radius: 999px;
+  font-size: 10px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.campaign-points-editor .unit-edit-pill-core {
+  background-color: #e8edf3;
+  color: #3c4a5d;
+}
+
+.campaign-points-editor .unit-edit-pill-added {
+  background-color: #e8f8ec;
+  color: #0f7a3d;
+}
+
+.campaign-notes-textareas {
+  display: flex;
+  gap: 12px;
+}
+
+.campaign-notes-textarea-box {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid black;
+  background-color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+.campaign-notes-textarea-box textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 86px;
+  border: 1px solid black;
+  resize: vertical;
+  padding: 6px;
+  font: inherit;
+  background-color: white;
+}
+
+@media screen and (max-width: 900px) {
+  .campaign-points-editor {
+    flex-direction: column;
+  }
+
+  .campaign-notes-textareas {
+    flex-direction: column;
+  }
+}

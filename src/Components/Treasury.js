@@ -2,8 +2,9 @@ import React from "react";
 import "../styles/Treasury.css";
 import { getPrestige } from "../Functions/getPrestige";
 
-const Treasury = ({ army, unitList }) => {
+const Treasury = ({ army, unitList, campaignNotes }) => {
   const prestigeValues = getPrestige(unitList, army);
+  console.log(campaignNotes, "campaignNotes in treasury");
   return (
     <div className="treasury-container">
       <div className="big-prestige">
@@ -98,9 +99,15 @@ const Treasury = ({ army, unitList }) => {
       </div>
       <div className="valuables">
         <div className="treasury-title">KOSZTOWNOŚCI</div>
+        <div className="valuables-content">
+          {campaignNotes?.kosztownosci ? campaignNotes?.kosztownosci : ""}
+        </div>
       </div>
       <div className="treasury">
         <div className="treasury-title">SKARBIEC</div>
+        <div className="treasury-content">
+          {campaignNotes?.skarbiec ? campaignNotes?.skarbiec : ""}
+        </div>
       </div>
     </div>
   );

@@ -19,13 +19,14 @@ const ArmyList = ({
   army,
   prestige,
   armyName,
+  campaignNotes,
 }) => {
   const heroesUnitList = unitList.filter((unit) => unit.type === "Bohater");
   const henchmenUnitList = unitList.filter(
     (unit) =>
       unit.type === "Stronnik" ||
       unit.type === "Machina" ||
-      unit.type === "Najemne Ostrze"
+      unit.type === "Najemne Ostrze",
   );
   const uniqueRulesList = getAllRules(unitList);
 
@@ -55,6 +56,7 @@ const ArmyList = ({
           unitList={unitList}
           heroesUnitList={heroesUnitList}
           henchmenUnitList={henchmenUnitList}
+          campaignNotes={campaignNotes}
         />
       </div>
       <div className="print-a4-page">
@@ -64,7 +66,7 @@ const ArmyList = ({
           unitName={unitName}
           setUnitList={setUnitList}
         />
-        <CampaignPoints army={army} />
+        <CampaignPoints army={army} campaignNotes={campaignNotes} />
       </div>
       {/* <div className="print-a4-page">
         <div className="rules-box">

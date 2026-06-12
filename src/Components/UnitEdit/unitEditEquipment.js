@@ -29,6 +29,23 @@ const normalizeCustomEquipment = (entry, index) => {
   return null;
 };
 
+const getModelCount = (unit) => {
+  const parsedNumber = Number(unit.selectedNumber);
+  return Number.isFinite(parsedNumber) && parsedNumber > 0 ? parsedNumber : 1;
+};
+
+const getEquipmentPrice = (entry) => {
+  const parsedPrice = Number(entry?.price);
+  return Number.isFinite(parsedPrice) && parsedPrice > 0 ? parsedPrice : 0;
+};
+
+const applyEquipmentCostDelta = (unit, priceDelta) => {
+  const modelCount = getModelCount(unit);
+
+  unit.cost = (Number(unit.cost) || 0) + priceDelta;
+  unit.totalCost = (Number(unit.totalCost) || 0) + priceDelta * modelCount;
+};
+
 const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
   if (!Array.isArray(unit.customEquipment)) {
     unit.customEquipment = [];
@@ -46,11 +63,11 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
   const [equipmentPrice, setEquipmentPrice] = useState("");
 
   const addedEquipment = unit.customEquipment.filter(
-    (entry) => !unit.baseCustomEquipmentIds.includes(entry.id)
+    (entry) => !unit.baseCustomEquipmentIds.includes(entry.id),
   );
 
   const coreCustomEquipment = unit.customEquipment.filter((entry) =>
-    unit.baseCustomEquipmentIds.includes(entry.id)
+    unit.baseCustomEquipmentIds.includes(entry.id),
   );
 
   const handleAddEquipment = (event) => {
@@ -70,6 +87,7 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
     };
 
     unit.customEquipment.push(entry);
+    applyEquipmentCostDelta(unit, parsedPrice);
     setUnitList([...unitList]);
     setEquipmentName("");
     setEquipmentPrice("");
@@ -82,15 +100,25 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
 
     const index = unit.customEquipment.findIndex((entry) => entry.id === id);
     if (index !== -1) {
+      applyEquipmentCostDelta(
+        unit,
+        -getEquipmentPrice(unit.customEquipment[index]),
+      );
       unit.customEquipment.splice(index, 1);
       setUnitList([...unitList]);
     }
   };
 
   const handleRevertClick = () => {
-    unit.customEquipment = unit.customEquipment.filter((entry) =>
-      unit.baseCustomEquipmentIds.includes(entry.id)
+    const priceDelta = addedEquipment.reduce(
+      (sum, entry) => sum - getEquipmentPrice(entry),
+      0,
     );
+
+    unit.customEquipment = unit.customEquipment.filter((entry) =>
+      unit.baseCustomEquipmentIds.includes(entry.id),
+    );
+    applyEquipmentCostDelta(unit, priceDelta);
     setUnitList([...unitList]);
   };
 
@@ -125,23 +153,33 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
       </form>
 
       <div className="unit-edit-equipment-list">
-        {[...(unit.startingEquipment || []), ...(unit.optionalEquipment || [])].map(
-          (item, index) => (
-            <div key={`core-equipment-${index}`} className="unit-edit-equipment-item">
-              <span>{item}</span>
-              <span className="unit-edit-pill unit-edit-pill-core">
-                {"początkowa"}
-              </span>
-            </div>
-          )
-        )}
+        {[
+          ...(unit.startingEquipment || []),
+          ...(unit.optionalEquipment || []),
+        ].map((item, index) => (
+          <div
+            key={`core-equipment-${index}`}
+            className="unit-edit-equipment-item"
+          >
+            <span>{item}</span>
+            <span className="unit-edit-pill unit-edit-pill-core">
+              {"początkowa"}
+            </span>
+            {/* <button onClick={() => handleDeleteEquipment(item.id)}>
+              <i className="fa-solid fa-trash-can"></i>
+            </button> */}
+          </div>
+        ))}
 
         {coreCustomEquipment.map((item) => (
           <div key={item.id} className="unit-edit-equipment-item">
             <span>{item.name}</span>
             <span className="unit-edit-pill unit-edit-pill-core">
-              {"początkowa"}
+              {"początkowaa"}
             </span>
+            <button onClick={() => handleDeleteEquipment(item.id)}>
+              <i className="fa-solid fa-trash-can"></i>
+            </button>
           </div>
         ))}
 

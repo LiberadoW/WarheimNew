@@ -21,6 +21,17 @@ import "../index.css";
 
 export const EditArmyContext = createContext();
 
+const DEFAULT_CAMPAIGN_NOTES = {
+  determinacja: "",
+  gniew: "",
+  odpornosc: "",
+  specialRules: [],
+  kosztownosci: "",
+  skarbiec: "",
+};
+
+export const getDefaultCampaignNotes = () => ({ ...DEFAULT_CAMPAIGN_NOTES });
+
 const App = () => {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login"></Navigate>;
@@ -35,6 +46,7 @@ const App = () => {
   const [mercenaryUnitName, setMercenaryUnitName] = useState("");
   const [prestige, setPrestige] = useState(0);
   const [armyName, setArmyName] = useState("");
+  const [campaignNotes, setCampaignNotes] = useState(getDefaultCampaignNotes);
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
@@ -164,6 +176,8 @@ const App = () => {
                     setPrestige={setPrestige}
                     setArmyName={setArmyName}
                     armyName={armyName}
+                    campaignNotes={campaignNotes}
+                    setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
                   />
@@ -187,6 +201,8 @@ const App = () => {
                     setPrestige={setPrestige}
                     setArmyName={setArmyName}
                     armyName={armyName}
+                    campaignNotes={campaignNotes}
+                    setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
                   />
@@ -210,6 +226,8 @@ const App = () => {
                     setPrestige={setPrestige}
                     setArmyName={setArmyName}
                     armyName={armyName}
+                    campaignNotes={campaignNotes}
+                    setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
                   />
@@ -234,6 +252,7 @@ const App = () => {
                       setUnitList={setUnitList}
                       setArmy={setArmy}
                       setArmyName={setArmyName}
+                      setCampaignNotes={setCampaignNotes}
                     />
                   </RequireAuth>
                 }
@@ -251,6 +270,7 @@ const App = () => {
           army={armies?.[army]}
           prestige={prestige}
           armyName={armyName}
+          campaignNotes={campaignNotes}
         />
       </div>
     </div>

@@ -56,7 +56,36 @@ const toNumber = (value) => {
   return Number.isFinite(parsedValue) ? parsedValue : 0;
 };
 
-const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
+const getDefaultCampaignNotes = () => ({
+  determinacja: "",
+  gniew: "",
+  odpornosc: "",
+  specialRules: [],
+  kosztownosci: "",
+  skarbiec: "",
+});
+
+const normalizeSpecialRules = (rules) => {
+  if (Array.isArray(rules)) {
+    return rules
+      .map((rule) => String(rule || "").trim())
+      .filter((rule) => rule.length > 0);
+  }
+
+  if (typeof rules === "string") {
+    return rules
+      .split(",")
+      .map((rule) => rule.trim())
+      .filter((rule) => rule.length > 0);
+  }
+
+  return [];
+};
+
+const MyLists = (
+  { setUnitList, setArmy, setArmyName, setCampaignNotes },
+  _ref,
+) => {
   const { currentUser } = useContext(AuthContext);
   const [groupedLists, setGroupedLists] = useState({});
   const [expandedHistory, setExpandedHistory] = useState({});
@@ -82,9 +111,18 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
   }, [currentUser?.user?.uid]);
 
   const openList = (list, route) => {
+    const loadedCampaignNotes = {
+      ...getDefaultCampaignNotes(),
+      ...(list.campaignNotes || {}),
+    };
+
     setUnitList(list.armyList);
     setArmy(list.armyType);
     setArmyName(list.armyName);
+    setCampaignNotes({
+      ...loadedCampaignNotes,
+      specialRules: normalizeSpecialRules(loadedCampaignNotes.specialRules),
+    });
     navigate(route);
   };
 
@@ -98,7 +136,8 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
     const arrayOfSavedLists = savedListsDoc.data()?.lists || [];
     const arrayArmyNames = savedListsDoc.data()?.armyNames || [];
     const index = arrayOfSavedLists.findIndex(
-      (item) => item.armyName === list.armyName && item.armyType === list.armyType
+      (item) =>
+        item.armyName === list.armyName && item.armyType === list.armyType,
     );
 
     if (index === -1) {
@@ -148,13 +187,21 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                         <p className="bold-text">{list.armyName}</p>
                         <p>{`${list.totalCost} zk`}</p>
                         <p>{`Prestiż: ${list.prestige}`}</p>
-                        <p className="armylist-date">{formatTimestamp(list.timestamp)}</p>
+                        <p className="armylist-date">
+                          {formatTimestamp(list.timestamp)}
+                        </p>
                       </div>
 
                       <div className="armylists-button-container">
-                        <button onClick={() => openList(list, "/")}>Wczytaj</button>
-                        <button onClick={() => openList(list, "/edit")}>Edytuj</button>
-                        <button onClick={() => openList(list, "/play")}>Graj</button>
+                        <button onClick={() => openList(list, "/")}>
+                          Wczytaj
+                        </button>
+                        <button onClick={() => openList(list, "/edit")}>
+                          Edytuj
+                        </button>
+                        <button onClick={() => openList(list, "/play")}>
+                          Graj
+                        </button>
                         <button onClick={() => toggleHistory(historyKey)}>
                           {`Historia (${historyEntries.length})`}
                         </button>
@@ -170,11 +217,13 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                     {isHistoryOpen && (
                       <div className="armylist-history">
                         {historyEntries.length === 0 ? (
-                          <p className="armylist-history-empty">Brak zapisanych gier.</p>
+                          <p className="armylist-history-empty">
+                            Brak zapisanych gier.
+                          </p>
                         ) : (
                           historyEntries.map((entry, gameIndex) => {
                             const outOfActionModels = Array.isArray(
-                              entry.outOfActionModels
+                              entry.outOfActionModels,
                             )
                               ? entry.outOfActionModels
                               : [];
@@ -191,13 +240,13 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                                   {getHistoryEntryName(
                                     entry,
                                     gameIndex,
-                                    historyEntries.length
+                                    historyEntries.length,
                                   )}
                                 </p>
                                 <p>{formatTimestamp(entry.finishedAt)}</p>
                                 <p>
                                   {`PD: +${toNumber(entry.totalExpGained)} | Obłęd: +${toNumber(
-                                    entry.totalObledGained
+                                    entry.totalObledGained,
                                   )}`}
                                 </p>
                                 <p>
@@ -210,42 +259,48 @@ const MyLists = ({ setUnitList, setArmy, setArmyName }, _ref) => {
                                   <details className="armylist-history-details">
                                     <summary>Szczegóły jednostek</summary>
                                     <div className="armylist-history-details-body">
-                                      {unitResults.map((unitResult, unitIndex) => {
-                                        const modelResults = Array.isArray(
-                                          unitResult.modelResults
-                                        )
-                                          ? unitResult.modelResults
-                                          : [];
+                                      {unitResults.map(
+                                        (unitResult, unitIndex) => {
+                                          const modelResults = Array.isArray(
+                                            unitResult.modelResults,
+                                          )
+                                            ? unitResult.modelResults
+                                            : [];
 
-                                        return (
-                                          <details
-                                            key={`${historyKey}-game-${gameIndex}-unit-${unitIndex}`}
-                                            className="armylist-history-unit-details"
-                                          >
-                                            <summary>{unitResult.unitLabel}</summary>
-                                            <p>
-                                              {`PD: +${toNumber(
-                                                unitResult.gainedExp
-                                              )} | Obłęd: +${toNumber(
-                                                unitResult.gainedObled
-                                              )}`}
-                                            </p>
-                                            <ul className="armylist-history-model-list">
-                                              {modelResults.map((modelResult, modelIndex) => (
-                                                <li
-                                                  key={`${historyKey}-game-${gameIndex}-unit-${unitIndex}-model-${modelIndex}`}
-                                                >
-                                                  {`${modelResult.modelLabel}: ${
-                                                    modelResult.isOutOfAction
-                                                      ? "WzA"
-                                                      : "aktywny"
-                                                  }`}
-                                                </li>
-                                              ))}
-                                            </ul>
-                                          </details>
-                                        );
-                                      })}
+                                          return (
+                                            <details
+                                              key={`${historyKey}-game-${gameIndex}-unit-${unitIndex}`}
+                                              className="armylist-history-unit-details"
+                                            >
+                                              <summary>
+                                                {unitResult.unitLabel}
+                                              </summary>
+                                              <p>
+                                                {`PD: +${toNumber(
+                                                  unitResult.gainedExp,
+                                                )} | Obłęd: +${toNumber(
+                                                  unitResult.gainedObled,
+                                                )}`}
+                                              </p>
+                                              <ul className="armylist-history-model-list">
+                                                {modelResults.map(
+                                                  (modelResult, modelIndex) => (
+                                                    <li
+                                                      key={`${historyKey}-game-${gameIndex}-unit-${unitIndex}-model-${modelIndex}`}
+                                                    >
+                                                      {`${modelResult.modelLabel}: ${
+                                                        modelResult.isOutOfAction
+                                                          ? "WzA"
+                                                          : "aktywny"
+                                                      }`}
+                                                    </li>
+                                                  ),
+                                                )}
+                                              </ul>
+                                            </details>
+                                          );
+                                        },
+                                      )}
                                     </div>
                                   </details>
                                 )}

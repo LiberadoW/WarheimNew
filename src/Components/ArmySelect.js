@@ -10,6 +10,7 @@ const ArmySelect = ({
   setUnitName,
   setIdShown,
   setMercenaryUnitName,
+  resetCampaignNotes,
 }) => {
   const { setStandardBearer, setMusician } = useContext(CommandContext);
 
@@ -19,6 +20,7 @@ const ArmySelect = ({
     setUnitList([]);
     setIdShown(null);
     setMercenaryUnitName("");
+    resetCampaignNotes();
     setStandardBearer(null);
     setMusician(null);
   };

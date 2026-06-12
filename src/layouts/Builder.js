@@ -5,6 +5,7 @@ import html2pdf from "html2pdf.js";
 import "@sweetalert2/themes/bootstrap-4";
 import ArmySelect from "../Components/ArmySelect";
 import ArmyInfo from "../Components/ArmyInfo";
+import CampaignPointsEditor from "../Components/CampaignPointsEditor";
 import Modal from "../Components/Modal";
 import UnitSelect from "./UnitSelect";
 import UnitList from "./UnitList";
@@ -12,7 +13,8 @@ import { AuthContext } from "../Context/AuthContext";
 import { db } from "../Database/database";
 import { getOneOfChoices } from "../Functions/getOneOfChoices";
 import { getPrestige } from "../Functions/getPrestige";
-import { EditArmyContext } from "./App";
+import { normalizeSpecialRules } from "../Components/CampaignPoints";
+import { EditArmyContext, getDefaultCampaignNotes } from "./App";
 import "../styles/Builder.css";
 
 export const CommandContext = createContext();
@@ -157,6 +159,15 @@ const buildBattleSummary = (unitList) => {
   };
 };
 
+const normalizeCampaignNotes = (campaignNotes) => {
+  const notes = { ...getDefaultCampaignNotes(), ...(campaignNotes || {}) };
+
+  return {
+    ...notes,
+    specialRules: normalizeSpecialRules(notes.specialRules),
+  };
+};
+
 const Builder = ({
   unitList,
   setUnitList,
@@ -171,6 +182,8 @@ const Builder = ({
   armyName,
   setArmyName,
   setMercenaries,
+  campaignNotes,
+  setCampaignNotes,
   handleSetUnitExp,
   theme,
 }) => {
@@ -282,6 +295,7 @@ const Builder = ({
         timestamp: Timestamp.now(),
         totalCost: totalCost,
         prestige: prestige,
+        campaignNotes: normalizeCampaignNotes(campaignNotes),
         gameHistory: [],
       };
 
@@ -354,9 +368,14 @@ const Builder = ({
       setUnitName("");
       setMercenaryUnitName("");
       setArmyName("");
+      setCampaignNotes(getDefaultCampaignNotes());
       setStandardBearer(null);
       setMusician(null);
     }
+  };
+
+  const resetCampaignNotes = () => {
+    setCampaignNotes(getDefaultCampaignNotes());
   };
 
   const handleCustomArmyCostClick = () => {
@@ -435,6 +454,7 @@ const Builder = ({
       timestamp: Timestamp.now(),
       totalCost: updatedCost,
       prestige: updatedPrestige,
+      campaignNotes: normalizeCampaignNotes(campaignNotes),
       gameHistory: [...currentHistory, historyEntry],
     };
 
@@ -539,6 +559,7 @@ const Builder = ({
                 setIdShown={setIdShown}
                 setMercenaryUnitName={setMercenaryUnitName}
                 setMercenaries={setMercenaries}
+                resetCampaignNotes={resetCampaignNotes}
               />
             )}
 
@@ -579,6 +600,13 @@ const Builder = ({
               handleSetUnitExp={handleSetUnitExp}
               army={army}
             />
+            {isEditArmyView && (
+              <CampaignPointsEditor
+                army={army}
+                campaignNotes={campaignNotes}
+                setCampaignNotes={setCampaignNotes}
+              />
+            )}
           </div>
         </div>
       </div>
