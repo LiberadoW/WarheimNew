@@ -32,6 +32,8 @@ const PATHS_OF_MAGIC = [
   "Dziedzina Boga-Pajonka",
   "Magia Pradawnych",
   "Duchowny (modlitwy do Sigmara)",
+  "Duchowny (modlitwy do Ranalda)",
+  "Duchowny (modlitwy do Mananna)",
 ];
 
 export const getMagicLore = (unitList) => {

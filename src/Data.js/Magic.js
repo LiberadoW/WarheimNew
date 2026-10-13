@@ -1,4 +1,78 @@
 export const magic = {
+  "Duchowny (modlitwy do Mananna)": {
+    "1": [
+      "1-3 BŁOGOSŁAWIEŃSTWO PANA MÓRZ",
+      "ODMÓWIONA PRZED ROZGRYWKĄ",
+      "Modlitwa musi zostać odmówiona przed rozgrywką i oddziałuje na duchownego lub K3 dowolne sprzymierzone modele pieszych bohaterów lub stronników wielkości człowieka lub mniejszych (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej), które nie podlegają zasadzie specjalnej demon lub istota eteryczna lub leśny duch lub nieumarły lub opętany.\nDo końca rozgrywki objęte działaniem modlitwy modele podlegają zasadzie specjalnej wodny i zwiadowca."
+    ],
+    "2": [
+      "4 TRÓJZĄB TRYTONA",
+      "POZOSTAJE W GRZE",
+      "Moc modlitwy oddziałuje na duchownego.\nDopóki modlitwa pozostaje w grze dzierżony przez duchownego trójząb traktowany są jak broń z zasadą specjalną magiczny atak i precyzyjne uderzenie, a trafione i zranione orężem modele nie mogą skorzystać z Ochrony Pancerza.\nWładający trójzębem duchowny może przerzucić wszystkie nieudane rzuty na trafienie. Wynik drugiego rzutu jest ostateczny."
+    ],
+    "3": [
+      "5 KLĄTWA ALBATROSA",
+      "",
+      "Moc modlitwy może zostać skierowana na pojedynczy model przeciwnika, także związany walką wręcz znajdujący się w odległości do 12” od duchownego (postać zostaje wybrana przez kierującego duchownym bez ograniczeń, z wyjątkiem tego, że duchowny musi widzieć swój cel). Do początku następnej fazy magii duchownego wszystkie modele atakującego przeklętą postać otrzymują kumulatywny modyfikator +1 do rzutu na zranienie i rzutu w tabeli Efekt zranienia.\nPostać może znajdować się pod działaniem tylko jednej klątwy na raz."
+    ],
+    "4": [
+      "6 LITANIA NAWIGATORA",
+      "POZOSTAJE W GRZE",
+      "Moc modlitwy oddziałuje na duchownego lub dowolny sprzymierzony model pieszy bohatera lub stronnika wielkości człowieka lub mniejszy (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej), który nie podlega zasadzie specjalnej demon lub istota eteryczna lub leśny duch lub nieumarły lub opętany.\nDopóki modlitwa pozostaje w grze objęty działaniem modlitwy model podlega zasadzie specjalnej ranger oraz sprint i uporczywość."
+    ],
+    "5": [
+      "7 KLĄTWA TOPIELCA",
+      "",
+      "Po udanym odmówieniu modlitwy kierujący duchownym gracz wybiera dowolny, znajdujący się w polu widzenia i w odległości do 12” od duchownego wrogi model, który należy przykryć 3” okrągłym wzornikiem. Trafione modele, które nie podlegają zasadzie specjalnej demon lub istota eteryczna lub leśny duch lub machina wojenna lub nieumarły lub opętany lub wodny muszą wykonać udany test Wt lub zostaną Powalone na ziemię!.\nPostać może znajdować się pod działaniem tylko jednej klątwy na raz."
+    ],
+    "6": [
+      "8 GWAŁTOWNY SZTORM",
+      "POZOSTAJE W GRZE",
+      "Po udanym odmówieniu modlitwy kierujący duchownym gracz wybiera dowolny, znajdujący się w polu widzenia i w odległości do 18” od duchownego obszar na powierzchni stołu, który należy przykryć 5” okrągłym wzornikiem. Dopóki modlitwa pozostaje w grze na przykrytym wzornikiem obszarze panuje wichura (zobacz paragraf Pogoda w Starym Świecie w Rozdziale 11: Scenariusze)."
+    ],
+    "7": [
+      "9 ZBROJA MANANNA",
+      "POZOSTAJE W GRZE",
+      "Moc modlitwy oddziałuje na duchownego.\nDopóki modlitwa pozostaje w grze duchowny otrzymuje Magiczną Ochronę na 4+, a wszystkie modele (wrogie i sprzymierzone) w kontakcie z podstawką duchownego, na początku fazy walki wręcz otrzymują jedno trafienie o Sile 4 bez możliwości skorzystania z Ochrony Pancerza."
+    ]
+  },
+  "Duchowny (modlitwy do Ranalda)": {
+    "1": [
+      "1-3 UŚMIECH LOSU",
+      "ODMÓWIONA PRZED ROZGRYWKĄ",
+      "Modlitwa musi zostać odmówiona przed rozgrywką i oddziałuje na duchownego lub K3 dowolne sprzymierzone modele pieszych bohaterów lub stronników wielkości człowieka lub mniejszych (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej), które nie podlegają zasadzie specjalnej demon lub istota eteryczna lub leśny duch lub nieumarły lub opętany.\nDo końca rozgrywki objęte działaniem modlitwy modele podlegają zasadzie specjalnej piętno Chaosu (Tzeentcha)."
+    ],
+    "2": [
+      "4 GRA POZORÓW",
+      "POZOSTAJE W GRZE",
+      "Moc modlitwy oddziałuje na duchownego.\nDopóki modlitwa pozostaje w grze duchowny podlega zasadzie specjalnej genius i śmigły."
+    ],
+    "3": [
+      "5 KLĄTWA PECHA",
+      "",
+      "Moc modlitwy może zostać skierowana na pojedynczy model przeciwnika, także związany walką wręcz znajdujący się w odległości do 12” od duchownego (postać zostaje wybrana przez kierującego duchownym bez ograniczeń, z wyjątkiem tego, że duchowny musi widzieć swój cel). Do początku następnej fazy magii duchownego ofiara klątwy musi przerzucić wszystkie udane rzuty na trafienie, zranienie oraz Ochronę Pancerza i Magiczną Ochronę.\nPostać może znajdować się pod działaniem tylko jednej klątwy na raz."
+    ],
+    "4": [
+      "6 KOCI CHÓD",
+      "POZOSTAJE W GRZE",
+      "Moc modlitwy oddziałuje na duchownego i wszystkie sprzymierzone modele znajdujące się w odległości do 12\", również związane walczą wręcz.\nDopóki modlitwa pozostaje w grze, objęte działaniem modlitwy modele podlegają zasadzie specjalnej ranger i rączy."
+    ],
+    "5": [
+      "7 KLĄTWA KOCIOKWIKU",
+      "POZOSTAJE W GRZE",
+      "Po udanym odmówieniu modlitwy kierujący duchownym gracz wybiera dowolny, znajdujący się w polu widzenia i w odległości do 12” od duchownego wrogi model, który należy przykryć 3” okrągłym wzornikiem. Dopóki modlitwa pozostaje w grze trafione modele przeprowadzając test oparty na współczynniku CP wykonują rzut 3K6 odrzucając kostkę z najniższym wynikiem.\nModlitwa nie działa na modele z zasadą specjalną niezłomny. Postać może znajdować się pod działaniem tylko jednej klątwy na raz."
+    ],
+    "6": [
+      "8 SMOLNY OPAR",
+      "POZOSTAJE W GRZE",
+      "Po udanym odmówieniu modlitwy kierujący duchownym gracz wybiera dowolny, znajdujący się w polu widzenia i w odległości do 18” od duchownego obszar na powierzchni stołu, który należy przykryć 5” okrągłym wzornikiem. Dopóki modlitwa pozostaje w grze na przykrytym wzornikiem obszarze unosi się mgła (zobacz paragraf Pogoda w Starym Świecie w Rozdziale 11: Scenariusze)."
+    ],
+    "7": [
+      "9 ZBROJA RANALDA",
+      "POZOSTAJE W GRZE",
+      "Moc modlitwy oddziałuje na duchownego.\nDopóki modlitwa pozostaje w grze duchowny podlega zasadzie specjalnej rój nietoperzy oraz otrzymuje Magiczną Ochronę na 4+."
+    ]
+  },
   "Tradycja Bestii": {
     1: [
       "1-2 WŁADCA BESTII",

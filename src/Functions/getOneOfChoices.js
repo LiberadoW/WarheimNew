@@ -38,6 +38,11 @@ const disableOneOfChoices = (unitArr, unitList) => {
 
 export const getOneOfChoices = (army, unitList) => {
   const choices = {
+    "Gang przemytników": [
+      ["Kapłan Ranalda", "Kapłan Mananna"],
+      ["Doker", "Nożownik"],
+      ["Rozbójnik", "Ogr"],
+    ],
     "Cyrkowcy z Ligii Ostermarku": [
       ["Magister magii", "Kapłan Ranalda"],
       ["Siłacz", "Żongler"],
