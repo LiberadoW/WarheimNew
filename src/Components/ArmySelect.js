@@ -28,6 +28,7 @@ const ArmySelect = ({
   const updatedArmies = [
     "Łowcy Czarownic",
     "Cyrkowcy z Ligii Ostermarku",
+    "Gang przemytników",
     "Strażnicy dróg z Averlandu",
     "Zbrojna chorągiew z Kisleva",
     "Kupiecka karawana z Arabii",

@@ -1,5 +1,6 @@
 import { łowcyCzarownic } from "./Armies/Łowcy Czarownic";
 import { cyrkowcy } from "./Armies/Cyrkowcy";
+import { gangPrzemytnikow } from "./Armies/GangPrzemytnikow";
 import { muszkieterzyNuln } from "./Armies/MuszkieterzyNuln";
 import { marienburg } from "./Armies/Marienburg";
 import { averland } from "./Armies/Averland";
@@ -56,6 +57,7 @@ import { sybaryci } from "./Armies/Sybaryci";
 const armies = {
   "Łowcy Czarownic": łowcyCzarownic,
   "Cyrkowcy z Ligii Ostermarku": cyrkowcy,
+  "Gang przemytników": gangPrzemytnikow,
   "Muszkieterzy z Nuln": muszkieterzyNuln,
   "Piechota Morska z Marienburga": marienburg,
   "Strażnicy dróg z Averlandu": averland,
