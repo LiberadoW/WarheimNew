@@ -132,7 +132,7 @@ export const liczmistrz = {
         "Uderza jako ostatni",
       ],
     },
-    "Czarny Rycerz": {
+    "Czarny rycerz": {
       id: 8,
       startingEquipment: [
         "Chopesz",

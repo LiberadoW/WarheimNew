@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const pestilens = {
   heroes: {
-    "Diakon Zarazy": {
+    "Diakon zarazy": {
       id: 0,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 65,
@@ -17,7 +17,7 @@ export const pestilens = {
       exp: 20,
       skills: [0, 2, 4, 5],
     },
-    "Mnich Zarazy": {
+    "Mnich zarazy": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 35,
@@ -75,7 +75,7 @@ export const pestilens = {
       },
       rules: ["Mięso armatnie", "Niewolnik", "Rozmiar rzondzi"],
     },
-    "Czciciel Zarazy": {
+    "Czciciel zarazy": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 25,
@@ -94,7 +94,7 @@ export const pestilens = {
         "W nogi!",
       ],
     },
-    "Siewca Zarazy": {
+    "Siewca zarazy": {
       id: 6,
       startingEquipment: ["Cep bojowy"],
       cost: 50,
@@ -107,7 +107,7 @@ export const pestilens = {
       },
       rules: ["Fanatyk", "Furia", "Ranger", "Twardziel", "W nogi!"],
     },
-    "Szczur Zarazy": {
+    "Szczur zarazy": {
       id: 7,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 25,
@@ -128,7 +128,7 @@ export const pestilens = {
         "Zwierzę",
       ],
     },
-    "Czerw Zarazy": {
+    "Czerw zarazy": {
       id: 8,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 200,

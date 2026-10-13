@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const orki = {
   heroes: {
-    "Herszt Orków": {
+    "Herszt orków": {
       id: 0,
       startingEquipment: ["Sztylet", "Rembak", "Rembak", "Broń wielka"],
       cost: 85,
@@ -17,7 +17,7 @@ export const orki = {
       exp: 20,
       skills: [0, 3, 4, 5],
     },
-    "Szaman Orków": {
+    "Szaman orków": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 45,
@@ -32,7 +32,7 @@ export const orki = {
       exp: 10,
       skills: [0, 3, 4, 5],
     },
-    "Burszuj Orków": {
+    "Burszuj orków": {
       id: 2,
       startingEquipment: [],
       cost: 40,
@@ -99,7 +99,7 @@ export const orki = {
         "Wybuchowe zarodniki",
       ],
     },
-    "Gobliński Fanatyk": {
+    "Gobliński fanatyk": {
       id: 7,
       startingEquipment: ["Kula na łańcuchu"],
       cost: 50,
@@ -131,7 +131,7 @@ export const orki = {
         "Zwierzę",
       ],
     },
-    "Ork na Dziku": {
+    "Ork na dziku": {
       id: 9,
       startingEquipment: ["Sztylet", "Rembak", "Dzik", "Siodło & uprząż"],
       cost: 80,

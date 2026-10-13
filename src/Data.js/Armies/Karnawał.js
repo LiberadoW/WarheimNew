@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const karnawałChaosu = {
   heroes: {
-    "Mistrz Karnawału": {
+    "Mistrz karnawału": {
       id: 0,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 70,
@@ -93,7 +93,7 @@ export const karnawałChaosu = {
       },
       rules: ["Demon", "Głód krwi", "Lot"],
     },
-    "Piekielny Ogar": {
+    "Piekielny ogar": {
       id: 6,
       startingEquipment: ["Broń naturalna (zabójczy cios)"],
       cost: 45,
@@ -112,7 +112,7 @@ export const karnawałChaosu = {
         "Stygmaty Khorna (skoczek)",
       ],
     },
-    Nurglingi: {
+    "Nurgling": {
       id: 7,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 35,
@@ -125,7 +125,7 @@ export const karnawałChaosu = {
       },
       rules: ["Demon", "Stygmaty Nurgla (odór, rój much)"],
     },
-    "Bólożądna Pieszczota": {
+    "Bólożądna pieszczota": {
       id: 8,
       startingEquipment: ["Broń naturalna (szybki)"],
       cost: 45,
@@ -142,7 +142,7 @@ export const karnawałChaosu = {
         "Stygmaty Slaanesha (ogon skorpiona, ponętny, szczypce)",
       ],
     },
-    "Różowy Strachulec": {
+    "Różowy strachulec": {
       id: 9,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 45,

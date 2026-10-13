@@ -78,7 +78,7 @@ export const purpurowaDłoń = {
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
     },
-    "Różowy Strachulec": {
+    "Różowy strachulec": {
       id: 4,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 45,
@@ -109,7 +109,7 @@ export const purpurowaDłoń = {
       },
       rules: ["Magiczna ochrona (6+)", "Ranger", "Stygmat Chaosu"],
     },
-    "Smoczy Ogr": {
+    "Smoczy ogr": {
       id: 7,
       startingEquipment: ["Broń wielka"],
       cost: 250,

@@ -29,7 +29,7 @@ export const khazadzi = {
       exp: 20,
       skills: [0, 1, 2, 3, 5],
     },
-    "Kowal Run": {
+    "Kowal run": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
@@ -44,7 +44,7 @@ export const khazadzi = {
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Mistrz Inżynier": {
+    "Mistrz inżynier": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
@@ -97,7 +97,7 @@ export const khazadzi = {
       exp: 10,
       skills: [0, 3, 5],
     },
-    "Łamacz Żelaza": {
+    "Łamacz żelaza": {
       id: 4,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 40,
@@ -122,7 +122,7 @@ export const khazadzi = {
       exp: 8,
       skills: [0, 3, 5],
     },
-    "Wojownik Klanowy": {
+    "Wojownik klanowy": {
       id: 5,
       startingEquipment: ["Sztylet"],
       cost: 25,
@@ -194,7 +194,7 @@ export const khazadzi = {
         "Zwiadowca",
       ],
     },
-    "Pogromca Trolli": {
+    "Pogromca trolli": {
       id: 8,
       startingEquipment: [
         "Topór krasnoludów",

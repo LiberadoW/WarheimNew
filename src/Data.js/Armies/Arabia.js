@@ -107,7 +107,7 @@ export const arabia = {
     },
     Nomada: {
       id: 7,
-      startingEquipment: ["Sztylet","Chopesz","Łuk krótki","Rumak Elfów","Siodło & uprząż"],
+      startingEquipment: ["Sztylet","Chopesz","Łuk krótki","Koń bojowy","Siodło & uprząż"],
       cost: 70,
       number: 3,
       equipmentList: heroEquipment["Kupiecka karawana z Arabii"].Nomada,
@@ -115,7 +115,7 @@ export const arabia = {
       stats: {
         "Początkowa": [4,3,4,3,3,1,3,1,7],
         "Maksymalna": [5,6,6,4,4,3,6,4,9],
-        "Rumak elfów": [9,3,0,3,3,1,4,1,5]
+        "Koń bojowy": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Kawalerzysta", "Lekka jazda", "Ranger", "Zwiadowca"],
     },

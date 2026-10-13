@@ -242,7 +242,7 @@ export const army = {
         "Początkowa": [7,4,0,5,4,3,4,2,7],
         "Maksymalna": [7,4,0,5,4,3,4,2,7]
       },
-      "rules": ["Dzikie squigi","Głód krwi","Krzepki","Potwór","Ugryzienie","Wierzchowiec","Zwierzę"]
+      "rules": ["Głód krwi","Krzepki","Potwór","Ugryzienie","Wierzchowiec","Zwierzę"]
     },
     "Bitewny ołtarz": {
       "id": 9,

@@ -79,7 +79,7 @@ export const karmazynowaCzaszka = {
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
     },
-    "Piekielny Ogar": {
+    "Piekielny ogar": {
       id: 4,
       startingEquipment: ["Broń naturalna (zabójczy cios)"],
       cost: 45,

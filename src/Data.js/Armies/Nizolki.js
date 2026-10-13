@@ -25,7 +25,7 @@ export const nizolki = {
       exp: 20,
       skills: [0, 1, 2, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,

@@ -180,7 +180,7 @@ export const mroczne = {
       },
       rules: ["Głód krwi","Lot","Nadrzewni drapieżcy","Rozmiar rzondzi","Zwierzę"],
     },
-    "Mroczny Pegaz": {
+    "Mroczny pegaz": {
       id: 10,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 150,

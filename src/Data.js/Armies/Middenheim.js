@@ -21,7 +21,7 @@ export const middenheim = {
       exp: 20,
       skills: [0, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,

@@ -264,6 +264,7 @@ export const army = {
       "cost": 70,
       "number": 3,
       "equipmentList": {
+        "Topór bojowy/Nadziak": [5,0],
         "Buława/Maczuga/Młot bojowy": [5,0],
         "Miecz": [10,0],
         "Sztylet": [2,0],

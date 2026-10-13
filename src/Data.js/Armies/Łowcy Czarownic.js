@@ -7,7 +7,7 @@ export const łowcyCzarownic = {
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 60,
       number: 1,
-      equipmentList: heroEquipment["Łowcy Czarownic"].Bohaterowie,
+      equipmentList: heroEquipment["Łowcy czarownic"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
@@ -31,7 +31,7 @@ export const łowcyCzarownic = {
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 35,
       number: 1,
-      equipmentList: heroEquipment["Łowcy Czarownic"].Prezbiter,
+      equipmentList: heroEquipment["Łowcy czarownic"].Prezbiter,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
@@ -53,7 +53,7 @@ export const łowcyCzarownic = {
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 25,
       number: 3,
-      equipmentList: heroEquipment["Łowcy Czarownic"].Bohaterowie,
+      equipmentList: heroEquipment["Łowcy czarownic"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -68,7 +68,7 @@ export const łowcyCzarownic = {
       startingEquipment: ["Sztylet"],
       cost: 20,
       number: 99,
-      equipmentList: heroEquipment["Łowcy Czarownic"].Stronnicy,
+      equipmentList: heroEquipment["Łowcy czarownic"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -81,7 +81,7 @@ export const łowcyCzarownic = {
       startingEquipment: ["Cep bojowy"],
       cost: 40,
       number: 5,
-      equipmentList: heroEquipment["Łowcy Czarownic"].Flagelant,
+      equipmentList: heroEquipment["Łowcy czarownic"].Flagelant,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
@@ -107,7 +107,7 @@ export const łowcyCzarownic = {
       startingEquipment: ["Sztylet", "Miecz", "Koń bojowy", "Siodło & uprząż"],
       cost: 70,
       number: 3,
-      equipmentList: heroEquipment["Łowcy Czarownic"].Rycerz,
+      equipmentList: heroEquipment["Łowcy czarownic"].Rycerz,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -141,7 +141,7 @@ export const łowcyCzarownic = {
   limit: 500,
   minModels: 3,
   maxModels: 12,
-  name: "Łowcy Czarownic",
+  name: "Łowcy czarownic",
   nature: "Neutralna",
   armyRules: ["Kontakty handlowe (3)", "Podatek", "Rozrzutność"],
   mercenaries: [

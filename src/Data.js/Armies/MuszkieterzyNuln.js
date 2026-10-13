@@ -17,7 +17,7 @@ export const muszkieterzyNuln = {
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -119,7 +119,7 @@ export const muszkieterzyNuln = {
       },
       rules: ["Drużyna wsparcia"],
     },
-    "Strażnik miejski": {
+    "Strażnik Miejski": {
       id: 8,
       startingEquipment: ["Sztylet", "Halabarda"],
       cost: 35,
@@ -152,7 +152,7 @@ export const muszkieterzyNuln = {
       },
       rules: ["Kawalerzysta", "Lekka jazda", "Rajtar"],
     },
-    "Krasnoludzki Ranger": {
+    "Krasnoludzki ranger": {
       id: 10,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 45,

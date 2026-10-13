@@ -1,3 +1,4 @@
+import { getArmyName, normalizeRosterNames } from "../Data.js/RulebookNames";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../Database/database";
@@ -7,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const sortArmylists = (armylists) => {
   return (armylists || []).reduce((groups, item) => {
-    const group = groups[item.armyType] || [];
+    const armyType = getArmyName(item.armyType);
+    const group = groups[armyType] || [];
     group.push(item);
-    groups[item.armyType] = group;
+    groups[armyType] = group;
     return groups;
   }, {});
 };
@@ -116,8 +118,9 @@ const MyLists = (
       ...(list.campaignNotes || {}),
     };
 
-    setUnitList(list.armyList);
-    setArmy(list.armyType);
+    const renamedList = normalizeRosterNames(list);
+    setUnitList(renamedList.armyList);
+    setArmy(renamedList.armyType);
     setArmyName(list.armyName);
     setCampaignNotes({
       ...loadedCampaignNotes,

@@ -32,7 +32,7 @@ export const marienburg = {
       exp: 12,
       skills: [2, 4, 5],
     },
-    "Kapłan Mannana": {
+    "Kapłan Mananna": {
       id: 2,
       startingEquipment: ["Sztylet", "Trójząb"],
       cost: 35,

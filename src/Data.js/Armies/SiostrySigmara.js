@@ -39,7 +39,7 @@ export const siostry = {
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Siostra Bitwy": {
+    "Siostra bitwy": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 25,
@@ -127,7 +127,7 @@ export const siostry = {
         "Zabójczy cios",
       ],
     },
-    "Bitewny Ołtarz": {
+    "Bitewny ołtarz": {
       id: 8,
       startingEquipment: [],
       cost: 175,

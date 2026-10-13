@@ -177,7 +177,7 @@ export const grasanciChaosu = {
         "Wielkolud",
       ],
     },
-    "Smoczy Ogr": {
+    "Smoczy ogr": {
       id: 11,
       startingEquipment: ["Broń wielka"],
       cost: 250,
@@ -243,7 +243,7 @@ export const grasanciChaosu = {
       },
       rules: ["Duży cel", "Machina wojenna", "Powóz", "Więźniarka"],
     },
-    "Rydwan Chaosu": {
+    "Rydwan": {
       id: 14,
       startingEquipment: [],
       cost: 125,

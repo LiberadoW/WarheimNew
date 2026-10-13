@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const pogromcy = {
   heroes: {
-    "Tan Pogromców": {
+    "Tan pogromców": {
       id: 0,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 85,
@@ -30,7 +30,7 @@ export const pogromcy = {
       exp: 20,
       skills: [0, 1, 2, 3, 5],
     },
-    "Kowal Run": {
+    "Kowal run": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 60,
@@ -45,7 +45,7 @@ export const pogromcy = {
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Mistrz Inżynier": {
+    "Mistrz inżynier": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 60,
@@ -75,7 +75,7 @@ export const pogromcy = {
       exp: 12,
       skills: [0, 1, 2, 3, 5],
     },
-    "Pogromca Smoków": {
+    "Pogromca smoków": {
       id: 3,
       startingEquipment: [
         "Topór krasnoludów",
@@ -119,7 +119,7 @@ export const pogromcy = {
       exp: 10,
       skills: [0, 3, 4, 5],
     },
-    "Pogromca Gigantów": {
+    "Pogromca gigantów": {
       id: 4,
       startingEquipment: [
         "Topór krasnoludów",
@@ -163,7 +163,7 @@ export const pogromcy = {
       exp: 8,
       skills: [0, 3, 4, 5],
     },
-    "Pogromca Trolli": {
+    "Pogromca trolli": {
       id: 5,
       startingEquipment: [
         "Topór krasnoludów",

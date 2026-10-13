@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const piraci = {
   heroes: {
-    "Kapitan Piratów": {
+    "Kapitan piratów": {
       id: 0,
       startingEquipment: ["Sztylet", "Rapier"],
       cost: 55,
@@ -32,7 +32,7 @@ export const piraci = {
       exp: 12,
       skills: [2, 4, 5],
     },
-    "Kapłan Mannana": {
+    "Kapłan Mananna": {
       id: 2,
       startingEquipment: ["Sztylet", "Trójząb"],
       cost: 35,
@@ -131,7 +131,7 @@ export const piraci = {
       },
       rules: ["Drużyna ciężkich broni", "Drużyna wsparcia"],
     },
-    "Żołnierz okrętowy": {
+    "Żołnierz Okrętowy": {
       id: 8,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 30,

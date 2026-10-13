@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const kapry = {
   heroes: {
-    "Kapitan Goblinów": {
+    "Kapitan goblinów": {
       id: 0,
       startingEquipment: ["Sztylet", "Pistolet"],
       cost: 55,
@@ -17,7 +17,7 @@ export const kapry = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szaman Goblinów": {
+    "Szaman goblinów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -32,7 +32,7 @@ export const kapry = {
       exp: 12,
       skills: [0, 1, 4, 5],
     },
-    "Goblin Mat": {
+    "Goblin mat": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 25,
@@ -75,7 +75,7 @@ export const kapry = {
       },
       rules: ["Mięso armatnie", "Niewolnik", "Rozmiar rzondzi"],
     },
-    "Goblin Pirat": {
+    "Goblin pirat": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
@@ -181,7 +181,7 @@ export const kapry = {
       },
       rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
-    "Ośmiornica Bagienna": {
+    "Ośmiornica bagienna": {
       id: 11,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 200,

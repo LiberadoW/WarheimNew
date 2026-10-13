@@ -25,7 +25,7 @@ export const leśne = {
       exp: 20,
       skills: [0, 1, 2, 4, 5],
     },
-    "Mag Elfów": {
+    "Mag elfów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 50,
@@ -68,7 +68,7 @@ export const leśne = {
       exp: 11,
       skills: [0, 3, 4, 5],
     },
-    "Strażnik Ścieżek": {
+    "Strażnik ścieżek": {
       id: 3,
       startingEquipment: ["Sztylet", "Łuk elfów"],
       cost: 45,
@@ -90,7 +90,7 @@ export const leśne = {
       exp: 11,
       skills: [0, 1, 4, 5],
     },
-    "Strażnik Polany": {
+    "Strażnik polany": {
       id: 4,
       startingEquipment: ["Sztylet", "Łuk długi"],
       cost: 40,
@@ -110,7 +110,7 @@ export const leśne = {
         "Zasadzka",
       ],
     },
-    "Tancerz Wojny": {
+    "Tancerz wojny": {
       id: 5,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 50,
@@ -142,7 +142,7 @@ export const leśne = {
         "Zew dziczy",
       ],
     },
-    "Jeździec Polany": {
+    "Jeździec polany": {
       id: 7,
       startingEquipment: [
         "Sztylet",

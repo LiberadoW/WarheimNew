@@ -43,7 +43,7 @@ export const graal = {
       exp: 12,
       skills: [0, 2, 4, 5],
     },
-    "Rycerz Próby": {
+    "Rycerz próby": {
       id: 2,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 35,
@@ -58,7 +58,7 @@ export const graal = {
       exp: 8,
       skills: [0, 3, 4, 5],
     },
-    "Rycerz Królestwa": {
+    "Rycerz królestwa": {
       id: 3,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 30,
@@ -92,7 +92,7 @@ export const graal = {
         "Żywa tarcza",
       ],
     },
-    "Zbrojny Graala": {
+    "Zbrojny": {
       id: 5,
       startingEquipment: ["Sztylet"],
       cost: 20,
@@ -118,7 +118,7 @@ export const graal = {
       },
       rules: ["Fanatyk", "Furia", "Stan niższy"],
     },
-    "Błędny Rycerz": {
+    "Błędny rycerz": {
       id: 7,
       startingEquipment: ["Sztylet", "Miecz", "Rumak", "Siodło & uprząż"],
       cost: 70,

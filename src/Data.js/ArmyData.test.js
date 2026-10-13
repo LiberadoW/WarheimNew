@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import armies from "./Armies";
+import { getArmyName, getUnitName, armyNameAliases, unitNameAliases, normalizeRosterNames } from "./RulebookNames";
 import expected from "./__fixtures__/rulebook-profiles.json";
 import { armyChoices } from "./ArmyChoices";
 import { mercenariesList } from "./Mercenaries";
@@ -12,18 +13,29 @@ import UnitSelect from "../layouts/UnitSelect";
 
 // Independent extraction of 704 explicit recruitment profiles in Warheim.docx.
 // Bractwo's generic priest points to seven profiles in chapter 23 instead.
-test.each(Object.entries(expected))("%s matches the Word recruitment tables", (name, profiles) => {
-  const army = armies[name];
+test.each(Object.entries(expected))("%s matches the Word tables with approved review corrections", (name, profiles) => {
+  const army = armies[getArmyName(name)];
   expect(army).toBeDefined();
   Object.entries(profiles).forEach(([unitName, [cost, cap, stats]]) => {
-    const unit = army.heroes[unitName];
+    const unit = army.heroes[getUnitName(name, unitName)];
     expect(unit).toBeDefined();
     expect([unitName, unit.cost]).toEqual([unitName, cost]);
     if (cap !== null) expect([unitName, unit.number]).toEqual([unitName, cap]);
     else expect(unit.number).toBeGreaterThanOrEqual(army.maxModels);
-    // Printed altar row conflicts with the Powóz rule; tracked in the audit.
-    if (name === "Rycerze Graala" && unitName === "Bitewny ołtarz") return;
-    expect([unitName, Object.values(unit.stats)]).toEqual([unitName, stats]);
+    // Preserve the independent source fixture. Override only the exact rows
+    // corrected by the owner's PR #5 review; compare every other row as printed.
+    const reviewedStats = stats.map((row) => [...row]);
+    if (unitName.toLowerCase() === "bitewny ołtarz") {
+      reviewedStats[0] = ["-", "-", "-", 4, 8, 8, "-", "-", "-"];
+    }
+    if ((name === "Żołnierze z Reiklandu" && unitName === "Rydwan") ||
+        (name === "Nieumarły sabat rodu Nekrarch" && ["Czarna Karoca", "Ścierwowóz"].includes(unitName))) {
+      reviewedStats[0][5] = 8;
+    }
+    if (name === "Kupiecka karawana z Arabii" && unitName === "Nomada") {
+      reviewedStats[2] = [8, 3, 0, 3, "-", "-", 3, 1, 5];
+    }
+    expect([unitName, Object.values(unit.stats)]).toEqual([unitName, reviewedStats]);
   });
 });
 
@@ -193,4 +205,61 @@ test.each(["Mananna","Morra","Myrmidii","Ranalda","Ulryka","Ursuna","Sigmara"])(
     expect(title).toMatch(/^\d/);
     expect(body.length).toBeGreaterThan(30);
   });
+});
+
+
+test("all five battle altars use the Powóz profile", () => {
+  const altars = Object.values(armies).flatMap((army) =>
+    Object.entries(army.heroes).filter(([name]) => name.toLowerCase() === "bitewny ołtarz"));
+  expect(altars).toHaveLength(5);
+  altars.forEach(([, unit]) => {
+    expect(unit.stats.Powóz).toEqual(["-", "-", "-", 4, 8, 8, "-", "-", "-"]);
+    expect(unit.stats.Rydwan).toBeUndefined();
+    expect(unit.rules).toContain("Powóz");
+  });
+});
+
+test("review confirms prices, caps, horse and Półgryfon rules", () => {
+  expect(armies["Emisariusze Smoczego Cesarza"].heroes.Nomada.equipmentList["Topór bojowy/Nadziak"]).toEqual([5, 0]);
+  expect(armies["Amazonki z Lustrii"].heroes.Walkiria.equipmentList.Oszczep).toEqual([15, 1]);
+  expect(armies["Cyrkowcy z Ligii Ostermarku"].heroes.Cyrkowiec.number).toBe(7);
+  expect(armies["Emisariusze Smoczego Cesarza"].heroes.Strzelec.number).toBe(7);
+  expect(armies["Bractwo Rycerskie"].heroes.Półgryfon.rules).not.toContain("Dzikie squigi");
+  const nomad = armies["Kupiecka karawana z Arabii"].heroes.Nomada;
+  expect(nomad.startingEquipment).toContain("Koń bojowy");
+  expect(nomad.startingEquipment).not.toContain("Rumak Elfów");
+  expect(nomad.stats["Koń bojowy"]).toEqual([8, 3, 0, 3, "-", "-", 3, 1, 5]);
+});
+
+test("all renamed entries remain recruitable and old names are absent from the catalog", () => {
+  Object.entries(armyNameAliases).forEach(([oldName, name]) => {
+    expect(armies[oldName]).toBeUndefined();
+    expect(armies[name].name).toBe(name);
+  });
+  Object.entries(unitNameAliases).forEach(([armyName, names]) => {
+    Object.entries(names).forEach(([oldName, name]) => {
+      expect(armies[armyName].heroes[oldName]).toBeUndefined();
+      expect(armies[armyName].heroes[name]).toBeDefined();
+    });
+  });
+});
+
+test("legacy saved rosters change names without losing campaign data or renaming hired swords", () => {
+  const veteran = { unitName: "Dreg", unitDisplayName: "My veteran", type: "Bohater", exp: 27,
+    stats: { Początkowa: [4, 4, 3, 3, 3, 2, 3, 1, 7] }, optionalEquipment: ["Miecz"], uniqueId: "veteran" };
+  const roster = { armyType: "Nieumarły poczet Krwawych Smoków", armyList: [veteran,
+    { ...veteran, unitDisplayName: "Dreg", uniqueId: "unnamed" },
+    { ...veteran, type: "Najemne Ostrze", uniqueId: "hired" }], gameHistory: [{ gameName: "Battle" }] };
+  const normalized = normalizeRosterNames(roster);
+  expect(normalized.armyType).toBe("Nieumarły poczet Krwawego Smoka");
+  expect(normalized.armyList[0]).toEqual({ ...veteran, unitName: "Giermek" });
+  expect(normalized.armyList[1].unitDisplayName).toBe("Giermek");
+  expect(normalized.armyList[2]).toEqual(roster.armyList[2]);
+  expect(normalized.gameHistory).toEqual(roster.gameHistory);
+  expect(roster.armyList[0].unitName).toBe("Dreg");
+  expect(normalizeRosterNames(normalized)).toEqual(normalized);
+  expect(getUnitName("Nieumarła świta hrabiego von Carstein", "Dreg")).toBe("Dreg");
+  const army = armies[normalized.armyType];
+  expect(errors(army, [recruit(army, "Krwawy smok"), ...normalized.armyList.slice(0, 2).map((u) =>
+    ({ ...recruit(army, u.unitName), ...u }))])).toBe(0);
 });

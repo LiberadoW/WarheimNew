@@ -18,7 +18,7 @@ export const krasnoludyChaosu = {
       exp: 20,
       skills: [0, 2, 3, 5],
     },
-    "Mistrz Inżynier": {
+    "Mistrz inżynier": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
@@ -131,7 +131,7 @@ export const krasnoludyChaosu = {
         "Zasadzka",
       ],
     },
-    "Wojownik Klanowy": {
+    "Wojownik klanowy": {
       id: 6,
       startingEquipment: ["Sztylet"],
       cost: 25,

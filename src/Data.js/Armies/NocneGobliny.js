@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const nocneGobliny = {
   heroes: {
-    "Herszt Nocnych Goblinów": {
+    "Herszt nocnych goblinów": {
       id: 0,
       startingEquipment: ["Sztylet", "Włócznia"],
       cost: 55,
@@ -17,7 +17,7 @@ export const nocneGobliny = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szaman Nocnych Goblinów": {
+    "Szaman nocnych goblinów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -32,7 +32,7 @@ export const nocneGobliny = {
       exp: 12,
       skills: [0, 1, 4, 5],
     },
-    "Sieciarz Nocnych Goblinów": {
+    "Sieciarz nocnych goblinów": {
       id: 2,
       startingEquipment: ["Sztylet", "Sieć"],
       cost: 25,
@@ -75,7 +75,7 @@ export const nocneGobliny = {
       },
       rules: ["Mięso armatnie", "Niewolnik", "Rozmiar rzondzi"],
     },
-    "Nocny Goblin": {
+    "Nocny goblin": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
@@ -115,7 +115,7 @@ export const nocneGobliny = {
         "Wybuchowe zarodniki",
       ],
     },
-    "Gobliński Fanatyk": {
+    "Gobliński fanatyk": {
       id: 7,
       startingEquipment: ["Kula na łańcuchu"],
       cost: 50,
@@ -147,7 +147,7 @@ export const nocneGobliny = {
         "Zwierzę",
       ],
     },
-    "Nocny Hop-Goblin": {
+    "Nocny hop-goblin": {
       id: 9,
       startingEquipment: [
         "Sztylet",
@@ -192,7 +192,7 @@ export const nocneGobliny = {
       },
       rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
-    "Wielki Squig": {
+    "Wielki squig": {
       id: 11,
       startingEquipment: ["Broń naturalna (zabójczy cios)"],
       cost: 180,

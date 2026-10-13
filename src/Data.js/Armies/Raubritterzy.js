@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const raubritterzy = {
   heroes: {
-    "Herszt Raubritterów": {
+    "Herszt raubritterów": {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 55,

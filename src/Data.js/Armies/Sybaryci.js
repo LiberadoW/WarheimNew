@@ -77,7 +77,7 @@ export const sybaryci = {
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
     },
-    "Bólożądna Pieszczota": {
+    "Bólożądna pieszczota": {
       id: 4,
       startingEquipment: ["Broń naturalna (szybki)"],
       cost: 45,

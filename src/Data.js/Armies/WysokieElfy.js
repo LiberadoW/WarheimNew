@@ -8,7 +8,7 @@ export const wysokie = {
       cost: 75,
       number: 1,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"]["Bohaterowie"],
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [5, 5, 5, 3, 3, 2, 6, 1, 9],
@@ -18,12 +18,12 @@ export const wysokie = {
       exp: 20,
       skills: [0, 1, 2, 4, 5],
     },
-    "Mag Elfów Wysokiego Rodu": {
+    "Mag elfów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 55,
       number: 1,
-      equipmentList: heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Mag,
+      equipmentList: heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Mag,
       type: "Bohater",
       stats: {
         Początkowa: [5, 4, 4, 3, 3, 1, 5, 1, 8],
@@ -44,7 +44,7 @@ export const wysokie = {
       cost: 50,
       number: 1,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"]["Bohaterowie"],
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [5, 5, 4, 4, 3, 1, 5, 1, 8],
@@ -54,13 +54,13 @@ export const wysokie = {
       exp: 11,
       skills: [0, 3, 4, 5],
     },
-    "Mistrz Miecza Hoetha": {
+    "Mistrz Miecza Hoeth": {
       id: 3,
       startingEquipment: ["Sztylet", "Broń wielka"],
       cost: 60,
       number: 1,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"]["Bohaterowie"],
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [5, 6, 4, 3, 3, 1, 5, 1, 8],
@@ -76,7 +76,7 @@ export const wysokie = {
       cost: 45,
       number: 12,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Stronnicy,
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 4, 3, 3, 1, 5, 1, 8],
@@ -90,7 +90,7 @@ export const wysokie = {
       cost: 45,
       number: 5,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Stronnicy,
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 4, 3, 3, 1, 5, 1, 8],
@@ -109,7 +109,7 @@ export const wysokie = {
       ],
       cost: 80,
       number: 3,
-      equipmentList: heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Srebrny,
+      equipmentList: heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Srebrny,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 4, 3, 3, 1, 5, 1, 8],
@@ -129,7 +129,7 @@ export const wysokie = {
       cost: 50,
       number: 5,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Stronnicy,
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [5, 5, 4, 3, 3, 1, 5, 1, 8],
@@ -176,7 +176,7 @@ export const wysokie = {
   limit: 600,
   minModels: 3,
   maxModels: 12,
-  name: "Elfowie Wysokiego Rodu z Ulthuan",
+  name: "Elfowie Wysokiego Rodu z Ulthuanu",
   nature: "Neutralna",
   armyRules: ["Kontakty handlowe (3)", "Podatek", "Rozrzutność", "Zamożność"],
   mercenaries: ["Minstrel", "Strażnik Morski z Lothern", "Zwiadowca"],

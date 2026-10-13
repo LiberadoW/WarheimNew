@@ -95,7 +95,7 @@ export const psyWojny = {
         "Szermierz",
       ],
     },
-    "Oblężnik z Remas": {
+    "Oblężnik": {
       id: 6,
       startingEquipment: ["Sztylet", "Kusza", "Pawęż"],
       cost: 30,

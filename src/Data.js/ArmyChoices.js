@@ -6,40 +6,40 @@ export const armyChoices = {
     ["Rozbójnik","Ogr"]
   ],
   "Cyrkowcy z Ligii Ostermarku": [
-    ["Magister magii","Kapłan Ranalda"],
+    ["Magister Magii","Kapłan Ranalda"],
     ["Siłacz","Żongler"],
     ["Ogr","Niedźwiedź"],
     ["Zaprzęg","Rydwan"]
   ],
   "Muszkieterzy z Nuln": [
-    ["Magister magii","Prezbiter Sigmara"],
-    ["Rajtar","Krasnoludzki Ranger"],
+    ["Magister Magii","Prezbiter Sigmara"],
+    ["Rajtar","Krasnoludzki ranger"],
     ["Wóz bojowy","Rydwan"]
   ],
   "Piechota Morska z Marienburga": [
-    ["Czarownik","Kapłan Mannana"],
+    ["Czarownik","Kapłan Mananna"],
     ["Przepatrywacz","Bukanier"],
     ["Zaprzęg","Rydwan"]
   ],
   "Strażnicy dróg z Averlandu": [
-    ["Magister magii","Prezbiter Sigmara"],
-    ["Rajtar","Pogromca Trolli"],
+    ["Magister Magii","Prezbiter Sigmara"],
+    ["Rajtar","Pogromca trolli"],
     ["Zaprzęg","Rydwan"]
   ],
   "Zbrojna kompania z Ostlandu": [
-    ["Magister magii","Prezbiter Sigmara"],
+    ["Magister Magii","Prezbiter Sigmara"],
     ["Ogr","Przepatrywacz"],
     ["Więźniarka","Rydwan"]
   ],
   "Zbrojni z Middenheim": [
-    ["Magister magii","Kapłan Ulryka"],
+    ["Magister Magii","Kapłan Ulryka"],
     ["Wilczarz","Przepatrywacz"],
     ["Zaprzęg","Rydwan"]
   ],
   "Żołnierze z Reiklandu": [
     ["Rajtar","Flagelant"],
     ["Zaprzęg","Rydwan"],
-    ["Magister magii","Prezbiter Sigmara"]
+    ["Magister Magii","Prezbiter Sigmara"]
   ],
   "Zbrojna chorągiew z Kisleva": [
     ["Kapłan Ursuna","Magister Lodu"],
@@ -48,7 +48,7 @@ export const armyChoices = {
     ["Zaprzęg","Rydwan"]
   ],
   "Piraci z Sartosy": [
-    ["Kapłan Mannana","Czarownik"],
+    ["Kapłan Mananna","Czarownik"],
     ["Przepatrywacz","Ogr"],
     ["Więźniarka","Rydwan"]
   ],
@@ -71,18 +71,18 @@ export const armyChoices = {
     ["Więźniarka","Rydwan"]
   ],
   "Gladiatorzy z Jałowej Krainy": [
-    ["Szablozębny","Pogromca Trolli"],
+    ["Szablozębny","Pogromca trolli"],
     ["Niedźwiedź","Nomada","Ogr"],
     ["Więźniarka","Rydwan"]
   ],
   "Siostry Sigmara": [
-    ["Bitewny Ołtarz","Rydwan"]
+    ["Bitewny ołtarz","Rydwan"]
   ],
   "Leśni Elfowie z Athel Loren": [
-    ["Tancerz Wojny","Driada"],
-    ["Jeździec Polany","Drzewoduch"]
+    ["Tancerz wojny","Driada"],
+    ["Jeździec polany","Drzewoduch"]
   ],
-  "Elfowie Wysokiego Rodu z Ulthuan": [
+  "Elfowie Wysokiego Rodu z Ulthuanu": [
     ["Rydwan z Tiranoc","Lwi Rydwan z Chrace"]
   ],
   "Mroczni Elfowie z Naggaroth": [
@@ -91,27 +91,27 @@ export const armyChoices = {
     ["Rydwan","Więźniarka"]
   ],
   "Khazadzi z Gór Krańca Świata": [
-    ["Kowal Run","Mistrz Inżynier"],
+    ["Kowal run","Mistrz inżynier"],
     ["Strzelec","Górnik"]
   ],
   "Kult Pogromców z Karak Kadrin": [
-    ["Kowal Run","Mistrz Inżynier"]
+    ["Kowal run","Mistrz inżynier"]
   ],
-  "Kompania Krasnoludzkich Piwowarów": [
-    ["Kowal Run","Mistrz Inżynier"],
-    ["Pogromca Trolli","Krasnoludzki Przepatrywacz"],
+  "Kompania krasnoludzkich Piwowarów": [
+    ["Kowal run","Mistrz inżynier"],
+    ["Pogromca trolli","Krasnoludzki przepatrywacz"],
     ["Zaprzęg","Powóz piwny"]
   ],
   "Szkutnicy z Barak Varr": [
-    ["Kowal Run","Mistrz Inżynier"],
+    ["Kowal run","Mistrz inżynier"],
     ["Ogr","Ptasznik z Barak Varr"],
     ["Balon bojowy","Żyrokopter"]
   ],
-  "Jeźdzcy Wilków": [
+  "Jeźdźcy Wilków": [
     ["Więźniarka","Rydwan"]
   ],
   "Zwiadowcza kompania z Królestw Ogrów": [
-    ["Ogniobrzuchy","Rzeźnik"],
+    ["Ogniobrzuchy (ogr)","Rzeźnik (ogr)"],
     ["Gorger","Yeti"]
   ],
   "Kult Ducha Chaosu": [
@@ -125,18 +125,18 @@ export const armyChoices = {
   "Grasanci Chaosu": [
     ["Odrzucony","Zwierzoczłek"],
     ["Kawalerzysta Chaosu","Ogar Chaosu"],
-    ["Ogr Chaosu","Smoczy Ogr","Troll Chaosu"],
-    ["Więźniarka","Rydwan Chaosu"]
+    ["Ogr Chaosu","Smoczy ogr","Troll Chaosu"],
+    ["Więźniarka","Rydwan"]
   ],
   "Karnawał Chaosu": [
     ["Harlekin","Mocarz"],
-    ["Furia Chaosu","Piekielny Ogar","Nurglingi","Bólożądna Pieszczota","Różowy Strachulec"],
+    ["Furia Chaosu","Piekielny ogar","Nurgling","Bólożądna pieszczota","Różowy strachulec"],
     ["Tyralier","Ogar Chaosu"]
   ],
   "Zbrojne stado Zwierzoludzi": [
     ["Grabieżcy","Harpia"]
   ],
-  "Nieumarła świta Hrabiego Von Carstein": [
+  "Nieumarła świta hrabiego von Carstein": [
     ["Graveir","Mroczny wilk"],
     ["Czarna Karoca","Ścierwowóz"]
   ],
@@ -144,28 +144,28 @@ export const armyChoices = {
     ["Gnilec","Graveir"],
     ["Czarna Karoca","Ścierwowóz"]
   ],
-  "Nieumarły poczet Krwawych Smoków": [
+  "Nieumarły poczet Krwawego Smoka": [
     ["Ghoul","Wicht"],
-    ["Czarny Rycerz","Graveir"],
+    ["Czarny rycerz","Graveir"],
     ["Rydwan","Ścierwowóz"]
   ],
   "Nieumarły sabat rodu Nekrarch": [
     ["Ghoul","Wicht"],
     ["Graveir","Rój nietoperzy"],
-    ["Czarna Karoca","Ścierwowóz"]
+    ["Czarna karoca","Ścierwowóz"]
   ],
   "Nieumarły tabor ludu Strigosu": [
     ["Graveir","Stregoica"],
-    ["Czarna Karoca","Ścierwowóz"]
+    ["Czarna karoca","Ścierwowóz"]
   ],
   "Nieumarła horda Liczmistrza": [
     ["Ghoul","Wicht"],
-    ["Czarny Rycerz","Graveir","Mroczny wilk","Rój nietoperzy"],
+    ["Czarny rycerz","Graveir","Mroczny wilk","Rój nietoperzy"],
     ["Rydwan","Ścierwowóz"]
   ],
   "Nieumarły zastęp z Nehekhary": [
-    ["Nieumarły rój","Nieumarły Nomada"],
-    ["Gnilec","Ushabti","Grobowy Skorpion"]
+    ["Nieumarły rój","Nieumarły nomada"],
+    ["Gnilec","Ushabti","Grobowy skorpion"]
   ],
   "Zwiadowcze stado klanu Eshin": [
     ["Rydwan","Więźniarka"]
@@ -174,48 +174,48 @@ export const armyChoices = {
     ["Ambulatorium","Więźniarka"]
   ],
   "Kult Zarazy klanu Pestilens": [
-    ["Szczur Zarazy","Czerw Zarazy"],
+    ["Szczur zarazy","Czerw zarazy"],
     ["Zarazowóz","Więźniarka"]
   ],
   "Harcownicy klanu Skryre": [
-    ["Koło Zagłady","Więźniarka"]
+    ["Koło zagłady","Więźniarka"]
   ],
   "Zbrojne stado klanu Mors": [
     ["Wóz bojowy","Więźniarka"]
   ],
   "Łowcze plemię Dzikich Orków": [
-    ["Dziki Ork na Dziku","Troll","Wielki Pajonk"]
+    ["Dziki ork na dziku","Troll","Wielki Pajonk"]
   ],
   "Plemię Leśnych Goblinów": [
-    ["Troll","Wielki Pajonk"]
+    ["Troll","Wielki pajonk"]
   ],
   "Orkowie & Gobliny": [
-    ["Ork na Dziku","Troll"]
+    ["Ork na dziku","Troll"]
   ],
   "Nocne Gobliny": [
-    ["Troll","Wielki Squig"],
+    ["Troll","Wielki squig"],
     ["Rydwan","Więźniarka"]
   ],
   "Załoga Zielonoskórych Kaprów": [
     ["Squig","Kaper"],
-    ["Troll","Ośmiornica Bagienna"],
+    ["Troll","Ośmiornica bagienna"],
     ["Więźniarka","Rydwan"]
   ],
   "Jaszczuroludzie z Lustrii": [
-    ["Jeździec Zimnokrwistych","Jeździec Terradonów"],
+    ["Jeździec zimnokrwistych","Jeździec terradonów"],
     ["Salamandra","Kroxigor"],
     ["Wóz bojowy","Rydwan"]
   ],
   "Kult Sybarytów": [
-    ["Bólożądna Pieszczota","Slaangor"]
+    ["Bólożądna pieszczota","Slaangor"]
   ],
   "Kult Karmazynowej Czaszki": [
-    ["Piekielny Ogar","Khorngor"],
+    ["Piekielny ogar","Khorngor"],
     ["Ogr Chaosu","Troll Chaosu"]
   ],
   "Kult Purpurowej Dłoni": [
-    ["Tzaangor","Różowy Strachulec"],
-    ["Smoczy Ogr","Troll Chaosu"]
+    ["Tzaangor","Różowy strachulec"],
+    ["Smoczy ogr","Troll Chaosu"]
   ],
   "Bractwo Rycerskie": [
     ["Kapłan Mananna","Kapłan Morra","Kapłan Myrmidii","Kapłan Ranalda","Kapłan Ulryka","Kapłan Ursuna","Prezbiter Sigmara"],

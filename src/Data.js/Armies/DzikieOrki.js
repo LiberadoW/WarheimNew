@@ -25,7 +25,7 @@ export const dzikieOrki = {
       exp: 20,
       skills: [0, 3, 4, 5],
     },
-    "Szaman Dzikich Orków": {
+    "Szaman dzikich orków": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 60,
@@ -40,7 +40,7 @@ export const dzikieOrki = {
       exp: 10,
       skills: [0, 3, 4, 5],
     },
-    "Burszuj Dzikich Orków": {
+    "Burszuj dzikich orków": {
       id: 2,
       startingEquipment: [],
       cost: 55,
@@ -55,7 +55,7 @@ export const dzikieOrki = {
       exp: 8,
       skills: [0, 1, 3, 4, 5],
     },
-    "Dziki Ork": {
+    "Dziki ork": {
       id: 3,
       startingEquipment: ["Sztylet", "Rembak"],
       cost: 40,
@@ -87,7 +87,7 @@ export const dzikieOrki = {
         "Zabobonny lęk",
       ],
     },
-    "Leśny Goblin": {
+    "Leśny goblin": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
@@ -134,7 +134,7 @@ export const dzikieOrki = {
       },
       rules: ["Łuskowata skóra (5+)","Murołaz","Niezłomny","Oplątanie","Rozmiar rzondzi","Saper","Zwierzę"],
     },
-    "Dziki Ork na Dziku": {
+    "Dziki ork na dziku": {
       id: 8,
       startingEquipment: ["Sztylet", "Rembak", "Dzik", "Siodło & uprząż"],
       cost: 80,

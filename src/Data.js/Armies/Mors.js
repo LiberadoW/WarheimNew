@@ -17,7 +17,7 @@ export const mors = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szary Prorok": {
+    "Szary prorok": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,

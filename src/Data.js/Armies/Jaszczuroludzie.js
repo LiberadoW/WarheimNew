@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const jaszczuroludzie = {
   heroes: {
-    "Wódz Skinków": {
+    "Wódz skinków": {
       id: 0,
       startingEquipment: ["Sztylet", "Dmuchawka"],
       cost: 60,
@@ -24,7 +24,7 @@ export const jaszczuroludzie = {
       exp: 20,
       skills: [0, 1, 2, 4, 5],
     },
-    "Kapłan Skinków": {
+    "Kapłan skinków": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 45,
@@ -91,7 +91,7 @@ export const jaszczuroludzie = {
         "Zimnokrwisty",
       ],
     },
-    "Skink Kameleon": {
+    "Skink kameleon": {
       id: 4,
       startingEquipment: ["Sztylet", "Dmuchawka"],
       cost: 40,
@@ -115,7 +115,7 @@ export const jaszczuroludzie = {
         "Zimnokrwisty",
       ],
     },
-    "Jeździec Zimnokrwistych": {
+    "Jeździec zimnokrwistych": {
       id: 5,
       startingEquipment: [
         "Sztylet",
@@ -143,7 +143,7 @@ export const jaszczuroludzie = {
         "Zimnokrwisty",
       ],
     },
-    "Jeździec Terradonów": {
+    "Jeździec terradonów": {
       id: 6,
       startingEquipment: ["Sztylet", "Oszczep", "Terradon", "Siodło & uprząż"],
       cost: 80,

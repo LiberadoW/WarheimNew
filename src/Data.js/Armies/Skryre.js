@@ -140,7 +140,7 @@ export const skryre = {
       },
       rules: ["Bycza szarża","Duży cel","Głód trzewi","Konstrukt","Łuskowata skóra (4+)","Murołaz","Niezłomny","Nieświadomy","Przepastne trzewia","Strach","Wielkolud","Zbrojne ramię"],
     },
-    "Koło Zagłady": {
+    "Koło zagłady": {
       id: 9,
       startingEquipment: [],
       cost: 150,

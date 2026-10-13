@@ -190,7 +190,7 @@ export const nekrarcha = {
         "Zwierzę",
       ],
     },
-    "Czarna Karoca": {
+    "Czarna karoca": {
       id: 10,
       startingEquipment: [],
       cost: 200,
@@ -198,7 +198,7 @@ export const nekrarcha = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        "Czarna Karoca": ["-","-","-",4,8,4,"-","-","-"],
+        "Czarna Karoca": ["-","-","-",4,8,8,"-","-","-"],
         "Nieumarły koń": [8,2,0,3,"-","-",2,1,4],
         "Nieumarły koń  ": [8,2,0,3,"-","-",2,1,4]
       },
@@ -212,7 +212,7 @@ export const nekrarcha = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        "Ścierwowóz": ["-","-","-",5,5,4,"-","-","-"],
+        "Ścierwowóz": ["-","-","-",5,5,8,"-","-","-"],
         "Nieumarły koń": [8,2,0,3,"-","-",2,1,4],
         "Nieumarły koń  ": [8,2,0,3,"-","-",2,1,4]
       },

@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const nehekhara = {
   heroes: {
-    "Książe Grobowców": {
+    "Książe grobowców": {
       id: 0,
       startingEquipment: ["Sztylet", "Chopesz"],
       cost: 80,
@@ -90,7 +90,7 @@ export const nehekhara = {
         "Strzały Asaph",
       ],
     },
-    "Strażnik Grobowców": {
+    "Strażnik grobowców": {
       id: 5,
       startingEquipment: ["Chopesz", "Średni", "Tarcza"],
       cost: 50,
@@ -123,7 +123,7 @@ export const nehekhara = {
         "Trudny do zabicia",
       ],
     },
-    "Nieumarły Nomada": {
+    "Nieumarły nomada": {
       id: 7,
       startingEquipment: [
         "Włócznia",
@@ -186,7 +186,7 @@ export const nehekhara = {
         "Wielkolud",
       ],
     },
-    "Grobowy Skorpion": {
+    "Grobowy skorpion": {
       id: 10,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 250,

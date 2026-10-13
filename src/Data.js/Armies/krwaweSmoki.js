@@ -2,13 +2,13 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const krwaweSmoki = {
   heroes: {
-    "Krwawy Smok": {
+    "Krwawy smok": {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 100,
       number: 1,
       equipmentList:
-        heroEquipment["Nieumarły poczet Krwawych Smoków"].Bohaterowie,
+        heroEquipment["Nieumarły poczet Krwawego Smoka"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [5, 6, 4, 4, 4, 2, 6, 1, 8],
@@ -35,7 +35,7 @@ export const krwaweSmoki = {
       cost: 45,
       number: 1,
       equipmentList:
-        heroEquipment["Nieumarły poczet Krwawych Smoków"].Bohaterowie,
+        heroEquipment["Nieumarły poczet Krwawego Smoka"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -51,7 +51,7 @@ export const krwaweSmoki = {
       cost: 50,
       number: 1,
       equipmentList:
-        heroEquipment["Nieumarły poczet Krwawych Smoków"].Bohaterowie,
+        heroEquipment["Nieumarły poczet Krwawego Smoka"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 4, 3, 1, 3, 1, 7],
@@ -61,13 +61,13 @@ export const krwaweSmoki = {
       exp: 8,
       skills: [0, 3, 4, 5],
     },
-    Dreg: {
+    "Giermek": {
       id: 3,
       startingEquipment: ["Sztylet"],
       cost: 15,
       number: 2,
       equipmentList:
-        heroEquipment["Nieumarły poczet Krwawych Smoków"].Bohaterowie,
+        heroEquipment["Nieumarły poczet Krwawego Smoka"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 2, 2, 3, 3, 1, 3, 1, 6],
@@ -83,7 +83,7 @@ export const krwaweSmoki = {
       cost: 15,
       number: 15,
       equipmentList:
-        heroEquipment["Nieumarły poczet Krwawych Smoków"].Stronnicy,
+        heroEquipment["Nieumarły poczet Krwawego Smoka"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 2, 2, 3, 3, 1, 2, 1, 3],
@@ -117,7 +117,7 @@ export const krwaweSmoki = {
       cost: 50,
       number: 3,
       equipmentList:
-        heroEquipment["Nieumarły poczet Krwawych Smoków"].Stronnicy,
+        heroEquipment["Nieumarły poczet Krwawego Smoka"].Stronnicy,
       type: "Stronnik",
       stats: {
         "Początkowa": [4,3,3,3,4,1,3,1,8],
@@ -144,7 +144,7 @@ export const krwaweSmoki = {
         "Uderza jako ostatni",
       ],
     },
-    "Czarny Rycerz": {
+    "Czarny rycerz": {
       id: 8,
       startingEquipment: [
         "Miecz",
@@ -154,7 +154,7 @@ export const krwaweSmoki = {
       ],
       cost: 80,
       number: 3,
-      equipmentList: heroEquipment["Nieumarły poczet Krwawych Smoków"].Rycerz,
+      equipmentList: heroEquipment["Nieumarły poczet Krwawego Smoka"].Rycerz,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
@@ -215,7 +215,7 @@ export const krwaweSmoki = {
   limit: 500,
   minModels: 3,
   maxModels: 15,
-  name: "Nieumarły poczet Krwawych Smoków",
+  name: "Nieumarły poczet Krwawego Smoka",
   nature: "Praworządna",
   armyRules: ["Kontrolowanie ożywieńców", "Podatek", "Rozrzutność"],
   mercenaries: [

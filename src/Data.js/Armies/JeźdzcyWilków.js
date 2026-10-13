@@ -2,12 +2,12 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const jeźdzcyWilków = {
   heroes: {
-    "Herszt Hobgoblinów": {
+    "Herszt hobgoblinów": {
       id: 0,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 55,
       number: 1,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
+      equipmentList: heroEquipment["Jeźdźcy Wilków"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 4, 3, 3, 2, 5, 1, 7],
@@ -17,12 +17,12 @@ export const jeźdzcyWilków = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szaman Hobgoblinów": {
+    "Szaman hobgoblinów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 40,
       number: 1,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
+      equipmentList: heroEquipment["Jeźdźcy Wilków"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 6],
@@ -37,12 +37,12 @@ export const jeźdzcyWilków = {
       exp: 10,
       skills: [0, 1, 4, 5],
     },
-    "Siepacz Hobgoblinów": {
+    "Siepacz hobgoblinów": {
       id: 2,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 30,
       number: 1,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
+      equipmentList: heroEquipment["Jeźdźcy Wilków"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 3, 3, 1, 4, 1, 6],
@@ -57,7 +57,7 @@ export const jeźdzcyWilków = {
       startingEquipment: ["Sztylet", "Łapacz"],
       cost: 30,
       number: 1,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Bohaterowie,
+      equipmentList: heroEquipment["Jeźdźcy Wilków"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 6],
@@ -85,7 +85,7 @@ export const jeźdzcyWilków = {
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 20,
       number: 15,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Hobgoblin,
+      equipmentList: heroEquipment["Jeźdźcy Wilków"].Hobgoblin,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 6],
@@ -109,7 +109,7 @@ export const jeźdzcyWilków = {
       ],
       cost: 70,
       number: 3,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Stronnicy,
+      equipmentList: heroEquipment["Jeźdźcy Wilków"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 6],
@@ -185,7 +185,7 @@ export const jeźdzcyWilków = {
   limit: 500,
   minModels: 3,
   maxModels: 15,
-  name: "Jeźdzcy Wilków",
+  name: "Jeźdźcy Wilków",
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: [

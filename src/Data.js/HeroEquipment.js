@@ -84,7 +84,7 @@ export const heroEquipment = {
       Średni: [30, 2, "Zbroja"],
     },
   },
-  "Łowcy Czarownic": {
+  "Łowcy czarownic": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -1598,7 +1598,7 @@ export const heroEquipment = {
           "Saearath": [15,0],
     },
   },
-  "Elfowie Wysokiego Rodu z Ulthuan": {
+  "Elfowie Wysokiego Rodu z Ulthuanu": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       Halabarda: [10, 0],
@@ -1799,7 +1799,7 @@ export const heroEquipment = {
       "Topór krasnoludów": [10, 0],
     },
   },
-  "Kompania Krasnoludzkich Piwowarów": {
+  "Kompania krasnoludzkich Piwowarów": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -2054,7 +2054,7 @@ export const heroEquipment = {
       Hełm: [5, 2],
     },
   },
-  "Jeźdzcy Wilków": {
+  "Jeźdźcy Wilków": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       Bicz: [15, 0],
@@ -2673,7 +2673,7 @@ export const heroEquipment = {
           "Cep bojowy": [10,0],
     },
   },
-  "Nieumarła świta Hrabiego Von Carstein": {
+  "Nieumarła świta hrabiego von Carstein": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -2750,7 +2750,7 @@ export const heroEquipment = {
       Hełm: [5, 2],
     },
   },
-  "Nieumarły poczet Krwawych Smoków": {
+  "Nieumarły poczet Krwawego Smoka": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],

@@ -161,7 +161,7 @@ export const strigos = {
         "Wielkolud",
       ],
     },
-    "Czarna Karoca": {
+    "Czarna karoca": {
       id: 9,
       startingEquipment: [],
       cost: 200,

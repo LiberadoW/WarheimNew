@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const zwierzoludzie = {
   heroes: {
-    "Herszt Zwierzoludzi": {
+    "Herszt zwierzoludzi": {
       id: 0,
       startingEquipment: ["Sztylet", "Broń wielka"],
       cost: 80,
@@ -23,7 +23,7 @@ export const zwierzoludzie = {
       exp: 20,
       skills: [0, 3, 4, 5],
     },
-    "Szaman Zwierzoludzi": {
+    "Szaman zwierzoludzi": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur Rykowca"],
       cost: 55,
