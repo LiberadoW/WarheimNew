@@ -173,7 +173,7 @@ export const szkutnicy = {
       startingEquipment: ["Maczuga ogrów"],
       cost: 160,
       number: 1,
-      equipmentList: heroEquipment["Szkutnicy z Barak Varr"].Ogr,
+      equipmentList: heroEquipment["Gang przemytników"]["Ogr"],
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],
@@ -221,7 +221,7 @@ export const szkutnicy = {
       startingEquipment: [],
       cost: 150,
       number: 1,
-      equipmentList: [],
+      equipmentList: {},
       type: "Machina",
       stats: {
         Początkowa: [2, "-", "-", 4, 5, 5, "-", "-", "-"],
@@ -245,7 +245,7 @@ export const szkutnicy = {
       startingEquipment: [],
       cost: 175,
       number: 1,
-      equipmentList: [],
+      equipmentList: {},
       type: "Machina",
       stats: {
         Początkowa: [2, "-", "-", 4, 5, 5, "-", "-", "-"],

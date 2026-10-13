@@ -98,7 +98,7 @@ export const muszkieterzyNuln = {
       startingEquipment: ["Sztylet"],
       cost: 20,
       number: 99,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Stronnicy,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -111,7 +111,7 @@ export const muszkieterzyNuln = {
       startingEquipment: ["Sztylet", "Muszkiet"],
       cost: 30,
       number: 7,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Stronnicy,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -124,7 +124,7 @@ export const muszkieterzyNuln = {
       startingEquipment: ["Sztylet", "Halabarda"],
       cost: 35,
       number: 5,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Stronnicy,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 4, 3, 3, 3, 1, 3, 1, 7],
@@ -157,7 +157,7 @@ export const muszkieterzyNuln = {
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 45,
       number: 3,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Ranger,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Ranger"],
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 9],

@@ -192,9 +192,9 @@ export const reikland = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Rydwan": ["-","-","-",5,5,4,"-","-","-"],
+        "Koń": [8,3,0,3,"-","-",3,1,5],
+        "Koń ": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Duży cel", "Machina wojenna", "Rydwan"],
     },

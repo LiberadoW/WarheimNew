@@ -161,9 +161,9 @@ export const nocneGobliny = {
       equipmentList: heroEquipment["Nocne Gobliny"].Hop,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 2, 3, 3, 3, 1, 3, 1, 5],
-        Maksymalna: [5, 5, 6, 3, 4, 3, 6, 4, 7],
-        "Jaskiniowy squig": ["3K6", 4, 0, 5, 3, 1, 3, 2, 3],
+        "Początkowa": [4,2,3,3,3,1,3,1,5],
+        "Maksymalna": [5,5,6,3,4,3,6,4,7],
+        "Jaskiniowy squig": ["3K6",4,0,5,"-","-",3,2,3]
       },
       rules: [
         "Animozja",
@@ -190,23 +190,11 @@ export const nocneGobliny = {
         Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
         Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Głupota",
-        "Nieświadomy",
-        "Niezłomny",
-        "Przepastne trzewia",
-        "Regeneracja",
-        "Strach",
-        "Wielkolud",
-        "Żrąca plwocina",
-      ],
+      rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
     "Wielki Squig": {
       id: 11,
-      startingEquipment: ["Broń naturalna (druzgoczący)"],
+      startingEquipment: ["Broń naturalna (zabójczy cios)"],
       cost: 180,
       number: 1,
       equipmentList: {},
@@ -233,9 +221,9 @@ export const nocneGobliny = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
-        "Jaskiniowy squig": ["3K6", 4, 0, 5, 3, 1, 3, 2, 3],
-        "Jaskiniowy squig ": ["3K6", 4, 0, 5, 3, 1, 3, 2, 3],
+        "Rydwan": ["-","-","-",5,5,8,"-","-","-"],
+        "Jaskiniowy squig": ["3K6",4,0,5,"-","-",3,2,3],
+        "Jaskiniowy squig ": ["3K6",4,0,5,"-","-",3,2,3]
       },
       rules: ["Duży cel", "Machina wojenna", "Rydwan"],
     },
@@ -247,9 +235,9 @@ export const nocneGobliny = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        "Jaskiniowy squig": ["3K6", 4, 0, 5, 3, 1, 3, 2, 3],
-        "Jaskiniowy squig ": ["3K6", 4, 0, 5, 3, 1, 3, 2, 3],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Jaskiniowy squig": ["3K6",4,0,5,"-","-",3,2,3],
+        "Jaskiniowy squig ": ["3K6",4,0,5,"-","-",3,2,3]
       },
       rules: ["Duży cel", "Machina wojenna", "Powóz", "Więźniarka"],
     },

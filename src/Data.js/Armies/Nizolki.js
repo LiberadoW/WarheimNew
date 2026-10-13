@@ -7,7 +7,7 @@ export const nizolki = {
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 45,
       number: 1,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Bohaterowie,
+      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [3, 3, 4, 3, 2, 2, 5, 1, 9],
@@ -45,7 +45,7 @@ export const nizolki = {
       startingEquipment: ["Sztylet", "Halabarda"],
       cost: 25,
       number: 1,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Bohaterowie,
+      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [3, 3, 4, 2, 2, 1, 4, 1, 8],
@@ -66,7 +66,7 @@ export const nizolki = {
       startingEquipment: ["Sztylet", "Kusza"],
       cost: 20,
       number: 2,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Bohaterowie,
+      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [3, 2, 4, 2, 2, 1, 4, 1, 8],
@@ -89,7 +89,7 @@ export const nizolki = {
       startingEquipment: ["Sztylet"],
       cost: 20,
       number: 15,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Stronnicy,
+      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [3, 2, 4, 2, 2, 1, 4, 1, 8],
@@ -112,7 +112,7 @@ export const nizolki = {
       startingEquipment: ["Sztylet", "Halabarda"],
       cost: 20,
       number: 5,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Stronnicy,
+      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [3, 3, 4, 2, 2, 1, 4, 1, 8],
@@ -151,7 +151,7 @@ export const nizolki = {
       ],
       cost: 70,
       number: 3,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Stronnicy,
+      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [3, 2, 4, 2, 2, 1, 4, 1, 8],
@@ -174,7 +174,7 @@ export const nizolki = {
       startingEquipment: ["Maczuga ogrów"],
       cost: 160,
       number: 1,
-      equipmentList: heroEquipment["Nizołki z Krainy Zgromadzenia"].Ogr,
+      equipmentList: heroEquipment["Gang przemytników"]["Ogr"],
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],

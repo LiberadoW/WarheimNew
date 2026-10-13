@@ -83,8 +83,8 @@ export const grasanciChaosu = {
       equipmentList: heroEquipment["Grasanci Chaosu"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 4, 3, 3, 4, 1, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,4,3,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Berserk", "Chorążowie & sygnaliści"],
     },
@@ -96,8 +96,8 @@ export const grasanciChaosu = {
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 4, 0, 4, 4, 1, 4, "K3", 10],
-        Maksymalna: [5, 6, 0, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,4,0,4,4,1,4,"+K3",10],
+        "Maksymalna": [5,6,0,4,4,3,6,4,9]
       },
       rules: [
         "Berserk",
@@ -116,20 +116,14 @@ export const grasanciChaosu = {
       equipmentList: heroEquipment["Grasanci Chaosu"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [5, 4, 3, 4, 4, 1, 3, 1, 7],
-        Maksymalna: [5, 4, 3, 4, 4, 1, 3, 1, 7],
+        "Początkowa": [5,4,3,4,4,1,3,1,7],
+        "Maksymalna": [6,7,6,4,5,4,6,4,9]
       },
       rules: ["Nienawiść", "Ranger", "Stygmat Chaosu"],
     },
     "Kawalerzysta Chaosu": {
       id: 8,
-      startingEquipment: [
-        "Sztylet",
-        "Topór bojowy/Nadziak",
-        "Oszczep",
-        "Koń bojowy",
-        "Siodło & uprząż",
-      ],
+      startingEquipment: ["Sztylet","Topór bojowy/Nadziak","Oszczep","Rumak chaosu","Siodło & uprząż"],
       cost: 80,
       number: 3,
       equipmentList: heroEquipment["Grasanci Chaosu"].Stronnicy,
@@ -216,8 +210,8 @@ export const grasanciChaosu = {
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
-        Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
+        "Początkowa": [6,3,1,5,4,3,1,3,4],
+        "Maksymalna": [6,3,1,5,4,3,1,4,4]
       },
       rules: [
         "Bycza szarża",
@@ -269,6 +263,6 @@ export const grasanciChaosu = {
   maxModels: 12,
   name: "Grasanci Chaosu",
   nature: "Chaotyczna",
-  armyRules: ["Oko Chaosu", "Rozrzutność", "Znak Chaosu"],
+  armyRules: ["Niewolnicy ciemności","Oko Chaosu","Podatek","Rozrzutność","Znak Chaosu"],
   mercenaries: [],
 };

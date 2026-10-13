@@ -133,7 +133,7 @@ export const raubritterzy = {
       cost: 70,
       number: 3,
       equipmentList:
-        heroEquipment["Raubritterzy z Księstw Granicznych"].Rozbójnik,
+        heroEquipment["Gang przemytników"]["Rozbójnik"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],

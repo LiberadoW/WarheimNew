@@ -34,12 +34,7 @@ export const nehekhara = {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
         Maksymalna: [5, 7, 6, 4, 5, 3, 6, 4, 10],
       },
-      rules: [
-        "Animacja",
-        "Łatwopalny",
-        "Mag (Dziedzina Nehekhary albo Tradycja Śmierci albo Tradycja Światła)",
-        "Nieumarły",
-      ],
+      rules: ["Animacja","Łatwopalny","Mag (Domena Nehekhary albo Tradycja Śmierci albo Tradycja Światła)","Nieumarły"],
       exp: 8,
       skills: [0, 2, 5],
     },

@@ -43,18 +43,7 @@ export const piwowarzy = {
         Początkowa: [3, 4, 4, 3, 4, 1, 2, 1, 9],
         Maksymalna: [4, 7, 6, 4, 5, 3, 5, 4, 10],
       },
-      rules: [
-        "Kowal Run",
-        "Krzepki",
-        "Nieustępliwy",
-        "Odporność na magię (2)",
-        "Rankor",
-        "Rozproszenie magii (1)",
-        "Trudny do zabicia",
-        "Uporczywość",
-        "Wspinaczka",
-        "Zabobonny lęk",
-      ],
+      rules: ["Błogosławieństwo Valayi","Kowal Run","Krzepki","Nieustępliwy","Odporność na magię (2)","Rankor","Rozproszenie magii (1)","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk"],
       exp: 12,
       skills: [0, 2, 3, 5],
     },
@@ -142,7 +131,7 @@ export const piwowarzy = {
     },
     "Krasnoludzki Ranger": {
       id: 5,
-      startingEquipment: ["Sztylet", "Topór kransoludów"],
+      startingEquipment: ["Sztylet","Topór krasnoludów"],
       cost: 45,
       number: 5,
       equipmentList:
@@ -237,9 +226,9 @@ export const piwowarzy = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Kuc": [6,2,0,4,"-","-",2,1,5],
+        "Kuc ": [6,2,0,4,"-","-",2,1,5]
       },
       rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },

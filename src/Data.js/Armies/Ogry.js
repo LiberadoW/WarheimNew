@@ -8,7 +8,7 @@ export const ogry = {
       cost: 160,
       number: 1,
       equipmentList:
-        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"].Bohaterowie,
+        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [6, 5, 4, 4, 4, 3, 4, 2, 9],
@@ -90,7 +90,7 @@ export const ogry = {
       cost: 140,
       number: 1,
       equipmentList:
-        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"].Bohaterowie,
+        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 8],
@@ -157,7 +157,7 @@ export const ogry = {
       cost: 140,
       number: 3,
       equipmentList:
-        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"].Stronnicy,
+        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],

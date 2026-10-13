@@ -41,11 +41,7 @@ export const middenheim = {
     },
     "Kapłan Ulryka": {
       id: 2,
-      startingEquipment: [
-        "Płaszcz z wilczej skóry",
-        "Sztylet",
-        "Topór bojowy/Nadziak",
-      ],
+      startingEquipment: ["Sztylet","Buława/Maczuga/Młot bojowy","Płaszcz z wilczej skóry"],
       cost: 35,
       number: 1,
       equipmentList: heroEquipment["Zbrojni z Middenheim"].Kapłan,
@@ -90,7 +86,7 @@ export const middenheim = {
         "Sztylet",
         "Buława/Maczuga/Młot bojowy",
       ],
-      cost: 30,
+      cost: 25,
       number: 1,
       equipmentList: heroEquipment["Zbrojni z Middenheim"].Bohaterowie,
       type: "Bohater",
@@ -168,9 +164,9 @@ export const middenheim = {
       equipmentList: heroEquipment["Zbrojni z Middenheim"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
-        "Koń bojowy": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Początkowa": [4,3,3,4,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9],
+        "Koń bojowy": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Kawalerzysta", "Lekka jazda", "Ranger", "Zwiadowca"],
     },

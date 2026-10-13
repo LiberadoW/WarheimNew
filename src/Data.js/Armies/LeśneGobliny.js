@@ -196,19 +196,7 @@ export const leśneGobliny = {
         Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
         Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Głupota",
-        "Nieświadomy",
-        "Niezłomny",
-        "Przepastne trzewia",
-        "Regeneracja",
-        "Strach",
-        "Wielkolud",
-        "Żrąca plwocina",
-      ],
+      rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
     "Wielki Pajonk": {
       id: 10,
@@ -255,5 +243,5 @@ export const leśneGobliny = {
   name: "Plemię Leśnych Goblinów",
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
-  mercenaries: ["Czarny Ork, Grzybowar", "Mekaniak"],
+  mercenaries: ["Czarny Ork","Grzybowar","Mekaniak"],
 };

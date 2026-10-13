@@ -120,8 +120,8 @@ export const krwaweSmoki = {
         heroEquipment["Nieumarły poczet Krwawych Smoków"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
-        Maksymalna: [5, 6, 0, 4, 4, 3, 6, 4, 8],
+        "Początkowa": [4,3,3,3,4,1,3,1,8],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Nieumarły", "Świadomy", "Zabójczy cios"],
     },
@@ -180,20 +180,7 @@ export const krwaweSmoki = {
         Początkowa: [6, 3, 0, 4, 4, 3, 2, 2, 6],
         Maksymalna: [6, 6, 0, 5, 5, 5, 6, 5, 8],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Ghast",
-        "Głód krwi",
-        "Łuskowata skóra (5+)",
-        "Murołaz",
-        "Ograniczony",
-        "Przepastne trzewia",
-        "Stan niższy",
-        "Strach",
-        "Wielkolud",
-        "Zabójczy cios",
-      ],
+      rules: ["Bycza szarża","Duży cel","Ghast","Głód krwi","Głód trzewi","Łuskowata skóra (5+)","Murołaz","Ograniczony","Przepastne trzewia","Stan niższy","Strach","Wielkolud","Zabójczy cios"],
     },
 
     Rydwan: {

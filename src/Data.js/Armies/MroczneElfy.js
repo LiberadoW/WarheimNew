@@ -134,21 +134,13 @@ export const mroczne = {
       startingEquipment: ["Sztylet", "Włócznia"],
       cost: 50,
       number: 3,
-      equipmentList: heroEquipment["Mroczni Elfowie z Naggaroth"].Stronnicy,
+      equipmentList: heroEquipment["Mroczni Elfowie z Naggaroth"]["Wiedźma"],
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 4, 3, 3, 1, 6, 1, 10],
         Maksymalna: [6, 7, 7, 4, 3, 3, 9, 4, 10],
       },
-      rules: [
-        "Fanatyk",
-        "Furia",
-        "Nienawiść",
-        "Ochronne tatuaże",
-        "Szósty zmysł",
-        "Zatruty atak",
-        "Żniwiarz",
-      ],
+      rules: ["Fanatyk","Furia","Głód krwi","Nienawiść","Ochronne tatuaże","Szósty zmysł","Zatruty atak","Żniwiarz"],
     },
     "Jeździec Mroku": {
       id: 8,
@@ -186,7 +178,7 @@ export const mroczne = {
         Początkowa: [4, 4, 0, 4, 3, 1, 4, 2, 6],
         Maksymalna: [4, 4, 0, 4, 3, 1, 4, 2, 6],
       },
-      rules: ["Głód krwi", "Nadrzewni drapieżcy", "Rozmiar rzondzi", "Zwierzę"],
+      rules: ["Głód krwi","Lot","Nadrzewni drapieżcy","Rozmiar rzondzi","Zwierzę"],
     },
     "Mroczny Pegaz": {
       id: 10,

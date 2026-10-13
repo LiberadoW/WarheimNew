@@ -88,8 +88,8 @@ export const karnawałChaosu = {
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 4, 0, 4, 3, 1, 4, 2, 6],
-        Maksymalna: [4, 4, 0, 4, 3, 1, 4, 2, 6],
+        "Początkowa": [4,4,0,4,3,1,4,2,6],
+        "Maksymalna": [4,4,0,4,3,4,4,2,6]
       },
       rules: ["Demon", "Głód krwi", "Lot"],
     },
@@ -127,7 +127,7 @@ export const karnawałChaosu = {
     },
     "Bólożądna Pieszczota": {
       id: 8,
-      startingEquipment: ["Broń naturalna (przebicie pancerza)"],
+      startingEquipment: ["Broń naturalna (szybki)"],
       cost: 45,
       number: 3,
       equipmentList: {},
@@ -163,21 +163,15 @@ export const karnawałChaosu = {
     },
     Tyralier: {
       id: 10,
-      startingEquipment: [
-        "Sztylet",
-        "Miecz",
-        "Łuk",
-        "Oszczep",
-        "Siodło & uprząż",
-      ],
+      startingEquipment: ["Sztylet","Miecz","Łuk","Rumak chaosu","Siodło & uprząż"],
       cost: 80,
       number: 3,
-      equipmentList: heroEquipment["Karnawał Chaosu"].Stronnicy,
+      equipmentList: heroEquipment["Karnawał Chaosu"]["Tyralier"],
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
-        "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Początkowa": [4,3,3,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9],
+        "Rumak Chaosu": [8,3,0,4,"-","-",3,1,5]
       },
       rules: [
         "Akrobata",
@@ -208,8 +202,8 @@ export const karnawałChaosu = {
       equipmentList: {},
       type: "Stronnik",
       stats: {
-        Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
-        Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
+        "Początkowa": [6,3,1,5,4,3,1,3,4],
+        "Maksymalna": [6,3,1,5,4,3,1,4,4]
       },
       rules: [
         "Bycza szarża",
@@ -235,10 +229,10 @@ export const karnawałChaosu = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Rumak Chaosu ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        Furman: ["-", 3, "-", 3, "-", "-", 4, 1, 7],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Rumak Chaosu": [8,3,0,4,"-","-",3,1,5],
+        "Rumak Chaosu ": [8,3,0,4,"-","-",3,1,5],
+        "Furman": ["-",3,"-",3,"-","-",4,1,7]
       },
       rules: [
         "Demon",

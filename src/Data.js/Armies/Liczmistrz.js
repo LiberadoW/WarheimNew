@@ -85,14 +85,7 @@ export const liczmistrz = {
         Początkowa: [4, 2, 2, 3, 3, 1, 2, 1, 3],
         Maksymalna: [4, 2, 2, 3, 3, 1, 2, 1, 3],
       },
-      rules: [
-        "Chorążowie & sygnaliści",
-        "Drużyna obsługi",
-        "Martwe zło",
-        "Nieśmiertelny",
-        "Nieumarły",
-        "Rozmiarz rzondzi",
-      ],
+      rules: ["Chorążowie & sygnaliści","Drużyna obsługi","Martwe zło","Nieśmiertelny","Nieumarły","Rozmiar rzondzi"],
     },
     Ghoul: {
       id: 5,
@@ -115,8 +108,8 @@ export const liczmistrz = {
       equipmentList: heroEquipment["Nieumarła horda Liczmistrza"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
-        Maksymalna: [5, 6, 0, 4, 4, 3, 6, 4, 8],
+        "Początkowa": [4,3,3,3,4,1,3,1,8],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Nieumarły", "Świadomy", "Zabójczy cios"],
     },

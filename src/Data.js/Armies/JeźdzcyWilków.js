@@ -136,7 +136,7 @@ export const jeźdzcyWilków = {
       startingEquipment: ["Maczuga ogrów"],
       cost: 160,
       number: 1,
-      equipmentList: heroEquipment["Jeźdzcy Wilków"].Ogr,
+      equipmentList: heroEquipment["Gang przemytników"]["Ogr"],
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],

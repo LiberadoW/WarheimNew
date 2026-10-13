@@ -91,7 +91,7 @@ export const łowcyCzarownic = {
     },
     "Pies bojowy": {
       id: 5,
-      startingEquipment: [],
+      startingEquipment: ["Broń naturalna"],
       cost: 15,
       number: 5,
       equipmentList: {},
@@ -129,9 +129,9 @@ export const łowcyCzarownic = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        Koń: [8, 3, 1, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 1, 3, "-", "-", 3, 1, 5],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Koń": [8,3,0,3,"-","-",3,1,5],
+        "Koń ": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Duży cel", "Machina wojenna", "Pokutnik", "Powóz", "Strach"],
       exp: 0,

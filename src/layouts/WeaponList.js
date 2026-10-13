@@ -167,6 +167,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
       disableButtons("Tarcza", index);
       disableButtons("Choice", index);
       disableButtons("Tradycja", index);
+      disableButtons("Dualizm", index);
     });
   });
 
@@ -285,12 +286,15 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
 
     const spellSchools = Object.fromEntries(
       Object.entries(unit.equipmentList).filter(
-        ([key]) => key.includes("Tradycja") || key.includes("Magia")
+        ([key, value]) => value[1] === 4
       )
     );
 
-    if (e.target.name.includes("Tradycja") || e.target.name.includes("Magia")) {
-      const mageEquipment = mageEquipmentList[e.target.name].equipment;
+    if (unit.equipmentList[e.target.name]?.[1] === 4) {
+      const mageEquipment = mageEquipmentList[e.target.name]?.equipment || {};
+      const usesLoreEquipment = !Object.values(heroes[unit.unitName]?.equipmentList || {}).some(
+        (value) => value[1] < 3
+      );
 
       const indexOfSpellSchool = unit.rules.findIndex(
         (el) => el.indexOf("Mag") !== -1
@@ -303,7 +307,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
       }
 
       if (e.target.checked === true) {
-        if (
+        if (usesLoreEquipment &&
           Object.values(unit.equipmentList).filter((x) => x.length === 2)
             .length === 0
         ) {
@@ -313,7 +317,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
         }
 
         if (unit.unitName !== "Panna Graala") {
-          if (heroes[unit.unitName].skills.length === 0) {
+          if (heroes[unit.unitName].skills?.length === 0 && mageEquipmentList[e.target.name]) {
             unit.skills = mageEquipmentList[e.target.name].skills;
           }
         } else {
@@ -324,18 +328,20 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
           (x) => Object.keys(mageEquipment).includes(x)
         );
 
-        if (
+        if (usesLoreEquipment && Object.keys(mageEquipment).length > 0 &&
           JSON.stringify(differentEquipmentNames) ==
           JSON.stringify(Object.keys(mageEquipment))
         ) {
           unit.equipmentList = spellSchools;
         }
 
-        unit.optionalEquipment = [];
-        unit.cost = heroes[unit.unitName].cost;
+        if (usesLoreEquipment) {
+          unit.optionalEquipment = [];
+          unit.cost = heroes[unit.unitName].cost;
+        }
 
         if (unit.unitName !== "Panna Graala") {
-          if (heroes[unit.unitName].skills.length === 0) {
+          if (heroes[unit.unitName].skills?.length === 0 && mageEquipmentList[e.target.name]) {
             unit.skills = [];
           }
         } else {
@@ -350,11 +356,11 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
       }
     }
 
-    if (e.target.name === "Rumak") {
+    if (e.target.name === "Rumak" || e.target.name === "Koń bojowy") {
       if (e.target.checked === true) {
-        unit.stats["Rumak"] = [8, 3, 0, 3, "-", "-", 3, 1, 5];
+        unit.stats[e.target.name] = [8, 3, 0, 3, "-", "-", 3, 1, 5];
       } else {
-        delete unit.stats["Rumak"];
+        delete unit.stats[e.target.name];
       }
     }
 
@@ -416,6 +422,10 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
       ).length;
       unit.totalCost =
         unit.cost * unit.selectedNumber + howManyCommandChecked * 20;
+    } else if (heroes[unit.unitName]?.crewBaseCost) {
+      const sharedWeaponCost = unit.optionalEquipment.reduce((sum, name) =>
+        sum + (["Harpun", "Ołowiomiotacz"].includes(name) ? unit.equipmentList[name][0] : 0), 0);
+      unit.totalCost = unit.cost * unit.selectedNumber - heroes[unit.unitName].crewBaseCost - sharedWeaponCost;
     } else if (unitList[id].unitName === "Duże Dźgacze") {
       unit.totalCost = unit.cost * unit.selectedNumber - 100;
     } else if (

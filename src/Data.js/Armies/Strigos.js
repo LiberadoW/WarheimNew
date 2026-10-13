@@ -56,7 +56,7 @@ export const strigos = {
       },
       rules: ["Ghast", "Głód krwi", "Murołaz", "Strach", "Żywa tarcza"],
       exp: 8,
-      skills: [0, 1, 4, 5],
+      skills: [0,3,4,5],
     },
     Strigan: {
       id: 3,
@@ -70,7 +70,7 @@ export const strigos = {
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: ["Tarot", "Żywa tarcza"],
-      exp: 8,
+      exp: 0,
       skills: [0, 1, 4, 5],
     },
     Szkielet: {
@@ -136,21 +136,7 @@ export const strigos = {
         Początkowa: [6, 3, 0, 4, 4, 3, 2, 2, 6],
         Maksymalna: [6, 6, 0, 5, 5, 5, 6, 5, 8],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Ghast",
-        "Głód krwi",
-        "Łuskowata skóra (5+)",
-        "Murołaz",
-        "Ograniczony",
-        "Przepastne trzewia",
-        "Stan niższy",
-        "Strach",
-
-        "Wielkolud",
-        "Zabójczy cios",
-      ],
+      rules: ["Bycza szarża","Duży cel","Ghast","Głód krwi","Głód trzewi","Łuskowata skóra (5+)","Murołaz","Ograniczony","Przepastne trzewia","Stan niższy","Strach","Wielkolud","Zabójczy cios"],
     },
     Stregoica: {
       id: 8,

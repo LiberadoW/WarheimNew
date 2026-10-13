@@ -122,7 +122,7 @@ export const ostland = {
     Myśliwy: {
       id: 7,
       startingEquipment: ["Sztylet", "Łuk"],
-      cost: 25,
+      cost: 20,
       number: 7,
       equipmentList: heroEquipment["Zbrojna kompania z Ostlandu"].Stronnicy,
       type: "Stronnik",

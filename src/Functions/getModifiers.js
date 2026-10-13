@@ -21,6 +21,8 @@ export const getModifiers = (arr, unit) => {
     armour -= 1;
   }
 
+  if (arr.includes("Kropierz") && unit.rules.includes("Potwór")) armour -= 2;
+
   if (unit.rules.includes("Żelazoskóry")) {
     armour -= 1;
   }

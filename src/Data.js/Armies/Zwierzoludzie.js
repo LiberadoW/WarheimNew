@@ -102,7 +102,7 @@ export const zwierzoludzie = {
     },
     Grabieżcy: {
       id: 5,
-      startingEquipment: ["Sztylet", "Krótki łuk"],
+      startingEquipment: ["Sztylet","Łuk krótki"],
       cost: 25,
       number: 5,
       equipmentList: heroEquipment["Zbrojne stado Zwierzoludzi"].Ungor,

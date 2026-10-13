@@ -79,20 +79,16 @@ export const sybaryci = {
     },
     "Bólożądna Pieszczota": {
       id: 4,
-      startingEquipment: ["Broń naturalna (przebicie pancerza)"],
+      startingEquipment: ["Broń naturalna (szybki)"],
       cost: 45,
-      number: 5,
+      number: 3,
       equipmentList: {},
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 0, 4, 3, 1, 5, 3, 8],
         Maksymalna: [5, 4, 0, 4, 3, 1, 5, 3, 8],
       },
-      rules: [
-        "Demon",
-        "Niepokojący",
-        "Stygmaty Slaneesha (ogon skorpiona, ponętny, szczypce)",
-      ],
+      rules: ["Demon","Niepokojący","Stygmaty Slaanesha (ogon skorpiona, ponętny, szczypce)"],
     },
     Slaangor: {
       id: 5,
@@ -138,9 +134,9 @@ export const sybaryci = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Rumak Chaosu ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Rumak Chaosu": [8,3,0,4,"-","-",3,1,5],
+        "Rumak Chaosu ": [8,3,0,4,"-","-",3,1,5]
       },
       rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },
@@ -150,14 +146,7 @@ export const sybaryci = {
   maxModels: 12,
   name: "Kult Sybarytów",
   nature: "Chaotyczna",
-  armyRules: [
-    "Kontakty handlowe (1)",
-    "Niewolnicy ciemności",
-    "Oko Chaosu",
-    "Rozrzutność",
-    "Zamożność",
-    "Znak Chaosu (Wyznawcy Slaneesha)",
-  ],
+  armyRules: ["Kontakty handlowe (1)","Niewolnicy ciemności","Oko Chaosu","Rozrzutność","Zamożność","Znak chaosu (wyznawcy slaanesha)"],
   mercenaries: [
     "Gladiator",
     "Poszukiwacz złota",

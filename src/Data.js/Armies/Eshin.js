@@ -114,7 +114,7 @@ export const eshin = {
         Początkowa: [6, 4, 3, 3, 3, 1, 5, 1, 6],
         Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
       },
-      rules: ["Ranger", "Saper", "Zasadzka", "Zwiadowca"],
+      rules: ["Ranger","Saper","W nogi!","Zasadzka","Zwiadowca"],
     },
     "Wielki szczur": {
       id: 7,

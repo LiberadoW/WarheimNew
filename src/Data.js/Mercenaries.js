@@ -1,4 +1,42 @@
 export const mercenariesList = {
+  "Czarny Ork": {
+    "id": 143,
+    "startingEquipment": ["Sztylet","Rembak","Rembak","Broń wielka","Hełm","Ciężki"],
+    "cost": 50,
+    "pay": 25,
+    "prestige": 32,
+    "number": 1,
+    "equipmentList": {
+
+    },
+    "type": "Najemne Ostrze",
+    "stats": {
+      "Początkowa": [4,4,3,4,4,2,2,1,8],
+      "Maksymalna": [5,8,4,5,5,3,5,4,9]
+    },
+    "rules": ["Najemnik","Uzurpator","Zamknij ryj!","Zbrojny po zemby"],
+    "exp": 0,
+    "skills": [0,3,4,5]
+  },
+  "Grzybowar": {
+    "id": 144,
+    "startingEquipment": ["Sztylet","Kostur","Proca","Hełm"],
+    "cost": 35,
+    "pay": 15,
+    "prestige": 13,
+    "number": 1,
+    "equipmentList": {
+
+    },
+    "type": "Najemne Ostrze",
+    "stats": {
+      "Początkowa": [4,2,3,3,3,1,3,1,6],
+      "Maksymalna": [5,5,6,3,4,3,6,4,7]
+    },
+    "rules": ["Dziwnie cuchnom","Głupota","Grzybowar","Najemnik","Rozmiar rzondzi","Zawiść"],
+    "exp": 0,
+    "skills": [2,4,5]
+  },
   Balistyk: {
     id: 101,
     startingEquipment: ["Sztylet", "Miecz", "Kusza", "Lekki"],

@@ -35,7 +35,7 @@ const UnitSelect = ({
     if (unitName === "") {
       alert("Wybierz jednostkę");
     } else {
-      if (heroes[unitName].number <= unitNumbers[unitName]) {
+      if (heroes[unitName].retired || heroes[unitName].number <= unitNumbers[unitName]) {
         alert("Osiągnąłeś limit dla tej jednostki");
       } else {
         setUnitList((oldUnitList) => [
@@ -48,7 +48,9 @@ const UnitSelect = ({
             cost: heroes[unitName].cost,
             totalCost: heroes[unitName].cost,
             startingEquipment: [...(heroes[unitName].startingEquipment || [])],
-            equipmentList: heroes[unitName].equipmentList,
+            equipmentList: Object.fromEntries(
+              Object.entries(heroes[unitName].equipmentList || {}).map(([name, values]) => [name, [...values]])
+            ),
             stats: cloneStats(heroes[unitName].stats),
             statsModifiers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             baseRules: Array.isArray(heroes[unitName].rules)
@@ -80,6 +82,7 @@ const UnitSelect = ({
   const labels = ["Bohaterowie", "Stronnicy", "Machiny"];
 
   Object.entries(heroes).forEach(([key, value]) => {
+    if (value.retired) return;
     if (value.type === "Bohater") {
       groups[0][key] = value;
     } else if (value.type === "Stronnik") {

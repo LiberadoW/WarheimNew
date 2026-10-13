@@ -8,7 +8,7 @@ export const wysokie = {
       cost: 75,
       number: 1,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Bohaterowie,
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [5, 5, 5, 3, 3, 2, 6, 1, 9],
@@ -44,7 +44,7 @@ export const wysokie = {
       cost: 50,
       number: 1,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Bohaterowie,
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [5, 5, 4, 4, 3, 1, 5, 1, 8],
@@ -60,7 +60,7 @@ export const wysokie = {
       cost: 60,
       number: 1,
       equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"].Bohaterowie,
+        heroEquipment["Elfowie Wysokiego Rodu z Ulthuan"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [5, 6, 4, 3, 3, 1, 5, 1, 8],

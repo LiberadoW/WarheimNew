@@ -62,8 +62,8 @@ export const skryre = {
       equipmentList: heroEquipment["Harcownicy klanu Skryre"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [5, 3, 3, 3, 4, 1, 5, 1, 5],
-        Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
+        "Początkowa": [5,3,3,3,3,1,5,1,5],
+        "Maksymalna": [6,6,6,4,4,3,7,4,7]
       },
       rules: ["Handlarz niewolników", "Ranger", "W nogi!"],
       exp: 8,
@@ -106,13 +106,7 @@ export const skryre = {
         Początkowa: [5, 4, 3, 3, 3, 1, 5, 1, 6],
         Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
       },
-      rules: [
-        "Drużyna ciężkich broni",
-        "Drużyna obsługi",
-        "Ranger",
-        "Szermierz",
-        "W nogi!",
-      ],
+      rules: ["Drużyna ciężkich broni (kulomiot, spaczrusznica, miotacz spaczognia, moździerz trującego wichru)","Drużyna obsługi","Ranger","Szermierz","W nogi!"],
     },
     "Drużyna ciężkich broni": {
       id: 7,
@@ -144,19 +138,7 @@ export const skryre = {
         Początkowa: [6, 3, 3, 5, 4, 3, 4, 3, 5],
         Maksymalna: [6, 3, 3, 5, 4, 3, 4, 3, 5],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Konstrukt",
-        "Łuskowata skóra (4+)",
-        "Murołaz",
-        "Niezłomny",
-        "Przepastne trzewia",
-        "Strach",
-        "Wielkolud",
-        "Zbrojne ramię",
-      ],
+      rules: ["Bycza szarża","Duży cel","Głód trzewi","Konstrukt","Łuskowata skóra (4+)","Murołaz","Niezłomny","Nieświadomy","Przepastne trzewia","Strach","Wielkolud","Zbrojne ramię"],
     },
     "Koło Zagłady": {
       id: 9,

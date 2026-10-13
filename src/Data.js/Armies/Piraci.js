@@ -43,13 +43,7 @@ export const piraci = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: [
-        "Czarostwo",
-        "Duchowny (modlity do Mannana)",
-        "Modlitwa",
-        "Pogarda",
-        "Rozproszenie magii (2)",
-      ],
+      rules: ["Czarostwo","Duchowny (modlitwy do Mananna)","Modlitwa","Pogarda","Rozproszenie magii (2)"],
       exp: 12,
       skills: [0, 2, 3, 5],
     },
@@ -72,7 +66,7 @@ export const piraci = {
       id: 4,
       startingEquipment: ["Sztylet", "Łapacz"],
       cost: 25,
-      number: 2,
+      number: 1,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
       stats: {
@@ -87,7 +81,7 @@ export const piraci = {
       id: 5,
       startingEquipment: ["Sztylet"],
       cost: 15,
-      number: 2,
+      number: 1,
       equipmentList: heroEquipment["Piraci z Sartosy"].Bohaterowie,
       type: "Bohater",
       stats: {
@@ -122,7 +116,7 @@ export const piraci = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Chorążowie & sygnaliści", "Drużyna obsługi"],
+      rules: ["Chorążowie & sygnaliści","Drużyna ciężkich broni (harpun, ołowiomiotacz)","Drużyna obsługi"],
     },
     "Drużyna ciężkich broni": {
       id: 7,

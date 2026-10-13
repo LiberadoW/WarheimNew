@@ -10,8 +10,8 @@ export const orki = {
       equipmentList: heroEquipment["Orkowie & Gobliny"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 5, 3, 4, 4, 2, 2, 1, 8],
-        Maksymalna: [5, 8, 4, 4, 5, 3, 5, 4, 9],
+        "Początkowa": [4,5,3,4,4,2,2,1,8],
+        "Maksymalna": [5,8,4,5,5,3,5,4,9]
       },
       rules: ["Dowódca", "Zbrojny po zemby", "Do Łooomotu!", "Za mną!"],
       exp: 20,
@@ -159,19 +159,7 @@ export const orki = {
         Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
         Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Głupota",
-        "Nieświadomy",
-        "Niezłomny",
-        "Przepastne trzewia",
-        "Regeneracja",
-        "Strach",
-        "Wielkolud",
-        "Żrąca plwocina",
-      ],
+      rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
     Rydwan: {
       id: 11,
