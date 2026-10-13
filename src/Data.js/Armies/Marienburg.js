@@ -32,10 +32,10 @@ export const marienburg = {
       exp: 12,
       skills: [2, 4, 5],
     },
-    "Kapłan Mannana": {
+    "Kapłan Mananna": {
       id: 2,
       startingEquipment: ["Sztylet", "Trójząb"],
-      cost: 40,
+      cost: 35,
       number: 1,
       equipmentList: heroEquipment["Piechota Morska z Marienburga"].Kapłan,
       type: "Bohater",
@@ -43,13 +43,7 @@ export const marienburg = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: [
-        "Czarostwo",
-        "Duchowny(modlity do Mannana)",
-        "Modlitwa",
-        "Pogarda",
-        "Rozproszenie magii (2)",
-      ],
+      rules: ["Czarostwo","Duchowny (modlitwy do Mananna)","Modlitwa","Pogarda","Rozproszenie magii (2)"],
       exp: 12,
       skills: [0, 2, 3, 5],
     },
@@ -107,7 +101,7 @@ export const marienburg = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Ranger", "Zwiadowca"],
+      rules: ["Drużyna ciężkich broni (harpun)","Ranger","Zwiadowca"],
     },
     "Drużyna ciężkich broni": {
       id: 7,

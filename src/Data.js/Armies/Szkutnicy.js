@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const szkutnicy = {
   heroes: {
-    "Mistrz Szkutnik": {
+    "Mistrz szkutnik": {
       id: 0,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 75,
@@ -33,7 +33,7 @@ export const szkutnicy = {
       exp: 20,
       skills: [0, 1, 2, 3, 5],
     },
-    "Kowal Run": {
+    "Kowal run": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
@@ -61,7 +61,7 @@ export const szkutnicy = {
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Mistrz Inżynier": {
+    "Mistrz inżynier": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
@@ -117,7 +117,7 @@ export const szkutnicy = {
       exp: 8,
       skills: [0, 1, 4, 5],
     },
-    "Wojownik Klanowy": {
+    "Wojownik klanowy": {
       id: 4,
       startingEquipment: ["Sztylet"],
       cost: 25,
@@ -173,7 +173,7 @@ export const szkutnicy = {
       startingEquipment: ["Maczuga ogrów"],
       cost: 160,
       number: 1,
-      equipmentList: heroEquipment["Szkutnicy z Barak Varr"].Ogr,
+      equipmentList: heroEquipment["Gang przemytników"]["Ogr"],
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],
@@ -221,7 +221,7 @@ export const szkutnicy = {
       startingEquipment: [],
       cost: 150,
       number: 1,
-      equipmentList: [],
+      equipmentList: {},
       type: "Machina",
       stats: {
         Początkowa: [2, "-", "-", 4, 5, 5, "-", "-", "-"],
@@ -245,7 +245,7 @@ export const szkutnicy = {
       startingEquipment: [],
       cost: 175,
       number: 1,
-      equipmentList: [],
+      equipmentList: {},
       type: "Machina",
       stats: {
         Początkowa: [2, "-", "-", 4, 5, 5, "-", "-", "-"],

@@ -31,8 +31,8 @@ export const purpurowaDłoń = {
       equipmentList: heroEquipment["Kult Purpurowej Dłoni"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,3,3,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Dominacja", "Stygmat Chaosu"],
       exp: 8,
@@ -68,17 +68,17 @@ export const purpurowaDłoń = {
     Kultysta: {
       id: 3,
       startingEquipment: ["Sztylet"],
-      cost: 30,
+      cost: 20,
       number: 12,
       equipmentList: heroEquipment["Kult Purpurowej Dłoni"].Stronnicy,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,3,3,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
     },
-    "Różowy Strachulec": {
+    "Różowy strachulec": {
       id: 4,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 45,
@@ -109,7 +109,7 @@ export const purpurowaDłoń = {
       },
       rules: ["Magiczna ochrona (6+)", "Ranger", "Stygmat Chaosu"],
     },
-    "Smoczy Ogr": {
+    "Smoczy ogr": {
       id: 7,
       startingEquipment: ["Broń wielka"],
       cost: 250,
@@ -169,9 +169,9 @@ export const purpurowaDłoń = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        "Rumak Chaosu": [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Rumak Chaosu ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Rumak Chaosu": [8,3,0,4,"-","-",3,1,5],
+        "Rumak Chaosu ": [8,3,0,4,"-","-",3,1,5]
       },
       rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },

@@ -1,3 +1,4 @@
+import { getArmyName } from "../Data.js/RulebookNames";
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
@@ -415,7 +416,7 @@ const Builder = ({
       ? [...savedListsData.lists]
       : [];
     const listIndex = arrayOfSavedLists.findIndex(
-      (item) => item.armyName === armyName && item.armyType === army.name,
+      (item) => item.armyName === armyName && getArmyName(item.armyType) === army.name,
     );
 
     if (listIndex === -1) {
@@ -450,6 +451,7 @@ const Builder = ({
 
     arrayOfSavedLists[listIndex] = {
       ...selectedList,
+      armyType: army.name,
       armyList: normalizeUnitList(updatedUnits),
       timestamp: Timestamp.now(),
       totalCost: updatedCost,

@@ -106,7 +106,7 @@ export const dzieciZagłady = {
     },
     "Ogr Chaosu": {
       id: 6,
-      startingEquipment: ["Sztlet", "Broń wielka"],
+      startingEquipment: ["Sztylet","Broń wielka"],
       cost: 180,
       number: 1,
       equipmentList: heroEquipment["Kult Dzieci Zagłady"].Ogr,

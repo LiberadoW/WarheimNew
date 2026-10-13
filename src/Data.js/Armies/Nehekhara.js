@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const nehekhara = {
   heroes: {
-    "Książe Grobowców": {
+    "Książe grobowców": {
       id: 0,
       startingEquipment: ["Sztylet", "Chopesz"],
       cost: 80,
@@ -34,12 +34,7 @@ export const nehekhara = {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 8],
         Maksymalna: [5, 7, 6, 4, 5, 3, 6, 4, 10],
       },
-      rules: [
-        "Animacja",
-        "Łatwopalny",
-        "Mag (Dziedzina Nehekhary albo Tradycja Śmierci albo Tradycja Światła)",
-        "Nieumarły",
-      ],
+      rules: ["Animacja","Łatwopalny","Mag (Domena Nehekhary albo Tradycja Śmierci albo Tradycja Światła)","Nieumarły"],
       exp: 8,
       skills: [0, 2, 5],
     },
@@ -95,7 +90,7 @@ export const nehekhara = {
         "Strzały Asaph",
       ],
     },
-    "Strażnik Grobowców": {
+    "Strażnik grobowców": {
       id: 5,
       startingEquipment: ["Chopesz", "Średni", "Tarcza"],
       cost: 50,
@@ -128,7 +123,7 @@ export const nehekhara = {
         "Trudny do zabicia",
       ],
     },
-    "Nieumarły Nomada": {
+    "Nieumarły nomada": {
       id: 7,
       startingEquipment: [
         "Włócznia",
@@ -191,7 +186,7 @@ export const nehekhara = {
         "Wielkolud",
       ],
     },
-    "Grobowy Skorpion": {
+    "Grobowy skorpion": {
       id: 10,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 250,

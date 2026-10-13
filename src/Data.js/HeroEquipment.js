@@ -84,12 +84,12 @@ export const heroEquipment = {
       Średni: [30, 2, "Zbroja"],
     },
   },
-  "Łowcy Czarownic": {
+  "Łowcy czarownic": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Gwiazda zaranna": [5, 0],
-      "Kadzielnica Ognia": [20, 0],
+
       Miecz: [10, 0],
       Mizerykordia: [5, 0],
       Sztylet: [2, 0],
@@ -105,6 +105,7 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Kadzielnica ognia": [20,0],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
@@ -131,8 +132,9 @@ export const heroEquipment = {
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Cep bojowy": [10, 0],
       "Gwiazda zaranna": [5, 0],
-      "Kadzielnica Ognia": [20, 0],
+
       Korbacz: [5, 0],
+          "Kadzielnica ognia": [20,0],
     },
     Rycerz: {
       "Broń wielka": [10, 0],
@@ -145,9 +147,10 @@ export const heroEquipment = {
       "Broń miotana (noże)": [10, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Puklerz: [3, 2, "Tarcza"],
+
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Ciężki": [30,2,"Zbroja"],
     },
     Prezbiter: {
       "Broń wielka": [10, 0],
@@ -219,7 +222,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -228,6 +231,7 @@ export const heroEquipment = {
       Ołowiomiotacz: [50, 1],
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
+          "Cep bojowy": [10,0],
     },
   },
   "Muszkieterzy z Nuln": {
@@ -289,6 +293,7 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Włócznia": [10,0],
     },
     Rajtar: {
       Miecz: [10, 0],
@@ -303,7 +308,7 @@ export const heroEquipment = {
     Ranger: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowy": [5, 0],
+      "Cep bojowy": [10,0],
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
       "Topór krasnoludów": [10, 0],
@@ -311,7 +316,7 @@ export const heroEquipment = {
       Kusza: [25, 1],
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
-      Średni: [15, 2, "Zbroja"],
+      Średni: [20,2,"Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
     },
@@ -445,8 +450,8 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       "Broń miotana (noże)": [10, 1],
       Oszczep: [15, 1],
-      Proca: [5, 0],
-      Sieć: [10, 0],
+      Proca: [5,1],
+      Sieć: [10,1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
       Puklerz: [3, 2, "Tarcza"],
@@ -524,6 +529,7 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Bolas": [10,1],
     },
     Rajtar: {
       Miecz: [10, 0],
@@ -532,7 +538,7 @@ export const heroEquipment = {
       Pistolet: [10, 1],
       "Pistolet pojedynkowy": [20, 1],
       Lekki: [5, 2, "Zbroja"],
-      Średni: [15, 2, "Zbroja"],
+      Średni: [20,2,"Zbroja"],
       Hełm: [5, 2],
     },
     Pogromca: {
@@ -763,8 +769,9 @@ export const heroEquipment = {
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Cep bojowy": [10, 0],
       "Gwiazda zaranna": [5, 0],
-      "Kadzielnica Ognia": [20, 0],
+
       Korbacz: [5, 0],
+          "Kadzielnica ognia": [20,0],
     },
   },
   "Rycerze Graala": {
@@ -823,7 +830,7 @@ export const heroEquipment = {
       "Cep bojowy": [10, 0],
       "Gwiazda zaranna": [5, 0],
       Halabarda: [10, 0],
-      Korbacz: [10, 0],
+      Korbacz: [5,0],
       Miecz: [10, 0],
       Sztylet: [2, 0],
       Włócznia: [10, 0],
@@ -866,7 +873,7 @@ export const heroEquipment = {
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Cep bojowy": [10, 0],
       "Gwiazda zaranna": [5, 0],
-      Korbacz: [10, 0],
+      Korbacz: [5,0],
       Miecz: [10, 0],
     },
     Błędny: {
@@ -1042,7 +1049,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -1051,6 +1058,7 @@ export const heroEquipment = {
       Ołowiomiotacz: [50, 1],
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
+          "Cep bojowy": [10,0],
     },
     Kapłan: {
       "Broń wielka": [10, 0],
@@ -1312,7 +1320,7 @@ export const heroEquipment = {
       Pistolet: [10, 1],
       "Pistolet pojedynkowy": [20, 1],
       Lekki: [5, 2, "Zbroja"],
-      Średni: [15, 2, "Zbroja"],
+      Średni: [20,2,"Zbroja"],
       Hełm: [5, 2],
     },
     Ogr: {
@@ -1341,7 +1349,7 @@ export const heroEquipment = {
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
       Bolas: [10, 1],
-      "Broń miotana (noże)": [10, 1],
+      "Broń miotana (noże)": [15,1],
       Łuk: [10, 1],
       "Łuk długi": [20, 1],
       Oszczep: [15, 1],
@@ -1351,6 +1359,7 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Bicz": [15,0],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
@@ -1360,7 +1369,7 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
-      "Broń miotana (noże)": [10, 1],
+      "Broń miotana (noże)": [15,1],
       Łuk: [10, 1],
       "Łuk długi": [20, 1],
       Muszkiet: [25, 1],
@@ -1380,12 +1389,13 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
-      "Broń miotana (topory/młoty)": [15, 1],
+
       "Łuk krótki": [5, 1],
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Broń miotana (noże)": [10,1],
     },
     Derwisz: {
       "Broń wielka": [10, 0],
@@ -1457,7 +1467,7 @@ export const heroEquipment = {
   },
   "Nizołki z Krainy Zgromadzenia": {
     Bohaterowie: {
-      "Broń wielka": [10, 0],
+
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Gwiazda zaranna": [5, 0],
       Halabarda: [10, 0],
@@ -1476,6 +1486,7 @@ export const heroEquipment = {
       Ciężki: [30, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Broń Wielka": [10,0],
     },
     Magister: {
       Kostur: [5, 0],
@@ -1484,7 +1495,7 @@ export const heroEquipment = {
       "Broń miotana (noże)": [10, 1],
     },
     Stronnicy: {
-      "Broń wielka": [10, 0],
+
       "Buława/Maczuga/Młot bojowy": [5, 0],
       "Gwiazda zaranna": [5, 0],
       Halabarda: [10, 0],
@@ -1501,11 +1512,12 @@ export const heroEquipment = {
       Średni: [15, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Broń Wielka": [10,0],
     },
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -1514,6 +1526,7 @@ export const heroEquipment = {
       Ołowiomiotacz: [50, 1],
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
+          "Cep bojowy": [10,0],
     },
   },
   "Leśni Elfowie z Athel Loren": {
@@ -1567,13 +1580,14 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       Włócznia: [10, 0],
       "Broń miotana (topory/młoty)": [15, 1],
-      Łuk: [10, 1],
+
       "Łuk długi": [20, 1],
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Łuk elfów": [35,1],
     },
     Tancerz: {
       "Broń wielka": [10, 0],
@@ -1581,9 +1595,10 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       Włócznia: [10, 0],
       "Broń miotana (topory/młoty)": [15, 1],
+          "Saearath": [15,0],
     },
   },
-  "Elfowie Wysokiego Rodu z Ulthuan": {
+  "Elfowie Wysokiego Rodu z Ulthuanu": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       Halabarda: [10, 0],
@@ -1659,7 +1674,7 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
-      "Arkana/Bolas/Sieć": [10, 1],
+
       "Broń miotana (noże)": [10, 1],
       Kusza: [25, 1],
       "Kusza powtarzalna": [25, 1],
@@ -1672,6 +1687,7 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Arkan/Bolas/Sieć": [10,1],
     },
     Mag: {
       Kostur: [5, 0],
@@ -1716,7 +1732,7 @@ export const heroEquipment = {
       Sieć: [10, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Puklerz: [3, 2, "Tarcza"],
+
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
     },
@@ -1783,7 +1799,7 @@ export const heroEquipment = {
       "Topór krasnoludów": [10, 0],
     },
   },
-  "Kompania Krasnoludzkich Piwowarów": {
+  "Kompania krasnoludzkich Piwowarów": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -1963,7 +1979,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -1972,6 +1988,7 @@ export const heroEquipment = {
       Ołowiomiotacz: [50, 1],
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
+          "Cep bojowy": [10,0],
     },
   },
   "Krasnoludowie Chaosu z Zorn Uzkul": {
@@ -2006,7 +2023,7 @@ export const heroEquipment = {
       Miecz: [10, 0],
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
-      "Arkana/Bolas/Sieć": [10, 1],
+
       "Broń miotana (ładunki wybuchowe)": [15, 1],
       Granatnik: [35, 1],
       "Muszkiet krasnoludzki": [25, 1],
@@ -2018,6 +2035,7 @@ export const heroEquipment = {
       "Pancerz z Gromrilu": [50, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Arkan/Bolas/Sieć": [10,1],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
@@ -2036,7 +2054,7 @@ export const heroEquipment = {
       Hełm: [5, 2],
     },
   },
-  "Jeźdzcy Wilków": {
+  "Jeźdźcy Wilków": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       Bicz: [15, 0],
@@ -2091,7 +2109,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2100,13 +2118,14 @@ export const heroEquipment = {
       Ołowiomiotacz: [50, 1],
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
+          "Cep bojowy": [10,0],
     },
   },
   "Zwiadowcza kompania z Królestw Ogrów": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2120,6 +2139,7 @@ export const heroEquipment = {
       Średni: [30, 2, "Zbroja"],
       Ciężki: [60, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Ogniobrzuchy: {
       "Broń wielka": [10, 0],
@@ -2148,7 +2168,7 @@ export const heroEquipment = {
     Stronnicy: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2158,6 +2178,7 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Gnoblar: {
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -2178,7 +2199,7 @@ export const heroEquipment = {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Gwiazda zaranna": [5, 0],
       Halabarda: [10, 0],
       Kostur: [5, 0],
@@ -2196,11 +2217,12 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Gwiazda zaranna": [5, 0],
       Miecz: [10, 0],
       Sztylet: [2, 0],
@@ -2213,11 +2235,12 @@ export const heroEquipment = {
       Puklerz: [3, 2, "Tarcza"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2225,13 +2248,14 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
   "Kult Karmazynowej Czaszki": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Gwiazda zaranna": [5, 0],
       Halabarda: [10, 0],
       Korbacz: [5, 0],
@@ -2248,11 +2272,12 @@ export const heroEquipment = {
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Gwiazda zaranna": [5, 0],
       Korbacz: [5, 0],
       Miecz: [10, 0],
@@ -2265,11 +2290,12 @@ export const heroEquipment = {
       Średni: [15, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2277,13 +2303,14 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
   "Kult Dzieci Zagłady": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Gwiazda zaranna": [5, 0],
       Halabarda: [10, 0],
       Korbacz: [5, 0],
@@ -2300,11 +2327,12 @@ export const heroEquipment = {
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Gwiazda zaranna": [5, 0],
       Korbacz: [5, 0],
       Miecz: [10, 0],
@@ -2317,11 +2345,12 @@ export const heroEquipment = {
       Średni: [15, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2329,6 +2358,7 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
   "Kult Sybarytów": {
@@ -2345,7 +2375,7 @@ export const heroEquipment = {
       Włócznia: [10, 0],
       "Broń miotana (noże)": [10, 1],
       Kusza: [25, 1],
-      "Pistolet pojedynkowy": [20, 0],
+      "Pistolet pojedynkowy": [20,1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
       "Zbroja Chaosu": [100, 2, "Zbroja"],
@@ -2372,7 +2402,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2380,6 +2410,7 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
   "Kult Purpurowej Dłoni": {
@@ -2425,7 +2456,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2433,6 +2464,7 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
   "Grasanci Chaosu": {
@@ -2451,7 +2483,7 @@ export const heroEquipment = {
       Sztylet: [2, 0],
       "Topór bojowy/Nadziak": [5, 0],
       Włócznia: [10, 0],
-      "Broń miotana (toporki)": [15, 1],
+
       Oszczep: [15, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
@@ -2459,6 +2491,7 @@ export const heroEquipment = {
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Broń miotana (topory/młoty)": [15,1],
     },
     Stronnicy: {
       "Broń wielka": [10, 0],
@@ -2482,7 +2515,7 @@ export const heroEquipment = {
     Ogr: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2490,6 +2523,7 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
   "Karnawał Chaosu": {
@@ -2513,7 +2547,7 @@ export const heroEquipment = {
       Pistolet: [10, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Ciężki: [30, 2, "Zrboja"],
+      Ciężki: [30,2,"Zbroja"],
       "Zbroja Chaosu": [100, 2, "Zbroja"],
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
@@ -2549,7 +2583,20 @@ export const heroEquipment = {
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
     },
-  },
+  "Tyralier": {
+      "Buława/Maczuga/Młot bojowy": [5,0],
+      "Miecz": [10,0],
+      "Sztylet": [2,0],
+      "Topór bojowy/Nadziak": [5,0],
+      "Włócznia": [10,0],
+      "Broń miotana (noże)": [10,1],
+      "Łuk": [10,1],
+      "Oszczep": [15,1],
+      "Lekki": [5,2,"Zbroja"],
+      "Tarcza": [5,2,"Tarcza"],
+      "Hełm": [5,2]
+    },
+},
   "Zbrojne stado Zwierzoludzi": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
@@ -2615,7 +2662,7 @@ export const heroEquipment = {
     Minotaur: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
-      "Cep bojowcy": [10, 0],
+
       "Karwasz bojowy": [15, 0],
       Miecz: [10, 0],
       "Maczuga ogrów": [5, 0],
@@ -2623,9 +2670,10 @@ export const heroEquipment = {
       Lekki: [10, 2, "Zbroja"],
       Średni: [30, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Cep bojowy": [10,0],
     },
   },
-  "Nieumarła świta Hrabiego Von Carstein": {
+  "Nieumarła świta hrabiego von Carstein": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -2702,7 +2750,7 @@ export const heroEquipment = {
       Hełm: [5, 2],
     },
   },
-  "Nieumarły poczet Krwawych Smoków": {
+  "Nieumarły poczet Krwawego Smoka": {
     Bohaterowie: {
       "Broń wielka": [10, 0],
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -2738,9 +2786,10 @@ export const heroEquipment = {
       Sieć: [10, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Ciążki: [30, 2, "Zbroja"],
+
       Tarcza: [5, 2, "Tarcza"],
       Hełm: [5, 2],
+          "Ciężki": [30,2,"Zbroja"],
     },
     Rycerz: {
       "Broń wielka": [10, 0],
@@ -3026,6 +3075,7 @@ export const heroEquipment = {
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Sieć": [10,1],
     },
   },
   "Poganiacze klanu Moulder": {
@@ -3077,8 +3127,9 @@ export const heroEquipment = {
       Proca: [5, 1],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
-      Tarcza: [5, 2, "Tarcza"],
+
       Hełm: [5, 2],
+          "Ciężki": [30,2,"Zbroja"],
     },
     Stronnicy: {
       "Buława/Maczuga/Młot bojowy": [5, 0],
@@ -3145,13 +3196,14 @@ export const heroEquipment = {
       Miecz: [10, 0],
       Sztylet: [2, 0],
       Włócznia: [10, 0],
-      Kulomiot: [50, 3, "Choice"],
-      "Miotacz spaczognia": [50, 3, "Choice"],
-      "Moździerz trującego wichru": [50, 3, "Choice"],
+      Kulomiot: [50,1],
+      "Miotacz spaczognia": [50,1],
+      "Moździerz trującego wichru": [50,1],
       Spaczrusznica: [50, 3, "Choice"],
       Lekki: [5, 2, "Zbroja"],
       Średni: [15, 2, "Zbroja"],
       Hełm: [5, 2],
+          "Spaczrusznica i pawęża": [50,1],
     },
     Szczurogr: {
       Kulomiot: [50, 3, "Choice"],

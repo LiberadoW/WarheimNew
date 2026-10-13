@@ -1,3 +1,11 @@
+import { army as BractwoRycerskie } from "./Armies/BractwoRycerskie";
+import { army as EmisariuszeSmoczegoCesarza } from "./Armies/EmisariuszeSmoczegoCesarza";
+import { army as Nippon } from "./Armies/Nippon";
+import { army as BerserkerzyNorski } from "./Armies/BerserkerzyNorski";
+import { army as KonwentHoeth } from "./Armies/KonwentHoeth";
+import { army as BestiobojcyKrakaDrak } from "./Armies/BestiobojcyKrakaDrak";
+import { army as Fimirowie } from "./Armies/Fimirowie";
+import { army as EterycznyDwor } from "./Armies/EterycznyDwor";
 import { łowcyCzarownic } from "./Armies/Łowcy Czarownic";
 import { cyrkowcy } from "./Armies/Cyrkowcy";
 import { gangPrzemytnikow } from "./Armies/GangPrzemytnikow";
@@ -55,7 +63,15 @@ import { nocneGobliny } from "./Armies/NocneGobliny";
 import { sybaryci } from "./Armies/Sybaryci";
 
 const armies = {
-  "Łowcy Czarownic": łowcyCzarownic,
+  "Bractwo Rycerskie": BractwoRycerskie,
+  "Emisariusze Smoczego Cesarza": EmisariuszeSmoczegoCesarza,
+  "Klan wojowników z Nipponu": Nippon,
+  "Berserkerzy z Norski": BerserkerzyNorski,
+  "Konwent magów Wieży Hoeth": KonwentHoeth,
+  "Bestiobójcy z Kraka Drak": BestiobojcyKrakaDrak,
+  "Łupieżcza kompania Fimirów": Fimirowie,
+  "Eteryczny dwór Króla kurhanów": EterycznyDwor,
+  "Łowcy czarownic": łowcyCzarownic,
   "Cyrkowcy z Ligii Ostermarku": cyrkowcy,
   "Gang przemytników": gangPrzemytnikow,
   "Muszkieterzy z Nuln": muszkieterzyNuln,
@@ -74,14 +90,14 @@ const armies = {
   "Siostry Sigmara": siostry,
   "Niziołki z Krainy Zgromadzenia": nizolki,
   "Leśni Elfowie z Athel Loren": leśne,
-  "Elfowie Wysokiego Rodu z Ulthuan": wysokie,
+  "Elfowie Wysokiego Rodu z Ulthuanu": wysokie,
   "Mroczni Elfowie z Naggaroth": mroczne,
   "Khazadzi z Gór Krańca Świata": khazadzi,
-  "Kompania Krasnoludzkich Piwowarów": piwowarzy,
+  "Kompania krasnoludzkich Piwowarów": piwowarzy,
   "Kult Pogromców z Karak Kadrin": pogromcy,
   "Szkutnicy z Barak Varr": szkutnicy,
   "Krasnoludowie Chaosu z Zorn Uzkul": krasnoludyChaosu,
-  "Jeźdzcy Wilków": jeźdzcyWilków,
+  "Jeźdźcy Wilków": jeźdzcyWilków,
   "Zwiadowcza kompania z Królestw Ogrów": ogry,
   "Kult Ducha Chaosu": duchChaosu,
   "Kult Karmazynowej Czaszki": karmazynowaCzaszka,
@@ -90,9 +106,9 @@ const armies = {
   "Grasanci Chaosu": grasanciChaosu,
   "Karnawał Chaosu": karnawałChaosu,
   "Zbrojne stado Zwierzoludzi": zwierzoludzie,
-  "Nieumarła świta Hrabiego Von Carstein": vonCarstein,
+  "Nieumarła świta hrabiego von Carstein": vonCarstein,
   "Nieumarły orszak księżnej Lahmi": lahmia,
-  "Nieumarły poczet Krwawych Smoków": krwaweSmoki,
+  "Nieumarły poczet Krwawego Smoka": krwaweSmoki,
   "Nieumarły sabat rodu Nekrarch": nekrarcha,
   "Nieumarły tabor ludu Strigosu": strigos,
   "Nieumarły zastęp z Nehekhary": nehekhara,

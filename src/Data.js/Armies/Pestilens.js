@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const pestilens = {
   heroes: {
-    "Diakon Zarazy": {
+    "Diakon zarazy": {
       id: 0,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 65,
@@ -13,18 +13,11 @@ export const pestilens = {
         Początkowa: [4, 4, 4, 3, 3, 2, 5, 1, 7],
         Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
       },
-      rules: [
-        "Dowódca",
-        "Mag (Tradycja Zarazy)",
-        "Ranger",
-        "Strachliwy",
-        "Trudny do zabicia",
-        "W nogi!",
-      ],
+      rules: ["Dowódca","Mag (Tradycja Zarazy)","Ranger","Strachliwy","Twardziel","W nogi!"],
       exp: 20,
       skills: [0, 2, 4, 5],
     },
-    "Mnich Zarazy": {
+    "Mnich zarazy": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 35,
@@ -82,7 +75,7 @@ export const pestilens = {
       },
       rules: ["Mięso armatnie", "Niewolnik", "Rozmiar rzondzi"],
     },
-    "Czciciel Zarazy": {
+    "Czciciel zarazy": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 25,
@@ -101,7 +94,7 @@ export const pestilens = {
         "W nogi!",
       ],
     },
-    "Siewca Zarazy": {
+    "Siewca zarazy": {
       id: 6,
       startingEquipment: ["Cep bojowy"],
       cost: 50,
@@ -114,7 +107,7 @@ export const pestilens = {
       },
       rules: ["Fanatyk", "Furia", "Ranger", "Twardziel", "W nogi!"],
     },
-    "Szczur Zarazy": {
+    "Szczur zarazy": {
       id: 7,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 25,
@@ -135,11 +128,11 @@ export const pestilens = {
         "Zwierzę",
       ],
     },
-    "Czerw Zarazy": {
+    "Czerw zarazy": {
       id: 8,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 200,
-      number: 5,
+      number: 1,
       equipmentList: {},
       type: "Stronnik",
       stats: {

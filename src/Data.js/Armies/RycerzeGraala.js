@@ -39,18 +39,11 @@ export const graal = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: [
-        "Duży cel (wierzchem)",
-        "Mag (Kolegia Magii)",
-        "Mistrz Magii",
-        "Odporność na magię (1)",
-        "Wiedza tajemna",
-        "Konny",
-      ],
-      exp: 20,
+      rules: ["Duży cel (wierzchem)","Kawalerzysta","Mag (Tradycja Bestii albo Tradycja Niebios albo Tradycja Życia)","Mistrz Magii","Odporność na magię (1)","Wiedza tajemna (Tradycja Bestii albo Tradycja Niebios albo Tradycja Życia)","Konny"],
+      exp: 12,
       skills: [0, 2, 4, 5],
     },
-    "Rycerz Próby": {
+    "Rycerz próby": {
       id: 2,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 35,
@@ -65,7 +58,7 @@ export const graal = {
       exp: 8,
       skills: [0, 3, 4, 5],
     },
-    "Rycerz Królestwa": {
+    "Rycerz królestwa": {
       id: 3,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 30,
@@ -73,8 +66,8 @@ export const graal = {
       equipmentList: heroEquipment["Rycerze Graala"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 2, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,3,3,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Duży cel (wierzchem)", "Kawalerzysta", "Konny"],
       exp: 8,
@@ -99,11 +92,11 @@ export const graal = {
         "Żywa tarcza",
       ],
     },
-    "Zbrojny Graala": {
+    "Zbrojny": {
       id: 5,
       startingEquipment: ["Sztylet"],
       cost: 20,
-      number: 15,
+      number: 7,
       equipmentList: heroEquipment["Rycerze Graala"].Zbrojny,
       type: "Stronnik",
       stats: {
@@ -125,7 +118,7 @@ export const graal = {
       },
       rules: ["Fanatyk", "Furia", "Stan niższy"],
     },
-    "Błędny Rycerz": {
+    "Błędny rycerz": {
       id: 7,
       startingEquipment: ["Sztylet", "Miecz", "Rumak", "Siodło & uprząż"],
       cost: 70,

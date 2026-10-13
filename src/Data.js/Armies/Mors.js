@@ -17,7 +17,7 @@ export const mors = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szary Prorok": {
+    "Szary prorok": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -35,7 +35,7 @@ export const mors = {
         "Ranger",
         "W nogi!",
       ],
-      exp: 8,
+      exp: 12,
       skills: [0, 2, 4, 5],
     },
     Czarnoszczur: {
@@ -103,7 +103,7 @@ export const mors = {
       id: 6,
       startingEquipment: ["Sztylet", "Halabarda"],
       cost: 35,
-      number: 7,
+      number: 5,
       equipmentList: heroEquipment["Zbrojne stado klanu Mors"].Szturmoszczur,
       type: "Stronnik",
       stats: {

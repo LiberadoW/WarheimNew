@@ -124,7 +124,7 @@ export const gladiatorzy = {
         "Zwierzę",
       ],
     },
-    "Pogromca Trolli": {
+    "Pogromca trolli": {
       id: 9,
       startingEquipment: [
         "Topór krasnoludów",

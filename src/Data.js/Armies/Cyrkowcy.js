@@ -17,7 +17,7 @@ export const cyrkowcy = {
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -45,14 +45,7 @@ export const cyrkowcy = {
         Początkowa: [4, 2, 2, 3, 3, 1, 4, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: [
-        "Duchowny (modlitwy do Ranalda)",
-        "Kamuflaż",
-        "Modlitwa",
-        "Rewelator",
-        "Rozproszenie magii (2)",
-        "Wzgardzony",
-      ],
+      rules: ["Duchowny (modlitwy do Ranalda)","Gadanina","Modlitwa","Rewelator","Rozproszenie magii (2)","Wzgardzony"],
       exp: 12,
       skills: [0, 2, 4, 5],
     },
@@ -67,7 +60,7 @@ export const cyrkowcy = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Niepokojący"],
+      rules: ["Gadanina"],
       exp: 8,
       skills: [0, 1, 4, 5],
     },

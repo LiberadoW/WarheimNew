@@ -17,7 +17,7 @@ export const muszkieterzyNuln = {
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -98,7 +98,7 @@ export const muszkieterzyNuln = {
       startingEquipment: ["Sztylet"],
       cost: 20,
       number: 99,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Stronnicy,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -111,7 +111,7 @@ export const muszkieterzyNuln = {
       startingEquipment: ["Sztylet", "Muszkiet"],
       cost: 30,
       number: 7,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Stronnicy,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -119,12 +119,12 @@ export const muszkieterzyNuln = {
       },
       rules: ["Drużyna wsparcia"],
     },
-    "Strażnik miejski": {
+    "Strażnik Miejski": {
       id: 8,
       startingEquipment: ["Sztylet", "Halabarda"],
       cost: 35,
       number: 5,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Stronnicy,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [4, 4, 3, 3, 3, 1, 3, 1, 7],
@@ -152,12 +152,12 @@ export const muszkieterzyNuln = {
       },
       rules: ["Kawalerzysta", "Lekka jazda", "Rajtar"],
     },
-    "Krasnoludzki Ranger": {
+    "Krasnoludzki ranger": {
       id: 10,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 45,
       number: 3,
-      equipmentList: heroEquipment["Muszkieterzy z Nuln"].Ranger,
+      equipmentList: heroEquipment["Muszkieterzy z Nuln"]["Ranger"],
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 9],

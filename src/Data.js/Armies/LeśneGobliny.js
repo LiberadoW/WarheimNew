@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const leśneGobliny = {
   heroes: {
-    "Herszt Leśnych Goblinów": {
+    "Herszt leśnych goblinów": {
       id: 0,
       startingEquipment: ["Sztylet", "Włócznia"],
       cost: 55,
@@ -24,7 +24,7 @@ export const leśneGobliny = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szaman Leśnych Goblinów": {
+    "Szaman leśnych goblinów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -45,7 +45,7 @@ export const leśneGobliny = {
       exp: 12,
       skills: [0, 1, 4, 5],
     },
-    "Traper Leśnych Goblinów": {
+    "Traper leśnych goblinów": {
       id: 2,
       startingEquipment: ["Sztylet", "Broń miotana (noże)"],
       cost: 25,
@@ -68,7 +68,7 @@ export const leśneGobliny = {
       exp: 8,
       skills: [0, 1, 4, 5],
     },
-    "Rembajło Leśnych Goblinów": {
+    "Rembajło leśnych goblinów": {
       id: 3,
       startingEquipment: ["Sztylet", "Miecz"],
       cost: 25,
@@ -89,7 +89,7 @@ export const leśneGobliny = {
       exp: 8,
       skills: [0, 1, 3, 4, 5],
     },
-    "Leśny Goblin": {
+    "Leśny goblin": {
       id: 4,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
@@ -111,7 +111,7 @@ export const leśneGobliny = {
         "Zasadzka",
       ],
     },
-    "Jeździec Pajonków": {
+    "Jeździec pajonków": {
       id: 5,
       startingEquipment: [
         "Sztylet",
@@ -196,21 +196,9 @@ export const leśneGobliny = {
         Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
         Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Głupota",
-        "Nieświadomy",
-        "Niezłomny",
-        "Przepastne trzewia",
-        "Regeneracja",
-        "Strach",
-        "Wielkolud",
-        "Żrąca plwocina",
-      ],
+      rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
-    "Wielki Pajonk": {
+    "Wielki pajonk": {
       id: 10,
       startingEquipment: ["Broń naturalna (zatruty atak)"],
       cost: 180,
@@ -255,5 +243,5 @@ export const leśneGobliny = {
   name: "Plemię Leśnych Goblinów",
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
-  mercenaries: ["Czarny Ork, Grzybowar", "Mekaniak"],
+  mercenaries: ["Czarny Ork","Grzybowar","Mekaniak"],
 };

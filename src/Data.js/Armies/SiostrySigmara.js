@@ -13,14 +13,7 @@ export const siostry = {
         Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: [
-        "Arcykapłan",
-        "Czarostwo",
-        "Duchowny (modlitwy do Sigmara)",
-        "Modlitwa",
-        "Nienawiść",
-        "Rozproszenie magii (2)",
-      ],
+      rules: ["Arcykapłan","Czarostwo","Duchowny (modlitwy do Sigmara)","Dowódca","Modlitwa","Nienawiść","Rozproszenie magii (2)"],
       exp: 20,
       skills: [0, 2, 3, 4, 5],
     },
@@ -46,7 +39,7 @@ export const siostry = {
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Siostra Bitwy": {
+    "Siostra bitwy": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 25,
@@ -134,7 +127,7 @@ export const siostry = {
         "Zabójczy cios",
       ],
     },
-    "Bitewny Ołtarz": {
+    "Bitewny ołtarz": {
       id: 8,
       startingEquipment: [],
       cost: 175,

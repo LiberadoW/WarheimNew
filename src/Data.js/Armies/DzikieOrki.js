@@ -25,7 +25,7 @@ export const dzikieOrki = {
       exp: 20,
       skills: [0, 3, 4, 5],
     },
-    "Szaman Dzikich Orków": {
+    "Szaman dzikich orków": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 60,
@@ -36,31 +36,26 @@ export const dzikieOrki = {
         Początkowa: [4, 3, 3, 3, 4, 1, 3, 1, 7],
         Maksymalna: [5, 7, 5, 4, 5, 3, 5, 4, 8],
       },
-      rules: [
-        "Furia",
-        "Mag (Magia Dużego Łooomotu!)",
-        "Ochronne tautaże",
-        "Zabobonny lęk",
-      ],
+      rules: ["Furia","Mag (Magia Dużego Łooomotu!)","Ochronne tatuaże","Zabobonny lęk"],
       exp: 10,
       skills: [0, 3, 4, 5],
     },
-    "Burszuj Dzikich Orków": {
+    "Burszuj dzikich orków": {
       id: 2,
       startingEquipment: [],
       cost: 55,
       number: 2,
-      equipmentList: heroEquipment["Łowcze plemię Dzikich Orków"].Debeściak,
+      equipmentList: heroEquipment["Łowcze plemię Dzikich Orków"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 3, 4, 1, 3, 1, 7],
         Maksymalna: [5, 7, 5, 4, 5, 3, 5, 4, 8],
       },
-      rules: ["Furia", "Ochronne tautaże", "Zabobonny lęk", "Zbrojny po zemby"],
+      rules: ["Furia","Ochronne tatuaże","Zabobonny lęk","Zbrojny po zemby"],
       exp: 8,
       skills: [0, 1, 3, 4, 5],
     },
-    "Dziki Ork": {
+    "Dziki ork": {
       id: 3,
       startingEquipment: ["Sztylet", "Rembak"],
       cost: 40,
@@ -71,14 +66,7 @@ export const dzikieOrki = {
         Początkowa: [4, 3, 3, 3, 4, 1, 2, 1, 7],
         Maksymalna: [5, 7, 5, 4, 5, 3, 5, 4, 8],
       },
-      rules: [
-        "Animozja",
-        "Chorążowie & sygnaliści",
-        "Duża dźgacz",
-        "Furia",
-        "Ochronne tautaże",
-        "Zabobonny lęk",
-      ],
+      rules: ["Animozja","Chorążowie & sygnaliści","Drużyna ciężkich broni (duża dźgacz)","Furia","Ochronne tatuaże","Zabobonny lęk"],
     },
     "Duże Dźgacze": {
       id: 4,
@@ -99,7 +87,7 @@ export const dzikieOrki = {
         "Zabobonny lęk",
       ],
     },
-    "Leśny Goblin": {
+    "Leśny goblin": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
@@ -111,13 +99,7 @@ export const dzikieOrki = {
         Początkowa: [4, 2, 3, 3, 3, 1, 3, 1, 5],
         Maksymalna: [5, 5, 6, 3, 4, 3, 6, 4, 7],
       },
-      rules: [
-        "Animozja",
-        "Drużyna obsługi",
-        "Dziwnie cuchnom",
-        "Rozmiar rzondzi",
-        "Za cienki w uszach",
-      ],
+      rules: ["Animozja","Drużyna obsługi","Dziwnie cuchnom","Nadrzewni drapieżcy","Rozmiar rzondzi","Wspinaczka","Za cienki w uszach"],
     },
     Snotling: {
       id: 6,
@@ -150,15 +132,9 @@ export const dzikieOrki = {
         Początkowa: [7, 3, 0, 3, 3, 1, 4, 1, 2],
         Maksymalna: [7, 3, 0, 3, 3, 1, 4, 1, 2],
       },
-      rules: [
-        "Łuskowata skóra (5+)",
-        "Murołaz",
-        "Niezłomny",
-        "Rozmiar rzondzi",
-        "Zwierzę",
-      ],
+      rules: ["Łuskowata skóra (5+)","Murołaz","Niezłomny","Oplątanie","Rozmiar rzondzi","Saper","Zwierzę"],
     },
-    "Dziki Ork na Dziku": {
+    "Dziki ork na dziku": {
       id: 8,
       startingEquipment: ["Sztylet", "Rembak", "Dzik", "Siodło & uprząż"],
       cost: 80,
@@ -170,14 +146,7 @@ export const dzikieOrki = {
         Maksymalna: [5, 7, 5, 4, 5, 3, 5, 4, 8],
         Dzik: [7, 3, 0, 3, 4, 1, 3, 1, 3],
       },
-      rules: [
-        "Animozja",
-        "Duży cel (wierzchem)",
-        "Furia",
-        "Kawalerzysta",
-        "Ochronne tautaże",
-        "Zabobonny lęk",
-      ],
+      rules: ["Animozja","Duży cel (wierzchem)","Furia","Kawalerzysta","Ochronne tatuaże","Zabobonny lęk"],
     },
     Troll: {
       id: 9,
@@ -193,20 +162,7 @@ export const dzikieOrki = {
         Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
         Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Głupota",
-        "Nieświadomy",
-        "Niezłomny",
-        "Ochronne tatuaże",
-        "Przepastne trzewia",
-        "Regeneracja",
-        "Strach",
-        "Wielkolud",
-        "Żrąca plwocina",
-      ],
+      rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Ochronne tatuaże","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
     "Wielki Pajonk": {
       id: 10,
@@ -219,16 +175,7 @@ export const dzikieOrki = {
         Początkowa: [7, 3, 0, 4, 4, 3, 4, 3, 7],
         Maksymalna: [7, 3, 0, 4, 4, 3, 4, 3, 7],
       },
-      rules: [
-        "Głód trzewi",
-        "Łuskowata skóra (4+)",
-        "Murołaz",
-        "Niezłomny",
-        "Omotanie",
-        "Potwór",
-        "Wierzchowiec",
-        "Zwierzę",
-      ],
+      rules: ["Głód trzewi","Łuskowata skóra (4+)","Murołaz","Niezłomny","Omotanie","Oplątanie","Potwór","Wierzchowiec","Zwierzę"],
     },
     Rydwan: {
       id: 11,
@@ -251,5 +198,5 @@ export const dzikieOrki = {
   name: "Łowcze plemię Dzikich Orków",
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
-  mercenaries: ["Czarny ork", "Grzybowar", "Mekaniak"],
+  mercenaries: ["Czarny Ork","Grzybowar","Mekaniak"],
 };

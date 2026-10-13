@@ -2,13 +2,13 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const vonCarstein = {
   heroes: {
-    "Hrabia Von Carstein": {
+    "Hrabia von Carstein": {
       id: 0,
       startingEquipment: ["Sztylet", "Rapier"],
       cost: 100,
       number: 1,
       equipmentList:
-        heroEquipment["Nieumarła świta Hrabiego Von Carstein"].Bohaterowie,
+        heroEquipment["Nieumarła świta hrabiego von Carstein"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [5, 5, 4, 4, 4, 2, 6, 1, 9],
@@ -33,7 +33,7 @@ export const vonCarstein = {
       cost: 45,
       number: 1,
       equipmentList:
-        heroEquipment["Nieumarła świta Hrabiego Von Carstein"].Bohaterowie,
+        heroEquipment["Nieumarła świta hrabiego von Carstein"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -49,7 +49,7 @@ export const vonCarstein = {
       cost: 25,
       number: 3,
       equipmentList:
-        heroEquipment["Nieumarła świta Hrabiego Von Carstein"].Bohaterowie,
+        heroEquipment["Nieumarła świta hrabiego von Carstein"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
@@ -65,7 +65,7 @@ export const vonCarstein = {
       cost: 15,
       number: 15,
       equipmentList:
-        heroEquipment["Nieumarła świta Hrabiego Von Carstein"].Stronnicy,
+        heroEquipment["Nieumarła świta hrabiego von Carstein"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 2, 2, 3, 3, 1, 2, 1, 3],
@@ -189,7 +189,7 @@ export const vonCarstein = {
   limit: 500,
   minModels: 3,
   maxModels: 15,
-  name: "Nieumarła świta Hrabiego Von Carstein",
+  name: "Nieumarła świta hrabiego von Carstein",
   nature: "Praworządna",
   armyRules: ["Kontrolowanie ożywieńców", "Podatek", "Rozrzutność"],
   mercenaries: [

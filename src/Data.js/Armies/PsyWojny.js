@@ -40,16 +40,10 @@ export const psyWojny = {
       equipmentList: heroEquipment["Psy Wojny"].Kapłan,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 2, 4, 1, 8],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,3,3,3,3,1,3,1,8],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
-      rules: [
-        "Czarostwo",
-        "Duchowny (modlity do Myrmidii)",
-        "Modlitwa",
-        "Rozproszenie magii (2)",
-        "Szermierz",
-      ],
+      rules: ["Czarostwo","Duchowny (modlitwy do Myrmidii)","Modlitwa","Rozproszenie magii (2)","Szermierz"],
       exp: 12,
       skills: [0, 2, 4, 5],
     },
@@ -86,7 +80,7 @@ export const psyWojny = {
     Najemnik: {
       id: 5,
       startingEquipment: ["Sztylet"],
-      cost: 25,
+      cost: 20,
       number: 15,
       equipmentList: heroEquipment["Psy Wojny"].Stronnicy,
       type: "Stronnik",
@@ -101,7 +95,7 @@ export const psyWojny = {
         "Szermierz",
       ],
     },
-    "Oblężnik z Remas": {
+    "Oblężnik": {
       id: 6,
       startingEquipment: ["Sztylet", "Kusza", "Pawęż"],
       cost: 30,

@@ -49,7 +49,7 @@ export const amazonki = {
     Memroda: {
       id: 2,
       startingEquipment: ["Sztylet", "Łapacz"],
-      cost: 35,
+      cost: 30,
       number: 1,
       equipmentList: heroEquipment["Amazonki z Lustrii"].Bohaterowie,
       type: "Bohater",
@@ -198,9 +198,9 @@ export const amazonki = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Koń": [8,3,0,3,3,1,3,1,5],
+        "Koń ": [8,3,0,3,3,1,3,1,5]
       },
       rules: ["Duży cel", "Machina wojenna", "Powóz", "Więźniarka"],
     },
@@ -212,9 +212,9 @@ export const amazonki = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Rydwan": ["-","-","-",5,5,8,"-","-","-"],
+        "Koń": [8,3,0,3,3,1,3,1,5],
+        "Koń ": [8,3,0,3,3,1,3,1,5]
       },
       rules: ["Duży cel", "Machina wojenna", "Rydwan"],
     },
@@ -224,6 +224,6 @@ export const amazonki = {
   maxModels: 15,
   name: "Amazonki z Lustrii",
   nature: "Zła",
-  armyRules: ["Podatek", "Rozrzutność", "Żertwa"],
+  armyRules: ["Podatek","Rozrzutność"],
   mercenaries: ["Czarownica", "Magus", "Minstrel", "Szpieg", "Wróżbita"],
 };

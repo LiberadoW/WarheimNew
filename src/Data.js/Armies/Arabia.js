@@ -22,13 +22,7 @@ export const arabia = {
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
       number: 1,
-      equipmentList: {
-        ...heroEquipment["Kupiecka karawana z Arabii"].Bohaterowie,
-        ...{
-          "Tradycja Metalu": [0, 4, "Tradycja"],
-          "Magia Żywiołów": [0, 4, "Tradycja"],
-        },
-      },
+      equipmentList: heroEquipment["Nieumarły sabat rodu Nekrarch"]["Nekrarcha"],
       type: "Bohater",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 8],
@@ -40,7 +34,7 @@ export const arabia = {
         "Żyłka handlowa",
       ],
       exp: 12,
-      skills: [],
+      skills: [0, 2, 4, 5],
     },
     "Handlarz niewolników": {
       id: 2,
@@ -50,8 +44,8 @@ export const arabia = {
       equipmentList: heroEquipment["Kupiecka karawana z Arabii"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,3,3,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Handlarz niewolników", "Żyłka handlowa"],
       exp: 8,
@@ -65,8 +59,8 @@ export const arabia = {
       equipmentList: heroEquipment["Kupiecka karawana z Arabii"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 2, 2, 3, 3, 1, 4, 1, 6],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
+        "Początkowa": [4,2,2,3,3,1,3,1,6],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
       rules: ["Szczęście", "Tarot", "Wzgardzony", "Żyłka handlowa"],
       exp: 0,
@@ -113,21 +107,15 @@ export const arabia = {
     },
     Nomada: {
       id: 7,
-      startingEquipment: [
-        "Sztylet",
-        "Chopesz",
-        "Łuk krótki",
-        "Koń bojowy",
-        "Siodło & uprząż",
-      ],
+      startingEquipment: ["Sztylet","Chopesz","Łuk krótki","Koń bojowy","Siodło & uprząż"],
       cost: 70,
       number: 3,
       equipmentList: heroEquipment["Kupiecka karawana z Arabii"].Nomada,
       type: "Stronnik",
       stats: {
-        Początkowa: [4, 3, 4, 3, 3, 1, 3, 1, 7],
-        Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
-        "Koń bojowy": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Początkowa": [4,3,4,3,3,1,3,1,7],
+        "Maksymalna": [5,6,6,4,4,3,6,4,9],
+        "Koń bojowy": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Kawalerzysta", "Lekka jazda", "Ranger", "Zwiadowca"],
     },
@@ -155,18 +143,7 @@ export const arabia = {
         Początkowa: [6, 4, 0, 5, 4, 3, 4, 3, 6],
         Maksymalna: [6, 4, 0, 5, 4, 3, 4, 3, 6],
       },
-      rules: [
-        "Bycza szarża",
-        "Demon",
-        "Duży cel",
-        "Genius",
-        "Głód krwi",
-        "Nienawiść",
-        "Odwieczny konflikt",
-        "Ogrnista korona",
-        "Przepastne trzewia",
-        "Wielkolud",
-      ],
+      rules: ["Bycza szarża","Demon","Duży cel","Genius","Głód krwi","Nienawiść","Odwieczny konflikt","Ognista korona","Przepastne trzewia","Wielkolud"],
     },
     Więźniarka: {
       id: 10,

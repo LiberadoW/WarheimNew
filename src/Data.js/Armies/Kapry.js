@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const kapry = {
   heroes: {
-    "Kapitan Goblinów": {
+    "Kapitan goblinów": {
       id: 0,
       startingEquipment: ["Sztylet", "Pistolet"],
       cost: 55,
@@ -17,7 +17,7 @@ export const kapry = {
       exp: 20,
       skills: [0, 1, 3, 4, 5],
     },
-    "Szaman Goblinów": {
+    "Szaman goblinów": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -32,7 +32,7 @@ export const kapry = {
       exp: 12,
       skills: [0, 1, 4, 5],
     },
-    "Goblin Mat": {
+    "Goblin mat": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 25,
@@ -55,8 +55,8 @@ export const kapry = {
       equipmentList: heroEquipment["Załoga Zielonoskórych Kaprów"].Bohaterowie,
       type: "Bohater",
       stats: {
-        Początkowa: [4, 3, 3, 3, 3, 1, 2, 1, 5],
-        Maksymalna: [5, 5, 6, 3, 4, 3, 6, 4, 7],
+        "Początkowa": [4,3,3,3,3,1,2,1,6],
+        "Maksymalna": [5,5,6,3,4,3,6,4,7]
       },
       rules: ["Dziwnie cuchnom", "Handlarz niewolników", "Żertwa"],
       exp: 8,
@@ -75,7 +75,7 @@ export const kapry = {
       },
       rules: ["Mięso armatnie", "Niewolnik", "Rozmiar rzondzi"],
     },
-    "Goblin Pirat": {
+    "Goblin pirat": {
       id: 5,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 15,
@@ -86,13 +86,7 @@ export const kapry = {
         Początkowa: [4, 2, 3, 3, 3, 1, 2, 1, 6],
         Maksymalna: [5, 5, 6, 3, 4, 3, 6, 4, 7],
       },
-      rules: [
-        "Animozja",
-        "Chorążowie & sygnaliści",
-        "Drużyna obsługi",
-        "Dziwnie cuchnom",
-        "Rozmiar rzondzi",
-      ],
+      rules: ["Animozja","Chorążowie & sygnaliści","Drużyna ciężkich broni (harpun, ołowiomiotacz)","Drużyna obsługi","Dziwnie cuchnom","Rozmiar rzondzi"],
     },
     "Drużyna ciężkich broni": {
       id: 6,
@@ -153,7 +147,7 @@ export const kapry = {
     },
     Kaper: {
       id: 9,
-      startingEquipment: ["Pistolet", "Pistolet"],
+      startingEquipment: ["Pistolet"],
       cost: 40,
       number: 5,
       equipmentList: heroEquipment["Załoga Zielonoskórych Kaprów"].Kaper,
@@ -185,21 +179,9 @@ export const kapry = {
         Początkowa: [6, 3, 1, 5, 4, 3, 1, 3, 4],
         Maksymalna: [6, 3, 1, 5, 4, 3, 1, 3, 4],
       },
-      rules: [
-        "Bycza szarża",
-        "Duży cel",
-        "Głód trzewi",
-        "Głupota",
-        "Nieświadomy",
-        "Niezłomny",
-        "Przepastne trzewia",
-        "Regeneracja",
-        "Strach",
-        "Wielkolud",
-        "Żrąca plwocina",
-      ],
+      rules: ["Bycza szarża","Duży cel","Gatunki trolli","Głód trzewi","Głupota","Nieświadomy","Niezłomny","Przepastne trzewia","Regeneracja","Strach","Wielkolud","Żrąca plwocina"],
     },
-    "Ośmiornica Bagienna": {
+    "Ośmiornica bagienna": {
       id: 11,
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 200,
@@ -210,22 +192,7 @@ export const kapry = {
         Początkowa: ["2K6", 3, "-", 4, 5, 3, 2, "K6+1", 5],
         Maksymalna: ["2K6", 3, "-", 4, 5, 3, 2, "K6+1", 5],
       },
-      rules: [
-        "Głód krwi",
-        "Głód trzewi",
-        "Kamuflaż",
-        "Murołaz",
-        "No to hooop!",
-        "Potwór",
-        "Stygmaty Nurgla (odór)",
-        "Trafienie z uderzenia",
-        "Ugryzienie",
-        "Wodny",
-        "Zbrojne kończyny",
-        "Zimnokrwisty",
-        "Zwiadowca",
-        "Zwierzę",
-      ],
+      rules: ["Głód krwi","Głód trzewi","Kamuflaż","Murołaz","No to hooop!","Potwór","Stygmaty Nurgla (odór)","Ugryzienie","Wodny","Zbrojne kończyny","Zimnokrwisty","Zwiadowca","Zwierzę"],
     },
     Więźniarka: {
       id: 12,

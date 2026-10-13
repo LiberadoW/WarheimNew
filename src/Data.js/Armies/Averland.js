@@ -17,7 +17,7 @@ export const averland = {
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -152,7 +152,7 @@ export const averland = {
       },
       rules: ["Kawalerzysta", "Lekka jazda", "Rajtar"],
     },
-    "Pogromca Trolli": {
+    "Pogromca trolli": {
       id: 9,
       startingEquipment: [
         "Topór krasnoludów",
@@ -167,19 +167,7 @@ export const averland = {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 10],
         Maksymalna: [4, 7, 6, 4, 5, 3, 5, 4, 10],
       },
-      rules: [
-        "Fanatyk",
-        "Krzepki",
-        "Nieustępliwość",
-        "Ochronne tatuaże",
-        "Odporność na magię (2)",
-        "Pogromca",
-        "Rankor",
-        "Topory pogromcy",
-        "Trudny do zabicia",
-        "Uporczywość",
-        "Zabobonny lęk",
-      ],
+      rules: ["Fanatyk","Krzepki","Nieustępliwy","Ochronne tatuaże","Odporność na magię (2)","Pogromca","Rankor","Topory pogromcy","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk"],
     },
     Zaprzęg: {
       id: 10,

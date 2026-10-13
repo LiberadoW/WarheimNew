@@ -1,3 +1,4 @@
+import { rulebookMagic } from "./RulebookMagic";
 export const magic = {
   "Duchowny (modlitwy do Mananna)": {
     "1": [
@@ -3622,100 +3623,6 @@ export const magic = {
     `,
     ],
   },
-  "Duchowny (modlitwy do Sigmara)": {
-    1: [
-      "1-3 AURA ODWAGI",
-      "ODMÓWIONA PRZED ROZGRYWKĄ",
-      `Modlitwa musi zostać odmówiona przed rozgrywką i oddziałuje na DUCHOWNEGO lub K3
-dowolne sprzymierzone modele PIESZYCH bohaterów lub stronników wielkości człowieka
-lub mniejszych (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna
-krawędź mierzy 40 mm i więcej), które nie podlegają zasadzie specjalnej DEMON lub
-ISTOTA ETERYCZNA lub LEŚNY DUCH lub MAG lub NIEUMARŁY lub OPĘTANY.
-Do końca rozgrywki objęte działaniem modlitwy modele podlegają zasadzie
-specjalnej NIEZŁOMNY i ZIMNOKRWISTY.
-      `,
-    ],
-    2: [
-      "4 MŁOT NA CZAROWNICE",
-      "POZOSTAJE W GRZE",
-      `Moc modlitwy oddziałuje na DUCHOWNEGO.
-Dopóki modlitwa pozostaje w grze dzierżona przez DUCHOWNEGO młot bojowy
-lub młot ulrykański lub broń wielka traktowana jest jak broń z zasadą specjalną MAGICZNY
-ATAK oraz PAROWANIE i PŁONĄCY ATAK, a DUCHOWNY może przerzucić wszystkie
-nieudane rzuty na trafienie. Wynik drugiego rzutu jest ostateczny.
-Modele z zasadą specjalną DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub
-MAG lub NIEUMARŁY lub OPĘTANY otrzymują trafienie z zasadą specjalną
-DRUZGOCZĄCY.
-.
-      `,
-    ],
-    2: [
-      "5 KLĄTWA STOSU",
-      "",
-      `Moc modlitwy może zostać skierowana na pojedynczy model przeciwnika, także
-związany walką wręcz znajdujący się w odległości do 12” od DUCHOWNEGO (postać
-zostaje wybrana przez kierującego DUCHOWNYM bez ograniczeń, z wyjątkiem tego, że
-DUCHOWNY musi widzieć swój cel).Do początku następnej fazy magii DUCHOWNEGO
-ofiara klątwy podlega zasadzie specjalnej ŁATWOPALNY oraz musi przerzucić wszystkie
-udane rzuty naOchronę Pancerza i Magiczną Ochronę. Wynik drugiego rzutu jest ostateczny.
-Postać może znajdować się pod działaniem tylko jednej klątwy na raz.
-.
-      `,
-    ],
-    3: [
-      "6 ŚWIĘTY POGROM",
-      "POZOSTAJE W GRZE",
-      `Moc modlitwy oddziałuje na DUCHOWNEGO i wszystkie sprzymierzone modele
-znajdujące się w odległości do 12", również związane walczą wręcz.
-Dopóki modlitwa pozostaje w grze, objęte działaniem modlitwy modele podlegają
-zasadzie specjalnej FURIA i NIENAWIŚĆ.
 
-.
-      `,
-    ],
-    4: [
-      "7 GROZA SIGMARA",
-      "",
-      `Po udanym odmówieniu modlitwy kierujący DUCHOWNYM gracz wybiera dowolny,
-znajdujący się w polu widzenia i w odległości do 12” od DUCHOWNEGO wrogi model,
-który należy przykryć 3” okrągłym wzornikiem. Dopóki modlitwa pozostaje w grze
-DUCHOWNY wzbudza GROZĘ wobjętych klątwach wrogich modelach.
-Postać może znajdować się pod działaniem tylko jednej klątwy na raz.
-
-.
-      `,
-    ],
-    5: [
-      "8 KRĄG WIARY",
-      "POZOSTAJE W GRZE",
-      `Po udanym odmówieniu modlitwy kierujący DUCHOWNYM gracz wybiera dowolny,
-niezajęty przez wrogie postaci, znajdujący się w polu widzenia i w odległości do 18” od
-DUCHOWNEGO obszar na powierzchni stołu, który należy przykryć 5” okrągłym
-wzornikiem. Dopóki modlitwa pozostaje w grze pole wszystkie modele (wrogie i
-sprzymierzone), które podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub
-LEŚNY DUCH lub MAG lub NIEUMARŁY lub OPĘTANY traktują teren przykryty
-wzornikiem jako teren niedostępny.
-
-
-.
-      `,
-    ],
-    6: [
-      "9 ZBROJA SIGMARA",
-      "POZOSTAJE W GRZE",
-      `Moc modlitwy oddziałuje na DUCHOWNEGO.
-Dopóki modlitwa pozostaje w grze DUCHOWNY otrzymuje Magiczną Ochronę na
-4+, a wszystkie modele (wrogie i sprzymierzone) znajdujące się w kontakcie z
-podstawką DUCHOWNEGO, na początku fazy walki wręcz otrzymują jedno trafienie o
-SILE 4 z zasadą specjalną PŁONĄCY ATAK.
-Modele z zasadą specjalną DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub
-MAG lub NIEUMARŁY lub OPĘTANY otrzymują trafienie o SILE 6 z zasadą specjalną
-PŁONĄCY ATAK.
-
-
-
-.
-      `,
-    ],
-  },
+  ...rulebookMagic,
 };

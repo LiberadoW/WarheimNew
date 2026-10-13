@@ -68,7 +68,7 @@ export const karmazynowaCzaszka = {
     },
     Kultysta: {
       id: 3,
-      startingEquipment: ["Chorążowie & sygnaliści", "Żywa tarcza"],
+      startingEquipment: ["Sztylet"],
       cost: 20,
       number: 12,
       equipmentList: heroEquipment["Kult Karmazynowej Czaszki"].Stronnicy,
@@ -79,11 +79,11 @@ export const karmazynowaCzaszka = {
       },
       rules: ["Chorążowie & sygnaliści", "Żywa tarcza"],
     },
-    "Piekielny Ogar": {
+    "Piekielny ogar": {
       id: 4,
       startingEquipment: ["Broń naturalna (zabójczy cios)"],
       cost: 45,
-      number: 5,
+      number: 3,
       equipmentList: {},
       type: "Stronnik",
       stats: {

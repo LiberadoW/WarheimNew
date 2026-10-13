@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const pogromcy = {
   heroes: {
-    "Tan Pogromców": {
+    "Tan pogromców": {
       id: 0,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 85,
@@ -30,7 +30,7 @@ export const pogromcy = {
       exp: 20,
       skills: [0, 1, 2, 3, 5],
     },
-    "Kowal Run": {
+    "Kowal run": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 60,
@@ -41,24 +41,11 @@ export const pogromcy = {
         Początkowa: [3, 4, 4, 3, 4, 1, 2, 1, 9],
         Maksymalna: [4, 7, 6, 4, 5, 3, 5, 4, 10],
       },
-      rules: [
-        "Kowal Run",
-        "Krzepki",
-        "Nieustępliwy",
-        "Ochronne tatuaże",
-        "Odporność na magię (2)",
-        "Pogromca",
-        "Rankor",
-        "Rozproszenie magii (1)",
-        "Trudny do zabicia",
-        "Uporczywość",
-        "Wspinaczka",
-        "Zabobonny lęk",
-      ],
+      rules: ["Błogosławieństwo Valayi","Kowal Run","Krzepki","Nieustępliwy","Ochronne tatuaże","Odporność na magię (2)","Pogromca","Rankor","Rozproszenie magii (1)","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk"],
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Mistrz Inżynier": {
+    "Mistrz inżynier": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 60,
@@ -88,7 +75,7 @@ export const pogromcy = {
       exp: 12,
       skills: [0, 1, 2, 3, 5],
     },
-    "Pogromca Smoków": {
+    "Pogromca smoków": {
       id: 3,
       startingEquipment: [
         "Topór krasnoludów",
@@ -97,7 +84,19 @@ export const pogromcy = {
       ],
       cost: 55,
       number: 1,
-      equipmentList: heroEquipment["Kult Pogromców z Karak Kadrin"].Bohaterowie,
+      equipmentList: {
+        "Broń wielka": [10,0],
+        "Buława/Maczuga/Młot bojowy": [5,0],
+        "Cep bojowy": [10,0],
+        "Sztylet": [2,0],
+        "Topór bojowy/Nadziak": [5,0],
+        "Topór krasnoludów": [10,0],
+        "Broń miotana (ładunki wybuchowe)": [15,1],
+        "Kusza": [25,1],
+        "Muszkiet krasnoludzki": [25,1],
+        "Pistolet dubeltowy": [15,1],
+        "Pistolet pojedynkowy": [20,1]
+      },
       type: "Bohater",
       stats: {
         Początkowa: [3, 6, 3, 3, 4, 1, 2, 1, 10],
@@ -120,16 +119,28 @@ export const pogromcy = {
       exp: 10,
       skills: [0, 3, 4, 5],
     },
-    "Pogromca Gigantów": {
+    "Pogromca gigantów": {
       id: 4,
       startingEquipment: [
         "Topór krasnoludów",
         "Topór krasnoludów",
         "Broń wielka",
       ],
-      cost: 55,
+      cost: 50,
       number: 1,
-      equipmentList: heroEquipment["Kult Pogromców z Karak Kadrin"].Bohaterowie,
+      equipmentList: {
+        "Broń wielka": [10,0],
+        "Buława/Maczuga/Młot bojowy": [5,0],
+        "Cep bojowy": [10,0],
+        "Sztylet": [2,0],
+        "Topór bojowy/Nadziak": [5,0],
+        "Topór krasnoludów": [10,0],
+        "Broń miotana (ładunki wybuchowe)": [15,1],
+        "Kusza": [25,1],
+        "Muszkiet krasnoludzki": [25,1],
+        "Pistolet dubeltowy": [15,1],
+        "Pistolet pojedynkowy": [20,1]
+      },
       type: "Bohater",
       stats: {
         Początkowa: [3, 5, 3, 3, 4, 1, 2, 1, 10],
@@ -152,7 +163,7 @@ export const pogromcy = {
       exp: 8,
       skills: [0, 3, 4, 5],
     },
-    "Pogromca Trolli": {
+    "Pogromca trolli": {
       id: 5,
       startingEquipment: [
         "Topór krasnoludów",
@@ -161,7 +172,19 @@ export const pogromcy = {
       ],
       cost: 50,
       number: 12,
-      equipmentList: heroEquipment["Kult Pogromców z Karak Kadrin"].Bohaterowie,
+      equipmentList: {
+        "Broń wielka": [10,0],
+        "Buława/Maczuga/Młot bojowy": [5,0],
+        "Cep bojowy": [10,0],
+        "Sztylet": [2,0],
+        "Topór bojowy/Nadziak": [5,0],
+        "Topór krasnoludów": [10,0],
+        "Broń miotana (ładunki wybuchowe)": [15,1],
+        "Kusza": [25,1],
+        "Muszkiet krasnoludzki": [25,1],
+        "Pistolet dubeltowy": [15,1],
+        "Pistolet pojedynkowy": [20,1]
+      },
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 10],
@@ -245,7 +268,7 @@ export const pogromcy = {
       startingEquipment: [],
       cost: 175,
       number: 1,
-      equipmentList: [],
+      equipmentList: {},
       type: "Machina",
       stats: {
         Początkowa: [2, "-", "-", 4, 5, 5, "-", "-", "-"],

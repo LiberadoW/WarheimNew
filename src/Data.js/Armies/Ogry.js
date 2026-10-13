@@ -2,13 +2,13 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const ogry = {
   heroes: {
-    Łowca: {
+    "Łowca (ogr)": {
       id: 0,
       startingEquipment: ["Włócznia", "Harpun"],
       cost: 160,
       number: 1,
       equipmentList:
-        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"].Bohaterowie,
+        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [6, 5, 4, 4, 4, 3, 4, 2, 9],
@@ -31,7 +31,7 @@ export const ogry = {
       exp: 20,
       skills: [0, 1, 3, 5],
     },
-    Ogniobrzuchy: {
+    "Ogniobrzuchy (ogr)": {
       id: 1,
       startingEquipment: ["Broń wielka"],
       cost: 150,
@@ -56,7 +56,7 @@ export const ogry = {
       exp: 10,
       skills: [0, 3, 5],
     },
-    Rzeźnik: {
+    "Rzeźnik (ogr)": {
       id: 2,
       startingEquipment: ["Topór bojowy/Nadziak", "Maczuga ogrów"],
       cost: 150,
@@ -84,13 +84,13 @@ export const ogry = {
       exp: 10,
       skills: [0, 3, 5],
     },
-    Żelazobrzuchy: {
+    "Żelazobrzuchy (ogr)": {
       id: 3,
       startingEquipment: ["Broń wielka", "Hełm"],
       cost: 140,
       number: 1,
       equipmentList:
-        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"].Bohaterowie,
+        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"]["Bohaterowie"],
       type: "Bohater",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 8],
@@ -108,7 +108,7 @@ export const ogry = {
       exp: 8,
       skills: [0, 3, 5],
     },
-    Traper: {
+    "Traper (gnoblar)": {
       id: 4,
       startingEquipment: ["Sztylet", "Broń miotana (noże)"],
       cost: 25,
@@ -131,7 +131,7 @@ export const ogry = {
       exp: 0,
       skills: [0, 1, 4, 5],
     },
-    Zbrojny: {
+    "Zbrojny (Gnoblar)": {
       id: 5,
       startingEquipment: ["Sztylet"],
       cost: 15,
@@ -151,13 +151,13 @@ export const ogry = {
         "Stan niższy",
       ],
     },
-    Byk: {
+    "Byk (ogr)": {
       id: 5,
       startingEquipment: ["Maczuga ogrów"],
       cost: 140,
       number: 3,
       equipmentList:
-        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"].Stronnicy,
+        heroEquipment["Zwiadowcza kompania z Królestw Ogrów"]["Stronnicy"],
       type: "Stronnik",
       stats: {
         Początkowa: [6, 3, 2, 4, 4, 3, 2, 2, 7],

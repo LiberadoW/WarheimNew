@@ -1,3 +1,4 @@
+import { armyChoices } from "../Data.js/ArmyChoices";
 import isGeneral from "./isGeneral";
 import { getValueOfOptionalEquipment } from "./getValueOfOptionalEquipment";
 import { getAllEquipment } from "./getAllEquipment";
@@ -7,7 +8,7 @@ const getErrors = (army, totalCost, modelAmount, unitList, limit) => {
   let errors = 0;
 
   unitList.forEach((item, index) => {
-    const startingWeaponsOptions = Object.entries(item.equipmentList).filter(
+    const startingWeaponsOptions = Object.entries(item.equipmentList || {}).filter(
       ([key, value]) => value[2] === "Startowy"
     );
 
@@ -30,6 +31,25 @@ const getErrors = (army, totalCost, modelAmount, unitList, limit) => {
     if (unitNumbers[unit] > army?.heroes?.[unit]?.number) {
       errors += 1;
     }
+  });
+
+  (armyChoices[army.name] || []).forEach((group) => {
+    if (group.filter((name) => (unitNumbers[name] || 0) > 0).length > 1) errors += 1;
+  });
+
+  (army.unitRatios || []).forEach(({ unit, required, ratio }) => {
+    if ((unitNumbers[unit] || 0) > (unitNumbers[required] || 0) * ratio) errors += 1;
+  });
+
+  unitList.forEach((unit) => {
+    const profile = army.heroes[unit.unitName];
+    if (profile?.retired) errors += 1;
+    (profile?.requiredEquipmentGroups || []).forEach((group) => {
+      const options = Object.keys(profile.equipmentList).filter(
+        (name) => profile.equipmentList[name][2] === group
+      );
+      if (options.filter((name) => unit.optionalEquipment.includes(name) || unit.rules.includes(name)).length !== 1) errors += 1;
+    });
   });
 
   const equipmentList = getAllEquipment(unitList);

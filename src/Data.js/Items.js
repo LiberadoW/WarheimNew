@@ -1,4 +1,8 @@
 export const items = {
+  Katana: "Broń ręczna, parowanie, szybki.",
+  Wakizashi: "Broń ręczna, cios łaski, lekki, wyważony.",
+  "Wachlarz bojowy": "Broń ręczna, łamacz, parująca, wspinaczka, wyważony.",
+  Kropierz: "Wierzchowiec z zasadą Potwór otrzymuje +2 do Ochrony Pancerza (5+ bez pancerza), premię +1 do Siły trafień z uderzenia i zasadę Uderza jako ostatni.",
   Lekki: "Model odziany w LEKKI PANCERZ otrzymuje Ochronę Pancerza na 6+.",
   Średni: "Model odziany w ŚREDNI PANCERZ otrzymuje Ochronę Pancerza na 5+.",
   Ciężki: "Model odziany w CIĘŻKI PANCERZ otrzymuje Ochronę Pancerza na 4+.",

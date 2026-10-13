@@ -17,7 +17,7 @@ export const ostland = {
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -122,7 +122,7 @@ export const ostland = {
     Myśliwy: {
       id: 7,
       startingEquipment: ["Sztylet", "Łuk"],
-      cost: 25,
+      cost: 20,
       number: 7,
       equipmentList: heroEquipment["Zbrojna kompania z Ostlandu"].Stronnicy,
       type: "Stronnik",

@@ -17,7 +17,7 @@ export const reikland = {
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },
-    "Magister magii": {
+    "Magister Magii": {
       id: 1,
       startingEquipment: ["Sztylet", "Kostur"],
       cost: 35,
@@ -192,9 +192,9 @@ export const reikland = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Rydwan": ["-","-","-",5,5,8,"-","-","-"],
+        "Koń": [8,3,0,3,"-","-",3,1,5],
+        "Koń ": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Duży cel", "Machina wojenna", "Rydwan"],
     },

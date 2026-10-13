@@ -2,13 +2,13 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const piwowarzy = {
   heroes: {
-    "Mistrz Piwowar": {
+    "Mistrz piwowar": {
       id: 0,
       startingEquipment: ["Sztylet", "Topór krasnoludów"],
       cost: 75,
       number: 1,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Bohaterowie,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [3, 4, 4, 4, 4, 2, 3, 1, 9],
@@ -31,40 +31,29 @@ export const piwowarzy = {
       exp: 20,
       skills: [0, 1, 2, 3, 5],
     },
-    "Kowal Run": {
+    "Kowal run": {
       id: 1,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
       number: 1,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Bohaterowie,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [3, 4, 4, 3, 4, 1, 2, 1, 9],
         Maksymalna: [4, 7, 6, 4, 5, 3, 5, 4, 10],
       },
-      rules: [
-        "Kowal Run",
-        "Krzepki",
-        "Nieustępliwy",
-        "Odporność na magię (2)",
-        "Rankor",
-        "Rozproszenie magii (1)",
-        "Trudny do zabicia",
-        "Uporczywość",
-        "Wspinaczka",
-        "Zabobonny lęk",
-      ],
+      rules: ["Błogosławieństwo Valayi","Kowal Run","Krzepki","Nieustępliwy","Odporność na magię (2)","Rankor","Rozproszenie magii (1)","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk"],
       exp: 12,
       skills: [0, 2, 3, 5],
     },
-    "Mistrz Inżynier": {
+    "Mistrz inżynier": {
       id: 2,
       startingEquipment: ["Sztylet", "Buława/Maczuga/Młot bojowy"],
       cost: 50,
       number: 1,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Bohaterowie,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Bohaterowie,
       type: "Bohater",
       stats: {
         Początkowa: [3, 4, 4, 3, 4, 1, 2, 1, 9],
@@ -93,7 +82,7 @@ export const piwowarzy = {
       cost: 45,
       number: 2,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Zwiadowca,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Zwiadowca,
       type: "Bohater",
       stats: {
         Początkowa: [3, 4, 4, 3, 4, 1, 2, 1, 9],
@@ -115,13 +104,13 @@ export const piwowarzy = {
       exp: 8,
       skills: [0, 1, 4, 5],
     },
-    "Wojownik Klanowy": {
+    "Wojownik klanowy": {
       id: 4,
       startingEquipment: ["Sztylet"],
       cost: 25,
       number: 12,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Stronnicy,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 9],
@@ -140,13 +129,13 @@ export const piwowarzy = {
         "Zabobonny lęk",
       ],
     },
-    "Krasnoludzki Ranger": {
+    "Krasnoludzki ranger": {
       id: 5,
-      startingEquipment: ["Sztylet", "Topór kransoludów"],
+      startingEquipment: ["Sztylet","Topór krasnoludów"],
       cost: 45,
       number: 5,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Stronnicy,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 9],
@@ -165,7 +154,7 @@ export const piwowarzy = {
         "Zwiadowca",
       ],
     },
-    "Krasnoludzki Przepatrywacz": {
+    "Krasnoludzki przepatrywacz": {
       id: 6,
       startingEquipment: [
         "Sztylet",
@@ -176,7 +165,7 @@ export const piwowarzy = {
       cost: 80,
       number: 3,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Stronnicy,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Stronnicy,
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 9],
@@ -198,7 +187,7 @@ export const piwowarzy = {
         "Zwiadowca",
       ],
     },
-    "Pogromca Trolli": {
+    "Pogromca trolli": {
       id: 7,
       startingEquipment: [
         "Topór krasnoludów",
@@ -208,7 +197,7 @@ export const piwowarzy = {
       cost: 50,
       number: 3,
       equipmentList:
-        heroEquipment["Kompania Krasnoludzkich Piwowarów"].Pogromca,
+        heroEquipment["Kompania krasnoludzkich Piwowarów"].Pogromca,
       type: "Stronnik",
       stats: {
         Początkowa: [3, 4, 3, 3, 4, 1, 2, 1, 10],
@@ -237,9 +226,9 @@ export const piwowarzy = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Powóz": ["-","-","-",4,8,8,"-","-","-"],
+        "Kuc": [6,2,0,4,"-","-",2,1,5],
+        "Kuc ": [6,2,0,4,"-","-",2,1,5]
       },
       rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },
@@ -267,7 +256,7 @@ export const piwowarzy = {
   limit: 500,
   minModels: 3,
   maxModels: 12,
-  name: "Kompania Krasnoludzkich Piwowarów",
+  name: "Kompania krasnoludzkich Piwowarów",
   nature: "Neutralna",
   armyRules: ["Kontakty handlowe (3)", "Reduta", "Zhańbiony"],
   mercenaries: [

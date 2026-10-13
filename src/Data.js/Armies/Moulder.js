@@ -2,7 +2,7 @@ import { heroEquipment } from "../HeroEquipment";
 
 export const moulder = {
   heroes: {
-    "Mistrz Mutator": {
+    "Mistrz mutator": {
       id: 0,
       startingEquipment: ["Sztylet", "Bicz"],
       cost: 55,
@@ -24,7 +24,7 @@ export const moulder = {
       exp: 20,
       skills: [0, 2, 4, 5],
     },
-    "Mistrz Ciałokształtowania": {
+    "Mistrz ciałokształtowania": {
       id: 1,
       startingEquipment: ["Sztylet", "Bicz"],
       cost: 35,
