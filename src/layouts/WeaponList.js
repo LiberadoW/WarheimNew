@@ -741,6 +741,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
                             >{`${value[0]} zk `}</span>
                             <input
                               onClick={handleWeaponListClick}
+                              aria-label={displayName}
                               checked={isChecked}
                               data={value[2]}
                               data-alias={
@@ -762,6 +763,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
                             {showDoublePickCheckbox && (
                               <input
                                 onClick={handleWeaponListClick2}
+                                aria-label={`${displayName} — druga sztuka`}
                                 checked={
                                   isSplitOption
                                     ? totalAliasCount >= 2

@@ -545,7 +545,7 @@ const Builder = ({
             </details>
           </aside>}
           <section className="roster-panel" aria-label="Skład kompanii">
-            <div className="roster-heading"><div><h2>Skład kompanii</h2><p>{army.name}</p></div><span className="roster-count">{unitList.length} {unitList.length === 1 ? "wpis" : "wpisów"}</span></div>
+            <div className="roster-heading"><div><h2>Skład kompanii</h2><p>{army.name}</p></div><span className="roster-count">Pozycje: {unitList.length}</span></div>
             {unitList.length === 0 && <div className="roster-empty">
               <span className="empty-emblem"><FontAwesomeIcon icon={faUsers} /></span>
               <p className="eyebrow">KAŻDA HISTORIA MA POCZĄTEK</p>
