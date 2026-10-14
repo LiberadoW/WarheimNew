@@ -5,6 +5,7 @@ import { CommandContext } from "../layouts/Builder";
 
 const ArmySelect = ({
   army,
+  unitList,
   setArmy,
   setUnitList,
   setUnitName,
@@ -15,6 +16,7 @@ const ArmySelect = ({
   const { setStandardBearer, setMusician } = useContext(CommandContext);
 
   const handleOnChange = (e) => {
+    if (army.name !== e.target.value && unitList?.length > 0 && !window.confirm("Zmiana bandy wyczyści aktualną kompanię. Kontynuować?")) return;
     setArmy(e.target.value);
     setUnitName("");
     setUnitList([]);
@@ -29,8 +31,8 @@ const ArmySelect = ({
 
   return (
     <div className="army-select-container">
-      <span className="bold">Banda:</span>
-      <select onChange={handleOnChange} value={army.name}>
+      <label htmlFor="army-selection">Banda</label>
+      <select id="army-selection" onChange={handleOnChange} value={army.name}>
         <option disabled>Wybierz bandę</option>
 
         {Object.keys(armies)

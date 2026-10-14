@@ -1,4 +1,6 @@
 import { getArmyName } from "../Data.js/RulebookNames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileArrowDown, faEye, faFloppyDisk, faRotateLeft, faShieldHalved, faUsers } from "@fortawesome/free-solid-svg-icons";
 import React, { useContext, useEffect, useState, createContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
@@ -187,6 +189,7 @@ const Builder = ({
   setCampaignNotes,
   handleSetUnitExp,
   theme,
+  onShowPrintPreview,
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
@@ -356,7 +359,9 @@ const Builder = ({
     };
 
     try {
-      await html2pdf().from(element).set(options).save();
+      const sheet = element.cloneNode(true);
+      sheet.style.position = "static";
+      await html2pdf().from(sheet).set(options).save();
     } catch (err) {
       console.log(err);
       alert("Nie udało się zapisać PDF.");
@@ -510,107 +515,49 @@ const Builder = ({
     <CommandContext.Provider
       value={{ standardBearer, setStandardBearer, musician, setMusician }}
     >
-      <div className="builder">
-        <div className="builder-top-wrapper">
-          <div className="builder-controls">
-            <div className="builder-controls-buttons">
-              {!isPlayArmyView && (
-                <button className="button" onClick={handleResetArmyClick}>
-                  Resetuj
-                </button>
-              )}
-              <button className="button" onClick={handleSavePDFClick}>
-                Zapisz PDF
-              </button>
-              {isPlayArmyView && (
-                <button className="button" onClick={handleEndBattleClick}>
-                  Zakończ bitwę
-                </button>
-              )}
-              {currentUser && (
-                <button className="button " onClick={saveArmy}>
-                  Zapisz armię
-                </button>
-              )}
-            </div>
-
-            {!isEditArmyView && !isPlayArmyView && (
-              <div>
-                <input
-                  type="checkbox"
-                  onClick={handleCustomArmyCostClick}
-                ></input>
-                Zmień startową liczbę ZK
-              </div>
-            )}
-
-            {isCustomArmyCost && (
-              <div>
-                <input type="text" onChange={handleCustomArmyCostChange} />
-              </div>
-            )}
+      <div className="builder modern-builder">
+        <div className="workspace-heading">
+          <div><p className="eyebrow">WARHEIM · KREATOR KOMPANII</p>
+            <h1>{isPlayArmyView ? "Na polu bitwy" : isEditArmyView ? "Rozwój kompanii" : "Twoja kompania"}</h1>
+            <p className="workspace-description">{isPlayArmyView ? "Prowadź kompanię i zapisz wynik starcia." : "Zbierz drużynę. Wybierz ekwipunek. Napisz swoją historię."}</p>
           </div>
-
-          <div className="builder-select-container">
-            {!isEditArmyView && !isPlayArmyView && (
-              <ArmySelect
-                army={army}
-                setArmy={setArmy}
-                setUnitList={setUnitList}
-                setUnitName={setUnitName}
-                setIdShown={setIdShown}
-                setMercenaryUnitName={setMercenaryUnitName}
-                setMercenaries={setMercenaries}
-                resetCampaignNotes={resetCampaignNotes}
-              />
-            )}
-
-            {!isPlayArmyView && (
-              <UnitSelect
-                heroes={army?.heroes}
-                setUnitName={setUnitName}
-                unitName={unitName}
-                unitList={unitList}
-                setUnitList={setUnitList}
-              />
-            )}
+          <div className="workspace-actions">
+            <button className="button button-secondary" onClick={onShowPrintPreview}><FontAwesomeIcon icon={faEye} /> Podgląd karty</button>
+            <button className="button" onClick={handleSavePDFClick}><FontAwesomeIcon icon={faFileArrowDown} /> Zapisz PDF</button>
+            {currentUser && <button className="button" onClick={saveArmy}><FontAwesomeIcon icon={faFloppyDisk} /> Zapisz kompanię</button>}
+            {isPlayArmyView && <button className="button" onClick={handleEndBattleClick}>Zakończ bitwę</button>}
           </div>
         </div>
-
-        <ArmyInfo
-          prestige={prestige}
-          totalCost={totalCost}
-          army={army}
-          isCustomArmyCost={isCustomArmyCost}
-          customArmyCost={customArmyCost}
-          unitList={unitList}
-          setArmyName={setArmyName}
-          armyName={armyName}
-          errors={errors}
-          setErrors={setErrors}
-          theme={theme}
-        />
-
-        <div className="main-builder-container">
-          <div className="side-builder-left">
-            <UnitList
-              unitList={unitList}
-              setUnitList={setUnitList}
-              idShown={idShown}
-              setIdShown={setIdShown}
-              heroes={army?.heroes}
-              handleSetUnitExp={handleSetUnitExp}
-              army={army}
-            />
-            {isEditArmyView && (
-              <CampaignPointsEditor
-                army={army}
-                campaignNotes={campaignNotes}
-                setCampaignNotes={setCampaignNotes}
-              />
-            )}
-          </div>
+        <ArmyInfo {...{ prestige, totalCost, army, isCustomArmyCost, customArmyCost, unitList, setArmyName, armyName, errors, setErrors, theme }} />
+        <div className={`builder-workspace ${isPlayArmyView ? "play-workspace" : ""}`}>
+          {!isPlayArmyView && <aside className="recruitment-panel" aria-label="Rekrutacja">
+            <div className="panel-title"><FontAwesomeIcon icon={faShieldHalved} /><h2>Rekrutacja</h2></div>
+            {!isEditArmyView ? <ArmySelect {...{ army, unitList, setArmy, setUnitList, setUnitName, setIdShown, setMercenaryUnitName, setMercenaries, resetCampaignNotes }} />
+              : <p className="current-army-name">{army.name}</p>}
+            <p className="army-nature">Natura kompanii <strong>{army.nature}</strong></p>
+            <div className="recruitment-divider" />
+            <UnitSelect heroes={army?.heroes} armyName={army.name} {...{ setUnitName, unitName, unitList, setUnitList }} />
+            <p className="recruitment-hint">Dodaj postać, a następnie wybierz ją na liście, aby nadać jej imię i dobrać ekwipunek.</p>
+            <details className="company-settings"><summary>Ustawienia kompanii</summary>
+              {!isEditArmyView && <><label className="custom-budget-label"><input type="checkbox" checked={isCustomArmyCost} onChange={handleCustomArmyCostClick} /> Własny budżet początkowy</label>
+                {isCustomArmyCost && <label className="budget-input-label">Budżet (zk)<input type="number" min="0" value={customArmyCost} onChange={handleCustomArmyCostChange} /></label>}</>}
+              <button className="button button-quiet" onClick={handleResetArmyClick}><FontAwesomeIcon icon={faRotateLeft} /> Wyczyść kompanię</button>
+            </details>
+          </aside>}
+          <section className="roster-panel" aria-label="Skład kompanii">
+            <div className="roster-heading"><div><h2>Skład kompanii</h2><p>{army.name}</p></div><span className="roster-count">{unitList.length} {unitList.length === 1 ? "wpis" : "wpisów"}</span></div>
+            {unitList.length === 0 && <div className="roster-empty">
+              <span className="empty-emblem"><FontAwesomeIcon icon={faUsers} /></span>
+              <p className="eyebrow">KAŻDA HISTORIA MA POCZĄTEK</p>
+              <h3>Twoja kompania czeka na dowódcę</h3>
+              <p>Wybierz bandę i zrekrutuj pierwszego bohatera.<br />Tutaj pojawią się Twoje postacie i ich ekwipunek.</p>
+              <button className="button button-secondary" onClick={() => document.getElementById("unit-selection")?.focus()}>Wybierz pierwszą postać</button>
+            </div>}
+            <div className="roster-units"><UnitList {...{ unitList, setUnitList, idShown, setIdShown, handleSetUnitExp, army }} heroes={army?.heroes} /></div>
+            {isEditArmyView && <CampaignPointsEditor {...{ army, campaignNotes, setCampaignNotes }} />}
+          </section>
         </div>
+        <footer className="workspace-footer"><span>WARHEIM FANTASY SKIRMISH</span><span>Przygoda zaczyna się od kompanii.</span></footer>
       </div>
 
       <Modal showModal={showNewArmyModal} setShowModal={setShowNewArmyModal} />

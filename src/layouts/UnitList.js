@@ -67,19 +67,6 @@ const UnitList = ({
     setGroupedUnits(nextGroups);
   }, [unitList]);
 
-  const handleClickId = (e) => {
-    if (!e.target.classList.contains("unit-name")) {
-      return;
-    }
-
-    const selectedUnitId = e.target.closest(".unit")?.id;
-    if (!selectedUnitId) {
-      return;
-    }
-
-    setIdShown(idShown !== selectedUnitId ? selectedUnitId : null);
-  };
-
   const handleChange = (unitId, value) => {
     const unit = unitList.find((item) => item.uniqueId === unitId);
     if (!unit) {
@@ -94,7 +81,7 @@ const UnitList = ({
   return groupedUnits.map((unitsOfType, groupIndex) => (
     <React.Fragment key={`group-${ARRAY_OF_TYPES[groupIndex]}`}>
       {unitsOfType.length !== 0 && (
-        <h3 className="unit-list-divider">{ARRAY_OF_TYPES_DISPLAY[groupIndex]}</h3>
+        <h3 className="unit-list-divider">{ARRAY_OF_TYPES_DISPLAY[groupIndex]}<span>{unitsOfType.length}</span></h3>
       )}
       {unitsOfType.map((unit, unitIndex) => {
         const unitGlobalIndex = unitList.findIndex(
@@ -103,10 +90,14 @@ const UnitList = ({
 
         return (
           <React.Fragment key={unit.uniqueId}>
-            <div className={`unit ${unitIndex} ${unit.type}`} id={unit.uniqueId}>
-              <li className={`unit-info-container ${unitIndex}`} onClick={handleClickId}>
-                <span className="unit-name">{unit.unitName} </span>
-                <p className="unit-info">
+            <div className={`unit roster-unit ${idShown === unit.uniqueId ? "is-expanded" : ""} ${unitIndex} ${unit.type}`} id={unit.uniqueId}>
+              <div className={`unit-info-container ${unitIndex}`}>
+                <button className="unit-name" aria-expanded={idShown === unit.uniqueId} aria-label={`${unit.unitName} — ekwipunek i szczegóły`} onClick={() => setIdShown(idShown === unit.uniqueId ? null : unit.uniqueId)}>
+                  <span className="unit-initial" aria-hidden="true">{unit.unitName.charAt(0)}</span>
+                  <span className="unit-label"><strong>{unit.unitDisplayName || unit.unitName}</strong><small>{unit.unitDisplayName ? unit.unitName : unit.type} · {unit.exp || 0} PD</small></span>
+                  <span className="unit-chevron" aria-hidden="true">{idShown === unit.uniqueId ? "−" : "+"}</span>
+                </button>
+                <div className="unit-info">
                   <span className="number-of-henchmen">
                     {unit.type === "Stronnik" || unit.type === "Machina" ? (
                       <>
@@ -119,6 +110,7 @@ const UnitList = ({
                               handleChange(unit.uniqueId, Number(e.target.value))
                             }
                             name="number-of-henchmen"
+                            aria-label={`Liczba modeli: ${unit.unitName}`}
                             value={unit.selectedNumber}
                           >
                             {unit.unitName === "Duże Dżgacze" ||
@@ -140,15 +132,10 @@ const UnitList = ({
                   </span>
                   <span>{`${unit.totalCost} zk`}</span>
                   {!isPlayArmyView && (
-                    <span
-                      className={String(unitIndex)}
-                      onClick={() => handleDeleteClick(unit.uniqueId)}
-                    >
-                      <i className="fa-solid fa-trash-can"></i>
-                    </span>
+                    <button className="remove-unit" aria-label={`Usuń: ${unit.unitName}`} onClick={() => handleDeleteClick(unit.uniqueId)}><i className="fa-solid fa-trash-can" aria-hidden="true"></i></button>
                   )}
-                </p>
-              </li>
+                </div>
+              </div>
             </div>
             {idShown === unit.uniqueId && unitGlobalIndex !== -1 && (
               <UnitInfo

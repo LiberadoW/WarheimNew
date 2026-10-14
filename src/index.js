@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { AuthContextProvider } from "./Context/AuthContext";
 import "./index.css";
 import App from "./layouts/App";
+import "./styles/ModernBuilder.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

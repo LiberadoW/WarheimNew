@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import ArmyListErrors from "./ArmyListErrors";
-import armies from "../Data.js/Armies";
+
 import "../styles/ArmyInfo.css";
 import getErrors from "../Functions/getErrors";
 import getModelAmount from "../Functions/getModelAmount";
@@ -42,86 +42,35 @@ const ArmyInfo = ({
       setErrors(getErrors(army, totalCost, modelAmount, unitList, limit));
       return;
     }
-  }, [army, totalCost, modelAmount, unitList, isEditArmyView, limit]);
+  }, [army, totalCost, modelAmount, unitList, isEditArmyView, limit, setErrors]);
 
   const handleArmyNameChange = (e) => {
     setArmyName(e.target.value);
   };
 
+  const remaining = limit - totalCost;
+  const percent = limit > 0 ? Math.min(100, Math.max(0, totalCost / limit * 100)) : 0;
   return (
-    <div className="army-info-alerts-container">
-      <div className="army-info-container">
-        <div className="army-info-left">
-          {errors > 0 && (
-            <p className="alerts" onClick={handleClick}>
-              {clicked ? (
-                <i className="fa-solid fa-caret-down fa-xl"></i>
-              ) : (
-                <i className="fa-solid fa-caret-right fa-xl"></i>
-              )}
-              <span>
-                <i className="fa-solid fa-triangle-exclamation"></i> Liczba
-                błędów: {errors}{" "}
-              </span>
-            </p>
-          )}
+    <section className="company-summary" aria-label="Podsumowanie kompanii">
+      <div className="company-summary-main">
+        <label className="company-name-field" htmlFor="company-name">Nazwa kompanii
+          <input id="company-name" onChange={handleArmyNameChange} value={armyName} placeholder="Nadaj nazwę swojej kompanii" autoComplete="off" />
+        </label>
+        <div className={`budget-summary ${remaining < 0 && !isEditArmyView ? "over-budget" : ""}`}>
+          <span className="summary-label">{isEditArmyView ? "Wartość kompanii" : "Złote korony"}</span>
+          <strong>{totalCost} <span>{!isEditArmyView && `/ ${limit}`} zk</span></strong>
+          {!isEditArmyView && <><div className="budget-track" role="progressbar" aria-label="Wykorzystany budżet" aria-valuenow={Math.round(percent)} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${percent}%` }} /></div>
+            <small>{remaining >= 0 ? `Pozostało ${remaining} zk` : `Przekroczono budżet o ${-remaining} zk`}</small></>}
         </div>
-        <div className="army-info-right">
-          <p className="army-name-input">
-            <span>Nazwa kompanii:</span>{" "}
-            <input
-              onChange={handleArmyNameChange}
-              type="text"
-              value={armyName}
-            />
-          </p>
-          <p className="prestige">
-            <span className="bold">Prestiż:</span> {prestige}
-          </p>
-          {!isEditArmyView && (
-            <p
-              className="total-cost"
-              style={{
-                color:
-                  totalCost > limit
-                    ? "red"
-                    : theme === "dark"
-                      ? "#f2f2f2"
-                      : "black",
-              }}
-            >
-              <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
-            </p>
-          )}
-
-          <p
-            className="total-cost"
-            style={{
-              color:
-                totalCost > limit && !isEditArmyView
-                  ? "red"
-                  : theme === "dark"
-                    ? "#f2f2f2"
-                    : "black",
-            }}
-          >
-            <span className="bold">Liczba modeli:</span>{" "}
-            {isEditArmyView
-              ? modelAmount
-              : `${modelAmount} / ${army.maxModels}`}
-          </p>
-        </div>
+        <div className="summary-stat"><span className="summary-label">Modele</span><strong>{modelAmount}<span>{!isEditArmyView && ` / ${army.maxModels}`}</span></strong><small>{!isEditArmyView ? `Min. modeli: ${army.minModels}` : "W kompanii"}</small></div>
+        <div className="summary-stat"><span className="summary-label">Prestiż</span><strong>{prestige}</strong><small>Siła kompanii</small></div>
       </div>
-      {clicked && (
-        <ArmyListErrors
-          army={army}
-          unitList={unitList}
-          totalCost={totalCost}
-          limit={limit}
-        />
-      )}
-    </div>
+      {!isEditArmyView && <div className={`roster-validation ${errors ? "needs-attention" : "is-valid"}`}>
+        {errors ? <><button type="button" onClick={handleClick} aria-expanded={clicked} aria-controls="roster-validation-details"><span aria-hidden="true">{clicked ? "−" : "+"}</span> {unitList.length === 0 ? "Zacznij od dowódcy i skompletuj drużynę" : `Do sprawdzenia: ${errors}`}</button><span>{clicked ? "Ukryj szczegóły" : "Pokaż wymagania"}</span></>
+          : <p>✓ Kompania spełnia wymagania rekrutacji</p>}
+      </div>}
+      {clicked && errors > 0 && <div id="roster-validation-details"><ArmyListErrors army={army} unitList={unitList} totalCost={totalCost} limit={limit} /></div>}
+    </section>
   );
 };
-
 export default ArmyInfo;

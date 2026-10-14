@@ -656,7 +656,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
     <div className="equipment-list-container">
       <div className="equipment-list-name">
         {Object.keys(unitList[id].equipmentList).length === 0 ? null : (
-          <h4>Lista ekiwpunku</h4>
+          <h4>Ekwipunek</h4>
         )}
       </div>
       <div className="equipment-list">
