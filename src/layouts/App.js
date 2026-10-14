@@ -6,6 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Builder from "./Builder";
+import PrintPreview from "../Components/PrintPreview";
 import ArmyList from "../Components/ArmyList";
 import Register from "../Registration/Register";
 import Login from "../Registration/Login";
@@ -36,6 +37,7 @@ const App = () => {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login"></Navigate>;
   };
+  const [showPrintPreview, setShowPrintPreview] = useState(false);
   const [unitList, setUnitList] = useState([]);
   const [army, setArmy] = useState("Cyrkowcy z Ligii Ostermarku");
   const { currentUser } = useContext(AuthContext);
@@ -180,6 +182,7 @@ const App = () => {
                     setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
+                    onShowPrintPreview={() => setShowPrintPreview(true)}
                   />
                 }
               />
@@ -205,6 +208,7 @@ const App = () => {
                     setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
+                    onShowPrintPreview={() => setShowPrintPreview(true)}
                   />
                 }
               />
@@ -230,6 +234,7 @@ const App = () => {
                     setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
+                    onShowPrintPreview={() => setShowPrintPreview(true)}
                   />
                 }
               />
@@ -261,6 +266,7 @@ const App = () => {
           </Router>
         </main>
       </EditArmyContext.Provider>
+      <PrintPreview open={showPrintPreview} onClose={() => setShowPrintPreview(false)}>
       <div id="armylist">
         <ArmyList
           unitList={newUnitList}
@@ -273,6 +279,7 @@ const App = () => {
           campaignNotes={campaignNotes}
         />
       </div>
+      </PrintPreview>
     </div>
   );
 };
