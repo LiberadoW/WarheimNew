@@ -1,0 +1,218 @@
+[
+  {
+    "code": 11,
+    "name": "Agorafobia",
+    "text": "Bohater cierpiący na agorafobię, czyli strach przed otwartą przestrzenią, który znajdzie się na terenie otwartym przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem.",
+    "page": 412
+  },
+  {
+    "code": 12,
+    "name": "Aichmofobia",
+    "text": "Bohater chorujący na aichmofobię, czyli strach przed ostrymi przedmiotami, w walce wręcz posługuje się wyłącznie obuchową bronią do walki wręcz, a wrogie postaci uzbrojone w sieczną oraz drzewcową broń do walki wręcz wzbudzają w bohaterze STRACH.",
+    "page": 412
+  },
+  {
+    "code": 13,
+    "name": "Akrofobia",
+    "text": "Bohater cierpiący na akrofobię, czyli lęk wysokości, który znajdzie na wzniesieniu lub piętrze, a za takie miejsce należy uznać każdą płaszczyznę znajdującą się przynajmniej 2” nad powierzchnią stołu, przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem. Jeżeli model bohatera decyduje się na wspinaczkę lub zeskok lub przeskok to musi wykonać test STRACHU. Nieudany test oznacza, że model nie rusza się do końca tury.",
+    "page": 412
+  },
+  {
+    "code": 14,
+    "name": "Alkoholizm",
+    "text": "Bohater podlega zasadzie specjalnej ALKOHOLIZM.",
+    "page": 412
+  },
+  {
+    "code": 15,
+    "name": "Amnezja",
+    "text": "Należy wykonać rzut K6. Wynik 1-3 oznacza, że bohater cierpiący na amnezję zapomina wszystkie umiejętności z jednej losowo określonej listy umiejętności; rezultat 4-5 oznacza, że model zapomniał K3 losowo określone umiejętności; a 6 oznacza, że bohater zapomniał jedną losowo określoną umiejętność.",
+    "page": 412
+  },
+  {
+    "code": 16,
+    "name": "Animozja",
+    "text": "Bohater podlega zasadzie specjalnej ANIMOZJA.",
+    "page": 412
+  },
+  {
+    "code": 21,
+    "name": "Anoreksja",
+    "text": "Bohater cierpiący na anoreksję, czyli strach przed jedzeniem źle się czuje na samą myśl o posiłku i przestaje jeść. - Po pierwszej sekwencji po potyczce od nabawienia się choroby wartość współczynnika WT bohatera zostaje zmniejszona o -1 punkt. - Po trzeciej sekwencji po potyczce od nabawienia się schorzenia S bohatera zostaje zmniejszona o -1 punkt. - Po piątej sekwencji po potyczce od zachorowania na anoreksję wartość współczynników S i WT bohatera zostaje zmniejszona o kolejny -1 punkt. Należy zauważyć, że na skutek choroby wartość współczynników nie może zostać obniżona poniżej 1 punktu. Bohater cierpiący na anoreksję w trakcie sekwencji po potyczce nie bierze udziału w eksploracji oraz handlu. Wartość współczynników wraca do normy w tempie 1 punktu na każdą zakończoną sekwencję po potyczkę od wyleczenia dolegliwości.",
+    "page": 412
+  },
+  {
+    "code": 22,
+    "name": "Berserk",
+    "text": "Bohater podlega zasadzie specjalnej BERSERK.",
+    "page": 412
+  },
+  {
+    "code": 23,
+    "name": "Bezduszność",
+    "text": "Bohater podlega zasadzie specjalnej ZIMNOKRWISTY.",
+    "page": 412
+  },
+  {
+    "code": 24,
+    "name": "Choroba lokomocyjna",
+    "text": "Bohatera cierpiący na chorobę lokomocyjną, który podróżuje MACHINĄ WOJENNĄ lub dosiadając WIERZCHOWCA przeprowadzając wszystkie testy oparte na współczynniku CP wykonuje rzut 3K6 i odrzuca kostkę z najniższym wynikiem oraz musi powtórzyć wszystkie udane rzuty na trafienie. Wynik drugiego rzutu jest ostateczny.",
+    "page": 412
+  },
+  {
+    "code": 25,
+    "name": "Demencja",
+    "text": "Bohater cierpiący na demencję, czyli ogólne osłabienie umysłowe, staje się skłonny do niekontrolowanego mamrotania, napadów paranoi i strachu. Za każdym razem gdy bohater wykonana test oparty na współczynniku CP należy wykonać rzut K6. Wynik 1-3 oznacza, że model bohatera do następnego testu CP przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem; rezultat 4-5 oznacza, że do następnego testu CP wartość współczynnika CP modelu zostaje zmniejszona o -1 punkt, do minimalnej wartości 2 punktów; wynik 6 oznacza, że bohater do następnego testu CP podlega efektom zasady specjalnej GŁUPOTA.",
+    "page": 412
+  },
+  {
+    "code": 26,
+    "name": "Depresja",
+    "text": "Bohater cierpiący na depresję nie może szarżować oraz podlega zasadzie specjalnej UDERZA JAKO OSTATNI.",
+    "page": 412
+  },
+  {
+    "code": 31,
+    "name": "Donkiszoteria",
+    "text": "Za każdym razem, gdy bohaterowi cierpiącemu na donkiszoterię nie uda się test współczynnika CP automatycznie podlega zasadzie specjalnej FURIA.",
+    "page": 412
+  },
+  {
+    "code": 32,
+    "name": "Furia",
+    "text": "Bohater podlega zasadzie specjalnej FURIA.",
+    "page": 412
+  },
+  {
+    "code": 33,
+    "name": "Głód krwi",
+    "text": "Bohater podlega zasadzie specjalnej GŁÓD KRWI.",
+    "page": 412
+  },
+  {
+    "code": 34,
+    "name": "Głupota",
+    "text": "Bohater podlega zasadzie specjalnej GŁUPOTA.",
+    "page": 412
+  },
+  {
+    "code": 35,
+    "name": "Głupota heroiczna",
+    "text": "Bohater cierpiący na głupotę heroiczną nie może się UKRYĆ oraz ignoruje efekty nieudanego testu STRACHU oraz GROZY i SAM W WALCE, ale wciąż otrzymuje +1 PO za nieudany test STRACHU i +K3 PO za nieudany test GROZY. Bohater cierpiący z powodu głupoty heroicznej, który brał udział w rozgrywce, a w trakcie sekwencji po potyczce nie wykonywał rzutu na TABELĘ POWAŻNYCH RAN otrzymuje dodatkowy +1 Punkt Doświadczenia.",
+    "page": 412
+  },
+  {
+    "code": 36,
+    "name": "Halucynacje",
+    "text": "Za każdym razem, gdy bohater wykonana test oparty na współczynniku CP należy wykonać rzut K6. Wynik 1-2 oznacza, że bohater dostrzega w dręczących go halucynacjach zamierzenia wrogów, model może przerzucić wszystkie nieudane rzuty na trafienie. Wynik drugiego rzutu jest ostateczny. Rezultat 3-4 oznacza, że bohater dostrzega w majakach postacie sojuszników, model ignoruje efekty nieudanego testu STRACHU oraz GROZY i SAM W WALCE, ale wciąż otrzymuje +1 PO za nieudany test STRACHU i +K3 PO za nieudany test GROZY. Natomiast 5-6 oznacza, że dręczące bohatera upiory wskazują znajdujących się w pobliżu przeciwników, dzięki czemu model automatycznie wykrywa wszystkie UKRYTE modele. …demon rozmowę tę umilał sobie wypierdywanymi systematycznie bąkami, które kto wie czy nie niosły ładunku informacji zawartego w dźwięku, a być może ukrytego w zawiłej sekwencji zapachowej. A może… Może demon, zmieniając strukturę żywiołów powietrza, przekazuje nam prawdy święte i objawione, a jednak dla nas nierozszyfrowalne? Znaki pochodzące od samych bóstw? Może w tych pierdnięciach ukryto tajemne przesłanie wyjaśniające, jak zyskać szczęście, rozprawić się z biedą oraz chorobami? Jak stworzyć nowego człowieka, który największej przyjemności nie będzie znajdywał w dręczeniu drugiej myślącej istoty? Ha, boskie znaki! Może to są boskie znaki? A zważywszy na czystość naszych dusz, na naszą obyczajność, dobroć uczynków i na miłość, jaką odczuwamy ku bliźnim, to można się nawet spodziewać, iż znakomitym środkiem porozumienia się z nami były właśnie pierdnięcia demona Nurgla… - fragment dzieła Liber Chaotica, spisanego przez Prezbitera Richtera Klessa z Zakonu Pochodni, zamkniętego w Hospicjum dla Obłąkanych we Frederheim, w AS2500.",
+    "page": 412
+  },
+  {
+    "code": 41,
+    "name": "Homichlofobia",
+    "text": "Bohater cierpiący na homichlofobię, czyli strach przed mgłą, który w Starym Świecie nie jest całkiem bezpodstawny, który znajdzie się we mgle przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem. Jeżeli model bohatera decyduje się wejść w mgłę (zobacz MGŁA w TABELI POGODA w ROZDZIALE 11: SCENARIUSZE lub MGŁA w paragrafie ZDARZENIA LOSOWE w ROZDZIALE 12: ZASADY OPCJONALNE lub zaklęcie MGŁA w paragrafie MAGIA DEMONÓW w ROZDZIALE 22: MAGIA) lub na teren pokryty mgłą (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY), to najpierw to musi wykonać test STRACHU. Nieudany test oznacza, że model nie rusza się do końca tury.",
+    "page": 413
+  },
+  {
+    "code": 42,
+    "name": "Hydrofobia",
+    "text": "Bohater cierpiący na hydrofobię, czyli irracjonalny lęk przed wodą, który znajdzie na terenie wodnym lub w rzece (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY), przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem. Jeżeli model bohatera decyduje się przeprawić przez teren wodny lub rzekę to najpierw to musi wykonać test STRACHU. Nieudany test oznacza, że model nie rusza się do końca tury.",
+    "page": 413
+  },
+  {
+    "code": 43,
+    "name": "Katatonia",
+    "text": "Bohater, który nie zda testu STRACHU lub GROZY automatycznie odczuwa efekty działania zasady specjalnej GŁUPOTA.",
+    "page": 413
+  },
+  {
+    "code": 44,
+    "name": "Klaustrofobia",
+    "text": "Bohater cierpiący na klaustrofobię, czyli strach przed zamkniętą przestrzenią, który znajdzie się wewnątrz budowli lub jest wyekwipowany w CIĘŻKI PANCERZ przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem. Jeżeli bohater decyduje się na wejście do wnętrza budowli to najpierw to musi wykonać test STRACHU. Nieudany test oznacza, że model nie rusza się do końca tury.",
+    "page": 413
+  },
+  {
+    "code": 45,
+    "name": "Mania prześladowcza",
+    "text": "Bohater ogarnięty manią prześladowczą podlega zasadzie specjalnej UDERZA JAKO PIERWSZY, nie może jednak biegać oraz korzystać ze zdolności LOT, choć nadal może szarżować w zwykły sposób.",
+    "page": 413
+  },
+  {
+    "code": 46,
+    "name": "Megalomania",
+    "text": "Bohater cierpiący na megalomanię podlega zasadzie specjalnej UZURPATOR. Jeżeli bohater nie szarżował, to w czasie wykonywania ruchów przymusowych wykonuje ruch w kierunku najbliższej wrogiej postaci, nie może się UKRYĆ oraz automatycznie zdaje testy SAM W WALCE. Jeżeli megaloman podlega zasadzie specjalnej DOWÓDCA gracz dowodzący drużyną nie może zadeklarować dobrowolnego rozbicia. Megaloman, który brał udział w rozgrywce, a w trakcie sekwencji po potyczce nie wykonywał rzutu na TABELĘ POWAŻNYCH RAN otrzymuje dodatkowy +1 Punkt Doświadczenia.",
+    "page": 413
+  },
+  {
+    "code": 51,
+    "name": "Nadpobudliwość",
+    "text": "Bohater cierpiący na nadpobudliwość nie może się UKRYĆ, a wrogie postaci, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub NIEUMARŁY lub OPĘTANY, otrzymują kumulatywny modyfikator -1 do wszystkich rzutów na trafienie cierpiącego na schorzenie bohatera wykonywanych w fazie strzelania i w fazie walki wręcz.",
+    "page": 413
+  },
+  {
+    "code": 52,
+    "name": "Nienawiść",
+    "text": "Bohater z podlega zasadzie specjalnej ANIMOZJA oraz NIENAWIŚĆ.",
+    "page": 413
+  },
+  {
+    "code": 53,
+    "name": "Odrętwienie",
+    "text": "Bohater cierpiący na odrętwienie odcina się powoli od wszelkich bodźców, aż w końcu nie czuje już niczego. Drętwota jest podstępną i zdradziecką chorobą. - Po pierwszej sekwencji po potyczce od nabawienia się choroby na potrzeby rzutów na zranienie wartość współczynnika WT bohatera zostaje zwiększona o +1 punkt, ale wartość współczynnika I zostaje zmniejszona o -1 punkt. - Po trzeciej sekwencji po potyczce od nabawienia się schorzenia na potrzeby rzutów na zranienie wartość WT bohatera zostaje zwiększona o kolejny +1 punkt a wartość I zostaje zmniejszona o kolejny -1 punkt. - Po piątej sekwencji po potyczce od zachorowania na odrętwienie na potrzeby rzutów na zranienie wartość współczynnika WT bohatera zostaje zwiększona o kolejny +1 punkt, ale wartość I zostaje zmniejszona o kolejny -1 punkt. Z jednej strony odrętwienie może zwiększyć wartość współczynników ponad rasowe maksimum, aż do maksymalnej wartości 10 punktów, ale z drugiej strony na skutek choroby wartość współczynników nie może zostać obniżona poniżej 1 punktu. Wartość współczynników wraca do normy w tempie ±1 punktu na każdą zakończoną sekwencję po potyczkę od wyleczenia dolegliwości. Za każdym razem, kiedy bohater zostanie zraniony należy wykonać test CP. Nieudany test oznacza, że bohatera otrzymuje +1 Punkt Obłędu. Jeśli bohater nabawi się w ten sposób kolejnej choroby psychicznej będzie nią głupota heroiczna. Wrogie postaci naznaczone Piętnem Slaanesha w walce z bohaterem cierpiącym na odrętwienie podlegają zasadzie specjalnej NIENAWIŚĆ.",
+    "page": 413
+  },
+  {
+    "code": 54,
+    "name": "Opętanie",
+    "text": "Za każdym razem, gdy opętanemu bohaterowi nie uda się test współczynnika CP należy wykonać rzut K6. Wynik 1-3 oznacza, że bohater do następnego testu CP podlega zasadzie specjalnej DEMON; 4 oznacza, że bohater do następnego testu CP podlega zasadzie specjalnej ISTOTA ETERYCZNA; zaś wynik 5+ oznacza, że bohater do następnego testu CP podlega zasadzie specjalnej LEŚNY DUCH.",
+    "page": 413
+  },
+  {
+    "code": 55,
+    "name": "Pansaism",
+    "text": "Bohater z tym schorzeniem postrzega wszelkie nienaturalne istoty i zdarzenia jak coś zwykłego i naturalnego. Model cierpiący na pansaizm ignoruje efekty nieudanego testu STRACHU i GROZY, ale wciąż otrzymuje +1 PO za nieudany test STRACHU i +K3 PO za nieudany test GROZY.",
+    "page": 413
+  },
+  {
+    "code": 56,
+    "name": "Samotnik",
+    "text": "Bohater, automatycznie zdaje testy SAM W WALCE, jeżeli jednak znajdzie się odległości do 6” od innego sprzymierzonego modelu to przeprowadza wszystkie testy oparte na współczynniku CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem.",
+    "page": 413
+  },
+  {
+    "code": 61,
+    "name": "Schizofrenia",
+    "text": "Za każdym razem, gdy bohater wykonana test oparty na współczynniku CP należy wykonać rzut K6. Wynik 1-2 oznacza, że model do następnego testu CP cierpi z powodu DEPRESJI; 3-4 oznacza, że bohater do następnego testu CP odczuwa skutki GŁUPOTY HEROICZNEJ; a 5-6 oznacza, że bohater do następnego testu CP podlega efektom MANII PRZEŚLADOWCZEJ.",
+    "page": 413
+  },
+  {
+    "code": 62,
+    "name": "Urojony zbawca",
+    "text": "Gdy bohater zaczyna cierpień na to schorzenie umysłu, narasta w nim przeświadczenie, że jest wybrańcem, którego przeznaczeniem jest obalenie okrutnego tyrana. Jeżeli na początku fazy ruchu model bohatera jest jedynym sprzymierzonym modelem znajdujących się w promieniu 6” od DOWÓDCY to urojony zbawca natychmiast szarżuje na tyrana, za którego uważa swojego DOWÓDCĘ. Urojony zbawca i DOWÓDCA będą walczyć dopóty, dopóki jeden z modeli nie zostanie Wyłączony z akcji!.",
+    "page": 413
+  },
+  {
+    "code": 63,
+    "name": "Wewnętrzny wróg",
+    "text": "Pogrążony w szaleństwie umysł bohatera nie odróżnia sprzymierzeńców od wrogów, obłąkany bohater jest równie niebezpieczny dla swych sojuszników jak i przeciwników. Za każdym razem, gdy bohater wykonana test oparty na współczynniku CP należy wykonać rzut K6. Wynik 1-2 oznacza, że jeżeli inny sprzymierzony model znajduje się w zasięgu ruchu szarży i w polu widzenia to bohater natychmiast szarżuje i będzie walczył do końca tury ze sprzymierzonym modelem. Po zakończeniu fazy walki wręcz modele należy ustawić 1” od siebie. Jeżeli w zasięgu szarży i w polu widzenia nie znajduje się żaden inny sprzymierzony model, a bohater uzbrojony jest w broń dystansową będzie strzelał do najbliższego znajdującego się w polu widzenia sprzymierzonego modelu. Rezultat 3+ oznacza, że bohater rozpoznał swych sojuszników i zachowuje się normalnie.",
+    "page": 413
+  },
+  {
+    "code": 64,
+    "name": "Zmienność nastroju",
+    "text": "Samopoczucie bohatera balansuje pomiędzy euforią, a desperacją. Za każdym razem, gdy bohater wykonana test oparty na współczynniku CP należy wykonać rzut K6. Wynik 1-3 oznacza, że bohater do następnego testu CP opanowała DEPRESJA; a 4-6 oznacza, że model do następnego testu CP poddał się MANII PRZEŚLADOWCZEJ.",
+    "page": 413
+  },
+  {
+    "code": 65,
+    "name": "Zoofobia",
+    "text": "Modele z zasadą specjalną ZWIERZĘ wzbudzają STRACH w cierpiącym na zoofobię bohaterze. Jeżeli model bohatera decyduje się dosiąść WIERZCHOWCA z zasadą specjalną ZWIERZĘ to najpierw to musi wykonać test STRACHU. Nieudany test oznacza, że model nie rusza się do końca tury.",
+    "page": 413
+  },
+  {
+    "code": 66,
+    "name": "Żarłoczność",
+    "text": "Bohater z tym schorzeniem ma nienasycony apetyt, który stara się zaspokoić przy każdej możliwej okazji. - Po pierwszej sekwencji po potyczce od nabawienia się choroby model bohatera otrzymuje +1 punkt ŻW, ale wartość współczynnika I zostaje zmniejszona o -1 punkt. - Po trzeciej sekwencji po potyczce od nabawienia się schorzenia bohater otrzymuje +1 punkt S i WT, ale wartość SZ i I zostaje zmniejszona o -1 punkt. - Po piątej sekwencji po potyczce od zachorowania na żarłoczność model bohatera otrzymuje kolejny +1 punkt ŻW, ale wartość współczynników SZ i I zostaje zmniejszona o kolejny -1 punkt. Z jednej strony żarłoczność może zwiększyć wartość współczynników ponad rasowe maksimum, aż do maksymalnej wartości 10 punktów, ale z drugiej strony na skutek choroby wartość współczynników nie może zostać obniżona poniżej 1 punktu. Bohater cierpiący na żarłoczność podlega zasadzie specjalnej PRZEPASTNE TRZEWIA, a w trakcie sekwencji po potyczce nie bierze udziału w eksploracji oraz handlu. Wartość współczynników wraca do normy w tempie ±1 punktu na każdą zakończoną sekwencję po potyczkę od wyleczenia dolegliwości.",
+    "page": 413
+  }
+]

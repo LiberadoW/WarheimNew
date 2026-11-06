@@ -1,0 +1,142 @@
+[
+  {
+    "min": 11,
+    "max": 15,
+    "name": "Martwy",
+    "text": "Rany bohatera jątrzą się, a w część z nich wdaje się gangrena. Bohater umiera w mękach w wyniku odniesionych obrażeń i nie otrzymuje +1 PD za przeżycie potyczki. Ciało postaci spoczywa w jednym z niezliczonych bezimiennych grobów, a cały EKWIPUNEK który model posiadał przy sobie w chwili wykonywania rzutu w TABELI POWAŻNYCH RAN trafia do skarbca drużyny. Należy wykreślić bohatera z KARTY DRUŻYNY.",
+    "page": 410
+  },
+  {
+    "min": 16,
+    "max": 21,
+    "name": "Wielokrotnie zraniony",
+    "text": "Bohater żyje, ale odniesione przez model obrażenia są bardzo poważne. Należy wykonać rzut K3, którego wynik oznacza ilość rzutów K66 jakie należy wykonać określając rany jakie odniósł bohater. Rzut K66. Wynik 11-14 oznacza RANĘ NOGI, 15-22 RANĘ RĘKI, 23-24 SZALEŃSTWO, 25-31 oznacza STRZASKANĄ NOGĘ, 32-34 RANĘ KLATKI PIERSIOWEJ, z kolei rezultat 35-36 oznacza, że bohater został OŚLEPIONY, przy wyniku 41-43 model odniósł STARE WOJENNE RANY, rezultat 44-46 oznacza USZKODZENIE UKŁADU NERWOWEGO, zaś 51-54 to RANA DŁONI, 55-56 oznacza GŁĘBOKIE RANY, z kolei rezultat 61-62 oznacza, że bohater ma ZAWZIĘTEGO WROGA, 63-64 TO CO NAS NIE ZABIJE, TO NAS WZMOCNI, zaś 65-66 to PRZERAŻAJĄCE BLIZNY.",
+    "page": 410
+  },
+  {
+    "min": 22,
+    "max": 22,
+    "name": "Rana nogi",
+    "text": "W czasie rozgrywki noga bohatera zostaje poważnie stłuczona, a kości strzaskane w wielu miejscach. Choć rany zabliźniają się to wartość współczynnika SZYBKOŚĆ modelu bohatera zostaje zmniejszona do połowy wartości (zaokrąglając w dół). Wartość współczynnika nie może zostać obniżona poniżej 1 punktu. Bohater, który straci drugą nogę zostaje uznany za niezdatnego do walki i musi opuścić kompanię. Należy usunąć taki model z KARTY DRUŻYNY. Bohater może zastąpić źle zrośniętą nogę protezą (zobacz PROTEZY, DODATKI & USŁUGI w ROZDZIALE 14: EKWIPUNEK).",
+    "page": 410
+  },
+  {
+    "min": 23,
+    "max": 23,
+    "name": "Rana ręki",
+    "text": "Należy wykonać rzut K6, którego wynik określi jak poważne są uszkodzenia ramienia, które zostało w czasie rozgrywki poważnie stłuczone. Wynik 1, oznacza, że w ranę wdała się gangrena i przedramię zostało amputowane. Od tej pory model nie może używać broni WYMAGAJĄCEJ OBU RĄK oraz wspinać się. Bohater, który straci drugie ramię zostaje uznany za niezdatnego do walki i musi opuścić kompanię. Należy usunąć taki model z KARTY DRUŻYNY. Wynik 2+ oznacza, że rana ręki jest na tyle poważna, że bohater musi opuścić następną rozgrywkę by w pełni powrócić do zdrowia. Bohater, któremu amputowano przedramię, może zastąpić utraconą część kończyny protezą (zobacz PROTEZY, DODATKI & USŁUGI w ROZDZIALE 14: EKWIPUNEK).",
+    "page": 410
+  },
+  {
+    "min": 24,
+    "max": 24,
+    "name": "Szaleństwo",
+    "text": "Bohater zdrowieje, przynajmniej fizycznie. Koszmar ostatnich wydarzeń odbił się jednak na psychice postaci. Należy wykonać rzut K66 i odczytać wynik w TABELI CHORÓB PSYCHICZNYCH (zobacz paragraf OBŁĘD w ROZDZIALE 13: KAMPANIA).",
+    "page": 410
+  },
+  {
+    "min": 25,
+    "max": 25,
+    "name": "Strzaskana noga",
+    "text": "Aby określić jak poważne są rany nogi, należy wykonać rzut K6. Wynik 1 oznacza, że noga została trwale uszkodzona, a bohater nie może biegać oraz wykonywać zeskoku i przeskoku, choć nadal może szarżować w zwykły sposób. Rezultat 2+ oznacza, że noga została dość poważnie strzaskana i model, by w pełni wrócić do zdrowia musi opuścić następną rozgrywkę.",
+    "page": 410
+  },
+  {
+    "min": 26,
+    "max": 26,
+    "name": "Rana klatki piersiowej",
+    "text": "Bohater odniósł bardzo poważną ranę klatki piersiowej i choć model zdrowieje, to blizny do końca życia będą mu przypominać o odniesionych obrażeniach. Wartość współczynnika WYTRZYMAŁOŚĆ bohatera zostaje na stałe zmniejszona o -1 punkt. Wartość współczynnika nie może zostać obniżona poniżej 1 punktu.",
+    "page": 410
+  },
+  {
+    "min": 31,
+    "max": 31,
+    "name": "Oślepiony",
+    "text": "Bohater przeżył, jednak w wyniku odniesionych obrażeń stracił jedno oko. Wartość współczynnika US modelu zostaje na stałe zmniejszona o -1 punkt. Wartość współczynnika nie może zostać obniżona poniżej 1 punktu. Bohater, który straci drugie oko zostaje uznany za niezdatnego do walki i musi opuścić kompanię. Należy usunąć taki model z KARTY DRUŻYNY.",
+    "page": 410
+  },
+  {
+    "min": 32,
+    "max": 32,
+    "name": "Stare wojenne rany",
+    "text": "Bohater przeżył, jednak rany nie zabliźniają się dobrze i boleśnie przypominają o sobie w najmniej odpowiednich momentach. Przed rozpoczęciem każdej rozgrywki należy wykonać rzut K6. Wynik 1, oznacza, że stare rany odzywają się boleśnie i model nie może brać udziału w rozpoczynającej się rozgrywce.",
+    "page": 410
+  },
+  {
+    "min": 33,
+    "max": 33,
+    "name": "Uszkodzenie układu nerwowego",
+    "text": "Choć rany zabliźniają się, to uszkodzenia układu nerwowego są na tyle poważne, że wartość współczynnika INICJATYWA bohatera zostaje na stałe obniżona o -1 punkt. Wartość współczynnika nie może zostać obniżona poniżej 1 punktu.",
+    "page": 410
+  },
+  {
+    "min": 34,
+    "max": 34,
+    "name": "Rana dłoni",
+    "text": "Dłoń bohatera zostaje poważnie uszkodzona i choć rany powoli zabliźniają się to wartość współczynnika WW modelu zostaje na stałe obniżona o -1 punkt. Wartość współczynnika nie może zostać obniżona poniżej 1 punktu.",
+    "page": 410
+  },
+  {
+    "min": 35,
+    "max": 35,
+    "name": "Głębokie rany",
+    "text": "Choć obrażenia odniesione przez bohatera nie zagrażają jego życiu, to model musi opuścić kolejne K3 rozgrywki, w czasie których będzie wracał do pełni sił w OBOZOWISKU.",
+    "page": 410
+  },
+  {
+    "min": 36,
+    "max": 36,
+    "name": "Ograbiony",
+    "text": "Cios, który pozbawił bohatera przytomności nie był zbyt groźny. Jednak w czasie, gdy model pozostawał w objęciach Morra, wrogowie ograbili ciało nieprzytomnego bohatera. Kompania, której model Wyłączył z akcji! bohatera może umieścić w skarbcu drużyny cały posiadany przez ograbionego EKWIPUNEK.",
+    "page": 410
+  },
+  {
+    "min": 41,
+    "max": 55,
+    "name": "Powrót do zdrowia",
+    "text": "Obrażenia odniesione przez bohatera nie były zbyt poważne. Model powraca do pełni sił i może walczyć w kolejnej rozgrywce.",
+    "page": 410
+  },
+  {
+    "min": 56,
+    "max": 56,
+    "name": "Zawzięty wróg",
+    "text": "Choć fizyczne rany zostały w pełni wyleczone, to szok spowodowany strachem i bólem pozostawił swe piętno na psychice bohatera. Należy wykonać rzut K6, którego wynik określi wobec kogo bohater odczuwał będzie NIENAWIŚĆ, obwiniając przeciwnika za ból i strach. Wynik 1-3 oznacza, że model odczuwa NIENAWIŚĆ wobec postaci, przez którą został Wyłączyła z akcji!. Jeżeli bohater został Wyłączony z akcji! przez stronnika, odczuwa NIENAWIŚĆ do DOWÓDCY wrogiej drużyny. Rezultat 4 oznacza, że bohater odczuwa NIENAWIŚĆ wobec DOWÓDCY wrogiej kompanii. Z kolei 5 oznacza, że model bohatera NIENAWIDZI całej drużyny przeciwnika. Zaś 6 oznacza, że bohater będzie NIENAWIDZIŁ wszystkich modeli należących do wrogiej drużyny oraz wszystkich drużyn tego typu.",
+    "page": 410
+  },
+  {
+    "min": 61,
+    "max": 61,
+    "name": "Pojmany",
+    "text": "Model bohatera zostaje POJMANY przez wrogą drużynę, która Wyłączyła go z akcji!. Bohater może zostać odbity w trakcie rozgrywania scenariusza specjalnego MISJA RATUNKOWA (zobacz ROZDZIAŁ 11: SCENARIUSZE), wykupiony za okup ustalony przez gracza dowodzącego wrogą drużyną lub wymieniony za wojownika, który jest jeńcem w kompanii pojmanego. Więzień może zostać sprzedany handlarzom niewolników za równowartość K6x5 zk. Drużyny NIEUMARŁYCH mogą zabić jeńca, by wskrzesić go jako Zombie. Zaś ZŁE i CHAOTYCZNE kompanie mogą złożyć pojmanego w ofierze swym plugawym bóstwom, zaś ich DOWÓDCY otrzymują dodatkowy +1 Punkt Doświadczenia. Jeńcy, którzy zostaną wymienieni lub wykupieni za okup nie tracą swojego EKWIPUNKU. Jeżeli jednak zostaną sprzedani w niewolę lub zabici i zamienieni w Zombie lub złożeni w ofierze, cały posiadany przez nich EKWIPUNEK pozostaje w skarbcu drużyny, która POJMAŁA bohatera. Jeżeli model bohatera został Wyłączny z akcji! w wyniku działania zdarzenia losowego lub upadku lub utonięcia lub nieudanego testu należy wykonać rzut K66 odczytując wynik z TABELI POWAŻNYCH RAN, przerzucając wynik POJMANY.",
+    "page": 410
+  },
+  {
+    "min": 62,
+    "max": 63,
+    "name": "To co nas nie zabije, to nas wzmocni",
+    "text": "Bohater wylizuje się z ran, a jego psychika hartuje się w ogniu cierpienia i strachu. Model bohatera staje się odporny na STRACH i w mniejszym stopniu ulega GROZIE (należy wykonać rzut przeciw GROZIE jako rzut przeciw STRACHOWI).",
+    "page": 410
+  },
+  {
+    "min": 64,
+    "max": 64,
+    "name": "Przerażające blizny",
+    "text": "Choć rany goją się, to pozostawiają po sobie przerażające blizny układające się w groźne wzory, które mogą wzbudzić STRACH nawet w najtwardszych wojownikach. Bohater podlega zasadzie specjalnej STRACH.",
+    "page": 410
+  },
+  {
+    "min": 65,
+    "max": 65,
+    "name": "Zwerbowany na arenę",
+    "text": "Model bohatera odzyskuje świadomość na arenie jednego z okolicznych gimnazjonów i zmuszony jest do walki z gladiatorem (zobacz ROZDZIAŁ 15: NAJEMNE OSTRZA & POSTACIE DRAMATU). Należy wykonać rzut kostką, którego wynik określi kto szarżuje. Jeżeli bohater przegra walkę, należy wykonać rzut K6. Wynik 1-2 oznacza, że należy wykonać rzut K66: rezultat 11-14 oznacza RANĘ NOGI, 15-22 RANĘ RĘKI, 23-24 SZALEŃSTWO, 25-31 oznacza STRZASKANĄ NOGĘ, 32-34 RANĘ KLATKI PIERSIOWEJ, 35-36 oznacza, że bohater został OŚLEPIONY, przy wyniku 41-43 model odniósł STARE WOJENNE RANY, rezultat 44-46 oznacza USZKODZENIE UKŁADU NERWOWEGO, zaś 51-54 to RANA DŁONI, 55-56 oznacza GŁĘBOKIE RANY, z kolei rezultat 61-62 oznacza, że bohater ma ZAWZIĘTEGO WROGA, 63-64 TO CO NAS NIE ZABIJE, TO NAS WZMOCNI, zaś 65-66 to PRZERAŻAJĄCE BLIZNY; wynik 3+ oznacza, że gladiator oszczędził bohatera, który zostaje ograbiony i wyrzucony za bramy gimnazjonu, gdzie odnajdują go kompanii. Bohater, który wygrał otrzymuje nagrodę w wysokości 50 zk oraz +2 Punkty Doświadczenia, by w glorii zwycięstwa powrócić w szeregi swojej drużyny.",
+    "page": 410
+  },
+  {
+    "min": 66,
+    "max": 66,
+    "name": "Wbrew wszystkiemu",
+    "text": "Bohater, choć został bardzo ciężko ranny, powraca do zdrowia w zaskakująco szybkim tempie. Model bohatera otrzymuje +1 Punkt Doświadczenia.",
+    "page": 410
+  }
+]

@@ -1,0 +1,3030 @@
+{
+  "bractwo rycerskie": {
+    "page": 64,
+    "entries": [
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Nienawiść",
+        "restriction": ""
+      },
+      {
+        "name": "Podoficer",
+        "restriction": ""
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko DOWÓDCA i DUCHOWNY i templariusz"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": "tylko giermek"
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do Bractwa Rycerskiego, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DOWODZENIE (tylko DOWÓDCA) lub KAWALERZYSTA lub KRZEPKI lub NIENAWIŚĆ lub PODOFICER lub PRZYMIOT (tylko DOWÓDCA i DUCHOWNY i templariusz) lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA (tylko giermek) lub ZABÓJCZY CIOS (tylko DOWÓDCA) lub ŻELAZOSKÓRY. "
+  },
+  "cyrkowcy z ligii ostermarku": {
+    "page": 68,
+    "entries": [
+      {
+        "name": "Demagogia",
+        "restriction": "tylko szarlatan"
+      },
+      {
+        "name": "Handlarz",
+        "restriction": ""
+      },
+      {
+        "name": "Hipnotyczne spojrzenie",
+        "restriction": "tylko szarlatan"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz tresury",
+        "restriction": "tylko treser"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Podżeganie",
+        "restriction": "tylko szarlatan"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Cyrkowcy z Ligii Ostermarku, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DEMAGOGIA (tylko szarlatan) lub HANDLARZ lub HIPNOTYCZNE SPOJRZENIE (tylko szarlatan) lub KAWALERZYSTA lub LEKKA JAZDA lub MISTRZ TRESURY (tylko treser) lub MOCNA GŁOWA lub PODŻEGANIE (tylko szarlatan) lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA. "
+  },
+  "gang przemytników": {
+    "page": 72,
+    "entries": [
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Gadanina",
+        "restriction": ""
+      },
+      {
+        "name": "Łamignat",
+        "restriction": "tylko reketer"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Podżeganie",
+        "restriction": "tylko reketer"
+      },
+      {
+        "name": "Pułapkarz",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Wodny",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Gang przemytników, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAWALERZYSTA lub GADANINA lub ŁAMIGNAT (tylko reketer) lub MOCNA GŁOWA lub PODŻEGANIE (tylko reketer) lub PUŁAPKARZ lub REWELATOR (tylko DOWÓDCA) lub WODNY lub WOŹNICA lub ZASADZKA. "
+  },
+  "kult męczenników": {
+    "page": 76,
+    "entries": [
+      {
+        "name": "Dominacja",
+        "restriction": "tylko demagog"
+      },
+      {
+        "name": "Ekspiacja",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Męczennik",
+        "restriction": ""
+      },
+      {
+        "name": "Odporność na magię",
+        "restriction": "2"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko DOWÓDCA oraz prezbiter Sigmara"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Żywa tarcza",
+        "restriction": ""
+      },
+      {
+        "name": "Żywy święty",
+        "restriction": "tylko DOWÓDCA oraz prezbiter Sigmara"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Męczenników, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DOMINACJA (tylko demagog) lub EKSPIACJA (tylko DOWÓDCA) lub KRZEPKI lub MĘCZENNIK lub ODPORNOŚĆ NA MAGIĘ (2) lub REWELATOR (tylko DOWÓDCA) lub PRZYMIOT (tylko DOWÓDCA oraz prezbiter Sigmara) lub WOŹNICA lub ŻYWA TARCZA lub ŻYWY ŚWIĘTY (tylko DOWÓDCA oraz prezbiter Sigmara). "
+  },
+  "łowcy czarownic": {
+    "page": 80,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Ekspiacja",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Odporność na magię",
+        "restriction": "2"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Treser",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Żywy święty",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Łowcy czarownic, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub EKSPIACJA (tylko DOWÓDCA) lub KAWALERZYSTA lub KRZEPKI lub ODPORNOŚĆ NA MAGIĘ (2) lub REWELATOR (tylko DOWÓDCA) lub TRESER lub WOŹNICA lub ZABÓJCZY CIOS lub ŻYWY ŚWIĘTY (tylko DOWÓDCA). "
+  },
+  "muszkieterzy z nuln": {
+    "page": 84,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Rusznikarz",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Muszkieterzy z Nuln, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAWALERZYSTA lub KRZEPKI lub MOCNA GŁOWA lub PRZYBOCZNY lub RUSZNIKARZ lub RANGER lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "piechota morska z marienburga": {
+    "page": 88,
+    "entries": [
+      {
+        "name": "Handlarz",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko Czarownik"
+      },
+      {
+        "name": "Odkrywca",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Wodny",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Piechota Morska z Marienburga, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej HANDLARZ lub KAWALERZYSTA lub LEKKA JAZDA lub MOCNA GŁOWA lub NIEPOKOJĄCY (tylko Czarownik) lub ODKRYWCA lub PRZYBOCZNY lub REWELATOR (tylko DOWÓDCA) lub WODNY lub WOŹNICA. "
+  },
+  "gladiatorzy z jałowej krainy": {
+    "page": 92,
+    "entries": [
+      {
+        "name": "Brawura",
+        "restriction": ""
+      },
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz tresury",
+        "restriction": "tylko treser"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko czarownik"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko czempion"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko czempion"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Gladiatorzy z Jałowej Krainy, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BRAWURA lub DOWODZENIE (tylko DOWÓDCA) lub KAWALERZYSTA lub KRZEPKI lub MISTRZ TRESURY (tylko treser) lub NIEPOKOJĄCY (tylko czarownik) lub REWELATOR (tylko DOWÓDCA) lub PRZYMIOT (tylko czempion) lub WOŹNICA lub ZABÓJCZY CIOS (tylko czempion). "
+  },
+  "siostry sigmara": {
+    "page": 96,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Łamignat",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko siostry sigmara"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Trudny do zabicia",
+        "restriction": "tylko siostry sigmara"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Żywy święty",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Siostry Sigmara, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub DOWODZENIE (tylko DOWÓDCA) lub ŁAMIGNAT lub KRZEPKI lub PRZYMIOT (tylko siostry sigmara) lub REWELATOR (tylko DOWÓDCA) lub TRUDNY DO ZABICIA (tylko siostry sigmara) lub WOŹNICA lub ZABÓJCZY CIOS lub ŻYWY ŚWIĘTY (tylko DOWÓDCA). "
+  },
+  "strażnicy dróg z averlandu": {
+    "page": 100,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko traper"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Uporczywość",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Strażnicy dróg z Averlandu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAMUFLAŻ (tylko traper) lub KAWALERZYSTA lub LEKKA JAZDA lub PRZYBOCZNY lub RANGER lub REWELATOR (tylko DOWÓDCA) lub UPORCZYWOŚĆ lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "zbrojna kompania z ostlandu": {
+    "page": 104,
+    "entries": [
+      {
+        "name": "Bycza szarża",
+        "restriction": ""
+      },
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Handlarz",
+        "restriction": "tylko handlarz niewolników"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Łamigłówka",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Wojenny ryk",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zbrojnej kompanii z Ostlandu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BYCZA SZARŻA lub CHARAKTERNIK lub HANDLARZ (tylko handlarz niewolników) lub KAWALERZYSTA lub KRZEPKI lub ŁAMIGŁÓWKA lub MOCNA GŁOWA lub REWELATOR (tylko DOWÓDCA) lub WOJENNY RYK (tylko DOWÓDCA) lub WOŹNICA. "
+  },
+  "zbrojni z middenheim": {
+    "page": 108,
+    "entries": [
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Łamignat",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Treser",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zbrojni z Middenheim, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DOWODZENIE (tylko DOWÓDCA) lub KAWALERZYSTA lub KRZEPKI lub ŁAMIGNAT lub MOCNA GŁOWA lub RANGER lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub TRESER lub WOŹNICA. "
+  },
+  "żołnierze z reiklandu": {
+    "page": 112,
+    "entries": [
+      {
+        "name": "Brawura",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szczęście",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Żołnierze z Reiklandu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BRAWURA lub KAWALERZYSTA lub KRZEPKI lub LEKKA JAZDA lub MOCNA GŁOWA lub PRZYBOCZNY lub REWELATOR (tylko DOWÓDCA) lub SZCZĘŚCIE lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "rycerze graala": {
+    "page": 116,
+    "entries": [
+      {
+        "name": "Brawura",
+        "restriction": ""
+      },
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko panna Graala"
+      },
+      {
+        "name": "Nienawiść",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko panna Graala"
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko rycerze"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szczęście",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Rycerze Graala, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BRAWURA lub DOWODZENIE (tylko DOWÓDCA) lub KRZEPKI lub ŁASKA BOGÓW (tylko panna Graala) lub NIENAWIŚĆ lub NIEPOKOJĄCY (tylko panna Graala) lub PRZYMIOT (tylko rycerze) lub REWELATOR (tylko DOWÓDCA) lub SZCZĘŚCIE lub WOŹNICA. "
+  },
+  "zbrojna chorągiew z kisleva": {
+    "page": 120,
+    "entries": [
+      {
+        "name": "Bycza szarża",
+        "restriction": ""
+      },
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz tresury",
+        "restriction": "tylko treser"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiadowca",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zbrojna chorągiew z Kisleva, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BYCZA SZARŻA lub DOWODZENIE (tylko DOWÓDCA) lub KAWALERZYSTA lub KRZEPKI lub MISTRZ TRESURY (tylko treser) lub MOCNA GŁOWA lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS lub ZWIADOWCA. "
+  },
+  "piraci z sartosy": {
+    "page": 124,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Handlarz",
+        "restriction": ""
+      },
+      {
+        "name": "Łamigłówka",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko czarownik"
+      },
+      {
+        "name": "Odkrywca",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Wodny",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Piraci z Sartosy, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub HANDLARZ lub ŁAMIGŁÓWKA lub MOCNA GŁOWA lub NIEPOKOJĄCY (tylko czarownik) lub ODKRYWCA lub RANGER lub REWELATOR (tylko DOWÓDCA) lub WODNY lub WOŹNICA. "
+  },
+  "psy wojny": {
+    "page": 128,
+    "entries": [
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Kompania najemników",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko CZAROWNIK"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Ptasznik",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Psy Wojny, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DOWODZENIE (tylko DOWÓDCA) lub KAWALERZYSTA lub KOMPANIA NAJEMNIKÓW (tylko DOWÓDCA) lub KRZEPKI lub NIEPOKOJĄCY (tylko CZAROWNIK) lub PRZYBOCZNY lub PTASZNIK lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS. "
+  },
+  "szermierze z estalii": {
+    "page": 132,
+    "entries": [
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz tresury",
+        "restriction": "tylko matador"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko CZAROWNIK"
+      },
+      {
+        "name": "Prowokacja",
+        "restriction": ""
+      },
+      {
+        "name": "Riposta",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Zawadiaka",
+        "restriction": ""
+      },
+      {
+        "name": "Zbrojny po zemby",
+        "restriction": "tylko espadero"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Szermierze z Estalii, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAWALERZYSTA lub MISTRZ TRESURY (tylko matador) lub NIEPOKOJĄCY (tylko CZAROWNIK) lub PROWOKACJA lub RIPOSTA lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA) lub ZAWADIAKA lub ZBROJNY PO ZEMBY (tylko espadero). "
+  },
+  "raubritterzy z księstw granicznych": {
+    "page": 136,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Handlarz",
+        "restriction": "tylko raubritter"
+      },
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko kłusownik"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Łamigłówka",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Raubritterzy z Księstw Granicznych, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub HANDLARZ (tylko raubritter) lub KAMUFLAŻ (tylko kłusownik) lub KAWALERZYSTA lub LEKKA JAZDA lub ŁAMIGŁÓWKA lub MOCNA GŁOWA lub RANGER lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA. "
+  },
+  "emisariusze smoczego cesarza": {
+    "page": 140,
+    "entries": [
+      {
+        "name": "Demagogia",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Handlarz",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko kanclerz"
+      },
+      {
+        "name": "Odkrywca",
+        "restriction": ""
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "terakotowy żołnierz"
+      },
+      {
+        "name": "Receptury",
+        "restriction": "tylko inwestor"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko strażnik"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Emisariuszy, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DEMAGOGIA (tylko DOWÓDCA) lub HANDLARZ lub KAWALERZYSTA lub ŁASKA BOGÓW (tylko kanclerz) lub ODKRYWCA lub PRZYWOŁANIE (terakotowy żołnierz) (tylko DOWÓDCA) lub RECEPTURY (tylko inwestor)lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS (tylko strażnik). "
+  },
+  "klan wojowników z nipponu": {
+    "page": 144,
+    "entries": [
+      {
+        "name": "Bycza szarża",
+        "restriction": "tylko sumo"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko yamabushi"
+      },
+      {
+        "name": "Maszynista",
+        "restriction": ""
+      },
+      {
+        "name": "Odkrywca",
+        "restriction": ""
+      },
+      {
+        "name": "Przymiot",
+        "restriction": ""
+      },
+      {
+        "name": "Ptasznik",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Żniwiarz",
+        "restriction": "tylko HATAMOTO"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Klan wojowników z Nipponu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BYCZA SZARŻA (tylko sumo) lub KAWALERZYSTA lub ŁASKA BOGÓW (tylko yamabushi) lub MASZYNISTA lub ODKRYWCA lub PRZYMIOT lub PTASZNIK lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ŻNIWIARZ (tylko HATAMOTO). "
+  },
+  "kupiecka karawana z arabii": {
+    "page": 148,
+    "entries": [
+      {
+        "name": "Brawura",
+        "restriction": ""
+      },
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Handlarz",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Odkrywca",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiadowca",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kupiecka karawana z Arabii, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BRAWURA lub DOWODZENIE (tylko DOWÓDCA) lub HANDLARZ lub KAWALERZYSTA lub LEKKA JAZDA lub ODKRYWCA lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS lub ZWIADOWCA. "
+  },
+  "amazonki z lustrii": {
+    "page": 152,
+    "entries": [
+      {
+        "name": "Felczer",
+        "restriction": "tylko megiera"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lepsze ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Ptasznik",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zatruty atak",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Amazonki z Lustrii, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej FELCZER (tylko megiera) lub KAWALERZYSTA lub LEPSZE OCHRONNE TATUAŻE lub PTASZNIK lub RANGER lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZATRUTY ATAK lub ZASADZKA lub ŻELAZOSKÓRY (tylko DOWÓDCA). "
+  },
+  "berserkerzy z norski": {
+    "page": 156,
+    "entries": [
+      {
+        "name": "Bycza szarża",
+        "restriction": ""
+      },
+      {
+        "name": "Czarnoksięstwo",
+        "restriction": "tylko vitki"
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko vitki"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko vitki"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Wojenny ryk",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Berserkerzy z Norski, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BYCZA SZARŻA lub CZARNOKSIĘSTWO (tylko vitki) lub ŁASKA BOGÓW (tylko vitki) lub MOCNA GŁOWA lub NIEPOKOJĄCY (tylko vitki) lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub WOJENNY RYK lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "wojownicy burzy": {
+    "page": 160,
+    "entries": [
+      {
+        "name": "Egzorcysta",
+        "restriction": "tylko DOWÓDCA lub szpitalnik lub zbrojmistrz"
+      },
+      {
+        "name": "Ekspiacja",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Nienawiść",
+        "restriction": ""
+      },
+      {
+        "name": "Pawężnik",
+        "restriction": ""
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko DOWÓDCA lub szpitalnik lub zbrojmistrz"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Siłacz",
+        "restriction": ""
+      },
+      {
+        "name": "Trudny do zabicia",
+        "restriction": ""
+      },
+      {
+        "name": "Żniwiarz",
+        "restriction": "tylko zbrojmistrz"
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": "tylko DOWÓDCA lub szpitalnik lub zbrojmistrz"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Wojownicy Burzy, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej EGZORCYSTA (tylko DOWÓDCA lub szpitalnik lub zbrojmistrz) lub EKSPIACJA (tylko DOWÓDCA) lub NIENAWIŚĆ lub PAWĘŻNIK lub PRZYMIOT (tylko DOWÓDCA lub szpitalnik lub zbrojmistrz) lub REWELATOR (tylko DOWÓDCA) lub SIŁACZ lub TRUDNY DO ZABICIA lub ŻNIWIARZ (tylko zbrojmistrz) lub ŻELAZOSKÓRY (tylko DOWÓDCA lub szpitalnik lub zbrojmistrz). "
+  },
+  "niziołki z krainy zgromadzenia": {
+    "page": 164,
+    "entries": [
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Gadanina",
+        "restriction": "tylko niziołek"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": "tylko sierżant"
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szczęście",
+        "restriction": ""
+      },
+      {
+        "name": "Treser",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Niziołki z Krainy Zgromadzenia, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DOWODZENIE (tylko DOWÓDCA) lub GADANINA (tylko niziołek) lub KAWALERZYSTA lub MOCNA GŁOWA lub PRZYBOCZNY (tylko sierżant) lub RANGER lub REWELATOR (tylko DOWÓDCA) lub SZCZĘŚCIE lub TRESER lub WOŹNICA. "
+  },
+  "leśni elfowie z athel loren": {
+    "page": 168,
+    "entries": [
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko strażnik ścieżek"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Niezłomny",
+        "restriction": ""
+      },
+      {
+        "name": "Ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Przymiot",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy strzał",
+        "restriction": "tylko strażnik ścieżek"
+      },
+      {
+        "name": "Zwiadowca",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Leśni Elfowie z Athel Loren, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMUFLAŻ (tylko strażnik ścieżek) lub KAWALERZYSTA lub LEKKA JAZDA lub NIEZŁOMNY lub OCHRONNE TATUAŻE lub PRZYMIOT lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY STRZAŁ (tylko strażnik ścieżek) lub ZWIADOWCA. "
+  },
+  "elfowie wysokiego rodu z ulthuanu": {
+    "page": 172,
+    "entries": [
+      {
+        "name": "Brawura",
+        "restriction": ""
+      },
+      {
+        "name": "Gwardia lwa",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Uderza jako pierwszy",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Elfowie Wysokiego Rodu z Ulthuanu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BRAWURA lub GWARDIA LWA lub KAWALERZYSTA lub PRZYBOCZNY lub RANGER lub REWELATOR (tylko DOWÓDCA) lub UDERZA JAKO PIERWSZY lub WOŹNICA lub ZABÓJCZY CIOS lub ZASADZKA. "
+  },
+  "konwent magów wieży hoeth": {
+    "page": 176,
+    "entries": [
+      {
+        "name": "Aplikant",
+        "restriction": "tylko reflektant"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lekka jazda",
+        "restriction": ""
+      },
+      {
+        "name": "Magistrant",
+        "restriction": "tylko reflektant"
+      },
+      {
+        "name": "Maszynista",
+        "restriction": ""
+      },
+      {
+        "name": "Pretendent",
+        "restriction": "tylko reflektant"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Uderza jako pierwszy",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko mistrz miecza Hoeth"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Konwent magów Wieży Hoeth, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej APLIKANT (tylko reflektant) lub KAWALERZYSTA lub LEKKA JAZDA lub MAGISTRANT (tylko reflektant) lub MASZYNISTA lub PRETENDENT (tylko reflektant) lub REWELATOR (tylko DOWÓDCA) lub UDERZA JAKO PIERWSZY lub WOŹNICA lub ZABÓJCZY CIOS (tylko mistrz miecza Hoeth). "
+  },
+  "mroczni elfowie z naggaroth": {
+    "page": 180,
+    "entries": [
+      {
+        "name": "Handlarz",
+        "restriction": "tylko korsarz"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Smokobójca",
+        "restriction": ""
+      },
+      {
+        "name": "Wieczna nienawiść",
+        "restriction": "Elfowie Wysokiego Rodu z Ulthuanu"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Mroczni Elfowie z Naggaroth, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej HANDLARZ (tylko korsarz) lub KAWALERZYSTA lub KRZEPKI lub RANGER lub REWELATOR (tylko DOWÓDCA) lub SMOKOBÓJCA lub WIECZNA NIENAWIŚĆ (Elfowie Wysokiego Rodu z Ulthuanu) lub WOŹNICA lub ZABÓJCZY CIOS lub ZASADZKA. "
+  },
+  "bestiobójcy z kraka drak": {
+    "page": 184,
+    "entries": [
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko DOWÓDCA i tropiciel"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Pogromca",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Smokobójca",
+        "restriction": ""
+      },
+      {
+        "name": "Treser",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA i pawężnik"
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Bestiobójcy z Krak Drak, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMUFLAŻ (tylko DOWÓDCA i tropiciel) lub MOCNA GŁOWA lub POGROMCA lub RANGER lub REWELATOR (tylko DOWÓDCA) lub SMOKOBÓJCA lub TRESER lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA i pawężnik) lub ZASADZKA. "
+  },
+  "khazadzi z gór krańca świata": {
+    "page": 188,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kamienny spokój",
+        "restriction": ""
+      },
+      {
+        "name": "Maszynista",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Saper",
+        "restriction": ""
+      },
+      {
+        "name": "Wiarus",
+        "restriction": ""
+      },
+      {
+        "name": "Wspinaczka",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Khazadów z Gór Krańca Świata, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAMIENNY SPOKÓJ lub MASZYNISTA lub MOCNA GŁOWA lub PRZYBOCZNY lub SAPER lub WIARUS lub WSPINACZKA lub ZABÓJCZY CIOS (tylko DOWÓDCA) lub ŻELAZOSKÓRY. "
+  },
+  "kompania krasnoludzkich piwowarów": {
+    "page": 192,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kamienny spokój",
+        "restriction": ""
+      },
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko zwiadowca"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Szczęście",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Wspinaczka",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kompania krasnoludzkich Piwowarów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAMIENNY SPOKÓJ lub KAMUFLAŻ (tylko zwiadowca) lub KAWALERZYSTA lub MOCNA GŁOWA lub RANGER lub SZCZĘŚCIE lub WOŹNICA lub WSPINACZKA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "kult pogromców z karak kadrin": {
+    "page": 196,
+    "entries": [
+      {
+        "name": "Bycza szarżą",
+        "restriction": ""
+      },
+      {
+        "name": "Lepsze ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Łamigłówka",
+        "restriction": ""
+      },
+      {
+        "name": "Łamignat",
+        "restriction": ""
+      },
+      {
+        "name": "Maszynista",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Wojenny ryk",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Pogromców z Karak Kadrin, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BYCZA SZARŻĄ lub LEPSZE OCHRONNE TATUAŻE lub ŁAMIGŁÓWKA lub ŁAMIGNAT lub MASZYNISTA lub MOCNA GŁOWA lub RANGER lub WOJENNY RYK (tylko DOWÓDCA) lub ZABÓJCZY CIOS (tylko DOWÓDCA) lub ŻELAZOSKÓRY. "
+  },
+  "szkutnicy z barak varr": {
+    "page": 200,
+    "entries": [
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko zwiadowca"
+      },
+      {
+        "name": "Maszynista",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Ptasznik",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rusznikarz",
+        "restriction": ""
+      },
+      {
+        "name": "Wodny",
+        "restriction": ""
+      },
+      {
+        "name": "Wspinaczka",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiadowca",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Szkutnicy z Barak Varr, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMUFLAŻ (tylko zwiadowca) lub MASZYNISTA lub MOCNA GŁOWA lub PTASZNIK lub RANGER lub RUSZNIKARZ lub WODNY lub WSPINACZKA lub ZWIADOWCA lub ŻELAZOSKÓRY. "
+  },
+  "krasnoludowie chaosu z zorn uzkul": {
+    "page": 204,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Maszynista",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Stygmat hashuta",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Krasnoludowie Chaosu z Zorn Uzkul, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAMIENNA DUSZA (tylko DOWÓDCA) lub KAWALERZYSTA lub MASZYNISTA lub MOCNA GŁOWA lub PRZYBOCZNY lub RANGER lub STYGMAT HASHUTA lub ZASADZKA lub ŻELAZOSKÓRY. "
+  },
+  "jeźdźcy wilków": {
+    "page": 208,
+    "entries": [
+      {
+        "name": "Felczer",
+        "restriction": "tylko szaman hobgoblinów"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łamigłówka",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko szaman hobgoblinów"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Treser",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Zatruty atak",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Jeźdźcy Wilków, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej FELCZER (tylko szaman hobgoblinów) lub KAWALERZYSTA lub ŁAMIGŁÓWKA lub KRZEPKI lub NIEPOKOJĄCY (tylko szaman hobgoblinów) lub REWELATOR (tylko DOWÓDCA) lub TRESER lub WOŹNICA lub ZABÓJCZY CIOS lub ZATRUTY ATAK. "
+  },
+  "zwiadowcza kompania z królestw ogrów": {
+    "page": 212,
+    "entries": [
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko gnoblar"
+      },
+      {
+        "name": "Ludożerca",
+        "restriction": "tylko ogr"
+      },
+      {
+        "name": "Łamigłówka",
+        "restriction": "tylko ogr"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Oznakowany gnoblar",
+        "restriction": "tylko ogr"
+      },
+      {
+        "name": "Przymiot",
+        "restriction": "tylko ogr"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Wojenny ryk",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": "tylko gnoblar"
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": "tylko ogr"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zwiadowcza kompania z Królestw Ogrów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMUFLAŻ (tylko gnoblar) lub LUDOŻERCA (tylko ogr) lub ŁAMIGŁÓWKA (tylko ogr) lub MOCNA GŁOWA lub OZNAKOWANY GNOBLAR (tylko ogr) lub PRZYMIOT (tylko ogr) lub REWELATOR (tylko DOWÓDCA) lub WOJENNY RYK (tylko DOWÓDCA) lub WOŹNICA (tylko gnoblar) lub ŻELAZOSKÓRY (tylko ogr). "
+  },
+  "łupieżcza kompania fimirów": {
+    "page": 216,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko meargh i dirach"
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko meargh"
+      },
+      {
+        "name": "Mistrz mrocznej magii",
+        "restriction": "tylko meargh i dirach"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko meargh i dirach"
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "mniejszy demon"
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko szlachcic fimm"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Łupieżcza kompania Fimirów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko meargh i dirach) lub KRZEPKI lub ŁASKA BOGÓW (tylko meargh) lub MISTRZ MROCZNEJ MAGII (tylko meargh i dirach) lub NIEPOKOJĄCY (tylko meargh i dirach) lub PRZYWOŁANIE (mniejszy demon) (tylko DOWÓDCA) lub RANGER lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS (tylko szlachcic fimm). "
+  },
+  "kult ducha chaosu": {
+    "page": 220,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Piętno chaosu niepodzielonego",
+        "restriction": ""
+      },
+      {
+        "name": "Ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko OPĘTANY"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Ducha Chaosu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko DOWÓDCA) lub ŁASKA BOGÓW (tylko DOWÓDCA) lub PIĘTNO CHAOSU NIEPODZIELONEGO lub OCHRONNE TATUAŻE lub NIEPOKOJĄCY (tylko DOWÓDCA) lub REWELATOR (tylko DOWÓDCA) lub STYGMAT CHAOSU lub WOŹNICA lub WYBRANIEC MROCZNYCH BOGÓW lub ZABÓJCZY CIOS (tylko OPĘTANY). "
+  },
+  "kult karmazynowej czaszki": {
+    "page": 224,
+    "entries": [
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska khorna",
+        "restriction": ""
+      },
+      {
+        "name": "Odporność na magię",
+        "restriction": "2"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Karmazynowej Czaszki, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KRZEPKI lub ŁASKA KHORNA lub ODPORNOŚĆ NA MAGIĘ (2) lub PIĘTNO CHAOSU lub REWELATOR (tylko DOWÓDCA) lub SZAŁ (tylko DOWÓDCA) STYGMAT CHAOSU lub WOŹNICA lub WYBRANIEC MROCZNYCH BOGÓW lub ZABÓJCZY CIOS. "
+  },
+  "kult dzieci zagłady": {
+    "page": 228,
+    "entries": [
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Teriak",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Trudny do zabicia",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Dzieci Zagłady, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej ŁASKA BOGÓW (tylko DOWÓDCA) lub MOCNA GŁOWA lub NIEPOKOJĄCY (tylko DOWÓDCA) lub PIĘTNO CHAOSU lub REWELATOR (tylko DOWÓDCA) lub STYGMAT CHAOSU lub TERIAK (tylko DOWÓDCA) lub TRUDNY DO ZABICIA lub WOŹNICA lub WYBRANIEC MROCZNYCH BOGÓW. "
+  },
+  "kult sybarytów": {
+    "page": 232,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec bogów chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Sybarytów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko DOWÓDCA) lub ŁASKA BOGÓW (tylko DOWÓDCA) lub MOCNA GŁOWA lub NIEPOKOJĄCY (tylko DOWÓDCA) lub PIĘTNO CHAOSU lub REWELATOR (tylko DOWÓDCA) lub STYGMAT CHAOSU lub WOŹNICA lub WYBRANIEC BOGÓW CHAOSU lub ZABÓJCZY CIOS. "
+  },
+  "kult purpurowej dłoni": {
+    "page": 236,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zimnokrwisty",
+        "restriction": ""
+      },
+      {
+        "name": "Złowróż",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kult Purpurowej Dłoni, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko DOWÓDCA) lub ŁASKA BOGÓW (tylko DOWÓDCA) lub NIEPOKOJĄCY (tylko DOWÓDCA) lub PIĘTNO CHAOSU lub REWELATOR (tylko DOWÓDCA) lub STYGMAT CHAOSU lub WYBRANIEC MROCZNYCH BOGÓW lub WOŹNICA lub ZIMNOKRWISTY lub ZŁOWRÓŻ (tylko DOWÓDCA). "
+  },
+  "grasanci chaosu": {
+    "page": 240,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko czarnoksiężnik Chaosu"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zimnokrwisty",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Grasanci Chaosu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko czarnoksiężnik Chaosu) lub KAWALERZYSTA lub ŁASKA BOGÓW (tylko DOWÓDCA) lub NIEPOKOJĄCY (tylko DOWÓDCA) lub PIĘTNO CHAOSU lub REWELATOR (tylko DOWÓDCA) lub STYGMAT CHAOSU lub WYBRANIEC MROCZNYCH BOGÓW lub WOŹNICA lub ZIMNOKRWISTY. "
+  },
+  "karnawał chaosu": {
+    "page": 244,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Mistrz tresury",
+        "restriction": "tylko poskramiacz"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Podżeganie",
+        "restriction": "tylko harlekin"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko mocarz"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Karnawał Chaosu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko DOWÓDCA) lub ŁASKA BOGÓW (tylko DOWÓDCA) lub MISTRZ TRESURY (tylko poskramiacz) lub NIEPOKOJĄCY (tylko DOWÓDCA) lub PIĘTNO CHAOSU lub PODŻEGANIE (tylko harlekin) lub REWELATOR (tylko DOWÓDCA) lub STYGMAT CHAOSU lub WYBRANIEC MROCZNYCH BOGÓW lub ZABÓJCZY CIOS (tylko mocarz). "
+  },
+  "zbrojne stado zwierzoludzi": {
+    "page": 248,
+    "entries": [
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko szaman zwierzoludzi"
+      },
+      {
+        "name": "Piętno chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Stygmat chaosu",
+        "restriction": ""
+      },
+      {
+        "name": "Wojenny ryk",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Wybraniec mrocznych bogów",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiadowca",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zbrojne stado Zwierzoludzi, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej NIEPOKOJĄCY (tylko szaman zwierzoludzi) lub PIĘTNO CHAOSU lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub STYGMAT CHAOSU lub WOJENNY RYK (tylko DOWÓDCA) lub WOŹNICA lub WYBRANIEC MROCZNYCH BOGÓW lub ZWIADOWCA lub ŻELAZOSKÓRY. "
+  },
+  "nieumarła świta hrabiego von carstein": {
+    "page": 252,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko nekromanta"
+      },
+      {
+        "name": "Podoficer",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": "tylko dreg"
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "mroczny wilk"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Rój nietoperzy",
+        "restriction": "tylko hrabia von Carstein"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarła świta hrabiego von Carstein, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAWALERZYSTA lub NIEPOKOJĄCY (tylko nekromanta) lub PODOFICER (tylko DOWÓDCA) lub PRZYBOCZNY (tylko dreg) lub PRZYWOŁANIE (mroczny wilk) (tylko hrabia von Carstein) lub REWELATOR (tylko DOWÓDCA) lub RÓJ NIETOPERZY (tylko hrabia von Carstein) lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "nieumarły orszak księżnej lahmi": {
+    "page": 256,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Hipnotyczne spojrzenie",
+        "restriction": "tylko księżna Lahmi"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko nekromanta"
+      },
+      {
+        "name": "Podoficer",
+        "restriction": "tylko GWARDZISTA"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": "tylko dwórka"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Uderza jako pierwszy",
+        "restriction": "tylko księżna Lahmi"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios(tylko dowódca)",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarły orszak księżnej Lahmi, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub HIPNOTYCZNE SPOJRZENIE (tylko księżna Lahmi) lub KAWALERZYSTA lub NIEPOKOJĄCY (tylko nekromanta) lub PODOFICER (tylko GWARDZISTA) lub PRZYBOCZNY (tylko dwórka) lub REWELATOR (tylko DOWÓDCA) lub UDERZA JAKO PIERWSZY (tylko księżna Lahmi) lub WOŹNICA lub ZABÓJCZY CIOS(tylko DOWÓDCA). "
+  },
+  "nieumarły poczet krwawego smoka": {
+    "page": 260,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łamignat",
+        "restriction": "tylko krwawy smok"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko nekromanta"
+      },
+      {
+        "name": "Podoficer",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": "tylko giermek"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA i gwardzista"
+      },
+      {
+        "name": "Żniwiarz",
+        "restriction": "tylko krwawy smok"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarły poczet Krwawego Smoka, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAWALERZYSTA lub ŁAMIGNAT (tylko krwawy smok) lub NIEPOKOJĄCY (tylko nekromanta) lub PODOFICER (tylko DOWÓDCA) lub PRZYBOCZNY (tylko giermek) lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA i gwardzista) lub ŻNIWIARZ (tylko krwawy smok). "
+  },
+  "nieumarły sabat rodu nekrarch": {
+    "page": 264,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko nekrarcha"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz mrocznej magii",
+        "restriction": "tylko nekrarcha"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko nekrarcha i nekromanta"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": "tylko skryptor"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Tarot",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Złowróż",
+        "restriction": "tylko nekrarcha"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarły sabat rodu Nekrarch, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAMIENNA DUSZA (tylko nekrarcha) lub KAWALERZYSTA lub MISTRZ MROCZNEJ MAGII (tylko nekrarcha) lub NIEPOKOJĄCY (tylko nekrarcha i nekromanta) lub PRZYBOCZNY (tylko skryptor) lub REWELATOR (tylko DOWÓDCA) lub TAROT (tylko DOWÓDCA) lub WOŹNICA lub ZŁOWRÓŻ (tylko nekrarcha). "
+  },
+  "nieumarły tabor ludu strigosu": {
+    "page": 268,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łamignat",
+        "restriction": "tylko strigoi"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko nekromanta"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": "tylko strigan"
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "ghoul"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Rój nietoperzy",
+        "restriction": "tylko strigoi"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA i ghast"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarły tabor ludu Strigosu, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAWALERZYSTA lub ŁAMIGNAT (tylko strigoi) lub NIEPOKOJĄCY (tylko nekromanta) lub PRZYBOCZNY (tylko strigan) lub PRZYWOŁANIE (ghoul) (tylko strigoi) lub REWELATOR (tylko DOWÓDCA) lub RÓJ NIETOPERZY (tylko strigoi) lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA i ghast). "
+  },
+  "nieumarła horda liczmistrza": {
+    "page": 272,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko liczmistrz"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": "tylko liczmistrz i nekromanta"
+      },
+      {
+        "name": "Klątwa księcia grobowców",
+        "restriction": "tylko liczmistrz"
+      },
+      {
+        "name": "Nekrokleta",
+        "restriction": "tylko liczmistrz"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko liczmistrz i nekromanta"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiastun rozpaczy",
+        "restriction": "tylko liczmistrz"
+      },
+      {
+        "name": "Złowróż",
+        "restriction": "tylko liczmistrz"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarła horda Liczmistrza, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub KAMIENNA DUSZA (tylko liczmistrz) lub KAWALERZYSTA (tylko liczmistrz i nekromanta) lub KLĄTWA KSIĘCIA GROBOWCÓW (tylko liczmistrz) lub NEKROKLETA (tylko liczmistrz) lub NIEPOKOJĄCY (tylko liczmistrz i nekromanta) lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZWIASTUN ROZPACZY (tylko liczmistrz) lub ZŁOWRÓŻ (tylko liczmistrz). "
+  },
+  "nieumarły zastęp z nehekhary": {
+    "page": 276,
+    "entries": [
+      {
+        "name": "Błogosławieństwo asaph",
+        "restriction": "tylko nekrotekt"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz rzemiosła",
+        "restriction": "tylko nekrotekt"
+      },
+      {
+        "name": "Ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "nieumarły rój"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiastun rozpaczy",
+        "restriction": "tylko książę grobowców"
+      },
+      {
+        "name": "Żniwiarz",
+        "restriction": "tylko herold"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nieumarły zastęp z Nehekhary, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BŁOGOSŁAWIEŃSTWO ASAPH (tylko nekrotekt) lub KAWALERZYSTA lub MISTRZ RZEMIOSŁA (tylko nekrotekt) lub OCHRONNE TATUAŻE lub PRZYWOŁANIE (nieumarły rój) (tylko książę grobowców) lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZABÓJCZY CIOS lub ZWIASTUN ROZPACZY (tylko książę grobowców) lub ŻNIWIARZ (tylko herold). "
+  },
+  "eteryczny dwór króla kurhanów": {
+    "page": 280,
+    "entries": [
+      {
+        "name": "Kamienna dusza",
+        "restriction": "tylko profeta"
+      },
+      {
+        "name": "Kamuflaż",
+        "restriction": ""
+      },
+      {
+        "name": "Łaska bogów",
+        "restriction": "tylko profeta"
+      },
+      {
+        "name": "Mistrz mrocznej magii",
+        "restriction": "tylko profeta"
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": ""
+      },
+      {
+        "name": "Poltergeist",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko dowódca"
+      },
+      {
+        "name": "Rój nietoperzy",
+        "restriction": "tylko król kurhanów"
+      },
+      {
+        "name": "Złowróż",
+        "restriction": "tylko profeta"
+      },
+      {
+        "name": "Zwiastun rozpaczy",
+        "restriction": "tylko król kurhanów"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Eteryczny dwór Króla kurhanów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej KAMIENNA DUSZA (tylko profeta) lub KAMUFLAŻ lub ŁASKA BOGÓW (tylko profeta) lub MISTRZ MROCZNEJ MAGII (tylko profeta) lub NIEPOKOJĄCY lub POLTERGEIST lub REWELATOR (tylko dowódca) lub RÓJ NIETOPERZY (tylko król kurhanów) lub ZŁOWRÓŻ (tylko profeta) lub ZWIASTUN ROZPACZY (tylko król kurhanów). "
+  },
+  "zwiadowcze stado klanu eshin": {
+    "page": 284,
+    "entries": [
+      {
+        "name": "Chwytny ogon",
+        "restriction": ""
+      },
+      {
+        "name": "Infiltracja",
+        "restriction": "tylko czarnoszczur"
+      },
+      {
+        "name": "Murołaz",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Sztuka cichej śmierci",
+        "restriction": ""
+      },
+      {
+        "name": "Uderza jako pierwszy",
+        "restriction": ""
+      },
+      {
+        "name": "Wodny",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zwiadowcze stado klanu Eshin, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHWYTNY OGON lub INFILTRACJA (tylko czarnoszczur) lub MUROŁAZ lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub SZTUKA CICHEJ ŚMIERCI lub UDERZA JAKO PIERWSZY lub WODNY lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA). "
+  },
+  "poganiacze klanu moulder": {
+    "page": 288,
+    "entries": [
+      {
+        "name": "Chirurgia",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Chwytny ogon",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz tresury",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Murołaz",
+        "restriction": ""
+      },
+      {
+        "name": "Ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zimnokrwisty",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Poganiacze klanu Moulder, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHIRURGIA (tylko DOWÓDCA) lub CHWYTNY OGON lub MISTRZ TRESURY lub MOCNA GŁOWA lub MUROŁAZ lub OCHRONNE TATUAŻE lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub WOŹNICA lub ZIMNOKRWISTY. "
+  },
+  "kult zarazy klanu pestilens": {
+    "page": 292,
+    "entries": [
+      {
+        "name": "Furia",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Stygmat rogatego szczura",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Teriak",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zatruty atak",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Kultu Zarazy klanu Pestilens, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej FURIA lub MOCNA GŁOWA lub NIEPOKOJĄCY (tylko DOWÓDCA) lub STYGMAT ROGATEGO SZCZURA lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub TERIAK (tylko DOWÓDCA) lub WOŹNICA lub ZATRUTY ATAK lub ŻELAZOSKÓRY. "
+  },
+  "harcownicy klanu skryre": {
+    "page": 296,
+    "entries": [
+      {
+        "name": "Chwytny ogon",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": "tylko DOWÓDCA i czarnoszczur"
+      },
+      {
+        "name": "Mistrz spacztechnologii",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Murołaz",
+        "restriction": ""
+      },
+      {
+        "name": "Ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Spaczinżynieria",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Trudny do zabicia",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Harcownicy klanu Skryre, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHWYTNY OGON lub KRZEPKI (tylko DOWÓDCA i czarnoszczur) lub MISTRZ SPACZTECHNOLOGII (tylko DOWÓDCA) lub MUROŁAZ lub OCHRONNE TATUAŻE lub REWELATOR (tylko DOWÓDCA) lub SPACZINŻYNIERIA (tylko DOWÓDCA) lub SZAŁ lub TRUDNY DO ZABICIA (tylko DOWÓDCA) lub WOŹNICA. "
+  },
+  "zbrojne stado klanu mors": {
+    "page": 300,
+    "entries": [
+      {
+        "name": "Chwytny ogon",
+        "restriction": ""
+      },
+      {
+        "name": "Krzepki",
+        "restriction": ""
+      },
+      {
+        "name": "Łamignat",
+        "restriction": ""
+      },
+      {
+        "name": "Murołaz",
+        "restriction": ""
+      },
+      {
+        "name": "Niepokojący",
+        "restriction": "tylko szary prorok"
+      },
+      {
+        "name": "Przyboczny",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zabójczy cios",
+        "restriction": "tylko DOWÓDCA i czarnoszczur"
+      }
+    ],
+    "text": ": Bohater należący do kompanii Zbrojne stado klanu Mors, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHWYTNY OGON lub KRZEPKI lub ŁAMIGNAT lub MUROŁAZ lub NIEPOKOJĄCY (tylko szary prorok) lub PRZYBOCZNY lub REWELATOR (tylko DOWÓDCA) lub SZAŁ lub WOŹNICA lub ZABÓJCZY CIOS (tylko DOWÓDCA i czarnoszczur). "
+  },
+  "łowcze plemię dzikich orków": {
+    "page": 304,
+    "entries": [
+      {
+        "name": "Barwy łooomotu!",
+        "restriction": "tylko szaman dzikich orków"
+      },
+      {
+        "name": "Barwy wojenne",
+        "restriction": ""
+      },
+      {
+        "name": "Bycza szarża",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Lepsze ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Łooomot!",
+        "restriction": ""
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "snotling"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Ty być trupa!",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Łowcze plemię Dzikich Orków, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BARWY ŁOOOMOTU! (tylko szaman dzikich orków) lub BARWY WOJENNE lub BYCZA SZARŻA lub KAWALERZYSTA lub LEPSZE OCHRONNE TATUAŻE lub ŁOOOMOT! lub PRZYWOŁANIE (snotling) (tylko DOWÓDCA) lub REWELATOR (tylko DOWÓDCA) lub TY BYĆ TRUPA! lub WOŹNICA. "
+  },
+  "plemię leśnych goblinów": {
+    "page": 308,
+    "entries": [
+      {
+        "name": "Ochronne tatuaże",
+        "restriction": ""
+      },
+      {
+        "name": "Felczer",
+        "restriction": "tylko szaman leśnych goblinów"
+      },
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko traper leśnych goblinów"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "snotling"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Treser",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      },
+      {
+        "name": "Zatruty atak",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Plemię Leśnych Goblinów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej OCHRONNE TATUAŻE lub FELCZER (tylko szaman leśnych goblinów) lub KAMUFLAŻ (tylko traper leśnych goblinów) lub KAWALERZYSTA lub PRZYWOŁANIE (snotling) (tylko DOWÓDCA) lub REWELATOR (tylko DOWÓDCA) lub TRESER lub WOŹNICA lub ZASADZKA lub ZATRUTY ATAK. "
+  },
+  "orkowie & gobliny": {
+    "page": 312,
+    "entries": [
+      {
+        "name": "Barwy łooomotu!",
+        "restriction": "tylko szaman orków"
+      },
+      {
+        "name": "Barwy wojenne",
+        "restriction": ""
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Łooomot!",
+        "restriction": ""
+      },
+      {
+        "name": "Ja mieć plana!",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "snotling"
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Ty być trupa!",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Orkowie & Gobliny, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej BARWY ŁOOOMOTU! (tylko szaman orków) lub BARWY WOJENNE lub KAWALERZYSTA lub ŁOOOMOT! lub JA MIEĆ PLANA! (tylko DOWÓDCA) lub PRZYWOŁANIE (snotling) (tylko DOWÓDCA) lub REWELATOR (tylko DOWÓDCA) lub TY BYĆ TRUPA! lub WOŹNICA lub ŻELAZOSKÓRY. "
+  },
+  "nocne gobliny": {
+    "page": 316,
+    "entries": [
+      {
+        "name": "Felczer",
+        "restriction": "tylko szaman nocnych goblinów"
+      },
+      {
+        "name": "Kamuflaż",
+        "restriction": "tylko sieciarz nocnych goblinów"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "snotling"
+      },
+      {
+        "name": "Saper",
+        "restriction": ""
+      },
+      {
+        "name": "Szał",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zasadzka",
+        "restriction": ""
+      },
+      {
+        "name": "Zatruty atak",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Nocne Gobliny, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej FELCZER (tylko szaman nocnych goblinów) lub KAMUFLAŻ (tylko sieciarz nocnych goblinów) lub KAWALERZYSTA lub PRZYWOŁANIE (snotling) (tylko DOWÓDCA) lub SAPER lub SZAŁ lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZASADZKA lub ZATRUTY ATAK. "
+  },
+  "załoga zielonoskórych kaprów": {
+    "page": 320,
+    "entries": [
+      {
+        "name": "Charakternik",
+        "restriction": ""
+      },
+      {
+        "name": "Felczer",
+        "restriction": "tylko szaman goblinów"
+      },
+      {
+        "name": "Handlarz",
+        "restriction": ""
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Odkrywca",
+        "restriction": ""
+      },
+      {
+        "name": "Przywołanie",
+        "restriction": "snotling"
+      },
+      {
+        "name": "Ranger",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Wodny",
+        "restriction": ""
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Załoga Zielonoskórych Kaprów, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej CHARAKTERNIK lub FELCZER (tylko szaman goblinów) lub HANDLARZ lub MOCNA GŁOWA lub ODKRYWCA lub PRZYWOŁANIE (snotling) (tylko DOWÓDCA) lub RANGER lub REWELATOR (tylko DOWÓDCA) lub WODNY lub WOŹNICA. "
+  },
+  "jaszczuroludzie z lustrii": {
+    "page": 324,
+    "entries": [
+      {
+        "name": "Dowodzenie",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Kawalerzysta",
+        "restriction": ""
+      },
+      {
+        "name": "Mistrz skrytobójstwa",
+        "restriction": "tylko skinki"
+      },
+      {
+        "name": "Mocna głowa",
+        "restriction": ""
+      },
+      {
+        "name": "Rewelator",
+        "restriction": "tylko DOWÓDCA"
+      },
+      {
+        "name": "Woźnica",
+        "restriction": ""
+      },
+      {
+        "name": "Zatruty atak",
+        "restriction": ""
+      },
+      {
+        "name": "Zwiadowca",
+        "restriction": ""
+      },
+      {
+        "name": "Żelazoskóry",
+        "restriction": "tylko saurus"
+      },
+      {
+        "name": "Żniwiarz",
+        "restriction": ""
+      }
+    ],
+    "text": ": Bohater należący do kompanii Jaszczuroludzie z Lustrii, który osiągnął kolejny poziom doświadczenia i w ramach rozwoju wylosował nową umiejętność może nauczyć się zasady specjalnej DOWODZENIE (tylko DOWÓDCA) lub KAWALERZYSTA lub MISTRZ SKRYTOBÓJSTWA (tylko skinki) lub MOCNA GŁOWA lub REWELATOR (tylko DOWÓDCA) lub WOŹNICA lub ZATRUTY ATAK lub ZWIADOWCA lub ŻELAZOSKÓRY (tylko saurus) lub ŻNIWIARZ. "
+  }
+}

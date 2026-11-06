@@ -12,6 +12,7 @@ const normalizeCustomEquipment = (entry, index) => {
     const normalizedPrice = parsePrice(entry.price);
 
     return {
+      ...entry,
       id: entry.id || `legacy-custom-${index}`,
       name: normalizedName,
       price: Number.isNaN(normalizedPrice) ? 0 : normalizedPrice,
