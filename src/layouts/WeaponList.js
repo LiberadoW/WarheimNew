@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/WeaponList.css";
 import { addCommandCost } from "../Functions/addCommandCost";
 import { setCommandNumberModels } from "../Functions/setCommandNumberModels";
@@ -6,6 +6,8 @@ import mageEquipmentList from "../Data.js/MageEquipmentList";
 import { getItemText } from "../Functions/getItemText";
 import { CommandContext } from "./Builder";
 import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
+import RulesModal from "../Components/RulesModal";
+import { getRuleText, getWeaponRuleNames } from "../Functions/getRuleText";
 import { getEquipmentStats } from "../Data.js/EquipmentStats";
 import {
   EQUIPMENT_CATEGORIES,
@@ -69,6 +71,7 @@ const EquipmentStatsLine = ({ name, unit }) => {
 };
 
 const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
+  const [inspectedEquipment, setInspectedEquipment] = useState(null);
   const { standardBearer, setStandardBearer, musician, setMusician } =
     useContext(CommandContext);
 
@@ -552,6 +555,15 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
     }
   };
 
+  const inspectedName = inspectedEquipment
+    ? getEquipmentStats(inspectedEquipment.displayName)
+      ? inspectedEquipment.displayName
+      : inspectedEquipment.canonicalName
+    : null;
+  const inspectedRules = inspectedName
+    ? [...new Set(getWeaponRuleNames(getEquipmentStats(inspectedName)?.rules))]
+    : [];
+
   const weaponLimit = getWeaponLimit(unitList[id]);
   const categories = EQUIPMENT_CATEGORIES.map((name, index) => ({
     name,
@@ -595,7 +607,15 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
                     <li className="equipment-item" key={option.key}>
                       <div className="equipment-item-main">
                         <span className="equipment-item-name">
-                          {option.displayName}
+                          <button
+                            type="button"
+                            className="equipment-details-link"
+                            onClick={() => setInspectedEquipment(option)}
+                            aria-haspopup="dialog"
+                            aria-label={`Pokaż statystyki i zasady: ${option.displayName}`}
+                          >
+                            {option.displayName}
+                          </button>
                           {option.copies === 2 && (
                             <span className="equipment-badge">×2</span>
                           )}
@@ -623,10 +643,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
                           <span className="equipment-remove-placeholder" />
                         )}
                       </div>
-                      <EquipmentStatsLine
-                        name={option.canonicalName}
-                        unit={unitList[id]}
-                      />
                     </li>
                   );
                 })}
@@ -658,6 +674,25 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
           </section>
         );
       })}
+
+      {inspectedEquipment && (
+        <RulesModal
+          title={inspectedEquipment.displayName}
+          sections={[{
+            title: "Opisy zasad",
+            entries: inspectedRules.map((name) => ({ name, text: getRuleText(name) })),
+          }]}
+          onClose={() => setInspectedEquipment(null)}
+        >
+          <section className="rules-modal-section">
+            <h3>Profil ekwipunku</h3>
+            <EquipmentStatsLine name={inspectedName} unit={unitList[id]} />
+            {!getEquipmentStats(inspectedName) && !getItemText(inspectedName, unitList[id]) && (
+              <p>Brak opisu ekwipunku.</p>
+            )}
+          </section>
+        </RulesModal>
+      )}
 
       {isCommandGroup && (
         <section className="equipment-category">
