@@ -1,0 +1,4394 @@
+[
+  {
+    "army": "bractwo rycerskie",
+    "name": "Komtur",
+    "availability": null,
+    "page": 65
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Kapłan",
+    "availability": 9,
+    "page": 65
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Templariusz",
+    "availability": 7,
+    "page": 65
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Giermek",
+    "availability": 6,
+    "page": 65
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Zbrojny",
+    "availability": 0,
+    "page": 66
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Flagelant",
+    "availability": 8,
+    "page": 66
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Gwardzista",
+    "availability": 7,
+    "page": 66
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Rycerz zakonny",
+    "availability": 8,
+    "page": 66
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Półgryfon",
+    "availability": 10,
+    "page": 67
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Bitewny ołtarz",
+    "availability": 9,
+    "page": 67
+  },
+  {
+    "army": "bractwo rycerskie",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 67
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Mecenas",
+    "availability": null,
+    "page": 69
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Magister magii (kolegium cienia)",
+    "availability": 8,
+    "page": 69
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Kapłan ranalda",
+    "availability": 8,
+    "page": 69
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Szarlatan",
+    "availability": 8,
+    "page": 69
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Treser",
+    "availability": 9,
+    "page": 69
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Cyrkowiec",
+    "availability": 0,
+    "page": 70
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Siłacz",
+    "availability": 8,
+    "page": 70
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Żongler",
+    "availability": 8,
+    "page": 70
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Woltyżer",
+    "availability": 8,
+    "page": 70
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Ogr",
+    "availability": 11,
+    "page": 71
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Niedźwiedź",
+    "availability": 9,
+    "page": 71
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 71
+  },
+  {
+    "army": "cyrkowcy z ligii ostermarku",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 71
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Herszt gangu",
+    "availability": null,
+    "page": 73
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Kapłan ranalda",
+    "availability": 8,
+    "page": 73
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Kapłan mananna",
+    "availability": 8,
+    "page": 73
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Reketer",
+    "availability": 7,
+    "page": 73
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Paser",
+    "availability": 7,
+    "page": 73
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Przemytnik",
+    "availability": 0,
+    "page": 74
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Doker",
+    "availability": 8,
+    "page": 74
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Nożownik",
+    "availability": 7,
+    "page": 74
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Rozbójnik",
+    "availability": 8,
+    "page": 75
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 75
+  },
+  {
+    "army": "gang przemytników",
+    "name": "Wóz przemytniczy",
+    "availability": 9,
+    "page": 75
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Ucieleśniony",
+    "availability": null,
+    "page": 77
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 77
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Demagog",
+    "availability": 7,
+    "page": 77
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Podżegacz",
+    "availability": 5,
+    "page": 77
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Zelota",
+    "availability": 0,
+    "page": 78
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Flagelant",
+    "availability": 8,
+    "page": 78
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Procarzęta",
+    "availability": 6,
+    "page": 79
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Pogromca trolli",
+    "availability": 7,
+    "page": 79
+  },
+  {
+    "army": "kult męczenników",
+    "name": "Bitewny ołtarz",
+    "availability": 9,
+    "page": 79
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Inkwizytor",
+    "availability": null,
+    "page": 81
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 81
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Łowca czarownic",
+    "availability": 7,
+    "page": 81
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Zelota",
+    "availability": 0,
+    "page": 82
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Flagelant",
+    "availability": 8,
+    "page": 82
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Pies bojowy",
+    "availability": 6,
+    "page": 83
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Rycerz zakonny",
+    "availability": 8,
+    "page": 83
+  },
+  {
+    "army": "łowcy czarownic",
+    "name": "Pokutnik",
+    "availability": 9,
+    "page": 83
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Kapitan",
+    "availability": null,
+    "page": 85
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Magister magii (kolegium metalu albo ognia)",
+    "availability": 8,
+    "page": 85
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 85
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Inżynier",
+    "availability": 7,
+    "page": 85
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Sierżant",
+    "availability": 6,
+    "page": 85
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Milicjant",
+    "availability": 0,
+    "page": 86
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Muszkieter",
+    "availability": 6,
+    "page": 86
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Strażnik miejski",
+    "availability": 6,
+    "page": 86
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Rajtar",
+    "availability": 8,
+    "page": 86
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Krasnoludzki ranger",
+    "availability": 9,
+    "page": 87
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Wóz bojowy",
+    "availability": 9,
+    "page": 87
+  },
+  {
+    "army": "muszkieterzy z nuln",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 87
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Kapitan",
+    "availability": null,
+    "page": 89
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Czarownik",
+    "availability": 8,
+    "page": 89
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Kapłan mananna",
+    "availability": 8,
+    "page": 89
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Bosman",
+    "availability": 6,
+    "page": 89
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Mat",
+    "availability": 5,
+    "page": 89
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Marynarz",
+    "availability": 0,
+    "page": 90
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Harpunnik",
+    "availability": 6,
+    "page": 90
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Żołnierz okrętowy",
+    "availability": 6,
+    "page": 90
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Przepatrywacz",
+    "availability": 8,
+    "page": 91
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Bukanier",
+    "availability": 10,
+    "page": 91
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 91
+  },
+  {
+    "army": "piechota morska z marienburga",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 91
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Mecenas",
+    "availability": null,
+    "page": 93
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Czarownik",
+    "availability": 8,
+    "page": 93
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Czempion",
+    "availability": 7,
+    "page": 93
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Felczer",
+    "availability": 7,
+    "page": 93
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Treser",
+    "availability": 9,
+    "page": 93
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 94
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Gladiator",
+    "availability": 7,
+    "page": 94
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Szablozębny",
+    "availability": 9,
+    "page": 94
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Pogromca trolli",
+    "availability": 9,
+    "page": 94
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 95
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Niedźwiedź",
+    "availability": 9,
+    "page": 95
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Nomada",
+    "availability": 8,
+    "page": 95
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 95
+  },
+  {
+    "army": "gladiatorzy z jałowej krainy",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 95
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Przeorysza",
+    "availability": null,
+    "page": 97
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 97
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Siostra bitwy",
+    "availability": 7,
+    "page": 97
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Szpitalniczka",
+    "availability": 6,
+    "page": 97
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Nowicjuszka",
+    "availability": 0,
+    "page": 98
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Siostra sigmara",
+    "availability": 7,
+    "page": 98
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Pokutnica",
+    "availability": 8,
+    "page": 98
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Rycerz zakonny",
+    "availability": 8,
+    "page": 99
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Bitewny ołtarz",
+    "availability": 9,
+    "page": 99
+  },
+  {
+    "army": "siostry sigmara",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 99
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Kapitan",
+    "availability": null,
+    "page": 101
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Magister magii",
+    "availability": 8,
+    "page": 101
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 101
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Sierżant",
+    "availability": 6,
+    "page": 101
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Traper",
+    "availability": 6,
+    "page": 101
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Strażnik dróg",
+    "availability": 0,
+    "page": 102
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Myśliwy",
+    "availability": 6,
+    "page": 102
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Pikinier",
+    "availability": 6,
+    "page": 102
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Rajtar",
+    "availability": 8,
+    "page": 103
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Pogromca trolli",
+    "availability": 9,
+    "page": 103
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 103
+  },
+  {
+    "army": "strażnicy dróg z averlandu",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 103
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Kapitan",
+    "availability": 0,
+    "page": 105
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Magister magii",
+    "availability": 8,
+    "page": 105
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 105
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Sierżant",
+    "availability": 6,
+    "page": 105
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Handlarz niewolników",
+    "availability": 6,
+    "page": 105
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 106
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Żołnierz",
+    "availability": 0,
+    "page": 106
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Myśliwy",
+    "availability": 6,
+    "page": 106
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 107
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Przepatrywacz",
+    "availability": 8,
+    "page": 107
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 107
+  },
+  {
+    "army": "zbrojna kompania z ostlandu",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 107
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Pierworodny",
+    "availability": null,
+    "page": 109
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Magister magii (kolegium metalu albo niebios)",
+    "availability": 8,
+    "page": 109
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Kapłan ulryka",
+    "availability": 8,
+    "page": 109
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Wybrany syn",
+    "availability": 7,
+    "page": 109
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Krewniak",
+    "availability": 6,
+    "page": 109
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Zbrojny",
+    "availability": 0,
+    "page": 110
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Łucznik",
+    "availability": 6,
+    "page": 110
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Włócznik",
+    "availability": 6,
+    "page": 110
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Wilczarz",
+    "availability": 6,
+    "page": 111
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Przepatrywacz",
+    "availability": 8,
+    "page": 111
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 111
+  },
+  {
+    "army": "zbrojni z middenheim",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 111
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Kapitan",
+    "availability": null,
+    "page": 113
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Magister magii",
+    "availability": 8,
+    "page": 113
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Prezbiter sigmara",
+    "availability": 8,
+    "page": 113
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Sierżant",
+    "availability": 6,
+    "page": 113
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Adiutant",
+    "availability": 5,
+    "page": 113
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Żołnierz",
+    "availability": 0,
+    "page": 114
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Kusznik",
+    "availability": 6,
+    "page": 114
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Miecznik",
+    "availability": 6,
+    "page": 114
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Rajtar",
+    "availability": 8,
+    "page": 115
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Flagelant",
+    "availability": 8,
+    "page": 115
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 115
+  },
+  {
+    "army": "żołnierze z reiklandu",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 115
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Rycerz graala",
+    "availability": null,
+    "page": 117
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Panna graala",
+    "availability": 8,
+    "page": 117
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Rycerz próby",
+    "availability": 7,
+    "page": 117
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Rycerz królestwa",
+    "availability": 6,
+    "page": 117
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Piechur",
+    "availability": 0,
+    "page": 118
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Zbrojny graala",
+    "availability": 6,
+    "page": 118
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Pielgrzym graala",
+    "availability": 8,
+    "page": 118
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Błędny rycerz",
+    "availability": 8,
+    "page": 119
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Pegaz",
+    "availability": 10,
+    "page": 119
+  },
+  {
+    "army": "rycerze graala",
+    "name": "Bitewny ołtarz",
+    "availability": 9,
+    "page": 119
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Bojar",
+    "availability": null,
+    "page": 121
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Magister lodu",
+    "availability": 8,
+    "page": 121
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Kapłan ursuna",
+    "availability": 8,
+    "page": 121
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Sierżant",
+    "availability": 6,
+    "page": 121
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Treser",
+    "availability": 9,
+    "page": 121
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Adiutant",
+    "availability": 5,
+    "page": 121
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Zbrojny",
+    "availability": 0,
+    "page": 122
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Kozak",
+    "availability": 6,
+    "page": 122
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Myśliwy",
+    "availability": 6,
+    "page": 122
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Husarz",
+    "availability": 8,
+    "page": 123
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Nomada",
+    "availability": 8,
+    "page": 123
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Niedźwiedź",
+    "availability": 9,
+    "page": 123
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 123
+  },
+  {
+    "army": "zbrojna chorągiew z kisleva",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 123
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Kapitan piratów",
+    "availability": null,
+    "page": 125
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Czarownik",
+    "availability": 8,
+    "page": 125
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Kapłan mananna",
+    "availability": 8,
+    "page": 125
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Bosman",
+    "availability": 6,
+    "page": 125
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Łowca niewolników",
+    "availability": 6,
+    "page": 125
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Mat",
+    "availability": 5,
+    "page": 125
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 126
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Pirat",
+    "availability": 0,
+    "page": 126
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Żołnierz okrętowy",
+    "availability": 6,
+    "page": 126
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Przepatrywacz",
+    "availability": 8,
+    "page": 127
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 127
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 127
+  },
+  {
+    "army": "piraci z sartosy",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 127
+  },
+  {
+    "army": "psy wojny",
+    "name": "Kapitan",
+    "availability": null,
+    "page": 129
+  },
+  {
+    "army": "psy wojny",
+    "name": "Czarownik",
+    "availability": 8,
+    "page": 129
+  },
+  {
+    "army": "psy wojny",
+    "name": "Kapłan myrmidii",
+    "availability": 8,
+    "page": 129
+  },
+  {
+    "army": "psy wojny",
+    "name": "Sierżant",
+    "availability": 6,
+    "page": 129
+  },
+  {
+    "army": "psy wojny",
+    "name": "Adiutant",
+    "availability": 5,
+    "page": 129
+  },
+  {
+    "army": "psy wojny",
+    "name": "Najemnik",
+    "availability": 0,
+    "page": 130
+  },
+  {
+    "army": "psy wojny",
+    "name": "Oblężnik z remas",
+    "availability": 6,
+    "page": 130
+  },
+  {
+    "army": "psy wojny",
+    "name": "Lansjer",
+    "availability": 8,
+    "page": 130
+  },
+  {
+    "army": "psy wojny",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 131
+  },
+  {
+    "army": "psy wojny",
+    "name": "Ptasznik z catrazzy",
+    "availability": 9,
+    "page": 131
+  },
+  {
+    "army": "psy wojny",
+    "name": "Wóz bojowy",
+    "availability": 9,
+    "page": 131
+  },
+  {
+    "army": "psy wojny",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 131
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Caballero",
+    "availability": null,
+    "page": 133
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Czarownik",
+    "availability": 8,
+    "page": 133
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Kapłan myrmidii",
+    "availability": 8,
+    "page": 133
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Espadero",
+    "availability": 7,
+    "page": 133
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Matador",
+    "availability": 8,
+    "page": 133
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Peones",
+    "availability": 0,
+    "page": 134
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Rodeleros",
+    "availability": 6,
+    "page": 134
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Jinetes",
+    "availability": 8,
+    "page": 134
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 135
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Byk bojowy",
+    "availability": 9,
+    "page": 135
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 135
+  },
+  {
+    "army": "szermierze z estalii",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 135
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Herszt raubritterów",
+    "availability": null,
+    "page": 137
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Czarownik",
+    "availability": 8,
+    "page": 137
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Kłusownik",
+    "availability": 6,
+    "page": 137
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Raubritter",
+    "availability": 6,
+    "page": 137
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 138
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Banita",
+    "availability": 0,
+    "page": 138
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Myśliwy",
+    "availability": 6,
+    "page": 138
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Zbójca",
+    "availability": 6,
+    "page": 138
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Rozbójnik",
+    "availability": 8,
+    "page": 139
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 139
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 139
+  },
+  {
+    "army": "raubritterzy z księstw granicznych",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 139
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Emisariusz",
+    "availability": null,
+    "page": 141
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Kanclerz",
+    "availability": 9,
+    "page": 141
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Inwestor",
+    "availability": 9,
+    "page": 141
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Strażnik",
+    "availability": 9,
+    "page": 141
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Piechur",
+    "availability": 0,
+    "page": 142
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Strzelec",
+    "availability": 7,
+    "page": 142
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Smoczy lansjer",
+    "availability": 9,
+    "page": 142
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Nomada",
+    "availability": 8,
+    "page": 142
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Kirin",
+    "availability": 10,
+    "page": 143
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Balon bojowy",
+    "availability": 9,
+    "page": 143
+  },
+  {
+    "army": "emisariusze smoczego cesarza",
+    "name": "Bitewny ołtarz",
+    "availability": 9,
+    "page": 143
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Daimyo",
+    "availability": null,
+    "page": 145
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Yamabushi",
+    "availability": 9,
+    "page": 145
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Hatamoto",
+    "availability": 9,
+    "page": 145
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Sumo",
+    "availability": 9,
+    "page": 145
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Ashigaru",
+    "availability": 0,
+    "page": 146
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Samuraj",
+    "availability": 9,
+    "page": 146
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Kabuki",
+    "availability": 10,
+    "page": 146
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Yabusame",
+    "availability": 9,
+    "page": 146
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Oni",
+    "availability": 10,
+    "page": 147
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Tengu",
+    "availability": 10,
+    "page": 147
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Balon bojowy",
+    "availability": 9,
+    "page": 147
+  },
+  {
+    "army": "klan wojowników z nipponu",
+    "name": "Wóz bojowy",
+    "availability": 9,
+    "page": 147
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Emir",
+    "availability": null,
+    "page": 149
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Wezyr",
+    "availability": 8,
+    "page": 149
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Handlarz niewolników",
+    "availability": 6,
+    "page": 149
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Wieszcz",
+    "availability": 5,
+    "page": 149
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 150
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Strażnik",
+    "availability": 0,
+    "page": 150
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Dżinn",
+    "availability": 10,
+    "page": 150
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Nomada",
+    "availability": 8,
+    "page": 150
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Derwisz",
+    "availability": 8,
+    "page": 151
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Ifryt",
+    "availability": 9,
+    "page": 151
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 151
+  },
+  {
+    "army": "kupiecka karawana z arabii",
+    "name": "Latający dywan",
+    "availability": 10,
+    "page": 151
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Królowa",
+    "availability": null,
+    "page": 153
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Megiera",
+    "availability": 8,
+    "page": 153
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Memroda",
+    "availability": 7,
+    "page": 153
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Służebna",
+    "availability": 5,
+    "page": 153
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 154
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Amazonka",
+    "availability": 0,
+    "page": 154
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Mara",
+    "availability": 9,
+    "page": 154
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Zmora",
+    "availability": 8,
+    "page": 154
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Walkiria",
+    "availability": 8,
+    "page": 155
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Gorgona",
+    "availability": 9,
+    "page": 155
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 155
+  },
+  {
+    "army": "amazonki z lustrii",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 155
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Jarl",
+    "availability": null,
+    "page": 157
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Vitki",
+    "availability": 9,
+    "page": 157
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Skald",
+    "availability": 7,
+    "page": 157
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 157
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 158
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Wojownik",
+    "availability": 6,
+    "page": 158
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Berserker",
+    "availability": 10,
+    "page": 158
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Ogar chaosu",
+    "availability": 7,
+    "page": 158
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Zniewolony troll",
+    "availability": 10,
+    "page": 159
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Yeti",
+    "availability": 10,
+    "page": 159
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 159
+  },
+  {
+    "army": "berserkerzy z norski",
+    "name": "Bitewny ołtarz",
+    "availability": 9,
+    "page": 159
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Pieczętnik",
+    "availability": null,
+    "page": 161
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Szpitalnik",
+    "availability": 10,
+    "page": 161
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Zbrojmistrz",
+    "availability": 10,
+    "page": 161
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Kadzielnik",
+    "availability": 6,
+    "page": 161
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Wojownik burzy",
+    "availability": 8,
+    "page": 162
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Jeździec burzy",
+    "availability": 9,
+    "page": 162
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Tarczownik burzy",
+    "availability": 9,
+    "page": 162
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Półgryfon",
+    "availability": 10,
+    "page": 163
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Trybularz",
+    "availability": 9,
+    "page": 163
+  },
+  {
+    "army": "wojownicy burzy",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 163
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Starszy",
+    "availability": null,
+    "page": 165
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Magister magii (kolegium cienia)",
+    "availability": 8,
+    "page": 165
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Sierżant",
+    "availability": 7,
+    "page": 165
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Zwiadowca",
+    "availability": 7,
+    "page": 165
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Pasterz",
+    "availability": 6,
+    "page": 166
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Milicjant",
+    "availability": 7,
+    "page": 166
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Pies pasterski",
+    "availability": 6,
+    "page": 166
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Przepatrywacz",
+    "availability": 9,
+    "page": 167
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 167
+  },
+  {
+    "army": "niziołki z krainy zgromadzenia",
+    "name": "Wóz kuchenny",
+    "availability": 9,
+    "page": 167
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Szlachcic",
+    "availability": null,
+    "page": 169
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Mag elfów",
+    "availability": 9,
+    "page": 169
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Wieczny strażnik",
+    "availability": 8,
+    "page": 169
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Strażnik ścieżek",
+    "availability": 8,
+    "page": 169
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Strażnik polany",
+    "availability": 7,
+    "page": 170
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Tancerz wojny",
+    "availability": 9,
+    "page": 170
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Driada",
+    "availability": 9,
+    "page": 170
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Jeździec polany",
+    "availability": 9,
+    "page": 171
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Drzewoduch",
+    "availability": 10,
+    "page": 171
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Wielki orzeł",
+    "availability": 10,
+    "page": 171
+  },
+  {
+    "army": "leśni elfowie z athel loren",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 171
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Szlachcic",
+    "availability": null,
+    "page": 173
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Mag elfów",
+    "availability": 9,
+    "page": 173
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Biały lew",
+    "availability": 8,
+    "page": 173
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Mistrz miecza hoeth",
+    "availability": 8,
+    "page": 173
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Wojownik",
+    "availability": 7,
+    "page": 174
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Włócznik",
+    "availability": 8,
+    "page": 174
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Srebrny hełm",
+    "availability": 9,
+    "page": 174
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Wojownik cienia",
+    "availability": 8,
+    "page": 175
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Rydwan z tiranoc",
+    "availability": 9,
+    "page": 175
+  },
+  {
+    "army": "elfowie wysokiego rodu z ulthuanu",
+    "name": "Lwi rydwan z chrace",
+    "availability": 9,
+    "page": 175
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Mistrz magii hoeth",
+    "availability": null,
+    "page": 177
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Reflektant",
+    "availability": 8,
+    "page": 177
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Mistrz miecza hoeth",
+    "availability": 8,
+    "page": 177
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Wojownik",
+    "availability": 7,
+    "page": 178
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Włócznik",
+    "availability": 8,
+    "page": 178
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Jeździec z ellyrionu",
+    "availability": 9,
+    "page": 179
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Wielki orzeł",
+    "availability": 10,
+    "page": 179
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Balon bojowy",
+    "availability": 9,
+    "page": 179
+  },
+  {
+    "army": "konwent magów wieży hoeth",
+    "name": "Relikwiarz mocy",
+    "availability": 9,
+    "page": 179
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Szlachcic",
+    "availability": null,
+    "page": 181
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Wieszczka khaina",
+    "availability": 9,
+    "page": 181
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Korsarz",
+    "availability": 8,
+    "page": 181
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Egzekutor",
+    "availability": 8,
+    "page": 181
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 182
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Wojownik",
+    "availability": 7,
+    "page": 182
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Widmo",
+    "availability": 8,
+    "page": 182
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Wiedźma khaina",
+    "availability": 9,
+    "page": 182
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Jeździec mroku",
+    "availability": 9,
+    "page": 183
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Harpia",
+    "availability": 7,
+    "page": 183
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Mroczny pegaz",
+    "availability": 11,
+    "page": 183
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 183
+  },
+  {
+    "army": "mroczni elfowie z naggaroth",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 183
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Łowczy",
+    "availability": null,
+    "page": 185
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Kowal run",
+    "availability": 9,
+    "page": 185
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Pawężnik",
+    "availability": 8,
+    "page": 185
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Tropiciel",
+    "availability": 8,
+    "page": 185
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Wojownik klanowy",
+    "availability": 8,
+    "page": 186
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Oblężnik z kraka drak",
+    "availability": 10,
+    "page": 186
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Pogromca trolli",
+    "availability": 7,
+    "page": 186
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Zniewolony troll",
+    "availability": 10,
+    "page": 187
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Niedźwiedź",
+    "availability": 9,
+    "page": 187
+  },
+  {
+    "army": "bestiobójcy z kraka drak",
+    "name": "Wóz bojowy",
+    "availability": 9,
+    "page": 187
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Tan",
+    "availability": null,
+    "page": 189
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Kowal run",
+    "availability": 9,
+    "page": 189
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Mistrz inżynier",
+    "availability": 8,
+    "page": 189
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Długobrody",
+    "availability": 8,
+    "page": 189
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Łamacz żelaza",
+    "availability": 8,
+    "page": 189
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Wojownik klanowy",
+    "availability": 7,
+    "page": 190
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Strzelec",
+    "availability": 8,
+    "page": 190
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Górnik",
+    "availability": 8,
+    "page": 190
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Pogromca trolli",
+    "availability": 9,
+    "page": 191
+  },
+  {
+    "army": "khazadzi z gór krańca świata",
+    "name": "Żyrokopter",
+    "availability": 9,
+    "page": 191
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Kowal run",
+    "availability": 9,
+    "page": 193
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Mistrz inżynier",
+    "availability": 8,
+    "page": 193
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Zwiadowca",
+    "availability": 8,
+    "page": 193
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Wojownik klanowy",
+    "availability": 8,
+    "page": 194
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Krasnoludzki ranger",
+    "availability": 10,
+    "page": 194
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Krasnoludzki przepatrywacz",
+    "availability": 10,
+    "page": 194
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Pogromca trolli",
+    "availability": 9,
+    "page": 194
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 195
+  },
+  {
+    "army": "kompania krasnoludzkich piwowarów",
+    "name": "Powóz piwny",
+    "availability": 10,
+    "page": 195
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Tan pogromców",
+    "availability": null,
+    "page": 197
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Kowal run",
+    "availability": 9,
+    "page": 197
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Mistrz inżynier",
+    "availability": 8,
+    "page": 197
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Pogromca smoków",
+    "availability": 9,
+    "page": 197
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Pogromca gigantów",
+    "availability": 9,
+    "page": 197
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Pogromca trolli",
+    "availability": 9,
+    "page": 198
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Bukanier",
+    "availability": 10,
+    "page": 198
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Wyklęty",
+    "availability": 10,
+    "page": 199
+  },
+  {
+    "army": "kult pogromców z karak kadrin",
+    "name": "Żyrokopter",
+    "availability": 9,
+    "page": 199
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Mistrz szkutnik",
+    "availability": null,
+    "page": 201
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Kowal run",
+    "availability": 9,
+    "page": 201
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Mistrz inżynier",
+    "availability": 8,
+    "page": 201
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Zwiadowca",
+    "availability": 8,
+    "page": 201
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Wojownik klanowy",
+    "availability": 7,
+    "page": 202
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Bukanier",
+    "availability": 10,
+    "page": 202
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 202
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Ptasznik z barak varr",
+    "availability": 10,
+    "page": 202
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Balon bojowy",
+    "availability": 9,
+    "page": 203
+  },
+  {
+    "army": "szkutnicy z barak varr",
+    "name": "Żyrokopter",
+    "availability": 9,
+    "page": 203
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Czarnoksiężnik",
+    "availability": null,
+    "page": 205
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Mistrz inżynier",
+    "availability": 8,
+    "page": 205
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Łowca niewolników",
+    "availability": 8,
+    "page": 205
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Bykocentaur",
+    "availability": 9,
+    "page": 205
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 206
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Hobgoblin",
+    "availability": 6,
+    "page": 206
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Wojownik klanowy",
+    "availability": 7,
+    "page": 206
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Wilczy jeździec",
+    "availability": 9,
+    "page": 207
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Zagan",
+    "availability": 10,
+    "page": 207
+  },
+  {
+    "army": "krasnoludowie chaosu z zorn uzkul",
+    "name": "Żelazny demon",
+    "availability": 9,
+    "page": 207
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Herszt hobgoblinów",
+    "availability": null,
+    "page": 209
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Szaman hobgoblinów",
+    "availability": 8,
+    "page": 209
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Siepacz hobgoblinów",
+    "availability": 7,
+    "page": 209
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 209
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 210
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Hobgoblin",
+    "availability": 6,
+    "page": 210
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Wilczy jeździec",
+    "availability": 9,
+    "page": 210
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Wilkor",
+    "availability": 6,
+    "page": 211
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Ogr",
+    "availability": 10,
+    "page": 211
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 211
+  },
+  {
+    "army": "jeźdźcy wilków",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 211
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Łowca (ogr)",
+    "availability": null,
+    "page": 213
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Ogniobrzuchy (ogr)",
+    "availability": 10,
+    "page": 213
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Rzeźnik (ogr)",
+    "availability": 10,
+    "page": 213
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Żelazobrzuchy (ogr)",
+    "availability": 10,
+    "page": 213
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Traper (gnoblar)",
+    "availability": 6,
+    "page": 213
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Zbrojny (gnoblar)",
+    "availability": 0,
+    "page": 214
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Byk (ogr)",
+    "availability": 10,
+    "page": 214
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Szablozębny",
+    "availability": 9,
+    "page": 214
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Gorger",
+    "availability": 10,
+    "page": 215
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Yeti",
+    "availability": 10,
+    "page": 215
+  },
+  {
+    "army": "zwiadowcza kompania z królestw ogrów",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 215
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Meargh",
+    "availability": null,
+    "page": 217
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Dirach",
+    "availability": 9,
+    "page": 217
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Szlachcic fimm",
+    "availability": 8,
+    "page": 217
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 218
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Shearl",
+    "availability": 7,
+    "page": 218
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Wojownik fimm",
+    "availability": 8,
+    "page": 218
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Mniejszy demon",
+    "availability": 10,
+    "page": 218
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Ośmiornica bagienna",
+    "availability": 10,
+    "page": 219
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Bagienna bestia",
+    "availability": 10,
+    "page": 219
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Więźniarka",
+    "availability": 10,
+    "page": 219
+  },
+  {
+    "army": "łupieżcza kompania fimirów",
+    "name": "Rydwan",
+    "availability": 10,
+    "page": 219
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Wtajemniczony",
+    "availability": null,
+    "page": 221
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Akolita",
+    "availability": 7,
+    "page": 221
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Opętany",
+    "availability": 10,
+    "page": 221
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Kultysta",
+    "availability": 6,
+    "page": 222
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Furia chaosu",
+    "availability": 10,
+    "page": 222
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Zwierzoczłek",
+    "availability": 7,
+    "page": 222
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Ogr chaosu",
+    "availability": 10,
+    "page": 223
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Troll chaosu",
+    "availability": 10,
+    "page": 223
+  },
+  {
+    "army": "kult ducha chaosu",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 223
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Wtajemniczony",
+    "availability": null,
+    "page": 225
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Akolita",
+    "availability": 7,
+    "page": 225
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Opętany",
+    "availability": 10,
+    "page": 225
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Kultysta",
+    "availability": 6,
+    "page": 226
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Piekielny ogar",
+    "availability": 10,
+    "page": 226
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Khorngor",
+    "availability": 7,
+    "page": 226
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Ogr chaosu",
+    "availability": 10,
+    "page": 227
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Troll chaosu",
+    "availability": 10,
+    "page": 227
+  },
+  {
+    "army": "kult karmazynowej czaszki",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 227
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Wtajemniczony",
+    "availability": null,
+    "page": 229
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Akolita",
+    "availability": 7,
+    "page": 229
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Opętany",
+    "availability": 10,
+    "page": 229
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Kultysta",
+    "availability": 6,
+    "page": 230
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Nurglingi",
+    "availability": 10,
+    "page": 230
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Plagogor",
+    "availability": 7,
+    "page": 230
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Ogr chaosu",
+    "availability": 10,
+    "page": 231
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Troll chaosu",
+    "availability": 10,
+    "page": 231
+  },
+  {
+    "army": "kult dzieci zagłady",
+    "name": "Zarazowóz",
+    "availability": 9,
+    "page": 231
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Wtajemniczony",
+    "availability": null,
+    "page": 233
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Akolita",
+    "availability": 7,
+    "page": 233
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Opętany",
+    "availability": 10,
+    "page": 233
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Kultysta",
+    "availability": 6,
+    "page": 234
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Bólożądna pieszczota",
+    "availability": 10,
+    "page": 234
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Slaangor",
+    "availability": 7,
+    "page": 234
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Ogr chaosu",
+    "availability": 10,
+    "page": 235
+  },
+  {
+    "army": "kult sybarytów",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 235
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Wtajemniczony",
+    "availability": null,
+    "page": 237
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Akolita",
+    "availability": 7,
+    "page": 237
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Opętany",
+    "availability": 10,
+    "page": 237
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Kultysta",
+    "availability": 6,
+    "page": 238
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Różowy strachulec",
+    "availability": 10,
+    "page": 238
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Tzaangor",
+    "availability": 7,
+    "page": 238
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Smoczy ogr",
+    "availability": 11,
+    "page": 239
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Troll chaosu",
+    "availability": 10,
+    "page": 239
+  },
+  {
+    "army": "kult purpurowej dłoni",
+    "name": "Zaprzęg",
+    "availability": 9,
+    "page": 239
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Wybraniec chaosu",
+    "availability": null,
+    "page": 241
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Czarnoksiężnik chaosu",
+    "availability": 9,
+    "page": 241
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Wojownik chaosu",
+    "availability": 8,
+    "page": 241
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Łowca niewolników",
+    "availability": 8,
+    "page": 241
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 242
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Grasant chaosu",
+    "availability": 7,
+    "page": 242
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Odrzucony",
+    "availability": 9,
+    "page": 242
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Zwierzoczłek",
+    "availability": 7,
+    "page": 242
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Kawalerzysta chaosu",
+    "availability": 9,
+    "page": 242
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Ogar chaosu",
+    "availability": 7,
+    "page": 242
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Ogr chaosu",
+    "availability": 10,
+    "page": 243
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Smoczy ogr",
+    "availability": 11,
+    "page": 243
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Troll chaosu",
+    "availability": 10,
+    "page": 243
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 243
+  },
+  {
+    "army": "grasanci chaosu",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 243
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Mistrz karnawału",
+    "availability": null,
+    "page": 245
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Poskramiacz",
+    "availability": 9,
+    "page": 245
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Harlekin",
+    "availability": 8,
+    "page": 245
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Mocarz",
+    "availability": 8,
+    "page": 245
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Kultysta",
+    "availability": 6,
+    "page": 246
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Furia chaosu (tylko niewolnicy ciemności)",
+    "availability": 10,
+    "page": 246
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Piekielny ogar (tylko wojownicy khorna)",
+    "availability": 10,
+    "page": 246
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Nurgling (tylko potworny lud nurgla)",
+    "availability": 10,
+    "page": 246
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Bólożądna pieszczota (tylko wyznawcy slaanesha)",
+    "availability": 10,
+    "page": 246
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Różowy strachulec (tylko uczniowie tzeentcha)",
+    "availability": 10,
+    "page": 246
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Tyralier",
+    "availability": 8,
+    "page": 247
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Ogar chaosu",
+    "availability": 7,
+    "page": 247
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Troll chaosu",
+    "availability": 10,
+    "page": 247
+  },
+  {
+    "army": "karnawał chaosu",
+    "name": "Karawan",
+    "availability": 9,
+    "page": 247
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Herszt zwierzoludzi",
+    "availability": null,
+    "page": 249
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Szaman zwierzoludzi",
+    "availability": 8,
+    "page": 249
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Bestigor",
+    "availability": 7,
+    "page": 249
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Centigor",
+    "availability": 8,
+    "page": 249
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Ungor",
+    "availability": 0,
+    "page": 250
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Grabieżcy",
+    "availability": 7,
+    "page": 250
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Harpia",
+    "availability": 7,
+    "page": 250
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Gor",
+    "availability": 7,
+    "page": 251
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Wilczarz chaosu",
+    "availability": 7,
+    "page": 251
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Minotaur",
+    "availability": 10,
+    "page": 251
+  },
+  {
+    "army": "zbrojne stado zwierzoludzi",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 251
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Hrabia von carstein",
+    "availability": 10,
+    "page": 253
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Nekromanta",
+    "availability": 8,
+    "page": 253
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Dreg",
+    "availability": 6,
+    "page": 253
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 254
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Ghoul",
+    "availability": 7,
+    "page": 254
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Zombie",
+    "availability": 0,
+    "page": 254
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Graveir",
+    "availability": 10,
+    "page": 255
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Mroczny wilk",
+    "availability": 7,
+    "page": 255
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Czarna karoca",
+    "availability": 10,
+    "page": 255
+  },
+  {
+    "army": "nieumarła świta hrabiego von carstein",
+    "name": "Ścierwowóz",
+    "availability": 10,
+    "page": 255
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Księżna lahmi",
+    "availability": 10,
+    "page": 257
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Nekromanta",
+    "availability": 8,
+    "page": 257
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Gwardzista",
+    "availability": 7,
+    "page": 257
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Dwórka",
+    "availability": 6,
+    "page": 257
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 258
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Ghoul",
+    "availability": 7,
+    "page": 258
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Zombie",
+    "availability": 0,
+    "page": 258
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Gnilec",
+    "availability": 10,
+    "page": 259
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Graveir",
+    "availability": 10,
+    "page": 259
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Czarna karoca",
+    "availability": 10,
+    "page": 259
+  },
+  {
+    "army": "nieumarły orszak księżnej lahmi",
+    "name": "Ścierwowóz",
+    "availability": 10,
+    "page": 259
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Krwawy smok",
+    "availability": 10,
+    "page": 261
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Nekromanta",
+    "availability": 8,
+    "page": 261
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Gwardzista",
+    "availability": 7,
+    "page": 261
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Giermek",
+    "availability": 6,
+    "page": 261
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 262
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Ghoul",
+    "availability": 7,
+    "page": 262
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Wicht",
+    "availability": 9,
+    "page": 262
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Zombie",
+    "availability": 0,
+    "page": 262
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Czarny rycerz",
+    "availability": 9,
+    "page": 263
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Graveir",
+    "availability": 10,
+    "page": 263
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 263
+  },
+  {
+    "army": "nieumarły poczet krwawego smoka",
+    "name": "Ścierwowóz",
+    "availability": 10,
+    "page": 263
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Nekrarcha",
+    "availability": 10,
+    "page": 265
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Nekromanta",
+    "availability": 8,
+    "page": 265
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Gwardzista",
+    "availability": 7,
+    "page": 265
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Skryptor",
+    "availability": 6,
+    "page": 265
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 266
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Ghoul",
+    "availability": 7,
+    "page": 266
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Wicht",
+    "availability": 9,
+    "page": 266
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Zombie",
+    "availability": 0,
+    "page": 266
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Graveir",
+    "availability": 10,
+    "page": 267
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Rój nietoperzy",
+    "availability": 10,
+    "page": 267
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Czarna karoca",
+    "availability": 10,
+    "page": 267
+  },
+  {
+    "army": "nieumarły sabat rodu nekrarch",
+    "name": "Ścierwowóz",
+    "availability": 10,
+    "page": 267
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Strigoi",
+    "availability": 10,
+    "page": 269
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Nekromanta",
+    "availability": 8,
+    "page": 269
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Ghast",
+    "availability": 7,
+    "page": 269
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Strigan",
+    "availability": 6,
+    "page": 269
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 270
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Ghoul",
+    "availability": 7,
+    "page": 270
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Zombie",
+    "availability": 0,
+    "page": 270
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Graveir",
+    "availability": 10,
+    "page": 271
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Stregoica",
+    "availability": 10,
+    "page": 271
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Czarna karoca",
+    "availability": 10,
+    "page": 271
+  },
+  {
+    "army": "nieumarły tabor ludu strigosu",
+    "name": "Ścierwowóz",
+    "availability": 10,
+    "page": 271
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Liczmistrz",
+    "availability": 10,
+    "page": 273
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Nekromanta",
+    "availability": 8,
+    "page": 273
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Mumia",
+    "availability": 7,
+    "page": 273
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Ghast",
+    "availability": 7,
+    "page": 273
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 274
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Ghoul",
+    "availability": 7,
+    "page": 274
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Wicht",
+    "availability": 9,
+    "page": 274
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Zombie",
+    "availability": 0,
+    "page": 274
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Czarny rycerz",
+    "availability": 9,
+    "page": 274
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Graveir",
+    "availability": 10,
+    "page": 274
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Mroczny wilk",
+    "availability": 7,
+    "page": 275
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Rój nietoperzy",
+    "availability": 10,
+    "page": 275
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 275
+  },
+  {
+    "army": "nieumarła horda liczmistrza",
+    "name": "Ścierwowóz",
+    "availability": 10,
+    "page": 275
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Książe grobowców",
+    "availability": 10,
+    "page": 277
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Licz",
+    "availability": 8,
+    "page": 277
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Nekrotekt",
+    "availability": 7,
+    "page": 277
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Herold",
+    "availability": 7,
+    "page": 277
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Szkielet",
+    "availability": 0,
+    "page": 278
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Strażnik grobowców",
+    "availability": 9,
+    "page": 278
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Nieumarły rój",
+    "availability": 7,
+    "page": 278
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Nieumarły nomada",
+    "availability": 9,
+    "page": 278
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Gnilec",
+    "availability": 10,
+    "page": 279
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Ushabti",
+    "availability": 10,
+    "page": 279
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Grobowy skorpion",
+    "availability": 10,
+    "page": 279
+  },
+  {
+    "army": "nieumarły zastęp z nehekhary",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 279
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Król kurhanów",
+    "availability": null,
+    "page": 281
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Profeta",
+    "availability": 10,
+    "page": 281
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Protektor",
+    "availability": 10,
+    "page": 281
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Duch",
+    "availability": 8,
+    "page": 282
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Błędny ognik",
+    "availability": 10,
+    "page": 282
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Upiór",
+    "availability": 10,
+    "page": 282
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Zjawa",
+    "availability": 10,
+    "page": 282
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Widmo",
+    "availability": 10,
+    "page": 283
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Banshee",
+    "availability": 10,
+    "page": 283
+  },
+  {
+    "army": "eteryczny dwór króla kurhanów",
+    "name": "Łódź umarłych",
+    "availability": 9,
+    "page": 283
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Nocarz",
+    "availability": null,
+    "page": 285
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Zaklinacz",
+    "availability": 8,
+    "page": 285
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Czarnoszczur",
+    "availability": 7,
+    "page": 285
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 285
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 286
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Posłaniec nocy",
+    "availability": 0,
+    "page": 286
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Rynsztokowiec",
+    "availability": 7,
+    "page": 287
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Wielki szczur",
+    "availability": 6,
+    "page": 287
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 287
+  },
+  {
+    "army": "zwiadowcze stado klanu eshin",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 287
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Mistrz mutator",
+    "availability": null,
+    "page": 289
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Mistrz ciałokształtowania",
+    "availability": 8,
+    "page": 289
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Poganiacz",
+    "availability": 7,
+    "page": 289
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 289
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 290
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Klanbrat",
+    "availability": 0,
+    "page": 290
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Wielki szczur",
+    "availability": 6,
+    "page": 290
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Szczurogr",
+    "availability": 10,
+    "page": 291
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 291
+  },
+  {
+    "army": "poganiacze klanu moulder",
+    "name": "Ambulatorium",
+    "availability": 9,
+    "page": 291
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Diakon zarazy",
+    "availability": null,
+    "page": 293
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Mnich zarazy",
+    "availability": 7,
+    "page": 293
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Kadzielnik",
+    "availability": 8,
+    "page": 293
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 293
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 294
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Czciciel zarazy",
+    "availability": 0,
+    "page": 294
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Siewca zarazy",
+    "availability": 8,
+    "page": 294
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Szczur zarazy",
+    "availability": 6,
+    "page": 295
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Czerw zarazy",
+    "availability": 10,
+    "page": 295
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 295
+  },
+  {
+    "army": "kult zarazy klanu pestilens",
+    "name": "Zarazowóz",
+    "availability": 9,
+    "page": 295
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Spaczinżynier",
+    "availability": null,
+    "page": 297
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Kulomiotacz",
+    "availability": 8,
+    "page": 297
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Czarnoszczur",
+    "availability": 7,
+    "page": 297
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 297
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 298
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Klanbrat",
+    "availability": 0,
+    "page": 298
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Harcownik",
+    "availability": 7,
+    "page": 298
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Szczurogr klanu skryre",
+    "availability": 10,
+    "page": 299
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Koło zagłady",
+    "availability": 10,
+    "page": 299
+  },
+  {
+    "army": "harcownicy klanu skryre",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 299
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Szponowład",
+    "availability": null,
+    "page": 301
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Szary prorok",
+    "availability": 8,
+    "page": 301
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Czarnoszczur",
+    "availability": 7,
+    "page": 301
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Łowca niewolników",
+    "availability": 7,
+    "page": 301
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 302
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Klanbrat",
+    "availability": 0,
+    "page": 302
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Szturmoszczur",
+    "availability": 7,
+    "page": 303
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Wielki szczur",
+    "availability": 6,
+    "page": 303
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 303
+  },
+  {
+    "army": "zbrojne stado klanu mors",
+    "name": "Wóz bojowy",
+    "availability": 9,
+    "page": 303
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Herszt dzikich orków",
+    "availability": null,
+    "page": 305
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Szaman dzikich orków",
+    "availability": 8,
+    "page": 305
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Burszuj dzikich orków",
+    "availability": 7,
+    "page": 305
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Dziki ork",
+    "availability": 7,
+    "page": 306
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Leśny goblin",
+    "availability": 0,
+    "page": 306
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Snotling",
+    "availability": 0,
+    "page": 306
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Pajonk",
+    "availability": 6,
+    "page": 306
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Dziki ork na dziku",
+    "availability": 8,
+    "page": 306
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Troll",
+    "availability": 10,
+    "page": 307
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Wielki pajonk",
+    "availability": 10,
+    "page": 307
+  },
+  {
+    "army": "łowcze plemię dzikich orków",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 307
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Herszt leśnych goblinów",
+    "availability": null,
+    "page": 309
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Szaman leśnych goblinów",
+    "availability": 8,
+    "page": 309
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Traper leśnych goblinów",
+    "availability": 6,
+    "page": 309
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Rembajło leśnych goblinów",
+    "availability": 6,
+    "page": 309
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Leśny goblin",
+    "availability": 0,
+    "page": 310
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Jeździec pajonków",
+    "availability": 9,
+    "page": 310
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Snotling",
+    "availability": 0,
+    "page": 310
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Pajonk",
+    "availability": 6,
+    "page": 310
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Troll",
+    "availability": 10,
+    "page": 311
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Wielki pajonk",
+    "availability": 10,
+    "page": 311
+  },
+  {
+    "army": "plemię leśnych goblinów",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 311
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Herszt orków",
+    "availability": null,
+    "page": 313
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Szaman orków",
+    "availability": 8,
+    "page": 313
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Burszuj orków",
+    "availability": 7,
+    "page": 313
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Ork",
+    "availability": 7,
+    "page": 314
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Goblin",
+    "availability": 0,
+    "page": 314
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Snotling",
+    "availability": 0,
+    "page": 314
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Gobliński fanatyk",
+    "availability": 9,
+    "page": 314
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Squig",
+    "availability": 7,
+    "page": 314
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Ork na dziku",
+    "availability": 8,
+    "page": 315
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Troll",
+    "availability": 10,
+    "page": 315
+  },
+  {
+    "army": "orkowie & gobliny",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 315
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Herszt nocnych goblinów",
+    "availability": 0,
+    "page": 317
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Szaman nocnych goblinów",
+    "availability": 8,
+    "page": 317
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Sieciarz nocnych goblinów",
+    "availability": 6,
+    "page": 317
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Łowca niewolników",
+    "availability": 6,
+    "page": 317
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 318
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Nocny goblin",
+    "availability": 0,
+    "page": 318
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Snotling",
+    "availability": 0,
+    "page": 318
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Gobliński fanatyk",
+    "availability": 9,
+    "page": 318
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Squig",
+    "availability": 7,
+    "page": 318
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Nocny hop-goblin",
+    "availability": 9,
+    "page": 318
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Troll",
+    "availability": 10,
+    "page": 319
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Wielki squig",
+    "availability": 10,
+    "page": 319
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 319
+  },
+  {
+    "army": "nocne gobliny",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 319
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Kapitan goblinów",
+    "availability": null,
+    "page": 321
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Szaman goblinów",
+    "availability": 8,
+    "page": 321
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Goblin mat",
+    "availability": 6,
+    "page": 321
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Łowca niewolników",
+    "availability": 6,
+    "page": 321
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Niewolnik",
+    "availability": 0,
+    "page": 322
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Goblin pirat",
+    "availability": 0,
+    "page": 322
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Snotling",
+    "availability": 0,
+    "page": 322
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Squig",
+    "availability": 7,
+    "page": 322
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Kaper",
+    "availability": 9,
+    "page": 322
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Troll",
+    "availability": 10,
+    "page": 323
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Ośmiornica bagienna",
+    "availability": 10,
+    "page": 323
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Więźniarka",
+    "availability": 9,
+    "page": 323
+  },
+  {
+    "army": "załoga zielonoskórych kaprów",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 323
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Wódz skinków",
+    "availability": null,
+    "page": 325
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Kapłan skinków",
+    "availability": 9,
+    "page": 325
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Saurus",
+    "availability": 8,
+    "page": 325
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Skink",
+    "availability": 7,
+    "page": 326
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Skink kameleon",
+    "availability": 8,
+    "page": 326
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Jeździec zimnokrwistych",
+    "availability": 9,
+    "page": 326
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Jeździec terradonów",
+    "availability": 9,
+    "page": 326
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Kroxigor",
+    "availability": 10,
+    "page": 327
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Salamandra",
+    "availability": 10,
+    "page": 327
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Wóz bojowy",
+    "availability": 9,
+    "page": 327
+  },
+  {
+    "army": "jaszczuroludzie z lustrii",
+    "name": "Rydwan",
+    "availability": 9,
+    "page": 327
+  }
+]

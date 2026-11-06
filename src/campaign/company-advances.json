@@ -1,0 +1,410 @@
+[
+  {
+    "id": "determinacja-5-0",
+    "track": "determinacja",
+    "threshold": 5,
+    "name": "Eksploratorzy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +1 do rzutu określającego ilość KART LOKACJI losowanych z talii podczas przygotowań do scenariusza (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY).",
+    "page": 417
+  },
+  {
+    "id": "determinacja-5-1",
+    "track": "determinacja",
+    "threshold": 5,
+    "name": "Kontakty handlowe",
+    "text": "Drużyna podlega zasadzie specjalnej KONTAKTY HANDLOWE (1).",
+    "page": 417
+  },
+  {
+    "id": "determinacja-5-2",
+    "track": "determinacja",
+    "threshold": 5,
+    "name": "Zachłanność",
+    "text": "Kompania otrzymuje kumulatywny modyfikator +1 do rzutu określającego liczbę znaczników kosztowności, wykonywanego podczas przygotowań do scenariusza, w którym występują znaczniki kosztowności.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-10-0",
+    "track": "determinacja",
+    "threshold": 10,
+    "name": "Obrotność",
+    "text": "W trakcie sekwencji po potyczce kompania może przerzucić jeden wybrany WYNIK z puli Kości Dostępności.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-10-1",
+    "track": "determinacja",
+    "threshold": 10,
+    "name": "Specjalista",
+    "text": "Gracz losuje 5 KART ZADAŃ SPECJALNYCH (zobacz ROZDZIAŁ 24: KARTY ZADAŃ SPECJALNYCH) z których wybiera 3. Jeśli gracz uzna, że nie pasują mu żadne wylosowane karty, może włożyć je ponownie do talii, przetasować i ponownie wylosować 2 karty.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-10-2",
+    "track": "determinacja",
+    "threshold": 10,
+    "name": "Weteran",
+    "text": "W trakcie sekwencji po potyczce, w czasie wykonywania rzutu na dostępność doświadczonych stronników, którego wynik ustali sumę Punktów Doświadczenia posiadanych przez gotowe do rekrutacji modele stronników kompania może wykonać dwa rzuty 2K6 i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-15-0",
+    "track": "determinacja",
+    "threshold": 15,
+    "name": "Eksploratorzy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +2 do rzutu określającego ilość KART LOKACJI losowanych z talii podczas przygotowań do scenariusza (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY).",
+    "page": 417
+  },
+  {
+    "id": "determinacja-15-1",
+    "track": "determinacja",
+    "threshold": 15,
+    "name": "Kontakty handlowe",
+    "text": "Drużyna podlega zasadzie specjalnej KONTAKTY HANDLOWE (2).",
+    "page": 417
+  },
+  {
+    "id": "determinacja-15-2",
+    "track": "determinacja",
+    "threshold": 15,
+    "name": "Zachłanność",
+    "text": "Kompania otrzymuje kumulatywny modyfikator +2 do rzutu określającego liczbę znaczników kosztowności, wykonywanego podczas przygotowań do scenariusza, w którym występują znaczniki kosztowności.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-20-0",
+    "track": "determinacja",
+    "threshold": 20,
+    "name": "Rządcy",
+    "text": "W trakcie sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! kompania traktowana jest tak jakby sprzedała jedną część Łupu! więcej, niż ma to faktycznie miejsce.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-20-1",
+    "track": "determinacja",
+    "threshold": 20,
+    "name": "Stratedzy",
+    "text": "W czasie określania rodzaju rozgrywanego scenariusza kompania może wykonać dwa rzuty kostkami i wybrać korzystniejszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-20-2",
+    "track": "determinacja",
+    "threshold": 20,
+    "name": "Weteran",
+    "text": "W trakcie sekwencji po potyczce, w czasie wykonywania rzutu na dostępność doświadczonych stronników, którego wynik ustali sumę Punktów Doświadczenia posiadanych przez gotowe do rekrutacji modele stronników kompania może wykonać dwa rzuty 3K6 i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-29-0",
+    "track": "determinacja",
+    "threshold": 29,
+    "name": "Eksploratorzy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +3 do rzutu określającego ilość KART LOKACJI losowanych z talii podczas przygotowań do scenariusza (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY).",
+    "page": 417
+  },
+  {
+    "id": "determinacja-29-1",
+    "track": "determinacja",
+    "threshold": 29,
+    "name": "Kontakty handlowe",
+    "text": "Drużyna podlega zasadzie specjalnej KONTAKTY HANDLOWE (3).",
+    "page": 417
+  },
+  {
+    "id": "determinacja-29-2",
+    "track": "determinacja",
+    "threshold": 29,
+    "name": "Zachłanność",
+    "text": "Kompania otrzymuje kumulatywny modyfikator +3 do rzutu określającego liczbę znaczników kosztowności, wykonywanego podczas przygotowań do scenariusza, w którym występują znaczniki kosztowności.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-40-0",
+    "track": "determinacja",
+    "threshold": 40,
+    "name": "Łapczywość",
+    "text": "Służący w kompanii bohaterowie mogą przerzucić nieudany test CP, którego wynik określa czy Uciekający! model porzucił znacznik kosztowności.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-40-1",
+    "track": "determinacja",
+    "threshold": 40,
+    "name": "Stratedzy",
+    "text": "W czasie określania rodzaju rozgrywanego scenariusza kompania może wykonać trzy rzuty kostkami i wybrać korzystniejszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "determinacja-40-2",
+    "track": "determinacja",
+    "threshold": 40,
+    "name": "Władcy pogody",
+    "text": "Kompania otrzymuje modyfikator ±K3 do wykonywanego podczas przygotowań do rozgrywki rzutu w TABELI POGODY.",
+    "page": 417
+  },
+  {
+    "id": "gniew-3-0",
+    "track": "gniew",
+    "threshold": 3,
+    "name": "Alchemicy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +1 do jednego wybranego WYNIKU rzutu w puli Kości Dostępności MIKSTUR & NARKOTYKÓW ponadto cena specyfików zostaje obniżona o K6 zk (do minimalnie 1 zk).",
+    "page": 417
+  },
+  {
+    "id": "gniew-3-1",
+    "track": "gniew",
+    "threshold": 3,
+    "name": "Niszczyciele",
+    "text": "W trakcie plądrowania lokacji (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY) drużyna może wykonać rzut dwoma kostkami i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "gniew-3-2",
+    "track": "gniew",
+    "threshold": 3,
+    "name": "Truciciele",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +1 do jednego wybranego WYNIKU rzutu w puli Kości Dostępności TRUCIZN ponadto cena specyfików zostaje obniżona o K6 zk (do minimalnie 1 zk).",
+    "page": 417
+  },
+  {
+    "id": "gniew-7-0",
+    "track": "gniew",
+    "threshold": 7,
+    "name": "Kompania najemników",
+    "text": "W trakcie sekwencji po potyczce kompania może przyjąć bez opłacania kosztu rekrutacji i wykonywania rzutu na DOSTĘPNOŚĆ jedno z Najemnych Ostrzy, które może służyć w drużynie. Po zakończeniu następnej rozgrywki NAJEMNIK odejdzie w swoją stronę, chyba że DOWÓDCA zapłaci podany w opisie najmity żołd. Jeżeli drużyna nie zapłaci żołdu należy wykonać rzut K3, którego wynik określi przez ile rozgrywek najmita nie będzie mógł być zatrudniony przez DOWÓDCĘ.",
+    "page": 417
+  },
+  {
+    "id": "gniew-7-1",
+    "track": "gniew",
+    "threshold": 7,
+    "name": "Zbrojny po zemby",
+    "text": "Służący w kompanii bohaterowie podlegają zasadzie specjalnej ZBROJNY PO ZEMBY.",
+    "page": 417
+  },
+  {
+    "id": "gniew-7-2",
+    "track": "gniew",
+    "threshold": 7,
+    "name": "Żądza krwi",
+    "text": "W czasie określania kolejności rozgrywania tur, drużyna może wykonać rzut dwoma kostkami i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "gniew-11-0",
+    "track": "gniew",
+    "threshold": 11,
+    "name": "Alchemicy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +2 do jednego wybranego WYNIKU rzutu w puli Kości Dostępności MIKSTUR & NARKOTYKÓW ponadto cena specyfików zostaje obniżona o 2K6 zk (do minimalnie 1 zk).",
+    "page": 417
+  },
+  {
+    "id": "gniew-11-1",
+    "track": "gniew",
+    "threshold": 11,
+    "name": "Manipulatorzy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +1 do sumy Punktów Pieszczoty Chaosu zdobytych w trakcie rozgrywanej bieżącej tury (zobacz ROZDZIAŁ 12: ZASADY OPCJONALNE).",
+    "page": 417
+  },
+  {
+    "id": "gniew-11-2",
+    "track": "gniew",
+    "threshold": 11,
+    "name": "Truciciele",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +2 do jednego wybranego WYNIKU rzutu w puli Kości Dostępności TRUCIZN ponadto cena specyfików zostaje obniżona o 2K6 zk (do minimalnie 1 zk).",
+    "page": 417
+  },
+  {
+    "id": "gniew-19-0",
+    "track": "gniew",
+    "threshold": 19,
+    "name": "Taktycy",
+    "text": "Podczas przygotowań do rozgrywki, w czasie określania stref rozstawienia w których wystawione zostaną modele, drużyna może wybrać krawędź stołu na której rozpocznie rozgrywkę.",
+    "page": 417
+  },
+  {
+    "id": "gniew-19-1",
+    "track": "gniew",
+    "threshold": 19,
+    "name": "Uporczywość",
+    "text": "Służący w kompanii bohaterowie mogę wykonać bieg lub LOT, nawet jeśli wróg znajduje się w odległości do 8”.",
+    "page": 417
+  },
+  {
+    "id": "gniew-19-2",
+    "track": "gniew",
+    "threshold": 19,
+    "name": "Żądza krwi",
+    "text": "W czasie określania kolejności rozgrywania tur, drużyna może wykonać rzut trzema kostkami i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "gniew-29-0",
+    "track": "gniew",
+    "threshold": 29,
+    "name": "Alchemicy",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +3 do jednego wybranego WYNIKU rzutu w puli Kości Dostępności MIKSTUR & NARKOTYKÓW ponadto cena specyfików zostaje obniżona o 3K6 zk (do minimalnie 1 zk).",
+    "page": 417
+  },
+  {
+    "id": "gniew-29-1",
+    "track": "gniew",
+    "threshold": 29,
+    "name": "Niszczyciele",
+    "text": "W trakcie plądrowania lokacji (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY) drużyna może wykonać rzut dwoma kostkami i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "gniew-29-2",
+    "track": "gniew",
+    "threshold": 29,
+    "name": "Truciciele",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +3 do jednego wybranego WYNIKU rzutu w puli Kości Dostępności TRUCIZN ponadto cena specyfików zostaje obniżona o 3K6 zk (do minimalnie 1 zk).",
+    "page": 417
+  },
+  {
+    "id": "gniew-40-0",
+    "track": "gniew",
+    "threshold": 40,
+    "name": "Gorączka złota",
+    "text": "Służący w kompanii bohaterowie mogę wykonać bieg lub LOT, nawet jeśli dźwigają znacznik kosztowności.",
+    "page": 417
+  },
+  {
+    "id": "gniew-40-1",
+    "track": "gniew",
+    "threshold": 40,
+    "name": "Zbrojny po zemby",
+    "text": "Służący w kompanii bohaterowie i stronnicy podlegają zasadzie specjalnej ZBROJNY PO ZEMBY.",
+    "page": 417
+  },
+  {
+    "id": "gniew-40-2",
+    "track": "gniew",
+    "threshold": 40,
+    "name": "Władcy losu",
+    "text": "W czasie określania rodzaju zdarzenia losowego (zobacz ROZDZIAŁ 12: ZASADY OPCJONALNE) drużyna może wykonać rzut dwoma kostkami i wybrać korzystniejszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-6-0",
+    "track": "odpornosc",
+    "threshold": 6,
+    "name": "Horda",
+    "text": "Limit modeli służących w drużynie zostaje zwiększony o +1, liczba modeli w kompanii nie może przekroczyć 20 postaci.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-6-1",
+    "track": "odpornosc",
+    "threshold": 6,
+    "name": "Nieśmiertelni",
+    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCHRANmodel (lub modele) stronnika, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub POTWÓR lub WIELKOLUD lub ZWIERZĘ automatycznie rekrutuje jednego stronnika tego samego typu. Ponadto, należy zauważyć, że rekrutowany stronnik rozpoczyna grę nie posiadając Punktów Doświadczenia.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-6-2",
+    "track": "odpornosc",
+    "threshold": 6,
+    "name": "Pazerność",
+    "text": "Służący w kompanii bohaterowie w fazie eksploracji generują Kostkę Eksploracji nawet wtedy, gdy nie brali udziału w rozgrywce lub w bieżącej sekwencji po potyczce wykonywali rzut na TABELĘ POWAŻNYCHRAN.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-13-0",
+    "track": "odpornosc",
+    "threshold": 13,
+    "name": "Chciwość",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +1 do rzutu na eksplorację w trakcie rozgrywania sekwencji po potyczce.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-13-1",
+    "track": "odpornosc",
+    "threshold": 13,
+    "name": "Poszukiwacze",
+    "text": "W czasie określania rodzaju niezbadanego elementu terenu (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY) drużyna może wykonać rzut dwoma kostkami i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-13-2",
+    "track": "odpornosc",
+    "threshold": 13,
+    "name": "Samowystarczalni",
+    "text": "W trakcie sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! kompania traktowana jest tak jakby liczba modeli w drużynie była o jeden poziom niższa, niż ma to faktycznie miejsce (do minimalnego poziomu 1-3 modeli).",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-20-0",
+    "track": "odpornosc",
+    "threshold": 20,
+    "name": "Horda",
+    "text": "Limit modeli służących w drużynie zostaje zwiększony o +2, liczba modeli w kompanii nie może przekroczyć 20 postaci.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-20-1",
+    "track": "odpornosc",
+    "threshold": 20,
+    "name": "Konsyliarze",
+    "text": "W trakcie sekwencji po potyczce kompania otrzymuje kumulatywny modyfikator +1 do rzutu na TABELĘ POWAŻNYCHRANdla wszystkich Wyłączonych z akcji! modeli stronników, którzy nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub POTWÓR lub WIELKOLUD lub ZWIERZĘ.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-20-2",
+    "track": "odpornosc",
+    "threshold": 20,
+    "name": "Nieśmiertelni",
+    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCHRANmodel (lub modele) stronnika automatycznie rekrutuje jednego stronnika tego samego typu. Ponadto, należy zauważyć, że rekrutowany stronnik rozpoczyna grę nie posiadając Punktów Doświadczenia.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-29-0",
+    "track": "odpornosc",
+    "threshold": 29,
+    "name": "Chciwość",
+    "text": "Drużyna otrzymuje kumulatywny modyfikator +2 do rzutu na eksplorację w trakcie rozgrywania sekwencji po potyczce.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-29-1",
+    "track": "odpornosc",
+    "threshold": 29,
+    "name": "Poszukiwacze",
+    "text": "W czasie określania rodzaju niezbadanego elementu terenu (zobacz ROZDZIAŁ 10: ELEMENTY TERENU NA POLU BITWY) drużyna może wykonać rzut trzema kostkami i wybrać lepszy wynik.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-29-2",
+    "track": "odpornosc",
+    "threshold": 29,
+    "name": "Samowystarczalni",
+    "text": "W trakcie sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! kompania traktowana jest tak jakby liczba modeli w drużynie była o jeden poziom niższa, niż ma to faktycznie miejsce (do minimalnego poziomu 1-3 modeli).",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-40-0",
+    "track": "odpornosc",
+    "threshold": 40,
+    "name": "Horda",
+    "text": "Limit modeli służących w drużynie zostaje zwiększony o +3, liczba modeli w kompanii nie może przekroczyć 20 postaci.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-40-1",
+    "track": "odpornosc",
+    "threshold": 40,
+    "name": "Odkrywcy",
+    "text": "Kompania może przerzucić dowolną liczbę Kostek Eksploracji w fazie eksploracji rozgrywanej w trakcie sekwencji po potyczce.",
+    "page": 417
+  },
+  {
+    "id": "odpornosc-40-2",
+    "track": "odpornosc",
+    "threshold": 40,
+    "name": "Nieśmiertelni",
+    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCHRANmodel (lub modele) bohatera lub stronnika automatycznie rekrutuje jednego bohatera lub jednego stronnika tego samego typu. Rekrutowany bohater posiada jedynie początkową liczbę Punktów Doświadczenia, a model stronnika rozpoczyna grę nie posiadając Punktów Doświadczenia, ponadto oprócz sztyletu i ewentualnej broni wymienionej w opisie modelu, może zostać wyposażony jedynie w przedmioty Powszechnie dostępne. Nowo rekrutowany model bohatera może zostać wyposażony w przedmioty rzadkie dopiero w czasie rozgrywania następnej sekwencji po potyczce, chyba że drużyna posiada takie przedmioty w swoim skarbcu.",
+    "page": 417
+  }
+]

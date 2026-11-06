@@ -4,6 +4,8 @@ import "./UnitPlay.css";
 import RulesModal from "./RulesModal";
 import { getRuleText, getWeaponRuleNames } from "../Functions/getRuleText";
 import { getEquipmentStats } from "../Data.js/EquipmentStats";
+import DiceInput from "../campaign/DiceInput";
+import { darkPact } from "../campaign/sanity";
 import { catalog, isHero, activeModel } from "../campaign/rules";
 import { getModifiers } from "../Functions/getModifiers";
 
@@ -115,6 +117,8 @@ const formatCustomEquipmentEntry = (entry) => {
 const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   const [menu, setMenu] = useState("Bitwa");
   const [description, setDescription] = useState(null);
+  const [pactDice, setPactDice] = useState([]);
+  const pactCount = unitList.reduce((n, u) => n + (u.battlePacts || 0), 0);
   const battleActive = !!campaign?.activeBattle && !campaign.activeBattle.post;
 
   useEffect(() => {
@@ -177,7 +181,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   const totalExpAfterBattle =
     Math.max(0, Number(unit.exp) || 0) +
     battleExp +
-    (isHero(unit) ? Number(unit.battleKills) || 0 : 0) +
+    (unit.type === "Bohater" ? Number(unit.battleKills) || 0 : 0) +
     1;
   const totalObledAfterBattle = totalObled + battleObled;
 
@@ -266,7 +270,9 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
                       {
                         name: rule,
                         text:
-                          unit.campaignRuleTexts?.[rule] || getRuleText(rule),
+                          unit.campaignRuleTexts?.[rule] ||
+                          unit.dramaProfileText ||
+                          getRuleText(rule),
                       },
                     ],
                   },
@@ -316,6 +322,15 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
               onClick={() => {
                 const name = item.replace(/ pancerz$/, "");
                 const stats = getEquipmentStats(name);
+                const custom = (unit.customEquipment || []).find(
+                  (e) => e.name === item,
+                );
+                const crafted = (unit.craftedEquipment?.[name] || []).map(
+                  (r) => ({
+                    name: r.name + (r.active ? "" : " (nieaktywne)"),
+                    text: r.text,
+                  }),
+                );
                 const definition = catalog.find(
                   (eq) => eq.name.toLowerCase() === item.toLowerCase(),
                 );
@@ -329,15 +344,22 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
                           name: item,
                           text: stats
                             ? `${stats.armour ? `Ochrona: ${stats.armour}` : `Zasięg: ${stats.range}; Siła: ${stats.strength}`}. Zasady: ${stats.rules || "brak"}`
-                            : definition?.text || "Brak profilu w katalogu.",
+                            : custom?.text ||
+                              definition?.text ||
+                              "Brak profilu w katalogu.",
                         },
                       ],
                     },
                     {
                       title: "Zasady broni",
                       entries: [
-                        ...new Set(getWeaponRuleNames(stats?.rules)),
-                      ].map((name) => ({ name, text: getRuleText(name) })),
+                        ...new Set([
+                          ...getWeaponRuleNames(stats?.rules),
+                          ...(unit.weaponEnhancements?.[name] || []),
+                        ]),
+                      ]
+                        .map((name) => ({ name, text: getRuleText(name) }))
+                        .concat(crafted),
                     },
                   ],
                 });
@@ -372,7 +394,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
           Rozpocznij potyczkę w panelu kampanii, aby zapisywać jej przebieg.
         </p>
       )}
-      {isHero(unit) && (
+      {unit.type === "Bohater" && (
         <div className="unit-play-counter">
           <span className="unit-play-counter-label">Przeciwnicy WzA</span>
           <button
@@ -435,6 +457,43 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
             {`Po bitwie: ${totalObledAfterBattle} Obłędu`}
           </span>
         </div>
+      )}
+      {campaign?.settings?.obled && isHero(unit) && (
+        <details>
+          <summary>Mroczny Pakt ({pactCount}/3 w potyczce)</summary>
+          <p>
+            Po użyciu przerzutu: pierwszy pakt +1 PO, drugi +K3 PO, trzeci +K6
+            PO. Koszt obowiązuje również Niezłomnych.
+          </p>
+          {pactCount > 0 && pactCount < 3 && (
+            <DiceInput
+              label="Koszt Obłędu za Mroczny Pakt"
+              value={pactDice}
+              onChange={setPactDice}
+              disabled={!battleActive}
+            />
+          )}
+          <button
+            className="button"
+            disabled={
+              !battleActive ||
+              pactCount >= 3 ||
+              (pactCount > 0 &&
+                !(
+                  pactDice.length === 1 &&
+                  pactDice[0] >= 1 &&
+                  pactDice[0] <= 6
+                ))
+            }
+            onClick={() => {
+              darkPact(unitList, unit.uniqueId, pactDice);
+              setUnitList([...unitList]);
+              setPactDice([]);
+            }}
+          >
+            Zapisz użycie Mrocznego Paktu
+          </button>
+        </details>
       )}
       <div className="unit-play-wza-container">
         <p className="unit-play-wza-title">WzA! (wyłączony z akcji)</p>

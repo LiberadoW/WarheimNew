@@ -1,40 +1,51 @@
-# Campaign play (draft implementation)
+# Campaign play
 
-Based on the owner-supplied Warheim FS rulebook AD2026.04.15, chapters 13–14. This branch includes the clickable equipment work in PR #7 and should be reviewed after that change.
+Source: the owner's Warheim FS rulebook AD2026.04.15. The PDF itself is not committed. Unit/equipment dialogs and the initial campaign workflow were merged to master in PRs #7 and #8.
 
-## Implemented
+## Campaign workflow
 
-- Named, dated battles with opponent, scenario, area, result, casualties and notes.
-- In-game hero kill counters, additional scenario PD, per-model WzA and attendance; optional Obłęd counters. Unit rules and equipment open descriptions.
-- Eleven post-battle phases in the rulebook's order. Unfinished work is separate from the live roster. The live roster cannot be edited while resolving the post-battle draft.
-- K66 hero injuries and the different K6 tables for other types; follow-up rolls for multiple injuries, arm/leg wounds, madness and arena outcomes. Dead models are removed only at finalization; their equipment goes to the stash. Missing games and capture persist per model.
-- Survival PD, hero kill PD, experience caps, crossed advancement thresholds, hero choice of two rolls, henchman stat restrictions, promotion and available skill lists. All 66 faction-specific lists are imported, along with the five general lists. Spell/modification choices are recorded.
-- Campaign point awards, exploration dice and both 30-entry encounter tables. All repeated groups are displayed, but the greatest repetition wins; higher face breaks ties. Extra dice/discards require an explanation. Encounter descriptions, roll notebook and explicit reward adjustments are available.
-- Loot income table and supply adjustments, once per post-battle sequence.
-- Experienced henchman PD budget, basic recruitment, mercenary wages, equipment stash and transfer.
-- 505 catalog items/variants across chapter 14 categories, with price expressions, source text and page. Equipment permission uses personal lists plus Fechmistrz / Strzelec, caster restrictions and recognized faction restrictions. Variable prices are fixed in a quote; rare purchases consume a locked availability result. A rare set for a group must be purchased into storage one copy/result at a time.
-- Scoped local device drafts for guest and signed-in accounts. Existing Save Army also saves campaign notes. Finalization uses a Firestore transaction, checks the battle id, preserves the draft on failure, and refuses to overwrite newer campaign history.
+- Battles record date, opponent, scenario, area, result, attendance, model casualties, kills and additional scenario PD. Old war wound tests are available before play. Obłęd and up to three Mroczne Pakty per company can be recorded during play.
+- The eleven post-battle phases follow chapter 13. The live roster stays separate from a scoped local draft until finalization. Failed cloud saves retain that draft. Firestore finalization checks the battle ID and newer campaign history to avoid duplicate or stale writes.
+- Injury tables support K66 heroes/Drama and the appropriate K6 creature/henchman/mercenary tables, with follow-up rolls. Death removes individual models at finalization. Ordinary casualties return equipment to storage; mercenary/Drama casualties lose it. Dead Drama cannot be rehired in the campaign.
+- PD, caps, advancement thresholds, two-roll hero choices, single-roll mercenary choices, henchman stat restrictions, promotion, general/faction/personal character skill lists and spells are supported. Mercenaries use 2/5/9/14 PD thresholds, the hero development table and no duplicate characteristic advance. Late exploration/injury PD creates additional advancement tasks.
+- All 51 company advancement choices from page 417 are selectable at newly crossed thresholds. Choices persist with their source descriptions. Connected effects include Horda, Zbrojny po zemby, Chciwość, Pazerność, Konsyliarze, Rządcy, Samowystarczalni, Weteran, availability/chemical bonuses, Obrotność, Kompania najemników and eligible Nieśmiertelni replacements. Other scenario/tabletop effects remain visible as rules to apply during play.
+- Both exploration tables contain 30 encounters. Deterministic recipes request the dice, decisions, model selections and PD allocations before applying resource changes. The greatest repeated group is mandatory; the higher face breaks ties. Original dice, rerolls and decisions are retained. Extra dice/discards and external modifiers require a named source. Applicable future effects carry into the matching subsequent battle; area-specific effects wait for that area.
+- Loot sale uses the income/supply table once per sequence, excluding hired characters from maintenance. Recruitment uses source availability when matched, actual model limits and the company's mercenary list. Unmatched profiles require an explicit source for their availability. Existing henchman groups can accept experienced recruits using the PD budget and full equipment cost.
+- The chapter 14 catalog has 505 items/variants with categories, prices, availability and descriptions. Variable prices and discount dice are locked in quotes. Rare items consume an available result. Personal equipment lists and supported exceptions filter purchases. Contacts and chemical bonuses can be assigned to one availability result; Obrotność rerolls one result. Strigos trade applies its discount and requires the concluding theft roll before leaving that phase.
+- All 45 Drama profiles are imported. Hiring requires one successful CP search by an eligible commander, a free hero slot, payment and confirmation of the profile's special prerequisites. Wage recipes cover every character and K6 branch. Required items, loot, sacrifices and departures update the draft. Particular tabletop consequences have explicit outcome/confirmation fields; terminating a contract also requires recording those consequences.
+- Runic/mechanical crafting has 96 imported recipes, with costs, availability and descriptions. Craftsmen must be assigned before exploration and forfeit their die. The app checks eligible bases, attempt/item limits and combinations, then resolves creation and failure tables. A physical hit from an accident is resolved on the tabletop and its outcome/injury is entered. Upgrades persist through stash transfers and are shown with the equipment description.
+- Optional Chaos mutation support includes all five K66 tables (120 entries), repeat prevention, mutation limits/WT tests, direct characteristic changes and the source Chaos Spawn profile. Conditional combat effects remain in the rule description. Obłęd thresholds create required mental illness rolls; all 36 illness descriptions are available.
+- Stash transfer, item consumption, justified characteristic/rule adjustments, loss of rules, capture/absence adjustments, contract termination and an audited resource adjustment are available for conditional effects.
 
-## Guided / manual parts (do not describe this as full rule automation)
+## Rules requiring player resolution
 
-- Exploration encounters show their full rulebook instructions; tests, conditional decisions, rewards, new rules and finds are resolved with the roll notebook, adjustments and stash controls. The app does not automatically execute all branches of all sixty encounter descriptions.
-- Automatic skill changes cover learned rules and character statistics; conditional effects of skills/equipment still need to be applied by the player. Exceptions stated in prose, faction-specific eligibility, magical base-weapon slots, injury prohibitions and interactions need a further rules audit. Current permission checks are conservative and are not a complete rules engine.
-- Recruitment availability is entered from the selected recruit's profile. Experienced-group recruitment does not automate every faction restriction. Characters of Drama have a guided phase; their full hiring system is not implemented.
-- Campaign point thresholds / company advancement selections are visible in the rulebook reference but company advancement choices are not automated.
-- Optional disease and mutation settings are stored separately; they are not complete automated subsystems. Mandatory mental illness generated by an injury is supported independently.
-- Old war wounds need the pre-battle test to be resolved and absence marked by the player. Underdog bonuses, commander succession, lost gear value, hiring discounts, bribes / teamwork and other exceptional modifiers require explicit manual resolution.
-- Runic/mechanical equipment from later chapters is outside the imported chapter 14 catalog.
+This is a campaign assistant, not a complete simulator of all rulebook interactions.
+
+- A player's physical battle actions, random model selection, model bases and positions, linked companions/vehicles, special hiring items/conditions and bespoke combats cannot all be inferred from existing saved rosters. The relevant source is displayed; the player enters outcomes and confirms special consequences. Sacrifice eligibility still needs the source's base/size restrictions checked by the player.
+- Conditional skill, weapon, rune, mechanical and illness effects are recorded as readable rules. They are not universally folded into the displayed characteristics. Chronic mental illness progression/recovery, amnesia's random losses and some unusual mutation interactions require the justified adjustment controls.
+- Command succession, undead dissolution, inheritance of a caster's duties, underdog/scenario rewards, Chaos Gifts, unusual recruitment exceptions, and splitting/merging existing henchman groups still require manual resolution. This change does not claim to automate every exception in the full rulebook.
+- Equipment permission checks remain conservative. Prose restrictions and interactions need player review. Identically named weapon instances in legacy rosters have no distinct item IDs, so upgrades are associated with the owner's base-item name.
+- The source overlaps wage result 2 for Festus and Ruben. The owner explicitly chose the payment/sacrifice interpretation: departure on 1, payment/sacrifice on 2–4. This is a recorded campaign interpretation, not an unannounced correction to the PDF.
 
 ## Validation
 
-247 automated tests pass, including full-flow finalization and failed-save retry tests. Production build succeeds with pre-existing lint/bundle warnings. Live authenticated Firestore integration was not exercised. Browser visual QA was attempted, but the runtime had no browser and downloading Chromium failed; mobile/desktop visual review remains outstanding.
+646 automated tests pass. Automated coverage includes the end-to-end campaign finalization/failure retry flow, all 60 exploration recipe entry paths, all 270 Drama character/K6 wage branches, advancement rules, company choices, crafting success/failure and stash transfer, recruitment, discounts/theft, optional tables and persistence boundaries. Run `CI=true npm test -- --watchAll=false --runInBand` and `npm run build`.
 
-## Storage and compatibility
+The production build has existing lint/bundle-size warnings. Authenticated Firestore integration was not exercised against live user data. Desktop/mobile browser visual review remains outstanding: Chromium was installed, but this execution environment rejected its process-singleton socket at launch.
 
-No Firestore schema migration is required. Campaign state is under `campaignNotes.campaign`; legacy saved lists remain loadable and existing `gameHistory` remains available. Local drafts use `warheim:draft:<uid|guest>` and are not a server backup. The existing Firestore per-user lists document size limit still applies; large campaign histories should eventually move to subcollections.
+## Storage
+
+No Firestore migration is required. Campaign state is under `campaignNotes.campaign`; legacy saved lists and `gameHistory` remain loadable. Local drafts use `warheim:draft:<uid|guest>` and are not a server backup. Firestore's per-document size limit remains; long histories should eventually move to subcollections.
 
 ## Rebuild source data
 
-`python scripts/import-campaign-rulebook.py /path/to/Warheim_FS_RULEBooK.pdf`
+Requires PyMuPDF and the owner's PDF:
 
-Requires PyMuPDF. The owner's PDF is not included in the repository. The importer checks the source record counts and preserves source page references. The imported text must still be reviewed against the PDF before declaring all exceptions complete.
+```
+python scripts/import-campaign-rulebook.py /path/to/rulebook.pdf
+python scripts/import-company-advances.py /path/to/rulebook.pdf
+python scripts/import-campaign-characters.py /path/to/rulebook.pdf
+python scripts/import-campaign-extras.py /path/to/rulebook.pdf
+```
+
+Review imported text against the same edition before changing source counts or exception handling.

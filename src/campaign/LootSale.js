@@ -1,22 +1,27 @@
 import React, { useState } from "react";
+import { companyLevel } from "./company";
 import * as R from "./rules";
 
 function LootSale({ battle, post, update, setBattle }) {
   const [quantity, setQuantity] = useState(0);
   const [modifier, setModifier] = useState(0);
-  const models = post.units.reduce(
-    (n, u) =>
-      n +
-      R.modelCount(u) -
-      (u.campaignModelStatus || []).filter((s) => s.dead).length,
-    0,
-  );
+  const models = post.units
+    .filter((u) => !["Najemne Ostrze", "Postać Dramatu"].includes(u.type))
+    .reduce(
+      (n, u) =>
+        n +
+        R.modelCount(u) -
+        (u.campaignModelStatus || []).filter((s) => s.dead).length,
+      0,
+    );
   const gold = R.income(
-    quantity,
+    quantity > 0 ? quantity + (companyLevel(post, "Rządcy") ? 1 : 0) : 0,
     models,
     Number(battle.players) || 2,
     Number(battle.totalSold) || 0,
-    modifier,
+    modifier +
+      (post.effects?.incomeLevel || 0) -
+      companyLevel(post, "Samowystarczalni"),
   );
   return (
     <>

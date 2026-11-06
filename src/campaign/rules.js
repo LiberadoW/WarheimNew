@@ -126,7 +126,7 @@ export const k66 = (dice) => {
   return dice[0] * 10 + dice[1];
 };
 export const crossed = (before, after, unit) =>
-  (heroDevelopment(unit) ? HERO_THRESHOLDS : HENCH_THRESHOLDS).filter(
+  (isHero(unit) ? HERO_THRESHOLDS : HENCH_THRESHOLDS).filter(
     (x) => x > before && x <= after,
   );
 export const canEarnExperience = (unit) => !hasRule(unit, "Nieświadomy");
@@ -170,7 +170,7 @@ export const injuryKind = (unit) => {
     return "monster";
   return isHero(unit) ? "hero" : "henchman";
 };
-export const injuryResult = (unit, dice) => {
+export const injuryResult = (unit, dice, modifier = 0) => {
   const kind = injuryKind(unit);
   if (!validDice(dice, kind === "hero" ? 2 : 1))
     throw Error("Nieprawidłowe kości obrażeń.");
@@ -179,7 +179,7 @@ export const injuryResult = (unit, dice) => {
       ...injuries.find((r) => k66(dice) >= r.min && k66(dice) <= r.max),
       code: k66(dice),
     };
-  const n = dice[0];
+  const n = Math.min(6, dice[0] + modifier);
   const dead = n <= (["spirit", "henchman"].includes(kind) ? 2 : 1);
   const skip =
     !dead &&
@@ -237,7 +237,8 @@ export const repeats = (dice) => {
     }))
     .sort((a, b) => b.count - a.count || b.face - a.face);
 };
-export const explorationResult = (dice, area) => {
+export const explorationResult = (dice, area, modifier = 0) => {
+  const total = sum(dice) + modifier;
   const matches = repeats(dice);
   const best = matches[0];
   return {
@@ -245,20 +246,20 @@ export const explorationResult = (dice, area) => {
     best: best
       ? exploration.find((x) => x.area === area && x.key === best.key)
       : null,
-    total: sum(dice),
+    total,
     loot: !dice.length
       ? 0
-      : sum(dice) < 6
+      : total < 6
         ? 1
-        : sum(dice) < 12
+        : total < 12
           ? 2
-          : sum(dice) < 18
+          : total < 18
             ? 3
-            : sum(dice) < 25
+            : total < 25
               ? 4
-              : sum(dice) < 31
+              : total < 31
                 ? 5
-                : sum(dice) < 36
+                : total < 36
                   ? 6
                   : 7,
   };
@@ -301,7 +302,20 @@ export const priceDiceCount = (expression) => {
   const m = expression.match(/(\d*)K\d/i);
   return m ? Number(m[1] || 1) : 0;
 };
+export const allAdvancementStatsMaxed = (unit) =>
+  (heroDevelopment(unit) ? [1, 2, 3, 4, 5, 6, 7, 8] : [1, 2, 3, 6, 7, 8]).every(
+    (i) =>
+      typeof currentStats(unit)[i] !== "number" ||
+      (typeof unit.stats.Maksymalna?.[i] === "number" &&
+        currentStats(unit)[i] >= unit.stats.Maksymalna[i]),
+  );
 export const availableStats = (unit, result) => {
+  if (allAdvancementStatsMaxed(unit))
+    return typeof unit.stats.Maksymalna?.[0] === "number" &&
+      currentStats(unit)[0] < unit.stats.Maksymalna[0] &&
+      (isHero(unit) || !(unit.campaignAdvancements || []).includes(0))
+      ? [0]
+      : [];
   const options = heroDevelopment(unit)
     ? result <= 5 || result >= 10
       ? []
@@ -324,13 +338,13 @@ export const availableStats = (unit, result) => {
       typeof currentStats(unit)[i] === "number" &&
       (typeof unit.stats.Maksymalna?.[i] !== "number" ||
         currentStats(unit)[i] < unit.stats.Maksymalna[i]) &&
-      (heroDevelopment(unit) || !(unit.campaignAdvancements || []).includes(i)),
+      (isHero(unit) || !(unit.campaignAdvancements || []).includes(i)),
   );
 };
 export const needsSkill = (unit, n) =>
   heroDevelopment(unit) && (n <= 5 || n >= 10);
 export const skillChoices = (unit) =>
-  (unit.skills || [])
+  [...new Set([...(unit.skills || []), ...(unit.campaignSkillAccess || [])])]
     .filter((i) => i < 5)
     .flatMap((i) => SKILLS[i].map((name) => ({ name, list: SKILL_LISTS[i] })))
     .filter(
@@ -364,6 +378,8 @@ export const itemBaseNames = (item) => {
 };
 export const equipmentPermission = (unit, item, armyName) => {
   if (!unit) return "Wybierz postać.";
+  if (unit.type === "Najemne Ostrze")
+    return "Najemne Ostrza używają własnego ekwipunku.";
   const text = normal(item.text);
   const army = normal(armyName);
   if (/dla wielkoluda/.test(normal(item.name)) && !hasRule(unit, "Wielkolud"))
@@ -467,11 +483,46 @@ export const newBattle = (units) => ({
   startedAt: new Date().toISOString(),
   rosterIds: units.map((u) => u.uniqueId),
 });
-export const beginPostBattle = (battle, units, notes) => ({
+export const beginPostBattle = (battle, units, notes, army = {}) => ({
   ...battle,
   stage: 1,
   post: {
-    units: clone(units),
+    units: clone(units).map((u) => ({
+      ...u,
+      campaignModelStatus: Array.from({ length: modelCount(u) }, (_, i) => ({
+        ...u.campaignModelStatus?.[i],
+        skip: Math.max(
+          0,
+          (u.campaignModelStatus?.[i]?.skip || 0) -
+            (u.battleAbsentModels?.[i] ? 1 : 0),
+        ),
+      })),
+    })),
+    battleId: battle.id,
+    sanityBefore: Object.fromEntries(
+      units.map((u) => [u.uniqueId, Number(u.obled) || 0]),
+    ),
+    armyRules: [...(army.armyRules || []), ...(notes.specialRules || [])],
+    companyAdvancements: clone(notes.campaign?.companyAdvancements || []),
+    persistentEffects: clone(notes.campaign?.persistentEffects || {}),
+    futureEffects: clone(
+      (notes.campaign?.futureEffects || []).filter(
+        (e) => e.area && e.area !== battle.area,
+      ),
+    ),
+    activeFutureEffects: clone(
+      (notes.campaign?.futureEffects || []).filter(
+        (e) => !e.area || e.area === battle.area,
+      ),
+    ),
+    effects: {},
+    deadDrama: clone(notes.campaign?.deadDrama || []),
+    mercenaryBans: Object.fromEntries(
+      Object.entries(notes.campaign?.mercenaryBans || {}).map(([name, n]) => [
+        name,
+        Math.max(0, n - 1),
+      ]),
+    ),
     treasury: Math.max(0, Number(notes.skarbiec) || 0),
     loot: Math.max(0, Number(notes.kosztownosci) || 0),
     inventory: clone(notes.campaign?.inventory || []),
@@ -502,7 +553,10 @@ export const activeModel = (unit, i) =>
   !unit.campaignModelStatus?.[i]?.captured;
 export const eligibleHeroes = (units) =>
   units.filter(
-    (u) => isHero(u) && activeModel(u, 0) && !u.battleOutOfActionModels?.[0],
+    (u) =>
+      u.type === "Bohater" &&
+      activeModel(u, 0) &&
+      !u.battleOutOfActionModels?.[0],
   );
 export const injuryTasks = (post) =>
   post.units.flatMap((u) =>
@@ -519,11 +573,35 @@ export const injuryTasks = (post) =>
   );
 export const storeItem = (post, name, quantity = 1, extra = {}) => {
   const existing = post.inventory.find(
-    (i) => normal(i.name) === normal(name) && i.catalogId === extra.catalogId,
+    (i) =>
+      normal(i.name) === normal(name) &&
+      i.catalogId === extra.catalogId &&
+      JSON.stringify(i.crafting || null) ===
+        JSON.stringify(extra.crafting || null),
   );
   if (existing) existing.quantity += quantity;
   else post.inventory.push({ id: uid(), name, quantity, ...extra });
 };
+export function grantExperience(post, unit, amount, reason) {
+  if (!canEarnExperience(unit)) return;
+  const old = Number(unit.exp) || 0;
+  unit.exp = Math.min(isHero(unit) ? 90 : 14, Math.max(0, old + amount));
+  crossed(old, unit.exp, unit).forEach((threshold) =>
+    post.advances.push({
+      id: uid(),
+      unitId: unit.uniqueId,
+      threshold,
+      resolved: false,
+      rolls: [],
+      reason,
+    }),
+  );
+  log(
+    post,
+    "experience",
+    `${label(unit)}: ${old} → ${unit.exp} PD · ${reason}`,
+  );
+}
 export const applyInjury = (post, task, result, detail = {}) => {
   if (post.injuries[task.key])
     throw Error("Obrażenia tego modelu już rozstrzygnięto.");
@@ -531,8 +609,8 @@ export const applyInjury = (post, task, result, detail = {}) => {
   const status = {
     ...(unit.campaignModelStatus?.[task.index] || {}),
     dead: false,
-    skip: 0,
-    captured: false,
+    skip: unit.campaignModelStatus?.[task.index]?.skip || 0,
+    captured: !!unit.campaignModelStatus?.[task.index]?.captured,
   };
   const apply = (r, d = detail) => {
     const code = r.min || r.code;
@@ -553,6 +631,15 @@ export const applyInjury = (post, task, result, detail = {}) => {
         throw Error("Wykonaj rzut K66 na chorobę psychiczną.");
       const illness = mental.find((x) => x.code === k66(d.mental));
       addRule(unit, illness.name);
+      unit.mentalIllnesses = [
+        ...(unit.mentalIllnesses || []),
+        {
+          code: illness.code,
+          name: illness.name,
+          text: illness.text,
+          acquiredAt: post.battleId || null,
+        },
+      ];
       unit.campaignRuleTexts = {
         ...(unit.campaignRuleTexts || {}),
         [illness.name]: illness.text,
@@ -576,7 +663,8 @@ export const applyInjury = (post, task, result, detail = {}) => {
         throw Error("Wpisz wynik walki na arenie.");
       if (d.arena === "win") {
         post.treasury += 50;
-        unit.battleExp = (Number(unit.battleExp) || 0) + 2;
+        if (post.expApplied) grantExperience(post, unit, 2, "Walki na arenie");
+        else unit.battleExp = (Number(unit.battleExp) || 0) + 2;
       } else {
         if (!validDice(d.secondary, 1))
           throw Error("Rzuć na następstwa porażki na arenie.");
@@ -594,7 +682,7 @@ export const applyInjury = (post, task, result, detail = {}) => {
     }
     unit.injuries = [...(unit.injuries || []), r.name];
     if (r.code === 11 || r.min === 11) status.dead = true;
-    if (r.simple) status.skip = r.skip;
+    if (r.simple) status.skip = Math.max(status.skip, r.skip);
     if (code === 22) {
       const n = (unit.injuries || []).filter((s) => s === r.name).length;
       if (n >= 2) status.dead = true;
@@ -630,7 +718,11 @@ export const applyInjury = (post, task, result, detail = {}) => {
     if (code === 61) status.captured = true;
     if (code === 62) addRule(unit, "Odporny na strach (groza jako strach)");
     if (code === 64) addRule(unit, "Strach");
-    if (code === 66) unit.battleExp = (Number(unit.battleExp) || 0) + 1;
+    if (code === 66) {
+      if (post.expApplied)
+        grantExperience(post, unit, 1, "Przeżył wbrew przeciwnościom");
+      else unit.battleExp = (Number(unit.battleExp) || 0) + 1;
+    }
     if (code === 36) {
       unit.startingEquipment = [];
       unit.optionalEquipment = [];
@@ -643,13 +735,20 @@ export const applyInjury = (post, task, result, detail = {}) => {
   unit.campaignModelStatus = Array.from({ length: modelCount(unit) }, (_, i) =>
     i === task.index ? status : { ...(unit.campaignModelStatus?.[i] || {}) },
   );
+  if (status.dead && unit.type === "Postać Dramatu")
+    post.deadDrama = [
+      ...new Set([...(post.deadDrama || []), unit.dramaId || unit.unitName]),
+    ];
   post.injuries[task.key] = {
     result: result.name,
     code: result.code,
     detail,
     status,
   };
-  if (status.dead) {
+  if (
+    status.dead &&
+    !["Najemne Ostrze", "Postać Dramatu"].includes(unit.type)
+  ) {
     [
       ...(unit.startingEquipment || []),
       ...(unit.optionalEquipment || []),
@@ -662,6 +761,9 @@ export const applyInjury = (post, task, result, detail = {}) => {
       storeItem(post, name, 1, {
         ...(metadata?.catalogId ? { catalogId: metadata.catalogId } : {}),
         basePrice: metadata?.basePrice || unit.equipmentList?.[name]?.[0] || 0,
+        ...(unit.craftedEquipment?.[name]
+          ? { crafting: clone(unit.craftedEquipment[name]) }
+          : {}),
       });
     });
   }
@@ -682,14 +784,18 @@ export const applyExperience = (post) => {
       { length: modelCount(u) },
       (_, i) => !u.battleAbsentModels?.[i],
     ).some(Boolean);
+    if (survived && participated)
+      u.obled = Math.min(
+        89,
+        (Number(u.obled) || 0) + (Number(u.battleObled) || 0),
+      );
     if (!survived || !participated || !canEarnExperience(u)) return;
     const gained =
       1 +
       (Number(u.battleExp) || 0) +
-      (isHero(u) ? Number(u.battleKills) || 0 : 0);
+      (u.type === "Bohater" ? Number(u.battleKills) || 0 : 0);
     const old = Number(u.exp) || 0;
-    u.exp = Math.min(heroDevelopment(u) ? 90 : 14, old + gained);
-    u.obled = (Number(u.obled) || 0) + (Number(u.battleObled) || 0);
+    u.exp = Math.min(isHero(u) ? 90 : 14, old + gained);
     crossed(old, u.exp, u).forEach((threshold) =>
       post.advances.push({
         id: uid(),
@@ -724,12 +830,13 @@ export const finalizePostBattle = (battle, notes) => {
     u.totalCost = Number(u.cost) * statuses.length;
     u.campaignModelStatus = statuses.map(({ i, ...s }) => ({
       ...s,
-      skip: Math.max(0, (s.skip || 0) - (u.battleAbsentModels?.[i] ? 1 : 0)),
+      skip: Math.max(0, s.skip || 0),
     }));
     delete u.campaignNewRecruit;
     u.battleExp = 0;
     u.battleKills = 0;
     u.battleObled = 0;
+    u.battlePacts = 0;
     u.battleOutOfActionModels = statuses.map(() => false);
     u.battleAbsentModels = statuses.map(() => false);
     return [u];
@@ -738,6 +845,11 @@ export const finalizePostBattle = (battle, notes) => {
     ...campaignDefaults(),
     ...(notes.campaign || {}),
     inventory: p.inventory,
+    companyAdvancements: p.companyAdvancements || [],
+    persistentEffects: p.persistentEffects || {},
+    futureEffects: p.futureEffects || [],
+    deadDrama: p.deadDrama || [],
+    mercenaryBans: p.mercenaryBans || {},
     activeBattle: null,
   };
   if (campaign.history.some((h) => h.id === battle.id))
@@ -762,6 +874,12 @@ export const finalizePostBattle = (battle, notes) => {
     notes: {
       ...notes,
       ...(p.campaignPoints || {}),
+      specialRules: [
+        ...new Set([
+          ...(notes.specialRules || []),
+          ...(p.companyAdvancements || []).map((e) => e.name),
+        ]),
+      ],
       skarbiec: p.treasury,
       kosztownosci: p.loot,
       campaign,
@@ -771,6 +889,16 @@ export const finalizePostBattle = (battle, notes) => {
 };
 
 export const equipmentCapacity = (unit, item) => {
+  const crafted = Object.values(unit.craftedEquipment || {}).flat();
+  const craftSlot = {
+    "Magiczny oręż": /oręża|inżynierskie/i,
+    "Magiczna zbroja": /zbroi/i,
+    "Magiczne talizmany": /talizmanu/i,
+    "Magiczne instrumenty": /instrumentu/i,
+    "Magiczne sztandary": /sztandaru/i,
+  }[item.category];
+  if (craftSlot && crafted.some((r) => craftSlot.test(r.category)))
+    return "Ten magiczny slot zajmuje przedmiot runiczny lub mechaniczny.";
   const owned = unit.campaignEquipment || [];
   const magical =
     item.category.startsWith("Magicz") || item.category === "Arkana";
@@ -860,6 +988,14 @@ export const equipItem = (unit, item, quote) => {
   unit.totalCost = unit.cost * modelCount(unit);
 };
 
+export const availabilityValue = (token, item) =>
+  token.total +
+  (/\(trucizna\)/i.test(item.name)
+    ? token.poisonBonus || 0
+    : /\((mikstura|\s*narkotyk\s*)\)/i.test(item.name)
+      ? token.alchemyBonus || 0
+      : 0);
+
 export const buyItem = (
   post,
   unitId,
@@ -869,6 +1005,8 @@ export const buyItem = (
   toInventory = false,
 ) => {
   const unit = post.units.find((u) => u.uniqueId === unitId);
+  if (post.tradeClosed)
+    throw Error("Handel w tej sekwencji został zakończony.");
   const permission = equipmentPermission(unit, item, armyName);
   if (!toInventory && unit?.campaignNewRecruit && item.availability > 0)
     throw Error(
@@ -910,7 +1048,7 @@ export const buyItem = (
       !token ||
       !token.locked ||
       token.used ||
-      token.total < item.availability
+      availabilityValue(token, item) < item.availability
     )
       throw Error("Brak niewykorzystanego wyniku dostępności.");
     token.used = true;
@@ -967,8 +1105,24 @@ export const equipStoredItem = (post, unitId, storedId, armyName) => {
       text: "",
     };
   }
+  const craftCategory = stored.crafting?.[0]?.category;
+  const magicalCraftCategory = craftCategory
+    ? /oręża|inżynierskie/i.test(craftCategory)
+      ? "Magiczny oręż"
+      : /zbroi/i.test(craftCategory)
+        ? "Magiczna zbroja"
+        : /talizmanu/i.test(craftCategory)
+          ? "Magiczne talizmany"
+          : /instrumentu/i.test(craftCategory)
+            ? "Magiczne instrumenty"
+            : "Magiczne sztandary"
+    : null;
   const permission =
-    equipmentPermission(unit, item, armyName) || equipmentCapacity(unit, item);
+    equipmentPermission(unit, item, armyName) ||
+    equipmentCapacity(
+      unit,
+      magicalCraftCategory ? { ...item, category: magicalCraftCategory } : item,
+    );
   if (permission) throw Error(permission);
   const amount =
     modelCount(unit) -
@@ -977,6 +1131,11 @@ export const equipStoredItem = (post, unitId, storedId, armyName) => {
     throw Error("Potrzebny komplet dla całej grupy.");
   const base = stored.basePrice ?? Number(item.price.match(/^\d+/)?.[0] || 0);
   equipItem(unit, item, { basePrice: base, price: base });
+  if (stored.crafting)
+    unit.craftedEquipment = {
+      ...(unit.craftedEquipment || {}),
+      [item.name]: clone(stored.crafting),
+    };
   stored.quantity -= amount;
   post.inventory = post.inventory.filter((i) => i.quantity > 0);
   log(post, "inventory", `${stored.name} ×${amount} → ${label(unit)}`);
@@ -986,6 +1145,12 @@ export const unequipItem = (post, unitId, field, index) => {
   const unit = post.units.find((u) => u.uniqueId === unitId),
     entry = unit?.[field]?.[index];
   if (!entry) throw Error("Brak przedmiotu do przeniesienia.");
+  if (
+    unit.type === "Najemne Ostrze" ||
+    (unit.type === "Postać Dramatu" &&
+      (field === "startingEquipment" || entry.personal))
+  )
+    throw Error("Ta postać nie oddaje własnego ekwipunku do skarbca.");
   const name = typeof entry === "string" ? entry : entry.name;
   const metadata = (unit.campaignEquipment || []).find(
     (i) => normal(i.name) === normal(name),
@@ -1002,7 +1167,10 @@ export const unequipItem = (post, unitId, field, index) => {
   const amount =
     modelCount(unit) -
     (unit.campaignModelStatus || []).filter((s) => s.dead).length;
+  const crafting = unit.craftedEquipment?.[name];
+  if (crafting) delete unit.craftedEquipment[name];
   storeItem(post, name, amount, {
+    ...(crafting ? { crafting } : {}),
     ...(metadata?.catalogId ? { catalogId: metadata.catalogId } : {}),
     basePrice: base,
   });
