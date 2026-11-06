@@ -3,7 +3,7 @@ import WeaponList from "../layouts/WeaponList";
 import { magic } from "../Data.js/Magic";
 import { getMagicLore } from "../Functions/getMagicLore";
 import { getModifiers } from "../Functions/getModifiers";
-import { getEquipmentRules, getRuleText } from "../Functions/getRuleText";
+import { getRuleText } from "../Functions/getRuleText";
 import RulesModal from "./RulesModal";
 import "../styles/UnitDetails.css";
 
@@ -86,16 +86,6 @@ const getRuleSections = (unit, magicLore, spells) => [
   {
     title: "Zasady specjalne",
     entries: unit.rules.map((rule) => ({ name: rule, text: getRuleText(rule) })),
-  },
-  {
-    title: "Zasady ekwipunku",
-    entries: Object.entries(getEquipmentRules(unit))
-      .filter(([rule]) => !unit.rules.includes(rule))
-      .map(([rule, items]) => ({
-        name: rule,
-        text: getRuleText(rule),
-        source: items.join(", "),
-      })),
   },
   {
     title: magicLore || "Zaklęcia",

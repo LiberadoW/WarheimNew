@@ -239,3 +239,26 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.equipment-details-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.equipment-details-link:hover {
+  color: var(--accent);
+}
+
+.equipment-details-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}

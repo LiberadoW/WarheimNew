@@ -5,7 +5,7 @@ import "../styles/RulesModal.css";
 // Full rule texts for one unit in a dialog. `sections` is a list of
 // { title, entries: [{ name, text, source? }] }. When `focusName` is set the
 // dialog opens scrolled to that entry.
-const RulesModal = ({ title, sections, focusName, onClose }) => {
+const RulesModal = ({ title, sections, focusName, onClose, children }) => {
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const onCloseRef = useRef(onClose);
@@ -81,6 +81,7 @@ const RulesModal = ({ title, sections, focusName, onClose }) => {
           </button>
         </div>
         <div className="rules-modal-body">
+          {children}
           {sections
             .filter((section) => section.entries.length > 0)
             .map((section) => (
