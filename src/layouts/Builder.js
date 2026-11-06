@@ -6,8 +6,14 @@ import React, {
   useState,
   createContext,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
+import { useLocation } from "react-router-dom";
+import {
+  doc,
+  getDoc,
+  Timestamp,
+  updateDoc,
+  runTransaction,
+} from "firebase/firestore";
 import html2pdf from "html2pdf.js";
 import { avoidPdfPageBreaks } from "../Functions/avoidPdfPageBreaks";
 import "@sweetalert2/themes/bootstrap-4";
@@ -18,6 +24,7 @@ import CampaignPointsEditor from "../Components/CampaignPointsEditor";
 import Modal from "../Components/Modal";
 import UnitDetails, { UnitDetailsHeader } from "../Components/UnitDetails";
 import UnitSelect from "./UnitSelect";
+import CampaignManager from "../campaign/CampaignManager";
 import UnitPicker from "./UnitPicker";
 import UnitList from "./UnitList";
 import { AuthContext } from "../Context/AuthContext";
@@ -90,103 +97,6 @@ const getBattleModelCount = (unit) => {
     : 1;
 };
 
-const getDisplayUnitLabel = (unit) => {
-  const displayName =
-    typeof unit.unitDisplayName === "string" ? unit.unitDisplayName.trim() : "";
-
-  if (displayName.length > 0 && displayName !== unit.unitName) {
-    return `${unit.unitName} (${displayName})`;
-  }
-
-  return unit.unitName;
-};
-
-const getDefaultBattleName = () => {
-  return `Bitwa ${new Date().toLocaleString("pl-PL")}`;
-};
-
-const buildBattleSummary = (unitList) => {
-  const updatedUnits = [];
-  const outOfActionModels = [];
-  const unitResults = [];
-  let totalExpGained = 0;
-  let totalObledGained = 0;
-
-  unitList.forEach((unit) => {
-    if (!unit || unit.unitName === "") {
-      return;
-    }
-
-    const battleExp = Math.max(0, Number(unit.battleExp) || 0);
-    const battleObled = Math.max(0, Number(unit.battleObled) || 0);
-    const modelCount = getBattleModelCount(unit);
-    const statuses = Array.isArray(unit.battleOutOfActionModels)
-      ? unit.battleOutOfActionModels
-      : Array.from({ length: modelCount }, () => false);
-    const unitLabel = getDisplayUnitLabel(unit);
-
-    const modelResults = Array.from({ length: modelCount }, (_, index) => {
-      const modelLabel =
-        modelCount > 1 ? `${unitLabel} #${index + 1}` : unitLabel;
-      const isOutOfAction = Boolean(statuses[index]);
-
-      if (isOutOfAction) {
-        outOfActionModels.push(modelLabel);
-      }
-
-      return {
-        modelNumber: index + 1,
-        modelLabel,
-        isOutOfAction,
-      };
-    });
-
-    totalExpGained += battleExp;
-    totalObledGained += battleObled;
-
-    const outOfActionCount = modelResults.filter(
-      (modelResult) => modelResult.isOutOfAction,
-    ).length;
-    const remainingModels = Math.max(modelCount - outOfActionCount, 0);
-
-    unitResults.push({
-      unitLabel,
-      gainedExp: battleExp,
-      gainedObled: battleObled,
-      outOfActionCount,
-      remainingModels,
-      modelResults,
-    });
-
-    if (remainingModels <= 0) {
-      return;
-    }
-
-    unit.exp = (Number(unit.exp) || 0) + battleExp;
-    unit.obled = (Number(unit.obled) || 0) + battleObled;
-    unit.selectedNumber = remainingModels;
-    unit.totalCost = (Number(unit.cost) || 0) * remainingModels;
-    unit.battleExp = 0;
-    unit.battleObled = 0;
-    unit.battleOutOfActionModels = Array.from(
-      { length: remainingModels },
-      () => false,
-    );
-
-    updatedUnits.push(unit);
-  });
-
-  return {
-    updatedUnits,
-    summary: {
-      totalExpGained,
-      totalObledGained,
-      outOfActionModels,
-      unitResults,
-    },
-  };
-};
-
 const normalizeCampaignNotes = (campaignNotes) => {
   const notes = { ...getDefaultCampaignNotes(), ...(campaignNotes || {}) };
 
@@ -235,13 +145,6 @@ const Builder = ({
     setIsPlayArmyView,
   } = useContext(EditArmyContext);
   const location = useLocation();
-  const navigate = useNavigate();
-  const [showBattleModal, setShowBattleModal] = useState(false);
-  const [battleModalStep, setBattleModalStep] = useState("confirm");
-  const [battleSummary, setBattleSummary] = useState(null);
-  const [isFinishingBattle, setIsFinishingBattle] = useState(false);
-  const [battleSaveError, setBattleSaveError] = useState("");
-  const [battleName, setBattleName] = useState("");
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -463,121 +366,67 @@ const Builder = ({
     setCustomArmyCost(e.target.value);
   };
 
-  const handleEndBattleClick = () => {
-    setBattleModalStep("confirm");
-    setBattleSummary(null);
-    setBattleSaveError("");
-    setBattleName(getDefaultBattleName());
-    setShowBattleModal(true);
-  };
-
-  const handleCancelBattleModal = () => {
-    if (isFinishingBattle) {
-      return;
-    }
-    setShowBattleModal(false);
-  };
-
-  const saveBattleHistory = async (updatedUnits, summary, gameName) => {
-    if (!currentUser?.user?.uid || armyName.trim().length === 0) {
-      throw new Error("Brak danych do zapisu historii bitwy.");
-    }
-
-    const userListsRef = doc(db, "lists", currentUser.user.uid);
-    const savedListsDoc = await getDoc(userListsRef);
-    const savedListsData = savedListsDoc.data();
-    const arrayOfSavedLists = Array.isArray(savedListsData?.lists)
-      ? [...savedListsData.lists]
-      : [];
-    const listIndex = arrayOfSavedLists.findIndex(
-      (item) => item.armyName === armyName && getArmyName(item.armyType) === army.name,
-    );
-
-    if (listIndex === -1) {
-      throw new Error("Nie znaleziono rozpiski do aktualizacji historii.");
-    }
-
-    const selectedList = arrayOfSavedLists[listIndex];
-    const currentHistory = Array.isArray(selectedList.gameHistory)
-      ? selectedList.gameHistory
-      : [];
-
-    const historyEntry = {
-      finishedAt: Timestamp.now(),
-      gameName,
-      totalExpGained: summary.totalExpGained,
-      totalObledGained: summary.totalObledGained,
-      outOfActionModels: summary.outOfActionModels,
-      unitResults: summary.unitResults.map((unitResult) => ({
-        unitLabel: unitResult.unitLabel,
-        gainedExp: unitResult.gainedExp,
-        gainedObled: unitResult.gainedObled,
-        modelResults: unitResult.modelResults.map((modelResult) => ({
-          modelNumber: modelResult.modelNumber,
-          modelLabel: modelResult.modelLabel,
-          isOutOfAction: modelResult.isOutOfAction,
-        })),
-      })),
-    };
-
-    const updatedPrestige = getPrestige(updatedUnits)[0];
-    const updatedCost = getTotalCost(updatedUnits);
-
-    arrayOfSavedLists[listIndex] = {
-      ...selectedList,
-      armyType: army.name,
-      armyList: normalizeUnitList(updatedUnits),
-      timestamp: Timestamp.now(),
-      totalCost: updatedCost,
-      prestige: updatedPrestige,
-      campaignNotes: normalizeCampaignNotes(campaignNotes),
-      gameHistory: [...currentHistory, historyEntry],
-    };
-
-    await updateDoc(userListsRef, {
-      lists: arrayOfSavedLists,
-    });
-  };
-
-  const handleConfirmEndBattle = async () => {
-    if (isFinishingBattle) {
-      return;
-    }
-
-    setIsFinishingBattle(true);
-    setBattleSaveError("");
-    const normalizedBattleName = battleName.trim() || getDefaultBattleName();
-
-    const { updatedUnits, summary } = buildBattleSummary(unitList);
-    setUnitList(updatedUnits);
-
-    if (currentUser?.user?.uid && armyName.trim().length > 0) {
-      try {
-        await saveBattleHistory(updatedUnits, summary, normalizedBattleName);
-      } catch (err) {
-        console.log(err);
-        setBattleSaveError(
-          "Nie udało się zapisać historii bitwy. Możesz nadal zapisać armię ręcznie.",
+  const finishCampaignBattle = async ({ units, notes, entry }) => {
+    if (!currentUser?.user?.uid) return; // Guest campaigns remain in the device draft.
+    if (!armyName.trim())
+      throw new Error(
+        "Nazwij i zapisz kompanię na koncie przed zakończeniem potyczki.",
+      );
+    const ref = doc(db, "lists", currentUser.user.uid);
+    await runTransaction(db, async (transaction) => {
+      const snapshot = await transaction.get(ref);
+      const lists = [...(snapshot.data()?.lists || [])];
+      const index = lists.findIndex(
+        (item) =>
+          item.armyName === armyName &&
+          getArmyName(item.armyType) === army.name,
+      );
+      if (index === -1)
+        throw new Error(
+          "Najpierw zapisz kompanię na koncie przyciskiem Zapisz armię.",
+        );
+      const saved = lists[index];
+      if (
+        saved.campaignNotes?.campaign?.history?.some((h) => h.id === entry.id)
+      )
+        return;
+      const knownIds = new Set(
+        (campaignNotes.campaign?.history || []).map((h) => h.id),
+      );
+      if (
+        (saved.campaignNotes?.campaign?.history || []).some(
+          (h) => !knownIds.has(h.id),
+        )
+      ) {
+        throw new Error(
+          "Na koncie zapisano nowszą potyczkę. Zachowano lokalną wersję roboczą; uzgodnij zmiany przed zapisem.",
         );
       }
-    } else {
-      setBattleSaveError(
-        "Brak zalogowanego użytkownika lub nazwy rozpiski. Historia nie została zapisana.",
-      );
-    }
-
-    setBattleSummary({
-      ...summary,
-      gameName: normalizedBattleName,
+      lists[index] = {
+        ...saved,
+        armyList: normalizeUnitList(units),
+        campaignNotes: notes,
+        timestamp: Timestamp.now(),
+        totalCost: getTotalCost(units),
+        prestige: getPrestige(units)[0],
+        gameHistory: [
+          ...(saved.gameHistory || []),
+          {
+            id: entry.id,
+            gameName: entry.gameName,
+            finishedAt: Timestamp.now(),
+            totalExpGained: entry.journal
+              .filter((j) => j.type === "experience")
+              .reduce((n, j) => n + (j.gained || 0), 0),
+            totalObledGained: 0,
+            outOfActionModels: [],
+            unitResults: [],
+            campaignEntryId: entry.id,
+          },
+        ],
+      };
+      transaction.update(ref, { lists });
     });
-    setBattleModalStep("summary");
-    setIsFinishingBattle(false);
-  };
-
-  const handleCloseBattleSummary = () => {
-    setShowBattleModal(false);
-    setBattleModalStep("confirm");
-    navigate("/myLists");
   };
 
   return (
@@ -585,6 +434,16 @@ const Builder = ({
       value={{ standardBearer, setStandardBearer, musician, setMusician }}
     >
       <div className="builder">
+        {isPlayArmyView && (
+          <CampaignManager
+            unitList={unitList}
+            setUnitList={setUnitList}
+            army={army}
+            campaignNotes={campaignNotes}
+            setCampaignNotes={setCampaignNotes}
+            onFinish={finishCampaignBattle}
+          />
+        )}
         <div className="builder-header">
           <div className="builder-header-main">
             <div className="builder-identity">
@@ -640,21 +499,15 @@ const Builder = ({
                         handleSavePDFClick(e);
                       }}
                     >
-                      <i className="fa-solid fa-download" aria-hidden="true"></i>
+                      <i
+                        className="fa-solid fa-download"
+                        aria-hidden="true"
+                      ></i>
                       Zapisz PDF
                     </button>
                   </>
                 )}
               </HeaderMenu>
-              {isPlayArmyView && (
-                <button
-                  type="button"
-                  className="button button-secondary"
-                  onClick={handleEndBattleClick}
-                >
-                  Zakończ bitwę
-                </button>
-              )}
               {currentUser && (
                 <button type="button" className="button" onClick={saveArmy}>
                   <i className="fa-solid fa-floppy-disk" aria-hidden="true"></i>
@@ -704,7 +557,10 @@ const Builder = ({
                             handleResetArmyClick();
                           }}
                         >
-                          <i className="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                          <i
+                            className="fa-solid fa-rotate-left"
+                            aria-hidden="true"
+                          ></i>
                           Resetuj armię
                         </button>
                       )}
@@ -749,16 +605,21 @@ const Builder = ({
                 <p>Wybierz jednostki z listy obok, aby je dodać.</p>
               </div>
             )}
-            <UnitList
-              unitList={unitList}
-              setUnitList={setUnitList}
-              idShown={idShown}
-              setIdShown={setIdShown}
-              heroes={army?.heroes}
-              handleSetUnitExp={handleSetUnitExp}
-              army={army}
-              showDetailsInline={!isSidePanelView}
-            />
+            {!(
+              isPlayArmyView && campaignNotes.campaign?.activeBattle?.post
+            ) && (
+              <UnitList
+                unitList={unitList}
+                setUnitList={setUnitList}
+                idShown={idShown}
+                setIdShown={setIdShown}
+                heroes={army?.heroes}
+                handleSetUnitExp={handleSetUnitExp}
+                army={army}
+                showDetailsInline={!isSidePanelView}
+                campaign={campaignNotes.campaign}
+              />
+            )}
             {isEditArmyView && (
               <CampaignPointsEditor
                 army={army}
@@ -783,7 +644,10 @@ const Builder = ({
                       className="side-panel-back"
                       onClick={handleSidePanelBack}
                     >
-                      <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                      <i
+                        className="fa-solid fa-arrow-left"
+                        aria-hidden="true"
+                      ></i>
                       Dodaj jednostki
                     </button>
                   )}
@@ -828,126 +692,6 @@ const Builder = ({
       </div>
 
       <Modal showModal={showNewArmyModal} setShowModal={setShowNewArmyModal} />
-
-      {showBattleModal && (
-        <div className="battle-end-modal-overlay">
-          <div className="battle-end-modal">
-            {battleModalStep === "confirm" ? (
-              <>
-                <h3>Zakończyć bitwę?</h3>
-                <p>
-                  Ta akcja doda zdobyte PD i Obłęd do modeli oraz zapisze
-                  historię bitwy.
-                </p>
-                <div className="battle-end-name-field">
-                  <label htmlFor="battle-name-input" className="bold-text">
-                    Nazwa bitwy
-                  </label>
-                  <input
-                    id="battle-name-input"
-                    type="text"
-                    value={battleName}
-                    onChange={(e) => setBattleName(e.target.value)}
-                    placeholder="Np. Bitwa o Most Czaszek"
-                  />
-                </div>
-                <div className="battle-end-modal-actions">
-                  <button className="button" onClick={handleCancelBattleModal}>
-                    Anuluj
-                  </button>
-                  <button
-                    className="button"
-                    onClick={handleConfirmEndBattle}
-                    disabled={
-                      isFinishingBattle || battleName.trim().length === 0
-                    }
-                  >
-                    {isFinishingBattle
-                      ? "Zapisywanie..."
-                      : "Potwierdź zakończenie"}
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <h3>Bitwa zakończona</h3>
-                <div className="battle-end-summary">
-                  <p>
-                    <span className="bold-text">Nazwa bitwy:</span>{" "}
-                    {battleSummary?.gameName || "-"}
-                  </p>
-                  <p>
-                    <span className="bold-text">Zdobyte PD:</span>{" "}
-                    {battleSummary?.totalExpGained || 0}
-                  </p>
-                  <p>
-                    <span className="bold-text">Zdobyty Obłęd:</span>{" "}
-                    {battleSummary?.totalObledGained || 0}
-                  </p>
-
-                  <div className="battle-end-summary-section">
-                    <p className="bold-text">Modele WzA:</p>
-                    {battleSummary?.outOfActionModels?.length ? (
-                      <ul className="battle-end-list">
-                        {battleSummary.outOfActionModels.map(
-                          (modelLabel, index) => (
-                            <li key={`${modelLabel}-${index}`}>{modelLabel}</li>
-                          ),
-                        )}
-                      </ul>
-                    ) : (
-                      <p>Brak modeli WzA.</p>
-                    )}
-                  </div>
-
-                  <div className="battle-end-summary-section">
-                    <p className="bold-text">Podsumowanie jednostek:</p>
-                    <div className="battle-end-units">
-                      {(battleSummary?.unitResults || []).map(
-                        (unitResult, index) => {
-                          const unitOutOfActionModels =
-                            unitResult.modelResults.filter(
-                              (modelResult) => modelResult.isOutOfAction,
-                            );
-                          return (
-                            <div
-                              className="battle-end-unit-row"
-                              key={`${unitResult.unitLabel}-${index}`}
-                            >
-                              <p className="bold-text">
-                                {unitResult.unitLabel}
-                              </p>
-                              <p>
-                                {`PD: +${unitResult.gainedExp} | Obłęd: +${unitResult.gainedObled}`}
-                              </p>
-                              <p>
-                                {unitOutOfActionModels.length > 0
-                                  ? `WzA: ${unitOutOfActionModels
-                                      .map(
-                                        (modelResult) => modelResult.modelLabel,
-                                      )
-                                      .join(", ")}`
-                                  : "WzA: brak"}
-                              </p>
-                            </div>
-                          );
-                        },
-                      )}
-                    </div>
-                  </div>
-
-                  {battleSaveError.length > 0 && (
-                    <p className="battle-end-error">{battleSaveError}</p>
-                  )}
-                </div>
-                <button className="button" onClick={handleCloseBattleSummary}>
-                  Zamknij i przejdź do moich rozpisek
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
     </CommandContext.Provider>
   );
 };

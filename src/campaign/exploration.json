@@ -1,0 +1,422 @@
+[
+  {
+    "key": "11",
+    "area": "inside",
+    "name": "Studnia",
+    "text": "Obywatele miast Starego Świata czerpią wodę pitną z głębokich studni, drążonych w obrębie murów miejskich. Choć teoretycznie straż miejska strzeże bezpieczeństwa i czystości miejskich ujęć wody, to zdarza się, że niektóre zostają zanieczyszczone lub zniszczone. Wybrany przez gracza bohater musi wykonać test WT. Udany test oznacza, że bohater odnajduje na dnie studni dodatkowy +1 Łup! oraz otrzymuje +1 Punkt Doświadczenia. Nieudany testu oznacza, że bohater rozchorował się po opiciu mętną wodą i opuszcza następną rozgrywkę.",
+    "page": 419
+  },
+  {
+    "key": "22",
+    "area": "inside",
+    "name": "Stragan",
+    "text": "Choć stragan handlarza został już pobieżnie złupiony, to wciąż wśród połamanych desek, porwanego płótna i rozbitych przedmiotów można znaleźć trochę złota oraz innych użytecznych przedmiotów. Drużyna znajduje K6 złotych koron. Jeżeli w rzucie K6 gracz uzyskał wynik 1, oznacza to, że zamiast złotych koron znajduje Psią Łapkę (zobacz ROZDZIAŁ 14: EKWIPUNEK).",
+    "page": 419
+  },
+  {
+    "key": "33",
+    "area": "inside",
+    "name": "Zwłoki",
+    "text": "Stary Świat to groźne miejsce, w którym nawet miejskie mury dają złudne poczucie bezpieczeństwa. Grupy kultystów Mrocznych Bogów podkopują fundamenty Imperium, a w miejskich kanałach żyje wiele groźnych, nienazwanych stworzeń polujących na mieszkańców, a czasem także na ich dusze. W jednym z mrocznych zaułków drużyna natyka się na ciepłe jeszcze ciało nieszczęśnika. Zastygłe w przerażeniu oczy wpatrują się w modele drużyny, a wypływająca z licznych ran krew zlewa się w ogromną kałuże. Bohaterowie przeszukują zwłoki, a gracz musi wykonać rzut K6, aby określić co postaciom udało znaleźć się przy ciele. Wynik 1-2 oznacza, że znalezionych zostało K6 złotych koron; 3 to sztylet, rezultat 4 oznacza topór bojowy; 5 to miecz; a wynik 6 oznacza, że znaleziony został średni pancerz.",
+    "page": 419
+  },
+  {
+    "key": "44",
+    "area": "inside",
+    "name": "Obłąkany",
+    "text": "Ludzie zamieszkujący Stary Świat spoglądają na obłąkanych ze strachem i uzasadnioną podejrzliwością. Przekazywane z pokolenia na pokolenie mądrości ludowe głoszą, że obłęd bierze swój początek z Chaosu, który wypacza duszę i ciało. Choroby umysłu są traktowane jak zepsucie duszy, podobne do mutacji ciała, tyle że zżerające człowieka od wewnątrz. Drużyna natyka się na odzianego w łachmany szaleńca, który bełkocząc i śliniąc się próbuje coś powiedzieć. ZŁE i CHAOTYCZNE drużyny mogą sprzedać nieszczęśnika do niewoli lub złożyć go w ofierze swym plugawym bogom, otrzymując odpowiednio 2K6 złotych koron lub +1 Punkt Doświadczenia dla DOWÓDCY. Kompania NIEUMARŁYCH może zabić obłąkanego i ożywić go jako Zombie. Drużyny NEUTRALNE i PRAWORZĄDNE mogą wysłuchać szaleńca i zdobyć informacje na temat ukrytych w okolicy Łupów!. W czasie następnej sekwencji po potyczce w fazie eksploracji pula Kostek Eksploracji zostaje zwiększona o jedną dodatkową kostkę. Jednak po wykonaniu rzutu, gracz musi odrzucić kostkę z najniższym wynikiem, która nie wlicza się do wyniku rzutu.",
+    "page": 419
+  },
+  {
+    "key": "55",
+    "area": "inside",
+    "name": "Przewrócony powóz",
+    "text": "Zaklinowany w zrujnowanej branie leży przewrócony powóz. Pobieżne oględziny ujawniają kilka przedmiotów które mogą okazać się przydatne. Dlaczego wciąż tu leżą i co stało się z pasażerami tego pojazdu? Kompania odnajduje przewrócony powóz, aby określić co znajdowało się wewnątrz pojazdu należy wykonać rzut K6. Wynik 1-2 oznacza odnalezienie mapy; 3-4 to skórzana torba zawierając 2K6 złotych koron; a rezultat 5-6 to rapier, sztylet oraz średni pancerz.",
+    "page": 419
+  },
+  {
+    "key": "66",
+    "area": "inside",
+    "name": "Ruiny",
+    "text": "Wiele mniejszych miast i osad Starego Świata atakowanych jest przez bandy banitów i rozbójników, stada Zwierzoludzi czy hordy Zielonoskórych. Wiele z nich zostaje złupionych, a ruiny splądrowanych budynków przez wiele lat przypominają o nieszczęściu. Przeszukując pobliskie ruiny drużyna odnajduje K6 złotych koron.",
+    "page": 419
+  },
+  {
+    "key": "11",
+    "area": "outside",
+    "name": "Pogorzelisko",
+    "text": "W Starym Świecie większe miasta i osady otoczone są niewielkimi farmami zamieszkanymi zwykle przez jedną bądź dwie rodziny. Niestety dla farmerów, to właśnie ich zagrody jako pierwsze padają ofiarą zbrojnych najazdów jakie mają miejsce w czasie wojen. Przeszukując ruiny kompania odnajduje K6 złotych koron.",
+    "page": 419
+  },
+  {
+    "key": "22",
+    "area": "outside",
+    "name": "Szaleniec",
+    "text": "Hordy Chaosu zdobyły i zniszczyły niemal wszystkie osady i wioski położone na północy Imperium Jednak nie wszyscy mieszkańcy mieli dość szczęścia by zginąć pod ostrzami nieświadomych armii. Wielu przeżyło, jednak koszmar wojny odcisnął swe piętno na ich duszach i umysłach. Drużyna natyka się na odzianego w łachmany szaleńca, który bełkocząc i śliniąc się próbuje coś powiedzieć. ZŁE i CHAOTYCZNE drużyny mogą sprzedać nieszczęśnika do niewoli lub złożyć go w ofierze swym plugawym bogom, otrzymując odpowiednio 2K6 złotych koron lub +1 Punkt Doświadczenia dla DOWÓDCY. Kompania NIEUMARŁYCH może zabić obłąkanego i ożywić go jako Zombie. Drużyny NEUTRALNE i PRAWORZĄDNE mogą wysłuchać szaleńca, należy wykonać rzut K6: wynik 1-3 oznacza, że obłąkany mężczyzna nie ma nic sensownego do powiedzenia. Natomiast 4+ oznacza, że szaleniec opowiada drużynnikom o sekretnym tunelu, do którego wejście odnalazł w okolicy. Na początku następnej potyczki rozgrywanej ‘POZA MURAMI’ gracz może wystawić maksymalnie trzy modele, tak jakby podlegały one zasadzie specjalnej ZWIADOWCA, ponadto modele muszą znajdować się w odległości do 4” od siebie.",
+    "page": 419
+  },
+  {
+    "key": "33",
+    "area": "outside",
+    "name": "Sieroty",
+    "text": "Wojna od zawsze najbardziej doświadcza najsłabszych i bezbronnych. Setki poległych obrońców osierociło tysiące dzieci, które pozbawione dachu nad głową i opieki starszych musiały nauczyć się troszczyć same o siebie. Jednak w czasie wojny nie jest to łatwe, a płacz sierot słychać na całej północy Imperium. Drużyna natyka się na wygłodzone i zaniedbane sieroty. ZŁE i CHAOTYCZNE drużyny mogą sprzedać dzieci do niewoli lub złożyć je w ofierze swym plugawym bogom, otrzymując odpowiednio K6x5 złotych koron lub K3 Punkty Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy bohaterów swojej kompanii. Kompania NIEUMARŁYCH może zabić sieroty i ożywić je jako K3 Zombie. Drużyny NEUTRALNE i PRAWORZĄDNE mogą odtransportować sieroty do najbliższego sierocińca, otrzymując w zamian 2K6 złotych koron. Jeżeli w rzucie 2K6 gracz wyrzuci dwie niemodyfikowane 6, oznacza to, że sieroty opowiedziały kompanii o ukrytym skarbie, w którym znajdują się K3 Łupy!.",
+    "page": 419
+  },
+  {
+    "key": "44",
+    "area": "outside",
+    "name": "Rozbity powóz",
+    "text": "Wielu bogatszych mieszczan przeczuwając upadek miast porzuciło swych rodaków i wraz ze swymi rodzinami zapakowali dobytek na powozy i wyruszyli na południe Imperium, pragnąc odnaleźć schronienie w bezpiecznym Reiklandzie. Jednak w czasie Inwazji Chaosu nie ma bezpiecznych miejsc. Drużyna odnajduje rozbity powóz, aby określić co znajdowało się wewnątrz pojazdu należy wykonać rzut K6. Wynik 1-2 oznacza, że odnaleziona została lina & hak; 3-4 to skórzana torba zawierająca 2K6 złotych koron; a rezultat 5-6 to K3 porcje krasnoludzkiego prochu.",
+    "page": 419
+  },
+  {
+    "key": "55",
+    "area": "outside",
+    "name": "Pusty grób",
+    "text": "Wiele ofiar Hord Chaosu nie zostało pogrzebanych, obrońcy przelewający krew na murach nie byli wstanie kopać grobów, a gdy polegli nie było nikogo, kto mógłby ich pochować. Wielu pogrzebanych nie zaznało spoczynku, gdy ich ciała zostały przyzwane do nieżycie przez plugawe moce… W pustym grobie drużyna odnajduje medalion, który można sprzedać za K6 złotych koron.",
+    "page": 419
+  },
+  {
+    "key": "66",
+    "area": "outside",
+    "name": "Dziczyzna",
+    "text": "Maszerujące na południowy zachód Hordy Chaosu niszczyły wszystko co stanęło im na drodze. Płonące osady i lasy nie były niczym niezwykłym w tych trudnych czasach. Spłoszone dzikie zwierzęta wielkimi stadami uciekały na południe, szukając schronienia z dala od wojsk Ciemności. Każdy uzbrojony w broń dystansową model bohatera należący do kompanii może oddać strzał w kierunku biegnącego stada, z uwzględnieniem modyfikatora -1 do rzutu na trafienie. Udany rzut na trafienie oznacza, że model otrzymuje +1 Punkt Doświadczenia. Ponadto zaopatrzona w mięso kompania w czasie rozgrywania bieżącej sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! traktowana jest tak jakby liczba modeli w drużynie była o jeden poziom niższa, niż ma to faktycznie miejsce (do minimalnego poziomu 1-3 modeli).",
+    "page": 419
+  },
+  {
+    "key": "111",
+    "area": "inside",
+    "name": "Gospoda",
+    "text": "Gospoda, podobnie jak sąsiednie budynki została zniszczona w czasie ostatniego pożaru. Jednak fundamenty wyglądają na solidne… Drużyna przeszukująca fundamenty gospody odnajduje zejście do piwnicy, w której zmagazynowano kilka beczek z piwem i winem. DOWÓDCA drużyny musi przeprowadzić test CP. Powodzenie oznacza, że DOWÓDCA zdyscyplinował podwładnych i drużyna może sprzedać alkohol zarabiając 4K6 złotych koron. Jeżeli test zakończy się niepowodzeniem, bohaterowie i stronnicy barykadują wejście do piwnicy, po czym otwierają beczki by zalać się w trupa. Gardzące tak przyziemnymi rozrywkami, kompanie Bractwo Rycerskie, Łowcy czarownic, Siostry Sigmara, Rycerze Graala i NIEUMARŁYCH automatycznie zdają test CP.",
+    "page": 420
+  },
+  {
+    "key": "222",
+    "area": "inside",
+    "name": "Kowal",
+    "text": "Stojące pośród na wpół zburzonych murów palenisko i kowadło pokryło się dawno rdzą i kurzem, a węgiel i żużel zalegają na podłodze. Choć kuźnia niemal doszczętnie obróciła się w ruinę to uważny obserwator może znaleźć wśród gruzu i poskręcanego metalu kilka przydatnych przedmiotów. Należy wykonać rzut K6. Wynik 1 oznacza, że znaleziony został miecz; 2 oznacza broń wielką; 3 to cep bojowy; rezultat 4 oznacza K3 halabardy; 5 to kopia; a wynik 6 oznacza, że znaleziona została ruda i stopy żelaza o wartości 2K6 zk.",
+    "page": 420
+  },
+  {
+    "key": "333",
+    "area": "inside",
+    "name": "Więźniowie",
+    "text": "Nocną ciszę przerywają rozpaczliwe wołanie o pomoc. Kluczący pośród zamkniętych na głucho budynków drużynnicy odnajdują ukryte za gruzem wejście do piwnicy, w której zamknięto grupę mieszczan. Drużyna spotyka grupę więźniów. ZŁE i CHAOTYCZNE drużyny mogą sprzedać nieszczęśników w niewolę lub złożyć więźniów w ofierze swym plugawym bogom, otrzymując odpowiednio 3K6 złotych koron lub K3 Punkty Doświadczenia, które należy rozdzielić pomiędzy bohaterów. Kompania NIEUMARŁYCH może zabić więźniów, by następnie ożywić ich jako K3 Zombie. Drużyny NEUTRALNE i PRAWORZĄDNE mogą uwolnić więźniów otrzymując w zamian nagrodę w wysokości 2K6 zk. Jeden z więźniów prosi o przyjęcie do drużyny. Jeżeli gracz posiada środki potrzebne na wyekwipowanie, może dołączyć rekruta do istniejącej grupy stronników PIESZY model wielkości człowieka lub mniejszy (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej), nawet jeśli modele zdobyły już Punkty Doświadczenia. Jeżeli gracz nie posiada środków niezbędnych do wyekwipowania lub istniejące grupy stronników zawierają już maksymalną liczbę modeli, więzień odchodzi wraz z pozostałymi.",
+    "page": 420
+  },
+  {
+    "key": "444",
+    "area": "inside",
+    "name": "Łucznik",
+    "text": "Strzelcy bez trudu rozpoznają w tym warsztacie miejsce pracy łucznika, pośród stert gruzu wciąż można dostrzec cisowe listwy, fragmenty rogów i piór. Należy wykonać rzut K6. Wynik 1-2 oznacza, że znalezione zostały K3 łuki krótkie; 3 oznacza K3 łuki; 4 to K3 łuki długie; rezultat 5 oznacza łuk elfów; a wynik 6 oznacza, że znalezione zostały K3 kusze.",
+    "page": 420
+  },
+  {
+    "key": "555",
+    "area": "inside",
+    "name": "Targowisko",
+    "text": "Owalny plac usłany jest grubą warstwą śmieci i szczątkami rozbitych straganów. Jednak obecnie znaleźć tu można jedynie na wpół przegnite warzywa połamane deski, które nadają się jedynie na ognisko. Chociaż, zaraz, tam coś błyszczy… Przeszukując opuszczone targowisko drużyna odnajduje 2K6 złotych koron.",
+    "page": 420
+  },
+  {
+    "key": "666",
+    "area": "inside",
+    "name": "Dług wdzięczności",
+    "text": "W drodze powrotnej do obozu, jeden z bohaterów spotyka dawno niewidziane znajomka, który przybyłby spłacić bohaterowi zaciągnięty przed latami dług. Kompania może przyjąć, bez opłacania kosztu rekrutacji i wykonywania rzutu na DOSTĘPNOŚĆ jedno z Najemnych Ostrzy, które może służyć w drużynie. Po zakończeniu następnej rozgrywki NAJEMNIK odejdzie w swoją stronę, chyba że DOWÓDCA zapłaci podany w opisie najmity żołd. Zamiast przyjmowania Najemnego Ostrza gracz, jeśli posiada środki potrzebne do wyekwipowania, może dołączyć do istniejącej grupy stronników PIESZY model wielkości człowieka lub mniejszy (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej), nawet jeśli modele zdobyły już Punkty Doświadczenia. Jeżeli gracz nie posiada środków niezbędnych do wyekwipowania lub istniejące grupy stronników zawierają już maksymalną liczbę modeli, model odchodzi obiecując spłatę długu w przyszłości.",
+    "page": 420
+  },
+  {
+    "key": "111",
+    "area": "outside",
+    "name": "Tabor ludu strigosu",
+    "text": "Wygnani przed wiekami z ojczyzny potomkowie mieszkańców Królestwa Strigosu wędrują w taborach przez krainy Starego Świata nigdzie nie mogąc odnaleźć nowego domu. Drużyna spotyka karawanę ludu Strigosu, a taboryci oferują kompanii kupno licznego EKWIPUNEK, który posiadają na wozach. Drużyna, która podejmie się handlu z taborytami może zakupić przedmioty wymienione w ROZDZIALE 14: EKWIPUNEK z 50% zniżką (zaokrąglając w górę). Po zakończeniu handlu, gracz musi wykonać rzut K6. Wynik 5+ oznacza, że taboryci okradli kompanię. Z KARTY DRUŻYNY należy usunąć złote korony i Łupy! posiadane do tej pory przez kompanię, także te, które zostały odnalezione w czasie rozgrywania bieżącej sekwencji po potyczce.",
+    "page": 420
+  },
+  {
+    "key": "222",
+    "area": "outside",
+    "name": "Gospodarstwo",
+    "text": "Na szczęście nie wszystkie gospodarstwa zostały zniszczone w czasie wojny. Niektóre zagrody wciąż produkują żywność tak potrzebną głodującym uchodźcom. PRAWORZĄDNE, ZŁE i CHAOTYCZNE kompanie mogą zarżnąć niemal bezbronnych farmerów i zrabować zgromadzoną w zagrodzie żywność oraz kosztowności warte 2K6 złotych koron. NEUTRALNE kompanie zostaną ugoszczone i wyprowiantowane przez ostrożnych farmerów. Zaopatrzone w mięso kompanie w czasie rozgrywania bieżącej sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! traktowane są tak jakby liczba modeli w drużynie była o jeden poziom niższa, niż ma to faktycznie miejsce (do minimalnego poziomu 1-3 modeli).",
+    "page": 420
+  },
+  {
+    "key": "333",
+    "area": "outside",
+    "name": "Pielgrzymi",
+    "text": "Pielgrzymi wędrujący do świętych miejsc kultu i wieszczący upadek świata biczownicy zdają się być nieodłącznym elementem Imperium. Drużyna spotyka grupę pielgrzymów. PRAWORZĄDNE, ZŁE i CHAOTYCZNE kompanie mogą zarżnąć i ograbić pielgrzymów zabierając ze sobą K6 złotych koron i ŚWIĘTĄ RELIKWIĘ. NEUTRALNYM drużynom pielgrzymi zdradzą informacje, dzięki którym w następnym scenariuszu gracz może automatycznie wybrać krawędź stołu na której rozpocznie potyczkę. Rzut określający, który z graczy wystawi swoje modele jako pierwszy należy przeprowadzić w zwykły sposób.",
+    "page": 420
+  },
+  {
+    "key": "444",
+    "area": "outside",
+    "name": "Opuszczony obóz orków",
+    "text": "Tam, gdzie toczy się wojna, pojawiają się Zielonoskórzy. Kompania odnajduje pozostałości jakie pozostawiło po sobie obozujące w okolicy plemię Zielonoskórych. Wśród resztek i śmieci drużynnicy odnajdują 2K6 złotych koron. Ponadto Łowcze plemię Dzikich Orków, Plemię Leśnych Goblinów, Orkowie & Gobliny oraz Nocne Gobliny i Załoga Zielonoskórych Kaprów odnajduje skrzynię zawierającą kilka tuzinów zębów, walutę, która pośród Zielonoskórych jest równie cenna jak złoto. Wartość złotych koron odnalezionych przez Zielonoskórych zostaje potrojona.",
+    "page": 420
+  },
+  {
+    "key": "555",
+    "area": "outside",
+    "name": "Milicja",
+    "text": "W pogrążonych w wojennej zawierusze prowincjach Imperium porządek utrzymują na własną rękę lokalni arystokracji i arcykapłani. PRAWORZĄDNE, ZŁE i CHAOTYCZNE drużyny zostają zaatakowane przez oddział milicji. Po krótkiej walce patrol zostaje rozbity, a drużyna wzbogaca się o K6 zk, K3 halabardy, K3 miecze, K3 pistolety oraz K6 Punktów Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy bohaterów swojej drużyny. Ponadto, gracz za każdy model należący do kompanii musi wykonać rzut K6. Wynik 5+ oznacza, że model został w czasie walki Wyłączony z akcji!, a gracz musi wykonać odpowiedni rzut w TABELI POWAŻNYCH RAN. Kompanie NEUTRALNE zostają ostrzeżone przez milicjantów o czyhających w okolicy niebezpieczeństwach. Milicjanci polecają drużynę okolicznym kupcom, dzięki czemu wartość każdego EKWIPUNKU zakupionego przez kompanię w bieżącej sekwencji po potyczce zostaje obniżona o -2K6 złotych koron (do minimum 1 zk).",
+    "page": 420
+  },
+  {
+    "key": "666",
+    "area": "outside",
+    "name": "Dług wdzięczności",
+    "text": "W drodze powrotnej do obozu, jeden z bohaterów spotyka dawno niewidziane znajomka, który przybyłby spłacić bohaterowi zaciągnięty przed latami dług. Kompania może przyjąć, bez opłacania kosztu rekrutacji i wykonywania rzutu na DOSTĘPNOŚĆ jedno z Najemnych Ostrzy, które może służyć w drużynie. Po zakończeniu następnej rozgrywki NAJEMNIK odejdzie w swoją stronę, chyba że DOWÓDCA zapłaci podany w opisie najmity żołd. Zamiast przyjmowania Najemnego Ostrza gracz, jeśli posiada środki potrzebne do wyekwipowania, może dołączyć do istniejącej grupy stronników PIESZY model wielkości człowieka lub mniejszy (reguła nie dotyczy modeli na podstawkach, których co najmniej jedna krawędź mierzy 40 mm i więcej), nawet jeśli modele zdobyły już Punkty Doświadczenia. Jeżeli gracz nie posiada środków niezbędnych do wyekwipowania lub istniejące grupy stronników zawierają już maksymalną liczbę modeli, model odchodzi obiecując spłatę długu w przyszłości.",
+    "page": 420
+  },
+  {
+    "key": "1111",
+    "area": "inside",
+    "name": "Rusznikarz",
+    "text": "Drzwi prowadzące do warsztatu zostały wyważone, korytarz i większość pomieszczeń została ograbiona, jednak w ostatnim pokoju uważny obserwator dostrzeże kilka skrzyń, przykrytych zakurzonymi płótnami. Należy wykonać rzut K6. Wynik 1 oznacza, że odnaleziony został garłacz; 2 oznacza K2 pistolety; 3 to K2 pistolety pojedynkowe; rezultat 4 oznacza K3 muszkiety; 5 to K3 porcje krasnoludzkiego prochu; a 6 oznacza odnalezienie muszkietu hochlandzkiego.",
+    "page": 421
+  },
+  {
+    "key": "2222",
+    "area": "inside",
+    "name": "Kapliczka",
+    "text": "W ruinach, stojących na skrzyżowaniu ulic, z trudem można rozpoznać kapliczkę, a jedynie najbystrzejsi teologowie byliby w stanie rozpoznać, którego z bogów tu czczono. Drużyny CHAOTYCZNE, ZŁE i NEUTRALNE oraz kompanie NIEUMARŁYCH mogą rozszabrować i spieniężyć resztki świętych relikwii, zarabiając 3K6 złotych koron. Kompanie Bractwo Rycerskie, Łowcy czarownic, Siostry Sigmara, Rycerze Graala oraz wszystkie te, w szeregach, których służą DUCHOWNI mogą ocalić święte relikwie odnosząc je do najbliższej świątyni, otrzymując nagrodę w wysokości 3K6 złotych koron. Ponadto, wybrana przez gracza broń należąca do jednego z bohaterów zostaje pobłogosławiona przez bogów i podlega zasadzie specjalnej ŚWIĘTY ORĘŻ.",
+    "page": 421
+  },
+  {
+    "key": "3333",
+    "area": "inside",
+    "name": "Posiadłość",
+    "text": "Wzdłuż zasypanej gruzami i odpadkami ulicy wznosi się długi, trzypiętrowy budynek, który w czasach swojej świetności musiał być dumą miasta. Choć los obszedł się z nim dużo łagodniej niż z okolicznymi posiadłościami, to widok strzaskanych okien i spalonego dachu napawa smutkiem i rezygnacją. Przeszukując opuszczoną posiadłość drużyna odnajduje 3K6 złotych koron.",
+    "page": 421
+  },
+  {
+    "key": "4444",
+    "area": "inside",
+    "name": "Płatnerz",
+    "text": "Choć ukryty w zaułku warsztat płatnerza został częściowo ograbiony, a sam rzemieślnik prawdopodobnie zabity, to wciąż można znaleźć tu wiele przydatnych rzeczy. Należy wykonać rzut K6. Wynik 1 oznacza odnalezienie K3 tarcz lub puklerzy (wedle wyboru gracza); 2 to K3 hełmy; 3 to K6 lekkich pancerzy; rezultat 4 oznacza K3 średnie pancerza; 5 to K2 ciężkie pancerze; zaś wynik 6 oznacza odnalezienie pancerza z gromrilu.",
+    "page": 421
+  },
+  {
+    "key": "5555",
+    "area": "inside",
+    "name": "Cmentarz",
+    "text": "Wąska, kręta aleja prowadzi do bramy, za którą rozciąga się cmentarz, porośnięty niewysokimi, groteskowo powykręcanymi drzewami. Siedzące na gałęziach kruki z głośnych krakaniem wzbijają się w przestworza, gdy tylko pierwszy z wędrowców stawia swą stopę w ogrodzie Morra. Drużyny, z wyjątkiem Bractwo Rycerskie, Łowcy czarownic, Siostry Sigmara, Rycerze Graala oraz tych kompanii w których służą DUCHOWNI, mogą okraść krypty i groby uzyskując kosztowności warte K6x10 zk. Jeżeli drużyna ograbi groby, Morr naznaczy hieny cmentarne swym piętnem. W czasie następnej potyczki rozgrywanej przeciwko Łowcom czarownic, Siostrom Sigmara lub dowolnej kompanii, w której szeregach służy DUCHOWNY, modele drużyny naznaczonej piętnem Morra będą wzbudzać NIENAWIŚĆ w modelach wroga. Kompanie Bractwo Rycerskie, Łowcy czarownic, Siostry Sigmara, Rycerze Graala lub dowolna kompania, w której szeregach służy DUCHOWNY może zapieczętować groby i odmówić święte litanie. Morr nagrodzi taką drużynę K6 Punktami Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy bohaterów swojej drużyny.",
+    "page": 421
+  },
+  {
+    "key": "6666",
+    "area": "inside",
+    "name": "Katakumby",
+    "text": "Wąska, ciemna uliczka kończy się w śmierdzącym zgnilizną i stęchlizną zaułku. Na pierwszy rzut oka nic tutaj nie ma, a obrzydliwy smród jest niemal nie do zniesienia. Zaraz, czemu płomień pochodni tak łopocze? I co to za odległe dźwięki dobiegające z tego, wydawałoby się ślepego zaułka… Drużyna odnajduje wejście to starych, niemal zapomnianych katakumb rozciągających się pod osadą i okolicznymi wzgórzami. Na początku następnej rozgrywki ‘WEWNĄTRZ MURÓW’ gracz może wystawić maksymalnie trzy modele, tak jakby podlegały one zasadzie specjalnej ZWIADOWCA.",
+    "page": 421
+  },
+  {
+    "key": "1111",
+    "area": "outside",
+    "name": "Rozbity powóz",
+    "text": "Choć przykryte liśćmi i porośnięte mchem, zrzucone na kupę deski nie wyglądały naturalnie pośród leśnego poszycia, to leżące wokół stalowe fragmenty konstrukcji oraz strzaskane koła wyjaśniały uważnemu obserwatorowi czym były jeszcze niedawno owe połamane kawałki drewna. Przeszukując rozbity powóz drużyna odnajduje K6x10 złotych koron.",
+    "page": 421
+  },
+  {
+    "key": "2222",
+    "area": "outside",
+    "name": "Głaz zborny",
+    "text": "Otoczone pryzmami kości i resztkami stosów ofiarnych głazy zborne są nieodłączną częścią życia Zwierzoludzi Chaosu. Niejednokrotnie można je znaleźć w jaskiniach lub ukrytych dolinach. Kompania odnajduje głaz zborny Zwierzoludzi. Drużyny PRAWORZĄDNE, NEUTRALNE oraz ZŁE mogą zniszczyć obelisk i skraść ukryte pod głazem kosztowności, otrzymując K3 Łupy! oraz +1 Punkt Doświadczenia dla DOWÓDCY. Kompanie CHAOTYCZNE mogą złożyć pod głazem ofiarę z dowolnego modelu stronnika, a następnie wybrać jednego z bohaterów który zostanie obdarzony błogosławieństwem Bogów Chaosu. Należy wykonać rzut 2K6, którego wynik odczytany z TABELI DARY CHAOSU (zobacz OKO CHAOSU w ROZDZIALE 8: ZASADY SPECJALNE) określi nagrodę jaką otrzyma wybraniec. Otrzymane w ten sposób nagrody mają charakter trwały i obowiązują także w czasie kolejnych rozgrywek.",
+    "page": 421
+  },
+  {
+    "key": "3333",
+    "area": "outside",
+    "name": "Bydłokrad",
+    "text": "Spalone wsie zapewniły bydłokradom pełne ręce roboty. Nie próżnujący w czasie względnego pokoju złodzieje bydła w czasach wojny zaczęli gromadzić pokaźne stada bydła i trzody chlewnej. Drużyna spotyka grupę bydłokradów podających się za handlarzy bydła, złodzieje oferują kompanii kupno inwentarza, który posiadają w swoim stadzie. Drużyna, która podejmie się handlu z hodowcami może zakupić zwierzęta wymienione w podrozdziale ZWIERZĘTA (zobacz ROZDZIAŁ 14: EKWIPUNEK). Wartość każdego zwierzęcia zakupionego przez kompanię w bieżącej sekwencji po potyczce zostaje obniżona o -2K6 złotych koron (do minimum 1 zk).",
+    "page": 421
+  },
+  {
+    "key": "4444",
+    "area": "outside",
+    "name": "Chatka z piernika",
+    "text": "Bogowie Chaosu są nieprzewidywalni a ich wola bywa złowroga i kapryśna. Wielu aroganckich czarowników oddało swe dusze licząc, że zyskają władzę i potęgę a w zamian otrzymywali jedynie ‘dary’ będące wypaczonym obrazem ich marzeń i pragnień. Powracająca do obozu kompania natyka się na, stojącą na kurzej nóżce, chatkę z piernika. Każdy uzbrojony w broń do walki wręcz model bohatera należący do drużyny może wykonać test SIŁY by odłupać nieco piernika. Udany test oznacza, że model bohater otrzymuje +1 PD. Ponadto zaopatrzona w magiczne ciasto kompania w czasie rozgrywania bieżącej sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! traktowana jest tak jakby liczba modeli w drużynie była o dwa poziomy niższa, niż ma to faktycznie miejsce, zaś NAJEMNE OSTRZA zażądają jedynie połowy żołdu.",
+    "page": 421
+  },
+  {
+    "key": "5555",
+    "area": "outside",
+    "name": "Ranna kompania",
+    "text": "Wojna to pożądliwa kochanka, wabiąca wielu mężczyzn. Liczne, zbrojne po zęby kompanie wyruszyły na północ by stanąć do walki z Hordami Chaosu lub wprost przeciwnie, by wspomóc nieświadome armie w walce z potomkami Sigmara. Ale wojna jest także sprawiedliwa, równo obdarza cierpieniem każdego, kto odpowie na jej zew. Drużyna napotyka rozbitą kompanię, składającą się z ciężko rannych drużynników. Gracz musi zdecydować, czy dowodzona przez niego drużyna zaatakuję kompanię, czy też pomoże drużynnikom. Drużyna, która pomoże i odtransportuje rannych do najbliższego zajazdu otrzyma w podzięce 2K6 złotych koron i K3 Łupy!. Kompania, która dobije rannych może ograbić ciała zgarniając K6 złotych koron i K6 Punktów Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy bohaterów swojej drużyny.",
+    "page": 421
+  },
+  {
+    "key": "6666",
+    "area": "outside",
+    "name": "Kamienny krąg",
+    "text": "Niewielu mieszkańców Starego Świata zdaje sobie sprawę kto i kiedy zbudował potężne kamienne kręgi, w których druidzi oddawali Matce Ziemi boską cześć oraz odczytywali przyszłe zdarzenia. Prawdę mówiąc, niewielu mieszkańców Starego Świata to obchodzi… Drużyna, w której szeregach służy model z zasadą specjalną DUCHOWNY lub MAG może spróbować odczytać przyszłość zapisaną na kamiennych filarach. Należy wykonać rzut K6. Wynik 2+ oznacza, że kompania poznała przyszłe wydarzenia i w czasie rozgrywania kolejnej potyczki może automatycznie wybrać scenariusz, krawędź stołu oraz zdobywa prawo rozpoczęcia rozgrywki. Wynik 1 oznacza, że drużyna źle zinterpretowała znaki i to przeciwnik w czasie rozgrywania kolejnej potyczki może automatycznie wybrać scenariusz, krawędź stołu oraz zdobywa prawo rozpoczęcia rozgrywki.",
+    "page": 421
+  },
+  {
+    "key": "11111",
+    "area": "inside",
+    "name": "Gildia kupców",
+    "text": "Wzniesiona z granitu posiadłość oparła się losowi i przetrwała ostatnie wydarzenia w niemal nienaruszonym stanie. Rzeźbiony herb zdobiący wejście został zniszczony przez wandali i bardzo trudno rozpoznać, do którego z zamożnych rodów należała posiadłość. Choć drzwi zostały wyłamane, a wnętrze rozgrabione, to wciąż powinno znajdować się tu coś cennego. Przeszukując opuszczoną posiadłość drużyna odnajduje K6x10 złotych koron.",
+    "page": 422
+  },
+  {
+    "key": "22222",
+    "area": "inside",
+    "name": "Alchemik",
+    "text": "Wąska, pokryta gruzem i śmieciami uliczka prowadzi do położonego na uboczu, w pobliżu miejskich murów, budynku. Unoszący się wokół budynku smród siarki i zapach dziwnych odczynników, pozwala domniemywać, kto mieszkał tu zaledwie kilka tygodni temu. Ewentualne wątpliwości rozwiewają porozrzucane wewnątrz gliniane tablice, na których wyryto alchemiczne symbole i formuły. Przeszukując warsztat alchemika drużyna odnajduje 3K6 złotych koron oraz stary zniszczony notatnik. Wskazany przez gracza bohater może przeczytać dziennik alchemika. Zapisana w nim wiedza, pozwoli bohaterowi, gdy osiągnie on kolejny poziom doświadczenia i w ramach rozwoju wylosuje nową umiejętność na naukę dodatkowej umiejętności AKADEMICKIEJ, nawet jeśli normalnie są one dla danego modelu niedostępne.",
+    "page": 422
+  },
+  {
+    "key": "33333",
+    "area": "inside",
+    "name": "Jubiler",
+    "text": "Choć większość domów przy ulicy jubilerów została wielokrotnie splądrowana, a niemal każdą taczkę gruzu przesiewano przez sito, to uważni i cierpliwi poszukiwacze wciąż mogą znaleźć tu coś cennego. Należy wykonać rzut K6. Wynik 1-2 oznacza srebrne pierścienie o wartość K6x5 zk; 3-4 to złota bransoleta warta 20 zk; rezultat 5 oznacza złoty łańcuch wart 50 zk; zaś wynik 6 to rubin o wartości K6x15 zk. Drużyna nie musi sprzedawać znalezionych kosztowności, zamiast tego jeden z bohaterów może dodać je do swojego EKWIPUNKU. Dopóki model będzie posiadał kosztowności, dopóty będzie mógł korzystać z modyfikatora +1 do jednego wybranego WYNIKU rzutu na DOSTĘPNOŚĆ rzadkich przedmiotów (zobacz ROZDZIAŁ 14: EKWIPUNEK). Kupcy i handlarze, dużo chętniej zaoferują trudno dostępne przedmioty bogato prezentującemu się bohaterowi, niż odzianemu w łachmany włóczędze.",
+    "page": 422
+  },
+  {
+    "key": "44444",
+    "area": "inside",
+    "name": "Posiadłość kupca",
+    "text": "Szeroka, brukowana droga wiedzie wprost do okazałej posiadłości wzniesionej na jednym ze wzgórz. Choć brama wjazdowa została wyrwana z zawiasów, a dębowe drzwi prowadzące do budynku strzaskane, to grasującym w okolicy rzezimieszkom nie udało się splądrować całego budynku. Przeszukując posiadłość drużyna odnajduje kosztowności warte 2K6x5 złotych koron. Jeżeli gracz w rzucie określającym wartość odnalezionych przedmiotów wyrzuci naturalny dublet, drużyna odnajdzie także sygnet z herbem Bractwa Wolnego Handlu, bohater, który dołączy sygnet do swojego ekwipunku, będzie traktowany tak, jakby podlegał zasadzie specjalnej HANDLARZ.",
+    "page": 422
+  },
+  {
+    "key": "55555",
+    "area": "inside",
+    "name": "Spalony budynek",
+    "text": "Ujadający wściekle pies wciąż strzeże ruin spalonego budynku. Wszędzie widać ślady niedawnego pożaru, a wąskie smugi dymu wciąż unoszą się nad pogorzeliskiem. Wśród popiołu dostrzec można jednak wiele interesujących przedmiotów, które jakimś cudem oparły się niszczącemu działaniu ognia. Przeszukując posiadłość drużyna odnajduje dodatkowe K3 Łupy!. Jeżeli przywódca drużyny wykona uda test współczynnika CECHY PRZYWÓDCZE, pilnujący ruin budynku pies uspokoi się. Gracz może włączyć Psa bojowego w szeregi swojej drużyny, zupełnie tak, jakby ZWIERZĘ zostało zakupione zgodnie z zasadami podanymi w ROZDZIALE 14: EKWIPUNEK.",
+    "page": 422
+  },
+  {
+    "key": "66666",
+    "area": "inside",
+    "name": "Gildia szczurołapów",
+    "text": "Klucząca pośród zniszczonych budynków aleja prowadzi do niewielkiego budynku, położonego w pobliżu ujścia kanałów. Ledwie czytelny napis na rozbitym szyldzie informuje, że oto wędrowiec dotarł do siedziby Gildii Szczurołapów. Któż nie uległby pokusie sprawdzenia, jakie tajemnice mogą kryć się w budynku tak ‘zacnej’ organizacji… Przeszukując budynek Gildii Szczurołapów drużyna odnajduje plany i mapy przedstawiające sieć tuneli i kanałów pod miastem i okolicznymi wzgórzami. Od tej pory, po każdej potyczce rozgrywanej ‘WEWNĄTRZ MURÓW’ gracz otrzymuje prawo przerzutu jednej kostki w czasie rzutu na eksplorację. Kolejna wizyta w budynku Gildii Szczurołapów nie przyniesie żadnych dodatkowych korzyści.",
+    "page": 422
+  },
+  {
+    "key": "11111",
+    "area": "outside",
+    "name": "Farma",
+    "text": "Otoczona lasami, wzniesiona na niewysokim wzgórzu pokaźna farma przetrwała inwazję Hord Chaosu. Może to właśnie las zapewnił schronienie farmerom, a może jedynie odwlókł w czasie nieszczęście, które miało ich spotkać. PRAWORZĄDNE, ZŁE i CHAOTYCZNE kompanie mogą zarżnąć farmerów i zrabować żywność oraz kosztowności warte 2K6 złotych koron, drużyna otrzymuje także K3 Punkty Doświadczenia, które należy rozdzielić pomiędzy służących w kompanii bohaterów. Ponadto, gracz za każdy model należący do drużyny musi wykonać rzut K6. Wynik 6 oznacza, że postać została w czasie walki Wyłączona z akcji!, a gracz musi wykonać odpowiedni rzut w TABELI POWAŻNYCH RAN. NEUTRALNE drużyny zostaną ugoszczone i zaopatrzone przez farmerów, którzy nadto polecają kompanię okolicznym kupcom, dzięki czemu wartość każdego przedmiotu zakupionego przez kompanię w bieżącej sekwencji po potyczce zostaje obniżona o -2K6 złotych koron (do minimum 1 zk). Wszystkie zaopatrzone w mięso drużyny w czasie rozgrywania bieżącej sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! traktowane są tak jakby liczba modeli w kompanii była o dwa poziomy niższa, niż ma to faktycznie miejsce.",
+    "page": 422
+  },
+  {
+    "key": "22222",
+    "area": "outside",
+    "name": "Zwiadowcy",
+    "text": "Kraina Zgromadzenia granicząca z Sylvanią od wieków wystawia regimenty dzielnych zwiadowców, którzy z zapałem i oddaniem służą Imperium. W czasie wojny wiele regimentów złożonych z niziołków wyruszyło na północ by stanąć do walki z Hordami Chaosu. PRAWORZĄDNE, ZŁE i CHAOTYCZNE drużyny zostają zaatakowane przez oddział zwiadowców. Po krótkiej walce niziołki zostają rozbite, a drużyna wzbogaca się o K6 złotych koron, K6 krótkich łuków, K6 sztyletów, żelazne racje oraz K3 Punkty Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy służących w kompanii bohaterów swojej drużyny. Ponadto, gracz za każdy model należący do kompanii musi wykonać rzut K6. Wynik 6 oznacza, że model został w czasie walki Wyłączony z akcji!, a gracz musi wykonać odpowiedni rzut w TABELI POWAŻNYCH RAN. Kompanie NEUTRALNE zostają obdarowane przez niziołków żelaznymi racjami. Wszystkie, zaopatrzone w żelazne racje kompanie w czasie rozgrywania bieżącej sekwencji po potyczce, na potrzeby zasad sprzedaży Łupów! traktowane są tak jakby liczba modeli w drużynie była o dwa poziomy niższa, niż ma to faktycznie miejsce.",
+    "page": 422
+  },
+  {
+    "key": "33333",
+    "area": "outside",
+    "name": "Klatka błaznów",
+    "text": "Pordzewiałe, zanieczyszczone odchodami i pozostałościami zgniłych owoców klatki błaznów to częsty widok w miastach Imperium. Wielu władców rozkazało wieszać klatki także przed miejską bramą, by każdy kto przekracza miejskie mury wiedział jak karze się złoczyńców. Drużyna odnajduje zawieszoną na wysokim drzewie klatkę błaznów, w której zamknięto Skrytobójcę. Jeśli kompania uwolni Najemne Ostrze Skrytobójca zaoferuje swe usługi, pod warunkiem, że DOWÓDCA postanowi zawrzeć kontrakt, nawet jeśli normalnie Skrytobójca nie może służyć w danej kompanii i będzie płacił ustalony w opisie najmity żołd. Kompania, która pozwoli umrzeć uwięzionemu w klatce najmicie odnajdzie K6 złotych koron ukrytych w bucie i Psią Łapkę, choć co do skuteczności tego ostatniego istnieją spore wątpliwości.",
+    "page": 422
+  },
+  {
+    "key": "44444",
+    "area": "outside",
+    "name": "Wróż",
+    "text": "Wszelkiej maści wróżowie i astrologowie od wieków wyjaśniali mieszkańcom Starego Świata sekrety przyszłości. Niepewne czasy wojny oznaczają dla jasnowidzów znacznie więcej niebezpiecznej pracy. Drużyna odnajduje ciało zamordowanego jasnowidza, przy którym odnaleźć można 2K6.złotych koron oraz karty tarota i lunetę.",
+    "page": 422
+  },
+  {
+    "key": "55555",
+    "area": "outside",
+    "name": "Święty gaj",
+    "text": "Podobnie jak kamienne kręgi, także święte gaje są miejscami w których oddawano cześć Matce Ziemi. Wielu wierzy, że wewnątrz owych zagajników drzemie wielka moc. PRAWORZĄDNE, ZŁE i CHAOTYCZNE drużyny mogą zbezcześcić święty gaj otrzymując K6 Punktów Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy bohaterów swojej drużyny. NEUTRALNE kompanie mogą spędzić w zagajniku noc, a starożytna moc napełni ich ciała niezwykłą odpornością. Gracz, w czasie rozgrywania następnej sekwencji po potyczce będzie mógł przerzucić każdy rzut na TABELĘ POWAŻNYCH RAN dla Wyłączonych z akcji! bohaterów i stronników. Wynik drugiego rzutu jest ostateczny.",
+    "page": 422
+  },
+  {
+    "key": "66666",
+    "area": "outside",
+    "name": "Wyrżnięta drużyna",
+    "text": "Krakanie kruków niosło się daleko w noc, czarne jak smoła ptaki walczyły o najsmakowitsze kąski, wydziobywane z ciał zarżniętych przez Hordy Chaosu wojowników. Drużyna odnajduje zmasakrowane ciała wśród których odnaleźć można K3 miecze, K3 włócznie, K6 tarcz i 2K6 złotych koron oraz średni pancerz. Ponadto należy wykonać rzut K6. Wynik 5+ oznacza, że kompania odnalazła dodatkowy +1 Łup!.",
+    "page": 422
+  },
+  {
+    "key": "111111",
+    "area": "inside",
+    "name": "Krater",
+    "text": "Zabudowa ustępuje miejsca szerokiemu lejowi krateru, który wybiła kometa. Nieckę spowija mgła, sącząca się z centrum krateru, a skażony teren dostał się pod panowanie Pomiotu Chaosu. Drużyna może wysłać jednego z bohaterów, by przeszukał położone w pobliżu krateru ruiny. Jeśli drużyna zdecyduje się wysłać bohatera na zwiad, należy wykonać rzut K6. Wynik 1 oznacza, że bohater zostaje pochwycony i pożarty przez Pomiot Chaosu, a model należy usunąć z KARTY DRUŻYNY; rezultat 2+ oznacza, że bohater powraca ze zwiadu obciążony dodatkowymi 2K3 Łupami oraz zdobywa +1 Punkt Doświadczenia.",
+    "page": 423
+  },
+  {
+    "key": "222222",
+    "area": "inside",
+    "name": "Skarb",
+    "text": "Trzask płomieni obraca w popiół strzaskane fragmenty rozbitego powozu. Smugi gęstego, duszącego dymu wznoszą się w niebo. Płomienie coraz śmielej sięgają w kierunku rozbitej, masywnej skrzyni, w której uciekający z miasta arystokrata zgromadził swój majątek… Aby określić EKWIPUNEK, który ocalał należy wykonać rzut K6 dla każdego przedmiotu wymienionego poniżej. Jeżeli uzyskany rezultat jest równy bądź większy od wymienionego w tabeli wymaganego wyniku, oznaczać to będzie, że drużyna może zabrać EKWIPUNEK. PRZEDMIOT WYMAGANY WYNIK 5K6x5 zk Automatycznie Klejnoty warte K3x10 zk 3+ K3 Łupy! 3+",
+    "page": 423
+  },
+  {
+    "key": "333333",
+    "area": "inside",
+    "name": "Krasnoludzki kowal",
+    "text": "Choć wzniesione wokół budynki zostały poważnie uszkodzone, chroniona mocą run kuźnia krasnoludzkiego kowala wydaje się być w całkiem dobrym stanie. Choć wnętrze warsztatu nosi śladu wizyt włamywaczy, to wśród porozbijanych skrzyń i połamanych mebli, wciąż można odnaleźć misternie wykute przez kowala przedmioty i ekwipunek. Należy wykonać rzut K6. Wynik 1-2 oznacza odnalezienie K3 sztuk broni wielkiej, z kolei rezultat 3-5 to K3 ciężkie pancerze, a rezultat 6 oznacza odnalezienie pancerza z gromrilu.",
+    "page": 423
+  },
+  {
+    "key": "444444",
+    "area": "inside",
+    "name": "Wyrżnięta kompania",
+    "text": "Krakanie wron i kruków niesie się daleko w noc, czarne jak smoła ptaki walczą o najsmakowitsze kąski, wydziobywane z ciał poległych wojowników. Ciała nieszczęśników zostały rozerwane przez ostre jak brzytwa pazury, a kości zmiażdżone przez masywne szczęki. Nad polem śmierci unosi się zapach krwi, przerażenia i czegoś nienazwanego, obcego… Aby określić EKWIPUNEK, który ocalał z rzezi należy wykonać rzut K6 dla każdego przedmiotu wymienionego poniżej. Jeżeli uzyskany rezultat jest równy bądź większy od wymienionego w tabeli wymaganego wyniku, oznaczać to będzie, że drużyna może zabrać EKWIPUNEK. PRZEDMIOT WYMAGANY WYNIK 3K6x5 zk Automatycznie K3 lekkie pancerze 3+ K3 halabardy 4+ Ciężki pancerz 4+",
+    "page": 423
+  },
+  {
+    "key": "555555",
+    "area": "inside",
+    "name": "Gimnazjon",
+    "text": "Trybuny wzniesione wokół stadionu zostały niemal doszczętnie spalone, a teren wokół wciąż pokrywa sadza. Podziemny labirynt tuneli i pomieszczeń wciąż wypełniają manekiny, ćwiczebny oręż oraz inne pozostałości po szermierzach, a pustymi korytarzami niesie się szczęk broni… Drużyna odnajduje Traktat szermierczy o sztuce walki bronią. Księga może zostać sprzedana za równowartość 100 zk lub przekazana jednemu z bohaterów. Spisana przez estalijskich fechmistrzów wiedza, pozwoli bohaterowi, gdy osiągnie on kolejny poziom doświadczenia i w ramach rozwoju wylosuje nową umiejętność na naukę dodatkowej umiejętności WALKI, nawet jeśli normalnie są one dla danego modelu niedostępne. Ponadto, dopóki bohater posiada traktat, wartość współczynnika WW modelu zostaje podniesiona o +1. Należy zauważyć, że dzięki księdze wartość WW bohatera może zostać podniesiona ponad rasowe maksimum, aż do maksymalnej wartości 10 punktów.",
+    "page": 423
+  },
+  {
+    "key": "666666",
+    "area": "inside",
+    "name": "Dworek",
+    "text": "Szeroka, brukowana aleja kończy się u stóp kamiennych schodów, wiodących do rzeźbionych, teraz wyłamanych drzwi. Choć wielopiętrowa rezydencja została już ograbiona, a jedno ze skrzydeł niemal doszczętnie spłonęło, to wśród strzaskanych mebli i porozbijanych skrzyń wciąż można znaleźć różne, kosztowne przedmioty… Kompania odnajduje wejście do skarbca. I choć arystokrata już dawno opuścił dworek, to wśród licznych pozostałości po mieszkańcach odnaleźć można 5K6x10 zk, klejnoty warte K6x10 zk oraz K6 Łupów!.",
+    "page": 423
+  },
+  {
+    "key": "111111",
+    "area": "outside",
+    "name": "Gniazdo gryfona",
+    "text": "Potężne i niebezpieczne gryfony od tysiącleci zamieszkiwały ziemie Imperium wzbudzając w ludziach strach oraz szacunek. Od czasów Magnusa Pobożnego wizerunek pięknego zwierzęcia, jakim jest gryfon, powszechnie rozpoznawany jest jako symbol Imperatora i całości władanej przez niego krainy. Kompania odnajduje wznoszące się na wysokości 2K3” gniazdo gryfona w którym znajduje się K6 jaj. Gracz musi wybrać jednego z bohaterów, który podejmie próbę wspinaczki. Należy zauważyć, że bohater, który dostanie się do gniazda może zabrać ze sobą tylko jedno jajo na raz. Jeśli w rzucie na test wspinaczki wypadnie niemodyfikowana 6, oznacza to, że do gniazda powrócił jeden z dorosłych gryfonów. Powracający drapieżnik natychmiast atakuje bohatera, który zostaje automatycznie Powalony na ziemię! i spada z wysokości na jakiej się znajdował. Kolejne próby kradzieży jaja nie mogą być podejmowane. Każde wykradzione z gniazda jajo gryfona, które zostało bezpiecznie zniesione na dół może zostać sprzedane za 50+3K6 złotych koron.",
+    "page": 423
+  },
+  {
+    "key": "222222",
+    "area": "outside",
+    "name": "Kurhan",
+    "text": "Od tysiącleci ziemie znane jako Imperium były areną niezliczonych wojen i konfliktów które pochłonęły tysiące ofiar. Pośród nieprzebytych lasów wznosi się wiele mogił i kurhanów, w których spoczywają zapomniani herosi. Wiele kurhanów zostało otwartych przez czarnoksiężników Chaosu, którzy mocą plugawej magii Dhar przebudzili z wiecznego snu zmarłych, zmieniając poległych herosów w służące Mrocznym Potęgom upiory. Kompanie, z wyjątkiem Bractwo Rycerskie, Łowcy czarownic, Siostry Sigmara, Rycerze Graala oraz tych drużyn w których szeregach służą DUCHOWNI, mogą okraść kurhan uzyskując kosztowności warte 2K6x10 zk. Jeżeli drużyna ograbi kurhan, Morr naznaczy hieny cmentarne swym piętnem. W czasie następnej potyczki rozgrywanej przeciwko Łowcom czarownic, Siostrom Sigmara lub dowolnej kompanii, w której szeregach służy DUCHOWNY, modele drużyny naznaczonej piętnem Morra będą wzbudzać NIENAWIŚĆ w modelach wroga. Kompania Bractwo Rycerskie, Łowcy czarownic, Siostry Sigmara, Rycerze Graala lub dowolna kompania, w której szeregach służy DUCHOWNY może zapieczętować kurhan i odmówić święte litanie. Morr nagrodzi taką drużynę K6 Punktami Doświadczenia, które gracz powinien rozdzielić według własnego uznania pomiędzy bohaterów swojej drużyny. W wybranej przez gracza broni do walki wręcz należącej do jednego z bohaterów zostaje zaklęta cześć siły spoczywającego w kurhanie herosa, a oręż podlega zasadzie specjalnej DRUZGOCZĄCY.",
+    "page": 423
+  },
+  {
+    "key": "333333",
+    "area": "outside",
+    "name": "Dyliżans",
+    "text": "Wielu zamożnych mieszczan opuściło osady i ruszyło na południe, by uciec przed zbliżającą się Nieświadomą Armią. Jednak forpoczta Hord Chaosu dawno już zajęła przyczółki w pobliżu głównych traktów Imperium, atakując i niszcząc słabo uzbrojone karawany i pojedyncze powozy… Drużyna odnajduje rozbity dyliżans i zmasakrowane ciała podróżnych. Wśród szczątek odnaleźć można 5K6x5 zk, klejnoty warte K3x10 zk oraz K3 Łupy!.",
+    "page": 423
+  },
+  {
+    "key": "444444",
+    "area": "outside",
+    "name": "Faktoria",
+    "text": "Handlowe faktorie zakładane przez Gildię Kupców od początku stanowiły schronienie zarówno dla myśliwych i traperów jak i strażników dróg, a w czasie ataków Hord Chaosu wiele z nich zostało zniszczonych jako pierwsze. Przeszukując ruiny faktorii drużyna odnajduje plany i mapy szczegółowo przedstawiające okolicę. Od tej pory, po każdej rozgrywce rozgrywanej ‘POZA MURAMI’ gracz otrzymuje prawo przerzutu jednej kostki w czasie rzutu na eksplorację. Kolejna wizyta w ruinach faktorii nie przyniesie żadnych dodatkowych korzyści.",
+    "page": 423
+  },
+  {
+    "key": "555555",
+    "area": "outside",
+    "name": "Dworek myśliwski",
+    "text": "Pośród niewielkiej polany, otoczony palisadą i fosą wznoszą się ruiny myśliwskiego dworku. W czasach względnego pokoju poprzedzających Inwazję Chaosu wielu arystokratów spędzało letnie miesiące odpoczywając w wiejskich posiadłościach, gdzie oddawali się przyjemnościom polowania. Drużyna odnajduje ruiny myśliwskiego dworku. Należy wykonać rzut K6. Wynik 1-4 oznacza, że kompania odnalazła K6 łuków długich; rezultat 5+ oznacza, że drużyna odnalazła muszkiet hochlandzki i K3 porcje krasnoludzkiego prochu.",
+    "page": 423
+  },
+  {
+    "key": "666666",
+    "area": "outside",
+    "name": "Leże smoka",
+    "text": "Powiadają, że niegdyś na ziemiach Imperium żyło wiele smoków. Najwięcej prastarych gadów umiłowało sobie leżący na północy las zwany przez mieszkańców właśnie powodu dużej ilości smoków Drakwaldem. Smoki choć potężne, musiały ustąpić pola rozwijającej się ludzkości. Ludzie, choć słabi osobno razem stanowili siłę, której nawet potężne gady nie mogły pokonać. Kompania odnajduje wejście do smoczego leża. I choć gad już dawno opuścił to miejsce, to wśród licznych pozostałości po smoku i próbujących pokonać bestię wojownikach odnaleźć można pancerz z gromrilu, kopię, tarczę, siodło & uprząż, kropierz oraz K6 Łupów!.",
+    "page": 423
+  }
+]

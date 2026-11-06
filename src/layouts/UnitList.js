@@ -21,6 +21,7 @@ const UnitList = ({
   handleSetUnitExp,
   army,
   showDetailsInline = true,
+  campaign,
 }) => {
   const { setStandardBearer, setMusician } = useContext(CommandContext);
   const { isPlayArmyView } = useContext(EditArmyContext);
@@ -61,9 +62,7 @@ const UnitList = ({
 
   useEffect(() => {
     const nextGroups = ARRAY_OF_TYPES.map((type) =>
-      unitList
-        .filter((unit) => unit.type === type)
-        .sort((a, b) => a.id - b.id)
+      unitList.filter((unit) => unit.type === type).sort((a, b) => a.id - b.id),
     );
     setGroupedUnits(nextGroups);
   }, [unitList]);
@@ -73,7 +72,10 @@ const UnitList = ({
       return;
     }
     if (e.type === "keydown") {
-      if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) {
+      if (
+        e.target !== e.currentTarget ||
+        (e.key !== "Enter" && e.key !== " ")
+      ) {
         return;
       }
       e.preventDefault();
@@ -101,11 +103,13 @@ const UnitList = ({
   return groupedUnits.map((unitsOfType, groupIndex) => (
     <React.Fragment key={`group-${ARRAY_OF_TYPES[groupIndex]}`}>
       {unitsOfType.length !== 0 && (
-        <h3 className="unit-list-divider">{ARRAY_OF_TYPES_DISPLAY[groupIndex]}</h3>
+        <h3 className="unit-list-divider">
+          {ARRAY_OF_TYPES_DISPLAY[groupIndex]}
+        </h3>
       )}
       {unitsOfType.map((unit, unitIndex) => {
         const unitGlobalIndex = unitList.findIndex(
-          (item) => item.uniqueId === unit.uniqueId
+          (item) => item.uniqueId === unit.uniqueId,
         );
 
         return (
@@ -127,7 +131,8 @@ const UnitList = ({
                   role="button"
                   aria-pressed={idShown === unit.uniqueId}
                 >
-                  {unit.unitDisplayName && unit.unitDisplayName !== unit.unitName ? (
+                  {unit.unitDisplayName &&
+                  unit.unitDisplayName !== unit.unitName ? (
                     <>
                       {unit.unitDisplayName}
                       <span className="unit-name-type">{unit.unitName}</span>
@@ -146,7 +151,10 @@ const UnitList = ({
                         ) : (
                           <select
                             onChange={(e) =>
-                              handleChange(unit.uniqueId, Number(e.target.value))
+                              handleChange(
+                                unit.uniqueId,
+                                Number(e.target.value),
+                              )
                             }
                             name="number-of-henchmen"
                             value={unit.selectedNumber}
@@ -155,11 +163,13 @@ const UnitList = ({
                             unit.unitName === "Drużyna ciężkich broni" ? (
                               <option value={2}>2</option>
                             ) : (
-                              [...Array(Math.min(unit.number, 5))].map((_, i) => (
-                                <option key={i} value={i + 1}>
-                                  {i + 1}
-                                </option>
-                              ))
+                              [...Array(Math.min(unit.number, 5))].map(
+                                (_, i) => (
+                                  <option key={i} value={i + 1}>
+                                    {i + 1}
+                                  </option>
+                                ),
+                              )
                             )}
                           </select>
                         )}
@@ -176,7 +186,10 @@ const UnitList = ({
                       onClick={() => handleDeleteClick(unit.uniqueId)}
                       aria-label={`Usuń: ${unit.unitDisplayName || unit.unitName}`}
                     >
-                      <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+                      <i
+                        className="fa-solid fa-trash-can"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   )}
                 </p>
@@ -185,16 +198,17 @@ const UnitList = ({
             {showDetailsInline &&
               idShown === unit.uniqueId &&
               unitGlobalIndex !== -1 && (
-              <UnitInfo
-                heroes={heroes}
-                unit={unit}
-                unitIndex={unitGlobalIndex}
-                unitList={unitList}
-                setUnitList={setUnitList}
-                handleSetUnitExp={handleSetUnitExp}
-                army={army}
-              />
-            )}
+                <UnitInfo
+                  heroes={heroes}
+                  campaign={campaign}
+                  unit={unit}
+                  unitIndex={unitGlobalIndex}
+                  unitList={unitList}
+                  setUnitList={setUnitList}
+                  handleSetUnitExp={handleSetUnitExp}
+                  army={army}
+                />
+              )}
           </React.Fragment>
         );
       })}

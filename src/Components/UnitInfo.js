@@ -7,6 +7,7 @@ import { EditArmyContext } from "../layouts/App";
 
 const UnitInfo = ({
   heroes,
+  campaign,
   unit,
   unitIndex,
   unitList,
@@ -45,7 +46,12 @@ const UnitInfo = ({
           />
         </div>
         {isPlayArmyView ? (
-          <UnitPlay unit={unit} unitList={unitList} setUnitList={setUnitList} />
+          <UnitPlay
+            campaign={campaign}
+            unit={unit}
+            unitList={unitList}
+            setUnitList={setUnitList}
+          />
         ) : isEditArmyView &&
           unit.type !== "Machina" &&
           !unit.rules.includes("Zwierzę") ? (

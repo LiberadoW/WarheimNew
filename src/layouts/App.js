@@ -6,6 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Builder from "./Builder";
+import useCampaignDraft from "../campaign/useCampaignDraft";
 import ArmyList from "../Components/ArmyList";
 import Register from "../Registration/Register";
 import Login from "../Registration/Login";
@@ -36,26 +37,48 @@ const App = () => {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login"></Navigate>;
   };
-  const [unitList, setUnitList] = useState([]);
-  const [army, setArmy] = useState("Cyrkowcy z Ligii Ostermarku");
   const { currentUser } = useContext(AuthContext);
+  const [draft, setDraftField, storageError] = useCampaignDraft(
+    currentUser?.user?.uid || "guest",
+  );
+  const unitList = draft.unitList;
+  const army = draft.army;
+  const armyName = draft.armyName;
+  const campaignNotes = {
+    ...getDefaultCampaignNotes(),
+    ...draft.campaignNotes,
+  };
+  const setUnitList = React.useCallback(
+    (value) => setDraftField("unitList", value),
+    [setDraftField],
+  );
+  const setArmy = React.useCallback(
+    (value) => setDraftField("army", value),
+    [setDraftField],
+  );
+  const setArmyName = React.useCallback(
+    (value) => setDraftField("armyName", value),
+    [setDraftField],
+  );
+  const setCampaignNotes = React.useCallback(
+    (value) => setDraftField("campaignNotes", value),
+    [setDraftField],
+  );
   const [unitName, setUnitName] = useState("");
   const [mercenaries, setMercenaries] = useState(() =>
-    filterMercenaries(mercenariesList, armies[army])
+    filterMercenaries(mercenariesList, armies[army]),
   );
   const [mercenaryUnitName, setMercenaryUnitName] = useState("");
   const [prestige, setPrestige] = useState(0);
-  const [armyName, setArmyName] = useState("");
-  const [campaignNotes, setCampaignNotes] = useState(getDefaultCampaignNotes);
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
-    defaultDark ? "dark" : "light"
+    defaultDark ? "dark" : "light",
   );
 
   const [includeRulesInPdf, setIncludeRulesInPdf] = useLocalStorage(
     "includeRulesInPdf",
-    false
+    false,
   );
 
   const [isEditArmyView, setIsEditArmyView] = useState(false);
@@ -124,7 +147,7 @@ const App = () => {
     (unit) =>
       unit.type === "Stronnik" ||
       unit.type === "Machina" ||
-      unit.type === "Najemne Ostrze"
+      unit.type === "Najemne Ostrze",
   ).length;
 
   for (let i = 0; i < 7 - numberOfHenchmen; i++) {
@@ -160,6 +183,7 @@ const App = () => {
         }}
       >
         <main className="site-wrapper">
+          {storageError && <p role="alert">{storageError}</p>}
           <Router>
             <Header handleSwitchTheme={handleSwitchTheme} theme={theme} />
             <Routes>

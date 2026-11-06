@@ -1,6 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "../styles/UnitEdit.css";
 import "./UnitPlay.css";
+import RulesModal from "./RulesModal";
+import { getRuleText, getWeaponRuleNames } from "../Functions/getRuleText";
+import { getEquipmentStats } from "../Data.js/EquipmentStats";
+import { catalog, isHero, activeModel } from "../campaign/rules";
 import { getModifiers } from "../Functions/getModifiers";
 
 const MENU = [
@@ -108,8 +112,10 @@ const formatCustomEquipmentEntry = (entry) => {
   return null;
 };
 
-const UnitPlay = ({ unit, unitList, setUnitList }) => {
+const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   const [menu, setMenu] = useState("Bitwa");
+  const [description, setDescription] = useState(null);
+  const battleActive = !!campaign?.activeBattle && !campaign.activeBattle.post;
 
   useEffect(() => {
     const modelCount = getBattleModelCount(unit);
@@ -168,7 +174,11 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
   const battleExp = Math.max(0, Number(unit.battleExp) || 0);
   const battleObled = Math.max(0, Number(unit.battleObled) || 0);
   const totalObled = Math.max(0, Number(unit.obled) || 0);
-  const totalExpAfterBattle = Math.max(0, Number(unit.exp) || 0) + battleExp;
+  const totalExpAfterBattle =
+    Math.max(0, Number(unit.exp) || 0) +
+    battleExp +
+    (isHero(unit) ? Number(unit.battleKills) || 0 : 0) +
+    1;
   const totalObledAfterBattle = totalObled + battleObled;
 
   const updateBattleCounter = (field, delta) => {
@@ -242,9 +252,30 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
         </p>
       ) : (
         rules.map((rule, index) => (
-          <div key={`${rule}-${index}`} className="unit-play-list-item">
+          <button
+            type="button"
+            key={`${rule}-${index}`}
+            className="unit-play-list-item equipment-details-link"
+            onClick={() =>
+              setDescription({
+                title: rule,
+                sections: [
+                  {
+                    title: "Zasada jednostki",
+                    entries: [
+                      {
+                        name: rule,
+                        text:
+                          unit.campaignRuleTexts?.[rule] || getRuleText(rule),
+                      },
+                    ],
+                  },
+                ],
+              })
+            }
+          >
             {rule}
-          </div>
+          </button>
         ))
       )}
     </div>
@@ -278,9 +309,42 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
           <p className="unit-play-empty">Brak ekwipunku.</p>
         ) : (
           equipment.map((item, index) => (
-            <div key={`${item}-${index}`} className="unit-play-list-item">
+            <button
+              type="button"
+              key={`${item}-${index}`}
+              className="unit-play-list-item equipment-details-link"
+              onClick={() => {
+                const name = item.replace(/ pancerz$/, "");
+                const stats = getEquipmentStats(name);
+                const definition = catalog.find(
+                  (eq) => eq.name.toLowerCase() === item.toLowerCase(),
+                );
+                setDescription({
+                  title: item,
+                  sections: [
+                    {
+                      title: "Profil",
+                      entries: [
+                        {
+                          name: item,
+                          text: stats
+                            ? `${stats.armour ? `Ochrona: ${stats.armour}` : `Zasięg: ${stats.range}; Siła: ${stats.strength}`}. Zasady: ${stats.rules || "brak"}`
+                            : definition?.text || "Brak profilu w katalogu.",
+                        },
+                      ],
+                    },
+                    {
+                      title: "Zasady broni",
+                      entries: [
+                        ...new Set(getWeaponRuleNames(stats?.rules)),
+                      ].map((name) => ({ name, text: getRuleText(name) })),
+                    },
+                  ],
+                });
+              }}
+            >
               {item}
-            </div>
+            </button>
           ))
         )}
       </div>
@@ -303,18 +367,45 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
 
   const renderBattle = () => (
     <div className="unit-play-battle-container">
+      {!battleActive && (
+        <p>
+          Rozpocznij potyczkę w panelu kampanii, aby zapisywać jej przebieg.
+        </p>
+      )}
+      {isHero(unit) && (
+        <div className="unit-play-counter">
+          <span className="unit-play-counter-label">Przeciwnicy WzA</span>
+          <button
+            className="button"
+            disabled={!battleActive || !(unit.battleKills > 0)}
+            onClick={() => updateBattleCounter("battleKills", -1)}
+          >
+            −
+          </button>
+          <span>{unit.battleKills || 0}</span>
+          <button
+            className="button"
+            disabled={!battleActive}
+            onClick={() => updateBattleCounter("battleKills", 1)}
+          >
+            +
+          </button>
+          <span>+{unit.battleKills || 0} PD za pokonanych przeciwników</span>
+        </div>
+      )}
       <div className="unit-play-counter">
-        <span className="unit-play-counter-label">PD</span>
+        <span className="unit-play-counter-label">Dodatkowe PD</span>
         <button
           className="button"
           onClick={() => updateBattleCounter("battleExp", -1)}
-          disabled={battleExp === 0}
+          disabled={!battleActive || battleExp === 0}
         >
           -
         </button>
         <span className="unit-play-counter-value">{battleExp}</span>
         <button
           className="button"
+          disabled={!battleActive}
           onClick={() => updateBattleCounter("battleExp", 1)}
         >
           +
@@ -322,27 +413,29 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
         <span className="unit-play-counter-summary">{`Po bitwie: ${totalExpAfterBattle} PD`}</span>
       </div>
 
-      <div className="unit-play-counter">
-        <span className="unit-play-counter-label">Obłęd</span>
-        <button
-          className="button"
-          onClick={() => updateBattleCounter("battleObled", -1)}
-          disabled={battleObled === 0}
-        >
-          -
-        </button>
-        <span className="unit-play-counter-value">{battleObled}</span>
-        <button
-          className="button"
-          onClick={() => updateBattleCounter("battleObled", 1)}
-        >
-          +
-        </button>
-        <span className="unit-play-counter-summary">
-          {`Po bitwie: ${totalObledAfterBattle} Obłędu`}
-        </span>
-      </div>
-
+      {campaign?.settings?.obled && (
+        <div className="unit-play-counter">
+          <span className="unit-play-counter-label">Obłęd</span>
+          <button
+            className="button"
+            onClick={() => updateBattleCounter("battleObled", -1)}
+            disabled={!battleActive || battleObled === 0}
+          >
+            -
+          </button>
+          <span className="unit-play-counter-value">{battleObled}</span>
+          <button
+            className="button"
+            disabled={!battleActive}
+            onClick={() => updateBattleCounter("battleObled", 1)}
+          >
+            +
+          </button>
+          <span className="unit-play-counter-summary">
+            {`Po bitwie: ${totalObledAfterBattle} Obłędu`}
+          </span>
+        </div>
+      )}
       <div className="unit-play-wza-container">
         <p className="unit-play-wza-title">WzA! (wyłączony z akcji)</p>
         <div className="unit-play-wza-list">
@@ -354,17 +447,49 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
               modelCount > 1 ? `${unit.unitName} #${index + 1}` : unit.unitName;
 
             return (
-              <label
-                key={`wza-${unit.uniqueId}-${index}`}
-                className="unit-play-wza-item"
-              >
-                <input
-                  type="checkbox"
-                  checked={isOutOfAction}
-                  onChange={() => handleOutOfActionToggle(index)}
-                />
-                <span>{modelLabel}</span>
-              </label>
+              <div key={`wza-${unit.uniqueId}-${index}`}>
+                <label className="unit-play-wza-item">
+                  <input
+                    type="checkbox"
+                    disabled={!battleActive || !activeModel(unit, index)}
+                    checked={isOutOfAction}
+                    onChange={() => handleOutOfActionToggle(index)}
+                  />
+                  <span>{modelLabel}</span>
+                  <span>
+                    {unit.campaignModelStatus?.[index]?.captured
+                      ? " · pojmany"
+                      : unit.campaignModelStatus?.[index]?.skip
+                        ? ` · pauza: ${unit.campaignModelStatus[index].skip}`
+                        : ""}
+                  </span>
+                </label>
+                <label className="unit-play-wza-item">
+                  <input
+                    type="checkbox"
+                    checked={!!unit.battleAbsentModels?.[index]}
+                    disabled={
+                      !battleActive ||
+                      !!unit.campaignModelStatus?.[index]?.captured ||
+                      (unit.campaignModelStatus?.[index]?.skip || 0) > 0
+                    }
+                    onChange={(e) => {
+                      unit.battleAbsentModels = Array.from(
+                        { length: modelCount },
+                        (_, i) =>
+                          i === index
+                            ? e.target.checked
+                            : !!unit.battleAbsentModels?.[i],
+                      );
+                      if (e.target.checked) {
+                        unit.battleOutOfActionModels[index] = false;
+                      }
+                      setUnitList([...unitList]);
+                    }}
+                  />
+                  <span>Nie uczestniczy w tej potyczce</span>
+                </label>
+              </div>
             );
           })}
         </div>
@@ -386,6 +511,13 @@ const UnitPlay = ({ unit, unitList, setUnitList }) => {
         ))}
       </div>
 
+      {description && (
+        <RulesModal
+          title={description.title}
+          sections={description.sections}
+          onClose={() => setDescription(null)}
+        />
+      )}
       {menu === "Statystyki" && renderStats()}
       {menu === "Umiejętności" && renderRules()}
       {menu === "Ekwipunek" && renderEquipment()}

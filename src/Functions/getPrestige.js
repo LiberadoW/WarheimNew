@@ -57,6 +57,17 @@ const getCustomEquipmentPrice = (equipment) => {
 };
 
 export const getPrestige = (arr) => {
+  arr = arr.flatMap((unit) => {
+    if (!unit || !unit.campaignModelStatus?.length) return unit ? [unit] : [];
+    const count = Number(unit.selectedNumber) || 1;
+    const active = Array.from(
+      { length: count },
+      (_, i) => unit.campaignModelStatus[i],
+    ).filter(
+      (status) => !status?.dead && !status?.captured && !(status?.skip > 0),
+    ).length;
+    return active ? [{ ...unit, selectedNumber: active }] : [];
+  });
   const prestigeValues = {
     heroesTotalExp: 0,
     henchmenTotalExp: 0,
@@ -68,9 +79,14 @@ export const getPrestige = (arr) => {
     equipmentTotalValue: 0,
     mercenariesTotalPrestige: 0,
     modelWithMountRule: 0,
+    magicalItems: 0,
   };
   arr.forEach((item) => {
     if (item.unitName !== "" && item !== null) {
+      prestigeValues.magicalItems +=
+        (item.campaignEquipment || []).filter(
+          (eq) => eq.category.startsWith("Magicz") || eq.category === "Arkana",
+        ).length * (Number(item.selectedNumber) || 1);
       if (item.type === "Stronnik" || item.type === "Najemne Ostrze") {
         prestigeValues.henchmenTotalExp += item.exp * item.selectedNumber;
       }
@@ -145,9 +161,8 @@ export const getPrestige = (arr) => {
         if (Array.isArray(item.customEquipment)) {
           const modelCount = Number(item.selectedNumber) || 1;
           item.customEquipment.forEach((equipment) => {
-            prestigeValues.equipmentTotalValue += getCustomEquipmentPrice(
-              equipment
-            ) * modelCount;
+            prestigeValues.equipmentTotalValue +=
+              getCustomEquipmentPrice(equipment) * modelCount;
           });
         }
 
@@ -177,9 +192,8 @@ export const getPrestige = (arr) => {
         if (Array.isArray(item.customEquipment)) {
           const modelCount = Number(item.selectedNumber) || 1;
           item.customEquipment.forEach((equipment) => {
-            prestigeValues.equipmentTotalValue += getCustomEquipmentPrice(
-              equipment
-            ) * modelCount;
+            prestigeValues.equipmentTotalValue +=
+              getCustomEquipmentPrice(equipment) * modelCount;
           });
         }
       }
@@ -194,7 +208,8 @@ export const getPrestige = (arr) => {
     prestigeValues.warmachinesNumber * 25 +
     prestigeValues.monstersNumber * 50 +
     prestigeValues.equipmentTotalValue / 10 +
-    prestigeValues.mercenariesTotalPrestige;
+    prestigeValues.mercenariesTotalPrestige +
+    prestigeValues.magicalItems * 5;
 
   return [Math.round(prestige), prestigeValues];
 };
