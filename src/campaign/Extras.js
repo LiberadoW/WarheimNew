@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import { livingCount } from "./effects";
 import { campaignModelLimit } from "./company";
@@ -24,7 +25,7 @@ export function RollNotebook({ post, update }) {
       </label>
       <label>
         Liczba kości K6
-        <input
+        <NumberInput
           type="number"
           min="1"
           max="12"
@@ -74,7 +75,7 @@ export function EconomyAdjustment({ post, update }) {
       <div className="campaign-grid">
         <label>
           Zmiana złota (ujemna = wydatek)
-          <input
+          <NumberInput
             type="number"
             value={gold}
             onChange={(e) => setGold(Math.trunc(Number(e.target.value)))}
@@ -82,7 +83,7 @@ export function EconomyAdjustment({ post, update }) {
         </label>
         <label>
           Zmiana łupów
-          <input
+          <NumberInput
             type="number"
             value={loot}
             onChange={(e) => setLoot(Math.trunc(Number(e.target.value)))}

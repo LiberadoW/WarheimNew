@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React from "react";
 import DiceInput from "./DiceInput";
 import { encounterPlan } from "./encounters";
@@ -46,7 +47,7 @@ export default function EncounterResolution({
             {input.options.map((o) => (
               <label key={o.value}>
                 {o.label}
-                <input
+                <NumberInput
                   type="number"
                   min="0"
                   max={Math.min(input.total, o.max)}

@@ -17,6 +17,8 @@ Source: the owner's Warheim FS rulebook AD2026.04.15. The PDF itself is not comm
 - Optional Chaos mutation support includes all five K66 tables (120 entries), repeat prevention, mutation limits/WT tests, direct characteristic changes and the source Chaos Spawn profile. Conditional combat effects remain in the rule description. Obłęd thresholds create required mental illness rolls; all 36 illness descriptions are available.
 - Stash transfer, item consumption, justified characteristic/rule adjustments, loss of rules, capture/absence adjustments, contract termination and an audited resource adjustment are available for conditional effects.
 
+Numeric fields allow an empty editing draft while retaining the last valid campaign value. Leaving a field empty restores that value; existing minimum/maximum constraints remain in force.
+
 ## Rules requiring player resolution
 
 This is a campaign assistant, not a complete simulator of all rulebook interactions.
@@ -29,7 +31,7 @@ This is a campaign assistant, not a complete simulator of all rulebook interacti
 
 ## Validation
 
-646 automated tests pass. Automated coverage includes the end-to-end campaign finalization/failure retry flow, all 60 exploration recipe entry paths, all 270 Drama character/K6 wage branches, advancement rules, company choices, crafting success/failure and stash transfer, recruitment, discounts/theft, optional tables and persistence boundaries. Run `CI=true npm test -- --watchAll=false --runInBand` and `npm run build`.
+650 automated tests pass. Automated coverage includes the end-to-end campaign finalization/failure retry flow, all 60 exploration recipe entry paths, all 270 Drama character/K6 wage branches, advancement rules, company choices, crafting success/failure and stash transfer, recruitment, discounts/theft, optional tables and persistence boundaries. Run `CI=true npm test -- --watchAll=false --runInBand` and `npm run build`.
 
 The production build has existing lint/bundle-size warnings. Authenticated Firestore integration was not exercised against live user data. The deployed Netlify preview was exercised in a cloud browser as a guest: weapon descriptions, battle creation, PD, exploration, loot sale, a rare variable-price purchase, a Drama search, finalization and history creation worked. That check revealed an overflowing campaign panel, corrected with an explicit responsive width and wrapping phase navigation. Comprehensive desktop/mobile visual review remains outstanding. Local Chromium launch was rejected by the execution environment's process-singleton socket restriction.
 

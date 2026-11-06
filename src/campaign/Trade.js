@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import { companyLevel } from "./company";
 import {
@@ -82,7 +83,7 @@ export function AvailabilityPool({ post, update }) {
               />
               <label>
                 Modyfikator
-                <input
+                <NumberInput
                   type="number"
                   value={token.modifier}
                   disabled={token.used || token.locked}

@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import { companyLevel } from "./company";
 import * as R from "./rules";
@@ -94,7 +95,7 @@ export default function Recruitment({ post, update, army }) {
             <>
               <label>
                 Dostępność z opisu rekruta (0 = powszechna)
-                <input
+                <NumberInput
                   type="number"
                   min="0"
                   value={manual}

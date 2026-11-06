@@ -134,3 +134,28 @@ test("an unfinished injury prevents leaving the injury step", () => {
   expect(screen.getByRole("alert").textContent).toMatch(/obrażenia/);
   expect(state.notes.campaign.activeBattle.stage).toBe(1);
 });
+
+test("battle numeric fields can be cleared and retyped, with casualties bounded by enemy models", () => {
+  const { state } = setup();
+  click("Rozpocznij potyczkę");
+  for (const [name, value] of [
+    ["Runda zakończenia", "6"],
+    ["Modele przeciwnika", "24"],
+    ["Modele przeciwnika WzA", "12"],
+  ]) {
+    const input = screen.getByLabelText(name);
+    fireEvent.focus(input);
+    fireEvent.change(input, { target: { value: "" } });
+    expect(input.value).toBe("");
+    fireEvent.change(input, { target: { value } });
+    fireEvent.blur(input);
+    expect(input.value).toBe(value);
+  }
+  expect(state.notes.campaign.activeBattle.round).toBe(6);
+  expect(state.notes.campaign.activeBattle.opponentModels).toBe(24);
+  expect(state.notes.campaign.activeBattle.opponentOut).toBe(12);
+  fireEvent.change(screen.getByLabelText("Modele przeciwnika"), {
+    target: { value: "5" },
+  });
+  expect(screen.getByLabelText("Modele przeciwnika WzA").value).toBe("5");
+});

@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import { SanityTasks, Mutations } from "./SanityPanel";
 import { sanityTasks } from "./sanity";
 import Crafting from "./Crafting";
@@ -362,7 +363,7 @@ export default function CampaignManager({
                 </label>
                 <label>
                   Runda zakończenia
-                  <input
+                  <NumberInput
                     type="number"
                     min="1"
                     value={battle.round}
@@ -376,7 +377,7 @@ export default function CampaignManager({
                 </label>
                 <label>
                   Modele przeciwnika
-                  <input
+                  <NumberInput
                     type="number"
                     min="0"
                     value={battle.opponentModels}
@@ -384,13 +385,17 @@ export default function CampaignManager({
                       setBattle({
                         ...battle,
                         opponentModels: Math.max(0, Number(e.target.value)),
+                        opponentOut: Math.min(
+                          Math.max(0, Number(e.target.value)),
+                          battle.opponentOut,
+                        ),
                       })
                     }
                   />
                 </label>
                 <label>
                   Modele przeciwnika WzA
-                  <input
+                  <NumberInput
                     type="number"
                     min="0"
                     max={battle.opponentModels}
@@ -467,7 +472,7 @@ export default function CampaignManager({
                           <td>{u.exp || 0}</td>
                           <td>{u.battleKills || 0}</td>
                           <td>
-                            <input
+                            <NumberInput
                               type="number"
                               min="0"
                               disabled={post.expApplied}

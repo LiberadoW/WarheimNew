@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React from "react";
 import * as R from "./rules";
 import { companyChoices, selectCompanyAdvance } from "./company";
@@ -47,7 +48,7 @@ function CampaignPoints({ battle, post, update, notes }) {
         {Object.keys(suggested).map((k) => (
           <label key={k}>
             {k}: było {Number(notes[k]) || 0}
-            <input
+            <NumberInput
               type="number"
               min="0"
               max="40"
