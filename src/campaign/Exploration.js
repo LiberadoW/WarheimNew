@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React from "react";
 import { explorationRules } from "./company";
 import * as R from "./rules";
@@ -68,7 +69,7 @@ export default function Exploration({
         </label>
         <label>
           Liczba rzucanych kości
-          <input
+          <NumberInput
             type="number"
             min="0"
             max="12"
@@ -90,7 +91,7 @@ export default function Exploration({
         </label>
         <label>
           Modyfikator sumy łupów
-          <input
+          <NumberInput
             type="number"
             value={e.totalModifier || 0}
             disabled={

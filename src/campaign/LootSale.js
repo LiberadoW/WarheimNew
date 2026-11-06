@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import { companyLevel } from "./company";
 import * as R from "./rules";
@@ -32,7 +33,7 @@ function LootSale({ battle, post, update, setBattle }) {
       <div className="campaign-grid">
         <label>
           Sprzedawane łupy
-          <input
+          <NumberInput
             type="number"
             min="0"
             max={post.loot}
@@ -50,7 +51,7 @@ function LootSale({ battle, post, update, setBattle }) {
         </label>
         <label>
           Liczba graczy
-          <input
+          <NumberInput
             type="number"
             min="2"
             disabled={post.lootSold}
@@ -65,7 +66,7 @@ function LootSale({ battle, post, update, setBattle }) {
         </label>
         <label>
           Suma łupów sprzedanych przez wszystkich (w tym Twoje)
-          <input
+          <NumberInput
             type="number"
             min={quantity}
             disabled={post.lootSold}
@@ -80,7 +81,7 @@ function LootSale({ battle, post, update, setBattle }) {
         </label>
         <label>
           Modyfikator poziomu liczebności z zasad
-          <input
+          <NumberInput
             type="number"
             disabled={post.lootSold}
             value={modifier}

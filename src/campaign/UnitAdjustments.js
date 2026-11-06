@@ -1,3 +1,4 @@
+import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import * as R from "./rules";
 
@@ -163,7 +164,7 @@ function UnitAdjustments({ post, update }) {
       </button>
       <label>
         Opuszczone kolejne potyczki
-        <input
+        <NumberInput
           type="number"
           min="0"
           value={unit.campaignModelStatus?.[0]?.skip || 0}
