@@ -432,7 +432,11 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
         >
           +
         </button>
-        <span className="unit-play-counter-summary">{`Po bitwie: ${totalExpAfterBattle} PD`}</span>
+        <span className="unit-play-counter-summary">
+          {battleActive
+            ? `Po bitwie: ${Math.min(isHero(unit) ? 90 : 14, totalExpAfterBattle)} PD`
+            : `Doświadczenie: ${unit.exp || 0} PD`}
+        </span>
       </div>
 
       {campaign?.settings?.obled && (

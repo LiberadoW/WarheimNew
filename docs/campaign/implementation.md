@@ -31,7 +31,7 @@ This is a campaign assistant, not a complete simulator of all rulebook interacti
 
 646 automated tests pass. Automated coverage includes the end-to-end campaign finalization/failure retry flow, all 60 exploration recipe entry paths, all 270 Drama character/K6 wage branches, advancement rules, company choices, crafting success/failure and stash transfer, recruitment, discounts/theft, optional tables and persistence boundaries. Run `CI=true npm test -- --watchAll=false --runInBand` and `npm run build`.
 
-The production build has existing lint/bundle-size warnings. Authenticated Firestore integration was not exercised against live user data. Desktop/mobile browser visual review remains outstanding: Chromium was installed, but this execution environment rejected its process-singleton socket at launch.
+The production build has existing lint/bundle-size warnings. Authenticated Firestore integration was not exercised against live user data. The deployed Netlify preview was exercised in a cloud browser as a guest: weapon descriptions, battle creation, PD, exploration, loot sale, a rare variable-price purchase, a Drama search, finalization and history creation worked. That check revealed an overflowing campaign panel, corrected with an explicit responsive width and wrapping phase navigation. Comprehensive desktop/mobile visual review remains outstanding. Local Chromium launch was rejected by the execution environment's process-singleton socket restriction.
 
 ## Storage
 
