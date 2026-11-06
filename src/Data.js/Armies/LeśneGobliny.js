@@ -244,4 +244,8 @@ export const leśneGobliny = {
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: ["Czarny Ork","Grzybowar","Mekaniak"],
+  unitRatios: [
+    { unit: "Snotling", required: "Leśny goblin", ratio: 2 },
+    { unit: "Pajonk", required: "Leśny goblin", ratio: 2 },
+  ],
 };

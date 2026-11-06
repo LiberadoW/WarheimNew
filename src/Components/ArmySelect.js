@@ -28,8 +28,8 @@ const ArmySelect = ({
   const updatedArmies = Object.keys(armies);
 
   return (
-    <div className="army-select-container">
-      <span className="bold">Banda:</span>
+    <label className="army-select-container header-field">
+      <span className="header-field-label">Banda</span>
       <select onChange={handleOnChange} value={army.name}>
         <option disabled>Wybierz bandę</option>
 
@@ -51,7 +51,7 @@ const ArmySelect = ({
             );
           })}
       </select>
-    </div>
+    </label>
   );
 };
 

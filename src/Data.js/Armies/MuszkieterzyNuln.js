@@ -23,14 +23,8 @@ export const muszkieterzyNuln = {
       cost: 35,
       number: 1,
       equipmentList: {
-        "Tradycja Bestii": [0, 4, "Tradycja"],
-        "Tradycja Cienia": [0, 4, "Tradycja"],
         "Tradycja Metalu": [0, 4, "Tradycja"],
-        "Tradycja Niebios": [0, 4, "Tradycja"],
         "Tradycja Ognia": [0, 4, "Tradycja"],
-        "Tradycja Śmierci": [0, 4, "Tradycja"],
-        "Tradycja Światła": [0, 4, "Tradycja"],
-        "Tradycja Życia": [0, 4, "Tradycja"],
       },
       type: "Bohater",
       stats: {
@@ -57,8 +51,7 @@ export const muszkieterzyNuln = {
         "Duchowny (modlitwy do Sigmara)",
         "Modlitwa",
         "Nienawiść",
-        "Przepastne trzewia",
-        "Rozproszenie magii (2)",
+        "Rozproszenie magii (2)"
       ],
       exp: 12,
       skills: [0, 2, 3, 5],

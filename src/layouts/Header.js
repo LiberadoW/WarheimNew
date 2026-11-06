@@ -15,9 +15,9 @@ const Header = ({ handleSwitchTheme, theme }) => {
         <DarkModeSwitch
           checked={theme === "dark" ? true : false}
           onChange={handleSwitchTheme}
-          sunColor="white"
-          moonColor="white"
-          style={{ backgroundColor: theme === "dark" ? "#282828" : "#212529" }}
+          sunColor="#efe8db"
+          moonColor="#efe8db"
+          size={22}
         />
       </div>
       <Navbar />

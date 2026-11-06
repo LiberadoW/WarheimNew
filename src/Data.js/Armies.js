@@ -25,6 +25,7 @@ import { kislev } from "./Armies/Kislev";
 import { piraci } from "./Armies/Piraci";
 import { psyWojny } from "./Armies/PsyWojny";
 import { raubritterzy } from "./Armies/Raubritterzy";
+import { szermierzeEstalii } from "./Armies/SzermierzeEstalii";
 import { arabia } from "./Armies/Arabia";
 import { amazonki } from "./Armies/Amazonki";
 import { nizolki } from "./Armies/Nizolki";
@@ -61,6 +62,8 @@ import { liczmistrz } from "./Armies/Liczmistrz";
 import { reikland } from "./Armies/Reikland";
 import { nocneGobliny } from "./Armies/NocneGobliny";
 import { sybaryci } from "./Armies/Sybaryci";
+import { wojownicyBurzy } from "./Armies/WojownicyBurzy";
+import { kultMeczennikow } from "./Armies/KultMeczennikow";
 
 const armies = {
   "Bractwo Rycerskie": BractwoRycerskie,
@@ -84,6 +87,7 @@ const armies = {
   "Piraci z Sartosy": piraci,
   "Psy Wojny": psyWojny,
   "Raubritterzy z Księstw Granicznych": raubritterzy,
+  "Szermierze z Estalii": szermierzeEstalii,
   "Kupiecka karawana z Arabii": arabia,
   "Amazonki z Lustrii": amazonki,
   "Gladiatorzy z Jałowej Krainy": gladiatorzy,
@@ -126,6 +130,8 @@ const armies = {
   "Żołnierze z Reiklandu": reikland,
   "Nocne Gobliny": nocneGobliny,
   "Kult Sybarytów": sybaryci,
+  "Wojownicy Burzy": wojownicyBurzy,
+  "Kult Męczenników": kultMeczennikow,
 };
 
 export default armies;

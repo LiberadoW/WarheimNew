@@ -57,8 +57,7 @@ export const reikland = {
         "Duchowny (modlitwy do Sigmara)",
         "Modlitwa",
         "Nienawiść",
-        "Przepastne trzewia",
-        "Rozproszenie magii (2)",
+        "Rozproszenie magii (2)"
       ],
       exp: 12,
       skills: [0, 2, 3, 5],
@@ -168,7 +167,7 @@ export const reikland = {
         Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Fanatyk", "Furia"],
+      rules: ["Fanatyk", "Furia", "Męczennik"],
     },
     Zaprzęg: {
       id: 11,

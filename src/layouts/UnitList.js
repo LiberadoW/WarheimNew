@@ -20,6 +20,7 @@ const UnitList = ({
   heroes,
   handleSetUnitExp,
   army,
+  showDetailsInline = true,
 }) => {
   const { setStandardBearer, setMusician } = useContext(CommandContext);
   const { isPlayArmyView } = useContext(EditArmyContext);
@@ -68,7 +69,7 @@ const UnitList = ({
   }, [unitList]);
 
   const handleClickId = (e) => {
-    if (!e.target.classList.contains("unit-name")) {
+    if (e.target.closest("select, .unit-delete")) {
       return;
     }
 
@@ -103,7 +104,12 @@ const UnitList = ({
 
         return (
           <React.Fragment key={unit.uniqueId}>
-            <div className={`unit ${unitIndex} ${unit.type}`} id={unit.uniqueId}>
+            <div
+              className={`unit ${unitIndex} ${unit.type}${
+                idShown === unit.uniqueId ? " is-selected" : ""
+              }`}
+              id={unit.uniqueId}
+            >
               <li className={`unit-info-container ${unitIndex}`} onClick={handleClickId}>
                 <span className="unit-name">{unit.unitName} </span>
                 <p className="unit-info">
@@ -138,10 +144,10 @@ const UnitList = ({
                       ""
                     )}
                   </span>
-                  <span>{`${unit.totalCost} zk`}</span>
+                  <span className="unit-cost">{`${unit.totalCost} zk`}</span>
                   {!isPlayArmyView && (
                     <span
-                      className={String(unitIndex)}
+                      className={`unit-delete ${unitIndex}`}
                       onClick={() => handleDeleteClick(unit.uniqueId)}
                     >
                       <i className="fa-solid fa-trash-can"></i>
@@ -150,7 +156,9 @@ const UnitList = ({
                 </p>
               </li>
             </div>
-            {idShown === unit.uniqueId && unitGlobalIndex !== -1 && (
+            {showDetailsInline &&
+              idShown === unit.uniqueId &&
+              unitGlobalIndex !== -1 && (
               <UnitInfo
                 heroes={heroes}
                 unit={unit}

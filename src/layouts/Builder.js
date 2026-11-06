@@ -1,18 +1,26 @@
 import { getArmyName } from "../Data.js/RulebookNames";
-import React, { useContext, useEffect, useState, createContext } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, getDoc, Timestamp, updateDoc } from "firebase/firestore";
 import html2pdf from "html2pdf.js";
+import { avoidPdfPageBreaks } from "../Functions/avoidPdfPageBreaks";
 import "@sweetalert2/themes/bootstrap-4";
 import ArmySelect from "../Components/ArmySelect";
 import ArmyInfo from "../Components/ArmyInfo";
 import CampaignPointsEditor from "../Components/CampaignPointsEditor";
 import Modal from "../Components/Modal";
+import UnitDetails from "../Components/UnitDetails";
 import UnitSelect from "./UnitSelect";
+import UnitPicker from "./UnitPicker";
 import UnitList from "./UnitList";
 import { AuthContext } from "../Context/AuthContext";
 import { db } from "../Database/database";
-import { getOneOfChoices } from "../Functions/getOneOfChoices";
 import { getPrestige } from "../Functions/getPrestige";
 import { normalizeSpecialRules } from "../Components/CampaignPoints";
 import { EditArmyContext, getDefaultCampaignNotes } from "./App";
@@ -43,6 +51,24 @@ const OPTIONS = {
     format: "a4",
     orientation: "portrait",
   },
+};
+
+// html2canvas renders the whole list onto one canvas, and browsers refuse
+// canvases taller than ~32k px, so long lists (with rules) get a lower scale.
+const MAX_CANVAS_HEIGHT = 32000;
+const MAX_CANVAS_AREA = 250000000;
+
+const getPdfScale = (element) => {
+  const width = element.scrollWidth || 1;
+  const height = element.scrollHeight || 1;
+  return Math.max(
+    1,
+    Math.min(
+      OPTIONS.html2canvas.scale,
+      MAX_CANVAS_HEIGHT / height,
+      Math.sqrt(MAX_CANVAS_AREA / (width * height)),
+    ),
+  );
 };
 
 const normalizeUnitList = (unitList) => {
@@ -187,9 +213,13 @@ const Builder = ({
   setCampaignNotes,
   handleSetUnitExp,
   theme,
+  includeRulesInPdf,
+  setIncludeRulesInPdf,
 }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [idShown, setIdShown] = useState(null);
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const sidePanelRef = useRef(null);
   const { currentUser } = useContext(AuthContext);
   const [showNewArmyModal, setShowNewArmyModal] = useState(false);
   const [errors, setErrors] = useState(0);
@@ -223,8 +253,35 @@ const Builder = ({
 
   useEffect(() => {
     setPrestige(getPrestige(unitList)[0]);
-    getOneOfChoices(army, unitList);
   });
+
+  // The new-list view shows unit details in the right column; edit and play
+  // views still expand them inline under the unit.
+  const isSidePanelView = !isEditArmyView && !isPlayArmyView;
+  const selectedUnitIndex = isSidePanelView
+    ? unitList.findIndex((unit) => unit?.uniqueId === idShown)
+    : -1;
+  const selectedUnit =
+    selectedUnitIndex !== -1 ? unitList[selectedUnitIndex] : null;
+  const isSidePanelOpen = isPickerOpen || selectedUnit !== null;
+
+  // Each unit (or the recruitment list) opens scrolled to the top.
+  useEffect(() => {
+    sidePanelRef.current?.scrollTo?.(0, 0);
+  }, [idShown]);
+
+  const handleUnitAdded = (uniqueId) => {
+    setIdShown(uniqueId);
+  };
+
+  const handleSidePanelBack = () => {
+    setIdShown(null);
+  };
+
+  const handleSidePanelClose = () => {
+    setIdShown(null);
+    setIsPickerOpen(false);
+  };
 
   useEffect(() => {
     if (!isPlayArmyView) {
@@ -350,8 +407,16 @@ const Builder = ({
       return;
     }
 
+    // html2pdf lays the copy out at A4 width; measure page breaks the same way.
+    const previousWidth = element.style.width;
+    element.style.width = "21cm";
+    const removeSpacers = avoidPdfPageBreaks(
+      element,
+      ".print-rule, .print-equipment-table",
+    );
     const options = {
       ...OPTIONS,
+      html2canvas: { ...OPTIONS.html2canvas, scale: getPdfScale(element) },
       filename: `${armyName || "Moja rozpiska"}.pdf`,
     };
 
@@ -360,6 +425,9 @@ const Builder = ({
     } catch (err) {
       console.log(err);
       alert("Nie udało się zapisać PDF.");
+    } finally {
+      removeSpacers();
+      element.style.width = previousWidth;
     }
   };
 
@@ -511,88 +579,123 @@ const Builder = ({
       value={{ standardBearer, setStandardBearer, musician, setMusician }}
     >
       <div className="builder">
-        <div className="builder-top-wrapper">
-          <div className="builder-controls">
-            <div className="builder-controls-buttons">
-              {!isPlayArmyView && (
-                <button className="button" onClick={handleResetArmyClick}>
-                  Resetuj
-                </button>
-              )}
-              <button className="button" onClick={handleSavePDFClick}>
-                Zapisz PDF
-              </button>
-              {isPlayArmyView && (
-                <button className="button" onClick={handleEndBattleClick}>
-                  Zakończ bitwę
-                </button>
-              )}
-              {currentUser && (
-                <button className="button " onClick={saveArmy}>
-                  Zapisz armię
-                </button>
-              )}
-            </div>
+        <div className="builder-header">
+          {isSidePanelView && (
+            <ArmySelect
+              army={army}
+              setArmy={setArmy}
+              setUnitList={setUnitList}
+              setUnitName={setUnitName}
+              setIdShown={setIdShown}
+              setMercenaryUnitName={setMercenaryUnitName}
+              setMercenaries={setMercenaries}
+              resetCampaignNotes={resetCampaignNotes}
+            />
+          )}
 
-            {!isEditArmyView && !isPlayArmyView && (
-              <div>
-                <input
-                  type="checkbox"
-                  onClick={handleCustomArmyCostClick}
-                ></input>
-                Zmień startową liczbę ZK
+          {isEditArmyView && (
+            <UnitSelect
+              army={army}
+              setUnitName={setUnitName}
+              unitName={unitName}
+              unitList={unitList}
+              setUnitList={setUnitList}
+            />
+          )}
+
+          <ArmyInfo
+            prestige={prestige}
+            totalCost={totalCost}
+            army={army}
+            isCustomArmyCost={isCustomArmyCost}
+            customArmyCost={customArmyCost}
+            unitList={unitList}
+            setArmyName={setArmyName}
+            armyName={armyName}
+            errors={errors}
+            setErrors={setErrors}
+            theme={theme}
+          />
+
+          <div className="builder-header-actions">
+            {isSidePanelView && (
+              <div className="builder-custom-cost">
+                <label>
+                  <input
+                    type="checkbox"
+                    onClick={handleCustomArmyCostClick}
+                  ></input>
+                  Własny limit ZK
+                </label>
+                {isCustomArmyCost && (
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    onChange={handleCustomArmyCostChange}
+                    aria-label="Startowa liczba ZK"
+                  />
+                )}
               </div>
             )}
-
-            {isCustomArmyCost && (
-              <div>
-                <input type="text" onChange={handleCustomArmyCostChange} />
-              </div>
-            )}
-          </div>
-
-          <div className="builder-select-container">
-            {!isEditArmyView && !isPlayArmyView && (
-              <ArmySelect
-                army={army}
-                setArmy={setArmy}
-                setUnitList={setUnitList}
-                setUnitName={setUnitName}
-                setIdShown={setIdShown}
-                setMercenaryUnitName={setMercenaryUnitName}
-                setMercenaries={setMercenaries}
-                resetCampaignNotes={resetCampaignNotes}
-              />
-            )}
-
             {!isPlayArmyView && (
-              <UnitSelect
-                heroes={army?.heroes}
-                setUnitName={setUnitName}
-                unitName={unitName}
-                unitList={unitList}
-                setUnitList={setUnitList}
+              <button
+                className="button button-ghost"
+                onClick={handleResetArmyClick}
+              >
+                Resetuj
+              </button>
+            )}
+            <label
+              className="builder-pdf-rules"
+              title="Dołącz do PDF opisy zasad postaci, ekwipunku i zaklęć"
+            >
+              <input
+                type="checkbox"
+                checked={Boolean(includeRulesInPdf)}
+                onChange={(e) => setIncludeRulesInPdf(e.target.checked)}
               />
+              Zasady w PDF
+            </label>
+            <button
+              className="button button-secondary"
+              onClick={handleSavePDFClick}
+            >
+              <i className="fa-solid fa-file-pdf"></i> Zapisz PDF
+            </button>
+            {isPlayArmyView && (
+              <button className="button" onClick={handleEndBattleClick}>
+                Zakończ bitwę
+              </button>
+            )}
+            {currentUser && (
+              <button className="button" onClick={saveArmy}>
+                <i className="fa-solid fa-floppy-disk"></i> Zapisz armię
+              </button>
             )}
           </div>
         </div>
 
-        <ArmyInfo
-          prestige={prestige}
-          totalCost={totalCost}
-          army={army}
-          isCustomArmyCost={isCustomArmyCost}
-          customArmyCost={customArmyCost}
-          unitList={unitList}
-          setArmyName={setArmyName}
-          armyName={armyName}
-          errors={errors}
-          setErrors={setErrors}
-          theme={theme}
-        />
-
-        <div className="main-builder-container">
+        <div
+          className={`main-builder-container${
+            isSidePanelView ? " has-side-panel" : ""
+          }`}
+        >
           <div className="side-builder-left">
+            {isSidePanelView && (
+              <button
+                className="button side-panel-open-button"
+                onClick={() => setIsPickerOpen(true)}
+              >
+                + Dodaj jednostkę
+              </button>
+            )}
+            {isSidePanelView && unitList.length === 0 && (
+              <div className="unit-list-empty">
+                <i className="fa-solid fa-shield-halved"></i>
+                <p className="unit-list-empty-title">Kompania jest pusta</p>
+                <p>Wybierz jednostki z listy obok, aby je dodać.</p>
+              </div>
+            )}
             <UnitList
               unitList={unitList}
               setUnitList={setUnitList}
@@ -601,6 +704,7 @@ const Builder = ({
               heroes={army?.heroes}
               handleSetUnitExp={handleSetUnitExp}
               army={army}
+              showDetailsInline={!isSidePanelView}
             />
             {isEditArmyView && (
               <CampaignPointsEditor
@@ -610,6 +714,55 @@ const Builder = ({
               />
             )}
           </div>
+
+          {isSidePanelView && (
+            <aside
+              ref={sidePanelRef}
+              className={`side-builder-right${
+                isSidePanelOpen ? " is-open" : ""
+              }`}
+            >
+              <div className="side-panel-bar">
+                {selectedUnit ? (
+                  <button
+                    className="side-panel-back"
+                    onClick={handleSidePanelBack}
+                  >
+                    <i className="fa-solid fa-arrow-left"></i> Dodaj jednostki
+                  </button>
+                ) : (
+                  <span className="side-panel-title">Rekrutacja</span>
+                )}
+                <button
+                  className="side-panel-close"
+                  onClick={handleSidePanelClose}
+                  aria-label="Zamknij"
+                >
+                  ×
+                </button>
+              </div>
+
+              {selectedUnit ? (
+                <UnitDetails
+                  key={selectedUnit.uniqueId}
+                  heroes={army?.heroes}
+                  unit={selectedUnit}
+                  unitIndex={selectedUnitIndex}
+                  unitList={unitList}
+                  setUnitList={setUnitList}
+                  handleSetUnitExp={handleSetUnitExp}
+                  army={army}
+                />
+              ) : (
+                <UnitPicker
+                  army={army}
+                  unitList={unitList}
+                  setUnitList={setUnitList}
+                  onUnitAdded={handleUnitAdded}
+                />
+              )}
+            </aside>
+          )}
         </div>
       </div>
 

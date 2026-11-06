@@ -67,3 +67,72 @@
 .italic {
   font-style: italic;
 }
+
+/* Optional rules appendix (Zasady w PDF) */
+
+.print-rules {
+  margin: 10mm;
+  font-size: 11px;
+  line-height: 1.35;
+  page-break-before: always;
+  break-before: page;
+}
+
+.print-rules-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid #8e1b1b;
+}
+
+.print-rules-section {
+  margin-bottom: 12px;
+}
+
+.print-rules-section h3 {
+  margin: 10px 0 6px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #8e1b1b;
+}
+
+.print-rule {
+  padding: 4px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.print-rule-name {
+  margin: 0;
+  font-weight: bold;
+}
+
+.print-rule-source {
+  margin-left: 8px;
+  font-weight: normal;
+  font-style: italic;
+  color: #555;
+}
+
+.print-rule-text {
+  margin: 2px 0 0;
+  white-space: pre-line;
+}
+
+.print-equipment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.print-equipment-table th,
+.print-equipment-table td {
+  padding: 3px 5px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+
+.print-equipment-table th {
+  color: white;
+  background-color: #151311;
+}

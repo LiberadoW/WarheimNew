@@ -57,8 +57,7 @@ export const ostland = {
         "Duchowny (modlitwy do Sigmara)",
         "Modlitwa",
         "Nienawiść",
-        "Przepastne trzewia",
-        "Rozproszenie magii (2)",
+        "Rozproszenie magii (2)"
       ],
       exp: 12,
       skills: [0, 2, 3, 5],

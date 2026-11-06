@@ -230,4 +230,8 @@ export const kapry = {
   nature: "Zła",
   armyRules: ["...Na ślinę i sznurek", "Podatek", "Rozrzutność"],
   mercenaries: ["Czarny Ork", "Grzybowar", "Mekaniak"],
+  unitRatios: [
+    { unit: "Snotling", required: "Goblin pirat", ratio: 2 },
+    { unit: "Squig", required: "Goblin pirat", ratio: 1 },
+  ],
 };

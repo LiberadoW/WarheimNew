@@ -9,9 +9,10 @@ const mageEquipmentList = {
       Włócznia: [10, 0],
       "Broń miotana": [10, 1],
       Łuk: [10, 1],
+      "Łuk długi": [20, 1],
       Oszczep: [15, 1],
     },
-    skills: [0, 2, 3, 5],
+    skills: [0, 1, 2, 5],
   },
   "Tradycja Cienia": {
     equipment: {

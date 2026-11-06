@@ -167,7 +167,7 @@ export const krasnoludyChaosu = {
       cost: 70,
       number: 3,
       equipmentList:
-        heroEquipment["Krasnoludowie Chaosu z Zorn Uzkul"].Stronnicy,
+        heroEquipment["Krasnoludowie Chaosu z Zorn Uzkul"].Hobgoblin,
       type: "Stronnik",
       stats: {
         Początkowa: [4, 3, 3, 3, 3, 1, 4, 1, 6],
@@ -225,6 +225,9 @@ export const krasnoludyChaosu = {
   name: "Krasnoludowie Chaosu z Zorn Uzkul",
   nature: "Zła",
   armyRules: ["Palankin", "Podatek", "Reduta", "Rozrzutność"],
+  unitRatios: [
+    { unit: "Hobgoblin", required: "Wojownik klanowy", ratio: 2 },
+  ],
   mercenaries: [
     "Czarownica",
     "Hiena cmentarna",

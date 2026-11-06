@@ -17,7 +17,7 @@ export const middenheim = {
         Początkowa: [4, 4, 4, 4, 3, 2, 4, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Dowódca"],
+      rules: ["Dowódca", "Za mną!"],
       exp: 20,
       skills: [0, 2, 3, 4, 5],
     },

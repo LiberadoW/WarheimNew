@@ -39,7 +39,7 @@ export const strigos = {
         Początkowa: [4, 3, 3, 3, 3, 1, 3, 1, 7],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Animacja", "Mag (Dziedzina Nekromancji)"],
+      rules: ["Animacja", "Mag (Nekromancja)"],
       exp: 8,
       skills: [0, 2, 5],
     },
@@ -169,7 +169,7 @@ export const strigos = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        "Czarna Karoca": ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
+        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
         "Nieumarły koń": [8, 2, 0, 3, "-", "-", 2, 1, 4],
         "Nieumarły koń  ": [8, 2, 0, 3, "-", "-", 2, 1, 4],
       },
@@ -183,7 +183,7 @@ export const strigos = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Ścierwowóz: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
+        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
         "Nieumarły koń": [8, 2, 0, 3, "-", "-", 2, 1, 4],
         "Nieumarły koń  ": [8, 2, 0, 3, "-", "-", 2, 1, 4],
       },

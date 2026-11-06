@@ -39,8 +39,8 @@ test.each(Object.entries(expected))("%s matches the Word tables with approved re
   });
 });
 
-test("all 63 armies have usable equipment, complete profiles and resolved mercenaries", () => {
-  expect(Object.keys(armies)).toHaveLength(63);
+test("all 66 armies have usable equipment, complete profiles and resolved mercenaries", () => {
+  expect(Object.keys(armies)).toHaveLength(66);
   Object.entries(armies).forEach(([name, army]) => {
     expect(army.name).toBe(name);
     expect(army.minModels).toBeLessThanOrEqual(army.maxModels);
@@ -88,6 +88,13 @@ test("Nippon cannot recruit more samurai than ashigaru", () => {
   expect(errors(army, [...legal, recruit(army, "Samuraj")])).toBe(1);
 });
 
+test("Zorn Uzkul allows at most two hobgoblins per clan warrior", () => {
+  const army = armies["Krasnoludowie Chaosu z Zorn Uzkul"];
+  const legal = [recruit(army, "Czarnoksiężnik"), recruit(army, "Wojownik klanowy"), recruit(army, "Hobgoblin", 2)];
+  expect(errors(army, legal)).toBe(0);
+  expect(errors(army, [...legal, recruit(army, "Hobgoblin")])).toBe(1);
+});
+
 test("Bractwo allows one of seven priest patrons", () => {
   const army = armies["Bractwo Rycerskie"];
   const priests = Object.entries(army.heroes).filter(([, unit]) => unit.rules.some((r) => r.startsWith("Duchowny")));
@@ -108,7 +115,7 @@ test.each(newArmies)("%s recruits through the existing UI without mutating the c
     const [unitName, setUnitName] = useState("");
     const [unitList, setUnitList] = useState([]);
     recruited = unitList;
-    return <UnitSelect heroes={army.heroes} {...{ unitName, setUnitName, unitList, setUnitList }} />;
+    return <UnitSelect army={army} {...{ unitName, setUnitName, unitList, setUnitList }} />;
   };
   render(<Harness />);
   const leader = Object.keys(army.heroes).find((key) => army.heroes[key].rules.includes("Dowódca"));
@@ -124,7 +131,7 @@ test.each(newArmies)("%s recruits through the existing UI without mutating the c
 test("the retired Chaos chariot cannot be recruited but remains available to old saves", () => {
   const army = armies["Kult Ducha Chaosu"];
   expect(army.heroes["Rydwan Chaosu"].retired).toBe(true);
-  render(<UnitSelect heroes={army.heroes} unitName="" unitList={[]} setUnitName={() => {}} setUnitList={() => {}} />);
+  render(<UnitSelect army={army} unitName="" unitList={[]} setUnitName={() => {}} setUnitList={() => {}} />);
   expect(screen.queryByRole("option", { name: /Rydwan Chaosu/ })).toBeNull();
   const leader = recruit(army, "Wtajemniczony");
   expect(errors(army, [leader, recruit(army, "Rydwan Chaosu")])).toBe(errors(army, [leader]) + 1);
@@ -147,9 +154,14 @@ const equipmentHarness = (armyName, unitName) => {
     return <div className="unit" id="0"><WeaponList heroes={army.heroes} id={0} {...{army,unitList,setUnitList}} /></div>;
   };
   const {container} = render(<Harness />);
+  // Toggles an item: removes it when taken, otherwise picks it from its dropdown.
   return { unit: () => current, click: (name) => {
-    const input = container.querySelector(`input[name="${name}"]`);
-    expect(input).not.toBeNull(); fireEvent.click(input);
+    const remove = container.querySelector(`button[data-equipment="${name}"]`);
+    if (remove) { fireEvent.click(remove); return; }
+    const option = container.querySelector(`option[data-name="${name}"]`);
+    expect(option).not.toBeNull();
+    expect(option.disabled).toBe(false);
+    fireEvent.change(option.closest("select"), { target: { value: option.value } });
   }};
 };
 
@@ -181,17 +193,18 @@ test("Dao resolves to the recruited Yin or Yang tradition", () => {
   const h = equipmentHarness("Emisariusze Smoczego Cesarza", "Kanclerz");
   h.click("Dualizm (Yin)");
   expect(getMagicLore([h.unit()])).toBe("Tradycja Yin");
-  expect(Object.keys(magic["Tradycja Yin"])).toHaveLength(6);
+  // PDF chapter 22: five common spells (1-6) plus six Yin spells (7-12).
+  expect(Object.keys(magic["Tradycja Yin"])).toHaveLength(11);
   h.click("Dualizm (Yin)");
   h.click("Dualizm (Yang)");
   expect(getMagicLore([h.unit()])).toBe("Tradycja Yang");
-  expect(Object.keys(magic["Tradycja Yang"])).toHaveLength(6);
+  expect(Object.keys(magic["Tradycja Yang"])).toHaveLength(11);
 });
 
 test("Profeta can select either of its two lores without losing its equipment list", () => {
   const h = equipmentHarness("Eteryczny dwór Króla kurhanów", "Profeta");
   h.click("Domena Nehekhary");
-  expect(getMagicLore([h.unit()])).toBe("Dziedzina Nehekary");
+  expect(getMagicLore([h.unit()])).toBe("Domena Nehekhary");
   h.click("Domena Nehekhary");
   h.click("Magia Żywiołów");
   expect(getMagicLore([h.unit()])).toBe("Magia Żywiołów");
@@ -208,10 +221,10 @@ test.each(["Mananna","Morra","Myrmidii","Ranalda","Ulryka","Ursuna","Sigmara"])(
 });
 
 
-test("all five battle altars use the Powóz profile", () => {
+test("all six battle altars use the Powóz profile", () => {
   const altars = Object.values(armies).flatMap((army) =>
     Object.entries(army.heroes).filter(([name]) => name.toLowerCase() === "bitewny ołtarz"));
-  expect(altars).toHaveLength(5);
+  expect(altars).toHaveLength(6);
   altars.forEach(([, unit]) => {
     expect(unit.stats.Powóz).toEqual(["-", "-", "-", 4, 8, 8, "-", "-", "-"]);
     expect(unit.stats.Rydwan).toBeUndefined();
@@ -224,7 +237,7 @@ test("review confirms prices, caps, horse and Półgryfon rules", () => {
   expect(armies["Amazonki z Lustrii"].heroes.Walkiria.equipmentList.Oszczep).toEqual([15, 1]);
   expect(armies["Cyrkowcy z Ligii Ostermarku"].heroes.Cyrkowiec.number).toBe(7);
   expect(armies["Emisariusze Smoczego Cesarza"].heroes.Strzelec.number).toBe(7);
-  expect(armies["Bractwo Rycerskie"].heroes.Półgryfon.rules).not.toContain("Dzikie squigi");
+  expect(armies["Bractwo Rycerskie"].heroes.Półgryfon.rules).toContain("Dzikie squigi");
   const nomad = armies["Kupiecka karawana z Arabii"].heroes.Nomada;
   expect(nomad.startingEquipment).toContain("Koń bojowy");
   expect(nomad.startingEquipment).not.toContain("Rumak Elfów");

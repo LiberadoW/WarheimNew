@@ -17,6 +17,7 @@ export const graal = {
         "Dowódca",
         "Duży cel (wierzchem)",
         "Kawalerzysta",
+        "Niezłomny",
         "Konny",
         "Towarzysz Graala",
       ],
@@ -29,10 +30,10 @@ export const graal = {
       cost: 40,
       number: 1,
       equipmentList: {
+        ...heroEquipment["Rycerze Graala"].Bohaterowie,
         "Tradycja Bestii": [0, 4, "Tradycja"],
         "Tradycja Niebios": [0, 4, "Tradycja"],
         "Tradycja Życia": [0, 4, "Tradycja"],
-        Rumak: [55, 3],
       },
       type: "Bohater",
       stats: {
@@ -137,7 +138,9 @@ export const graal = {
       startingEquipment: ["Broń naturalna"],
       cost: 150,
       number: 1,
-      equipmentList: {},
+      equipmentList: {
+        Kropierz: [30, 3],
+      },
       type: "Stronnik",
       stats: {
         Początkowa: [8, 3, 0, 4, 4, 3, 4, 2, 7],

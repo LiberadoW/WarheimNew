@@ -155,7 +155,7 @@ export const mors = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Rydwan: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
+        Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
         Wilkoszczur: [9, 3, 0, 3, "-", "-", 4, 1, 3],
         "Wilkoszczur ": [9, 3, 0, 3, "-", "-", 4, 1, 3],
       },
@@ -178,4 +178,5 @@ export const mors = {
     "Wróżbita",
     "Złodziej",
   ],
+  unitRatios: [{ unit: "Wielki szczur", required: "Klanbrat", ratio: 2 }],
 };

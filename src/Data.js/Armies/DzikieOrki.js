@@ -42,10 +42,10 @@ export const dzikieOrki = {
     },
     "Burszuj dzikich orków": {
       id: 2,
-      startingEquipment: [],
+      startingEquipment: ["Sztylet"],
       cost: 55,
       number: 2,
-      equipmentList: heroEquipment["Łowcze plemię Dzikich Orków"]["Bohaterowie"],
+      equipmentList: heroEquipment["Łowcze plemię Dzikich Orków"].Burszuj,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 3, 4, 1, 3, 1, 7],
@@ -83,7 +83,7 @@ export const dzikieOrki = {
         "Animozja",
         "Duża dźgacz",
         "Furia",
-        "Ochronne tautaże",
+        "Ochronne tatuaże",
         "Zabobonny lęk",
       ],
     },
@@ -199,4 +199,9 @@ export const dzikieOrki = {
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: ["Czarny Ork","Grzybowar","Mekaniak"],
+  unitRatios: [
+    { unit: "Leśny goblin", required: "Dziki ork", ratio: 2 },
+    { unit: "Snotling", required: "Leśny goblin", ratio: 2 },
+    { unit: "Pajonk", required: "Leśny goblin", ratio: 1 },
+  ],
 };

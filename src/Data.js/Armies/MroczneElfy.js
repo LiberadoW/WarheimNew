@@ -42,7 +42,7 @@ export const mroczne = {
       startingEquipment: [
         "Sztylet",
         "Pistolet strzałkowy powtarzalny",
-        "Płaszcz z łusek morskiego smoka",
+        "Płaszcz z łusek smoka",
       ],
       cost: 45,
       number: 1,
@@ -185,7 +185,9 @@ export const mroczne = {
       startingEquipment: ["Broń naturalna (przebicie pancerza)"],
       cost: 150,
       number: 1,
-      equipmentList: {},
+      equipmentList: {
+        Kropierz: [30, 3],
+      },
       type: "Stronnik",
       stats: {
         Początkowa: [8, 3, 0, 4, 4, 3, 4, 2, 6],

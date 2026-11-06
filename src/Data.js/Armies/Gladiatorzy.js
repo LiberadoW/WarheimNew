@@ -13,7 +13,7 @@ export const gladiatorzy = {
         Początkowa: [4, 4, 4, 3, 3, 2, 4, 1, 8],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Dowódca", "Handlarz niewolników"],
+      rules: ["Dowódca", "Handlarz niewolników", "Strachliwy"],
       exp: 20,
       skills: [0, 1, 2, 3, 4, 5],
     },

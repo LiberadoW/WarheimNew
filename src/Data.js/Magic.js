@@ -1,4 +1,5 @@
 import { rulebookMagic } from "./RulebookMagic";
+import { pdfMagic } from "./PdfMagic";
 export const magic = {
   "Duchowny (modlitwy do Mananna)": {
     "1": [
@@ -1819,7 +1820,7 @@ export const magic = {
     ZŁOWIESZCZYM I ŚWIATŁOWSTRĘTNYM`,
     ],
   },
-  "Dziedzina Chaosu Niepodzielonego": {
+  "Dziedzina Chaosu": {
     1: [
       "1-2 CIĘTA RIPOSTA",
       "RZUCONY NA 6+",
@@ -2566,7 +2567,7 @@ export const magic = {
     zaklęcia, nie może używać oręża, tarczy & pancerza.`,
     ],
   },
-  "Dziedzina Nekromancji": {
+  "Nekromancja": {
     1: [
       "1-2 INWOKACJA NEHEK",
       "RZUCONY AUTOMATYCZNIE",
@@ -2689,7 +2690,7 @@ export const magic = {
     skorzystania z Ochrony Pancerza.`,
     ],
   },
-  "Dziedzina Nehekary": {
+  "Domena Nehekhary": {
     1: [
       "1-2 INKANTACJA KHEPRY",
       "RZUCONY AUTOMATYCZNIE",
@@ -3625,4 +3626,6 @@ export const magic = {
   },
 
   ...rulebookMagic,
+  // Spell lists from the AD2026.04.15 rulebook PDF replace the entries above.
+  ...pdfMagic,
 };

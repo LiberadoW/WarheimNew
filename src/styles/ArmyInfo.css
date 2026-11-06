@@ -1,51 +1,132 @@
+/* Lives inside .builder-header: its children join the header row and the
+   expanded error list wraps onto its own line below. */
 .army-info-alerts-container {
-  background-color: var(--tertiary);
-  box-sizing: border-box;
-  width: 95%;
-  max-width: 1200px;
-  border: 1px solid black;
-  padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  display: flex;
-  flex-direction: column;
+  display: contents;
 }
 
 .army-info-container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 24px;
+}
+
+.army-name-input input {
+  width: 220px;
 }
 
 .army-info-right {
   display: flex;
-  margin-left: auto;
-  align-items: center;
-  gap: 10px;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.army-metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 72px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.army-metric-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.army-metric-value {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.army-metric-limit {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.army-metric.is-over {
+  border-color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.army-metric.is-over .army-metric-value {
+  color: var(--accent);
 }
 
 .alerts {
-  color: #d0312d;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
   cursor: pointer;
 }
 
-.fa-caret-down {
-  color: var(--dark-text);
+.alerts-chevron {
+  font-size: 0.7rem;
 }
 
-.fa-caret-right {
-  color: var(--dark-text);
-}
-
-.alerts i {
-  margin-right: 10px;
+.army-list-errors {
+  order: 10;
+  flex-basis: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px !important;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-soft);
+  color: var(--accent) !important;
+  font-size: 0.9rem;
 }
 
 @media screen and (max-width: 768px) {
   .army-info-container {
     flex-direction: column;
-    gap: 10px;
+    align-items: stretch;
   }
+
+  .army-name-input input {
+    width: 100%;
+  }
+
   .army-info-right {
-    flex-direction: column;
-    margin: 0 auto;
+    justify-content: space-between;
+  }
+
+  .army-metric {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.army-metric-value {
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+  .army-metric {
+    padding: 6px 8px;
+  }
+
+  .army-metric-label {
+    font-size: 0.6rem;
+  }
+
+  .army-metric-value {
+    font-size: 0.95rem;
   }
 }

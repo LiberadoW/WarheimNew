@@ -68,7 +68,11 @@ export const unitNameAliases = {
     "Tancerz Wojny": "Tancerz wojny",
     "Jeździec Polany": "Jeździec polany"
   },
+  "Konwent magów Wieży Hoeth": {
+    "Łucznik": "Wojownik"
+  },
   "Elfowie Wysokiego Rodu z Ulthuanu": {
+    "Łucznik": "Wojownik",
     "Mag Elfów Wysokiego Rodu": "Mag elfów",
     "Mistrz Miecza Hoetha": "Mistrz Miecza Hoeth"
   },
@@ -240,10 +244,88 @@ export const unitNameAliases = {
 export const getArmyName = (name) => armyNameAliases[name] || name;
 export const getUnitName = (armyName, name) => unitNameAliases[getArmyName(armyName)]?.[name] || name;
 
+// Item and lore names changed to the rulebook PDF (AD2026.04.15).
+export const equipmentNameAliases = {
+  "Cep bojowcy": "Cep bojowy",
+  "Pawęż": "Pawęża",
+  "Płaszcz z łusek morskiego smoka": "Płaszcz z łusek smoka",
+};
+
+export const loreNameAliases = {
+  "Dziedzina Chaosu Niepodzielonego": "Dziedzina Chaosu",
+  "Dziedzina Nekromancji": "Nekromancja",
+  "Dziedzina Nehekary": "Domena Nehekhary",
+};
+
+// Rycerze Graala: the six "Cnota …" choices were replaced by the PDF's Przymiot list.
+const RETIRED_EQUIPMENT_PREFIX = "Cnota ";
+const PRZYMIOT_CHOICES = ["Dzierzba", "Filar", "Pobożny", "Pogromca", "Żniwiarz"].map(
+  (name) => `Przymiot: ${name}`,
+);
+
+const renameLores = (text) =>
+  Object.entries(loreNameAliases).reduce(
+    (result, [oldName, newName]) => result.split(oldName).join(newName),
+    text,
+  );
+
+export const getEquipmentName = (name) =>
+  equipmentNameAliases[name] || renameLores(name);
+
+const renameKeys = (object) =>
+  object &&
+  Object.fromEntries(
+    Object.entries(object).map(([key, value]) => [getEquipmentName(key), value]),
+  );
+
+const normalizeEquipmentList = (equipmentList) => {
+  if (!equipmentList) return equipmentList;
+  const renamed = renameKeys(equipmentList);
+  const retired = Object.keys(renamed).filter((key) => key.startsWith(RETIRED_EQUIPMENT_PREFIX));
+  if (retired.length === 0) return renamed;
+  retired.forEach((key) => delete renamed[key]);
+  PRZYMIOT_CHOICES.forEach((name) => {
+    renamed[name] = [0, 3, "Choice"];
+  });
+  return renamed;
+};
+
+// Renames that apply to one unit only: the Rozbójnik mercenary keeps his
+// "Płaszcz (puklerz)", which the PDF describes as a different item.
+const unitEquipmentNameAliases = {
+  Zwadźca: { "Płaszcz (puklerz)": "Płaszcz z Estalii" },
+};
+
+const renameUnitEquipment = (unit) => {
+  const aliases = unitEquipmentNameAliases[unit.unitName] || {};
+  return (name) => aliases[name] || getEquipmentName(name);
+};
+
+// Only touches fields the saved unit has, so other saved data stays as it was.
+const normalizeUnitEquipment = (unit) => ({
+  ...unit,
+  ...(unit.rules ? { rules: unit.rules.map(renameLores) } : {}),
+  ...(unit.startingEquipment
+    ? { startingEquipment: unit.startingEquipment.map(renameUnitEquipment(unit)) }
+    : {}),
+  ...(unit.optionalEquipment
+    ? {
+        optionalEquipment: unit.optionalEquipment
+          .map(renameUnitEquipment(unit))
+          .filter((name) => !name.startsWith(RETIRED_EQUIPMENT_PREFIX)),
+      }
+    : {}),
+  ...(unit.equipmentList ? { equipmentList: normalizeEquipmentList(unit.equipmentList) } : {}),
+  ...(unit.equipmentAliasSelections
+    ? { equipmentAliasSelections: renameKeys(unit.equipmentAliasSelections) }
+    : {}),
+});
+
 export const normalizeRosterNames = (roster) => ({
   ...roster,
   armyType: getArmyName(roster.armyType),
-  armyList: (roster.armyList || []).map((unit) => {
+  armyList: (roster.armyList || []).map((savedUnit) => {
+    const unit = normalizeUnitEquipment(savedUnit);
     if (unit.type === "Najemne Ostrze") return unit;
     const name = getUnitName(roster.armyType, unit.unitName);
     return {

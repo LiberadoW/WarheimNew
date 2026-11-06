@@ -146,7 +146,7 @@ export const sybaryci = {
   maxModels: 12,
   name: "Kult Sybarytów",
   nature: "Chaotyczna",
-  armyRules: ["Kontakty handlowe (1)","Niewolnicy ciemności","Oko Chaosu","Rozrzutność","Zamożność","Znak chaosu (wyznawcy slaanesha)"],
+  armyRules: ["Kontakty handlowe (1)","Niewolnicy ciemności","Oko Chaosu","Rozrzutność","Zamożność","Znak Chaosu (Wyznawcy Slaanesha)"],
   mercenaries: [
     "Gladiator",
     "Poszukiwacz złota",

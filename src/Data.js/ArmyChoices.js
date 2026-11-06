@@ -54,8 +54,13 @@ export const armyChoices = {
   ],
   "Psy Wojny": [
     ["Czarownik","Kapłan Myrmidii"],
-    ["Lansjer","Ogr","Ptasznik z Catrazzy"],
+    ["Ogr","Ptasznik z Catrazzy"],
     ["Wóz bojowy","Rydwan"]
+  ],
+  "Szermierze z Estalii": [
+    ["Czarownik","Kapłan Myrmidii"],
+    ["Ogr","Byk bojowy"],
+    ["Zaprzęg","Rydwan"]
   ],
   "Raubritterzy z Księstw Granicznych": [
     ["Myśliwy","Zbójca"],
@@ -251,5 +256,9 @@ export const armyChoices = {
   "Eteryczny dwór Króla kurhanów": [
     ["Upiór","Zjawa"],
     ["Widmo","Banshee"]
+  ],
+  "Wojownicy Burzy": [
+    ["Jeździec burzy","Tarczownik burzy"],
+    ["Trybularz","Rydwan"]
   ]
 };

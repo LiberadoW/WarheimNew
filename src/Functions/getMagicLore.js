@@ -15,14 +15,14 @@ const PATHS_OF_MAGIC = [
   "Magia Ognistej Paszczy",
   "Magia Demonów",
   "Magia Chaosu",
-  "Dziedzina Chaosu Niepodzielonego",
+  "Dziedzina Chaosu",
   "Dziedzina Nurgla",
   "Dziedzina Slaanesha",
   "Dziedzina Tzeentcha",
   "Dziedzina Hashuta",
   "Dziedzina Dziczy",
-  "Dziedzina Nekromancji",
-  "Dziedzina Nehekary",
+  "Nekromancja",
+  "Domena Nehekhary",
   "Tradycja Yin",
   "Tradycja Yang",
   "Spaczmagia",
@@ -40,6 +40,8 @@ const PATHS_OF_MAGIC = [
   "Duchowny (modlitwy do Ursuna)",
   "Duchowny (modlitwy do Ranalda)",
   "Duchowny (modlitwy do Mananna)",
+  "Duchowny (modlitwy do Vereny)",
+  "Duchowny (Magia Jelit)",
 ];
 
 export const getMagicLore = (unitList) => {
@@ -47,7 +49,7 @@ export const getMagicLore = (unitList) => {
 
   unitList.forEach((unit) => {
     const selected = [...(unit.optionalEquipment || []), ...unit.rules].map((rule) =>
-      rule === "Domena Nehekhary" ? "Dziedzina Nehekary" : rule);
+      rule === "Dziedzina Nehekhary" ? "Domena Nehekhary" : rule);
     if (unit.rules.includes("Mag (Dziedzina Dao)")) {
       if (selected.includes("Dualizm (Yin)")) magicPath = "Tradycja Yin";
       if (selected.includes("Dualizm (Yang)")) magicPath = "Tradycja Yang";
@@ -57,7 +59,10 @@ export const getMagicLore = (unitList) => {
     if (explicit.length) { magicPath = explicit[explicit.length - 1]; return; }
     PATHS_OF_MAGIC.forEach((path) => {
       unit.rules.forEach((rule) => {
-        if (rule.replace(/Domena Nehekhary|Dziedzina Nehekhary/g, "Dziedzina Nehekary").includes(path)) {
+        if (rule
+          .replace(/Dziedzina Nehekhary|Dziedzina Nehekary/g, "Domena Nehekhary")
+          .replace("Dziedzina Boga Pajonka", "Dziedzina Boga-Pajonka")
+          .includes(path)) {
           magicPath = path;
         }
       });

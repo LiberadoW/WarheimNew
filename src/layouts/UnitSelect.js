@@ -1,80 +1,27 @@
 import React from "react";
-import { getUnitNumbers } from "../Functions/getUnitNumbers";
 import "../styles/UnitSelect.css";
-import { uuidv4 } from "@firebase/util";
+import { createUnit } from "../Functions/createUnit";
+import { getUnitAvailability } from "../Functions/getUnitAvailability";
 
-const cloneStats = (statsObject) =>
-  Object.fromEntries(
-    Object.entries(statsObject || {}).map(([key, value]) => [
-      key,
-      Array.isArray(value) ? [...value] : value,
-    ])
-  );
+const UnitSelect = ({ army, setUnitName, unitName, unitList, setUnitList }) => {
+  const heroes = army?.heroes || {};
 
-const UnitSelect = ({
-  heroes,
-  setUnitName,
-  unitName,
-  unitList,
-  setUnitList,
-}) => {
   const handleOnChange = (e) => {
     setUnitName(e.target.value);
   };
 
-  const unitNameArr = [];
-  unitList.forEach((item) => {
-    if (item != null) {
-      unitNameArr.push(item.unitName);
-    }
-  });
-
-  const unitNumbers = getUnitNumbers(unitList);
+  const availability = getUnitAvailability(army, unitList);
 
   const handleClick = () => {
     if (unitName === "") {
       alert("Wybierz jednostkę");
+    } else if (!availability[unitName]?.isAvailable) {
+      alert("Osiągnąłeś limit dla tej jednostki");
     } else {
-      if (heroes[unitName].retired || heroes[unitName].number <= unitNumbers[unitName]) {
-        alert("Osiągnąłeś limit dla tej jednostki");
-      } else {
-        setUnitList((oldUnitList) => [
-          ...oldUnitList,
-          {
-            unitName: unitName,
-            unitDisplayName: "",
-            id: heroes[unitName].id,
-            optionalEquipment: [],
-            cost: heroes[unitName].cost,
-            totalCost: heroes[unitName].cost,
-            startingEquipment: [...(heroes[unitName].startingEquipment || [])],
-            equipmentList: Object.fromEntries(
-              Object.entries(heroes[unitName].equipmentList || {}).map(([name, values]) => [name, [...values]])
-            ),
-            stats: cloneStats(heroes[unitName].stats),
-            statsModifiers: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            baseRules: Array.isArray(heroes[unitName].rules)
-              ? [...heroes[unitName].rules]
-              : [],
-            rules: Array.isArray(heroes[unitName].rules)
-              ? [...heroes[unitName].rules]
-              : [],
-            customEquipment: [],
-            exp: heroes[unitName].exp ? heroes[unitName].exp : 0,
-            skills: Array.isArray(heroes[unitName].skills)
-              ? [...heroes[unitName].skills]
-              : [],
-            type: heroes[unitName].type,
-            number: heroes[unitName].number,
-            selectedNumber:
-              unitName === "Duże Dźgacze" ||
-              unitName === "Drużyna ciężkich broni"
-                ? 2
-                : 1,
-            uniqueId: uuidv4(),
-          },
-        ]);
-      }
+      setUnitList((oldUnitList) => [
+        ...oldUnitList,
+        createUnit(heroes, unitName),
+      ]);
     }
   };
 
@@ -92,13 +39,9 @@ const UnitSelect = ({
     }
   });
 
-  const groupedHeroes = groups.filter(
-    (value) => Object.keys(value).length !== 0
-  );
-
   return (
-    <div className="unit-select-container">
-      <span className="bold">Postać:</span>
+    <div className="unit-select-container header-field">
+      <span className="header-field-label">Postać</span>
       <p>
         <select
           name=""
@@ -109,25 +52,18 @@ const UnitSelect = ({
           <option value="" disabled>
             Wybierz postać
           </option>
-          {groupedHeroes.map((item, index) => {
+          {groups.map((group, index) => {
+            if (Object.keys(group).length === 0) {
+              return null;
+            }
             return (
-              <optgroup label={labels[index]} key={index}>
-                {Object.entries(groupedHeroes[index]).map(([key, value]) => {
+              <optgroup label={labels[index]} key={labels[index]}>
+                {Object.entries(group).map(([key, value]) => {
                   return (
                     <option
                       key={key}
                       value={key}
-                      disabled={
-                        unitNameArr.filter((x) => x == key).length >=
-                          heroes[key].number ||
-                        (key === "Duże Dźgacze" &&
-                          unitNameArr.filter((x) => x === "Duże Dźgacze")
-                            .length === 1) ||
-                        (key === "Drużyna ciężkich broni" &&
-                          unitNameArr.filter(
-                            (x) => x === "Drużyna ciężkich broni"
-                          ).length === 1)
-                      }
+                      disabled={!availability[key]?.isAvailable}
                     >
                       {`${key} (${value.cost} zk) `}
                     </option>

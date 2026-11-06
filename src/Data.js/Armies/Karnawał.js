@@ -17,6 +17,7 @@ export const karnawałChaosu = {
         "Czarnoksięstwo",
         "Dowódca",
         "Mag (Dziedzina Chaosu)",
+        "Strachliwy",
         "Stygmat Chaosu",
       ],
       exp: 20,

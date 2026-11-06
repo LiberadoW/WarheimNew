@@ -29,7 +29,7 @@ export const arabia = {
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
       rules: [
-        "Mag(Tradycja Metalu albo Magia Żywiołów)",
+        "Mag (Tradycja Metalu albo Magia Żywiołów)",
         "Przepastne trzewia",
         "Żyłka handlowa",
       ],

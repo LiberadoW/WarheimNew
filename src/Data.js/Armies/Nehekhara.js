@@ -215,7 +215,7 @@ export const nehekhara = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Ścierwowóz: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
+        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
         "Nieumarły koń": [8, 2, 0, 3, "-", "-", 2, 1, 4],
         "Nieumarły koń  ": [8, 2, 0, 3, "-", "-", 2, 1, 4],
       },

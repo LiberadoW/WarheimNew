@@ -165,7 +165,7 @@ export const army = {
         "Początkowa": [4,3,3,4,4,1,3,1,10],
         "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
-      "rules": ["Fanatyk","Furia"]
+      "rules": ["Fanatyk","Furia","Męczennik"]
     },
     "Gwardzista": {
       "id": 6,
@@ -242,7 +242,7 @@ export const army = {
         "Początkowa": [7,4,0,5,4,3,4,2,7],
         "Maksymalna": [7,4,0,5,4,3,4,2,7]
       },
-      "rules": ["Głód krwi","Krzepki","Potwór","Ugryzienie","Wierzchowiec","Zwierzę"]
+      "rules": ["Dzikie squigi","Głód krwi","Krzepki","Potwór","Ugryzienie","Wierzchowiec","Zwierzę"]
     },
     "Bitewny ołtarz": {
       "id": 9,
@@ -455,7 +455,7 @@ export const army = {
         "Początkowa": [4,3,3,3,3,1,3,1,8],
         "Maksymalna": [5,6,6,4,4,3,6,4,9]
       },
-      "rules": ["Czarostwo","Duchowny (modlitwy do Sigmara)","Modlitwa","Nienawiść","Przepastne trzewia","Rozproszenie magii (2)"],
+      "rules": ["Czarostwo","Duchowny (modlitwy do Sigmara)","Modlitwa","Nienawiść","Rozproszenie magii (2)"],
       "exp": 12,
       "skills": [0,2,3,5]
     }
