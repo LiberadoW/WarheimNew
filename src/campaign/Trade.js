@@ -1,3 +1,4 @@
+import useRollDraft from "./useRollDraft";
 import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import { companyLevel } from "./company";
@@ -30,7 +31,7 @@ export function AvailabilityPool({ post, update }) {
   const heroes = eligibleHeroes(post.units).filter(
     (u) => !hasRule(u, "Anoreksja"),
   );
-  const [reroll, setReroll] = useState([]),
+  const [reroll, setReroll] = useRollDraft(post, update, "availability-reroll"),
     [selected, setSelected] = useState("");
   return (
     <section>
@@ -248,11 +249,12 @@ export function AvailabilityPool({ post, update }) {
   );
 }
 function CatalogItem({ item, unit, post, update, armyName, toInventory }) {
-  const [dice, setDice] = useState([]);
-  const [token, setToken] = useState("");
-  const [discountRoll, setDiscountRoll] = useState([]);
-  const discounts = discountDice(post, item);
   const key = `${item.id}:${toInventory ? "inventory" : unit?.uniqueId}`;
+  const attempt = post.quotes[key]?.id || "first";
+  const [dice, setDice] = useRollDraft(post, update, `price:${key}:${attempt}`);
+  const [token, setToken] = useState("");
+  const [discountRoll, setDiscountRoll] = useRollDraft(post, update, `discount:${key}:${attempt}`);
+  const discounts = discountDice(post, item);
   const quote = post.quotes[key];
   const count = priceDiceCount(item.price);
   const reason = toInventory
@@ -386,7 +388,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory }) {
   );
 }
 export default function Trade({ post, update, army }) {
-  const [theftDice, setTheftDice] = useState([]);
+  const [theftDice, setTheftDice] = useRollDraft(post, update, "strigos-theft");
   const [unitId, setUnitId] = useState(
     post.units.find((u) => !u.campaignModelStatus?.every((s) => s.dead))
       ?.uniqueId || "",

@@ -74,7 +74,7 @@ export default function Exploration({
             min="0"
             max="12"
             disabled={
-              post.explorationApplied || e.locked || !e.modifierReason?.trim()
+              post.explorationApplied || e.locked || R.validDice(e.dice, diceCount) || !e.modifierReason?.trim()
             }
             value={diceCount}
             onChange={(ev) =>

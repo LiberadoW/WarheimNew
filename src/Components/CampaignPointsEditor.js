@@ -1,3 +1,4 @@
+import NumberInput from "../campaign/NumberInput";
 import React, { useState } from "react";
 import {
   CAMPAIGN_POINT_FIELDS,
@@ -80,7 +81,7 @@ const CampaignPointsEditor = ({ army, campaignNotes, setCampaignNotes }) => {
           {CAMPAIGN_POINT_FIELDS.map((field) => (
             <label className="campaign-points-editor-field" key={field.key}>
               <span>{field.label}</span>
-              <input
+              <NumberInput
                 type="number"
                 min="0"
                 max="40"

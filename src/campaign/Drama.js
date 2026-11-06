@@ -1,3 +1,4 @@
+import useRollDraft from "./useRollDraft";
 import React, { useState } from "react";
 import * as R from "./rules";
 import DiceInput from "./DiceInput";
@@ -13,7 +14,7 @@ import {
   settleDrama,
 } from "./drama-rules";
 export default function Drama({ post, update, army }) {
-  const [dice, setDice] = useState([]),
+  const [dice, setDice] = useRollDraft(post, update, "drama-search"),
     [name, setName] = useState(""),
     [confirmed, setConfirmed] = useState(false),
     [note, setNote] = useState("");

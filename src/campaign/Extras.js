@@ -1,3 +1,4 @@
+import useRollDraft from "./useRollDraft";
 import NumberInput from "./NumberInput";
 import React, { useState } from "react";
 import { livingCount } from "./effects";
@@ -9,15 +10,16 @@ import { modelCount, hasRule, log, validDice, sum, label } from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
 
 export function RollNotebook({ post, update }) {
-  const [dice, setDice] = useState([]),
-    [count, setCount] = useState(1),
-    [reason, setReason] = useState("");
+  const [dice, setDice] = useRollDraft(post, update, "notebook-dice", []),
+    [count, setCount] = useRollDraft(post, update, "notebook-count", 1),
+    [reason, setReason] = useRollDraft(post, update, "notebook-reason", "");
   return (
     <details className="campaign-card">
       <summary>Dodatkowy test / rzut z opisu zasady</summary>
       <label>
         Cel rzutu
         <input
+          disabled={validDice(dice, count)}
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           placeholder="Np. test WT w studni, K3 = K6/2 w górę"
@@ -29,6 +31,7 @@ export function RollNotebook({ post, update }) {
           type="number"
           min="1"
           max="12"
+          disabled={validDice(dice, count)}
           value={count}
           onChange={(e) => {
             setCount(Math.max(1, Math.min(12, Number(e.target.value))));
@@ -41,6 +44,7 @@ export function RollNotebook({ post, update }) {
         count={count}
         value={dice}
         onChange={setDice}
+        disabled={!reason.trim()}
       />
       <button
         className="button"
@@ -195,7 +199,7 @@ export const wageUnits = (post) =>
   );
 export function Wages({ post, update }) {
   const mercs = wageUnits(post);
-  const [banDice, setBanDice] = useState({});
+  const [banDice, setBanDice] = useRollDraft(post, update, "wage-refusal", {});
   return (
     <>
       <h3>Żołd Najemnych Ostrzy</h3>

@@ -201,3 +201,56 @@
 .campaign button {
   max-width: 100%;
 }
+
+/* Campaign controls must remain readable and usable with a thumb. */
+.campaign { overflow-wrap: break-word; scroll-margin-top: 12px; }
+.campaign:focus { outline: none; }
+.campaign *, .campaign *::before, .campaign *::after { box-sizing: border-box; }
+.campaign input:not([type="checkbox"]), .campaign select, .campaign textarea {
+  font: inherit;
+  min-height: 44px;
+  width: 100%;
+}
+.campaign label { font-size: .9rem; line-height: 1.45; }
+.campaign label + label, .campaign details[open] > label { margin-top: 12px; }
+.campaign button { min-height: 44px; padding: 10px 14px; line-height: 1.35; }
+.campaign .button { margin-top: 10px; margin-right: 8px; }
+.campaign .campaign-row > .button { margin-top: 0; }
+.campaign summary { line-height: 1.45; }
+.campaign details[open] > summary { margin-bottom: 14px; }
+.campaign .campaign-dice input { width: 56px; }
+.campaign-dice output { font-weight: 600; }
+.campaign .campaign-mobile-nav { display: none; }
+.campaign-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 16px 0; }
+.campaign-stat { padding: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; text-align: center; }
+.campaign-stat > span { display: block; font-weight: 600; margin-bottom: 8px; }
+.campaign-stat > div { display: flex; justify-content: center; gap: 8px; }
+.campaign-stat button { width: 44px; padding: 0; font-size: 1.2rem; border: 1px solid var(--border); border-radius: 5px; color: var(--text); background: var(--surface-2); }
+.campaign-experience input { width: 80px; }
+@media (max-width: 600px) {
+  .campaign { width: 100%; margin: 12px 0; padding: 14px; border-radius: 8px; }
+  .campaign .campaign-mobile-nav { display: flex; margin: 16px 0; }
+  .campaign-nav { display: none; }
+  .campaign-card { padding: 12px; }
+  .campaign .button { width: 100%; margin-right: 0; }
+  .campaign-row > * { min-width: 0; }
+  .campaign-footer { display: flex; flex-direction: column-reverse; gap: 8px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .campaign-footer .button { margin: 0; }
+  .campaign-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .campaign-stat { padding: 8px 4px; }
+  .campaign-stat > div { gap: 4px; }
+  .campaign-stat button { width: 40px; }
+  .campaign .campaign-experience { display: block; overflow: visible; border: 0; }
+  .campaign-experience thead { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); }
+  .campaign-experience tbody { display: grid; gap: 12px; }
+  .campaign-experience tr { display: grid; border: 1px solid var(--border); border-radius: 8px; padding: 12px; background: var(--surface-2); }
+  .campaign-experience td { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border: 0; }
+  .campaign-experience td:first-child { font-weight: 700; font-size: 1rem; padding-top: 0; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+  .campaign-experience td:not(:first-child)::before { content: attr(data-label); color: var(--text-muted); }
+  .campaign .campaign-experience input { width: 88px; }
+}
+
+.campaign-grid > label { margin-top: 0; }
+@media (max-width: 380px) {
+  .campaign-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

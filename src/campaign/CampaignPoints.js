@@ -47,7 +47,7 @@ function CampaignPoints({ battle, post, update, notes }) {
       <div className="campaign-grid">
         {Object.keys(suggested).map((k) => (
           <label key={k}>
-            {k}: było {Number(notes[k]) || 0}
+            {{ determinacja: "Determinacja", gniew: "Gniew", odpornosc: "Odporność" }[k]} · było {Number(notes[k]) || 0}
             <NumberInput
               type="number"
               min="0"

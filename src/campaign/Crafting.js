@@ -1,3 +1,4 @@
+import useRollDraft from "./useRollDraft";
 import React, { useState } from "react";
 import * as R from "./rules";
 import DiceInput from "./DiceInput";
@@ -46,16 +47,16 @@ export function CraftReservations({ post, update }) {
   );
 }
 export default function Crafting({ post, update }) {
-  const [crafter, setCrafter] = useState(""),
-    [recipeId, setRecipe] = useState(""),
-    [targetId, setTarget] = useState(""),
-    [priceDice, setPriceDice] = useState([]),
+  const [crafter, setCrafter] = useRollDraft(post, update, "craft-crafter", ""),
+    [recipeId, setRecipe] = useRollDraft(post, update, "craft-recipeId", ""),
+    [targetId, setTarget] = useRollDraft(post, update, "craft-targetId", ""),
+    [priceDice, setPriceDice] = useRollDraft(post, update, "craft-priceDice"),
     [token, setToken] = useState(""),
-    [dice, setDice] = useState([]),
-    [failure, setFailure] = useState([]),
-    [strength, setStrength] = useState([]),
-    [outcome, setOutcome] = useState(""),
-    [injuryDice, setInjury] = useState([]),
+    [dice, setDice] = useRollDraft(post, update, "craft-dice"),
+    [failure, setFailure] = useRollDraft(post, update, "craft-failure"),
+    [strength, setStrength] = useRollDraft(post, update, "craft-strength"),
+    [outcome, setOutcome] = useRollDraft(post, update, "craft-outcome", ""),
+    [injuryDice, setInjury] = useRollDraft(post, update, "craft-injuryDice"),
     [detail, setDetail] = useState({});
   const workers = craftsmen(post).filter(
     (u) => post.craftReservations?.[u.uniqueId],
@@ -86,6 +87,7 @@ export default function Crafting({ post, update }) {
           <label>
             Rzemieślnik
             <select
+              disabled={priceDice.length > 0}
               value={crafter}
               onChange={(e) => {
                 setCrafter(e.target.value);
@@ -104,6 +106,7 @@ export default function Crafting({ post, update }) {
           <label>
             Receptura
             <select
+              disabled={priceDice.length > 0}
               value={recipeId}
               onChange={(e) => {
                 setRecipe(e.target.value);
@@ -268,6 +271,7 @@ export default function Crafting({ post, update }) {
                 ),
               );
               setDice([]);
+              setPriceDice([]);
               setFailure([]);
               setStrength([]);
               setOutcome("");

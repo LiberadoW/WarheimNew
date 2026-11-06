@@ -117,7 +117,10 @@ const formatCustomEquipmentEntry = (entry) => {
 const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   const [menu, setMenu] = useState("Bitwa");
   const [description, setDescription] = useState(null);
-  const [pactDice, setPactDice] = useState([]);
+  const pactDraftKey = `${campaign?.activeBattle?.id || ""}:${unitList.reduce((n, u) => n + (u.battlePacts || 0), 0)}`;
+  const pactDice = unit.battlePactDraft?.key === pactDraftKey ? unit.battlePactDraft.dice : [];
+  const setPactDice = (dice) => setUnitList(unitList.map((u) => u.uniqueId === unit.uniqueId
+    ? { ...u, battlePactDraft: { key: pactDraftKey, dice } } : u));
   const pactCount = unitList.reduce((n, u) => n + (u.battlePacts || 0), 0);
   const battleActive = !!campaign?.activeBattle && !campaign.activeBattle.post;
 
@@ -492,7 +495,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
             onClick={() => {
               darkPact(unitList, unit.uniqueId, pactDice);
               setUnitList([...unitList]);
-              setPactDice([]);
+              // The next pact has a new draft key; preserve the recorded cost.
             }}
           >
             Zapisz użycie Mrocznego Paktu
