@@ -1,4 +1,12 @@
+import { SanityTasks, Mutations } from "./SanityPanel";
+import { sanityTasks } from "./sanity";
+import Crafting from "./Crafting";
+import Drama from "./Drama";
+import { dramaWageUnits } from "./drama-rules";
 import Inventory from "./Inventory";
+import { companyChoices } from "./company";
+import PreBattle, { oldWoundUnits } from "./PreBattle";
+import ImmortalRecruits from "./ImmortalRecruits";
 import Recruitment from "./Recruitment";
 import CampaignPoints from "./CampaignPoints";
 import LootSale from "./LootSale";
@@ -7,7 +15,6 @@ import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
 import React, { useState } from "react";
-import DiceInput from "./DiceInput";
 import Reference from "./Reference";
 import Trade from "./Trade";
 import {
@@ -15,6 +22,8 @@ import {
   EconomyAdjustment,
   ExperiencedRecruits,
   Wages,
+  wageUnits,
+  RecruitBudget,
 } from "./Extras";
 import * as R from "./rules";
 import "./Campaign.css";
@@ -93,8 +102,14 @@ export default function CampaignManager({
         return;
       }
       if (battle.stage === 0) {
+        if (
+          oldWoundUnits(unitList).some((u) => !battle.preBattle?.[u.uniqueId])
+        )
+          throw Error(
+            "Rozstrzygnij testy starych wojennych ran przed potyczką.",
+          );
         if (!battle.gameName.trim()) throw Error("Wpisz nazwę potyczki.");
-        setBattle(R.beginPostBattle(battle, unitList, campaignNotes));
+        setBattle(R.beginPostBattle(battle, unitList, campaignNotes, army));
         return;
       }
       if (
@@ -104,13 +119,36 @@ export default function CampaignManager({
         throw Error("Rozstrzygnij obrażenia wszystkich modeli WzA.");
       if (
         battle.stage === 2 &&
-        (!post.expApplied || post.advances.some((a) => !a.resolved))
+        (!post.expApplied ||
+          post.advances.some((a) => !a.resolved) ||
+          sanityTasks(post).length)
       )
         throw Error("Nalicz PD i rozstrzygnij wszystkie awanse.");
-      if (battle.stage === 3 && !post.campaignPointsApplied)
+      if (
+        battle.stage === 3 &&
+        (!post.campaignPointsApplied ||
+          companyChoices(post, campaignNotes).some((c) => !c.selected))
+      )
         throw Error("Zatwierdź punkty kampanii.");
-      if (battle.stage === 4 && !post.explorationApplied)
+      if (
+        battle.stage === 4 &&
+        (!post.explorationApplied || post.advances.some((a) => !a.resolved))
+      )
         throw Error("Zatwierdź eksplorację.");
+      if (battle.stage === 7 && post.effects?.strigosTheftPending)
+        throw Error("Zakończ handel z taborytami i rozstrzygnij kradzież.");
+      if (
+        battle.stage === 8 &&
+        dramaWageUnits(post).some((u) => !post.dramaWages?.[u.uniqueId])
+      )
+        throw Error("Rozlicz żołd Postaci Dramatu.");
+      if (battle.stage === 9 && post.craftQuote && !post.craftQuote.used)
+        throw Error("Rozstrzygnij rozpoczętą próbę rzemiosła.");
+      if (
+        battle.stage === 9 &&
+        wageUnits(post).some((u) => !post.wages?.[u.uniqueId])
+      )
+        throw Error("Wypłać żołd albo odpraw Najemne Ostrza.");
       if (battle.stage === 5 && !post.lootSold)
         throw Error("Zatwierdź sprzedaż lub pozostawienie łupów.");
       setBattle({ ...battle, stage: Math.min(11, battle.stage + 1) });
@@ -123,6 +161,8 @@ export default function CampaignManager({
     setSaving(true);
     setError("");
     try {
+      if (sanityTasks(post).length)
+        throw Error("Rozstrzygnij choroby psychiczne z nowych progów Obłędu.");
       const result = R.finalizePostBattle(battle, campaignNotes);
       await onFinish(result);
       setUnitList(result.units);
@@ -159,11 +199,18 @@ export default function CampaignManager({
             <div className="campaign-row">
               {Object.keys(campaign.settings).map((key) => (
                 <React.Fragment key={key}>
-                  {checkLabel(key, campaign.settings[key], (value) =>
-                    setCampaign({
-                      ...campaign,
-                      settings: { ...campaign.settings, [key]: value },
-                    }),
+                  {checkLabel(
+                    {
+                      obled: "Obłęd i Mroczne Pakty",
+                      choroby: "Choroby psychiczne",
+                      mutacje: "Stygmaty Chaosu",
+                    }[key] || key,
+                    campaign.settings[key],
+                    (value) =>
+                      setCampaign({
+                        ...campaign,
+                        settings: { ...campaign.settings, [key]: value },
+                      }),
                   )}
                 </React.Fragment>
               ))}
@@ -178,6 +225,7 @@ export default function CampaignManager({
                 battleExp: 0,
                 battleKills: 0,
                 battleObled: 0,
+                battlePacts: 0,
                 battleOutOfActionModels: Array.from(
                   { length: R.modelCount(u) },
                   () => false,
@@ -224,6 +272,31 @@ export default function CampaignManager({
           </nav>
           {phase === 0 ? (
             <>
+              <PreBattle
+                units={unitList}
+                setUnits={setUnitList}
+                battle={battle}
+                setBattle={setBattle}
+              />
+              {(campaign.futureEffects || [])
+                .filter((e) => !e.area || e.area === battle.area)
+                .map((e) => (
+                  <p className="campaign-card" key={e.id || e.key}>
+                    Efekt wcześniejszej potyczki: {e.label}
+                  </p>
+                ))}
+              {!!campaign.companyAdvancements?.length && (
+                <details>
+                  <summary>
+                    Zasady kompanii do przygotowania i rozegrania potyczki
+                  </summary>
+                  {campaign.companyAdvancements.map((e) => (
+                    <p key={e.id}>
+                      <strong>{e.name}</strong>: {e.text}
+                    </p>
+                  ))}
+                </details>
+              )}
               <div className="campaign-grid">
                 <label>
                   Nazwa potyczki
@@ -443,7 +516,12 @@ export default function CampaignManager({
                 />
               )}
               {phase === 4 && (
-                <Exploration battle={battle} post={post} update={update} />
+                <Exploration
+                  battle={battle}
+                  post={post}
+                  update={update}
+                  army={army}
+                />
               )}
               {phase === 5 && (
                 <LootSale
@@ -453,57 +531,16 @@ export default function CampaignManager({
                   setBattle={setBattle}
                 />
               )}
+              {phase === 6 && <RecruitBudget post={post} update={update} />}
               {phase === 6 && (
-                <>
-                  <p>
-                    Rzut 2K6 określa pulę PD dostępnych do rekrutacji
-                    doświadczonych stronników. Każdy rekrut dodatkowo kosztuje 2
-                    zk za każdy PD; nowa niedoświadczona grupa nie wymaga tego
-                    rzutu.
-                  </p>
-                  <DiceInput
-                    label="Dostępne PD rekrutów"
-                    count={2}
-                    disabled={post.recruitBudgetLocked}
-                    value={post.recruitDice || []}
-                    onChange={(dice) =>
-                      update((p) => {
-                        p.recruitDice = dice;
-                      })
-                    }
-                  />
-                  <button
-                    className="button"
-                    disabled={
-                      post.recruitBudgetLocked ||
-                      !R.validDice(post.recruitDice, 2)
-                    }
-                    onClick={() =>
-                      update((p) => {
-                        p.recruitBudget = R.sum(p.recruitDice);
-                        p.recruitBudgetLocked = true;
-                        R.log(
-                          p,
-                          "recruit-budget",
-                          `Dostępne PD: ${p.recruitBudget}`,
-                        );
-                      })
-                    }
-                  >
-                    Zatwierdź pulę PD
-                  </button>
-                </>
-              )}
-              {phase === 6 && (
-                <ExperiencedRecruits post={post} update={update} />
+                <ExperiencedRecruits post={post} update={update} army={army} />
               )}
               {phase === 7 && <Trade post={post} update={update} army={army} />}
-              {phase === 8 && (
-                <p>
-                  Rozstrzygnij rekrutację i żołd Postaci Dramatu zgodnie z ich
-                  opisem. Wydatki i wyniki zapisz w rozliczeniu poniżej.
-                </p>
+              {phase === 8 && <Drama post={post} update={update} army={army} />}
+              {phase === 9 && (
+                <ImmortalRecruits post={post} update={update} army={army} />
               )}
+              {phase === 9 && <Crafting post={post} update={update} />}
               {phase === 9 && <Wages post={post} update={update} />}
               {phase === 9 && (
                 <Recruitment post={post} update={update} army={army} />
@@ -526,11 +563,28 @@ export default function CampaignManager({
                   </p>
                 </>
               )}
+              {phase > 4 &&
+                post.advances
+                  .filter((a) => !a.resolved)
+                  .map((a) => (
+                    <AdvanceCard
+                      key={a.id}
+                      advance={a}
+                      unit={post.units.find((u) => u.uniqueId === a.unitId)}
+                      army={army}
+                      post={post}
+                      update={update}
+                    />
+                  ))}
+              {post.expApplied && <SanityTasks post={post} update={update} />}
               {phase !== 11 && (
                 <>
                   <RollNotebook post={post} update={update} />
                   <EconomyAdjustment post={post} update={update} />
                   <UnitAdjustments post={post} update={update} />
+                  {campaign.settings.mutacje && (
+                    <Mutations post={post} update={update} />
+                  )}
                 </>
               )}
               {PAGES[phase] && <Reference pages={PAGES[phase]} />}

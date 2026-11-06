@@ -1,59 +1,117 @@
 import React, { useState } from "react";
+import { companyLevel } from "./company";
 import * as R from "./rules";
-import { createUnit } from "../Functions/createUnit";
-import { getUnitAvailability } from "../Functions/getUnitAvailability";
-
-function Recruitment({ post, update, army }) {
-  const [name, setName] = useState("");
-  const [availability, setAvailability] = useState(0);
-  const [token, setToken] = useState("");
-  const unit = army.heroes?.[name];
-  const units = post.units.filter(
-    (u) => !u.campaignModelStatus?.every((s) => s.dead),
-  );
-  const state = name ? getUnitAvailability(army, units)[name] : null;
-  const rosterAtLimit =
-    units.reduce((n, u) => n + R.modelCount(u), 0) >=
-    (army.maxModels || Infinity);
-  const heroAtLimit =
-    unit?.type === "Bohater" && units.filter(R.isHero).length >= 6;
+import { mercenariesList } from "../Data.js/Mercenaries";
+import { recruit, recruitAvailability, recruitmentProblem } from "./recruiting";
+export default function Recruitment({ post, update, army }) {
+  const [companyFree, setCompanyFree] = useState(false);
+  const [name, setName] = useState(""),
+    [mercenary, setMercenary] = useState(false),
+    [manual, setManual] = useState(0),
+    [reason, setReason] = useState(""),
+    [token, setToken] = useState("");
+  const definitions = mercenary
+    ? Object.fromEntries(
+        (army.mercenaries || [])
+          .filter((n) => mercenariesList[n])
+          .map((n) => [n, mercenariesList[n]]),
+      )
+    : army.heroes || {};
+  const definition = definitions[name],
+    imported =
+      companyFree && mercenary ? 0 : recruitAvailability(army, name, mercenary),
+    availability = imported ?? manual;
+  const problem = name ? recruitmentProblem(post, army, name, mercenary) : null;
   return (
     <>
       <p>
         Nowi rekruci mogą otrzymać ekwipunek powszechny. Przedmioty rzadkie
-        dopiero po następnej potyczce, chyba że są już w skarbcu.
+        dopiero po następnej potyczce, chyba że są już w skarbcu. Najemne Ostrza
+        korzystają z własnego ekwipunku.
       </p>
+      <label className="campaign-check">
+        <input
+          type="checkbox"
+          checked={mercenary}
+          onChange={(e) => {
+            setMercenary(e.target.checked);
+            setCompanyFree(false);
+            setName("");
+            setToken("");
+          }}
+        />
+        Najemne Ostrza dostępne dla kompanii
+      </label>
+      {mercenary && companyLevel(post, "Kompania najemników") > 0 && (
+        <label className="campaign-check">
+          <input
+            type="checkbox"
+            checked={companyFree}
+            disabled={post.companyMercRecruited}
+            onChange={(e) => setCompanyFree(e.target.checked)}
+          />
+          Kompania najemników: jeden rekrut bez kosztu i testu dostępności
+        </label>
+      )}
       <label>
         Nowy rekrut
-        <select value={name} onChange={(e) => setName(e.target.value)}>
+        <select
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            setToken("");
+            setReason("");
+          }}
+        >
           <option value="">Wybierz</option>
-          {Object.keys(army.heroes || {}).map((n) => (
+          {Object.keys(definitions).map((n) => (
             <option key={n}>{n}</option>
           ))}
         </select>
       </label>
-      {unit && (
+      {definition && (
         <>
           <p>
-            Koszt: {unit.cost} zk ·{" "}
-            {(state?.blockedBy
-              ? `Blokuje: ${state.blockedBy}`
-              : state?.isAtLimit
-                ? "Osiągnięto limit"
-                : "") || ""}
+            Koszt:{" "}
+            {companyFree
+              ? 0
+              : definition.cost *
+                R.modelCount({
+                  selectedNumber: [
+                    "Duże Dźgacze",
+                    "Drużyna ciężkich broni",
+                  ].includes(name)
+                    ? 2
+                    : 1,
+                })}{" "}
+            zk{mercenary ? ` · żołd: ${definition.pay} zk` : ""} · Dostępność:{" "}
+            {imported === null
+              ? "brak rozpoznanego profilu"
+              : availability || "powszechna"}
           </p>
-          <label>
-            Dostępność z opisu rekruta (0 = powszechna)
-            <input
-              type="number"
-              min="0"
-              max="20"
-              value={availability}
-              onChange={(e) =>
-                setAvailability(Math.max(0, Number(e.target.value)))
-              }
-            />
-          </label>
+          {problem && <p>{problem}</p>}
+          {imported === null && (
+            <>
+              <label>
+                Dostępność z opisu rekruta (0 = powszechna)
+                <input
+                  type="number"
+                  min="0"
+                  value={manual}
+                  onChange={(e) =>
+                    setManual(Math.max(0, Math.trunc(Number(e.target.value))))
+                  }
+                />
+              </label>
+              <label>
+                Źródło / zasada dostępności
+                <input
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                />
+              </label>
+            </>
+          )}
           {availability > 0 && (
             <label>
               Wynik puli dostępności
@@ -72,32 +130,21 @@ function Recruitment({ post, update, army }) {
           <button
             className="button"
             disabled={
-              rosterAtLimit ||
-              heroAtLimit ||
-              post.treasury < unit.cost ||
-              !state?.isAvailable ||
-              (availability > 0 && !token)
+              !!problem ||
+              (!companyFree && post.treasury < definition.cost) ||
+              (availability > 0 && !token) ||
+              (imported === null && !reason.trim())
             }
             onClick={() =>
-              update((p) => {
-                if (availability > 0) {
-                  const t = p.availability.find((x) => x.id === token);
-                  if (!t || t.used || t.total < availability)
-                    throw Error("Brak dostępności.");
-                  t.used = true;
-                }
-                const u = createUnit(army.heroes, name);
-                if (p.treasury < unit.cost * R.modelCount(u))
-                  throw Error("Za mało złota na pełną drużynę.");
-                u.campaignNewRecruit = true;
-                p.units.push(u);
-                p.treasury -= unit.cost * R.modelCount(u);
-                R.log(
-                  p,
-                  "recruitment",
-                  `${name}: ${unit.cost} zk, dostępność ${availability || "powszechna"}.`,
-                );
-              })
+              update((p) =>
+                recruit(p, army, name, {
+                  mercenary,
+                  companyFree: mercenary && companyFree,
+                  availability,
+                  tokenId: token,
+                  sourceReason: reason,
+                }),
+              )
             }
           >
             Zrekrutuj
@@ -107,5 +154,3 @@ function Recruitment({ post, update, army }) {
     </>
   );
 }
-
-export default Recruitment;

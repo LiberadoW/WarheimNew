@@ -21,6 +21,10 @@ function Inventory({ post, update, army }) {
         </select>
       </label>
       <h3>Skarbiec ekwipunku</h3>
+      <label>
+        Powód zużycia / utraty przedmiotu
+        <input value={reason} onChange={(e) => setReason(e.target.value)} />
+      </label>
       {post.inventory.length ? (
         post.inventory.map((item) => {
           const definition = R.catalog.find((x) => x.id === item.catalogId);
@@ -37,6 +41,26 @@ function Inventory({ post, update, army }) {
                 {item.name} ×{item.quantity}
               </strong>
               <p>{permission}</p>
+              <button
+                className="button button-secondary"
+                disabled={!reason.trim()}
+                onClick={() =>
+                  update((p) => {
+                    const stored = p.inventory.find((i) => i.id === item.id);
+                    if (!stored || stored.quantity < 1)
+                      throw Error("Brak przedmiotu.");
+                    stored.quantity--;
+                    p.inventory = p.inventory.filter((i) => i.quantity > 0);
+                    R.log(
+                      p,
+                      "item-use",
+                      `${item.name}: zużyto / utracono jedną sztukę. ${reason}`,
+                    );
+                  })
+                }
+              >
+                Zużyj jedną sztukę
+              </button>
               <button
                 className="button"
                 disabled={

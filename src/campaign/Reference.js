@@ -1,5 +1,6 @@
 import React from "react";
 import reference from "./reference.json";
+import extra from "./extra-reference.json";
 export default function Reference({ pages, title = "Zasady z podręcznika" }) {
   return (
     <details>
@@ -7,7 +8,9 @@ export default function Reference({ pages, title = "Zasady z podręcznika" }) {
       {pages.map((page) => (
         <section key={page}>
           <p className="campaign-source">Podręcznik AD2026.04.15 · s. {page}</p>
-          <div className="campaign-reference">{reference[page]}</div>
+          <div className="campaign-reference">
+            {reference[page] || extra[page]}
+          </div>
         </section>
       ))}
     </details>

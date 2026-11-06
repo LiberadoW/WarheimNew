@@ -91,7 +91,7 @@ export const getPrestige = (arr) => {
         prestigeValues.henchmenTotalExp += item.exp * item.selectedNumber;
       }
 
-      if (item.type !== "Najemne Ostrze") {
+      if (!["Najemne Ostrze", "Postać Dramatu"].includes(item.type)) {
         if (item.type === "Bohater") {
           prestigeValues.heroesTotalExp += item.exp;
         }
@@ -188,7 +188,16 @@ export const getPrestige = (arr) => {
         //   });
         // });
       } else {
-        prestigeValues.mercenariesTotalPrestige += item.prestige;
+        prestigeValues.mercenariesTotalPrestige += Number(item.prestige) || 0;
+        if (item.type === "Postać Dramatu") {
+          prestigeValues.heroesTotalExp += Math.max(
+            0,
+            (Number(item.exp) || 0) - 12,
+          );
+          for (const name of item.optionalEquipment || [])
+            prestigeValues.equipmentTotalValue +=
+              Number(item.equipmentList?.[name]?.[0]) || 0;
+        }
         if (Array.isArray(item.customEquipment)) {
           const modelCount = Number(item.selectedNumber) || 1;
           item.customEquipment.forEach((equipment) => {

@@ -1,4 +1,5 @@
 import React from "react";
+import { companyInjuryModifier } from "./company";
 import * as R from "./rules";
 import DiceInput from "./DiceInput";
 import InjuryResolution from "./InjuryResolution";
@@ -14,7 +15,11 @@ function InjuryCard({ task, post, update }) {
   const kind = R.injuryKind(task.unit);
   const count = kind === "hero" ? 2 : 1;
   const result = R.validDice(draft.dice, count)
-    ? R.injuryResult(task.unit, draft.dice)
+    ? R.injuryResult(
+        task.unit,
+        draft.dice,
+        companyInjuryModifier(post, task.unit),
+      )
     : null;
   const setDraft = (change) =>
     update((p) => {
@@ -44,12 +49,45 @@ function InjuryCard({ task, post, update }) {
               ? "Tabela poważnych ran K66 (pierwsza kość: dziesiątki)."
               : `Tabela K6: ${kind}.`}
           </p>
+          {companyInjuryModifier(post, task.unit) > 0 && (
+            <p>Konsyliarze: +1 do wyniku K6.</p>
+          )}
           <DiceInput
             label="Obrażenia"
             count={count}
             value={draft.dice}
             onChange={(dice, source) => setDraft({ dice, source })}
           />
+          {result &&
+            (post.activeFutureEffects || []).some(
+              (e) => e.key === "injuryRerollAll",
+            ) &&
+            !draft.rerolled && (
+              <>
+                <DiceInput
+                  label="Przerzut obrażeń: pomoc medyka"
+                  count={count}
+                  value={draft.rerollDice || []}
+                  onChange={(dice) => setDraft({ rerollDice: dice })}
+                />
+                <button
+                  className="button"
+                  disabled={!R.validDice(draft.rerollDice, count)}
+                  onClick={() =>
+                    setDraft({
+                      dice: draft.rerollDice,
+                      originalDice: draft.dice,
+                      rerolled: true,
+                      secondary: [],
+                      children: [],
+                      mental: [],
+                    })
+                  }
+                >
+                  Zastosuj przerzut obrażeń
+                </button>
+              </>
+            )}
           {result && (
             <>
               <h3>

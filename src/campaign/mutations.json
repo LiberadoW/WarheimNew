@@ -1,0 +1,962 @@
+[
+  {
+    "god": "Niepodzielony",
+    "min": 11,
+    "max": 12,
+    "name": "Bycza skóra",
+    "text": "Skóra mutanta, naznaczona piętnem Chaosu, staje się niezwykle gruba i twarda. Wartość współczynnika WT modelu zostaje zwiększona o +1 punkt.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 13,
+    "max": 13,
+    "name": "Wywrócony na wierzch",
+    "text": "Na skutek kapryśnej woli Mrocznych Bogów, zazdrosne o promienie słońca trzewia zamieniają się miejscami ze skórą. Proces jest bardzo powolny i bolesny. Model nie może używać pancerza skórzanego/ćwiekowanego lub pancerza kolczego/zbroi łuskowej lub zbroi płytowej lub pancerza z gromrilu lub pancerza z ithilmaru, a wartość współczynnika WT zostaje zmniejszona o -1 punkt.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 14,
+    "max": 15,
+    "name": "Futro",
+    "text": "Ciało mutanta porasta gęsta szczecina. Model otrzymuje kumulatywny modyfikator +1 do Ochrony Pancerza lub otrzymuje Ochronę Pancerza na 6+, jeśli nie posiada pancerza.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 16,
+    "max": 16,
+    "name": "Gwoździogłowy",
+    "text": "Zmiażdżona w splotach Dhar głowa mutanta maleje do niewielkich rozmiarów, a w rezultacie zmniejsza się mózg nieszczęśnika. Model przeprowadzając test oparty na współczynniku CP wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 21,
+    "max": 22,
+    "name": "Przyssawki",
+    "text": "Na skutek stymulacji wywołanych bluźnierczym działaniem Kamienia Przemian ciało mutanta wykształca drobne przyssawki, podobne do tych, jakie można znaleźć na ramionach ośmiornicy. Mutant podlega zasadzie specjalnej MUROŁAZ.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 23,
+    "max": 23,
+    "name": "Kryształowe ciało",
+    "text": "Muśniętym dotykiem Chaosu ciałem mutanta wstrząsa dreszcz rozkoszy, wywołujący falę mutacji. Ciało, krew, kości i ścięgna zmieniają się w żywy kryształ. Nowa forma jest twardsza, lecz jednocześnie bardziej krucha. Wartość współczynnika WT modelu wynosi od tej pory 10 punktów, a ŻW 1 punkt, jest to także nowa maksymalna wartość tych współczynników modelu. Jeśli model zostanie zraniony zostaje automatycznie Wyłączony z akcji! bez konieczności wykonywania rzutu w TABELI EFEKT ZRANIENIA.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 24,
+    "max": 25,
+    "name": "Ogon",
+    "text": "Dotknięte działaniem Upiorytu ciało odmieńca mutuje. Kość ogonowa mutanta wydłuża się i wkrótce przekształca w ogon, który pomaga utrzymywać odmieńcowi równowagę. Model podlega zasadzie specjalnej AKROBATA.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 26,
+    "max": 26,
+    "name": "Myśląca narośl",
+    "text": "Wewnątrz skalanego mutagennym działaniem Upiorytu ciała mutanta zaczyna rosnąć przerażający, inteligentny guz. Narośl posiada własną osobowość i cele, które próbuje zrealizować, starając się przejąć kontrolę nad ciałem. Wartość współczynnika WT modelu zostaje zmniejszona o -1 punkt, zaś ŻW wrasta o +1 punkt. Przed rozpoczęciem każdej rozgrywki należy wykonać test CP modelu. Nieudany test oznacza, że myśląca narośl przejęła władzę nad ciałem i postanowiła zrealizować sobie tylko wiadome cele. Model musi opuścić rozgrywkę.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 31,
+    "max": 32,
+    "name": "Wieloręki",
+    "text": "Skażone mutagennym działaniem Kamienia Przemian ciało mutanta, ku większej chwale Chaosu, wykształca dodatkowe ramię. Jeżeli model podlega zasadzie specjalnej BROŃ NATURALNA lub trzyma w dodatkowym ramieniu BROŃ RĘCZNĄ otrzymuje w fazie walki wręcz dodatkowy +1 ATAK (zobacz zasada specjalna BROŃ RĘCZNA).",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 33,
+    "max": 33,
+    "name": "Plucie kwasem",
+    "text": "Dotknięte działaniem Spaczenia ciało mutanta wykształca gruczoły, produkujące żrący kwas. Model podlega zasadzie specjalnej ŻRĄCA PLWOCINA.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 34,
+    "max": 35,
+    "name": "Wielogłowy",
+    "text": "Natchnione bluźnierczym działaniem Upiorytu ciało mutanta wykształca dodatkową głowę. Model podlega zasadzie specjalnej SZÓSTY ZMYSŁ, automatycznie zdaje testy SAM W WALCE oraz w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 36,
+    "max": 36,
+    "name": "Prymityw",
+    "text": "Degenerując moc Kamienia Przemian wypacza ciało mutanta, upodabniając go do Orka. Ramiona odmieńca wydłużają się, model w czasie marszu przybiera pochyloną postawę, a czoło staje się niskie, zwieńczone wyrazistym grubym łukiem brwiowym. Model podlega zasadzie specjalnej OGRANICZONY.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 41,
+    "max": 42,
+    "name": "Kły jadowe",
+    "text": "Poddane działaniu mutującej mocy Chaosu kły mutanta wydłużają się, a w ich wnętrzu powstają kanały jadowe. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i ZATRUTY ATAK.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 43,
+    "max": 43,
+    "name": "Bezrozumny",
+    "text": "Bluźniercze moce Chaosu miażdżą umysł nieszczęśnika w splotach Dhar. Jaźń mutanta zostaje zdruzgotana, a jego osobowość zniszczona. Mózg nieszczęśnika, strzaskany w splotach plugawej Dhar zostaje zamieniony w kawałek Kamienia Przemian, uniemożliwiając podjęcie jakiejkolwiek bardziej złożonej czynności. Model podlega zasadzie specjalnej GŁUPOTA, NIEZŁOMNY, STAN NIŻSZY, TEMPY.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 44,
+    "max": 45,
+    "name": "Macka",
+    "text": "Na skutek działania bluźnierczych mocy Chaosu z ciała mutanta wyrasta pokryta maleńkimi przyssawkami macka. Model podlega zasadzie specjalnej OPLĄTANIE.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 46,
+    "max": 46,
+    "name": "Niegodziwiec",
+    "text": "Energie Chaosu wypaczają umysł i duszę mutanta, czyniąc go na wskroś złym. Model podlega zasadzie specjalnej NIEZŁOMNY.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 51,
+    "max": 52,
+    "name": "Pazury",
+    "text": "Strzępy plugawej Dhar wnikają w dłonie nieszczęśnika przekształcając paznokcie w długie, zakrzywione i ostre jak brzytwa pazury. Model podlega zasadzie specjalnej BROŃ NATURALNA i WSPINACZKA, nie może używać broni do walki wręcz oraz broni dystansowej, a w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 53,
+    "max": 53,
+    "name": "Atrofia",
+    "text": "Plugawa moc Kamienia Przemian degeneruje ciało mutanta. Jedna z części ciała nieszczęśnika kurczy się i obumiera w zastraszająco szybkim tempie. Należy wykonać rzut K6. Wynik 1-2 oznacza, że model podlega zasadzie specjalnej STYGMAT CHAOSU NIEPODZIELONEGO (gwoździogłowy). Rezultat 3-4 oznacza, że losowo wybrane przedramię zostało amputowane (zobacz RANA RĘKI w TABELI POWAŻNYCH RAN w ROZDZIALE 13: KAMPANIA). Wynik 5-6 oznacza, że losowa wybrana noga została poważnie stłuczona (zobacz RANA NOGI w TABELI POWAŻNYCH RAN w ROZDZIALE 13: KAMPANIA).",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 54,
+    "max": 55,
+    "name": "Chwytny ogon",
+    "text": "Stymulowana mutagennym działaniem Kamienia Przemian kość ogonowa mutanta rozwija się w pełnych rozmiarów ogon. Model podlega zasadzie specjalnej CHWYTNY OGON.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 56,
+    "max": 56,
+    "name": "Przerażający",
+    "text": "Bluźniercza moc Upiorytu przenika ciało nieszczęśnika, a mutujące strzępy Dhar nadają mu przerażający, niemal niemożliwy do opisania wygląd. Mutant przyjmuje formę tak obcą, że samo jedno spojrzenie na jego postać wystarcza by pozbawić śmiertelnika zdrowych zmysłów. Ba! Mutant jest tak potworny, że sam mógłby przypłacić obłędem jedno spojrzenie w lustro. Model wywołuje GROZĘ.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 61,
+    "max": 62,
+    "name": "Rogi",
+    "text": "Mutagenny wpływ Chaosu odciska swe piętno na ciele nieszczęśnika. Poddane działaniu Dhar kości czaszki wykształcają masywne rogi. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i SZYBKI.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 63,
+    "max": 63,
+    "name": "Jednooki",
+    "text": "Splugawiona dotykiem Dhar twarz mutanta zmienia się w masę drgającego mięsa, jednak po chwili odzyskuje dawny wygląd. Niestety jedno z oczu, uwolnione z czaszki, wykorzystuje okazję i na skrzydłach z powiek odlatuje w siną dal. Drugie oko zajmuje pozycję pośrodku czoła, ponad nosem. Wartość współczynnika US modelu zostaje zmniejszona o połowę (zaokrąglając w dół).",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 64,
+    "max": 65,
+    "name": "Kły",
+    "text": "Kły mutanta wydłużają się i stają się ostrzejsze. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i PRECYZYJNE UDERZENIE.",
+    "page": 543
+  },
+  {
+    "god": "Niepodzielony",
+    "min": 66,
+    "max": 66,
+    "name": "Szaleństwo",
+    "text": "Spaczony wpływem Upiorytu umysł mutanta ulega degeneracji. Należy wykonać rzut K66 i odczytać wynik w TABELI CHORÓB PSYCHICZNYCH (zobacz paragraf OBŁĘD w ROZDZIALE 13: KAMPANIA).",
+    "page": 543
+  },
+  {
+    "god": "Khorne",
+    "min": 11,
+    "max": 12,
+    "name": "Bycza skóra",
+    "text": "Skóra mutanta, naznaczona piętnem Chaosu, staje się niezwykle gruba i twarda. Wartość współczynnika WT modelu zostaje zwiększona o +1 punkt.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 13,
+    "max": 13,
+    "name": "Głód krwi",
+    "text": "Plugawa moc Khorna wypacza umysł i duszę mutanta, który zmienia się w okrutną, sadystyczną kreaturę. Model podlega zasadzie specjalnej GŁÓD KRWI.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 14,
+    "max": 15,
+    "name": "Futro",
+    "text": "Ciało mutanta porasta gęsta szczecina. Model otrzymuje kumulatywny modyfikator +1 do Ochrony Pancerza lub otrzymuje Ochronę Pancerza na 6+, jeśli nie posiada pancerza.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 16,
+    "max": 16,
+    "name": "Gwoździogłowy",
+    "text": "Zmiażdżona w splotach Dhar głowa mutanta maleje do niewielkich rozmiarów, a w rezultacie zmniejsza się mózg nieszczęśnika. Model przeprowadzając test oparty na współczynniku CP wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 21,
+    "max": 22,
+    "name": "Kolczasty ogon",
+    "text": "Plugawa moc Dhar wypacza ciało mutanta, które wykształca zakończony kolcami ogon. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i PRZEBICIE PANCERZA.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 23,
+    "max": 23,
+    "name": "Ognista czaszka",
+    "text": "Ciało na głowie potępieńca, zatrute Czarcim Pyłem powoli obumiera, odsłaniając czaszkę gorejącą ogniem Piekielnych Kuźni Khorna. Model podlega zasadzie specjalnej PŁONĄCY ATAK.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 24,
+    "max": 25,
+    "name": "Satyr",
+    "text": "Dotknięte działaniem bluźnierczej mocy Chaosu, dolne kończyny bohatera przekształcają się w masywne nogi kozła. Model podlega zasadzie specjalnej RANGER, a wartość współczynnika SZ modelu zostaje zwiększona o +1 punkt.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 26,
+    "max": 26,
+    "name": "Żywy szkielet",
+    "text": "Wiatr Dhar odziera kości nieszczęśnika z ciała, pozostawiając okrwawiony szkielet, skrywający oślizgłe organy wewnętrzne. Model podlega zasadzie specjalnej NIEUMARŁY.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 31,
+    "max": 32,
+    "name": "Wieloręki",
+    "text": "Skażone mutagennym działaniem Kamienia Przemian ciało mutanta, ku większej chwale Chaosu, wykształca dodatkowe ramię. Jeżeli model podlega zasadzie specjalnej BROŃ NATURALNA lub trzyma w dodatkowym ramieniu BROŃ RĘCZNĄ otrzymuje w fazie walki wręcz dodatkowy +1 ATAK (zobacz zasada specjalna BROŃ RĘCZNA).",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 33,
+    "max": 33,
+    "name": "Plucie kwasem",
+    "text": "Dotknięte działaniem Spaczenia ciało mutanta wykształca gruczoły, produkujące żrący kwas. Model podlega zasadzie specjalnej ŻRĄCA PLWOCINA.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 34,
+    "max": 35,
+    "name": "Furia",
+    "text": "Plugawa moc Dhar wypacza umysł i duszę nieszczęśnika. Model podlega zasadzie specjalnej FURIA.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 36,
+    "max": 36,
+    "name": "Prymityw",
+    "text": "Degenerując moc Kamienia Przemian wypacza ciało mutanta, upodabniając go do Orka. Ramiona odmieńca wydłużają się, model w czasie marszu przybiera pochyloną postawę, a czoło staje się niskie, zwieńczone wyrazistym grubym łukiem brwiowym. Model podlega zasadzie specjalnej OGRANICZONY.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 41,
+    "max": 42,
+    "name": "Kły jadowe",
+    "text": "Poddane działaniu mutującej mocy Chaosu kły mutanta wydłużają się, a w ich wnętrzu powstają kanały jadowe. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i ZATRUTY ATAK.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 43,
+    "max": 43,
+    "name": "Bezrozumny",
+    "text": "Bluźniercze moce Chaosu miażdżą umysł nieszczęśnika w splotach Dhar. Jaźń mutanta zostaje zdruzgotana, a jego osobowość zniszczona. Mózg nieszczęśnika, strzaskany w splotach plugawej Dhar zostaje zamieniony w kawałek Kamienia Przemian, uniemożliwiając podjęcie jakiejkolwiek bardziej złożonej czynności. Model podlega zasadzie specjalnej GŁUPOTA, NIEZŁOMNY, STAN NIŻSZY, TEMPY.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 44,
+    "max": 45,
+    "name": "Skoczek",
+    "text": "Spaczone dotykiem Chaosu mięśnie nóg mutanta rozrastają się, a dodatkowo oplatają je kolejne węzły muskułów. Odmieniec zyskuje zdolność wykonywania szczególnie długich skoków. Model podlega zasadzie specjalnej AKROBATA, a wykonując przeskok na dalszą odległość automatycznie zdaje testy współczynnika, a wykonując przeskok z miejsca jest w stanie wskoczyć na wysokość równą swojej SZ w calach. Model może bez uszczerbku zeskoczyć, a nawet upaść z wysokości nieprzekraczającej podwojonej SZ, jeśli tylko wykona udany test S albo I w zależności od tego, która z cech modelu jest większa.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 46,
+    "max": 46,
+    "name": "Niegodziwiec",
+    "text": "Energie Chaosu wypaczają umysł i duszę mutanta, czyniąc go na wskroś złym. Model podlega zasadzie specjalnej NIEZŁOMNY.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 51,
+    "max": 52,
+    "name": "Pazury",
+    "text": "Strzępy plugawej Dhar wnikają w dłonie nieszczęśnika przekształcając paznokcie w długie, zakrzywione i ostre jak brzytwa pazury. Model podlega zasadzie specjalnej BROŃ NATURALNA i WSPINACZKA, nie może używać broni do walki wręcz oraz broni dystansowej, a w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 53,
+    "max": 53,
+    "name": "Odporność na magię",
+    "text": "Bluźniercza moc Dhar zdaje się częściowo chronić odmieńca przed wpływem Wiatrów Magii, a może mutant cieszy się szczególną łaską Khorna. Model podlega zasadzie specjalnej ODPORNOŚĆ NA MAGIĘ (K3). Wartość należy ustalić losowo przed rozpoczęciem każdej rozgrywki.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 54,
+    "max": 55,
+    "name": "Przerośnięte ramiona",
+    "text": "Bluźniercza moc Boga Krwi napełnia ciało mutanta niespotykaną siłą. Kości mutanta obrastają mięśniami, a ścięgna stają się grube jak postronki. Wartość współczynnika SIŁA modelu zostaje zwiększona o +1 punkt.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 56,
+    "max": 56,
+    "name": "Przerażający",
+    "text": "Bluźniercza moc Upiorytu przenika ciało nieszczęśnika, a mutujące strzępy Dhar nadają mu przerażający, niemal niemożliwy do opisania wygląd. Mutant przyjmuje formę tak obcą, że samo jedno spojrzenie na jego postać wystarcza by pozbawić śmiertelnika zdrowych zmysłów. Ba! Mutant jest tak potworny, że sam mógłby przypłacić obłędem jedno spojrzenie w lustro. Model wywołuje GROZĘ.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 61,
+    "max": 62,
+    "name": "Rogi",
+    "text": "Mutagenny wpływ Chaosu odciska swe piętno na ciele nieszczęśnika. Poddane działaniu Dhar kości czaszki wykształcają masywne rogi. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i SZYBKI.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 63,
+    "max": 63,
+    "name": "Czaszka",
+    "text": "Strzępy Dhar wnikając w ciało twarzy nieszczęśnika, które staje się płynne i ścieka na ziemię. Spod jego resztek wyziera goła czaszka, strasząc każdego kto na nią spojrzy. Model wywołuje STRACH.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 64,
+    "max": 65,
+    "name": "Kły",
+    "text": "Kły mutanta wydłużają się i stają się ostrzejsze. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i PRECYZYJNE UDERZENIE.",
+    "page": 544
+  },
+  {
+    "god": "Khorne",
+    "min": 66,
+    "max": 66,
+    "name": "Szaleństwo",
+    "text": "Spaczony wpływem Upiorytu umysł mutanta ulega degeneracji. Należy wykonać rzut K66 i odczytać wynik w TABELI CHORÓB PSYCHICZNYCH (zobacz paragraf OBŁĘD w ROZDZIALE 13: KAMPANIA).",
+    "page": 544
+  },
+  {
+    "god": "Nurgle",
+    "min": 11,
+    "max": 12,
+    "name": "Bycza skóra",
+    "text": "Skóra mutanta, naznaczona piętnem Chaosu, staje się niezwykle gruba i twarda. Wartość współczynnika WT modelu zostaje zwiększona o +1 punkt.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 13,
+    "max": 13,
+    "name": "Wywrócony na wierzch",
+    "text": "Na skutek kapryśnej woli Mrocznych Bogów, zazdrosne o promienie słońca trzewia zamieniają się miejscami ze skórą. Proces jest bardzo powolny i bolesny. Model nie może używać pancerza skórzanego/ćwiekowanego lub pancerza kolczego/zbroi łuskowej lub zbroi płytowej lub pancerza z gromrilu lub pancerza z ithilmaru, a wartość współczynnika WT zostaje zmniejszona o -1 punkt.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 14,
+    "max": 15,
+    "name": "Kostropata skóra",
+    "text": "Każdy kawałek skóry mutanta, dotknięty pieszczotą Nurgla, pokryty jest krostami, bąblami, parchami, kurzajkami i liszajem. Model otrzymuje kumulatywny modyfikator +1 do Ochrony Pancerza lub otrzymuje Ochronę Pancerza na 6+, jeśli nie posiada pancerza.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 16,
+    "max": 16,
+    "name": "Gwoździogłowy",
+    "text": "Zmiażdżona w splotach Dhar głowa mutanta maleje do niewielkich rozmiarów, a w rezultacie zmniejsza się mózg nieszczęśnika. Model przeprowadzając test oparty na współczynniku CP wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 21,
+    "max": 22,
+    "name": "Rój much",
+    "text": "Chmura tłustych, czarnych, błyszczących i brzęczących much staje się nieodłącznym towarzystwem mutanta. Owady, latając wokół odmieńca, wchodzą i wychodzą z ust, nosa lub innych otworów. Kiedy tylko mutantowi grozi niebezpieczeństwo, owady zaczynają głośniej bzyczeć, wirując dookoła głowy odmieńca. Model podlega zasadzie specjalnej SZÓSTY ZMYSŁ, a wrogie postaci atakujące model otrzymują w fazie strzelania kumulatywny modyfikator -1 do rzutu na trafienie.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 23,
+    "max": 23,
+    "name": "Wieloręki",
+    "text": "Skażone mutagennym działaniem Kamienia Przemian ciało mutanta, ku większej chwale Chaosu, wykształca dodatkowe ramię. Jeżeli model podlega zasadzie specjalnej BROŃ NATURALNA lub trzyma w dodatkowym ramieniu BROŃ RĘCZNĄ otrzymuje w fazie walki wręcz dodatkowy +1 ATAK (zobacz zasada specjalna BROŃ RĘCZNA).",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 24,
+    "max": 25,
+    "name": "Ogon",
+    "text": "Dotknięte działaniem Upiorytu ciało odmieńca mutuje. Kość ogonowa mutanta wydłuża się i wkrótce przekształca w ogon, który pomaga utrzymywać odmieńcowi równowagę. Model podlega zasadzie specjalnej AKROBATA.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 26,
+    "max": 26,
+    "name": "Myśląca narośl",
+    "text": "Wewnątrz skalanego mutagennym działaniem Upiorytu ciała mutanta zaczyna rosnąć przerażający, inteligentny guz. Narośl posiada własną osobowość i cele, które próbuje zrealizować, starając się przejąć kontrolę nad ciałem. Wartość współczynnika WT modelu zostaje zmniejszona o -1 punkt, zaś ŻW wrasta o +1 punkt. Przed rozpoczęciem każdej rozgrywki należy wykonać test CP modelu. Nieudany test oznacza, że myśląca narośl przejęła władzę nad ciałem i postanowiła zrealizować sobie tylko wiadome cele. Model musi opuścić rozgrywkę.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 31,
+    "max": 32,
+    "name": "Odór",
+    "text": "Splugawione dotykiem Chaosu ciało mutanta zaczyna wydzielać nieznośny odór, przypominający mieszaninę woni wymiocin, zepsutych jaj i gnijącego mięsa. Wrogie postaci, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY atakujący model w fazie walki wręcz otrzymuje kumulatywny modyfikator -1 do trafienia.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 33,
+    "max": 33,
+    "name": "Plucie kwasem",
+    "text": "Zdegenerowane pieszczotą Nurgla wnętrzności mutanta zaczynają wydzielać bardzo żrące kwasy, podobne do tych, jakie tworzą się w brzuchu Trolla. Model podlega zasadzie specjalnej ŻRĄCA PLWOCINA.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 34,
+    "max": 35,
+    "name": "Przerażający",
+    "text": "Bluźniercza moc Upiorytu przenika ciało nieszczęśnika, a mutujące strzępy Dhar nadają mu przerażający, niemal niemożliwy do opisania wygląd. Mutant przyjmuje formę tak obcą, że samo jedno spojrzenie na jego postać wystarcza by pozbawić śmiertelnika zdrowych zmysłów. Ba! Mutant jest tak potworny, że sam mógłby przypłacić obłędem jedno spojrzenie w lustro. Model wywołuje GROZĘ.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 36,
+    "max": 36,
+    "name": "Prymityw",
+    "text": "Degenerując moc Kamienia Przemian wypacza ciało mutanta, upodabniając go do Orka. Ramiona odmieńca wydłużają się, model w czasie marszu przybiera pochyloną postawę, a czoło staje się niskie, zwieńczone wyrazistym grubym łukiem brwiowym. Model podlega zasadzie specjalnej OGRANICZONY.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 41,
+    "max": 42,
+    "name": "Kły jadowe",
+    "text": "Poddane działaniu mutującej mocy Chaosu kły mutanta wydłużają się, a w ich wnętrzu powstają kanały jadowe. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i ZATRUTY ATAK.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 43,
+    "max": 43,
+    "name": "Robaczywy",
+    "text": "Toczone zgnilizną ciało mutanta staje się pożywką dla plagi robaków. Owady toczą mózg, gnieżdżą się w płucach i wypełniają trzewia. Widać Pan Zarazy uznał, że skarabeusze, krocionogi i wije mogą stanowić interesujący dodatek wzbogacający osobowość mutanta. Model automatycznie zdaje testy SAM W WALCE, a wartość współczynnika WT zostaje zmniejszona o -1 punkt.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 44,
+    "max": 45,
+    "name": "Macka",
+    "text": "Na skutek działania bluźnierczych mocy Chaosu z ciała mutanta wyrasta pokryta maleńkimi przyssawkami macka. Model podlega zasadzie specjalnej OPLĄTANIE.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 46,
+    "max": 46,
+    "name": "Niegodziwiec",
+    "text": "Energie Chaosu wypaczają umysł i duszę mutanta, czyniąc go na wskroś złym. Model podlega zasadzie specjalnej NIEZŁOMNY.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 51,
+    "max": 52,
+    "name": "Pazury",
+    "text": "Strzępy plugawej Dhar wnikają w dłonie nieszczęśnika przekształcając paznokcie w długie, zakrzywione i ostre jak brzytwa pazury. Model podlega zasadzie specjalnej BROŃ NATURALNA i WSPINACZKA, nie może używać broni do walki wręcz oraz broni dystansowej, a w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 53,
+    "max": 53,
+    "name": "Atrofia",
+    "text": "Plugawa moc Kamienia Przemian degeneruje ciało mutanta. Jedna z części ciała nieszczęśnika kurczy się i obumiera w zastraszająco szybkim tempie. Należy wykonać rzut K6. Wynik 1-2 oznacza, że model podlega zasadzie specjalnej STYGMAT CHAOSU NIEPODZIELONEGO (gwoździogłowy). Rezultat 3-4 oznacza, że losowo wybrane przedramię zostało amputowane (zobacz RANA RĘKI w TABELI POWAŻNYCH RAN w ROZDZIALE 13: KAMPANIA). Wynik 5-6 oznacza, że losowa wybrana noga została poważnie stłuczona (zobacz RANA NOGI w TABELI POWAŻNYCH RAN w ROZDZIALE 13: KAMPANIA).",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 54,
+    "max": 55,
+    "name": "Kopyta",
+    "text": "Potworny ból przeszywa nogi mutanta, kiedy poddane działaniu mocy Kamienia Przemian palce u stóp stapiają się i przekształcają w coś, co z grubsza przypomina rozszczepione kopyta. Model podlega zasadzie specjalnej RANGER, a wartość współczynnika SZ modelu zostaje zwiększona o +1 punkt.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 56,
+    "max": 56,
+    "name": "Bezrozumny",
+    "text": "Bluźniercze moce Chaosu miażdżą umysł nieszczęśnika w splotach Dhar. Jaźń mutanta zostaje zdruzgotana, a jego osobowość zniszczona. Mózg nieszczęśnika, strzaskany w splotach plugawej Dhar zostaje zamieniony w kawałek Kamienia Przemian, uniemożliwiając podjęcie jakiejkolwiek bardziej złożonej czynności. Model podlega zasadzie specjalnej GŁUPOTA, NIEZŁOMNY, STAN NIŻSZY, TEMPY.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 61,
+    "max": 62,
+    "name": "Rogi",
+    "text": "Mutagenny wpływ Chaosu odciska swe piętno na ciele nieszczęśnika. Poddane działaniu Dhar kości czaszki wykształcają masywne rogi. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i SZYBKI.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 63,
+    "max": 63,
+    "name": "Jednooki",
+    "text": "Splugawiona dotykiem Dhar twarz mutanta zmienia się w masę drgającego mięsa, jednak po chwili odzyskuje dawny wygląd. Niestety jedno z oczu, uwolnione z czaszki, wykorzystuje okazję i na skrzydłach z powiek odlatuje w siną dal. Drugie oko zajmuje pozycję pośrodku czoła, ponad nosem. Wartość współczynnika US modelu zostaje zmniejszona o połowę (zaokrąglając w dół).",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 64,
+    "max": 65,
+    "name": "Cuchnący dotyk",
+    "text": "Skażone dotykiem Chaosu ciało mutanta zaczyna wydzielać cuchnącą, lepką substancję, której nie można usunąć i domyć. Dotyk odmieńca przenosi choroby i zarazy. Model podlega zasadzie specjalnej ZATRUTY ATAK.",
+    "page": 545
+  },
+  {
+    "god": "Nurgle",
+    "min": 66,
+    "max": 66,
+    "name": "Szaleństwo",
+    "text": "Spaczony wpływem Upiorytu umysł mutanta ulega degeneracji. Należy wykonać rzut K66 i odczytać wynik w TABELI CHORÓB PSYCHICZNYCH (zobacz paragraf OBŁĘD w ROZDZIALE 13: KAMPANIA).",
+    "page": 545
+  },
+  {
+    "god": "Slaanesh",
+    "min": 11,
+    "max": 12,
+    "name": "Ponętny",
+    "text": "Rozpieszczony lubieżnym dotykiem Slaanesha mutant w niezwykły sposób staje się ponętny i atrakcyjny dla innych. Model podlega zasadzie specjalnej UWODZENIE.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 13,
+    "max": 13,
+    "name": "Albinos",
+    "text": "Na skutek kapryśnej woli Mrocznych Bogów, skóra odmieńca staje się śnieżnobiała, a jego oczy krwistoczerwone. Wartość współczynnika WT zostaje zmniejszona o -1 punkt.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 14,
+    "max": 15,
+    "name": "Łuskowata skóra",
+    "text": "Skóra mutanta zmienia się w łuski. Model otrzymuje kumulatywny modyfikator +1 do Ochrony Pancerza lub otrzymuje Ochronę Pancerza na 6+, jeśli nie posiada pancerza.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 16,
+    "max": 16,
+    "name": "Gwoździogłowy",
+    "text": "Zmiażdżona w splotach Dhar głowa mutanta maleje do niewielkich rozmiarów, a w rezultacie zmniejsza się mózg nieszczęśnika. Model przeprowadzając test oparty na współczynniku CP wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 21,
+    "max": 22,
+    "name": "Przyssawki",
+    "text": "Na skutek stymulacji wywołanych bluźnierczym działaniem Kamienia Przemian ciało mutanta wykształca drobne przyssawki, podobne do tych, jakie można znaleźć na ramionach ośmiornicy. Mutant podlega zasadzie specjalnej MUROŁAZ.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 23,
+    "max": 23,
+    "name": "Kryształowe ciało",
+    "text": "Muśniętym dotykiem Chaosu ciałem mutanta wstrząsa dreszcz rozkoszy, wywołujący falę mutacji. Ciało, krew, kości i ścięgna zmieniają się w żywy kryształ. Nowa forma jest twardsza, lecz jednocześnie bardziej krucha. Wartość współczynnika WT modelu wynosi od tej pory 10 punktów, a ŻW 1 punkt, jest to także nowa maksymalna wartość tych współczynników modelu. Jeśli model zostanie zraniony zostaje automatycznie Wyłączony z akcji! bez konieczności wykonywania rzutu w TABELI EFEKT ZRANIENIA.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 24,
+    "max": 25,
+    "name": "Ogon",
+    "text": "Dotknięte działaniem Upiorytu ciało odmieńca mutuje. Kość ogonowa mutanta wydłuża się i wkrótce przekształca w ogon, który pomaga utrzymywać odmieńcowi równowagę. Model podlega zasadzie specjalnej AKROBATA.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 26,
+    "max": 26,
+    "name": "Myśląca narośl",
+    "text": "Wewnątrz skalanego mutagennym działaniem Upiorytu ciała mutanta zaczyna rosnąć przerażający, inteligentny guz. Narośl posiada własną osobowość i cele, które próbuje zrealizować, starając się przejąć kontrolę nad ciałem. Wartość współczynnika WT modelu zostaje zmniejszona o -1 punkt, zaś ŻW wrasta o +1 punkt. Przed rozpoczęciem każdej rozgrywki należy wykonać test CP modelu. Nieudany test oznacza, że myśląca narośl przejęła władzę nad ciałem i postanowiła zrealizować sobie tylko wiadome cele. Model musi opuścić rozgrywkę.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 31,
+    "max": 32,
+    "name": "Wieloręki",
+    "text": "Skażone mutagennym działaniem Kamienia Przemian ciało mutanta, ku większej chwale Chaosu, wykształca dodatkowe ramię. Jeżeli model podlega zasadzie specjalnej BROŃ NATURALNA lub trzyma w dodatkowym ramieniu BROŃ RĘCZNĄ otrzymuje w fazie walki wręcz dodatkowy +1 ATAK (zobacz zasada specjalna BROŃ RĘCZNA).",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 33,
+    "max": 33,
+    "name": "Kłujący jęzor",
+    "text": "Natchnione pieszczotą Slaanesha ciało mutanta stymuluje język do wzrostu. Język odmieńca wydłuża się i staje się ostrzejszy. Model podlega zasadzie specjalnej PRZYMIOT (dzierzba).",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 34,
+    "max": 35,
+    "name": "Wielogłowy",
+    "text": "Natchnione bluźnierczym działaniem Upiorytu ciało mutanta wykształca dodatkową głowę. Model podlega zasadzie specjalnej SZÓSTY ZMYSŁ, automatycznie zdaje testy SAM W WALCE oraz w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 36,
+    "max": 36,
+    "name": "Prymityw",
+    "text": "Degenerując moc Kamienia Przemian wypacza ciało mutanta, upodabniając go do Orka. Ramiona odmieńca wydłużają się, model w czasie marszu przybiera pochyloną postawę, a czoło staje się niskie, zwieńczone wyrazistym grubym łukiem brwiowym. Model podlega zasadzie specjalnej OGRANICZONY.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 41,
+    "max": 42,
+    "name": "Ogon skorpiona",
+    "text": "Zachęcone pocałunkiem Księcia Rozkoszy ciało mutanta wykształca ogon skorpiona. Ogon pokryty jest czarnymi, brązowymi oraz pomarańczowymi plamami i kończy się nieprzyjemnie wyglądającym żądłem. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i ZATRUTY ATAK.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 43,
+    "max": 43,
+    "name": "Bezduszny",
+    "text": "Slaanesh karze odmieńca odbierając mu dar przeżywania emocji płynących z dotychczasowych deprawacji. Mutant musi przekraczać kolejne granice perwersji by móc odczuwać ekscytacje. Model podlega zasadzie specjalnej ZIMNOKRWISTY.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 44,
+    "max": 45,
+    "name": "Macka",
+    "text": "Na skutek działania bluźnierczych mocy Chaosu z ciała mutanta wyrasta pokryta maleńkimi przyssawkami macka. Model podlega zasadzie specjalnej OPLĄTANIE.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 46,
+    "max": 46,
+    "name": "Niegodziwiec",
+    "text": "Energie Chaosu wypaczają umysł i duszę mutanta, czyniąc go na wskroś złym. Model podlega zasadzie specjalnej NIEZŁOMNY.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 51,
+    "max": 52,
+    "name": "Szczypce",
+    "text": "Skażone Kamieniem Przemian, ramiona mutanta rozszczepiają się na dwie części i przyjmują kształt podobny do szczypiec kraba. Model podlega zasadzie specjalnej BROŃ NATURALNA i ZABÓJCZY CIOS, nie może używać broni do walki wręcz oraz broni dystansowej, a w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 53,
+    "max": 53,
+    "name": "Marionetka",
+    "text": "Życie mutanta stało się bardzo dziwne, odkąd znikły wszystkie rysy twarzy odmieńca, nie licząc ust. W chwili, gdy skończył się ból odpadających uszu, nosa i zasklepiających się oczodołów, z czubka głowy wyrosła niewielka figurka, będąca idealną kopią nieszczęśnika. Od tej pory rola mutanta sprowadza się do jedzenia tak dużo i na tyle często, jak to możliwe, aby utrzymać swojego miniaturowego władcę przy życiu. Model podlega zasadzie specjalnej PRZEPASTNE TRZEWIA.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 54,
+    "max": 55,
+    "name": "Chwytny ogon",
+    "text": "Stymulowana mutagennym działaniem Kamienia Przemian kość ogonowa mutanta rozwija się w pełnych rozmiarów ogon. Model podlega zasadzie specjalnej CHWYTNY OGON.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 56,
+    "max": 56,
+    "name": "Przerażający",
+    "text": "Bluźniercza moc Upiorytu przenika ciało nieszczęśnika, a mutujące strzępy Dhar nadają mu przerażający, niemal niemożliwy do opisania wygląd. Mutant przyjmuje formę tak obcą, że samo jedno spojrzenie na jego postać wystarcza by pozbawić śmiertelnika zdrowych zmysłów. Ba! Mutant jest tak potworny, że sam mógłby przypłacić obłędem jedno spojrzenie w lustro. Model wywołuje GROZĘ.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 61,
+    "max": 62,
+    "name": "Rogi",
+    "text": "Mutagenny wpływ Chaosu odciska swe piętno na ciele nieszczęśnika. Poddane działaniu Dhar kości czaszki wykształcają masywne rogi. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i SZYBKI.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 63,
+    "max": 63,
+    "name": "Jednooki",
+    "text": "Splugawiona dotykiem Dhar twarz mutanta zmienia się w masę drgającego mięsa, jednak po chwili odzyskuje dawny wygląd. Niestety jedno z oczu, uwolnione z czaszki, wykorzystuje okazję i na skrzydłach z powiek odlatuje w siną dal. Drugie oko zajmuje pozycję pośrodku czoła, ponad nosem. Wartość współczynnika US modelu zostaje zmniejszona o połowę (zaokrąglając w dół).",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 64,
+    "max": 65,
+    "name": "Kły",
+    "text": "Kły mutanta wydłużają się i stają się ostrzejsze. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i PRECYZYJNE UDERZENIE.",
+    "page": 546
+  },
+  {
+    "god": "Slaanesh",
+    "min": 66,
+    "max": 66,
+    "name": "Szaleństwo",
+    "text": "Spaczony wpływem Upiorytu umysł mutanta ulega degeneracji. Należy wykonać rzut K66 i odczytać wynik w TABELI CHORÓB PSYCHICZNYCH (zobacz paragraf OBŁĘD w ROZDZIALE 13: KAMPANIA).",
+    "page": 546
+  },
+  {
+    "god": "Tzeentch",
+    "min": 11,
+    "max": 12,
+    "name": "Podżegacz",
+    "text": "Wielki Mutator nagradza mutanta zdolnością skłócania sojuszników. Model podlega zasadzie specjalnej PODŻEGANIE.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 13,
+    "max": 13,
+    "name": "Eteryczny",
+    "text": "Plugawa moc Dhar przenika ciało mutanta częściowo pozbawiając je materialności. Wobec modelu nie stosuje się zasady specjalnej DRUZGOCZĄCY, ŁAMIGŁÓWKA, OGŁUSZAJĄCY, PRECYZYJNE UDERZENIE, PŁONĄCY ATAK, POGROMCA, PREMIA DO SIŁY, PRZEBICIE PANCERZA, SIEWCA ZARAZY, UNIERUCHAMIAJĄCY, ZABÓJCZY CIOS, ZATRUTY ATAK oraz efektów TABELI ZRANIEŃ KRYTYCZNYCH, a wartość współczynnika WT modelu zostaje zmniejszona o -1 punkt.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 14,
+    "max": 15,
+    "name": "Upierzenie",
+    "text": "Ciało mutanta porasta gęste upierzenie. Model otrzymuje kumulatywny modyfikator +1 do Ochrony Pancerza lub otrzymuje Ochronę Pancerza na 6+, jeśli nie posiada pancerza.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 16,
+    "max": 16,
+    "name": "Gwoździogłowy",
+    "text": "Zmiażdżona w splotach Dhar głowa mutanta maleje do niewielkich rozmiarów, a w rezultacie zmniejsza się mózg nieszczęśnika. Model przeprowadzając test oparty na współczynniku CP wykonuje rzut 3K6 odrzucając kostkę z najniższym wynikiem.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 21,
+    "max": 22,
+    "name": "Przyssawki",
+    "text": "Na skutek stymulacji wywołanych bluźnierczym działaniem Kamienia Przemian ciało mutanta wykształca drobne przyssawki, podobne do tych, jakie można znaleźć na ramionach ośmiornicy. Mutant podlega zasadzie specjalnej MUROŁAZ.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 23,
+    "max": 23,
+    "name": "Kryształowe ciało",
+    "text": "Zachęconym dotykiem Tzeentcha ciałem mutanta wstrząsa dreszcz zmian, wywołujący falę mutacji. Ciało, krew, kości i ścięgna zmieniają się w żywy kryształ. Nowa forma jest twardsza, lecz jednocześnie bardziej krucha. Wartość współczynnika WT modelu wynosi od tej pory 10 punktów, a ŻW 1 punkt, jest to także nowa maksymalna wartość tych współczynników modelu. Jeśli model zostanie zraniony zostaje automatycznie Wyłączony z akcji! bez konieczności wykonywania rzutu w TABELI EFEKT ZRANIENIA.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 24,
+    "max": 25,
+    "name": "Ogon",
+    "text": "Dotknięte działaniem Upiorytu ciało odmieńca mutuje. Kość ogonowa mutanta wydłuża się i wkrótce przekształca w ogon, który pomaga utrzymywać odmieńcowi równowagę. Model podlega zasadzie specjalnej AKROBATA.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 26,
+    "max": 26,
+    "name": "Myśląca narośl",
+    "text": "Wewnątrz skalanego mutagennym działaniem Upiorytu ciała mutanta zaczyna rosnąć przerażający, inteligentny guz. Narośl posiada własną osobowość i cele, które próbuje zrealizować, starając się przejąć kontrolę nad ciałem. Wartość współczynnika WT modelu zostaje zmniejszona o -1 punkt, zaś ŻW wrasta o +1 punkt. Przed rozpoczęciem każdej rozgrywki należy wykonać test CP modelu. Nieudany test oznacza, że myśląca narośl przejęła władzę nad ciałem i postanowiła zrealizować sobie tylko wiadome cele. Model musi opuścić rozgrywkę.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 31,
+    "max": 32,
+    "name": "Wieloręki",
+    "text": "Skażone mutagennym działaniem Kamienia Przemian ciało mutanta, ku większej chwale Chaosu, wykształca dodatkowe ramię. Jeżeli model podlega zasadzie specjalnej BROŃ NATURALNA lub trzyma w dodatkowym ramieniu BROŃ RĘCZNĄ otrzymuje w fazie walki wręcz dodatkowy +1 ATAK (zobacz zasada specjalna BROŃ RĘCZNA).",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 33,
+    "max": 33,
+    "name": "Ogniste ciało",
+    "text": "Dotknięte działaniem Spaczenia ciało mutanta wykształca gruczoły, produkujące łatwopalny płyn. Model podlega zasadzie specjalnej OGNISTA KORONA.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 34,
+    "max": 35,
+    "name": "Niestabilność czasowa",
+    "text": "Mutant przekonuje się, że czas nie ma nad nim zbyt wielkiej władzy. Jeżeli model nie jest związany walką wręcz to na początku każdej tury w fazie rozpoczęcia tury należy wykonać rzut K6. Wynik 6 oznacza, że model wychodzi poza zwykły strumień czasu i znajduje się poza stołem, by pojawić się ponownie na początku następnej tury i znów wykonać rzut K6. W momencie określania czy kompania musi wykonać test rozbicia, modele znajdujące się poza stołem nie są liczone do całkowitej liczby postaci w kompanii i nie generują Kostek Mocy oraz Kostek Rozproszenia.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 36,
+    "max": 36,
+    "name": "Prymityw",
+    "text": "Degenerując moc Kamienia Przemian wypacza ciało mutanta, upodabniając go do Orka. Ramiona odmieńca wydłużają się, model w czasie marszu przybiera pochyloną postawę, a czoło staje się niskie, zwieńczone wyrazistym grubym łukiem brwiowym. Model podlega zasadzie specjalnej OGRANICZONY.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 41,
+    "max": 42,
+    "name": "Kły jadowe",
+    "text": "Poddane działaniu mutującej mocy Chaosu kły mutanta wydłużają się, a w ich wnętrzu powstają kanały jadowe. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i ZATRUTY ATAK.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 43,
+    "max": 43,
+    "name": "Bezrozumny",
+    "text": "Bluźniercze moce Chaosu miażdżą umysł nieszczęśnika w splotach Dhar. Jaźń mutanta zostaje zdruzgotana, a jego osobowość zniszczona. Mózg nieszczęśnika, strzaskany w splotach plugawej Dhar zostaje zamieniony w kawałek Kamienia Przemian, uniemożliwiając podjęcie jakiejkolwiek bardziej złożonej czynności. Model podlega zasadzie specjalnej GŁUPOTA, NIEZŁOMNY, STAN NIŻSZY, TEMPY.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 44,
+    "max": 45,
+    "name": "Macka",
+    "text": "Na skutek działania bluźnierczych mocy Chaosu z ciała mutanta wyrasta pokryta maleńkimi przyssawkami macka. Model podlega zasadzie specjalnej OPLĄTANIE.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 46,
+    "max": 46,
+    "name": "Niegodziwiec",
+    "text": "Energie Chaosu wypaczają umysł i duszę mutanta, czyniąc go na wskroś złym. Model podlega zasadzie specjalnej NIEZŁOMNY.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 51,
+    "max": 52,
+    "name": "Pazury",
+    "text": "Strzępy plugawej Dhar wnikają w dłonie nieszczęśnika przekształcając paznokcie w długie, zakrzywione i ostre jak brzytwa pazury. Model podlega zasadzie specjalnej BROŃ NATURALNA i WSPINACZKA, nie może używać broni do walki wręcz oraz broni dystansowej, a w fazie walki wręcz otrzymuje dodatkowy +1 ATAK.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 53,
+    "max": 53,
+    "name": "Marionetka",
+    "text": "Życie mutanta stało się bardzo dziwne, odkąd znikły wszystkie rysy twarzy odmieńca, nie licząc ust. W chwili, gdy skończył się ból odpadających uszu, nosa i zasklepiających się oczodołów, z czubka głowy wyrosła niewielka figurka, będąca idealną kopią nieszczęśnika. Od tej pory rola mutanta sprowadza się do jedzenia tak dużo i na tyle często, jak to możliwe, aby utrzymać swojego miniaturowego władcę przy życiu. Model podlega zasadzie specjalnej PRZEPASTNE TRZEWIA.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 54,
+    "max": 55,
+    "name": "Chwytny ogon",
+    "text": "Stymulowana mutagennym działaniem Kamienia Przemian kość ogonowa mutanta rozwija się w pełnych rozmiarów ogon. Model podlega zasadzie specjalnej CHWYTNY OGON.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 56,
+    "max": 56,
+    "name": "Przerażający",
+    "text": "Bluźniercza moc Upiorytu przenika ciało nieszczęśnika, a mutujące strzępy Dhar nadają mu przerażający, niemal niemożliwy do opisania wygląd. Mutant przyjmuje formę tak obcą, że samo jedno spojrzenie na jego postać wystarcza by pozbawić śmiertelnika zdrowych zmysłów. Ba! Mutant jest tak potworny, że sam mógłby przypłacić obłędem jedno spojrzenie w lustro. Model wywołuje GROZĘ.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 61,
+    "max": 62,
+    "name": "Rogi",
+    "text": "Mutagenny wpływ Chaosu odciska swe piętno na ciele nieszczęśnika. Poddane działaniu Dhar kości czaszki wykształcają masywne rogi. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i SZYBKI.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 63,
+    "max": 63,
+    "name": "Jednooki",
+    "text": "Splugawiona dotykiem Dhar twarz mutanta zmienia się w masę drgającego mięsa, jednak po chwili odzyskuje dawny wygląd. Niestety jedno z oczu, uwolnione z czaszki, wykorzystuje okazję i na skrzydłach z powiek odlatuje w siną dal. Drugie oko zajmuje pozycję pośrodku czoła, ponad nosem. Wartość współczynnika US modelu zostaje zmniejszona o połowę (zaokrąglając w dół).",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 64,
+    "max": 65,
+    "name": "Dziób",
+    "text": "Mutagenny wpływ Chaosu odciska swe piętno na ciele nieszczęśnika. Poddane działaniu Dhar kości czaszki ulegają potwornemu zniekształceniu, a z masy stwardniałego ciała wokół ust i nosa formuje się podobny do ptasiego dziób. Model w fazie walki wręcz otrzymuje dodatkowy +1 ATAK z zasadą specjalną BROŃ NATURALNA i PRZEBICIE PANCERZA.",
+    "page": 547
+  },
+  {
+    "god": "Tzeentch",
+    "min": 66,
+    "max": 66,
+    "name": "Szaleństwo",
+    "text": "Spaczony wpływem Upiorytu umysł mutanta ulega degeneracji. Należy wykonać rzut K66 i odczytać wynik w TABELI CHORÓB PSYCHICZNYCH (zobacz paragraf OBŁĘD w ROZDZIALE 13: KAMPANIA).",
+    "page": 547
+  }
+]

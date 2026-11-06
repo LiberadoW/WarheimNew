@@ -57,6 +57,7 @@ function toSummary() {
   fireEvent.change(screen.getByLabelText("Eksploracja, kość 1"), {
     target: { value: "4" },
   });
+  click("Zatwierdź pulę eksploracji");
   click("Zatwierdź eksplorację");
   click("Dalej: Sprzedaż łupów");
   click("Zatwierdź bez sprzedaży");

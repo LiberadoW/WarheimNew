@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import * as R from "./rules";
 import DiceInput from "./DiceInput";
 import specialSkills from "./special-skills.json";
+import characterProfiles from "./drama.json";
+import mercenaryProfiles from "./mercenary-profiles.json";
 import { getMagicLore } from "../Functions/getMagicLore";
 import { magic } from "../Data.js/Magic";
 import { getRuleText } from "../Functions/getRuleText";
@@ -18,7 +20,19 @@ const checkLabel = (text, value, onChange) => (
 );
 function AdvanceCard({ advance, unit, army, post, update }) {
   const [choice, setChoice] = useState("");
-  const special = specialSkills[R.normal(army.name)]?.entries || [];
+  const personalProfile = (
+    unit.type === "Postać Dramatu"
+      ? characterProfiles
+      : unit.type === "Najemne Ostrze"
+        ? mercenaryProfiles
+        : []
+  ).find((p) => R.normal(p.name) === R.normal(unit.dramaId || unit.unitName));
+  const special = personalProfile
+    ? (personalProfile.specialSkills || []).map((name) => ({
+        name,
+        restriction: "",
+      }))
+    : specialSkills[R.normal(army.name)]?.entries || [];
   const skills = [
     ...R.skillChoices(unit),
     ...(unit.skills?.includes(5)
@@ -51,9 +65,10 @@ function AdvanceCard({ advance, unit, army, post, update }) {
     advance.selectedRoll !== undefined
       ? R.sum(advance.rolls[advance.selectedRoll]?.dice || [])
       : 0;
-  const skill = R.needsSkill(unit, n),
+  const fallback = R.allAdvancementStatsMaxed(unit);
+  const skill = R.needsSkill(unit, n) || (fallback && R.heroDevelopment(unit)),
     stats = R.availableStats(unit, n),
-    promotion = !R.heroDevelopment(unit) && n >= 10;
+    promotion = !R.heroDevelopment(unit) && n >= 10 && !fallback;
   return (
     <article className="campaign-card">
       <h3>
@@ -106,6 +121,13 @@ function AdvanceCard({ advance, unit, army, post, update }) {
                 ? "Chłopak ma talent!"
                 : "Rozwinięcie charakterystyki"}
           </p>
+          {fallback && (
+            <p>
+              Współczynniki z tabeli rozwoju osiągnęły rasowe maksimum. Możesz
+              wybrać umiejętność (jeśli dostępna) lub +1 Sz w granicach
+              maksimum.
+            </p>
+          )}
           {skill && (
             <>
               <label>
@@ -115,6 +137,11 @@ function AdvanceCard({ advance, unit, army, post, update }) {
                   onChange={(e) => setChoice(e.target.value)}
                 >
                   <option value="">Wybierz z dostępnej listy</option>
+                  {fallback && stats.includes(0) && (
+                    <option value="stat:0">
+                      Sz +1 (maksimum pozostałych współczynników)
+                    </option>
+                  )}
                   {skills.map((s) => (
                     <option key={s.name} value={`rule:${s.name}`}>
                       {s.list}: {s.name}

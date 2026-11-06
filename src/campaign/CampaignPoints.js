@@ -1,5 +1,6 @@
 import React from "react";
 import * as R from "./rules";
+import { companyChoices, selectCompanyAdvance } from "./company";
 
 function CampaignPoints({ battle, post, update, notes }) {
   const out = post.units.reduce(
@@ -88,6 +89,34 @@ function CampaignPoints({ battle, post, update, notes }) {
       >
         Zatwierdź punkty kampanii
       </button>
+      {companyChoices(post, notes).map((choice) => (
+        <section
+          className="campaign-card"
+          key={`${choice.track}:${choice.threshold}`}
+        >
+          <h3>
+            {choice.track}: {choice.threshold} punktów
+          </h3>
+          {choice.selected ? (
+            <p>Wybrano: {choice.selected.name}</p>
+          ) : (
+            choice.options.map((entry) => (
+              <article key={entry.id}>
+                <h4>{entry.name}</h4>
+                <p>{entry.text}</p>
+                <button
+                  className="button"
+                  onClick={() =>
+                    update((p) => selectCompanyAdvance(p, notes, entry.id))
+                  }
+                >
+                  Wybierz: {entry.name}
+                </button>
+              </article>
+            ))
+          )}
+        </section>
+      ))}
     </>
   );
 }
