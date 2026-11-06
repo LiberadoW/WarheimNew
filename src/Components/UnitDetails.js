@@ -1,3 +1,4 @@
+import NumberInput from "../campaign/NumberInput";
 import React, { useState } from "react";
 import WeaponList from "../layouts/WeaponList";
 import { magic } from "../Data.js/Magic";
@@ -224,7 +225,7 @@ const UnitDetails = ({
         {unit.type === "Bohater" && typeof handleSetUnitExp === "function" && (
           <label className="unit-details-field unit-details-field-short">
             <span>Doświadczenie</span>
-            <input
+            <NumberInput
               type="number"
               min="0"
               max="90"

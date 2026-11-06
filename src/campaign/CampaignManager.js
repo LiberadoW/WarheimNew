@@ -15,7 +15,7 @@ import Exploration from "./Exploration";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Reference from "./Reference";
 import Trade from "./Trade";
 import {
@@ -84,12 +84,15 @@ export default function CampaignManager({
   const battle = campaign.activeBattle;
   const post = battle?.post;
   const setCampaign = (next) =>
-    setCampaignNotes({ ...campaignNotes, campaign: next });
+    setCampaignNotes((current) => ({ ...current, campaign: next }));
   const setBattle = (next) => setCampaign({ ...campaign, activeBattle: next });
+  const latestPost = useRef(post);
+  latestPost.current = post;
   const update = (fn) => {
     try {
-      const p = R.clone(post);
+      const p = R.clone(latestPost.current);
       fn(p);
+      latestPost.current = p;
       setBattle({ ...battle, post: p });
       setError("");
     } catch (e) {
@@ -177,8 +180,17 @@ export default function CampaignManager({
     }
   };
   const phase = battle?.stage || 0;
+  const panel = useRef(null);
+  const previousStage = useRef(phase);
+  useEffect(() => {
+    if (previousStage.current !== phase) {
+      panel.current?.scrollIntoView?.({ block: "start", behavior: "instant" });
+      panel.current?.focus({ preventScroll: true });
+    }
+    previousStage.current = phase;
+  }, [phase]);
   return (
-    <section className="campaign" aria-label="Prowadzenie kampanii">
+    <section ref={panel} tabIndex={-1} className="campaign" aria-label="Prowadzenie kampanii">
       <h2>Kampania</h2>
       {error && (
         <p role="alert" className="campaign-error">
@@ -256,6 +268,16 @@ export default function CampaignManager({
               </span>
             )}
           </div>
+          <label className="campaign-mobile-nav">
+            Etap {phase + 1} z {STEPS.length}
+            <select aria-label="Etap kampanii" value={phase} onChange={(e) => {
+              const stage = Number(e.target.value);
+              if (stage < phase && !(stage === 0 && post)) setBattle({ ...battle, stage });
+            }}>
+              {STEPS.map((s, i) => <option key={s} value={i}
+                disabled={i > phase || (i === 0 && !!post)}>{i}. {s}</option>)}
+            </select>
+          </label>
           <nav className="campaign-nav" aria-label="Sekwencja po potyczce">
             {STEPS.map((s, i) => (
               <button
@@ -456,7 +478,7 @@ export default function CampaignManager({
                     przeciwnika WzA. Dodatkowe PD ze scenariusza są dodawane
                     osobno.
                   </p>
-                  <table>
+                  <table className="campaign-experience">
                     <thead>
                       <tr>
                         <th>Postać</th>
@@ -468,11 +490,12 @@ export default function CampaignManager({
                     <tbody>
                       {post.units.map((u) => (
                         <tr key={u.uniqueId}>
-                          <td>{R.label(u)}</td>
-                          <td>{u.exp || 0}</td>
-                          <td>{u.battleKills || 0}</td>
-                          <td>
+                          <td data-label="Postać">{R.label(u)}</td>
+                          <td data-label="PD przed">{u.exp || 0}</td>
+                          <td data-label="Przeciwnicy WzA">{u.battleKills || 0}</td>
+                          <td data-label="Dodatkowe PD">
                             <NumberInput
+                              aria-label={`Dodatkowe PD: ${R.label(u)}`}
                               type="number"
                               min="0"
                               disabled={post.expApplied}

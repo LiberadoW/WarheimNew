@@ -1,3 +1,4 @@
+import NumberInput from "../../campaign/NumberInput";
 import { useState } from "react";
 import "./unitEditEquipment.css";
 
@@ -132,7 +133,7 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
           value={equipmentName}
           onChange={(event) => setEquipmentName(event.target.value)}
         />
-        <input
+        <NumberInput
           type="number"
           placeholder="Cena (zk)"
           min="0"

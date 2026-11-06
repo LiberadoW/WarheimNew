@@ -36,15 +36,16 @@ function UnitAdjustments({ post, update }) {
         Uzasadnienie zmiany / wynik z tabeli
         <input value={note} onChange={(e) => setNote(e.target.value)} />
       </label>
-      <div className="campaign-row">
+      <div className="campaign-stats">
         {R.STATS.map((name, i) => (
-          <div key={name}>
+          <div className="campaign-stat" key={name}>
             <span>
               {name}: {R.currentStats(unit)[i]}
             </span>
             <div>
               <button
-                disabled={!note.trim()}
+                aria-label={`Zmniejsz ${name}`}
+                disabled={!note.trim() || !Number.isFinite(Number(R.currentStats(unit)[i]))}
                 onClick={() =>
                   update((p) => {
                     R.changeStat(
@@ -63,7 +64,8 @@ function UnitAdjustments({ post, update }) {
                 −
               </button>
               <button
-                disabled={!note.trim()}
+                aria-label={`Zwiększ ${name}`}
+                disabled={!note.trim() || !Number.isFinite(Number(R.currentStats(unit)[i]))}
                 onClick={() =>
                   update((p) => {
                     R.changeStat(

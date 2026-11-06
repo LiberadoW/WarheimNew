@@ -1,3 +1,4 @@
+import useRollDraft from "./useRollDraft";
 import React, { useState } from "react";
 import * as R from "./rules";
 import DiceInput from "./DiceInput";
@@ -70,12 +71,12 @@ function Illness({ task, post, update }) {
   );
 }
 export function Mutations({ post, update }) {
-  const [unitId, setId] = useState(""),
-    [god, setGod] = useState("Niepodzielony"),
-    [dice, setDice] = useState([]),
-    [test, setTest] = useState([]),
-    [secondary, setSecondary] = useState([]),
-    [mentalDice, setMental] = useState([]),
+  const [unitId, setId] = useRollDraft(post, update, "mutation-unitId", ""),
+    [god, setGod] = useRollDraft(post, update, "mutation-god", "Niepodzielony"),
+    [dice, setDice] = useRollDraft(post, update, "mutation-dice", []),
+    [test, setTest] = useRollDraft(post, update, "mutation-test", []),
+    [secondary, setSecondary] = useRollDraft(post, update, "mutation-secondary", []),
+    [mentalDice, setMental] = useRollDraft(post, update, "mutation-mentalDice", []),
     [reason, setReason] = useState(""),
     [note, setNote] = useState("");
   const unit = post.units.find((u) => u.uniqueId === unitId),
@@ -107,6 +108,7 @@ export function Mutations({ post, update }) {
       <label>
         Znak Chaosu
         <select
+          disabled={R.validDice(dice, 2)}
           value={god}
           onChange={(e) => {
             setGod(e.target.value);

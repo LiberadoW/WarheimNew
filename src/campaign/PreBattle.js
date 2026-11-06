@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as R from "./rules";
 import DiceInput from "./DiceInput";
 export const oldWoundUnits = (units) =>
@@ -8,7 +8,8 @@ export const oldWoundUnits = (units) =>
       !u.battleAbsentModels?.[0],
   );
 export default function PreBattle({ units, setUnits, battle, setBattle }) {
-  const [rolls, setRolls] = useState({});
+  const rolls = battle.preBattleRolls || {};
+  const setRolls = (preBattleRolls) => setBattle({ ...battle, preBattleRolls });
   const pending = oldWoundUnits(units).filter(
     (u) => !battle.preBattle?.[u.uniqueId],
   );
