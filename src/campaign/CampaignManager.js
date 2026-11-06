@@ -86,6 +86,8 @@ export default function CampaignManager({
   const setCampaign = (next) =>
     setCampaignNotes((current) => ({ ...current, campaign: next }));
   const setBattle = (next) => setCampaign({ ...campaign, activeBattle: next });
+  // Several draft setters can run in one event (e.g. finish a test and clear
+  // its dice). Compose those edits before React renders the next snapshot.
   const latestPost = useRef(post);
   latestPost.current = post;
   const update = (fn) => {
@@ -482,7 +484,7 @@ export default function CampaignManager({
                     <thead>
                       <tr>
                         <th>Postać</th>
-                        <th>PD przed</th>
+                        <th>{post.expApplied ? "Aktualne PD" : "PD przed"}</th>
                         <th>Przeciwnicy WzA</th>
                         <th>Dodatkowe PD</th>
                       </tr>
@@ -491,7 +493,7 @@ export default function CampaignManager({
                       {post.units.map((u) => (
                         <tr key={u.uniqueId}>
                           <td data-label="Postać">{R.label(u)}</td>
-                          <td data-label="PD przed">{u.exp || 0}</td>
+                          <td data-label={post.expApplied ? "Aktualne PD" : "PD przed"}>{u.exp || 0}</td>
                           <td data-label="Przeciwnicy WzA">{u.battleKills || 0}</td>
                           <td data-label="Dodatkowe PD">
                             <NumberInput

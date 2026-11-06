@@ -159,3 +159,19 @@ test("battle numeric fields can be cleared and retyped, with casualties bounded 
   });
   expect(screen.getByLabelText("Modele przeciwnika WzA").value).toBe("5");
 });
+
+test("changing a step scrolls to and focuses the campaign heading", () => {
+  const scroll = jest.fn();
+  const previous = HTMLElement.prototype.scrollIntoView;
+  HTMLElement.prototype.scrollIntoView = scroll;
+  try {
+    setup();
+    click("Rozpocznij potyczkę");
+    fireEvent.change(screen.getByLabelText("Nazwa potyczki"), { target: { value: "Nawigacja" } });
+    click("Rozpocznij sekwencję po potyczce");
+    expect(scroll).toHaveBeenCalledWith({ block: "start", behavior: "instant" });
+    expect(document.activeElement.getAttribute("aria-label")).toBe("Prowadzenie kampanii");
+  } finally {
+    HTMLElement.prototype.scrollIntoView = previous;
+  }
+});

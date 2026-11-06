@@ -271,6 +271,7 @@ export default function Crafting({ post, update }) {
                 ),
               );
               setDice([]);
+              setPriceDice([]);
               setFailure([]);
               setStrength([]);
               setOutcome("");
