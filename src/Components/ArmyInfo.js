@@ -1,118 +1,122 @@
 import React, { useEffect, useState, useContext } from "react";
 import ArmyListErrors from "./ArmyListErrors";
-import armies from "../Data.js/Armies";
 import "../styles/ArmyInfo.css";
-import getErrors from "../Functions/getErrors";
+import { getErrorMessages } from "../Functions/getErrors";
 import getModelAmount from "../Functions/getModelAmount";
 import { EditArmyContext } from "../layouts/App";
 
+// "1 błąd", "2 błędy", "5 błędów", "22 błędy"
+export const formatErrorCount = (count) => {
+  const lastDigit = count % 10;
+  const lastTwo = count % 100;
+  if (count === 1) return "1 błąd";
+  if (lastDigit >= 2 && lastDigit <= 4 && (lastTwo < 12 || lastTwo > 14)) {
+    return `${count} błędy`;
+  }
+  return `${count} błędów`;
+};
+
+const Metric = ({ label, value, limit, isOver, overLabel }) => (
+  <div className={`army-metric${isOver ? " is-over" : ""}`}>
+    <span className="army-metric-label">{label}</span>
+    <span className="army-metric-value">
+      {value}
+      {limit !== undefined && <span className="army-metric-limit">{` / ${limit}`}</span>}
+    </span>
+    {isOver && (
+      <span className="army-metric-warning">
+        <i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+        {overLabel}
+      </span>
+    )}
+  </div>
+);
+
+// The summary strip under the header: gold, models, prestige and the
+// validation status, which opens the list of problems.
 const ArmyInfo = ({
   totalCost,
   prestige,
   army,
   unitList,
-  setArmyName,
-  armyName,
   errors,
   setErrors,
   isCustomArmyCost,
   customArmyCost,
-  theme,
+  onSelectUnit,
 }) => {
-  const [clicked, setClicked] = useState(false);
+  const [isErrorListOpen, setIsErrorListOpen] = useState(false);
   const { isEditArmyView } = useContext(EditArmyContext);
 
-  const handleClick = () => {
-    setClicked(!clicked);
-  };
-
+  let customLimit = Number(customArmyCost) || 0;
   if (army.armyRules.includes("Zamożność")) {
-    customArmyCost = 1.2 * customArmyCost;
+    customLimit = 1.2 * customLimit;
   }
 
   const modelAmount = getModelAmount(unitList, army);
+  const limit = isCustomArmyCost ? customLimit : army.limit;
 
-  const limit = isCustomArmyCost ? customArmyCost : army.limit;
+  const errorMessages = isEditArmyView
+    ? []
+    : getErrorMessages(army, totalCost, modelAmount, unitList, limit);
 
   useEffect(() => {
-    if (isEditArmyView) {
-      setErrors(0);
-      return;
-    } else {
-      setErrors(getErrors(army, totalCost, modelAmount, unitList, limit));
-      return;
-    }
-  }, [army, totalCost, modelAmount, unitList, isEditArmyView, limit]);
+    setErrors(errorMessages.length);
+  });
 
-  const handleArmyNameChange = (e) => {
-    setArmyName(e.target.value);
-  };
+  useEffect(() => {
+    if (errors === 0) {
+      setIsErrorListOpen(false);
+    }
+  }, [errors]);
 
   const isOverCost = !isEditArmyView && totalCost > limit;
   const isOverModels = !isEditArmyView && modelAmount > army.maxModels;
 
+  const handleSelectMessage = (uniqueId) => {
+    onSelectUnit?.(uniqueId);
+  };
+
   return (
-    <div className="army-info-alerts-container">
-      <div className="army-info-container">
-        <label className="army-name-input header-field">
-          <span className="header-field-label">Nazwa kompanii</span>
-          <input
-            onChange={handleArmyNameChange}
-            type="text"
-            value={armyName}
-            placeholder="Nazwij kompanię…"
+    <div className="army-summary">
+      <div className="army-summary-metrics">
+        {!isEditArmyView && (
+          <Metric
+            label="Złote korony"
+            value={totalCost}
+            limit={limit}
+            isOver={isOverCost}
+            overLabel="ponad limit"
           />
-        </label>
-        <div className="army-info-right">
-          <div className="army-metric">
-            <span className="army-metric-label">Prestiż</span>
-            <span className="army-metric-value">{prestige}</span>
-          </div>
-          {!isEditArmyView && (
-            <div className={`army-metric${isOverCost ? " is-over" : ""}`}>
-              <span className="army-metric-label">Złote korony</span>
-              <span className="army-metric-value">
-                {totalCost}
-                <span className="army-metric-limit">{` / ${limit}`}</span>
-              </span>
-            </div>
-          )}
-          <div className={`army-metric${isOverModels ? " is-over" : ""}`}>
-            <span className="army-metric-label">Modele</span>
-            <span className="army-metric-value">
-              {modelAmount}
-              {!isEditArmyView && (
-                <span className="army-metric-limit">{` / ${army.maxModels}`}</span>
-              )}
-            </span>
-          </div>
-        </div>
-        <div className="army-info-left">
-          {errors > 0 && (
-            <button
-              type="button"
-              className="alerts"
-              onClick={handleClick}
-              aria-expanded={clicked}
-            >
-              <i className="fa-solid fa-triangle-exclamation"></i>
-              {`Błędy: ${errors}`}
-              <i
-                className={`fa-solid ${
-                  clicked ? "fa-chevron-up" : "fa-chevron-down"
-                } alerts-chevron`}
-              ></i>
-            </button>
-          )}
-        </div>
-      </div>
-      {clicked && (
-        <ArmyListErrors
-          army={army}
-          unitList={unitList}
-          totalCost={totalCost}
-          limit={limit}
+        )}
+        <Metric
+          label="Modele"
+          value={modelAmount}
+          limit={isEditArmyView ? undefined : army.maxModels}
+          isOver={isOverModels}
+          overLabel="za dużo"
         />
+        <Metric label="Prestiż" value={prestige} />
+      </div>
+
+      {errorMessages.length > 0 && (
+        <button
+          type="button"
+          className="army-errors-toggle"
+          onClick={() => setIsErrorListOpen(!isErrorListOpen)}
+          aria-expanded={isErrorListOpen}
+          aria-controls="army-error-list"
+        >
+          <i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+          {formatErrorCount(errorMessages.length)}
+          <span className="army-errors-toggle-action">
+            · {isErrorListOpen ? "Ukryj" : "Sprawdź"}
+          </span>
+        </button>
+      )}
+
+      {isErrorListOpen && errorMessages.length > 0 && (
+        <ArmyListErrors messages={errorMessages} onSelect={handleSelectMessage} />
       )}
     </div>
   );

@@ -1,132 +1,155 @@
-/* Lives inside .builder-header: its children join the header row and the
-   expanded error list wraps onto its own line below. */
-.army-info-alerts-container {
-  display: contents;
-}
-
-.army-info-container {
+/* Summary strip under the header: gold, models, prestige, validation. */
+.army-summary {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 12px 24px;
+  align-items: center;
+  gap: 8px 24px;
 }
 
-.army-name-input input {
-  width: 220px;
-}
-
-.army-info-right {
+.army-summary-metrics {
   display: flex;
-  align-items: stretch;
-  gap: 6px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
 }
 
 .army-metric {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-  min-width: 72px;
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  background-color: var(--surface-2);
-  border: 1px solid var(--border);
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  white-space: nowrap;
 }
 
 .army-metric-label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.875rem;
   color: var(--text-muted);
 }
 
 .army-metric-value {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: var(--text);
 }
 
 .army-metric-limit {
-  color: var(--text-muted);
   font-weight: 500;
-}
-
-.army-metric.is-over {
-  border-color: var(--accent);
-  background-color: var(--accent-soft);
+  color: var(--text-muted);
 }
 
 .army-metric.is-over .army-metric-value {
   color: var(--accent);
 }
 
-.alerts {
+.army-metric-warning {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.army-errors-toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 36px;
-  padding: 0 12px;
+  min-height: 32px;
+  margin-left: auto;
+  padding: 0 10px;
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--accent);
-  background-color: var(--accent-soft);
-  border: 1px solid var(--accent);
-  border-radius: 999px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
 }
 
-.alerts-chevron {
-  font-size: 0.7rem;
+.army-errors-toggle:hover {
+  background-color: var(--accent-soft);
+}
+
+.army-errors-toggle:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.army-errors-toggle-action {
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .army-list-errors {
-  order: 10;
   flex-basis: 100%;
-  box-sizing: border-box;
-  padding: 12px 16px !important;
-  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
   background-color: var(--accent-soft);
-  color: var(--accent) !important;
-  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
 }
 
-@media screen and (max-width: 768px) {
-  .army-info-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .army-name-input input {
-    width: 100%;
-  }
-
-  .army-info-right {
-    justify-content: space-between;
-  }
-
-  .army-metric {
-    flex: 1;
-    min-width: 0;
-  }
+.army-error-link,
+.army-error-text {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-radius: 6px;
 }
 
-.army-metric-value {
+.army-error-link i,
+.army-error-text i {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.army-error-link {
+  cursor: pointer;
+}
+
+.army-error-link:hover {
+  background-color: var(--surface);
+}
+
+.army-error-link:focus-visible {
+  outline: 2px solid var(--focus);
+}
+
+.army-error-link-hint {
+  margin-left: auto;
+  padding-left: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
   white-space: nowrap;
+  color: var(--accent);
 }
 
-@media screen and (max-width: 480px) {
-  .army-metric {
-    padding: 6px 8px;
+@media screen and (max-width: 640px) {
+  .army-errors-toggle {
+    margin-left: 0;
   }
 
-  .army-metric-label {
-    font-size: 0.6rem;
+  .army-error-link {
+    flex-wrap: wrap;
   }
 
-  .army-metric-value {
-    font-size: 0.95rem;
+  .army-error-link-hint {
+    margin-left: 24px;
+    padding-left: 0;
   }
 }

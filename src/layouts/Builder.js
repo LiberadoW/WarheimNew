@@ -12,10 +12,11 @@ import html2pdf from "html2pdf.js";
 import { avoidPdfPageBreaks } from "../Functions/avoidPdfPageBreaks";
 import "@sweetalert2/themes/bootstrap-4";
 import ArmySelect from "../Components/ArmySelect";
+import HeaderMenu from "../Components/HeaderMenu";
 import ArmyInfo from "../Components/ArmyInfo";
 import CampaignPointsEditor from "../Components/CampaignPointsEditor";
 import Modal from "../Components/Modal";
-import UnitDetails from "../Components/UnitDetails";
+import UnitDetails, { UnitDetailsHeader } from "../Components/UnitDetails";
 import UnitSelect from "./UnitSelect";
 import UnitPicker from "./UnitPicker";
 import UnitList from "./UnitList";
@@ -276,6 +277,11 @@ const Builder = ({
 
   const handleSidePanelBack = () => {
     setIdShown(null);
+  };
+
+  const handleSelectUnitFromError = (uniqueId) => {
+    setIsPickerOpen(false);
+    setIdShown(uniqueId);
   };
 
   const handleSidePanelClose = () => {
@@ -580,28 +586,134 @@ const Builder = ({
     >
       <div className="builder">
         <div className="builder-header">
-          {isSidePanelView && (
-            <ArmySelect
-              army={army}
-              setArmy={setArmy}
-              setUnitList={setUnitList}
-              setUnitName={setUnitName}
-              setIdShown={setIdShown}
-              setMercenaryUnitName={setMercenaryUnitName}
-              setMercenaries={setMercenaries}
-              resetCampaignNotes={resetCampaignNotes}
-            />
-          )}
+          <div className="builder-header-main">
+            <div className="builder-identity">
+              <input
+                className="builder-name-input"
+                type="text"
+                value={armyName}
+                onChange={(e) => setArmyName(e.target.value)}
+                placeholder="Nazwij kompanię…"
+                aria-label="Nazwa kompanii"
+              />
+              {isSidePanelView && (
+                <ArmySelect
+                  army={army}
+                  setArmy={setArmy}
+                  setUnitList={setUnitList}
+                  setUnitName={setUnitName}
+                  setIdShown={setIdShown}
+                  setMercenaryUnitName={setMercenaryUnitName}
+                  setMercenaries={setMercenaries}
+                  resetCampaignNotes={resetCampaignNotes}
+                />
+              )}
+              {isEditArmyView && (
+                <UnitSelect
+                  army={army}
+                  setUnitName={setUnitName}
+                  unitName={unitName}
+                  unitList={unitList}
+                  setUnitList={setUnitList}
+                />
+              )}
+            </div>
 
-          {isEditArmyView && (
-            <UnitSelect
-              army={army}
-              setUnitName={setUnitName}
-              unitName={unitName}
-              unitList={unitList}
-              setUnitList={setUnitList}
-            />
-          )}
+            <div className="builder-header-actions">
+              <HeaderMenu label="PDF" icon="fa-solid fa-file-pdf" showCaret>
+                {(close) => (
+                  <>
+                    <label className="header-menu-item header-menu-check">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(includeRulesInPdf)}
+                        onChange={(e) => setIncludeRulesInPdf(e.target.checked)}
+                      />
+                      Dołącz zasady
+                    </label>
+                    <hr className="header-menu-separator" />
+                    <button
+                      type="button"
+                      className="header-menu-item"
+                      onClick={(e) => {
+                        close();
+                        handleSavePDFClick(e);
+                      }}
+                    >
+                      <i className="fa-solid fa-download" aria-hidden="true"></i>
+                      Zapisz PDF
+                    </button>
+                  </>
+                )}
+              </HeaderMenu>
+              {isPlayArmyView && (
+                <button
+                  type="button"
+                  className="button button-secondary"
+                  onClick={handleEndBattleClick}
+                >
+                  Zakończ bitwę
+                </button>
+              )}
+              {currentUser && (
+                <button type="button" className="button" onClick={saveArmy}>
+                  <i className="fa-solid fa-floppy-disk" aria-hidden="true"></i>
+                  Zapisz armię
+                </button>
+              )}
+              {(isSidePanelView || !isPlayArmyView) && (
+                <HeaderMenu
+                  icon="fa-solid fa-ellipsis-vertical"
+                  ariaLabel="Więcej opcji"
+                  buttonClassName="button button-secondary button-icon"
+                >
+                  {(close) => (
+                    <>
+                      {isSidePanelView && (
+                        <>
+                          <label className="header-menu-item header-menu-check">
+                            <input
+                              type="checkbox"
+                              checked={isCustomArmyCost}
+                              onChange={handleCustomArmyCostClick}
+                            />
+                            Własny limit ZK
+                          </label>
+                          {isCustomArmyCost && (
+                            <label className="header-menu-field">
+                              Startowa liczba ZK
+                              <input
+                                type="text"
+                                inputMode="numeric"
+                                value={customArmyCost || ""}
+                                onChange={handleCustomArmyCostChange}
+                              />
+                            </label>
+                          )}
+                        </>
+                      )}
+                      {isSidePanelView && !isPlayArmyView && (
+                        <hr className="header-menu-separator" />
+                      )}
+                      {!isPlayArmyView && (
+                        <button
+                          type="button"
+                          className="header-menu-item is-danger"
+                          onClick={() => {
+                            close();
+                            handleResetArmyClick();
+                          }}
+                        >
+                          <i className="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                          Resetuj armię
+                        </button>
+                      )}
+                    </>
+                  )}
+                </HeaderMenu>
+              )}
+            </div>
+          </div>
 
           <ArmyInfo
             prestige={prestige}
@@ -610,69 +722,10 @@ const Builder = ({
             isCustomArmyCost={isCustomArmyCost}
             customArmyCost={customArmyCost}
             unitList={unitList}
-            setArmyName={setArmyName}
-            armyName={armyName}
             errors={errors}
             setErrors={setErrors}
-            theme={theme}
+            onSelectUnit={handleSelectUnitFromError}
           />
-
-          <div className="builder-header-actions">
-            {isSidePanelView && (
-              <div className="builder-custom-cost">
-                <label>
-                  <input
-                    type="checkbox"
-                    onClick={handleCustomArmyCostClick}
-                  ></input>
-                  Własny limit ZK
-                </label>
-                {isCustomArmyCost && (
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    onChange={handleCustomArmyCostChange}
-                    aria-label="Startowa liczba ZK"
-                  />
-                )}
-              </div>
-            )}
-            {!isPlayArmyView && (
-              <button
-                className="button button-ghost"
-                onClick={handleResetArmyClick}
-              >
-                Resetuj
-              </button>
-            )}
-            <label
-              className="builder-pdf-rules"
-              title="Dołącz do PDF opisy zasad postaci, ekwipunku i zaklęć"
-            >
-              <input
-                type="checkbox"
-                checked={Boolean(includeRulesInPdf)}
-                onChange={(e) => setIncludeRulesInPdf(e.target.checked)}
-              />
-              Zasady w PDF
-            </label>
-            <button
-              className="button button-secondary"
-              onClick={handleSavePDFClick}
-            >
-              <i className="fa-solid fa-file-pdf"></i> Zapisz PDF
-            </button>
-            {isPlayArmyView && (
-              <button className="button" onClick={handleEndBattleClick}>
-                Zakończ bitwę
-              </button>
-            )}
-            {currentUser && (
-              <button className="button" onClick={saveArmy}>
-                <i className="fa-solid fa-floppy-disk"></i> Zapisz armię
-              </button>
-            )}
-          </div>
         </div>
 
         <div
@@ -723,23 +776,31 @@ const Builder = ({
               }`}
             >
               <div className="side-panel-bar">
-                {selectedUnit ? (
+                <div className="side-panel-bar-nav">
+                  {selectedUnit && (
+                    <button
+                      type="button"
+                      className="side-panel-back"
+                      onClick={handleSidePanelBack}
+                    >
+                      <i className="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                      Dodaj jednostki
+                    </button>
+                  )}
                   <button
-                    className="side-panel-back"
-                    onClick={handleSidePanelBack}
+                    type="button"
+                    className="side-panel-close"
+                    onClick={handleSidePanelClose}
                   >
-                    <i className="fa-solid fa-arrow-left"></i> Dodaj jednostki
+                    <i className="fa-solid fa-xmark" aria-hidden="true"></i>
+                    Wróć do kompanii
                   </button>
+                </div>
+                {selectedUnit ? (
+                  <UnitDetailsHeader unit={selectedUnit} />
                 ) : (
-                  <span className="side-panel-title">Rekrutacja</span>
+                  <h2 className="side-panel-title">Rekrutacja</h2>
                 )}
-                <button
-                  className="side-panel-close"
-                  onClick={handleSidePanelClose}
-                  aria-label="Zamknij"
-                >
-                  ×
-                </button>
               </div>
 
               {selectedUnit ? (

@@ -1,6 +1,39 @@
-.army-select-container select {
-  min-width: 240px;
+/* Faction selector: a quiet secondary control under the company name. */
+.army-select-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
   max-width: 100%;
+}
+
+.army-select-icon {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.app .army-select-container select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 32px;
+  padding: 4px 28px 4px 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  background-color: transparent;
+  border-color: transparent;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.app .army-select-container select:hover {
+  color: var(--text);
+  background-color: var(--surface-2);
+  border-color: var(--border);
+}
+
+.app .army-select-container select:focus-visible {
+  color: var(--text);
+  border-color: var(--border-strong);
 }
 
 .army-select-updated-option {

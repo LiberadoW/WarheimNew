@@ -1,135 +1,29 @@
 import React from "react";
-import "../styles/ArmyListErrors.css";
-import isGeneral from "../Functions/isGeneral";
-import getModelAmount from "../Functions/getModelAmount";
-import { getValueOfOptionalEquipment } from "../Functions/getValueOfOptionalEquipment";
-import { getAllEquipment } from "../Functions/getAllEquipment";
-import { getUnitNumbers } from "../Functions/getUnitNumbers";
-import { useState } from "react";
 
-const ArmyListErrors = ({ army, unitList, totalCost, limit }) => {
-  const modelAmount = getModelAmount(unitList, army);
-
-  const equipmentList = getAllEquipment(unitList);
-
-  const oneOfItems = [
-    "Harpun",
-    "Ołowiomiotacz",
-    "Kadzielnica zarazy",
-    "Kula trującego wichru",
-  ];
-
-  console.log(army, unitList);
-
-  const unitNumbers = getUnitNumbers(unitList);
-
-  let areMoreGoblinsThanOrks = false;
-
-  if (army?.name === "Orkowie & Gobliny") {
-    const numberOfOrks = unitList.map((unit) =>
-      unit.unitName.toLowerCase().includes("ork")
-    );
-    console.log(numberOfOrks, "orks");
-  }
-
-  return (
-    <div className="army-list-errors">
-      {totalCost > limit && (
-        <p className="bold">
-          <i className="fa-solid fa-triangle-exclamation"></i> Przekroczono
-          liczbę złotych koron.
-        </p>
-      )}
-
-      {!isGeneral(unitList) && (
-        <p className="bold">
-          {" "}
-          <i className="fa-solid fa-triangle-exclamation"></i> Banda musi
-          posiadać dowódcę.
-        </p>
-      )}
-
-      {modelAmount < army.minModels && (
-        <p className="bold">
-          {" "}
-          <i className="fa-solid fa-triangle-exclamation"></i>{" "}
-          {`Banda musi składać się z przynajmniej ${army.minModels} modeli.`}
-        </p>
-      )}
-
-      {modelAmount > army.maxModels && (
-        <p className="bold">
-          {" "}
-          <i className="fa-solid fa-triangle-exclamation"></i>{" "}
-          {`Banda musi składać się z maksymalnie ${army.maxModels} modeli.`}
-        </p>
-      )}
-
-      {army.armyRules.includes("Zamożność") &&
-        totalCost > limit * 0.8 &&
-        getValueOfOptionalEquipment(unitList) < limit * 0.2 && (
-          <p className="bold">
-            <i className="fa-solid fa-triangle-exclamation"> </i> Dodatkowe 20%
-            zk z zasady "Zamożność" musi być przeznaczone na zakup ekwipunku.
-          </p>
+// Lists roster problems. A message tied to a unit opens that unit.
+const ArmyListErrors = ({ messages, onSelect }) => (
+  <ul className="army-list-errors" id="army-error-list">
+    {messages.map(({ message, uniqueId }, index) => (
+      <li key={`${index}-${message}`}>
+        {uniqueId && onSelect ? (
+          <button
+            type="button"
+            className="army-error-link"
+            onClick={() => onSelect(uniqueId)}
+          >
+            <i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+            <span>{message}</span>
+            <span className="army-error-link-hint">Pokaż jednostkę</span>
+          </button>
+        ) : (
+          <span className="army-error-text">
+            <i className="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+            <span>{message}</span>
+          </span>
         )}
-
-      {oneOfItems.map((item, index) => {
-        if (equipmentList.filter((x) => x === item).length > 1) {
-          return (
-            <p className="bold" key={index}>
-              <i className="fa-solid fa-triangle-exclamation"> </i>{" "}
-              {`Banda może posiadać maksymalnie 1 ${item}.`}
-            </p>
-          );
-        }
-      })}
-
-      {Object.keys(unitNumbers).map((unit, index) => {
-        if (unitNumbers[unit] > army?.heroes?.[unit]?.number) {
-          return (
-            <p className="bold" key={index}>
-              <i className="fa-solid fa-triangle-exclamation"> </i>{" "}
-              {`Banda może posiadać maksymalnie ${
-                army?.heroes?.[unit].number
-              } ${
-                army.heroes[unit].number === 1
-                  ? "jednostkę"
-                  : army.heroes[unit].number > 4
-                  ? "jednostek"
-                  : "jednostki"
-              } ${unit}.`}
-            </p>
-          );
-        }
-      })}
-
-      {unitList.map((item, index) => {
-        const startingWeaponsOptions = Object.entries(
-          item.equipmentList
-        ).filter(([key, value]) => value[2] === "Startowy");
-
-        if (startingWeaponsOptions.length > 0) {
-          const intersection = item.optionalEquipment.filter((element) =>
-            startingWeaponsOptions.flat().includes(element)
-          );
-
-          if (intersection.length < 1) {
-            return (
-              <p className="bold" key={index}>
-                <i className="fa-solid fa-triangle-exclamation"></i>{" "}
-                {`${
-                  item.unitName
-                } musi posiadać przynajmniej 1 wybór z listy startowych broni: ${startingWeaponsOptions
-                  .map((item) => item[0])
-                  .join(", ")}.`}
-              </p>
-            );
-          }
-        }
-      })}
-    </div>
-  );
-};
+      </li>
+    ))}
+  </ul>
+);
 
 export default ArmyListErrors;

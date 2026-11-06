@@ -4,6 +4,7 @@ import { magic } from "../Data.js/Magic";
 import { getMagicLore } from "../Functions/getMagicLore";
 import { getModifiers } from "../Functions/getModifiers";
 import { getEquipmentRules, getRuleText } from "../Functions/getRuleText";
+import RulesModal from "./RulesModal";
 import "../styles/UnitDetails.css";
 
 const STAT_HEADERS = ["Sz", "WW", "US", "S", "Wt", "Żw", "I", "A", "CP"];
@@ -22,8 +23,6 @@ const TYPE_LABELS = {
   Machina: "Machina",
   "Najemne Ostrze": "Najemne Ostrze",
 };
-
-const LONG_RULE_LENGTH = 280;
 
 const sortStatRows = (stats) =>
   Object.entries(stats || {}).sort(([a], [b]) => {
@@ -83,60 +82,58 @@ const StatsSection = ({ unit }) => {
   );
 };
 
-const RuleEntry = ({ name, text, source }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const isLong = text.length > LONG_RULE_LENGTH;
-
-  return (
-    <li className="unit-rule">
-      <div className="unit-rule-header">
-        <span className="unit-rule-name">{name}</span>
-        {source && <span className="unit-rule-source">{source}</span>}
-      </div>
-      {text && (
-        <p
-          className={`unit-rule-text${
-            isLong && !isExpanded ? " is-clamped" : ""
-          }`}
-        >
-          {text}
-        </p>
-      )}
-      {isLong && (
-        <button
-          type="button"
-          className="unit-rule-toggle"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          {isExpanded ? "Zwiń" : "Pokaż całość"}
-        </button>
-      )}
-    </li>
-  );
-};
+const getRuleSections = (unit, magicLore, spells) => [
+  {
+    title: "Zasady specjalne",
+    entries: unit.rules.map((rule) => ({ name: rule, text: getRuleText(rule) })),
+  },
+  {
+    title: "Zasady ekwipunku",
+    entries: Object.entries(getEquipmentRules(unit))
+      .filter(([rule]) => !unit.rules.includes(rule))
+      .map(([rule, items]) => ({
+        name: rule,
+        text: getRuleText(rule),
+        source: items.join(", "),
+      })),
+  },
+  {
+    title: magicLore || "Zaklęcia",
+    entries: spells.map(([title, type, text]) => ({
+      name: title,
+      text,
+      source: type,
+    })),
+  },
+];
 
 const AbilitiesSection = ({ unit }) => {
+  const [modalFocus, setModalFocus] = useState(null);
   const skills = (unit.skills || [])
     .map((skill) => SKILL_NAMES[skill])
     .filter(Boolean);
   const magicLore = getMagicLore([unit]);
   const spells = magicLore && magic[magicLore] ? Object.values(magic[magicLore]) : [];
-  const equipmentRules = Object.entries(getEquipmentRules(unit)).filter(
-    ([rule]) => !unit.rules.includes(rule),
-  );
 
-  if (
-    unit.rules.length === 0 &&
-    skills.length === 0 &&
-    spells.length === 0 &&
-    equipmentRules.length === 0
-  ) {
+  if (unit.rules.length === 0 && skills.length === 0 && spells.length === 0) {
     return null;
   }
 
+  const openRules = (name = "") => setModalFocus(name);
+
   return (
     <section className="unit-details-section">
-      <h3 className="unit-details-heading">Umiejętności i zaklęcia</h3>
+      <div className="unit-details-heading-row">
+        <h3 className="unit-details-heading">Umiejętności i zasady</h3>
+        <button
+          type="button"
+          className="button button-secondary button-small"
+          onClick={() => openRules()}
+        >
+          <i className="fa-solid fa-book-open" aria-hidden="true"></i>
+          Opisy zasad
+        </button>
+      </div>
 
       {skills.length > 0 && (
         <div className="unit-details-group">
@@ -154,39 +151,48 @@ const AbilitiesSection = ({ unit }) => {
       {unit.rules.length > 0 && (
         <div className="unit-details-group">
           <h4 className="unit-details-subheading">Zasady specjalne</h4>
-          <ul className="unit-rules">
+          <div className="unit-chips">
             {unit.rules.map((rule) => (
-              <RuleEntry key={rule} name={rule} text={getRuleText(rule)} />
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {equipmentRules.length > 0 && (
-        <div className="unit-details-group">
-          <h4 className="unit-details-subheading">Zasady ekwipunku</h4>
-          <ul className="unit-rules">
-            {equipmentRules.map(([rule, items]) => (
-              <RuleEntry
+              <button
+                type="button"
+                className="unit-chip unit-chip-link"
                 key={rule}
-                name={rule}
-                text={getRuleText(rule)}
-                source={items.join(", ")}
-              />
+                onClick={() => openRules(rule)}
+                title="Pokaż opis zasady"
+              >
+                {rule}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
       {spells.length > 0 && (
         <div className="unit-details-group">
           <h4 className="unit-details-subheading">{magicLore}</h4>
-          <ul className="unit-rules">
-            {spells.map(([title, type, text]) => (
-              <RuleEntry key={title} name={title} text={text} source={type} />
+          <div className="unit-chips">
+            {spells.map(([title]) => (
+              <button
+                type="button"
+                className="unit-chip unit-chip-link"
+                key={title}
+                onClick={() => openRules(title)}
+                title="Pokaż opis zaklęcia"
+              >
+                {title}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
+      )}
+
+      {modalFocus !== null && (
+        <RulesModal
+          title={`Zasady: ${unit.unitDisplayName || unit.unitName}`}
+          sections={getRuleSections(unit, magicLore, spells)}
+          focusName={modalFocus}
+          onClose={() => setModalFocus(null)}
+        />
       )}
     </section>
   );
@@ -211,28 +217,8 @@ const UnitDetails = ({
     handleSetUnitExp(unit.uniqueId, exp);
   };
 
-  const isGroup = unit.type === "Stronnik" || unit.type === "Machina";
-
   return (
     <div className="unit-details">
-      <div className="unit-details-header">
-        <div className="unit-details-title">
-          <span className="unit-details-type">
-            {TYPE_LABELS[unit.type] || unit.type}
-          </span>
-          <h2>{unit.unitName}</h2>
-        </div>
-        <div className="unit-details-cost">
-          <span className="unit-details-cost-value">{unit.totalCost}</span>
-          <span className="unit-details-cost-unit">zk</span>
-          {isGroup && Number(unit.selectedNumber) > 1 && (
-            <span className="unit-details-cost-note">
-              {`${unit.selectedNumber} × ${unit.cost} zk`}
-            </span>
-          )}
-        </div>
-      </div>
-
       <div className="unit-details-fields">
         <label className="unit-details-field">
           <span>Imię</span>
@@ -272,6 +258,36 @@ const UnitDetails = ({
           army={army}
         />
       </section>
+    </div>
+  );
+};
+
+// Name, type and cost of the selected unit, shown in the panel's sticky bar.
+export const UnitDetailsHeader = ({ unit }) => {
+  const isGroup = unit.type === "Stronnik" || unit.type === "Machina";
+  const hasCustomName =
+    unit.unitDisplayName && unit.unitDisplayName !== unit.unitName;
+
+  return (
+    <div className="unit-details-header">
+      <div className="unit-details-title">
+        <span className="unit-details-type">
+          {TYPE_LABELS[unit.type] || unit.type}
+        </span>
+        <h2>{hasCustomName ? unit.unitDisplayName : unit.unitName}</h2>
+        {hasCustomName && (
+          <span className="unit-details-subtitle">{unit.unitName}</span>
+        )}
+      </div>
+      <div className="unit-details-cost">
+        <span className="unit-details-cost-value">{unit.totalCost}</span>
+        <span className="unit-details-cost-unit">zk</span>
+        {isGroup && Number(unit.selectedNumber) > 1 && (
+          <span className="unit-details-cost-note">
+            {`${unit.selectedNumber} × ${unit.cost} zk`}
+          </span>
+        )}
+      </div>
     </div>
   );
 };

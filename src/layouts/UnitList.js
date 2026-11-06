@@ -72,6 +72,12 @@ const UnitList = ({
     if (e.target.closest("select, .unit-delete")) {
       return;
     }
+    if (e.type === "keydown") {
+      if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) {
+        return;
+      }
+      e.preventDefault();
+    }
 
     const selectedUnitId = e.target.closest(".unit")?.id;
     if (!selectedUnitId) {
@@ -110,8 +116,26 @@ const UnitList = ({
               }`}
               id={unit.uniqueId}
             >
-              <li className={`unit-info-container ${unitIndex}`} onClick={handleClickId}>
-                <span className="unit-name">{unit.unitName} </span>
+              <li
+                className={`unit-info-container ${unitIndex}`}
+                onClick={handleClickId}
+              >
+                <span
+                  className="unit-name"
+                  onKeyDown={handleClickId}
+                  tabIndex={0}
+                  role="button"
+                  aria-pressed={idShown === unit.uniqueId}
+                >
+                  {unit.unitDisplayName && unit.unitDisplayName !== unit.unitName ? (
+                    <>
+                      {unit.unitDisplayName}
+                      <span className="unit-name-type">{unit.unitName}</span>
+                    </>
+                  ) : (
+                    unit.unitName
+                  )}
+                </span>
                 <p className="unit-info">
                   <span className="number-of-henchmen">
                     {unit.type === "Stronnik" || unit.type === "Machina" ? (
@@ -146,12 +170,14 @@ const UnitList = ({
                   </span>
                   <span className="unit-cost">{`${unit.totalCost} zk`}</span>
                   {!isPlayArmyView && (
-                    <span
+                    <button
+                      type="button"
                       className={`unit-delete ${unitIndex}`}
                       onClick={() => handleDeleteClick(unit.uniqueId)}
+                      aria-label={`Usuń: ${unit.unitDisplayName || unit.unitName}`}
                     >
-                      <i className="fa-solid fa-trash-can"></i>
-                    </span>
+                      <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+                    </button>
                   )}
                 </p>
               </li>

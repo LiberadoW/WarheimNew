@@ -1,0 +1,101 @@
+.header-menu {
+  position: relative;
+}
+
+.header-menu-caret {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.header-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 950;
+  box-sizing: border-box;
+  width: max-content;
+  min-width: 240px;
+  max-width: calc(100vw - 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+}
+
+.header-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.header-menu-item:hover {
+  background-color: var(--surface-2);
+}
+
+.header-menu-item:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 0;
+}
+
+.header-menu-item i {
+  width: 16px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.header-menu-item.is-danger,
+.header-menu-item.is-danger i {
+  color: var(--accent);
+}
+
+.header-menu-item.is-danger:hover {
+  background-color: var(--accent-soft);
+}
+
+.header-menu-check {
+  cursor: pointer;
+}
+
+.header-menu-check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.header-menu-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 12px 8px 38px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.app .header-menu-field input {
+  width: 120px;
+  font-variant-numeric: tabular-nums;
+}
+
+.header-menu-separator {
+  height: 1px;
+  margin: 4px 0;
+  border: none;
+  background-color: var(--border);
+}
