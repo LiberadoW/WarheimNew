@@ -34,10 +34,10 @@ export const orki = {
     },
     "Burszuj orków": {
       id: 2,
-      startingEquipment: [],
+      startingEquipment: ["Sztylet"],
       cost: 40,
       number: 2,
-      equipmentList: heroEquipment["Orkowie & Gobliny"].Bohaterowie,
+      equipmentList: heroEquipment["Orkowie & Gobliny"].Burszuj,
       type: "Bohater",
       stats: {
         Początkowa: [4, 4, 3, 3, 4, 1, 3, 1, 7],
@@ -188,5 +188,10 @@ export const orki = {
     "Mekaniak",
     "Miotacz ołowiu",
     "Ochroniarz",
+  ],
+  unitRatios: [
+    { unit: "Goblin", required: "Ork", ratio: 2 },
+    { unit: "Snotling", required: "Goblin", ratio: 2 },
+    { unit: "Squig", required: "Goblin", ratio: 1 },
   ],
 };

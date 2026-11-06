@@ -185,4 +185,5 @@ export const moulder = {
   nature: "Chaotyczna",
   armyRules: ["Rozrzutność"],
   mercenaries: ["Szczurogr", "Szpieg", "Złodziej"],
+  unitRatios: [{ unit: "Wielki szczur", required: "Klanbrat", ratio: 2 }],
 };

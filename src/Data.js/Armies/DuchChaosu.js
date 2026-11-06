@@ -17,7 +17,7 @@ export const duchChaosu = {
         "Czarnoksięstwo",
         "Dowodzenie",
         "Dowódca",
-        "Mag (Dziedzina Chaosu Niepodzielonego)",
+        "Mag (Dziedzina Chaosu)",
         "Stygmat Chaosu",
       ],
       exp: 20,

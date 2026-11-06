@@ -191,7 +191,7 @@ export const marienburg = {
       rules: ["Duży cel", "Kontakty handlowe (3)", "Machina wojenna", "Powóz"],
     },
     Rydwan: {
-      id: 11,
+      id: 12,
       startingEquipment: [],
       cost: 125,
       number: 1,

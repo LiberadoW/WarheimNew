@@ -33,8 +33,7 @@ export const siostry = {
         "Duchowny (modlitwy do Sigmara)",
         "Modlitwa",
         "Nienawiść",
-        "Przepastne trzewia",
-        "Rozproszenie magii (2)",
+        "Rozproszenie magii (2)"
       ],
       exp: 12,
       skills: [0, 2, 3, 5],
@@ -106,7 +105,7 @@ export const siostry = {
         Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Fanatyk", "Furia", "Nienawiść"],
+      rules: ["Fanatyk", "Furia", "Męczennik", "Nienawiść"],
     },
     "Rycerz zakonny": {
       id: 7,
@@ -155,7 +154,7 @@ export const siostry = {
       equipmentList: {},
       type: "Machina",
       stats: {
-        Powóz: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
+        Rydwan: ["-", "-", "-", 5, 5, 8, "-", "-", "-"],
         Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
         "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
       },

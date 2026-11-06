@@ -1,43 +1,52 @@
 .navbar {
-  height: 50px;
-  background-color: var(--main);
-  color: white;
+  min-height: 56px;
+  color: var(--ink-text);
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 2px;
+  padding-right: 8px;
   text-decoration: none;
 }
 
 .navbar li {
-  height: 50px;
+  display: flex;
   align-items: center;
 }
 
 .navbar li a {
   text-decoration: none;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  height: 50px;
-  padding: 0 10px 0 10px;
+  align-items: center;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .navbar a:hover {
-  background-color: var(--hover);
+  color: var(--ink-text);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .logout-button {
-  height: 50px;
   border: none;
   background-color: transparent;
-  transition: background-color 0.5s ease;
   cursor: pointer;
-  color: white;
 }
 
-.logout-button:hover {
-  background-color: var(--hover);
+.navbar li a,
+.navbar li {
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 480px) {
+  .navbar li a {
+    padding: 0 8px;
+    font-size: 0.82rem;
+  }
 }

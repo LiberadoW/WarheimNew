@@ -5,6 +5,7 @@ import UnitTable from "./UnitTable";
 import Treasury from "./Treasury";
 import ArmyListHeader from "./ArmyListHeader";
 import CampaignPoints from "./CampaignPoints";
+import ArmyRulesAppendix from "./ArmyRulesAppendix";
 import "../styles/ArmyList.css";
 import { magic } from "../Data.js/Magic";
 import { getMagicLore } from "../Functions/getMagicLore";
@@ -20,6 +21,7 @@ const ArmyList = ({
   prestige,
   armyName,
   campaignNotes,
+  includeRules = false,
 }) => {
   const heroesUnitList = unitList.filter((unit) => unit.type === "Bohater");
   const henchmenUnitList = unitList.filter(
@@ -68,6 +70,7 @@ const ArmyList = ({
         />
         <CampaignPoints army={army} campaignNotes={campaignNotes} />
       </div>
+      {includeRules && <ArmyRulesAppendix unitList={unitList} />}
       {/* <div className="print-a4-page">
         <div className="rules-box">
           {uniqueRulesList.map((rule) => {

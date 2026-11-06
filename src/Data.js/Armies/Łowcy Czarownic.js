@@ -42,8 +42,7 @@ export const łowcyCzarownic = {
         "Duchowny (modlitwy do Sigmara)",
         "Modlitwa",
         "Nienawiść",
-        "Przepastne trzewia",
-        "Rozproszenie magii (2)",
+        "Rozproszenie magii (2)"
       ],
       exp: 12,
       skills: [0, 2, 3, 5],
@@ -87,7 +86,7 @@ export const łowcyCzarownic = {
         Początkowa: [4, 3, 3, 4, 4, 1, 3, 1, 10],
         Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
       },
-      rules: ["Fanatyk", "Furia"],
+      rules: ["Fanatyk", "Furia", "Męczennik"],
     },
     "Pies bojowy": {
       id: 5,
@@ -130,8 +129,8 @@ export const łowcyCzarownic = {
       type: "Machina",
       stats: {
         "Powóz": ["-","-","-",4,8,8,"-","-","-"],
-        "Koń": [8,3,0,3,"-","-",3,1,5],
-        "Koń ": [8,3,0,3,"-","-",3,1,5]
+        "Koń bojowy": [8,3,0,3,"-","-",3,1,5],
+        "Koń bojowy ": [8,3,0,3,"-","-",3,1,5]
       },
       rules: ["Duży cel", "Machina wojenna", "Pokutnik", "Powóz", "Strach"],
       exp: 0,

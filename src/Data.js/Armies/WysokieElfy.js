@@ -70,13 +70,17 @@ export const wysokie = {
       exp: 11,
       skills: [0, 2, 3, 4, 5],
     },
-    Łucznik: {
+    Wojownik: {
       id: 4,
-      startingEquipment: ["Sztylet", "Łuk długi"],
+      // PDF: "sztylet i miecz lub łuk" - one of the two is free (Startowy).
+      startingEquipment: ["Sztylet"],
       cost: 45,
       number: 12,
-      equipmentList:
-        heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Stronnicy,
+      equipmentList: {
+        ...heroEquipment["Elfowie Wysokiego Rodu z Ulthuanu"].Stronnicy,
+        Miecz: [10, 0, "Startowy"],
+        Łuk: [10, 1, "Startowy"],
+      },
       type: "Stronnik",
       stats: {
         Początkowa: [5, 4, 4, 3, 3, 1, 5, 1, 8],

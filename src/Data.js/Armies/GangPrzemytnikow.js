@@ -176,8 +176,8 @@ export const gangPrzemytnikow = {
       type: "Machina",
       stats: {
         Powóz: ["-", "-", "-", 4, 8, 8, "-", "-", "-"],
-        Koń: [8, 3, 0, 3, "-", "-", 3, 1, 5],
-        "Koń ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Koń bojowy": [8, 3, 0, 3, "-", "-", 3, 1, 5],
+        "Koń bojowy ": [8, 3, 0, 3, "-", "-", 3, 1, 5],
       },
       rules: ["Duży cel", "Machina wojenna", "Powóz", "Wóz przemytniczy"],
     },

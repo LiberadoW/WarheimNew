@@ -4,44 +4,104 @@
 }
 
 :root {
-  --main: #212529;
-  --secondary: #f8f9fa;
-  --hover: #6c757d;
-  --tertiary: white;
-  --inputs: white;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas,
+    monospace;
+  --font-display: "Cinzel", Georgia, "Times New Roman", serif;
+
+  /* Palette: beige paper, black ink, white cards, dark red accents. */
+  --bg: #efe8db;
+  --surface: #ffffff;
+  --surface-2: #f8f4ec;
+  --surface-3: #ece4d4;
+  --border: #e0d6c4;
+  --border-strong: #c8baa2;
+  --text: #1b1815;
+  --text-muted: #6e655a;
+  --ink: #151311;
+  --ink-2: #26221e;
+  --ink-text: #f3ede2;
+  --ink-muted: #a89f92;
+  --accent: #8e1b1b;
+  --accent-hover: #731414;
+  --accent-soft: #f5e6e2;
+  --accent-text: #ffffff;
+  --focus: rgba(142, 27, 27, 0.35);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(27, 24, 21, 0.06);
+  --shadow: 0 1px 2px rgba(27, 24, 21, 0.05), 0 6px 20px rgba(27, 24, 21, 0.07);
+
+  /* Older component styles still read these names. */
+  --main: var(--ink);
+  --secondary: var(--bg);
+  --hover: var(--accent-hover);
+  --tertiary: var(--surface);
+  --inputs: var(--surface);
   --army-list: white;
-  --dark-text: black;
-  --error: red;
+  --dark-text: var(--text);
+  --error: var(--accent);
 }
 
 [data-theme="dark"] {
-  --main: #282828;
-  --secondary: #121212;
-  --hover: #6c757d;
-  --tertiary: #282828;
-  --inputs: #3f3f3f;
+  --bg: #121110;
+  --surface: #1c1a17;
+  --surface-2: #23201c;
+  --surface-3: #2d2924;
+  --border: #36312a;
+  --border-strong: #4b443a;
+  --text: #efe8db;
+  --text-muted: #a99f90;
+  --ink: #0a0908;
+  --ink-2: #1c1a17;
+  --ink-text: #efe8db;
+  --ink-muted: #8f877b;
+  --accent: #b93c3c;
+  --accent-hover: #cf5050;
+  --accent-soft: #3a1e1c;
+  --accent-text: #ffffff;
+  --focus: rgba(207, 80, 80, 0.4);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.35);
+
   --army-list: #717171;
-  --dark-text: #f2f2f2;
-  --error: #b00020;
 }
 
 body {
   margin: 0;
-  font-family: "Times New Roman", Times, serif;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .app {
-  background-color: #e9e9e9;
+  background-color: var(--bg);
   min-height: 100vh;
   overflow: hidden;
-  color: var(--dark-text);
+  color: var(--text);
 }
 
 .site-wrapper {
   margin: 0 auto;
-  background-color: #faf9f6;
+  background-color: var(--bg);
+}
+
+/* The printable roster keeps its paper look in both themes. */
+#armylist {
+  --main: #212529;
+  --secondary: #f8f9fa;
+  --tertiary: white;
+  --inputs: white;
+  --army-list: white;
+  --dark-text: black;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  line-height: normal;
+  color: black;
 }
 
 li {
@@ -50,7 +110,7 @@ li {
 
 .page-section {
   background-color: var(--secondary);
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 56px);
   box-sizing: border-box;
   padding: 1rem 0.5rem;
 }
@@ -62,13 +122,48 @@ li {
 input[type="checkbox"] {
   width: 18px;
   height: 18px;
+  accent-color: var(--accent);
 }
 
 input,
-select {
+select,
+textarea {
+  font: inherit;
+  color: var(--text);
   background-color: var(--inputs);
 }
 
 select {
-  color: var(--dark-text);
+  color: var(--text);
+}
+
+.app input[type="text"],
+.app input[type="number"],
+.app input[type="search"],
+.app input[type="email"],
+.app input[type="password"],
+.app select {
+  box-sizing: border-box;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app input:focus-visible,
+.app select:focus-visible,
+.app button:focus-visible,
+.app summary:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+
+.app #armylist input,
+.app #armylist select {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
 }

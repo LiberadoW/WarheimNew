@@ -53,6 +53,11 @@ const App = () => {
     defaultDark ? "dark" : "light"
   );
 
+  const [includeRulesInPdf, setIncludeRulesInPdf] = useLocalStorage(
+    "includeRulesInPdf",
+    false
+  );
+
   const [isEditArmyView, setIsEditArmyView] = useState(false);
   const [isPlayArmyView, setIsPlayArmyView] = useState(false);
 
@@ -180,6 +185,8 @@ const App = () => {
                     setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
+                    includeRulesInPdf={includeRulesInPdf}
+                    setIncludeRulesInPdf={setIncludeRulesInPdf}
                   />
                 }
               />
@@ -205,6 +212,8 @@ const App = () => {
                     setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
+                    includeRulesInPdf={includeRulesInPdf}
+                    setIncludeRulesInPdf={setIncludeRulesInPdf}
                   />
                 }
               />
@@ -230,6 +239,8 @@ const App = () => {
                     setCampaignNotes={setCampaignNotes}
                     handleSetUnitExp={handleSetUnitExp}
                     theme={theme}
+                    includeRulesInPdf={includeRulesInPdf}
+                    setIncludeRulesInPdf={setIncludeRulesInPdf}
                   />
                 }
               />
@@ -271,6 +282,7 @@ const App = () => {
           prestige={prestige}
           armyName={armyName}
           campaignNotes={campaignNotes}
+          includeRules={includeRulesInPdf}
         />
       </div>
     </div>

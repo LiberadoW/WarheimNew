@@ -226,7 +226,7 @@ export const grasanciChaosu = {
         "Stygmat Chaosu",
         "Wielkolud",
         "Żrąca plwocina",
-        "Żywiołak chaosu",
+        "Żywiołak Chaosu",
       ],
     },
     Więźniarka: {

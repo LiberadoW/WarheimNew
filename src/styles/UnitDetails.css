@@ -1,0 +1,278 @@
+.unit-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.unit-details-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.unit-details-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.unit-details-type {
+  align-self: flex-start;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  border-radius: 999px;
+}
+
+.unit-details-title h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.unit-details-cost {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 4px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.unit-details-cost-value {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.unit-details-cost-unit {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.unit-details-cost-note {
+  flex-basis: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.unit-details-fields {
+  display: flex;
+  gap: 12px;
+}
+
+.unit-details-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.unit-details-field > span,
+.unit-details-subheading {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.unit-details-field-short {
+  flex: 0 0 120px;
+}
+
+.unit-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.unit-details-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.unit-details-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Stats table */
+
+.unit-stats-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.unit-stats {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.unit-stats th,
+.unit-stats td {
+  padding: 7px 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.unit-stats thead th {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-text);
+  background-color: var(--ink);
+}
+
+.unit-stats tbody tr + tr {
+  border-top: 1px solid var(--border);
+}
+
+.unit-stats tbody tr:nth-child(even) {
+  background-color: var(--surface-2);
+}
+
+.unit-stats .unit-stats-label {
+  padding-left: 10px;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.unit-stats tbody .unit-stats-label {
+  color: var(--text-muted);
+}
+
+.unit-stats thead .unit-stats-armour {
+  background-color: var(--accent);
+}
+
+.unit-stats tbody .unit-stats-armour {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Skills, rules, spells */
+
+.unit-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.unit-chip {
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: var(--surface-3);
+  border-radius: 999px;
+}
+
+.unit-rules {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.unit-rule {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background-color: var(--surface);
+}
+
+.unit-rule + .unit-rule {
+  border-top: 1px solid var(--border);
+}
+
+.unit-rule-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 10px;
+}
+
+.unit-rule-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.unit-rule-source {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.unit-rule-text {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  white-space: pre-line;
+  color: var(--text-muted);
+}
+
+.unit-rule-text.is-clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.unit-rule-toggle {
+  align-self: flex-start;
+  padding: 0;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.unit-rule-toggle:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+  .unit-details-fields {
+    flex-direction: column;
+  }
+
+  .unit-details-field-short {
+    flex-basis: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .unit-stats th,
+  .unit-stats td {
+    padding: 6px 4px;
+  }
+}

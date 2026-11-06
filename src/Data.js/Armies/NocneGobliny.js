@@ -249,4 +249,8 @@ export const nocneGobliny = {
   nature: "Zła",
   armyRules: ["Podatek", "Rozrzutność"],
   mercenaries: ["Czarny Ork", "Grzybowar", "Mekaniak"],
+  unitRatios: [
+    { unit: "Snotling", required: "Nocny goblin", ratio: 2 },
+    { unit: "Squig", required: "Nocny goblin", ratio: 1 },
+  ],
 };

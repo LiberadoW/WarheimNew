@@ -183,7 +183,7 @@ export const army = {
         "Początkowa": [6,3,1,5,4,3,1,3,4],
         "Maksymalna": [6,3,1,5,4,3,1,3,4]
       },
-      "rules": ["Bycza szarża","Demon","Duży cel","Konstrukt","Łuskowata skóra (4+)","Przepastne trzewia","Regeneracja","Stygmaty nurgla (rój much)","Wielkolud","Wodny","Żrąca plwocina"]
+      "rules": ["Bycza szarża","Demon","Duży cel","Konstrukt","Łuskowata skóra (4+)","Przepastne trzewia","Regeneracja","Stygmaty Nurgla (rój much)","Wielkolud","Wodny","Żrąca plwocina"]
     },
     "Więźniarka": {
       "id": 9,

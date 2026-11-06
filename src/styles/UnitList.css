@@ -19,7 +19,7 @@
 
 .number-of-henchmen {
     display: flex;
-    gap: 5px;
+    gap: 6px;
 }
 
 .edit-unit-container {
@@ -31,7 +31,7 @@
 }
 
 .unit-inline-details {
-    border-top: 3px solid var(--main);
+    border-top: 3px solid var(--accent);
 }
 
 .unit-inline-details .army-list-container,
@@ -47,7 +47,6 @@
 
 .unit-name-input input {
     min-width: 220px;
-    height: 28px;
 }
 
 .unit-list-container {
@@ -58,9 +57,27 @@
 
 .main-builder-wrapper {
     display: flex;
-
 }
 
-.unit-list-divider{ 
-    margin-bottom: 5px;
+.unit-list-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.unit-list-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border);
+}
+
+.side-builder-left > .unit-list-divider:first-of-type {
+    margin-top: 0;
 }

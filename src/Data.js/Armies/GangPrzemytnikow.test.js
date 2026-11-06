@@ -6,7 +6,7 @@ import { mercenariesList } from "../Mercenaries";
 import { magic } from "../Magic";
 import { rulesObject } from "../Rules";
 import { getMagicLore } from "../../Functions/getMagicLore";
-import { getOneOfChoices } from "../../Functions/getOneOfChoices";
+import { getBlockedChoices } from "../../Functions/getOneOfChoices";
 import getErrors from "../../Functions/getErrors";
 import UnitSelect from "../../layouts/UnitSelect";
 
@@ -41,7 +41,7 @@ test("uses the specific priest, mounted and ogre equipment lists", () => {
   expect(army.heroes["Kapłan Ranalda"].equipmentList.Lekki).toBeUndefined();
   expect(army.heroes["Kapłan Mananna"].equipmentList.Ciężki).toEqual([30, 2, "Zbroja"]);
   expect(army.heroes["Kapłan Mananna"].equipmentList.Hełm).toBeUndefined();
-  expect(army.heroes.Rozbójnik.equipmentList.Średni).toEqual([20, 2, "Zbroja"]);
+  expect(army.heroes.Rozbójnik.equipmentList.Średni).toEqual([15, 2, "Zbroja"]);
   expect(army.heroes.Ogr.equipmentList.Średni).toEqual([30, 2, "Zbroja"]);
   expect(army.heroes.Ogr.equipmentList["Cep bojowy"]).toEqual([10, 0]);
   expect(army.heroes.Przemytnik.equipmentList.Średni).toBeUndefined();
@@ -81,20 +81,12 @@ test.each([
   ["Doker", "Nożownik"],
   ["Rozbójnik", "Ogr"],
 ])("makes %s and %s mutually exclusive in either direction", (first, second) => {
-  const select = document.createElement("select");
-  select.id = "unit-selection";
-  [first, second, "Przemytnik"].forEach((name) => select.add(new Option(name, name)));
-  document.body.appendChild(select);
-  try {
-    for (const [selected, excluded] of [[first, second], [second, first]]) {
-      getOneOfChoices(army, [{ unitName: selected }]);
-      expect(Array.from(select.options).find((option) => option.value === excluded).disabled).toBe(true);
-      expect(select.options[2].disabled).toBe(false);
-      getOneOfChoices(army, []);
-      expect(Array.from(select.options).every((option) => !option.disabled)).toBe(true);
-    }
-  } finally {
-    select.remove();
+  for (const [selected, excluded] of [[first, second], [second, first]]) {
+    const blocked = getBlockedChoices(army, [{ unitName: selected }]);
+    expect(blocked[excluded]).toBe(selected);
+    expect(blocked[selected]).toBeUndefined();
+    expect(blocked["Przemytnik"]).toBeUndefined();
+    expect(getBlockedChoices(army, [])).toEqual({});
   }
 });
 
@@ -104,7 +96,7 @@ test("recruits a valid starting list through the existing unit selector", () => 
     const [unitName, setUnitName] = useState("");
     const [unitList, setUnitList] = useState([]);
     recruited = unitList;
-    return <UnitSelect heroes={army.heroes} {...{ unitName, setUnitName, unitList, setUnitList }} />;
+    return <UnitSelect army={army} {...{ unitName, setUnitName, unitList, setUnitList }} />;
   }
   render(<Harness />);
   for (const name of ["Herszt gangu", "Kapłan Ranalda", "Przemytnik"]) {

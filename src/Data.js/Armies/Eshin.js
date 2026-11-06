@@ -35,7 +35,7 @@ export const eshin = {
         Początkowa: [6, 3, 3, 3, 3, 1, 4, 1, 6],
         Maksymalna: [6, 6, 6, 4, 4, 3, 7, 4, 7],
       },
-      rules: ["Mag (Tradycja Skrytości", "Ranger", "W nogi!", "Zasadzka"],
+      rules: ["Mag (Tradycja Skrytości)", "Ranger", "W nogi!", "Zasadzka"],
       exp: 8,
       skills: [0, 2, 4, 5],
     },
@@ -165,4 +165,5 @@ export const eshin = {
   nature: "Chaotyczna",
   armyRules: ["Rozrzutność"],
   mercenaries: ["Szczurogr", "Szpieg", "Złodziej"],
+  unitRatios: [{ unit: "Wielki szczur", required: "Posłaniec nocy", ratio: 2 }],
 };

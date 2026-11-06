@@ -48,68 +48,62 @@ const ArmyInfo = ({
     setArmyName(e.target.value);
   };
 
+  const isOverCost = !isEditArmyView && totalCost > limit;
+  const isOverModels = !isEditArmyView && modelAmount > army.maxModels;
+
   return (
     <div className="army-info-alerts-container">
       <div className="army-info-container">
+        <label className="army-name-input header-field">
+          <span className="header-field-label">Nazwa kompanii</span>
+          <input
+            onChange={handleArmyNameChange}
+            type="text"
+            value={armyName}
+            placeholder="Nazwij kompanię…"
+          />
+        </label>
+        <div className="army-info-right">
+          <div className="army-metric">
+            <span className="army-metric-label">Prestiż</span>
+            <span className="army-metric-value">{prestige}</span>
+          </div>
+          {!isEditArmyView && (
+            <div className={`army-metric${isOverCost ? " is-over" : ""}`}>
+              <span className="army-metric-label">Złote korony</span>
+              <span className="army-metric-value">
+                {totalCost}
+                <span className="army-metric-limit">{` / ${limit}`}</span>
+              </span>
+            </div>
+          )}
+          <div className={`army-metric${isOverModels ? " is-over" : ""}`}>
+            <span className="army-metric-label">Modele</span>
+            <span className="army-metric-value">
+              {modelAmount}
+              {!isEditArmyView && (
+                <span className="army-metric-limit">{` / ${army.maxModels}`}</span>
+              )}
+            </span>
+          </div>
+        </div>
         <div className="army-info-left">
           {errors > 0 && (
-            <p className="alerts" onClick={handleClick}>
-              {clicked ? (
-                <i className="fa-solid fa-caret-down fa-xl"></i>
-              ) : (
-                <i className="fa-solid fa-caret-right fa-xl"></i>
-              )}
-              <span>
-                <i className="fa-solid fa-triangle-exclamation"></i> Liczba
-                błędów: {errors}{" "}
-              </span>
-            </p>
-          )}
-        </div>
-        <div className="army-info-right">
-          <p className="army-name-input">
-            <span>Nazwa kompanii:</span>{" "}
-            <input
-              onChange={handleArmyNameChange}
-              type="text"
-              value={armyName}
-            />
-          </p>
-          <p className="prestige">
-            <span className="bold">Prestiż:</span> {prestige}
-          </p>
-          {!isEditArmyView && (
-            <p
-              className="total-cost"
-              style={{
-                color:
-                  totalCost > limit
-                    ? "red"
-                    : theme === "dark"
-                      ? "#f2f2f2"
-                      : "black",
-              }}
+            <button
+              type="button"
+              className="alerts"
+              onClick={handleClick}
+              aria-expanded={clicked}
             >
-              <span className="bold">Suma:</span> {`${totalCost} / ${limit} zk`}
-            </p>
+              <i className="fa-solid fa-triangle-exclamation"></i>
+              {`Błędy: ${errors}`}
+              <i
+                className={`fa-solid ${
+                  clicked ? "fa-chevron-up" : "fa-chevron-down"
+                } alerts-chevron`}
+              ></i>
+            </button>
           )}
-
-          <p
-            className="total-cost"
-            style={{
-              color:
-                totalCost > limit && !isEditArmyView
-                  ? "red"
-                  : theme === "dark"
-                    ? "#f2f2f2"
-                    : "black",
-            }}
-          >
-            <span className="bold">Liczba modeli:</span>{" "}
-            {isEditArmyView
-              ? modelAmount
-              : `${modelAmount} / ${army.maxModels}`}
-          </p>
         </div>
       </div>
       {clicked && (

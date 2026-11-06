@@ -3,7 +3,7 @@ export const army = {
   "heroes": {
     "Łowczy": {
       "id": 0,
-      "startingEquipment": ["Sztylet","Włócznia","Płaszcz z łusek morskiego smoka"],
+      "startingEquipment": ["Sztylet","Włócznia","Płaszcz z łusek smoka"],
       "cost": 75,
       "number": 1,
       "equipmentList": {
@@ -69,7 +69,7 @@ export const army = {
     },
     "Pawężnik": {
       "id": 2,
-      "startingEquipment": ["Sztylet","Włócznia","Pawęż"],
+      "startingEquipment": ["Sztylet","Włócznia","Pawęża"],
       "cost": 45,
       "number": 1,
       "equipmentList": {
@@ -96,7 +96,7 @@ export const army = {
         "Początkowa": [3,4,3,3,4,1,2,1,9],
         "Maksymalna": [4,7,6,4,5,3,5,4,10]
       },
-      "rules": ["Krzepki","Nieustępliwy","Odporność na magię (2)","Rankor","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk","Zabójca potworów","Zasadzka","Żelazoskóry"],
+      "rules": ["Krzepki","Nieustępliwy","Odporność na magię (2)","Pawężnik","Rankor","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk","Zabójca potworów","Zasadzka","Żelazoskóry"],
       "exp": 10,
       "skills": [0,3,5]
     },
@@ -165,7 +165,7 @@ export const army = {
     },
     "Oblężnik z Kraka Drak": {
       "id": 5,
-      "startingEquipment": ["Sztylet","Kusza","Pawęż"],
+      "startingEquipment": ["Sztylet","Kusza","Pawęża"],
       "cost": 45,
       "number": 5,
       "equipmentList": {
@@ -191,7 +191,7 @@ export const army = {
         "Początkowa": [3,4,3,3,4,1,2,1,9],
         "Maksymalna": [4,7,6,4,5,3,5,4,10]
       },
-      "rules": ["Błyskawiczne przeładowanie","Krzepki","Nieustępliwy","Odporność na magię (2)","Ranger","Rankor","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk","Zabójca potworów","Zasadzka"]
+      "rules": ["Błyskawiczne przeładowanie","Krzepki","Nieustępliwy","Odporność na magię (2)","Pawężnik","Ranger","Rankor","Trudny do zabicia","Uporczywość","Wspinaczka","Zabobonny lęk","Zabójca potworów","Zasadzka"]
     },
     "Pogromca Trolli": {
       "id": 6,

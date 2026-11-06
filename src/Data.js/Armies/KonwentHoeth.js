@@ -73,7 +73,7 @@ export const army = {
         "Lekki": [5,2,"Zbroja"],
         "Średni": [15,2,"Zbroja"],
         "Ciężki": [30,2,"Zbroja"],
-        "Pancerz z Ithilmaru": [50,2],
+        "Pancerz z Ithilmaru": [50,2,"Zbroja"],
         "Tarcza": [5,2,"Tarcza"],
         "Hełm": [5,2]
       },
@@ -86,20 +86,20 @@ export const army = {
       "exp": 11,
       "skills": [0,2,3,4,5]
     },
-    "Łucznik": {
+    "Wojownik": {
       "id": 3,
-      "startingEquipment": ["Sztylet","Łuk długi"],
+      "startingEquipment": ["Sztylet"],
       "cost": 45,
       "number": 12,
       "equipmentList": {
         "Broń wielka": [10,0],
         "Halabarda": [10,0],
-        "Miecz": [10,0],
+        "Miecz": [10,0,"Startowy"],
         "Sztylet": [2,0],
         "Topór bojowy": [5,0],
         "Włócznia": [10,0],
         "Broń miotana (noże)": [10,1],
-        "Łuk": [10,1],
+        "Łuk": [10,1,"Startowy"],
         "Łuk długi": [20,1],
         "Oszczep": [15,1],
         "Lekki": [5,2,"Zbroja"],

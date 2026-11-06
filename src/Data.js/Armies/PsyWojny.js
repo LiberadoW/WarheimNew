@@ -97,7 +97,7 @@ export const psyWojny = {
     },
     "Oblężnik": {
       id: 6,
-      startingEquipment: ["Sztylet", "Kusza", "Pawęż"],
+      startingEquipment: ["Sztylet", "Kusza", "Pawęża"],
       cost: 30,
       number: 7,
       equipmentList: heroEquipment["Psy Wojny"].Stronnicy,
