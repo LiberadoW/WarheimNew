@@ -8,8 +8,9 @@ const unit = {uniqueId:"h",unitName:"Herszt",type:"Bohater",selectedNumber:1,cos
 const army={name:"Gang przemytników",heroes:{Herszt:unit}};
 const click=name=>fireEvent.click(screen.getByRole("button",{name,exact:true}));
 const change=(name,value)=>fireEvent.change(screen.getByLabelText(name),{target:{value}});
-function setup(extra={},gold=100){
-  let snapshot=R.beginPostBattle({...R.newBattle([]),gameName:"Zakupy"},[{...R.clone(unit),...extra}],{skarbiec:gold},army).post;
+function setup(extra={},gold=100,more=[],postExtra={}){
+  let snapshot=R.beginPostBattle({...R.newBattle([]),gameName:"Zakupy"},[{...R.clone(unit),...extra},...more],{skarbiec:gold},army).post;
+  snapshot={...snapshot,...postExtra};
   const state={};
   function Harness(){const [post,setPost]=useState(snapshot);state.post=post;
     return <Trade post={post} army={army} update={fn=>setPost(p=>{const n=R.clone(p);fn(n);snapshot=n;return n;})} />;}
@@ -64,4 +65,26 @@ test("the normal catalog hides equipment outside the recipient's list",()=>{
   expect(screen.queryByRole("button",{name:"Wybierz: Łuk długi"})).toBeNull();
   fireEvent.click(screen.getByText("Opcje listy i pula dostępności",{selector:"summary"}));fireEvent.click(screen.getByLabelText("Pokaż również niedozwolone dla postaci"));
   click("Wybierz: Łuk długi");expect(screen.queryByRole("button",{name:/Kup za/})).toBeNull();
+});
+
+test("resuming a selected purchase keeps the second recipient instead of equipping the first hero",()=>{
+  const second={...R.clone(unit),uniqueId:"h2",unitName:"Sieciarz"};
+  const {state,resume}=setup({},100,[second]);
+  change("Odbiorca zakupów","h2");change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");resume();
+  expect(screen.getByLabelText("Odbiorca zakupów").value).toBe("h2");click("Kup za 10 zk");
+  expect(state.post.units[0].optionalEquipment).not.toContain("Miecz");
+  expect(state.post.units[1].optionalEquipment).toContain("Miecz");
+});
+
+test("Obrotność requires selecting a target before rolling and cannot reset its roll by switching targets",()=>{
+  const token=id=>({id,unitId:id,name:id,dice:[6,6],total:12,modifier:0,reason:"",locked:true,used:false});
+  const {state}=setup({},100,[],{armyRules:["Obrotność"],availability:[token("a"),token("b")]});
+  fireEvent.click(screen.getByText("Opcje listy i pula dostępności",{selector:"summary"}));
+  const scope=within(screen.getByRole("group",{name:"Obrotność: nowy wynik dostępności · 2K6"}));
+  expect(scope.getByRole("button",{name:"Rzuć"}).disabled).toBe(true);
+  change("Wynik do modyfikacji zasadą kompanii","a");
+  fireEvent.click(scope.getByRole("button",{name:"Rzuć"}));
+  expect(screen.getByLabelText("Wynik do modyfikacji zasadą kompanii").disabled).toBe(true);
+  click("Zastosuj przerzut dostępności");expect(state.post.availabilityRerolled).toBe(true);
+  expect(screen.queryByLabelText("Obrotność: nowy wynik dostępności, kość 1")).toBeNull();
 });

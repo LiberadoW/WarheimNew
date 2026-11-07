@@ -27,7 +27,7 @@ import {
   availabilityValue,
 } from "./rules";
 
-export function AvailabilityPool({ post, update }) {
+export function AvailabilityPool({ post, update, compact = false }) {
   const heroes = eligibleHeroes(post.units).filter(
     (u) => !hasRule(u, "Anoreksja"),
   );
@@ -35,11 +35,11 @@ export function AvailabilityPool({ post, update }) {
     [selected, setSelected] = useState("");
   return (
     <section>
-      <h3>Pula wyników dostępności</h3>
+      {!compact && <><h3>Pula wyników dostępności</h3>
       <p>
         Każdy uprawniony bohater daje jeden wynik 2K6. Wynik zużywasz na jeden
         rzadki przedmiot lub rekruta. Wyniki niewykorzystane przepadają.
-      </p>
+      </p></>}
       {post.availability === null ? (
         <button
           className="button"
@@ -155,6 +155,7 @@ export function AvailabilityPool({ post, update }) {
             Wynik do modyfikacji zasadą kompanii
             <select
               value={selected}
+              disabled={validDice(reroll, 2)}
               onChange={(e) => {
                 setSelected(e.target.value);
                 setReroll([]);
@@ -217,6 +218,7 @@ export function AvailabilityPool({ post, update }) {
                   label="Obrotność: nowy wynik dostępności"
                   count={2}
                   value={reroll}
+                  disabled={!selected}
                   onChange={setReroll}
                 />
                 <button
@@ -247,7 +249,7 @@ export function AvailabilityPool({ post, update }) {
             )}
         </>
       )}
-      <Reference pages={[426]} />
+      {!compact && <Reference pages={[426]} />}
     </section>
   );
 }
@@ -284,7 +286,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
       {completed ? (
         <div className="campaign-purchase-success" role="status">
           <strong>Zakupiono: {item.name}</strong>
-          <p>Przedmiot trafił do: {recipient}. Skarbiec: {post.treasury} zk.</p>
+          <p>Przedmiot trafił do: {recipient}. Zapłacono {quote.price * quantity} zk. Skarbiec: {post.treasury} zk.</p>
           <button className="button" onClick={onBack}>Wróć do listy</button>
           <button className="button button-secondary" onClick={()=>setRepeatOf(quote.id)}>Kup kolejne</button>
         </div>
@@ -296,7 +298,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
               {tokens.length === 0 && <p className="campaign-muted">Potrzebujesz niewykorzystanego wyniku co najmniej {item.availability}. Rzut wykonujesz raz na bohatera po potyczce.</p>}
               <details open={tokens.length === 0}>
                 <summary>Rzuty i wyniki dostępności</summary>
-                <AvailabilityPool post={post} update={update} />
+                <AvailabilityPool post={post} update={update} compact />
               </details>
               <label>Wynik dostępności
                 <select value={tokenId} disabled={!!saved} onChange={e=>setToken(e.target.value)}>
@@ -374,7 +376,7 @@ export default function Trade({ post, update, army }) {
               <option value="inventory">Skarbiec kompanii</option>
             </select>
           </label>
-          <p className="campaign-muted">{inventory ? "Zakup do zapasów kompanii. Przy przydziale sprawdzimy listę ekwipunku postaci." : "Lista uwzględnia ekwipunek dostępny dla wybranej postaci. Dla grupy kupujesz po sztuce na model."}</p>
+          <p className="campaign-muted">{inventory ? "Przedmioty do późniejszego przydziału." : unit && modelCount(unit)>1 ? `Kupujesz komplet dla ${modelCount(unit)} modeli.` : "Ekwipunek z listy wybranej postaci."}</p>
         </div>
         {selected ? <CatalogItem key={`${selected.id}:${unitId}:${inventory}`} item={selected} unit={unit}
           post={post} update={update} armyName={army.name} toInventory={inventory} onBack={()=>setSelected("")} /> : (

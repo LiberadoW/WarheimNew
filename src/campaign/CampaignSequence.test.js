@@ -132,3 +132,20 @@ test("after correcting an empty battle name its validation error disappears on t
   expect(state.draft.campaignNotes.campaign.activeBattle.stage).toBe(1);
   expect(screen.queryByRole("alert")).toBeNull();
 });
+
+test.each([false,true])("injury rerolls require the medic effect (%s) and cannot be repeated", (authorized) => {
+  const {state,resume}=setup([hero({battleOutOfActionModels:[true]})],{
+    campaign:{futureEffects: authorized ? [{key:"injuryRerollAll"}] : []},
+  });
+  dice("Obrażenia",[1,1],card("Herszt #1"));
+  if (!authorized) {
+    expect(screen.queryByLabelText("Przerzut obrażeń: pomoc medyka, kość 1")).toBeNull();
+    return;
+  }
+  dice("Przerzut obrażeń: pomoc medyka",[4,1]); click("Zastosuj przerzut obrażeń");
+  resume();
+  expect(screen.queryByRole("button",{name:"Zastosuj przerzut obrażeń"})).toBeNull();
+  click("Zastosuj obrażenia",card("Herszt #1"));
+  expect(post(state).units[0].campaignModelStatus[0].dead).not.toBe(true);
+  expect(Object.values(post(state).injuryDrafts)[0].originalDice).toEqual([1,1]);
+});
