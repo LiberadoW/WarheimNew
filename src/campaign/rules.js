@@ -129,7 +129,8 @@ export const crossed = (before, after, unit) =>
   (isHero(unit) ? HERO_THRESHOLDS : HENCH_THRESHOLDS).filter(
     (x) => x > before && x <= after,
   );
-export const canEarnExperience = (unit) => !hasRule(unit, "Nieświadomy");
+export const canEarnExperience = (unit) =>
+  !hasRule(unit, "Nieświadomy") && !hasRule(unit, "Zwierzę");
 export const currentStats = (unit) =>
   unit.stats?.Aktualna || unit.stats?.Początkowa || [];
 export const addRule = (unit, name) => {

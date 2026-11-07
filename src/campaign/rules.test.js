@@ -244,3 +244,12 @@ test("group rare equipment requires separate availability results per copy", () 
     ),
   ).toThrow(/pojedynczo/);
 });
+
+test.each(["Zwierzę", "Nieświadomy"])("%s cannot gain battle or exploration experience or produce an advance", (rule) => {
+  const u = hero({ type: "Stronnik", exp: 0, rules: [rule], battleExp: 9, battleKills: 5 });
+  const b = begin([u]);
+  R.applyExperience(b.post);
+  R.grantExperience(b.post, b.post.units[0], 5, "nagroda eksploracji");
+  expect(b.post.units[0].exp).toBe(0);
+  expect(b.post.advances).toHaveLength(0);
+});
