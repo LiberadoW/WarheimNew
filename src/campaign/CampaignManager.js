@@ -102,6 +102,7 @@ export default function CampaignManager({
     }
   };
   const next = () => {
+    setError("");
     try {
       if (battle.stage === 0 && post) {
         setBattle({ ...battle, stage: 1 });
@@ -492,7 +493,7 @@ export default function CampaignManager({
                     <tbody>
                       {post.units.map((u) => (
                         <tr key={u.uniqueId}>
-                          <td data-label="Postać">{R.label(u)}</td>
+                          <td data-label="Postać">{R.label(u)}{!R.canEarnExperience(u) && <small className="campaign-no-experience">Nie zdobywa PD</small>}</td>
                           <td data-label={post.expApplied ? "Aktualne PD" : "PD przed"}>{u.exp || 0}</td>
                           <td data-label="Przeciwnicy WzA">{u.battleKills || 0}</td>
                           <td data-label="Dodatkowe PD">
@@ -500,7 +501,7 @@ export default function CampaignManager({
                               aria-label={`Dodatkowe PD: ${R.label(u)}`}
                               type="number"
                               min="0"
-                              disabled={post.expApplied}
+                              disabled={post.expApplied || !R.canEarnExperience(u)}
                               value={u.battleExp || 0}
                               onChange={(e) =>
                                 update((p) => {

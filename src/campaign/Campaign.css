@@ -254,3 +254,38 @@
 @media (max-width: 380px) {
   .campaign-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+.campaign-no-experience { display: block; color: var(--text-muted); font-weight: 400; font-size: .8rem; }
+
+.campaign-shop-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; scroll-margin-top: 12px; }
+.campaign-shop-heading:focus { outline: none; }
+.campaign-shop-heading > strong { font-size: 1.25rem; }
+.campaign-shop-heading small { font-size: .8rem; font-weight: 400; }
+.campaign-shop > fieldset { border: 0; padding: 0; margin: 0; }
+.campaign-shop-recipient { padding: 14px; margin: 10px 0 16px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); }
+.campaign-shop-filters { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+.campaign-shop-options { margin: 12px 0; }
+.campaign-shop-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.campaign .campaign-shop-item { display: flex; width: 100%; align-items: center; text-align: left; gap: 12px; padding: 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); cursor: pointer; }
+.campaign-shop-item:hover { border-color: var(--accent); background: var(--surface-2); }
+.campaign-shop-item-name { flex: 1; min-width: 0; font-weight: 600; }
+.campaign-shop-item small { display: block; font-size: .75rem; color: var(--text-muted); font-weight: 400; margin-top: 4px; }
+.campaign-shop-item-price { text-align: right; font-weight: 600; }
+.campaign-shop-item-price small { max-width: 115px; }
+.campaign-purchase h3 { font-size: 1.3rem; margin-bottom: 6px; }
+.campaign .campaign-back { border: 0; padding: 8px 0; background: transparent; color: var(--accent); font-weight: 600; }
+.campaign-item-description { margin: 16px 0; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.campaign-purchase-step { margin: 18px 0; }
+.campaign-purchase-step h4 { font-size: 1rem; margin: 0 0 10px; }
+.campaign-purchase-total { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+.campaign-purchase-total span, .campaign-purchase-total small { display: block; color: var(--text-muted); font-size: .85rem; }
+.campaign-purchase-total strong { display: block; font-size: 1.4rem; margin: 4px 0; }
+.campaign-purchase-success { border: 1px solid var(--border); border-radius: 8px; padding: 18px; background: var(--surface-2); }
+@media (max-width: 600px) {
+  .campaign-shop-list, .campaign-shop-filters { grid-template-columns: 1fr; }
+  .campaign .campaign-shop-item { padding: 12px; gap: 8px; }
+  .campaign-shop-item-name { font-size: .9rem; }
+  .campaign-shop-item-price { font-size: .85rem; }
+  .campaign-purchase-total { flex-direction: column; align-items: stretch; }
+  .campaign-purchase-total .button { margin: 0; }
+}

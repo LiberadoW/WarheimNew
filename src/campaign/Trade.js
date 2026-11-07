@@ -1,6 +1,6 @@
 import useRollDraft from "./useRollDraft";
 import NumberInput from "./NumberInput";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { companyLevel } from "./company";
 import {
   discountDice,
@@ -82,6 +82,8 @@ export function AvailabilityPool({ post, update }) {
                   })
                 }
               />
+              <details>
+                <summary>Modyfikatory wyniku</summary>
               <label>
                 Modyfikator
                 <NumberInput
@@ -112,6 +114,7 @@ export function AvailabilityPool({ post, update }) {
                   }
                 />
               </label>
+              </details>
               <p>
                 Wynik: <strong>{token.total}</strong> ·{" "}
                 {token.used
@@ -146,7 +149,7 @@ export function AvailabilityPool({ post, update }) {
           ))}
         </div>
       )}
-      {post.availability && (
+      {post.availability && ["Kontakty handlowe", "Alchemicy", "Truciciele", "Obrotność"].some((name) => companyLevel(post, name) > 0) && (
         <>
           <label>
             Wynik do modyfikacji zasadą kompanii
@@ -248,140 +251,85 @@ export function AvailabilityPool({ post, update }) {
     </section>
   );
 }
-function CatalogItem({ item, unit, post, update, armyName, toInventory }) {
+function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }) {
   const key = `${item.id}:${toInventory ? "inventory" : unit?.uniqueId}`;
-  const attempt = post.quotes[key]?.id || "first";
-  const [dice, setDice] = useRollDraft(post, update, `price:${key}:${attempt}`);
-  const [token, setToken] = useState("");
-  const [discountRoll, setDiscountRoll] = useRollDraft(post, update, `discount:${key}:${attempt}`);
-  const discounts = discountDice(post, item);
   const quote = post.quotes[key];
-  const count = priceDiceCount(item.price);
-  const reason = toInventory
-    ? null
-    : equipmentPermission(unit, item, armyName) ||
-      equipmentCapacity(unit, item);
+  const attempt = quote?.id || "first";
+  const [draftDice, setDice] = useRollDraft(post, update, `price:${key}:${attempt}`);
+  const [draftDiscount, setDiscount] = useRollDraft(post, update, `discount:${key}:${attempt}`);
+  const [token, setToken] = useState("");
+  const [repeatOf, setRepeatOf] = useState(null);
+  const completed = quote?.used && quote.id !== repeatOf;
+  const saved = quote && !quote.used ? quote : null;
+  const dice = saved?.dice || draftDice;
+  const discountRoll = saved?.discountRoll || draftDiscount;
+  const count = priceDiceCount(item.price), discounts = discountDice(post, item);
+  const quantity = toInventory ? 1 : modelCount(unit || {});
+  const recipient = toInventory ? "Skarbiec kompanii" : (unit?.unitDisplayName || unit?.unitName || "Brak postaci");
+  const reason = toInventory ? null : !unit ? "Wybierz postać, dla której kupujesz ekwipunek." : equipmentPermission(unit, item, armyName) || equipmentCapacity(unit, item);
   const priceAllowed = /^(\d+\+)?(\d*K[236](X\d+)?|\d+)$/i.test(item.price);
-  const tokens = (post.availability || []).filter(
-    (t) =>
-      t.locked && !t.used && availabilityValue(t, item) >= item.availability,
-  );
+  const tokens = (post.availability || []).filter(t => t.locked && !t.used && availabilityValue(t, item) >= item.availability);
+  const tokenId = saved?.tokenId || token || (tokens.length === 1 ? tokens[0].id : "");
+  const priceReady = priceAllowed && (count === 0 || validDice(dice, count)) && (discounts === 0 || validDice(discountRoll, discounts));
+  const price = saved ? saved.price : priceReady ? quotePrice(post, item, dice, discountRoll) : null;
+  const total = price == null ? null : price * quantity;
+  const availabilityReady = !item.availability || tokens.some(t=>t.id === tokenId);
   return (
-    <article className="campaign-item">
-      <div className="campaign-row">
-        <strong>{item.name}</strong>
-        <span>{item.price} zk</span>
-        <span> Dostępność: {item.availability || "powszechna"}</span>
-      </div>
-      <p className="campaign-source">
-        {item.category} · podręcznik s. {item.page}
-      </p>
-      <details>
-        <summary>Opis, zasady i ograniczenia</summary>
-        <p>{item.text}</p>
-      </details>
-      {reason ? (
-        <p className="campaign-muted">{reason}</p>
-      ) : (
+    <article className="campaign-purchase" aria-label={`Zakup: ${item.name}`}>
+      <button type="button" className="campaign-back" onClick={onBack}>← Wróć do przedmiotów</button>
+      <p className="campaign-source">{item.category} · podręcznik s. {item.page}</p>
+      <h3>{item.name}</h3>
+      <p>{recipient} · {quantity} {quantity === 1 ? "sztuka" : "szt."}</p>
+      <details className="campaign-item-description"><summary>Statystyki, zasady i ograniczenia</summary><p>{item.text}</p></details>
+      {completed ? (
+        <div className="campaign-purchase-success" role="status">
+          <strong>Zakupiono: {item.name}</strong>
+          <p>Przedmiot trafił do: {recipient}. Skarbiec: {post.treasury} zk.</p>
+          <button className="button" onClick={onBack}>Wróć do listy</button>
+          <button className="button button-secondary" onClick={()=>setRepeatOf(quote.id)}>Kup kolejne</button>
+        </div>
+      ) : reason ? <p className="campaign-error">{reason}</p> : (
         <>
-          {!quote || quote.used ? (
-            <>
-              {count > 0 && (
-                <DiceInput
-                  label={`Cena: ${item.name}`}
-                  count={count}
-                  value={dice}
-                  onChange={setDice}
-                />
-              )}
-              {discounts > 0 && (
-                <DiceInput
-                  label={`Zniżka: ${item.name}`}
-                  count={discounts}
-                  value={discountRoll}
-                  onChange={setDiscountRoll}
-                />
-              )}
-              {item.availability > 0 && (
-                <label>
-                  Wynik dostępności
-                  <select
-                    value={token}
-                    onChange={(e) => setToken(e.target.value)}
-                  >
-                    <option value="">Wybierz wynik</option>
-                    {tokens.map((t) => (
-                      <option value={t.id} key={t.id}>
-                        {t.name}: {availabilityValue(t, item)}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              )}
-              <button
-                className="button button-secondary"
-                disabled={
-                  !priceAllowed ||
-                  (discounts > 0 && !validDice(discountRoll, discounts)) ||
-                  (count > 0 && !validDice(dice, count)) ||
-                  (item.availability > 0 && !token)
-                }
-                onClick={() =>
-                  update((p) => {
-                    p.quotes[key] = {
-                      id: uid(),
-                      itemId: item.id,
-                      price: quotePrice(p, item, dice, discountRoll),
-                      discountRoll,
-                      chemicalKind: chemicalKind(item),
-                      basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
-                      dice,
-                      tokenId: token,
-                      used: false,
-                    };
-                    log(
-                      p,
-                      "price",
-                      `${item.name}: ${p.quotes[key].price} zk (kości: ${dice.join(",") || "cena stała"})`,
-                    );
-                  })
-                }
-              >
-                Ustal cenę
-              </button>
-              {!priceAllowed && (
-                <p>Wybierz wariant ceny według opisu przedmiotu.</p>
-              )}
-            </>
-          ) : (
-            <div className="campaign-row">
-              <strong>
-                {quote.price} zk / model · razem{" "}
-                {quote.price * (toInventory ? 1 : modelCount(unit))} zk
-              </strong>
-              <button
-                className="button"
-                disabled={
-                  post.treasury <
-                  quote.price * (toInventory ? 1 : modelCount(unit))
-                }
-                onClick={() =>
-                  update((p) =>
-                    buyItem(
-                      p,
-                      unit?.uniqueId,
-                      item,
-                      p.quotes[key],
-                      armyName,
-                      toInventory,
-                    ),
-                  )
-                }
-              >
-                Kup {toInventory ? "do skarbca" : "dla postaci"}
-              </button>
-            </div>
+          {item.availability > 0 && (
+            <section className="campaign-purchase-step">
+              <h4>Dostępność {item.availability}+</h4>
+              {tokens.length === 0 && <p className="campaign-muted">Potrzebujesz niewykorzystanego wyniku co najmniej {item.availability}. Rzut wykonujesz raz na bohatera po potyczce.</p>}
+              <details open={tokens.length === 0}>
+                <summary>Rzuty i wyniki dostępności</summary>
+                <AvailabilityPool post={post} update={update} />
+              </details>
+              <label>Wynik dostępności
+                <select value={tokenId} disabled={!!saved} onChange={e=>setToken(e.target.value)}>
+                  <option value="">Wybierz zatwierdzony wynik</option>
+                  {tokens.map(t=><option key={t.id} value={t.id}>{t.name}: {availabilityValue(t,item)}</option>)}
+                </select>
+              </label>
+            </section>
           )}
+          <section className="campaign-purchase-step">
+            <h4>Cena {item.price} zk / szt.</h4>
+            {count > 0 && <DiceInput label={`Cena: ${item.name}`} count={count} value={dice} onChange={setDice} disabled={!!saved} />}
+            {discounts > 0 && <DiceInput label={`Zniżka: ${item.name}`} count={discounts} value={discountRoll} onChange={setDiscount} disabled={!!saved} />}
+            {!priceAllowed && <p>Wybierz wariant ceny według opisu przedmiotu.</p>}
+          </section>
+          <div className="campaign-purchase-total">
+            <div><span>Do zapłaty</span><strong>{total == null ? "Ustal wynik rzutu" : `${total} zk`}</strong>
+              <small>{quantity > 1 && total != null ? `${quantity} × ${price} zk · ` : ""}W skarbcu: {post.treasury} zk</small></div>
+            <button className="button" disabled={!priceReady || !availabilityReady || total > post.treasury || post.tradeClosed}
+              onClick={()=>update(p=>{
+                if ((p.quotes[key]?.id || null) !== (quote?.id || null)) throw Error("Zakup został już rozliczony.");
+                if (!saved) {
+                  p.quotes[key] = { id: uid(), itemId: item.id, price: quotePrice(p,item,dice,discountRoll),
+                    discountRoll, chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
+                    dice, tokenId, used: false };
+                  log(p,"price",`${item.name}: ${p.quotes[key].price} zk (kości: ${dice.join(",") || "cena stała"})`);
+                }
+                buyItem(p,unit?.uniqueId,item,p.quotes[key],armyName,toInventory);
+              })}>
+              {total == null ? "Kup przedmiot" : `Kup za ${total} zk`}
+            </button>
+          </div>
+          {total != null && total > post.treasury && <p className="campaign-error">Brakuje {total-post.treasury} zk do zakupu.</p>}
         </>
       )}
     </article>
@@ -389,122 +337,79 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory }) {
 }
 export default function Trade({ post, update, army }) {
   const [theftDice, setTheftDice] = useRollDraft(post, update, "strigos-theft");
-  const [unitId, setUnitId] = useState(
-    post.units.find((u) => !u.campaignModelStatus?.every((s) => s.dead))
-      ?.uniqueId || "",
-  );
-  const [category, setCategory] = useState("");
-  const [query, setQuery] = useState("");
-  const [all, setAll] = useState(false);
-  const [inventory, setInventory] = useState(false);
-  const unit = post.units.find((u) => u.uniqueId === unitId);
-  const categories = [...new Set(catalog.map((i) => i.category))];
-  const shown = catalog.filter(
-    (i) =>
-      (!category || i.category === category) &&
-      normal(i.name).includes(normal(query)) &&
-      (all || inventory || !equipmentPermission(unit, i, army.name)),
-  );
+  const [selectedId, setSelected] = useRollDraft(post, update, "trade-selected", "");
+  const [recipientId, setUnitId] = useRollDraft(post, update, "trade-recipient", post.units.find(u=>!u.campaignModelStatus?.every(s=>s.dead))?.uniqueId || "");
+  const [category, setCategory] = useState(""), [query, setQuery] = useState("");
+  const [all, setAll] = useState(false), [limit, setLimit] = useState(24);
+  const [inventory, setInventory] = useRollDraft(post, update, "trade-inventory", false);
+  const unit = post.units.find(u=>u.uniqueId === recipientId && !u.campaignModelStatus?.every(s=>s.dead)) || post.units.find(u=>!u.campaignModelStatus?.every(s=>s.dead));
+  const unitId = unit?.uniqueId || "";
+  const categories = [...new Set(catalog.map(i=>i.category))];
+  const shown = catalog.filter(i=>(!category || i.category===category) && normal(i.name).includes(normal(query)) &&
+    (all || inventory || !equipmentPermission(unit,i,army.name)));
+  const selected = catalog.find(i=>i.id === selectedId);
+  const heading = useRef(null), previousSelection = useRef(selectedId);
+  useEffect(()=>{
+    if (previousSelection.current !== selectedId) {
+      heading.current?.scrollIntoView?.({block:"start",behavior:"instant"});
+      heading.current?.focus({preventScroll:true});
+    }
+    previousSelection.current=selectedId;
+  },[selectedId]);
   return (
-    <>
-      {post.tradeClosed && (
-        <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>
-      )}
+    <section className="campaign-shop" aria-label="Sklep kampanii">
+      <div className="campaign-shop-heading" ref={heading} tabIndex={-1}>
+        <h3>Handel</h3><strong>{post.treasury} <small>zk w skarbcu</small></strong>
+      </div>
+      {post.tradeClosed && <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>}
       <fieldset disabled={post.tradeClosed}>
-        <AvailabilityPool post={post} update={update} />
-        <h3>Handel · skarbiec: {post.treasury} zk</h3>
-        <div className="campaign-grid">
-          <label>
-            Postać / grupa
-            <select value={unitId} onChange={(e) => setUnitId(e.target.value)}>
-              {post.units
-                .filter((u) => !u.campaignModelStatus?.every((s) => s.dead))
-                .map((u) => (
-                  <option key={u.uniqueId} value={u.uniqueId}>
-                    {u.unitDisplayName || u.unitName}
-                  </option>
-                ))}
+        <div className="campaign-shop-recipient">
+          <label>Odbiorca zakupów
+            <select value={inventory ? "inventory" : unitId} onChange={e=>{
+              setInventory(e.target.value === "inventory");
+              if(e.target.value !== "inventory") setUnitId(e.target.value);
+              setSelected("");
+            }}>
+              {post.units.filter(u=>!u.campaignModelStatus?.every(s=>s.dead)).map(u=><option key={u.uniqueId} value={u.uniqueId}>{u.unitDisplayName || u.unitName}{modelCount(u)>1 ? ` · ${modelCount(u)} modele` : ""}</option>)}
+              <option value="inventory">Skarbiec kompanii</option>
             </select>
           </label>
-          <label>
-            Kategoria
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="">Wszystkie kategorie</option>
-              {categories.map((c) => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Szukaj przedmiotu
-            <input value={query} onChange={(e) => setQuery(e.target.value)} />
-          </label>
+          <p className="campaign-muted">{inventory ? "Zakup do zapasów kompanii. Przy przydziale sprawdzimy listę ekwipunku postaci." : "Lista uwzględnia ekwipunek dostępny dla wybranej postaci. Dla grupy kupujesz po sztuce na model."}</p>
         </div>
-        <div className="campaign-row">
-          <label className="campaign-check">
-            <input
-              type="checkbox"
-              checked={inventory}
-              onChange={(e) => setInventory(e.target.checked)}
-            />
-            Kupuj do skarbca
-          </label>
-          <label className="campaign-check">
-            <input
-              type="checkbox"
-              checked={all}
-              onChange={(e) => setAll(e.target.checked)}
-            />
-            Pokaż również niedozwolone dla postaci
-          </label>
-        </div>
-        <p className="campaign-muted">
-          Dla grupy stronników kupowany jest komplet dla każdego modelu.
-          Przedmioty poza listą można kupić do skarbca do późniejszego
-          przydziału.
-        </p>
-        <div className="campaign-catalog">
-          {shown.length ? (
-            shown.map((item) => (
-              <CatalogItem
-                key={`${item.id}:${unitId}:${inventory}`}
-                item={item}
-                unit={unit}
-                post={post}
-                update={update}
-                armyName={army.name}
-                toInventory={inventory}
-              />
-            ))
-          ) : (
-            <p>Brak przedmiotów spełniających filtry.</p>
-          )}
-        </div>
-        {post.effects?.strigosTheftPending && (
-          <section className="campaign-card">
-            <h3>Zakończenie handlu ze Strigosem</h3>
-            <p>
-              50% zniżki. Po wszystkich zakupach rzuć K6: na 5+ tracisz całe
-              złoto i wszystkie łupy. Zatwierdzenie zamyka handel.
-            </p>
-            <DiceInput
-              label="Strigos: kradzież po handlu"
-              value={theftDice}
-              onChange={setTheftDice}
-            />
-            <button
-              className="button"
-              disabled={!validDice(theftDice, 1)}
-              onClick={() => update((p) => settleStrigos(p, theftDice))}
-            >
-              Zakończ handel z taborytami
-            </button>
-          </section>
+        {selected ? <CatalogItem key={`${selected.id}:${unitId}:${inventory}`} item={selected} unit={unit}
+          post={post} update={update} armyName={army.name} toInventory={inventory} onBack={()=>setSelected("")} /> : (
+          <>
+            <div className="campaign-shop-filters">
+              <label>Szukaj przedmiotu<input type="search" placeholder="Nazwa, np. miecz lub trucizna" value={query} onChange={e=>{setQuery(e.target.value);setLimit(24);}} /></label>
+              <label>Kategoria<select value={category} onChange={e=>{setCategory(e.target.value);setLimit(24);}}>
+                <option value="">Wszystkie kategorie</option>{categories.map(c=><option key={c}>{c}</option>)}
+              </select></label>
+            </div>
+            <details className="campaign-shop-options"><summary>Opcje listy i pula dostępności</summary>
+              <label className="campaign-check"><input type="checkbox" checked={all} onChange={e=>setAll(e.target.checked)} />Pokaż również niedozwolone dla postaci</label>
+              <AvailabilityPool post={post} update={update} />
+            </details>
+            <p className="campaign-source">{shown.length} przedmiotów · wybierz przedmiot, aby zobaczyć zasady i kupić</p>
+            <div className="campaign-shop-list">
+              {shown.slice(0,limit).map(item=>{
+                const reason=inventory ? null : equipmentPermission(unit,item,army.name) || equipmentCapacity(unit,item);
+                return <button type="button" className="campaign-shop-item" key={item.id} aria-label={`Wybierz: ${item.name}`} onClick={()=>setSelected(item.id)}>
+                  <span className="campaign-shop-item-name">{item.name}<small>{item.category}</small></span>
+                  <span className="campaign-shop-item-price">{item.price} zk<small>{reason ? "Sprawdź ograniczenia" : item.availability ? `Dostępność ${item.availability}+` : "Powszechny"}</small></span>
+                  <span aria-hidden="true">›</span>
+                </button>;
+              })}
+            </div>
+            {!shown.length && <p>Brak przedmiotów spełniających filtry.</p>}
+            {shown.length>limit && <button className="button button-secondary" onClick={()=>setLimit(limit+24)}>Pokaż kolejne ({shown.length-limit})</button>}
+          </>
         )}
+        {post.effects?.strigosTheftPending && <section className="campaign-card">
+          <h3>Zakończenie handlu ze Strigosem</h3><p>50% zniżki. Po wszystkich zakupach rzuć K6: na 5+ tracisz całe złoto i wszystkie łupy. Zatwierdzenie zamyka handel.</p>
+          <DiceInput label="Strigos: kradzież po handlu" value={theftDice} onChange={setTheftDice} />
+          <button className="button" disabled={!validDice(theftDice,1)} onClick={()=>update(p=>settleStrigos(p,theftDice))}>Zakończ handel z taborytami</button>
+        </section>}
       </fieldset>
-    </>
+    </section>
   );
 }
