@@ -8,6 +8,7 @@ import { CraftReservations } from "./Crafting";
 import AdvanceCard from "./Advancement";
 import { encounterPlan } from "./encounters";
 import { applyEffects } from "./effects";
+import { explorationAuto, explorationAutoTotals } from "./auto-rules";
 
 export default function Exploration({
   battle,
@@ -29,7 +30,20 @@ export default function Exploration({
     .filter((_, i) => !(e.discarded || []).includes(i))
     .sort((a, b) => a - b)
     .slice(privileges.discardLowest);
-  const sumModifier = privileges.totalModifier + (Number(e.totalModifier) || 0);
+  const auto = explorationAuto(battle, post);
+  const autoTotals = explorationAutoTotals(
+    auto,
+    e.autoRolls || {},
+    e.autoSigns || {},
+    e.thieves || {},
+  );
+  const autoReason = auto.rerolls.map((r) => r.source).join(", ");
+  const rerollReason = e.rerollReason ?? autoReason;
+  const autoRerolls = auto.rerolls.reduce((n, r) => n + r.count, 0);
+  const sumModifier =
+    privileges.totalModifier +
+    (Number(e.totalModifier) || 0) +
+    (autoTotals?.sum || 0);
   const result = R.validDice(e.dice, diceCount)
     ? R.explorationResult(kept, battle.area, sumModifier)
     : null;
@@ -122,6 +136,85 @@ export default function Exploration({
           </label>
         ))}
       </details>
+      {(auto.bonuses.length ||
+        auto.thieves.length ||
+        auto.robbers.length ||
+        auto.tables.length) > 0 && (
+        <section className="campaign-card">
+          <h3>Zasady kompanii w eksploracji</h3>
+          {auto.bonuses.map((b) => (
+            <div key={b.key}>
+              <DiceInput
+                label={`${b.label}: K3 (wynik K6 ÷ 2${b.best ? ", liczy się najwyższa" : ""})`}
+                count={b.dice}
+                value={e.autoRolls?.[b.key] || []}
+                disabled={post.explorationApplied}
+                onChange={(dice) =>
+                  set({ autoRolls: { ...(e.autoRolls || {}), [b.key]: dice } })
+                }
+              />
+              {b.signed && (
+                <div className="campaign-row" role="group" aria-label={`${b.label}: kierunek`}>
+                  {[1, -1].map((sign) => (
+                    <button
+                      key={sign}
+                      type="button"
+                      className={`button ${e.autoSigns?.[b.key] === sign ? "" : "button-secondary"}`}
+                      disabled={post.explorationApplied}
+                      aria-pressed={e.autoSigns?.[b.key] === sign}
+                      onClick={() =>
+                        set({ autoSigns: { ...(e.autoSigns || {}), [b.key]: sign } })
+                      }
+                    >
+                      {sign > 0 ? "Dodaj K3" : "Odejmij K3"}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          {auto.thieves.map((t) => (
+            <label className="campaign-check" key={t.unitId}>
+              <input
+                type="checkbox"
+                disabled={post.explorationApplied}
+                checked={e.thieves?.[t.unitId] ?? t.kills > 0}
+                onChange={(ev) =>
+                  set({ thieves: { ...(e.thieves || {}), [t.unitId]: ev.target.checked } })
+                }
+              />
+              Złodziej: {t.label} wyłączył wroga z akcji (+1 łup)
+            </label>
+          ))}
+          {auto.robbers.map((r) => (
+            <DiceInput
+              key={r.key}
+              label={`${r.label}: 1 = jeden łup mniej`}
+              count={1}
+              value={e.autoRolls?.[r.key] || []}
+              disabled={post.explorationApplied}
+              onChange={(dice) =>
+                set({ autoRolls: { ...(e.autoRolls || {}), [r.key]: dice } })
+              }
+            />
+          ))}
+          {auto.tables.map((t) => (
+            <p className="campaign-source" key={t}>
+              {t}: przed eksploracją rzuć K6 na tabelę z opisu zasady i zapisz
+              efekt w narzędziach.
+            </p>
+          ))}
+          {autoTotals ? (
+            <p className="campaign-done">
+              Suma: {autoTotals.sum >= 0 ? "+" : ""}
+              {autoTotals.sum}
+              {autoTotals.loot ? ` · łupy ${autoTotals.loot > 0 ? "+" : ""}${autoTotals.loot}` : ""}
+            </p>
+          ) : (
+            <p className="campaign-source">Wykonaj wszystkie rzuty z zasad.</p>
+          )}
+        </section>
+      )}
       <DiceInput
         label="Eksploracja"
         count={diceCount}
@@ -165,14 +258,15 @@ export default function Exploration({
               <label>
                 Źródło prawa do przerzutu (uprawnienia z zasad / ekwipunku)
                 <input
-                  value={e.rerollReason || ""}
+                  value={rerollReason || ""}
                   onChange={(ev) => set({ rerollReason: ev.target.value })}
                 />
               </label>
-              {!!privileges.rerolls && (
+              {!!(privileges.rerolls + autoRerolls) && (
                 <p>
-                  Przerzuty kompanii dostępne dla {privileges.rerolls} kości.
-                  Każdą kość można przerzucić raz.
+                  Przerzuty z zasad dostępne dla {privileges.rerolls + autoRerolls}{" "}
+                  kości{autoReason ? ` (${autoReason})` : ""}. Każdą kość
+                  można przerzucić raz.
                 </p>
               )}
               {e.dice.map((d, i) => (
@@ -181,7 +275,7 @@ export default function Exploration({
                   label={`Przerzut kości ${i + 1} (było ${d})`}
                   value={e.pendingRerolls?.[i] || []}
                   disabled={
-                    !e.rerollReason?.trim() || (e.rerolled || []).includes(i)
+                    !rerollReason?.trim() || (e.rerolled || []).includes(i)
                   }
                   onChange={(dice, source) =>
                     set({
@@ -208,7 +302,7 @@ export default function Exploration({
                       key={delta}
                       className="button button-secondary"
                       disabled={
-                        !e.rerollReason?.trim() ||
+                        !rerollReason?.trim() ||
                         (e.adjusted || []).includes(i) ||
                         d + delta < 1 ||
                         d + delta > 6
@@ -270,11 +364,14 @@ export default function Exploration({
             />
           </label>
           {post.explorationApplied ? (
-            <p className="campaign-done">✓ Eksploracja zatwierdzona · +{result.loot} łupów</p>
+            <p className="campaign-done">
+              ✓ Eksploracja zatwierdzona · +
+              {Math.max(0, result.loot + (autoTotals?.loot || 0))} łupów
+            </p>
           ) : (
           <button
             className="button"
-            disabled={post.explorationApplied || !plan.ready}
+            disabled={post.explorationApplied || !plan.ready || !autoTotals}
             onClick={() =>
               update((p) => {
                 if (p.explorationApplied)
@@ -293,12 +390,14 @@ export default function Exploration({
                     );
                   applyEffects(p, validated.effects, result.best.name, army);
                 }
-                p.loot += result.loot;
+                if (!autoTotals)
+                  throw Error("Wykonaj rzuty z zasad kompanii.");
+                p.loot += Math.max(0, result.loot + autoTotals.loot);
                 p.explorationApplied = true;
                 R.log(
                   p,
                   "exploration",
-                  `Eksploracja: ${e.dice.join(", ")}. ${result.best?.name || "Bez powtórzeń"}. Łupy z puli: ${result.loot}. ${e.note || ""}`,
+                  `Eksploracja: ${e.dice.join(", ")}. ${result.best?.name || "Bez powtórzeń"}. Łupy z puli: ${result.loot}${autoTotals?.loot ? ` (${autoTotals.loot > 0 ? "+" : ""}${autoTotals.loot} z zasad)` : ""}${autoTotals?.sum ? `; suma ${autoTotals.sum > 0 ? "+" : ""}${autoTotals.sum} z zasad` : ""}. ${e.note || ""}`,
                   {
                     dice: e.dice,
                     originalDice: e.originalDice,

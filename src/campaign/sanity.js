@@ -111,7 +111,14 @@ export function applyMutation(
   const originalStats = [...R.currentStats(u)];
   u.mutationLimit = limit;
   u.mutations = [...(u.mutations || []), { ...entry, dice, reason }];
-  R.addRule(u, `Stygmat Chaosu (${entry.name})`);
+  // addRule ignores the bracket, so every stigma would collapse into the
+  // plain "Stygmat Chaosu" rule; each stigma is a separate rule.
+  const stigma = `Stygmat Chaosu (${entry.name})`;
+  if (!(u.rules || []).includes(stigma)) {
+    if (!u.baseRules) u.baseRules = [...(u.rules || [])];
+    u.rules = [...(u.rules || []), stigma];
+    u.newRules = [...(u.newRules || []), stigma];
+  }
   u.campaignRuleTexts = {
     ...(u.campaignRuleTexts || {}),
     [`Stygmat Chaosu (${entry.name})`]: entry.text,
@@ -174,7 +181,8 @@ export function applyMutation(
   if (entry.name === "Szaleństwo") addIllness(post, u, mentalDice, note);
   if (entry.name === "Atrofia") {
     if (secondary[0] <= 2) {
-      R.addRule(u, "Stygmat Chaosu (Gwoździogłowy)");
+      if (!u.rules.includes("Stygmat Chaosu (Gwoździogłowy)"))
+        u.rules = [...u.rules, "Stygmat Chaosu (Gwoździogłowy)"];
       u.campaignRuleTexts["Stygmat Chaosu (Gwoździogłowy)"] = mutations.find(
         (m) => m.name === "Gwoździogłowy",
       ).text;

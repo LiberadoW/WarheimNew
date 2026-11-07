@@ -634,3 +634,27 @@
     font-size: 1.35rem;
   }
 }
+
+/* Znak Chaosu selector */
+.chaos-mark { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.chaos-mark label { display: flex; flex-direction: column; gap: 4px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
+.chaos-mark select { min-height: 44px; padding: 8px 12px; font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; }
+.chaos-mark p { margin: 0; font-size: .8rem; color: var(--text-muted); }
+.chaos-mark-required select { border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus); }
+
+/* Stigmata before the first game */
+.stigmata-panel { margin: 0 0 16px; padding: 16px; border: 1px solid var(--accent); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow-sm); color: var(--text); }
+.stigmata-panel h3 { margin: 0 0 6px; font-family: var(--font-display); font-size: 1.1rem; }
+.stigmata-panel > p { margin: 0 0 12px; font-size: .85rem; color: var(--text-muted); }
+.stigma-row { padding: 12px; margin: 10px 0 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); }
+.stigma-row-head small { display: block; color: var(--text-muted); font-size: .8rem; }
+.stigma-row .campaign-dice { border: 0; padding: 0; margin: 10px 0; }
+.stigma-row .campaign-dice legend { font-size: .8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; }
+.stigma-row .campaign-dice .campaign-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.stigma-row .campaign-dice input { width: 52px; height: 48px; text-align: center; font-size: 1.1rem; font-weight: 700; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--surface); color: var(--text); }
+.stigma-row .campaign-dice .button { flex: 1 1 96px; min-height: 44px; }
+.stigma-result p { margin: 4px 0 10px; font-size: .9rem; }
+.stigma-result .button { width: 100%; min-height: 44px; }
+.stigma-error { color: var(--accent); font-weight: 600; font-size: .85rem; }
+.chaos-mark, .chaos-mark label { min-width: 0; max-width: 100%; }
+.chaos-mark select { width: 100%; max-width: 100%; box-sizing: border-box; }

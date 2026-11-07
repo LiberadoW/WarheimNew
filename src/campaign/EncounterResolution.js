@@ -18,6 +18,12 @@ export default function EncounterResolution({
       <h3>
         {event.key} · {event.name}
       </h3>
+      {/PRAWORZĄDN|NEUTRALN|ZŁE|CHAOTYCZN|NIEUMARŁYCH/.test(event.text) && (
+        <p className="campaign-done">
+          Twoja kompania: {army?.nature || "natura nieznana"}. Poniżej są tylko
+          opcje dostępne dla tej natury; opis z podręcznika podaje wszystkie.
+        </p>
+      )}
       <details>
         <summary>Opis z podręcznika · s. {event.page}</summary>
         <p>{event.text}</p>

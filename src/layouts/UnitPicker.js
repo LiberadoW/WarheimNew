@@ -45,6 +45,15 @@ const UnitPicker = ({ army, unitList, setUnitList, onUnitAdded }) => {
     ),
   })).filter((group) => group.units.length > 0);
 
+  if (army?.chaosMark === null)
+    return (
+      <div className="unit-picker">
+        <p className="unit-picker-empty">
+          Najpierw wybierz Mroczną Potęgę (Znak Chaosu) w nagłówku kompanii. Od
+          niej zależą dostępne demony i dziedzina magii.
+        </p>
+      </div>
+    );
   return (
     <div className="unit-picker">
       <input

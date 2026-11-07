@@ -508,3 +508,4 @@
 .campaign .campaign-points-total { display: block; text-align: center; font-size: .85rem; font-weight: 500; color: var(--text-muted); }
 .campaign .campaign-points-total strong { color: var(--text); }
 .campaign .campaign-help > p { margin: 0 0 8px; color: var(--text-muted); font-size: .85rem; }
+.campaign-auto-rules { margin: 0 0 12px; padding: 10px 14px 10px 30px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); font-size: .85rem; color: var(--text-muted); } .campaign-auto-rules li { list-style: disc; }

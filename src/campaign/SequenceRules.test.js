@@ -163,3 +163,37 @@ test("K6 injury results show the roll in Polish, not the K66 code", () => {
   const merc = henchmen("m", 1, { type: "Najemne Ostrze" });
   expect(R.injuryResult(merc, [2]).text).toMatch(/przepada/);
 });
+
+test("Podatek adds K6 / 2K6 / 3K6 by base price and giants pay double for armour", () => {
+  const { taxDice, quotePrice, giantArmourBlocked, basePriceOf } = require("./trading");
+  const taxed = { armyRules: ["Podatek"], effects: {}, companyAdvancements: [] };
+  expect([taxDice(taxed, 20), taxDice(taxed, 21), taxDice(taxed, 50), taxDice(taxed, 51)]).toEqual([1, 2, 2, 3]);
+  expect(taxDice({ armyRules: [] }, 10)).toBe(0);
+  const sword = { id: "x", name: "Miecz", category: "Oręż — walka wręcz", price: "10" };
+  expect(() => quotePrice(taxed, sword, [], [])).toThrow(/podatek/);
+  expect(quotePrice(taxed, sword, [], [], { taxRoll: [4] })).toBe(14);
+  const ogre = henchmen("o", 1, { rules: ["Wielkolud"] });
+  const light = { name: "Lekki pancerz", category: "Tarcza i pancerz", price: "5" };
+  const gromril = { name: "Pancerz z gromrilu (ciężki pancerz)", category: "Tarcza i pancerz", price: "50" };
+  expect(giantArmourBlocked(ogre, light)).toMatch(/dla wielkoluda/);
+  expect(giantArmourBlocked(henchmen("h", 1), light)).toBeNull();
+  expect(basePriceOf(gromril, [], ogre)).toBe(100);
+  expect(basePriceOf({ name: "Hełm", category: "Tarcza i pancerz", price: "5" }, [], ogre)).toBe(5);
+});
+
+test("company rules adjust exploration and the loot sale automatically", () => {
+  const { explorationAuto, explorationAutoTotals, lootSaleAuto } = require("./auto-rules");
+  const post = { armyRules: ["Rozrzutność"], units: [
+    hero("a", 8, 10, { rules: ["Dowódca", "Światowiec", "Łowca skarbów", "Rewelator"] }),
+    henchmen("t", 2, { rules: ["Złodziej", "Przepastne trzewia"] }),
+    henchmen("w", 2, { rules: ["Światowiec", "Ekonom"] }),
+  ] };
+  const auto = explorationAuto({ area: "outside" }, post);
+  expect(auto.rerolls).toEqual([{ source: "Łowca skarbów: a", count: 1 }]);
+  expect(auto.bonuses.map((b) => b.dice)).toEqual([1, 2]);
+  expect(explorationAutoTotals(auto, {})).toBeNull();
+  const rolls = { [auto.bonuses[0].key]: [5], [auto.bonuses[1].key]: [1, 6] };
+  expect(explorationAutoTotals(auto, rolls, {}, { t: true })).toEqual({ sum: 3 + 3, loot: 1 });
+  const sale = lootSaleAuto(post);
+  expect(sale).toMatchObject({ gluttons: 2, economists: 2, extraLoot: 1, spendthrift: true, leaderCp: 8 });
+});

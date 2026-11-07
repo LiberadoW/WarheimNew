@@ -33,6 +33,8 @@ import { getPrestige } from "../Functions/getPrestige";
 import { normalizeSpecialRules } from "../Components/CampaignPoints";
 import { EditArmyContext, getDefaultCampaignNotes } from "./App";
 import "../styles/Builder.css";
+import ChaosMarkSelect from "../Components/ChaosMarkSelect";
+import StigmataPanel from "../Components/StigmataPanel";
 
 export const CommandContext = createContext();
 
@@ -472,6 +474,13 @@ const Builder = ({
                   resetCampaignNotes={resetCampaignNotes}
                 />
               )}
+              <ChaosMarkSelect
+                army={army}
+                campaignNotes={campaignNotes}
+                setCampaignNotes={setCampaignNotes}
+                unitList={unitList}
+                setUnitList={setUnitList}
+              />
               {isEditArmyView && (
                 <UnitSelect
                   army={army}
@@ -609,6 +618,14 @@ const Builder = ({
                 <p className="unit-list-empty-title">Kompania jest pusta</p>
                 <p>Wybierz jednostki z listy obok, aby je dodać.</p>
               </div>
+            )}
+            {!campaignNotes.campaign?.activeBattle && (
+              <StigmataPanel
+                army={army}
+                campaignNotes={campaignNotes}
+                unitList={unitList}
+                setUnitList={setUnitList}
+              />
             )}
             {!(
               isPlayArmyView && campaignNotes.campaign?.activeBattle?.post

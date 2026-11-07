@@ -17,6 +17,7 @@ import MyLists from "../User/MyLists";
 import Header from "./Header";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { filterMercenaries } from "../Functions/filterMercenaries";
+import { withChaosMark } from "../Functions/chaosMark";
 import useLocalStorage from "use-local-storage";
 import "../index.css";
 
@@ -48,6 +49,9 @@ const App = () => {
     ...getDefaultCampaignNotes(),
     ...draft.campaignNotes,
   };
+  // Companies with an unspecified Znak Chaosu see the army as their chosen
+  // Dark Power (spell lore, allowed demons, marked army rule).
+  const markedArmy = withChaosMark(armies[army], campaignNotes.chaosMark);
   const setUnitList = React.useCallback(
     (value) => setDraftField("unitList", value),
     [setDraftField],
@@ -194,7 +198,7 @@ const App = () => {
                   <Builder
                     unitList={unitList}
                     setUnitList={setUnitList}
-                    army={armies[army]}
+                    army={markedArmy}
                     setArmy={setArmy}
                     unitName={unitName}
                     setUnitName={setUnitName}
@@ -221,7 +225,7 @@ const App = () => {
                   <Builder
                     unitList={unitList}
                     setUnitList={setUnitList}
-                    army={armies[army]}
+                    army={markedArmy}
                     setArmy={setArmy}
                     unitName={unitName}
                     setUnitName={setUnitName}
@@ -248,7 +252,7 @@ const App = () => {
                   <Builder
                     unitList={unitList}
                     setUnitList={setUnitList}
-                    army={armies[army]}
+                    army={markedArmy}
                     setArmy={setArmy}
                     unitName={unitName}
                     setUnitName={setUnitName}
@@ -309,10 +313,10 @@ const App = () => {
       <div id="armylist">
         <ArmyList
           unitList={newUnitList}
-          heroes={armies?.[army]?.heroes}
+          heroes={markedArmy?.heroes}
           unitName={unitName}
           setUnitList={setUnitList}
-          army={armies?.[army]}
+          army={markedArmy}
           prestige={prestige}
           armyName={armyName}
           campaignNotes={campaignNotes}

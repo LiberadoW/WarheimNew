@@ -76,7 +76,9 @@ export const getErrorMessages = (army, totalCost, modelAmount, unitList, limit) 
     if (profile?.retired) {
       messages.push({
         uniqueId: unit.uniqueId,
-        message: `${unit.unitName} nie jest już dostępny w tej bandzie.`,
+        message: profile.retiredReason
+          ? `${unit.unitName}: ${profile.retiredReason}`
+          : `${unit.unitName} nie jest już dostępny w tej bandzie.`,
       });
     }
     (profile?.requiredEquipmentGroups || []).forEach((group) => {

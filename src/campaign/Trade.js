@@ -7,6 +7,10 @@ import {
   quotePrice,
   chemicalKind,
   settleStrigos,
+  taxDice,
+  basePriceOf,
+  giantArmour,
+  giantArmourBlocked,
 } from "./trading";
 import DiceInput from "./DiceInput";
 import Reference from "./Reference";
@@ -259,21 +263,26 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
   const attempt = quote?.id || "first";
   const [draftDice, setDice] = useRollDraft(post, update, `price:${key}:${attempt}`);
   const [draftDiscount, setDiscount] = useRollDraft(post, update, `discount:${key}:${attempt}`);
+  const [draftTax, setTax] = useRollDraft(post, update, `tax:${key}:${attempt}`);
   const [token, setToken] = useState("");
   const [repeatOf, setRepeatOf] = useState(null);
   const completed = quote?.used && quote.id !== repeatOf;
   const saved = quote && !quote.used ? quote : null;
   const dice = saved?.dice || draftDice;
   const discountRoll = saved?.discountRoll || draftDiscount;
+  const taxRoll = saved?.taxRoll || draftTax;
   const count = priceDiceCount(item.price), discounts = discountDice(post, item);
   const quantity = toInventory ? 1 : modelCount(unit || {});
   const recipient = toInventory ? "Skarbiec kompanii" : (unit?.unitDisplayName || unit?.unitName || "Brak postaci");
-  const reason = toInventory ? null : !unit ? "Wybierz postać, dla której kupujesz ekwipunek." : equipmentPermission(unit, item, armyName) || equipmentCapacity(unit, item);
+  const reason = toInventory ? null : !unit ? "Wybierz postać, dla której kupujesz ekwipunek." : giantArmourBlocked(unit, item) || equipmentPermission(unit, item, armyName) || equipmentCapacity(unit, item);
+  const priceUnit = toInventory ? null : unit;
+  const base = (count === 0 || validDice(dice, count)) ? basePriceOf(item, dice, priceUnit) : null;
+  const taxes = taxDice(post, base);
   const priceAllowed = /^(\d+\+)?(\d*K[236](X\d+)?|\d+)$/i.test(item.price);
   const tokens = (post.availability || []).filter(t => t.locked && !t.used && availabilityValue(t, item) >= item.availability);
   const tokenId = saved?.tokenId || token || (tokens.length === 1 ? tokens[0].id : "");
-  const priceReady = priceAllowed && (count === 0 || validDice(dice, count)) && (discounts === 0 || validDice(discountRoll, discounts));
-  const price = saved ? saved.price : priceReady ? quotePrice(post, item, dice, discountRoll) : null;
+  const priceReady = priceAllowed && (count === 0 || validDice(dice, count)) && (discounts === 0 || validDice(discountRoll, discounts)) && (taxes === 0 || validDice(taxRoll, taxes));
+  const price = saved ? saved.price : priceReady ? quotePrice(post, item, dice, discountRoll, { taxRoll, unit: priceUnit }) : null;
   const total = price == null ? null : price * quantity;
   const availabilityReady = !item.availability || tokens.some(t=>t.id === tokenId);
   return (
@@ -312,6 +321,8 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
             <h4>Cena {item.price} zk / szt.</h4>
             {count > 0 && <DiceInput label={`Cena: ${item.name}`} count={count} value={dice} onChange={setDice} disabled={!!saved} />}
             {discounts > 0 && <DiceInput label={`Zniżka: ${item.name}`} count={discounts} value={discountRoll} onChange={setDiscount} disabled={!!saved} />}
+            {giantArmour(priceUnit, item) && <p className="campaign-source">Wielkolud: koszt pancerza x2 ({base ?? "…"} zk).</p>}
+            {taxes > 0 && <DiceInput label={`Podatek (cena podstawowa ${base} zk): +${taxes}K6`} count={taxes} value={taxRoll} onChange={setTax} disabled={!!saved} />}
             {!priceAllowed && <p>Wybierz wariant ceny według opisu przedmiotu.</p>}
           </section>
           <div className="campaign-purchase-total">
@@ -321,10 +332,10 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
               onClick={()=>update(p=>{
                 if ((p.quotes[key]?.id || null) !== (quote?.id || null)) throw Error("Zakup został już rozliczony.");
                 if (!saved) {
-                  p.quotes[key] = { id: uid(), itemId: item.id, price: quotePrice(p,item,dice,discountRoll),
-                    discountRoll, chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
+                  p.quotes[key] = { id: uid(), itemId: item.id, price: quotePrice(p,item,dice,discountRoll,{ taxRoll, unit: priceUnit }),
+                    discountRoll, taxRoll, chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
                     dice, tokenId, used: false };
-                  log(p,"price",`${item.name}: ${p.quotes[key].price} zk (kości: ${dice.join(",") || "cena stała"})`);
+                  log(p,"price",`${item.name}: ${p.quotes[key].price} zk (kości: ${dice.join(",") || "cena stała"}${taxes ? `; podatek ${taxRoll.join("+")}` : ""}${giantArmour(priceUnit, item) ? "; wielkolud x2" : ""})`);
                 }
                 buyItem(p,unit?.uniqueId,item,p.quotes[key],armyName,toInventory);
               })}>
@@ -348,7 +359,7 @@ export default function Trade({ post, update, army, commonOnly = false }) {
   const unitId = unit?.uniqueId || "";
   const categories = [...new Set(catalog.map(i=>i.category))];
   const shown = catalog.filter(i=>(!category || i.category===category) && normal(i.name).includes(normal(query)) &&
-    (all || inventory || !equipmentPermission(unit,i,army.name)) &&
+    (all || inventory || (!equipmentPermission(unit,i,army.name) && !giantArmourBlocked(unit,i))) &&
     (!commonOnly || !i.availability));
   const selected = catalog.find(i=>i.id === selectedId);
   const heading = useRef(null), previousSelection = useRef(selectedId);
@@ -396,7 +407,7 @@ export default function Trade({ post, update, army, commonOnly = false }) {
             <p className="campaign-source">{shown.length} przedmiotów · wybierz przedmiot, aby zobaczyć zasady i kupić</p>
             <div className="campaign-shop-list">
               {shown.slice(0,limit).map(item=>{
-                const reason=inventory ? null : equipmentPermission(unit,item,army.name) || equipmentCapacity(unit,item);
+                const reason=inventory ? null : giantArmourBlocked(unit,item) || equipmentPermission(unit,item,army.name) || equipmentCapacity(unit,item);
                 return <button type="button" className="campaign-shop-item" key={item.id} aria-label={`Wybierz: ${item.name}`} onClick={()=>setSelected(item.id)}>
                   <span className="campaign-shop-item-name">{item.name}<small>{item.category}</small></span>
                   <span className="campaign-shop-item-price">{item.price} zk<small>{reason ? "Sprawdź ograniczenia" : item.availability ? `Dostępność ${item.availability}+` : "Powszechny"}</small></span>
