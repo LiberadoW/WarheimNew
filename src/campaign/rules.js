@@ -806,6 +806,46 @@ export const applyInjury = (post, task, result, detail = {}) => {
     unitId: unit.uniqueId,
   });
 };
+// Śmierć dowódcy (s. 409): dowództwo przejmuje bohater z najwyższym CP, potem
+// z większą liczbą PD; przy pełnym remisie decyduje rzut kością.
+export const leaderSuccession = (post) => {
+  const leader = post.units.find(
+    (u) =>
+      isHero(u) &&
+      modelCount(u) === 1 &&
+      hasRule(u, "Dowódca") &&
+      u.campaignModelStatus?.[0]?.dead,
+  );
+  if (!leader) return null;
+  const score = (u) => [Number(currentStats(u)[8]) || 0, Number(u.exp) || 0];
+  const candidates = post.units
+    .filter(
+      (u) =>
+        u !== leader &&
+        u.type === "Bohater" &&
+        !u.campaignModelStatus?.[0]?.dead,
+    )
+    .sort((a, b) => score(b)[0] - score(a)[0] || score(b)[1] - score(a)[1]);
+  const best = candidates[0];
+  const tied = best
+    ? candidates.filter(
+        (u) => score(u)[0] === score(best)[0] && score(u)[1] === score(best)[1],
+      )
+    : [];
+  return { leader, candidates, tied, undead: hasRule(leader, "Nieumarły") };
+};
+export const assignLeader = (post, unitId) => {
+  const s = leaderSuccession(post);
+  if (!s) throw Error("Dowódca żyje.");
+  const unit = post.units.find((u) => u.uniqueId === unitId);
+  if (!unit || !s.candidates.includes(unit))
+    throw Error("Ten bohater nie może objąć dowództwa.");
+  if (!s.undead && !s.tied.includes(unit))
+    throw Error("Dowództwo obejmuje bohater z najwyższym CP, potem PD.");
+  addRule(unit, "Dowódca");
+  post.succession = unitId;
+  log(post, "leader", `${label(unit)} obejmuje dowództwo po ${label(s.leader)}.`);
+};
 export const applyExperience = (post) => {
   if (post.expApplied) throw Error("Doświadczenie już naliczono.");
   if (injuryTasks(post).some((t) => !post.injuries[t.key]))

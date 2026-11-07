@@ -83,6 +83,9 @@ function CampaignPoints({ battle, post, update, notes }) {
           </label>
         ))}
       </div>
+      {post.campaignPointsApplied ? (
+        <p className="campaign-done">✓ Punkty kampanii zatwierdzone</p>
+      ) : (
       <button
         className="button"
         disabled={post.campaignPointsApplied}
@@ -107,6 +110,7 @@ function CampaignPoints({ battle, post, update, notes }) {
       >
         Zatwierdź punkty kampanii
       </button>
+      )}
       {companyChoices(post, notes).map((choice) => (
         <section
           className="campaign-card"

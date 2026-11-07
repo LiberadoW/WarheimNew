@@ -45,3 +45,34 @@ test("Odporność ignores models that did not take part", () => {
   const u = unit({ battleOutOfActionModels: [true, false, false, false], battleAbsentModels: [false, false, true, true] });
   expect(points({}, [u])[2]).toBe(1);
 });
+
+const hero = (id, cp, exp, extra = {}) => ({
+  uniqueId: id, unitName: id, type: "Bohater", selectedNumber: 1, exp, rules: [],
+  stats: { Początkowa: [4, 4, 4, 3, 3, 1, 4, 1, cp] },
+  campaignModelStatus: [{ dead: false }], ...extra,
+});
+
+test("a dead leader is succeeded by the highest CP, then PD", () => {
+  const post = { journal: [], units: [
+    hero("boss", 9, 30, { rules: ["Dowódca"], campaignModelStatus: [{ dead: true }] }),
+    hero("a", 7, 20), hero("b", 8, 5), hero("c", 8, 12)] };
+  const s = R.leaderSuccession(post);
+  expect(s.tied.map((u) => u.uniqueId)).toEqual(["c"]);
+  expect(() => R.assignLeader(post, "b")).toThrow();
+  R.assignLeader(post, "c");
+  expect(post.units[3].rules).toContain("Dowódca");
+  expect(post.succession).toBe("c");
+});
+
+test("a full CP and PD tie lets the player pick any tied hero", () => {
+  const post = { journal: [], units: [
+    hero("boss", 9, 30, { rules: ["Dowódca"], campaignModelStatus: [{ dead: true }] }),
+    hero("a", 8, 12), hero("b", 8, 12)] };
+  expect(R.leaderSuccession(post).tied).toHaveLength(2);
+  R.assignLeader(post, "b");
+  expect(post.units[2].rules).toContain("Dowódca");
+});
+
+test("no succession is needed while the leader lives", () => {
+  expect(R.leaderSuccession({ units: [hero("boss", 9, 0, { rules: ["Dowódca"] })] })).toBeNull();
+});

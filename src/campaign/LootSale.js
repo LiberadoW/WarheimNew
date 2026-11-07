@@ -99,6 +99,9 @@ function LootSale({ battle, post, update, setBattle }) {
       <p>
         Przychód według tabeli i nadpodaży: <strong>{gold} zk</strong>.
       </p>
+      {post.lootSold ? (
+        <p className="campaign-done">✓ Sprzedaż łupów rozliczona</p>
+      ) : (
       <button
         className="button"
         disabled={
@@ -119,6 +122,7 @@ function LootSale({ battle, post, update, setBattle }) {
       >
         {quantity ? "Sprzedaj łupy" : "Zatwierdź bez sprzedaży"}
       </button>
+      )}
     </>
   );
 }

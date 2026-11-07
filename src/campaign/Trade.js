@@ -337,7 +337,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
     </article>
   );
 }
-export default function Trade({ post, update, army }) {
+export default function Trade({ post, update, army, commonOnly = false }) {
   const [theftDice, setTheftDice] = useRollDraft(post, update, "strigos-theft");
   const [selectedId, setSelected] = useRollDraft(post, update, "trade-selected", "");
   const [recipientId, setUnitId] = useRollDraft(post, update, "trade-recipient", post.units.find(u=>!u.campaignModelStatus?.every(s=>s.dead))?.uniqueId || "");
@@ -348,7 +348,8 @@ export default function Trade({ post, update, army }) {
   const unitId = unit?.uniqueId || "";
   const categories = [...new Set(catalog.map(i=>i.category))];
   const shown = catalog.filter(i=>(!category || i.category===category) && normal(i.name).includes(normal(query)) &&
-    (all || inventory || !equipmentPermission(unit,i,army.name)));
+    (all || inventory || !equipmentPermission(unit,i,army.name)) &&
+    (!commonOnly || !i.availability));
   const selected = catalog.find(i=>i.id === selectedId);
   const heading = useRef(null), previousSelection = useRef(selectedId);
   useEffect(()=>{
@@ -361,8 +362,9 @@ export default function Trade({ post, update, army }) {
   return (
     <section className="campaign-shop" aria-label="Sklep kampanii">
       <div className="campaign-shop-heading" ref={heading} tabIndex={-1}>
-        <h3>Handel</h3><strong>{post.treasury} <small>zk w skarbcu</small></strong>
+        <h3>{commonOnly ? "Ekwipunek powszechny" : "Handel"}</h3><strong>{post.treasury} <small>zk w skarbcu</small></strong>
       </div>
+      {commonOnly && <p className="campaign-source">Krok 9: nowi rekruci i pozostali drużynnicy mogą kupić przedmioty powszechne. Rzadkie kupujesz w kroku 7.</p>}
       {post.tradeClosed && <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>}
       <fieldset disabled={post.tradeClosed}>
         <div className="campaign-shop-recipient">
@@ -389,7 +391,7 @@ export default function Trade({ post, update, army }) {
             </div>
             <details className="campaign-shop-options"><summary>Opcje listy i pula dostępności</summary>
               <label className="campaign-check"><input type="checkbox" checked={all} onChange={e=>setAll(e.target.checked)} />Pokaż również niedozwolone dla postaci</label>
-              <AvailabilityPool post={post} update={update} />
+              {!commonOnly && <AvailabilityPool post={post} update={update} />}
             </details>
             <p className="campaign-source">{shown.length} przedmiotów · wybierz przedmiot, aby zobaczyć zasady i kupić</p>
             <div className="campaign-shop-list">

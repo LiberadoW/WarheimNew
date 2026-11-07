@@ -269,6 +269,9 @@ export default function Exploration({
               onChange={(ev) => set({ note: ev.target.value })}
             />
           </label>
+          {post.explorationApplied ? (
+            <p className="campaign-done">✓ Eksploracja zatwierdzona · +{result.loot} łupów</p>
+          ) : (
           <button
             className="button"
             disabled={post.explorationApplied || !plan.ready}
@@ -307,6 +310,7 @@ export default function Exploration({
           >
             Zatwierdź eksplorację
           </button>
+          )}
         </>
       )}
       {post.advances

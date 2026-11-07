@@ -88,3 +88,17 @@ test("Obrotność requires selecting a target before rolling and cannot reset it
   click("Zastosuj przerzut dostępności");expect(state.post.availabilityRerolled).toBe(true);
   expect(screen.queryByLabelText("Obrotność: nowy wynik dostępności, kość 1")).toBeNull();
 });
+
+test("the step 9 shop lists only common items", () => {
+  const { render: r, screen: sc } = require("@testing-library/react");
+  const Trade = require("./Trade").default;
+  const { catalog } = require("./rules");
+  const unit = { uniqueId: "h", unitName: "Herszt", type: "Bohater", selectedNumber: 1, rules: [],
+    startingEquipment: [], optionalEquipment: [], equipmentList: {}, campaignModelStatus: [{}] };
+  r(<Trade post={{ units: [unit], treasury: 100, inventory: [], journal: [], availability: null }} update={() => {}}
+    army={{ name: "" }} commonOnly />);
+  sc.getByLabelText("Pokaż również niedozwolone dla postaci").click();
+  const rare = catalog.find((i) => i.availability);
+  expect(sc.queryByRole("button", { name: `Wybierz: ${rare.name}` })).toBeNull();
+  expect(sc.getByText("Ekwipunek powszechny")).toBeTruthy();
+});

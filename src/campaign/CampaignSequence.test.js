@@ -98,7 +98,8 @@ test.each(["stat", "skill"])("an unresolved %s advance blocks Next and its selec
   if (kind==="stat") expect(R.currentStats(post(state).units[0])[1]).toBe(5);
   else expect(post(state).units[0].rules).toContain("Błyskawiczny blok");
   fireEvent.click(screen.getByRole("button",{name:"1. Poważne rany",exact:true}));
-  click("Dalej: Doświadczenie i rozwój"); expect(button("Nalicz doświadczenie").disabled).toBe(true);
+  click("Dalej: Doświadczenie i rozwój"); expect(screen.queryByRole("button",{name:"Nalicz doświadczenie"})).toBeNull();
+  expect(screen.getByText("✓ Doświadczenie naliczone")).toBeTruthy();
   expect(post(state).units[0].exp).toBe(24);
 });
 

@@ -115,6 +115,47 @@ function UnderdogGold({ post, update }) {
   );
 }
 
+function Succession({ post, update }) {
+  const s = R.leaderSuccession(post);
+  if (!s || R.injuryTasks(post).some((t) => !post.injuries[t.key])) return null;
+  const chosen = post.units.find((u) => u.uniqueId === post.succession);
+  return (
+    <section className="campaign-card">
+      <h3>Śmierć dowódcy: {R.label(s.leader)}</h3>
+      {s.undead && (
+        <p>
+          Kompania nieumarłych: dowództwo obejmuje Nekromanta, Licz lub Profeta.
+          Jeśli go nie ma, kompania rozpada się (s. 409).
+        </p>
+      )}
+      <p className="campaign-source">
+        Nowy DOWÓDCA, gdy osiągnie kolejny poziom, przejmuje zasady poprzednika
+        (Mag, Duchowny, Kowal run…) opisane w kompanii.
+      </p>
+      {chosen ? (
+        <p className="campaign-done">✓ Dowództwo objął {R.label(chosen)}</p>
+      ) : !s.candidates.length ? (
+        <p>Brak bohatera, który może objąć dowództwo.</p>
+      ) : (
+        <>
+          {s.tied.length > 1 && !s.undead && (
+            <p>Remis CP i PD: wybierz zwycięzcę rzutu kością.</p>
+          )}
+          {(s.undead ? s.candidates : s.tied).map((u) => (
+            <button
+              key={u.uniqueId}
+              className="button"
+              onClick={() => update((p) => R.assignLeader(p, u.uniqueId))}
+            >
+              Dowódca: {R.label(u)} (CP {R.currentStats(u)[8]}, {u.exp || 0} PD)
+            </button>
+          ))}
+        </>
+      )}
+    </section>
+  );
+}
+
 const checkLabel = (text, value, onChange) => (
   <label className="campaign-check">
     <input
@@ -190,6 +231,12 @@ export default function CampaignManager({
         R.injuryTasks(post).some((t) => !post.injuries[t.key])
       )
         throw Error("Rozstrzygnij obrażenia wszystkich modeli WzA.");
+      if (
+        battle.stage === 1 &&
+        R.leaderSuccession(post)?.candidates.length &&
+        !post.succession
+      )
+        throw Error("Wskaż nowego dowódcę kompanii.");
       if (
         battle.stage === 2 &&
         (!post.expApplied ||
@@ -339,8 +386,15 @@ export default function CampaignManager({
               </span>
             )}
           </div>
+          <progress
+            className="campaign-progress"
+            value={phase}
+            max={STEPS.length - 1}
+            aria-label={`Postęp sekwencji: etap ${phase + 1} z ${STEPS.length}`}
+          />
           <label className="campaign-mobile-nav">
             Etap {phase + 1} z {STEPS.length}
+            {phase < 11 ? ` · dalej: ${STEPS[phase + 1]}` : ""}
             <select aria-label="Etap kampanii" value={phase} onChange={(e) => {
               const stage = Number(e.target.value);
               if (stage < phase && !(stage === 0 && post)) setBattle({ ...battle, stage });
@@ -566,6 +620,7 @@ export default function CampaignManager({
                       Żaden uczestniczący model nie został wyłączony z akcji.
                     </p>
                   )}
+                  <Succession post={post} update={update} />
                 </>
               )}
               {phase === 2 && (
@@ -617,13 +672,16 @@ export default function CampaignManager({
                       ))}
                     </tbody>
                   </table>
-                  <button
-                    className="button"
-                    disabled={post.expApplied}
-                    onClick={() => update(R.applyExperience)}
-                  >
-                    Nalicz doświadczenie
-                  </button>
+                  {post.expApplied ? (
+                    <p className="campaign-done">✓ Doświadczenie naliczone</p>
+                  ) : (
+                    <button
+                      className="button"
+                      onClick={() => update(R.applyExperience)}
+                    >
+                      Nalicz doświadczenie
+                    </button>
+                  )}
                   {post.advances.map((a) => (
                     <AdvanceCard
                       key={a.id}
@@ -674,6 +732,18 @@ export default function CampaignManager({
               {phase === 9 && (
                 <Recruitment post={post} update={update} army={army} />
               )}
+              {phase === 9 &&
+                (post.effects?.strigosDiscount || post.tradeClosed ? (
+                  <p className="campaign-source">
+                    Handel w tej sekwencji odbył się z taborytami Strigosu i
+                    został zamknięty w kroku 7.
+                  </p>
+                ) : (
+                  <details className="campaign-card">
+                    <summary>Kup ekwipunek powszechny (nowi rekruci)</summary>
+                    <Trade post={post} update={update} army={army} commonOnly />
+                  </details>
+                ))}
               {phase === 10 && (
                 <Inventory post={post} update={update} army={army} />
               )}
@@ -731,14 +801,15 @@ export default function CampaignManager({
                   ))}
               {post.expApplied && <SanityTasks post={post} update={update} />}
               {phase !== 11 && (
-                <>
+                <details className="campaign-tools">
+                  <summary>Narzędzia: testy, żołd, korekty</summary>
                   <RollNotebook post={post} update={update} />
                   <EconomyAdjustment post={post} update={update} />
                   <UnitAdjustments post={post} update={update} />
                   {campaign.settings.mutacje && (
                     <Mutations post={post} update={update} />
                   )}
-                </>
+                </details>
               )}
               {PAGES[phase] && <Reference pages={PAGES[phase]} />}
             </>
