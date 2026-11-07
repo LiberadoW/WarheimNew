@@ -4,16 +4,29 @@ import * as R from "./rules";
 import { companyChoices, selectCompanyAdvance } from "./company";
 
 function CampaignPoints({ battle, post, update, notes }) {
+  // Odporność liczy się względem modeli, które faktycznie wzięły udział w
+  // potyczce — nieobecni (rany, pojmanie, obozowisko) nie zaniżają odsetka.
+  const participating = (u, i) => !u.battleAbsentModels?.[i];
   const out = post.units.reduce(
-    (n, u) => n + (u.battleOutOfActionModels || []).filter(Boolean).length,
+    (n, u) =>
+      n +
+      (u.battleOutOfActionModels || []).filter(
+        (x, i) => x && participating(u, i),
+      ).length,
     0,
   );
-  const count = post.units.reduce((n, u) => n + R.modelCount(u), 0);
+  const count = post.units.reduce(
+    (n, u) =>
+      n +
+      Array.from({ length: R.modelCount(u) }, (_, i) => participating(u, i))
+        .filter(Boolean).length,
+    0,
+  );
   const suggested = {
     determinacja:
       1 +
       (battle.result === "win"
-        ? battle.round < 4
+        ? battle.round <= 4
           ? 2
           : battle.round >= 5 && battle.round <= 9
             ? 1
@@ -28,8 +41,9 @@ function CampaignPoints({ battle, post, update, notes }) {
             ? 1
             : 0
       : 0,
-    odpornosc:
-      out / count < 0.25
+    odpornosc: !count
+      ? 0
+      : out / count < 0.25
         ? 3
         : out / count < 0.5
           ? 2
@@ -41,8 +55,11 @@ function CampaignPoints({ battle, post, update, notes }) {
   return (
     <>
       <p>
-        Propozycja wynika z wyniku potyczki i odsetka strat. Uwzględnij wyjątki
-        z zasad kompanii.
+        Propozycja wynika z wyniku potyczki i odsetka strat: Determinacja +1
+        zawsze, zwycięzca +2 do 4. rundy lub +1 w rundach 5–9; Gniew za WzA
+        przeciwnika powyżej 25/50/75%; Odporność za własne WzA poniżej
+        75/50/25% uczestniczących modeli ({out}/{count}). Uwzględnij wyjątki z
+        zasad kompanii (np. Khorne).
       </p>
       <div className="campaign-grid">
         {Object.keys(suggested).map((k) => (

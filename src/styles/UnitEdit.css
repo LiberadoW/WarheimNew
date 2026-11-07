@@ -1,6 +1,15 @@
+/* Phones: one scrollable row of tabs instead of a tall black stack. */
 @media screen and (max-width: 768px) {
   .unit-edit-menu {
-    flex-direction: column;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-radius: 8px;
+  }
+  .unit-edit-menu .menu-button {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 10px 14px;
+    white-space: nowrap;
   }
 }
 

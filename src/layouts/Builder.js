@@ -318,6 +318,10 @@ const Builder = ({
 
     // html2pdf lays the copy out at A4 width; measure page breaks the same way.
     const previousWidth = element.style.width;
+    // On phones the sheet is hidden behind a toggle; it must be laid out to
+    // measure page breaks and the canvas scale.
+    const previousDisplay = element.style.display;
+    element.style.display = "block";
     element.style.width = "21cm";
     const removeSpacers = avoidPdfPageBreaks(
       element,
@@ -337,6 +341,7 @@ const Builder = ({
     } finally {
       removeSpacers();
       element.style.width = previousWidth;
+      element.style.display = previousDisplay;
     }
   };
 

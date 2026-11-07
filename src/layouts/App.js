@@ -70,6 +70,7 @@ const App = () => {
   );
   const [mercenaryUnitName, setMercenaryUnitName] = useState("");
   const [prestige, setPrestige] = useState(0);
+  const [showPrintPreview, setShowPrintPreview] = useState(false);
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
@@ -296,6 +297,15 @@ const App = () => {
           </Router>
         </main>
       </EditArmyContext.Provider>
+      <div className={`armylist-shell${showPrintPreview ? " is-open" : ""}`}>
+        <button
+          type="button"
+          className="armylist-toggle"
+          aria-expanded={showPrintPreview}
+          onClick={() => setShowPrintPreview((v) => !v)}
+        >
+          {showPrintPreview ? "Ukryj kartę do druku" : "Pokaż kartę do druku"}
+        </button>
       <div id="armylist">
         <ArmyList
           unitList={newUnitList}
@@ -308,6 +318,7 @@ const App = () => {
           campaignNotes={campaignNotes}
           includeRules={includeRulesInPdf}
         />
+      </div>
       </div>
     </div>
   );

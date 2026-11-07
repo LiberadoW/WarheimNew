@@ -6,7 +6,12 @@ import { getRuleText, getWeaponRuleNames } from "../Functions/getRuleText";
 import { getEquipmentStats } from "../Data.js/EquipmentStats";
 import DiceInput from "../campaign/DiceInput";
 import { darkPact } from "../campaign/sanity";
-import { catalog, isHero, activeModel } from "../campaign/rules";
+import {
+  catalog,
+  isHero,
+  activeModel,
+  canEarnExperience,
+} from "../campaign/rules";
 import { getModifiers } from "../Functions/getModifiers";
 
 const MENU = [
@@ -181,11 +186,12 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   const battleExp = Math.max(0, Number(unit.battleExp) || 0);
   const battleObled = Math.max(0, Number(unit.battleObled) || 0);
   const totalObled = Math.max(0, Number(unit.obled) || 0);
-  const totalExpAfterBattle =
-    Math.max(0, Number(unit.exp) || 0) +
-    battleExp +
-    (unit.type === "Bohater" ? Number(unit.battleKills) || 0 : 0) +
-    1;
+  const totalExpAfterBattle = canEarnExperience(unit)
+    ? Math.max(0, Number(unit.exp) || 0) +
+      battleExp +
+      (unit.type === "Bohater" ? Number(unit.battleKills) || 0 : 0) +
+      1
+    : Math.max(0, Number(unit.exp) || 0);
   const totalObledAfterBattle = totalObled + battleObled;
 
   const updateBattleCounter = (field, delta) => {

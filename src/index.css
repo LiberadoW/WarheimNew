@@ -82,6 +82,8 @@ body {
   background-color: var(--bg);
   min-height: 100vh;
   overflow: hidden;
+  /* clip (unlike hidden) is not a scroll container, so sticky bars still work */
+  overflow: clip;
   color: var(--text);
 }
 
@@ -166,4 +168,14 @@ select {
   min-height: 0;
   padding: 0;
   border-radius: 0;
+}
+
+/* On phones the A4 sheet is wider than the screen: keep it behind a toggle and
+   let it scroll horizontally. html2pdf clones #armylist outside this shell, so
+   hiding it here does not affect the PDF. */
+.armylist-toggle { display: none; }
+@media (max-width: 700px) {
+  .armylist-toggle { display: block; width: calc(100% - 32px); margin: 16px; min-height: 44px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-weight: 600; }
+  .armylist-shell:not(.is-open) #armylist { display: none; }
+  .armylist-shell.is-open { overflow-x: auto; }
 }

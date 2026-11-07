@@ -1,11 +1,18 @@
 import NumberInput from "./NumberInput";
-import React, { useState } from "react";
+import React from "react";
 import { companyLevel } from "./company";
 import * as R from "./rules";
 
 function LootSale({ battle, post, update, setBattle }) {
-  const [quantity, setQuantity] = useState(0);
-  const [modifier, setModifier] = useState(0);
+  // Draft values live in the saved battle, so a reload or step change keeps them.
+  const quantity = Number(post.lootDraft?.quantity) || 0;
+  const modifier = Number(post.lootDraft?.modifier) || 0;
+  const setDraft = (patch) =>
+    update((p) => {
+      p.lootDraft = { quantity, modifier, ...p.lootDraft, ...patch };
+    });
+  const setQuantity = (value) => setDraft({ quantity: value });
+  const setModifier = (value) => setDraft({ modifier: value });
   const models = post.units
     .filter((u) => !["Najemne Ostrze", "Postać Dramatu"].includes(u.type))
     .reduce(

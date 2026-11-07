@@ -17,6 +17,10 @@ import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
 import React, { useEffect, useRef, useState } from "react";
 import Reference from "./Reference";
+import BattleTracker from "./BattleTracker";
+import DiceInput from "./DiceInput";
+import useRollDraft from "./useRollDraft";
+import { getPrestige } from "../Functions/getPrestige";
 import Trade from "./Trade";
 import {
   RollNotebook,
@@ -56,6 +60,61 @@ const PAGES = {
   10: [426],
   11: [408],
 };
+const RESULTS = { win: "Zwycięstwo", loss: "Porażka", draw: "Remis" };
+const safePrestige = (units) => {
+  try {
+    return getPrestige(units)[0];
+  } catch {
+    return null;
+  }
+};
+
+function UnderdogGold({ post, update }) {
+  const bonus = post.underdog;
+  const [dice, setDice] = useRollDraft(post, update, "underdog-gold");
+  if (!bonus) return null;
+  const total = R.validDice(dice, bonus.dice) ? bonus.gold + R.sum(dice) : null;
+  return (
+    <section className="campaign-card">
+      <h3>Żółtodzioby (różnica prestiżu {bonus.diff})</h3>
+      <p>
+        Każdy uczestniczący bohater i grupa stronników otrzymuje +{bonus.exp}{" "}
+        PD (wliczone w naliczanie). Zasady na tę sekwencję:{" "}
+        {bonus.rules.join(", ")}.
+      </p>
+      {post.underdogGoldApplied ? (
+        <p>Dodano {post.underdogGoldApplied} zk do skarbca.</p>
+      ) : (
+        <>
+          <DiceInput
+            label={`Dodatkowe zk: ${bonus.gold}+${bonus.dice}K6`}
+            count={bonus.dice}
+            value={dice}
+            onChange={setDice}
+          />
+          <button
+            className="button"
+            disabled={total === null}
+            onClick={() =>
+              update((p) => {
+                p.treasury += total;
+                p.underdogGoldApplied = total;
+                R.log(
+                  p,
+                  "income",
+                  `Żółtodzioby: ${bonus.gold} + ${dice.join("+")} = ${total} zk.`,
+                );
+              })
+            }
+          >
+            Dodaj {total ?? "…"} zk do skarbca
+          </button>
+        </>
+      )}
+    </section>
+  );
+}
+
 const checkLabel = (text, value, onChange) => (
   <label className="campaign-check">
     <input
@@ -116,7 +175,14 @@ export default function CampaignManager({
             "Rozstrzygnij testy starych wojennych ran przed potyczką.",
           );
         if (!battle.gameName.trim()) throw Error("Wpisz nazwę potyczki.");
-        setBattle(R.beginPostBattle(battle, unitList, campaignNotes, army));
+        setBattle(
+          R.beginPostBattle(
+            { ...battle, ownPrestige: safePrestige(unitList) ?? 0 },
+            unitList,
+            campaignNotes,
+            army,
+          ),
+        );
         return;
       }
       if (
@@ -131,6 +197,8 @@ export default function CampaignManager({
           sanityTasks(post).length)
       )
         throw Error("Nalicz PD i rozstrzygnij wszystkie awanse.");
+      if (battle.stage === 2 && post.underdog && !post.underdogGoldApplied)
+        throw Error("Rzuć na dodatkowe złote korony Żółtodziobów.");
       if (
         battle.stage === 3 &&
         (!post.campaignPointsApplied ||
@@ -264,7 +332,7 @@ export default function CampaignManager({
         <>
           <div className="campaign-row">
             <strong>{battle.gameName || "Nowa potyczka"}</strong>
-            <span>{STEPS[phase]}</span>
+            <span>{phase ? STEPS[phase] : "Przebieg potyczki"}</span>
             {post && (
               <span>
                 Skarbiec: {post.treasury} zk · łupy: {post.loot}
@@ -323,8 +391,10 @@ export default function CampaignManager({
                   ))}
                 </details>
               )}
-              <div className="campaign-grid">
-                <label>
+              <BattleTracker units={unitList} setUnits={setUnitList} />
+              <h3>Dane potyczki</h3>
+              <div className="campaign-grid campaign-battle-data">
+                <label className="wide">
                   Nazwa potyczki
                   <input
                     value={battle.gameName}
@@ -343,7 +413,7 @@ export default function CampaignManager({
                     }
                   />
                 </label>
-                <label>
+                <label className="wide">
                   Przeciwnik
                   <input
                     value={battle.opponent}
@@ -352,7 +422,7 @@ export default function CampaignManager({
                     }
                   />
                 </label>
-                <label>
+                <label className="wide">
                   Scenariusz
                   <input
                     value={battle.scenario}
@@ -440,6 +510,34 @@ export default function CampaignManager({
                   />
                 </label>
               </div>
+              <div className="campaign-grid">
+                <label>
+                  Prestiż przeciwnika
+                  <NumberInput
+                    type="number"
+                    min="0"
+                    value={battle.opponentPrestige || 0}
+                    onChange={(e) =>
+                      setBattle({
+                        ...battle,
+                        opponentPrestige: Math.max(0, Number(e.target.value)),
+                      })
+                    }
+                  />
+                </label>
+                <p className="campaign-source">
+                  Prestiż Twojej kompanii: {safePrestige(unitList) ?? "?"}
+                  {(() => {
+                    const b = R.underdogBonus(
+                      safePrestige(unitList),
+                      battle.opponentPrestige,
+                    );
+                    return b
+                      ? ` · Żółtodzioby (różnica ${b.diff}): ${b.rules.join(", ")}, +${b.exp} PD, ${b.gold}+${b.dice}K6 zk`
+                      : " · bez premii Żółtodziobów (różnica do 50).";
+                  })()}
+                </p>
+              </div>
               <label>
                 Notatki
                 <textarea
@@ -449,10 +547,6 @@ export default function CampaignManager({
                   }
                 />
               </label>
-              <p>
-                PD za pokonanych przeciwników i WzA zapisuj poniżej, przy
-                jednostkach. Przed rozliczeniem zakończ ich uzupełnianie.
-              </p>
             </>
           ) : (
             <>
@@ -480,7 +574,11 @@ export default function CampaignManager({
                     +1 PD za przeżycie; bohaterowie dodatkowo +1 PD za
                     przeciwnika WzA. Dodatkowe PD ze scenariusza są dodawane
                     osobno.
+                    {post.underdog
+                      ? ` Żółtodzioby: +${post.underdog.exp} PD dla każdego uczestnika.`
+                      : ""}
                   </p>
+                  <UnderdogGold post={post} update={update} />
                   <table className="campaign-experience">
                     <thead>
                       <tr>
@@ -583,10 +681,34 @@ export default function CampaignManager({
                 <>
                   <h3>Podsumowanie: {battle.gameName}</h3>
                   <p>
-                    {battle.date} · {battle.opponent} · {battle.scenario}
+                    {[
+                      battle.date,
+                      battle.opponent,
+                      battle.scenario,
+                      RESULTS[battle.result],
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
                   </p>
                   <p>
-                    Skarbiec: {post.treasury} zk · łupy: {post.loot}.
+                    Skarbiec: {Number(campaignNotes.skarbiec) || 0} →{" "}
+                    <strong>{post.treasury} zk</strong> · łupy:{" "}
+                    {Number(campaignNotes.kosztownosci) || 0} →{" "}
+                    <strong>{post.loot}</strong>
+                  </p>
+                  <p>
+                    Polegli:{" "}
+                    {Object.values(post.injuries).filter((i) => i.status?.dead)
+                      .length || "brak"}{" "}
+                    · awanse: {post.advances.length} · wpisy w dzienniku:{" "}
+                    {post.journal.length}
+                  </p>
+                  <p>
+                    Prestiż drużyny: {battle.ownPrestige ?? "?"} →{" "}
+                    <strong>{safePrestige(post.units) ?? "?"}</strong>{" "}
+                    <small className="campaign-source">
+                      (bez modeli martwych, pojmanych i pauzujących)
+                    </small>
                   </p>
                   <p>
                     Rozliczenie zostanie zapisane raz. W razie błędu zapisu
@@ -671,7 +793,9 @@ export default function CampaignManager({
                 {h.date} · {h.gameName} · {h.opponent}
               </summary>
               <p>
-                {h.scenario} · {h.result} · {h.notes}
+                {[h.scenario, RESULTS[h.result] || h.result, h.notes]
+                  .filter(Boolean)
+                  .join(" · ")}
               </p>
               <ul>
                 {h.journal.map((e) => (

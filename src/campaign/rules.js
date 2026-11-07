@@ -477,6 +477,8 @@ export const newBattle = (units) => ({
   round: 10,
   opponentModels: 0,
   opponentOut: 0,
+  ownPrestige: 0,
+  opponentPrestige: 0,
   players: 2,
   totalSold: 0,
   notes: "",
@@ -484,10 +486,37 @@ export const newBattle = (units) => ({
   startedAt: new Date().toISOString(),
   rosterIds: units.map((u) => u.uniqueId),
 });
+// Żółtodzioby (rozdział 13, s. 414): słabsza kompania dostaje zasady, PD i zk
+// zależnie od różnicy prestiżu ustalonej przed rozgrywką.
+export const UNDERDOG = [
+  { min: 51, rules: ["Pazerność"], exp: 1, gold: 20, dice: 2 },
+  { min: 76, rules: ["Kompania najemników", "Pazerność"], exp: 2, gold: 40, dice: 2 },
+  { min: 101, rules: ["Kompania najemników", "Pazerność"], exp: 3, gold: 55, dice: 3 },
+  {
+    min: 151,
+    rules: ["Kompania najemników", "Pazerność", "Samowystarczalni"],
+    exp: 4,
+    gold: 65,
+    dice: 4,
+  },
+  {
+    min: 301,
+    rules: ["Kompania najemników", "Pazerność", "Odkrywcy", "Samowystarczalni"],
+    exp: 5,
+    gold: 70,
+    dice: 5,
+  },
+];
+export const underdogBonus = (own, opponent) => {
+  const diff = (Number(opponent) || 0) - (Number(own) || 0);
+  const row = [...UNDERDOG].reverse().find((r) => diff >= r.min);
+  return row ? { diff, ...row } : null;
+};
 export const beginPostBattle = (battle, units, notes, army = {}) => ({
   ...battle,
   stage: 1,
   post: {
+    underdog: underdogBonus(battle.ownPrestige, battle.opponentPrestige),
     units: clone(units).map((u) => ({
       ...u,
       campaignModelStatus: Array.from({ length: modelCount(u) }, (_, i) => ({
@@ -503,7 +532,12 @@ export const beginPostBattle = (battle, units, notes, army = {}) => ({
     sanityBefore: Object.fromEntries(
       units.map((u) => [u.uniqueId, Number(u.obled) || 0]),
     ),
-    armyRules: [...(army.armyRules || []), ...(notes.specialRules || [])],
+    armyRules: [
+      ...(army.armyRules || []),
+      ...(notes.specialRules || []),
+      ...(underdogBonus(battle.ownPrestige, battle.opponentPrestige)?.rules ||
+        []),
+    ],
     companyAdvancements: clone(notes.campaign?.companyAdvancements || []),
     persistentEffects: clone(notes.campaign?.persistentEffects || {}),
     futureEffects: clone(
@@ -793,6 +827,7 @@ export const applyExperience = (post) => {
     if (!survived || !participated || !canEarnExperience(u)) return;
     const gained =
       1 +
+      (Number(post.underdog?.exp) || 0) +
       (Number(u.battleExp) || 0) +
       (u.type === "Bohater" ? Number(u.battleKills) || 0 : 0);
     const old = Number(u.exp) || 0;
