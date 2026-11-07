@@ -59,7 +59,6 @@ export default function BattleTracker({ units, setUnits }) {
       </h3>
       <p className="campaign-source">
         Dotknij modelu, aby oznaczyć go jako wyłączonego z akcji (WzA).
-        Nieobecność zaznaczaj tylko dla modeli, które nie wyszły na stół.
       </p>
       {units.map((u) => {
         const count = R.modelCount(u);
@@ -78,7 +77,7 @@ export default function BattleTracker({ units, setUnits }) {
               {R.canEarnExperience(u) &&
                 counter(u, "battleExp", "PD ze scenariusza")}
             </div>
-            <div className="campaign-tracker-models">
+            <div className="campaign-tracker-models" role="group" aria-label={`Wyłączeni z akcji: ${R.label(u)}`}>
               {Array.from({ length: count }, (_, i) => {
                 const status = u.campaignModelStatus?.[i] || {};
                 const blocked = status.captured || (status.skip || 0) > 0;
@@ -86,26 +85,55 @@ export default function BattleTracker({ units, setUnits }) {
                 const out = !!u.battleOutOfActionModels?.[i];
                 const name = count > 1 ? `#${i + 1}` : "Model";
                 return (
-                  <div className="campaign-tracker-model" key={i}>
-                    <button
-                      type="button"
-                      aria-pressed={out}
-                      className={out ? "is-out" : ""}
-                      disabled={blocked || absent}
-                      onClick={() =>
-                        edit(u.uniqueId, (x) => {
-                          x.battleOutOfActionModels[i] = !out;
-                        })
-                      }
-                    >
-                      {name}: {blocked ? (status.captured ? "pojmany" : `pauza ${status.skip}`) : absent ? "nieobecny" : out ? "WzA" : "w grze"}
-                    </button>
-                    {!blocked && (
-                      <label className="campaign-check">
+                  <button
+                    key={i}
+                    type="button"
+                    aria-pressed={out}
+                    className={out ? "is-out" : ""}
+                    disabled={blocked || absent}
+                    onClick={() =>
+                      edit(u.uniqueId, (x) => {
+                        x.battleOutOfActionModels[i] = !out;
+                      })
+                    }
+                  >
+                    <span>{name}</span>
+                    <small>
+                      {blocked
+                        ? status.captured
+                          ? "pojmany"
+                          : `pauza ${status.skip}`
+                        : absent
+                          ? "nieobecny"
+                          : out
+                            ? "WzA"
+                            : "w grze"}
+                    </small>
+                  </button>
+                );
+              })}
+            </div>
+            {Array.from({ length: count }).some(
+              (_, i) =>
+                !u.campaignModelStatus?.[i]?.captured &&
+                !(u.campaignModelStatus?.[i]?.skip > 0),
+            ) && (
+              <details className="campaign-help campaign-tracker-absent">
+                <summary>
+                  Nieobecni na stole (
+                  {(u.battleAbsentModels || []).filter(Boolean).length})
+                </summary>
+                <div className="campaign-chips">
+                  {Array.from({ length: count }, (_, i) => {
+                    const status = u.campaignModelStatus?.[i] || {};
+                    if (status.captured || status.skip > 0) return null;
+                    const name = count > 1 ? `#${i + 1}` : "Model";
+                    return (
+                      <label className="campaign-chip-toggle" key={i}>
                         <input
                           type="checkbox"
                           aria-label={`Nieobecny: ${R.label(u)} ${name}`}
-                          checked={absent}
+                          checked={!!u.battleAbsentModels?.[i]}
                           onChange={(e) =>
                             edit(u.uniqueId, (x) => {
                               x.battleAbsentModels[i] = e.target.checked;
@@ -114,13 +142,13 @@ export default function BattleTracker({ units, setUnits }) {
                             })
                           }
                         />
-                        nieobecny
+                        <span>{name}</span>
                       </label>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                    );
+                  })}
+                </div>
+              </details>
+            )}
           </article>
         );
       })}

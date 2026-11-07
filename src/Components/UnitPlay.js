@@ -120,7 +120,9 @@ const formatCustomEquipmentEntry = (entry) => {
 };
 
 const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
-  const [menu, setMenu] = useState("Bitwa");
+  const [menu, setMenu] = useState(
+    campaign?.activeBattle && !campaign.activeBattle.post ? "Bitwa" : "Statystyki",
+  );
   const [description, setDescription] = useState(null);
   const pactDraftKey = `${campaign?.activeBattle?.id || ""}:${unitList.reduce((n, u) => n + (u.battlePacts || 0), 0)}`;
   const pactDice = unit.battlePactDraft?.key === pactDraftKey ? unit.battlePactDraft.dice : [];
@@ -413,7 +415,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
           >
             −
           </button>
-          <span>{unit.battleKills || 0}</span>
+          <span className="unit-play-counter-value">{unit.battleKills || 0}</span>
           <button
             className="button"
             disabled={!battleActive}

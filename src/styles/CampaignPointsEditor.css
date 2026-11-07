@@ -173,3 +173,24 @@
     flex-direction: column;
   }
 }
+
+/* Card look consistent with the builder and campaign panels. */
+.campaign-notes-editor { margin-top: 24px; gap: 12px; }
+.campaign-notes-editor > h3 { margin: 0; font-family: var(--font-display); font-size: 1.15rem; }
+.campaign-points-editor-fields, .campaign-points-editor-rules, .campaign-notes-textarea-box {
+  border: 1px solid var(--border) !important; border-radius: var(--radius); background: var(--surface) !important;
+  box-shadow: var(--shadow-sm) !important; padding: 14px !important; color: var(--text);
+}
+.campaign-points-editor-field, .campaign-points-editor-rules > .bold, .campaign-notes-textarea-box > .bold {
+  font-size: .75rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted);
+}
+.campaign-points-editor-field input, .campaign-points-editor-rules input, .campaign-notes-textarea-box textarea {
+  min-height: 44px; border: 1px solid var(--border-strong) !important; border-radius: 10px; padding: 8px 12px;
+  font-size: 1rem; background: var(--surface); color: var(--text);
+}
+.campaign-points-editor-rules-form .button { min-height: 44px; }
+@media (max-width: 700px) {
+  .campaign-points-editor { flex-direction: column; }
+  .campaign-points-editor-fields { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .campaign-points-editor-field input { text-align: center; }
+}

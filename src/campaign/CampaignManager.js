@@ -18,6 +18,7 @@ import InjuryCard from "./InjuryCard";
 import React, { useEffect, useRef, useState } from "react";
 import Reference from "./Reference";
 import BattleTracker from "./BattleTracker";
+import GroupManager from "./GroupManager";
 import DiceInput from "./DiceInput";
 import useRollDraft from "./useRollDraft";
 import { getPrestige } from "../Functions/getPrestige";
@@ -46,6 +47,20 @@ const STEPS = [
   "Rekrutacja",
   "Podział ekwipunku",
   "Podsumowanie",
+];
+const LEADS = [
+  "Zapisuj przebieg na bieżąco, a po grze uzupełnij dane potyczki.",
+  "Rzut na tabelę poważnych ran dla każdego modelu wyłączonego z akcji.",
+  "Nalicz PD i rozstrzygnij awanse bohaterów oraz grup.",
+  "Determinacja, Gniew i Odporność oraz rozwinięcia kompanii.",
+  "Pula kostek eksploracji, powtórzenia i znalezione łupy.",
+  "Łupy można sprzedać tylko raz w sekwencji.",
+  "Rzut 2K6 na sumę PD rekrutów dołączających do grup.",
+  "Pula dostępności i zakup rzadkiego ekwipunku.",
+  "Wynajęcie Postaci Dramatu i ich żołd.",
+  "Nowi drużynnicy, Najemne Ostrza, rzemiosło i grupy stronników.",
+  "Wymiana oręża i ekwipunku między postaciami i skarbcem.",
+  "Sprawdź wynik i zapisz rozliczenie.",
 ];
 const PAGES = {
   1: [409, 410],
@@ -309,15 +324,15 @@ export default function CampaignManager({
   }, [phase]);
   return (
     <section ref={panel} tabIndex={-1} className="campaign" aria-label="Prowadzenie kampanii">
-      <h2>Kampania</h2>
-      {error && (
+      {!battle && <h2>Kampania</h2>}
+      {!battle && error && (
         <p role="alert" className="campaign-error">
           {error}
         </p>
       )}
       {!battle ? (
         <>
-          <p>
+          <p className="campaign-lead">
             Rozpocznij potyczkę, zaznacz uczestników i zapisuj PD oraz modele
             wyłączone z akcji w panelach jednostek.
           </p>
@@ -377,32 +392,74 @@ export default function CampaignManager({
         </>
       ) : (
         <>
-          <div className="campaign-row">
-            <strong>{battle.gameName || "Nowa potyczka"}</strong>
-            <span>{phase ? STEPS[phase] : "Przebieg potyczki"}</span>
+          <div className="campaign-head">
+            <p className="campaign-overline">
+              {battle.gameName || "Nowa potyczka"}
+            </p>
+            <div className="campaign-head-row">
+              <h2>{phase ? STEPS[phase] : "Przebieg potyczki"}</h2>
+              <label className="campaign-step-picker">
+                <span>
+                  {phase + 1}/{STEPS.length}
+                </span>
+                <select
+                  aria-label="Etap kampanii"
+                  value={phase}
+                  onChange={(e) => {
+                    const stage = Number(e.target.value);
+                    if (stage < phase && !(stage === 0 && post))
+                      setBattle({ ...battle, stage });
+                  }}
+                >
+                  {STEPS.map((s, i) => (
+                    <option
+                      key={s}
+                      value={i}
+                      disabled={i > phase || (i === 0 && !!post)}
+                    >
+                      {i}. {s}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div
+              className="campaign-progress"
+              role="progressbar"
+              aria-valuemin={1}
+              aria-valuemax={STEPS.length}
+              aria-valuenow={phase + 1}
+              aria-label={`Postęp sekwencji: etap ${phase + 1} z ${STEPS.length}`}
+            >
+              {STEPS.map((s, i) => (
+                <span
+                  key={s}
+                  className={i < phase ? "done" : i === phase ? "current" : ""}
+                />
+              ))}
+            </div>
+            <p className="campaign-lead">{LEADS[phase]}</p>
             {post && (
-              <span>
-                Skarbiec: {post.treasury} zk · łupy: {post.loot}
-              </span>
+              <dl className="campaign-meters">
+                <div>
+                  <dt>Skarbiec</dt>
+                  <dd>{post.treasury} zk</dd>
+                </div>
+                <div>
+                  <dt>Łupy</dt>
+                  <dd>{post.loot}</dd>
+                </div>
+                <div>
+                  <dt>Awanse</dt>
+                  <dd>
+                    {post.advances.filter((x) => !x.resolved).length
+                      ? `${post.advances.filter((x) => !x.resolved).length} do wyboru`
+                      : "—"}
+                  </dd>
+                </div>
+              </dl>
             )}
           </div>
-          <progress
-            className="campaign-progress"
-            value={phase}
-            max={STEPS.length - 1}
-            aria-label={`Postęp sekwencji: etap ${phase + 1} z ${STEPS.length}`}
-          />
-          <label className="campaign-mobile-nav">
-            Etap {phase + 1} z {STEPS.length}
-            {phase < 11 ? ` · dalej: ${STEPS[phase + 1]}` : ""}
-            <select aria-label="Etap kampanii" value={phase} onChange={(e) => {
-              const stage = Number(e.target.value);
-              if (stage < phase && !(stage === 0 && post)) setBattle({ ...battle, stage });
-            }}>
-              {STEPS.map((s, i) => <option key={s} value={i}
-                disabled={i > phase || (i === 0 && !!post)}>{i}. {s}</option>)}
-            </select>
-          </label>
           <nav className="campaign-nav" aria-label="Sekwencja po potyczce">
             {STEPS.map((s, i) => (
               <button
@@ -418,6 +475,11 @@ export default function CampaignManager({
               </button>
             ))}
           </nav>
+          {error && (
+            <p role="alert" className="campaign-error">
+              {error}
+            </p>
+          )}
           {phase === 0 ? (
             <>
               <PreBattle
@@ -732,6 +794,7 @@ export default function CampaignManager({
               {phase === 9 && (
                 <Recruitment post={post} update={update} army={army} />
               )}
+              {phase === 9 && <GroupManager post={post} update={update} />}
               {phase === 9 &&
                 (post.effects?.strigosDiscount || post.tradeClosed ? (
                   <p className="campaign-source">
@@ -749,8 +812,7 @@ export default function CampaignManager({
               )}
               {phase === 11 && (
                 <>
-                  <h3>Podsumowanie: {battle.gameName}</h3>
-                  <p>
+                  <p className="campaign-source">
                     {[
                       battle.date,
                       battle.opponent,
@@ -760,25 +822,43 @@ export default function CampaignManager({
                       .filter(Boolean)
                       .join(" · ")}
                   </p>
-                  <p>
-                    Skarbiec: {Number(campaignNotes.skarbiec) || 0} →{" "}
-                    <strong>{post.treasury} zk</strong> · łupy:{" "}
-                    {Number(campaignNotes.kosztownosci) || 0} →{" "}
-                    <strong>{post.loot}</strong>
-                  </p>
-                  <p>
-                    Polegli:{" "}
-                    {Object.values(post.injuries).filter((i) => i.status?.dead)
-                      .length || "brak"}{" "}
-                    · awanse: {post.advances.length} · wpisy w dzienniku:{" "}
-                    {post.journal.length}
-                  </p>
-                  <p>
-                    Prestiż drużyny: {battle.ownPrestige ?? "?"} →{" "}
-                    <strong>{safePrestige(post.units) ?? "?"}</strong>{" "}
-                    <small className="campaign-source">
-                      (bez modeli martwych, pojmanych i pauzujących)
-                    </small>
+                  <dl className="campaign-summary">
+                    <div>
+                      <dt>Skarbiec</dt>
+                      <dd>
+                        {Number(campaignNotes.skarbiec) || 0} →{" "}
+                        <strong>{post.treasury} zk</strong>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Łupy</dt>
+                      <dd>
+                        {Number(campaignNotes.kosztownosci) || 0} →{" "}
+                        <strong>{post.loot}</strong>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Prestiż drużyny</dt>
+                      <dd>
+                        {battle.ownPrestige ?? "?"} →{" "}
+                        <strong>{safePrestige(post.units) ?? "?"}</strong>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Polegli</dt>
+                      <dd>
+                        {Object.values(post.injuries).filter(
+                          (i) => i.status?.dead,
+                        ).length || "brak"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Awanse</dt>
+                      <dd>{post.advances.length}</dd>
+                    </div>
+                  </dl>
+                  <p className="campaign-source">
+                    Prestiż bez modeli martwych, pojmanych i pauzujących.
                   </p>
                   <p>
                     Rozliczenie zostanie zapisane raz. W razie błędu zapisu
@@ -801,7 +881,7 @@ export default function CampaignManager({
                   ))}
               {post.expApplied && <SanityTasks post={post} update={update} />}
               {phase !== 11 && (
-                <details className="campaign-tools">
+                <details className="campaign-tools campaign-more">
                   <summary>Narzędzia: testy, żołd, korekty</summary>
                   <RollNotebook post={post} update={update} />
                   <EconomyAdjustment post={post} update={update} />
@@ -811,7 +891,17 @@ export default function CampaignManager({
                   )}
                 </details>
               )}
-              {PAGES[phase] && <Reference pages={PAGES[phase]} />}
+              <div className="campaign-more">
+                {PAGES[phase] && <Reference pages={PAGES[phase]} />}
+                <details>
+                  <summary>Dziennik rozliczenia ({post.journal.length})</summary>
+                  <ul className="campaign-journal">
+                    {post.journal.map((e) => (
+                      <li key={e.id}>{e.text}</li>
+                    ))}
+                  </ul>
+                </details>
+              </div>
             </>
           )}
           <div className="campaign-footer">
@@ -843,16 +933,6 @@ export default function CampaignManager({
               </button>
             )}
           </div>
-          {post && (
-            <details>
-              <summary>Dziennik rozliczenia ({post.journal.length})</summary>
-              <ul className="campaign-journal">
-                {post.journal.map((e) => (
-                  <li key={e.id}>{e.text}</li>
-                ))}
-              </ul>
-            </details>
-          )}
         </>
       )}
       {campaign.history.length > 0 && (

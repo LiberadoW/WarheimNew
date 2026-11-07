@@ -110,7 +110,7 @@ const CampaignPointsEditor = ({ army, campaignNotes, setCampaignNotes }) => {
             </button>
             <button
               type="button"
-              className="button"
+              className="button button-secondary"
               onClick={handleRevertClick}
               disabled={addedRules.length === 0}
             >

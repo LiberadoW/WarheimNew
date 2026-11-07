@@ -125,3 +125,21 @@
     text-align: left;
   }
 }
+
+/* Modern counters: label + compact stepper, consistent with the campaign tracker. */
+.unit-play .unit-play-counter, .unit-play .unit-play-wza-container { box-shadow: none; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); padding: 12px; }
+.unit-play .unit-play-counter { grid-template-columns: 1fr 44px 40px 44px; grid-template-rows: auto; row-gap: 4px; }
+.unit-play .unit-play-counter-label { grid-column: auto; font-weight: 600; }
+.unit-play .unit-play-counter > span:not(.unit-play-counter-label):not(.unit-play-counter-value), .unit-play .unit-play-counter-summary { grid-column: 1 / -1; text-align: left; font-size: .8rem; color: var(--text-muted); }
+.unit-play .unit-play-counter .button { width: 44px; min-height: 44px; padding: 0; font-size: 1.2rem; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; }
+.unit-play .unit-play-counter .button:disabled { opacity: .45; }
+.unit-play .unit-play-counter-value { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.unit-play .unit-play-wza-item { min-height: 40px; }
+.unit-play .unit-play-wza-item input { width: 20px; height: 20px; accent-color: var(--accent); }
+.unit-play .unit-play-stats-table thead td { background: var(--ink); color: var(--ink-text); }
+
+/* Inline unit details: left-aligned title like the rest of the app. */
+.unit-inline-details .modal-unit-info { align-self: stretch; align-items: flex-start; text-align: left; gap: 2px; margin-bottom: 8px; }
+.unit-inline-details .modal-unit-info h2 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; }
+.unit-inline-details .modal-unit-info > span { color: var(--text-muted); font-size: .85rem; }
+.unit-inline-details .unit-name-input { align-self: stretch; }

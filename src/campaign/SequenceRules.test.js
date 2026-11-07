@@ -76,3 +76,53 @@ test("a full CP and PD tie lets the player pick any tied hero", () => {
 test("no succession is needed while the leader lives", () => {
   expect(R.leaderSuccession({ units: [hero("boss", 9, 0, { rules: ["Dowódca"] })] })).toBeNull();
 });
+
+const henchmen = (id, n, extra = {}) => ({
+  uniqueId: id, unitName: "Khorngor", type: "Stronnik", selectedNumber: n, number: 5, cost: 55,
+  exp: 2, rules: ["Furia"], startingEquipment: ["Sztylet", "Broń wielka"], optionalEquipment: [],
+  stats: { Początkowa: [5, 4, 3, 4, 4, 1, 3, 1, 7] },
+  campaignModelStatus: Array.from({ length: n }, () => ({})),
+  battleOutOfActionModels: Array(n).fill(false), battleAbsentModels: Array(n).fill(false), ...extra,
+});
+
+test("Khorne counts its own WzA towards Gniew", () => {
+  const battle = { result: "loss", round: 10, opponentModels: 10, opponentOut: 2 };
+  const units = [henchmen("g", 4, { battleOutOfActionModels: [true, true, true, false] })];
+  expect(R.suggestCampaignPoints(battle, { units }).suggested.gniew).toBe(0);
+  const khorne = { units, armyRules: ["Znak Chaosu (Wojownicy Khorna)"] };
+  // (2 + 3) / (10 + 4) = 36% → +1
+  expect(R.suggestCampaignPoints(battle, khorne)).toMatchObject({ khorne: true, suggested: { gniew: 1 } });
+  expect(R.isKhorne({ units, armyRules: ["Znak Chaosu"], khorne: true })).toBe(true);
+});
+
+test("a henchman group splits into two with the chosen models", () => {
+  const post = { journal: [], injuries: {}, units: [henchmen("g", 4, {
+    campaignModelStatus: [{}, { skip: 1 }, {}, { dead: true }] })] };
+  expect(() => R.splitGroup(post, "g", [0, 1, 2])).toThrow(/co najmniej jeden/);
+  const id = R.splitGroup(post, "g", [1, 2]);
+  const [a, b] = post.units;
+  expect(b.uniqueId).toBe(id);
+  expect(b.selectedNumber).toBe(2);
+  expect(b.campaignModelStatus[0].skip).toBe(1);
+  expect(a.selectedNumber).toBe(2);
+  expect(a.campaignModelStatus[1].dead).toBe(true);
+  expect(a.totalCost).toBe(110);
+});
+
+test("only identical groups merge, within the group size limit", () => {
+  const post = { journal: [], injuries: {}, units: [henchmen("a", 2), henchmen("b", 2), henchmen("c", 4),
+    henchmen("d", 1, { exp: 5 }), henchmen("e", 1, { optionalEquipment: ["Tarcza"] })] };
+  const [a, , c, d, e] = post.units;
+  expect(R.mergeProblem(a, c)).toMatch(/najwyżej 5/);
+  expect(R.mergeProblem(a, d)).toMatch(/doświadczenie/);
+  expect(R.mergeProblem(a, e)).toMatch(/oręż/);
+  R.mergeGroups(post, "a", "b");
+  expect(post.units.map((u) => u.uniqueId)).toEqual(["a", "c", "d", "e"]);
+  expect(post.units[0].selectedNumber).toBe(4);
+});
+
+test("groups cannot be reorganised before injuries are settled", () => {
+  const post = { journal: [], injuries: {}, units: [henchmen("g", 3, {
+    battleOutOfActionModels: [true, false, false] })] };
+  expect(() => R.splitGroup(post, "g", [1])).toThrow(/poważne rany/);
+});

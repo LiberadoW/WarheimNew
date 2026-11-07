@@ -806,6 +806,163 @@ export const applyInjury = (post, task, result, detail = {}) => {
     unitId: unit.uniqueId,
   });
 };
+// Krok 9 (s. 408): grupy stronników można dzielić i łączyć; modele w grupie
+// muszą mieć ten sam oręż i pancerz (a tu także to samo doświadczenie i profil).
+const gear = (u) =>
+  JSON.stringify(
+    [
+      ...(u.startingEquipment || []),
+      ...(u.optionalEquipment || []),
+      ...(u.customEquipment || []).map((e) => e?.name || e),
+    ]
+      .map(String)
+      .sort(),
+  );
+const living = (u) =>
+  Array.from({ length: modelCount(u) }, (_, i) => i).filter(
+    (i) => !u.campaignModelStatus?.[i]?.dead,
+  );
+export const isGroup = (u) => u.type === "Stronnik";
+export const groupSize = (u) => living(u).length;
+export const groupLimit = (u) => Math.min(5, Number(u.number) || 5);
+export const mergeProblem = (a, b) => {
+  if (a === b) return "To ta sama grupa.";
+  if (!isGroup(a) || !isGroup(b)) return "Łączyć można tylko grupy stronników.";
+  if (a.unitName !== b.unitName) return "To różne rodzaje stronników.";
+  if ((Number(a.exp) || 0) !== (Number(b.exp) || 0))
+    return "Grupy mają różne doświadczenie.";
+  if (gear(a) !== gear(b)) return "Grupy mają różny oręż i pancerz.";
+  if (
+    JSON.stringify(currentStats(a)) !== JSON.stringify(currentStats(b)) ||
+    JSON.stringify([...(a.rules || [])].sort()) !==
+      JSON.stringify([...(b.rules || [])].sort())
+  )
+    return "Grupy mają różne rozwinięcia.";
+  if (groupSize(a) + groupSize(b) > groupLimit(a))
+    return `Grupa może liczyć najwyżej ${groupLimit(a)} modeli.`;
+  return null;
+};
+const keepModels = (u, indices) => {
+  const pick = (arr) => indices.map((i) => arr?.[i]);
+  u.campaignModelStatus = pick(u.campaignModelStatus || []).map((s) => s || {});
+  // Injuries are resolved before step 9 and keyed by model index; clearing the
+  // markers keeps renumbered models from asking for injuries again.
+  u.battleOutOfActionModels = indices.map(() => false);
+  u.battleAbsentModels = pick(u.battleAbsentModels).map(Boolean);
+  u.selectedNumber = indices.length;
+  u.totalCost = (Number(u.cost) || 0) * indices.length;
+};
+const injuriesSettled = (post) => {
+  if (injuryTasks(post).some((t) => !post.injuries?.[t.key]))
+    throw Error("Najpierw rozstrzygnij poważne rany.");
+};
+export const splitGroup = (post, unitId, moved) => {
+  injuriesSettled(post);
+  const u = post.units.find((x) => x.uniqueId === unitId);
+  if (!u || !isGroup(u)) throw Error("Wybierz grupę stronników.");
+  const alive = living(u);
+  const indices = [...new Set(moved)].filter((i) => alive.includes(i));
+  if (!indices.length) throw Error("Zaznacz modele do nowej grupy.");
+  if (indices.length >= alive.length)
+    throw Error("W dotychczasowej grupie musi zostać co najmniej jeden model.");
+  const fresh = clone(u);
+  fresh.uniqueId = uid();
+  fresh.unitDisplayName = `${u.unitName} (grupa ${
+    post.units.filter((x) => x.unitName === u.unitName).length + 1
+  })`;
+  keepModels(fresh, indices);
+  keepModels(
+    u,
+    Array.from({ length: modelCount(u) }, (_, i) => i).filter(
+      (i) => !indices.includes(i),
+    ),
+  );
+  post.units.splice(post.units.indexOf(u) + 1, 0, fresh);
+  log(
+    post,
+    "group",
+    `${label(u)}: wydzielono nową grupę (${indices.length} modeli).`,
+  );
+  return fresh.uniqueId;
+};
+export const mergeGroups = (post, targetId, sourceId) => {
+  injuriesSettled(post);
+  const a = post.units.find((x) => x.uniqueId === targetId),
+    b = post.units.find((x) => x.uniqueId === sourceId);
+  if (!a || !b) throw Error("Nie znaleziono grupy.");
+  const problem = mergeProblem(a, b);
+  if (problem) throw Error(problem);
+  const join = (x, n) =>
+    Array.from({ length: modelCount(x) }, (_, i) => i).filter(
+      (i) => !x.campaignModelStatus?.[i]?.dead,
+    ).map((i) => ({
+      s: x.campaignModelStatus?.[i] || {},
+      ab: !!x.battleAbsentModels?.[i],
+    }));
+  const all = [...join(a), ...join(b)];
+  a.campaignModelStatus = all.map((m) => m.s);
+  a.battleOutOfActionModels = all.map(() => false);
+  a.battleAbsentModels = all.map((m) => m.ab);
+  a.selectedNumber = all.length;
+  a.totalCost = (Number(a.cost) || 0) * all.length;
+  post.units = post.units.filter((x) => x !== b);
+  log(post, "group", `${label(b)} dołącza do ${label(a)} (${all.length} modeli).`);
+};
+// Punkty Kampanii (s. 418). Odporność liczy się względem modeli, które wzięły
+// udział w potyczce. Wojownicy Khorna dostają Gniew także za własne WzA:
+// odsetek liczony jest wtedy od wszystkich modeli obu kompanii.
+export const isKhorne = (post) =>
+  !!post.khorne ||
+  (post.armyRules || []).some((r) => /znak chaosu.*khorn/i.test(r));
+const gniewFor = (ratio) =>
+  ratio > 0.75 ? 3 : ratio > 0.5 ? 2 : ratio > 0.25 ? 1 : 0;
+export const suggestCampaignPoints = (battle, post) => {
+  const playing = (u, i) => !u.battleAbsentModels?.[i];
+  let out = 0,
+    count = 0;
+  for (const u of post.units)
+    for (let i = 0; i < modelCount(u); i++)
+      if (playing(u, i)) {
+        count++;
+        if (u.battleOutOfActionModels?.[i]) out++;
+      }
+  const khorne = isKhorne(post);
+  const enemy = Number(battle.opponentModels) || 0,
+    enemyOut = Number(battle.opponentOut) || 0;
+  const gniewRatio = khorne
+    ? enemy + count
+      ? (enemyOut + out) / (enemy + count)
+      : 0
+    : enemy
+      ? enemyOut / enemy
+      : 0;
+  return {
+    out,
+    count,
+    khorne,
+    suggested: {
+      determinacja:
+        1 +
+        (battle.result === "win"
+          ? battle.round <= 4
+            ? 2
+            : battle.round <= 9
+              ? 1
+              : 0
+          : 0),
+      gniew: gniewFor(gniewRatio),
+      odpornosc: !count
+        ? 0
+        : out / count < 0.25
+          ? 3
+          : out / count < 0.5
+            ? 2
+            : out / count < 0.75
+              ? 1
+              : 0,
+    },
+  };
+};
 // Śmierć dowódcy (s. 409): dowództwo przejmuje bohater z najwyższym CP, potem
 // z większą liczbą PD; przy pełnym remisie decyduje rzut kością.
 export const leaderSuccession = (post) => {

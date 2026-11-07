@@ -4,64 +4,49 @@ import * as R from "./rules";
 import { companyChoices, selectCompanyAdvance } from "./company";
 
 function CampaignPoints({ battle, post, update, notes }) {
-  // Odporność liczy się względem modeli, które faktycznie wzięły udział w
-  // potyczce — nieobecni (rany, pojmanie, obozowisko) nie zaniżają odsetka.
-  const participating = (u, i) => !u.battleAbsentModels?.[i];
-  const out = post.units.reduce(
-    (n, u) =>
-      n +
-      (u.battleOutOfActionModels || []).filter(
-        (x, i) => x && participating(u, i),
-      ).length,
-    0,
+  const { suggested, out, count, khorne } = R.suggestCampaignPoints(
+    battle,
+    post,
   );
-  const count = post.units.reduce(
-    (n, u) =>
-      n +
-      Array.from({ length: R.modelCount(u) }, (_, i) => participating(u, i))
-        .filter(Boolean).length,
-    0,
+  const unmarkedChaos = (post.armyRules || []).some(
+    (r) => R.normal(r) === "znak chaosu",
   );
-  const suggested = {
-    determinacja:
-      1 +
-      (battle.result === "win"
-        ? battle.round <= 4
-          ? 2
-          : battle.round >= 5 && battle.round <= 9
-            ? 1
-            : 0
-        : 0),
-    gniew: battle.opponentModels
-      ? battle.opponentOut / battle.opponentModels > 0.75
-        ? 3
-        : battle.opponentOut / battle.opponentModels > 0.5
-          ? 2
-          : battle.opponentOut / battle.opponentModels > 0.25
-            ? 1
-            : 0
-      : 0,
-    odpornosc: !count
-      ? 0
-      : out / count < 0.25
-        ? 3
-        : out / count < 0.5
-          ? 2
-          : out / count < 0.75
-            ? 1
-            : 0,
-  };
   const points = post.pointsDraft || suggested;
   return (
     <>
-      <p>
-        Propozycja wynika z wyniku potyczki i odsetka strat: Determinacja +1
-        zawsze, zwycięzca +2 do 4. rundy lub +1 w rundach 5–9; Gniew za WzA
-        przeciwnika powyżej 25/50/75%; Odporność za własne WzA poniżej
-        75/50/25% uczestniczących modeli ({out}/{count}). Uwzględnij wyjątki z
-        zasad kompanii (np. Khorne).
-      </p>
-      <div className="campaign-grid">
+      {unmarkedChaos && (
+        <label className="campaign-check">
+          <input
+            type="checkbox"
+            disabled={post.campaignPointsApplied}
+            checked={!!post.khorne}
+            onChange={(e) =>
+              update((p) => {
+                p.khorne = e.target.checked;
+                delete p.pointsDraft;
+              })
+            }
+          />
+          Kompania naznaczona Znakiem Khorna
+        </label>
+      )}
+      <details className="campaign-help">
+        <summary>Jak liczone są propozycje</summary>
+        <ul>
+          <li>Determinacja: +1 zawsze; zwycięzca +2 do 4. rundy, +1 w rundach 5–9.</li>
+          <li>
+            Gniew: WzA przeciwnika powyżej 25 / 50 / 75%
+            {khorne
+              ? ". Khorne: liczą się też własne WzA, odsetek ze wszystkich modeli obu kompanii."
+              : "."}
+          </li>
+          <li>
+            Odporność: własne WzA poniżej 75 / 50 / 25% modeli w grze (teraz{" "}
+            {out}/{count}).
+          </li>
+        </ul>
+      </details>
+      <div className="campaign-grid campaign-points-grid">
         {Object.keys(suggested).map((k) => (
           <label key={k}>
             {{ determinacja: "Determinacja", gniew: "Gniew", odpornosc: "Odporność" }[k]} · było {Number(notes[k]) || 0}

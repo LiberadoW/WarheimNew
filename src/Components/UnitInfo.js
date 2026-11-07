@@ -26,11 +26,20 @@ const UnitInfo = ({
     <div className="unit unit-inline-details" id={String(unitIndex)}>
       <div className="edit-unit-container">
         <div className="modal-unit-info">
-          <h2>{unit.unitName}</h2>
+          <h2>
+            {isPlayArmyView && unit.unitDisplayName
+              ? unit.unitDisplayName
+              : unit.unitName}
+          </h2>
           <span>
+            {isPlayArmyView &&
+              unit.unitDisplayName &&
+              unit.unitDisplayName !== unit.unitName &&
+              `${unit.unitName} · `}
             <span className="bold-text">Koszt:</span> {`${unit.totalCost} zk`}
           </span>
         </div>
+        {!isPlayArmyView && (
         <div className="unit-name-input">
           <label htmlFor={`unit-name-input-${unit.uniqueId}`}>Imię: </label>
           <input
@@ -45,6 +54,7 @@ const UnitInfo = ({
             }
           />
         </div>
+        )}
         {isPlayArmyView ? (
           <UnitPlay
             campaign={campaign}
