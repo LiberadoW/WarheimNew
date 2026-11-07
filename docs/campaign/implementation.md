@@ -31,7 +31,7 @@ This is a campaign assistant, not a complete simulator of all rulebook interacti
 
 ## Validation
 
-654 automated tests pass. Automated coverage includes the end-to-end campaign finalization/failure retry flow, all 60 exploration recipe entry paths, all 270 Drama character/K6 wage branches, advancement rules, company choices, crafting success/failure and stash transfer, recruitment, discounts/theft, optional tables and persistence boundaries. Run `CI=true npm test -- --watchAll=false --runInBand` and `npm run build`.
+672 automated tests pass. Automated coverage includes the end-to-end campaign finalization/failure retry flow, all 60 exploration recipe entry paths, all 270 Drama character/K6 wage branches, advancement rules, company choices, crafting success/failure and stash transfer, recruitment, discounts/theft, optional tables and persistence boundaries. Run `CI=true npm test -- --watchAll=false --runInBand` and `npm run build`.
 
 The production build has existing lint/bundle-size warnings. Authenticated Firestore integration was not exercised against live user data. The deployed Netlify preview was exercised in a cloud browser as a guest: weapon descriptions, battle creation, PD, exploration, loot sale, a rare variable-price purchase, a Drama search, finalization and history creation worked. That check revealed an overflowing campaign panel, corrected with an explicit responsive width and wrapping phase navigation. Follow-up browser verification used the real app in a 390 px iframe viewport: clearing/retyping numeric values, mobile XP cards, compact stage selection, stat adjustments, scroll/focus after Next, and the locked exploration roll after page reload were checked. Pending local-only dice (prices, searches, crafting, wage refusal and mutations) now live in the persisted battle draft. Each app roll locks both its button and dice inputs; rules-based rerolls use separate single-use inputs. Desktop layout retains the table and phase navigation. This is a browser viewport check, not a test on physical Android hardware.
 
@@ -51,3 +51,6 @@ python scripts/import-campaign-extras.py /path/to/rulebook.pdf
 ```
 
 Review imported text against the same edition before changing source counts or exception handling.
+
+
+Follow-up sequence and shop QA: [2026-11-07 report](qa-2026-11-07.md). Purchases now use a compact catalog and a single-item transaction panel; availability, pending price rolls, selected recipient and item survive resume. Common items are bought with one confirmation, with totals calculated for the whole group.

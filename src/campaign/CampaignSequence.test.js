@@ -37,8 +37,9 @@ function setup(units = [hero()], extraNotes = {}, prepared = true) {
   return { state, finish, resume: () => { view.unmount(); view = render(<Harness />); } };
 }
 const post = (state) => state.draft.campaignNotes.campaign.activeBattle.post;
-function experienceToExploration() {
+function experienceToExploration(checkExperience = () => {}) {
   click("Dalej: Doświadczenie i rozwój"); click("Nalicz doświadczenie");
+  checkExperience();
   click("Dalej: Punkty kampanii"); click("Zatwierdź punkty kampanii");
   click("Dalej: Eksploracja");
 }
@@ -64,7 +65,10 @@ test("injuries, a group casualty, an absent hero and an animal survive resume an
   resume();
   expect(card("Stronnicy #1").getByText(/poległy/).textContent).toMatch(/poległy/);
   dice("Obrażenia", [3], card("Stronnicy #2")); click("Zastosuj obrażenia",card("Stronnicy #2"));
-  experienceToExploration();
+  experienceToExploration(() => {
+    expect(screen.getByLabelText("Dodatkowe PD: Squig").disabled).toBe(true);
+    expect(screen.getByText("Nie zdobywa PD")).toBeTruthy();
+  });
   expect(post(state).units.find(u=>u.uniqueId==="beast").exp).toBe(0);
   expect(post(state).units.find(u=>u.uniqueId==="absent").exp).toBe(20);
   dice("Eksploracja",[4]); click("Zatwierdź pulę eksploracji"); click("Zatwierdź eksplorację");
