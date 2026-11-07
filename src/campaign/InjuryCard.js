@@ -47,7 +47,7 @@ function InjuryCard({ task, post, update }) {
           <p className="campaign-muted">
             {kind === "hero"
               ? "Tabela poważnych ran K66 (pierwsza kość: dziesiątki)."
-              : `Tabela K6: ${kind}.`}
+              : R.INJURY_TABLES[kind]}
           </p>
           {companyInjuryModifier(post, task.unit) > 0 && (
             <p>Konsyliarze: +1 do wyniku K6.</p>
@@ -91,7 +91,8 @@ function InjuryCard({ task, post, update }) {
           {result && (
             <>
               <h3>
-                {result.code} · {result.name}
+                {result.simple ? `K6: ${result.roll}` : `K66: ${result.code}`} ·{" "}
+                {result.name}
               </h3>
               <p>{result.text}</p>
               <InjuryResolution

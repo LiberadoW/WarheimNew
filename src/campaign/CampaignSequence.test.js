@@ -90,7 +90,7 @@ test.each(["stat", "skill"])("an unresolved %s advance blocks Next and its selec
   click("Dalej: Doświadczenie i rozwój"); click("Nalicz doświadczenie");
   click("Dalej: Punkty kampanii"); expect(screen.getByRole("alert").textContent).toMatch(/awanse/);
   dice("Rozwój 1",kind==="stat" ? [3,4] : [2,2]); dice("Rozwój 2",[1,1]);
-  click(`Wybierz wynik 1: ${kind==="stat" ? 7 : 4}`); resume();
+  click(kind==="stat" ? "Wybierz 7 · WW lub US +1" : "Wybierz 4 · Nowa umiejętność"); resume();
   expect(post(state).advances[0].selectedRoll).toBe(0);
   change(kind==="stat" ? "Współczynnik" : "Umiejętność",kind==="stat" ? "stat:1" : "rule:Błyskawiczny blok");
   click("Zastosuj rozwinięcie");

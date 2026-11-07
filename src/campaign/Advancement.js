@@ -107,7 +107,9 @@ function AdvanceCard({ advance, unit, army, post, update }) {
                 })
               }
             >
-              Wybierz wynik {i + 1}: {R.sum(r.dice)}
+              {R.validDice(r.dice, 2)
+                ? `Wybierz ${R.sum(r.dice)} · ${R.advanceLabel(unit, R.sum(r.dice))}`
+                : `Wynik ${i + 1}: rzuć kośćmi`}
             </button>
           ))}
         </div>

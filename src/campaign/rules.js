@@ -171,6 +171,16 @@ export const injuryKind = (unit) => {
     return "monster";
   return isHero(unit) ? "hero" : "henchman";
 };
+export const INJURY_TABLES = {
+  henchman: "Stronnik / Najemne Ostrze, K6: 1–2 martwy, 3+ powrót do zdrowia.",
+  spirit:
+    "Demon / istota eteryczna / leśny duch, K6: 1–2 martwy, 3 opuszcza następną potyczkę, 4+ powrót do zdrowia.",
+  undead:
+    "Nieumarły / opętany / wierzchowiec / zwierzę, K6: 1 martwy, 2 opuszcza następną potyczkę, 3+ powrót do zdrowia.",
+  familiar: "Chowaniec / cherubin, K6: 1 martwy, 2+ powrót do zdrowia.",
+  monster:
+    "Potwór / machina wojenna / wielkolud, K6: 1 martwy, 2–3 opuszcza następną potyczkę, 4+ powrót do zdrowia.",
+};
 export const injuryResult = (unit, dice, modifier = 0) => {
   const kind = injuryKind(unit);
   if (!validDice(dice, kind === "hero" ? 2 : 1))
@@ -198,7 +208,14 @@ export const injuryResult = (unit, dice, modifier = 0) => {
       : skip
         ? "Opuszcza następną potyczkę"
         : "Powrót do zdrowia",
-    text: `K6: ${n}. ${dead ? "Ekwipunek trafia do skarbca." : skip ? "Model opuszcza jedną potyczkę." : "Model powraca do zdrowia."}`,
+    text: dead
+      ? ["Najemne Ostrze", "Postać Dramatu"].includes(unit.type)
+        ? "Model ginie, a jego dobytek przepada."
+        : "Model ginie, a jego ekwipunek trafia do skarbca."
+      : skip
+        ? "Model opuszcza następną potyczkę."
+        : "Model powraca do zdrowia.",
+    roll: n,
     simple: true,
     skip: skip ? 1 : 0,
   };
@@ -341,6 +358,26 @@ export const availableStats = (unit, result) => {
         currentStats(unit)[i] < unit.stats.Maksymalna[i]) &&
       (isHero(unit) || !(unit.campaignAdvancements || []).includes(i)),
   );
+};
+// Short name of a development roll, shown before the player picks a result.
+export const advanceLabel = (unit, n) => {
+  if (!n) return "";
+  if (heroDevelopment(unit) && (n <= 5 || n >= 10)) return "Nowa umiejętność";
+  if (!heroDevelopment(unit) && n >= 10) return "Chłopak ma talent!";
+  const options = heroDevelopment(unit)
+    ? n === 6
+      ? [3, 4]
+      : n === 7
+        ? [1, 2]
+        : n === 8
+          ? [6, 8]
+          : [7, 5]
+    : n <= 5
+      ? [6, 8]
+      : n <= 7
+        ? [1, 2]
+        : [3, 7];
+  return `${options.map((i) => STATS[i]).join(" lub ")} +1`;
 };
 export const needsSkill = (unit, n) =>
   heroDevelopment(unit) && (n <= 5 || n >= 10);
@@ -989,7 +1026,39 @@ export const leaderSuccession = (post) => {
         (u) => score(u)[0] === score(best)[0] && score(u)[1] === score(best)[1],
       )
     : [];
-  return { leader, candidates, tied, undead: hasRule(leader, "Nieumarły") };
+  const undead = hasRule(leader, "Nieumarły");
+  if (undead) {
+    // Nieumarli (s. 409): dowództwo przejmuje Nekromanta, Licz lub Profeta;
+    // bez nich czar się rozprasza, a kompania rozpada.
+    const casters = candidates.filter((u) =>
+      /^(nekromanta|licz|profeta)$/.test(normal(u.unitName)),
+    );
+    return {
+      leader,
+      candidates: casters,
+      tied: casters,
+      undead,
+      dissolves: !casters.length,
+    };
+  }
+  return { leader, candidates, tied, undead };
+};
+export const dissolveCompany = (post) => {
+  const s = leaderSuccession(post);
+  if (!s?.dissolves) throw Error("Kompania ma następcę dowódcy.");
+  post.dissolved = true;
+  post.units.forEach((u) => {
+    u.campaignModelStatus = Array.from({ length: modelCount(u) }, (_, i) => ({
+      ...(u.campaignModelStatus?.[i] || {}),
+      dead: true,
+    }));
+  });
+  post.inventory = [];
+  log(
+    post,
+    "dissolved",
+    `${label(s.leader)} poległ bez Nekromanty, Licza ani Profety: czar się rozprasza, kompania rozpada się.`,
+  );
 };
 export const assignLeader = (post, unitId) => {
   const s = leaderSuccession(post);
@@ -1048,9 +1117,10 @@ export const applyExperience = (post) => {
 export const finalizePostBattle = (battle, notes) => {
   const p = clone(battle.post);
   if (
-    injuryTasks(p).some((t) => !p.injuries[t.key]) ||
-    !p.expApplied ||
-    p.advances.some((a) => !a.resolved)
+    !p.dissolved &&
+    (injuryTasks(p).some((t) => !p.injuries[t.key]) ||
+      !p.expApplied ||
+      p.advances.some((a) => !a.resolved))
   )
     throw Error("Rozstrzygnij obrażenia, doświadczenie i awanse.");
   const units = p.units.flatMap((u) => {

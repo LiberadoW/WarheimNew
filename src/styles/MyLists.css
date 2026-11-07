@@ -148,3 +148,40 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Card look shared with the builder and campaign. */
+.armylists-title { font-family: var(--font-display); font-size: 1.5rem; text-align: left; margin: 8px 0 16px; }
+.armylist-container { gap: 8px; margin-bottom: 20px; }
+.armylist-container > h3 { margin: 0; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+.armylist-container ul { display: flex; flex-direction: column; gap: 10px; padding: 0; margin: 0; }
+.armylist-info {
+  gap: 12px; padding: 14px; margin: 0; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+}
+.armylists-text-container { align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.armylists-text-container p { margin: 0; color: var(--text-muted); font-size: .88rem; }
+.armylists-text-container p.bold-text { color: var(--text); font-size: 1rem; }
+.armylists-button-container { flex-wrap: wrap; gap: 6px; }
+.armylist-info button {
+  min-height: 40px; padding: 0 14px; border: 1px solid var(--border-strong); border-radius: 10px;
+  background: var(--surface); color: var(--text); font: inherit; font-size: .85rem; font-weight: 600;
+}
+.armylist-info button:not(.delete-list-button):hover { background: var(--surface-2); font-weight: 600; }
+.armylist-info button:first-child { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.armylist-info button:first-child:hover { background: var(--accent-hover) !important; }
+.armylist-info .delete-list-button { color: var(--accent); border-color: transparent; background: transparent; }
+.delete-list-button:hover { background: var(--accent-soft); font-weight: 600; }
+.armylist-history {
+  margin: -4px 0 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius);
+  background: var(--surface-2); color: var(--text);
+}
+.armylist-history-item { border-color: var(--border); border-radius: 10px; background: var(--surface); padding: 10px 12px; }
+.armylist-history-details { border-top-color: var(--border); }
+.armylist-history-unit-details { border-color: var(--border); border-radius: 10px; }
+@media screen and (max-width: 768px) {
+  .armylist-info { align-items: stretch; }
+  .armylists-text-container { flex-direction: row; }
+  .armylist-date { flex-basis: 100%; }
+  .armylists-button-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .armylist-info button:first-child { grid-column: 1 / -1; }
+}

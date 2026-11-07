@@ -139,16 +139,42 @@ function Succession({ post, update }) {
       <h3>Śmierć dowódcy: {R.label(s.leader)}</h3>
       {s.undead && (
         <p>
-          Kompania nieumarłych: dowództwo obejmuje Nekromanta, Licz lub Profeta.
-          Jeśli go nie ma, kompania rozpada się (s. 409).
+          Kompania nieumarłych: dowództwo obejmuje Nekromanta, Licz lub Profeta
+          (s. 409). Poległego dowódcę można zrekrutować ponownie w następnej
+          sekwencji, jeśli opiekun zrzeknie się dowodzenia.
         </p>
       )}
       <p className="campaign-source">
         Nowy DOWÓDCA, gdy osiągnie kolejny poziom, przejmuje zasady poprzednika
         (Mag, Duchowny, Kowal run…) opisane w kompanii.
       </p>
-      {chosen ? (
+      {post.dissolved ? (
+        <p className="campaign-error">
+          Kompania rozpadła się. Zapisz rozliczenie i zrekrutuj nową drużynę.
+        </p>
+      ) : chosen ? (
         <p className="campaign-done">✓ Dowództwo objął {R.label(chosen)}</p>
+      ) : s.dissolves ? (
+        <>
+          <p>
+            W kompanii nie ma Nekromanty, Licza ani Profety: czar utrzymujący
+            ożywieńców zostaje rozproszony. Wszystkie postacie i ekwipunek
+            zostają stracone.
+          </p>
+          <button
+            className="button"
+            onClick={() => {
+              if (
+                window.confirm(
+                  "Rozwiązać kompanię? Wszystkie postacie i ekwipunek przepadną.",
+                )
+              )
+                update((p) => R.dissolveCompany(p));
+            }}
+          >
+            Kompania rozpada się
+          </button>
+        </>
       ) : !s.candidates.length ? (
         <p>Brak bohatera, który może objąć dowództwo.</p>
       ) : (
@@ -246,6 +272,16 @@ export default function CampaignManager({
         R.injuryTasks(post).some((t) => !post.injuries[t.key])
       )
         throw Error("Rozstrzygnij obrażenia wszystkich modeli WzA.");
+      if (battle.stage === 1 && post.dissolved) {
+        setBattle({ ...battle, stage: 11 });
+        return;
+      }
+      if (
+        battle.stage === 1 &&
+        R.leaderSuccession(post)?.dissolves &&
+        !post.dissolved
+      )
+        throw Error("Potwierdź rozpad kompanii nieumarłych.");
       if (
         battle.stage === 1 &&
         R.leaderSuccession(post)?.candidates.length &&

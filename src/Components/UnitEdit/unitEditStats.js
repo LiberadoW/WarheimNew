@@ -107,6 +107,7 @@ const UnitEditStats = ({ unitList, unit, setUnitList }) => {
           <div className="unit-edit-stats-label">{item}</div>
           <button
             className="plus-button"
+            aria-label={`${item} +1`}
             onClick={() => updateStatModifier(index, 1)}
             disabled={!canIncrease(index)}
           >
@@ -129,10 +130,11 @@ const UnitEditStats = ({ unitList, unit, setUnitList }) => {
           </div>
           <button
             className="minus-button"
+            aria-label={`${item} −1`}
             onClick={() => updateStatModifier(index, -1)}
             disabled={!canDecrease(index)}
           >
-            -
+            −
           </button>
         </li>
       ))}

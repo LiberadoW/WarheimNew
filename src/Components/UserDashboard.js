@@ -2,8 +2,10 @@ import "../styles/UserDashboard.css";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router-dom";
+import useHidePrintSheet from "../Functions/useHidePrintSheet";
 
 const UserDashboard = () => {
+  useHidePrintSheet();
   const { currentUser } = useContext(AuthContext);
 
   return (

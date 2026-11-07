@@ -5,6 +5,7 @@ import { db } from "../Database/database";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 import "../styles/MyLists.css";
 import { useNavigate } from "react-router-dom";
+import useHidePrintSheet from "../Functions/useHidePrintSheet";
 
 const sortArmylists = (armylists) => {
   return (armylists || []).reduce((groups, item) => {
@@ -88,6 +89,7 @@ const MyLists = (
   { setUnitList, setArmy, setArmyName, setCampaignNotes },
   _ref,
 ) => {
+  useHidePrintSheet();
   const { currentUser } = useContext(AuthContext);
   const [groupedLists, setGroupedLists] = useState({});
   const [expandedHistory, setExpandedHistory] = useState({});

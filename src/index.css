@@ -179,3 +179,5 @@ select {
   .armylist-shell:not(.is-open) #armylist { display: none; }
   .armylist-shell.is-open { overflow-x: auto; }
 }
+/* Pages without a roster (login, account) do not show the print sheet. */
+body.no-print-sheet .armylist-shell { display: none; }

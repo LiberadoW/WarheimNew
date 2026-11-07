@@ -505,3 +505,6 @@
 .campaign-summary > div + div { border-top: 1px solid var(--border); }
 .campaign-summary dt { color: var(--text-muted); font-weight: 600; font-size: .9rem; }
 .campaign-summary dd { margin: 0; font-variant-numeric: tabular-nums; }
+.campaign .campaign-points-total { display: block; text-align: center; font-size: .85rem; font-weight: 500; color: var(--text-muted); }
+.campaign .campaign-points-total strong { color: var(--text); }
+.campaign .campaign-help > p { margin: 0 0 8px; color: var(--text-muted); font-size: .85rem; }

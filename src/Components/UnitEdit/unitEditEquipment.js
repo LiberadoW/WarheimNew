@@ -130,12 +130,14 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
         <input
           type="text"
           placeholder="Nazwa ekwipunku"
+          aria-label="Nazwa ekwipunku"
           value={equipmentName}
           onChange={(event) => setEquipmentName(event.target.value)}
         />
         <NumberInput
           type="number"
           placeholder="Cena (zk)"
+          aria-label="Cena (zk)"
           min="0"
           step="1"
           value={equipmentPrice}
@@ -146,7 +148,7 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
         </button>
         <button
           type="button"
-          className="button"
+          className="button button-secondary"
           onClick={handleRevertClick}
           disabled={addedEquipment.length === 0}
         >
@@ -179,8 +181,13 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
             <span className="unit-edit-pill unit-edit-pill-core">
               {"początkowa"}
             </span>
-            <button onClick={() => handleDeleteEquipment(item.id)}>
-              <i className="fa-solid fa-trash-can"></i>
+            <button
+              type="button"
+              aria-label={`Usuń: ${item.name}`}
+              onClick={() => handleDeleteEquipment(item.id)}
+            >
+              <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+              <span className="unit-edit-remove-text">Usuń</span>
             </button>
           </div>
         ))}
@@ -189,8 +196,13 @@ const UnitEditEquipment = ({ unit, setUnitList, unitList }) => {
           <div key={item.id} className="unit-edit-equipment-item">
             <span>{item.name}</span>
             <span className="unit-edit-pill unit-edit-pill-added">dodane</span>
-            <button onClick={() => handleDeleteEquipment(item.id)}>
-              <i className="fa-solid fa-trash-can"></i>
+            <button
+              type="button"
+              aria-label={`Usuń: ${item.name}`}
+              onClick={() => handleDeleteEquipment(item.id)}
+            >
+              <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+              <span className="unit-edit-remove-text">Usuń</span>
             </button>
           </div>
         ))}

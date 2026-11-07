@@ -31,7 +31,12 @@ function CampaignPoints({ battle, post, update, notes }) {
         </label>
       )}
       <details className="campaign-help">
-        <summary>Jak liczone są propozycje</summary>
+        <summary>Skąd te liczby? (zasady, s. 418)</summary>
+        <p>
+          Aplikacja sama wpisała, ile punktów kompania zdobywa w tej potyczce.
+          Możesz to poprawić, np. gdy zasada kompanii lub scenariusza mówi
+          inaczej.
+        </p>
         <ul>
           <li>Determinacja: +1 zawsze; zwycięzca +2 do 4. rundy, +1 w rundach 5–9.</li>
           <li>
@@ -49,7 +54,10 @@ function CampaignPoints({ battle, post, update, notes }) {
       <div className="campaign-grid campaign-points-grid">
         {Object.keys(suggested).map((k) => (
           <label key={k}>
-            {{ determinacja: "Determinacja", gniew: "Gniew", odpornosc: "Odporność" }[k]} · było {Number(notes[k]) || 0}
+            <span>
+              {{ determinacja: "Determinacja", gniew: "Gniew", odpornosc: "Odporność" }[k]}{" "}
+              +
+            </span>
             <NumberInput
               type="number"
               min="0"
@@ -65,6 +73,12 @@ function CampaignPoints({ battle, post, update, notes }) {
                 })
               }
             />
+            <small className="campaign-points-total">
+              {Number(notes[k]) || 0} →{" "}
+              <strong>
+                {Math.min(40, (Number(notes[k]) || 0) + (Number(points[k]) || 0))}
+              </strong>
+            </small>
           </label>
         ))}
       </div>

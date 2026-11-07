@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import { AuthContextProvider } from "./Context/AuthContext";
 import "./index.css";
 import App from "./layouts/App";
+// Shared panel styles load after every component stylesheet.
+import "./styles/Panels.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

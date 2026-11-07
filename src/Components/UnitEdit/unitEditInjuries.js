@@ -74,7 +74,8 @@ const UnitEditInjuries = ({ unitList, unit, setUnitList, heroes }) => {
     <ul className="unit-edit-injuries-container">
       {INJURIES_LIST.map((injury, index) => {
         return (
-          <li key={index} className="injury-label">
+          <li key={index}>
+            <label className="injury-label">
             <input
               type="checkbox"
               onChange={handleChange}
@@ -83,6 +84,7 @@ const UnitEditInjuries = ({ unitList, unit, setUnitList, heroes }) => {
               className="injury-checkbox"
             />
             <span>{injury}</span>
+            </label>
           </li>
         );
       })}

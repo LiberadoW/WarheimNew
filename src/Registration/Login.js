@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { AuthContext } from "../Context/AuthContext";
+import useHidePrintSheet from "../Functions/useHidePrintSheet";
 
 const Login = () => {
+  useHidePrintSheet();
   const userRef = useRef();
   const errorRef = useRef();
 

@@ -398,13 +398,14 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
     </div>
   );
 
-  const renderBattle = () => (
+  const renderBattle = () =>
+    !battleActive ? (
+      <p className="unit-play-empty unit-play-note">
+        Rozpocznij potyczkę w panelu kampanii, aby zapisywać jej przebieg.
+        Doświadczenie: {unit.exp || 0} PD.
+      </p>
+    ) : (
     <div className="unit-play-battle-container">
-      {!battleActive && (
-        <p>
-          Rozpocznij potyczkę w panelu kampanii, aby zapisywać jej przebieg.
-        </p>
-      )}
       {unit.type === "Bohater" && (
         <div className="unit-play-counter">
           <span className="unit-play-counter-label">Przeciwnicy WzA</span>
@@ -433,7 +434,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
           onClick={() => updateBattleCounter("battleExp", -1)}
           disabled={!battleActive || battleExp === 0}
         >
-          -
+          −
         </button>
         <span className="unit-play-counter-value">{battleExp}</span>
         <button
@@ -458,7 +459,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
             onClick={() => updateBattleCounter("battleObled", -1)}
             disabled={!battleActive || battleObled === 0}
           >
-            -
+            −
           </button>
           <span className="unit-play-counter-value">{battleObled}</span>
           <button

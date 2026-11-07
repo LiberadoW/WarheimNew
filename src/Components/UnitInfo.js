@@ -41,7 +41,7 @@ const UnitInfo = ({
         </div>
         {!isPlayArmyView && (
         <div className="unit-name-input">
-          <label htmlFor={`unit-name-input-${unit.uniqueId}`}>Imię: </label>
+          <label htmlFor={`unit-name-input-${unit.uniqueId}`}>Imię</label>
           <input
             className={String(unitIndex)}
             onChange={handleOnChange}
@@ -81,12 +81,17 @@ const UnitInfo = ({
           />
         )}
         {!isPlayArmyView && (
-          <UnitTable
-            unitList={[unit]}
-            handleSetUnitExp={handleSetUnitExp}
-            heroes={heroes}
-            disableExpEdit={isPlayArmyView}
-          />
+          <details className="unit-print-preview" open={!isEditArmyView}>
+            <summary>Karta jednostki (podgląd druku)</summary>
+            <div className="unit-print-preview-scroll">
+              <UnitTable
+                unitList={[unit]}
+                handleSetUnitExp={handleSetUnitExp}
+                heroes={heroes}
+                disableExpEdit={isPlayArmyView}
+              />
+            </div>
+          </details>
         )}
       </div>
     </div>

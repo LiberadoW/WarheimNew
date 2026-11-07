@@ -16,12 +16,14 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../Database/database";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import useHidePrintSheet from "../Functions/useHidePrintSheet";
 
 const USER_REGEX = /^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PASSWORD_REGEX = /^(?=.*\d).{6,24}$/;
 
 const Register = () => {
+  useHidePrintSheet();
   const userRef = useRef();
   const errorRef = useRef();
 
@@ -41,7 +43,7 @@ const Register = () => {
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
-  const [errorMsg, setErrorMsg] = useState("ass");
+  const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
   const { dispatch } = useContext(AuthContext);
@@ -77,7 +79,7 @@ const Register = () => {
     const v2 = PASSWORD_REGEX.test(pwd);
     const v3 = EMAIL_REGEX.test(email);
     if (!v1 || !v2 || !v3) {
-      setErrorMsg("Invalid Entry");
+      setErrorMsg("Nieprawidłowe dane w formularzu.");
       return;
     }
 

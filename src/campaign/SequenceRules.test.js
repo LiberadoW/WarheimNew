@@ -126,3 +126,40 @@ test("groups cannot be reorganised before injuries are settled", () => {
     battleOutOfActionModels: [true, false, false] })] };
   expect(() => R.splitGroup(post, "g", [1])).toThrow(/poważne rany/);
 });
+
+test("an undead leader passes command to a necromancer, or the company dissolves", () => {
+  const vamp = hero("vamp", 9, 30, { rules: ["Dowódca", "Nieumarły"], campaignModelStatus: [{ dead: true }] });
+  const post = { journal: [], inventory: [{ name: "Miecz" }], units: [vamp,
+    hero("ghoul", 9, 50, { unitName: "Upiór" }), hero("necro", 7, 3, { unitName: "Nekromanta" })] };
+  const s = R.leaderSuccession(post);
+  expect(s.candidates.map((u) => u.uniqueId)).toEqual(["necro"]);
+  expect(() => R.assignLeader(post, "ghoul")).toThrow();
+  R.assignLeader(post, "necro");
+
+  const lost = { journal: [], inventory: [{ name: "Miecz" }], units: [R.clone(vamp), hero("ghoul", 9, 50, { unitName: "Upiór" })] };
+  expect(R.leaderSuccession(lost).dissolves).toBe(true);
+  R.dissolveCompany(lost);
+  expect(lost.inventory).toEqual([]);
+  const done = R.finalizePostBattle({ id: "b", post: { ...lost, expApplied: false, advances: [], injuries: {} } }, {});
+  expect(done.units).toEqual([]);
+});
+
+test("development roll buttons name the outcome", () => {
+  const h = hero("h", 8, 24);
+  expect(R.advanceLabel(h, 12)).toBe("Nowa umiejętność");
+  expect(R.advanceLabel(h, 2)).toBe("Nowa umiejętność");
+  expect(R.advanceLabel(h, 7)).toBe("WW lub US +1");
+  const g = henchmen("g", 2);
+  expect(R.advanceLabel(g, 11)).toBe("Chłopak ma talent!");
+  expect(R.advanceLabel(g, 4)).toBe("I lub CP +1");
+});
+
+test("K6 injury results show the roll in Polish, not the K66 code", () => {
+  const squig = henchmen("s", 1, { rules: ["Zwierzę"] });
+  const r = R.injuryResult(squig, [1]);
+  expect(r).toMatchObject({ name: "Martwy", roll: 1, simple: true });
+  expect(r.text).toMatch(/skarbca/);
+  expect(R.INJURY_TABLES[R.injuryKind(squig)]).toMatch(/^Nieumarły \/ opętany \/ wierzchowiec \/ zwierzę/);
+  const merc = henchmen("m", 1, { type: "Najemne Ostrze" });
+  expect(R.injuryResult(merc, [2]).text).toMatch(/przepada/);
+});

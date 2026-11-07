@@ -78,13 +78,19 @@ const UnitEditRules = ({ unit, setUnitList, unitList }) => {
   return (
     <div className="unit-edit-rules-container">
       <form onSubmit={handleSubmit} className="rules-input">
-        <input value={rule} type="text" onChange={handleChange} />
+        <input
+          value={rule}
+          type="text"
+          placeholder="Nowa zasada lub umiejętność"
+          aria-label="Nowa zasada lub umiejętność"
+          onChange={handleChange}
+        />
         <button type="submit" className="button">
           Dodaj
         </button>
         <button
           type="button"
-          className="button"
+          className="button button-secondary"
           onClick={handleRevertClick}
           disabled={unit.newRules.length === 0}
         >
@@ -105,8 +111,13 @@ const UnitEditRules = ({ unit, setUnitList, unitList }) => {
               {isCoreRule ? "początkowa" : "dodana"}
             </span>
             {!isCoreRule && (
-              <button onClick={() => handleDeleteRuleClick(item)}>
-                <i className="fa-solid fa-trash-can"></i>
+              <button
+                type="button"
+                aria-label={`Usuń: ${item}`}
+                onClick={() => handleDeleteRuleClick(item)}
+              >
+                <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+                <span className="unit-edit-remove-text">Usuń</span>
               </button>
             )}
           </div>
