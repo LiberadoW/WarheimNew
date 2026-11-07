@@ -32,7 +32,7 @@ This is a campaign assistant, not a complete simulator of all rulebook interacti
 
 - A player's physical battle actions, random model selection, model bases and positions, linked companions/vehicles, special hiring items/conditions and bespoke combats cannot all be inferred from existing saved rosters. The relevant source is displayed; the player enters outcomes and confirms special consequences. Sacrifice eligibility still needs the source's base/size restrictions checked by the player.
 - Conditional skill, weapon, rune, mechanical and illness effects are recorded as readable rules. They are not universally folded into the displayed characteristics. Chronic mental illness progression/recovery, amnesia's random losses and some unusual mutation interactions require the justified adjustment controls.
--  inheritance of a caster's duties, scenario rewards, Chaos Gifts and unusual recruitment exceptions still require manual resolution. This change does not claim to automate every exception in the full rulebook.
+- Inheritance of a caster's duties, scenario rewards, Chaos Gifts and unusual recruitment exceptions still require manual resolution. This change does not claim to automate every exception in the full rulebook.
 - Equipment permission checks remain conservative. Prose restrictions and interactions need player review. Identically named weapon instances in legacy rosters have no distinct item IDs, so upgrades are associated with the owner's base-item name.
 - The source overlaps wage result 2 for Festus and Ruben. The owner explicitly chose the payment/sacrifice interpretation: departure on 1, payment/sacrifice on 2–4. This is a recorded campaign interpretation, not an unannounced correction to the PDF.
 
