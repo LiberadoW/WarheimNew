@@ -1299,6 +1299,18 @@ export const availabilityValue = (token, item) =>
       ? token.alchemyBonus || 0
       : 0);
 
+// New quotes retain each item's actual price; old single-price quotes remain
+// readable for purchases without per-item rolls.
+export const purchaseTotal = (quote, quantity) => {
+  const prices = quote?.unitPrices;
+  if (prices !== undefined && (!Array.isArray(prices) || prices.length !== quantity))
+    throw Error("Ustal cenę każdej kupowanej sztuki.");
+  const values = prices === undefined ? Array(quantity).fill(quote?.price) : prices;
+  if (values.some((price) => !Number.isFinite(price) || price < 1))
+    throw Error("Nieprawidłowa cena przedmiotu.");
+  return sum(values);
+};
+
 export const buyItem = (
   post,
   unitId,
@@ -1339,11 +1351,10 @@ export const buyItem = (
       "Rzadkie przedmioty dla grupy kup pojedynczo do skarbca, a następnie przydziel pełny komplet.",
     );
   if (quantity < 1) throw Error("Nie można kupować dla poległej postaci.");
-  if (
-    !Number.isFinite(quote.price) ||
-    quote.price < 1 ||
-    post.treasury < quote.price * quantity
-  )
+  if (quantity > 1 && (post.armyRules || []).some((r) => baseName(r) === "podatek") && !quote.unitPrices)
+    throw Error("Dla grupy wykonaj osobny rzut na podatek za każdą sztukę.");
+  const total = purchaseTotal(quote, quantity);
+  if (post.treasury < total)
     throw Error("Za mało złotych koron w skarbcu.");
   if (item.availability > 0) {
     const token = post.availability?.find((t) => t.id === quote.tokenId);
@@ -1356,7 +1367,7 @@ export const buyItem = (
       throw Error("Brak niewykorzystanego wyniku dostępności.");
     token.used = true;
   }
-  post.treasury -= quote.price * quantity;
+  post.treasury -= total;
   quote.used = true;
   if (toInventory)
     storeItem(post, item.name, 1, {
@@ -1369,10 +1380,13 @@ export const buyItem = (
   log(
     post,
     "purchase",
-    `${item.name} ×${quantity}: ${quote.price * quantity} zk → ${toInventory ? "skarbiec" : label(unit)}`,
+    `${item.name} ×${quantity}: ${total} zk → ${toInventory ? "skarbiec" : label(unit)}`,
     {
       catalogId: item.id,
       price: quote.price,
+      unitPrices: quote.unitPrices || null,
+      taxRolls: quote.taxRolls || null,
+      total,
       quantity,
       tokenId: quote.tokenId || null,
     },

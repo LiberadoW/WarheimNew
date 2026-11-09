@@ -509,3 +509,10 @@
 .campaign .campaign-points-total strong { color: var(--text); }
 .campaign .campaign-help > p { margin: 0 0 8px; color: var(--text-muted); font-size: .85rem; }
 .campaign-auto-rules { margin: 0 0 12px; padding: 10px 14px 10px 30px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); font-size: .85rem; color: var(--text-muted); } .campaign-auto-rules li { list-style: disc; }
+
+.campaign-item-tax + .campaign-item-tax { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px; }
+.campaign-recruitment-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 12px 0; }
+.campaign-recruitment-sections > .campaign-card { min-width: 0; margin: 0; }
+@media (max-width: 700px) {
+  .campaign-recruitment-sections { grid-template-columns: 1fr; }
+}

@@ -35,21 +35,21 @@ test("an unaffordable item explains the missing gold and cannot be purchased",()
   expect(screen.getByText("Brakuje 5 zk do zakupu.")).toBeTruthy();expect(state.post.treasury).toBe(5);
 });
 test("a rare variable-price item keeps recipient and dice after resume, then consumes one availability result",()=>{
-  const {state,resume}=setup();change("Odbiorca zakupów","inventory");
+  const {state,resume}=setup();change("Postać","inventory");
   change("Szukaj przedmiotu","Krasnoludzki proch");click("Wybierz: Krasnoludzki proch");
   click("Utwórz pulę (1 bohaterów)");
   for(const i of [1,2])change(`Dostępność: Herszt, kość ${i}`,"6");
   click("Zatwierdź wynik");
   change("Cena: Krasnoludzki proch, kość 1","3");change("Cena: Krasnoludzki proch, kość 2","4");
   expect(screen.getByRole("button",{name:"Kup za 12 zk"}).disabled).toBe(false);
-  resume();expect(screen.getByLabelText("Odbiorca zakupów").value).toBe("inventory");
+  resume();expect(screen.getByLabelText("Postać").value).toBe("inventory");
   expect(screen.getByLabelText("Cena: Krasnoludzki proch, kość 1").value).toBe("3");
   expect(screen.getByLabelText("Cena: Krasnoludzki proch, kość 1").disabled).toBe(true);
   click("Kup za 12 zk");expect(state.post.treasury).toBe(88);expect(state.post.availability[0].used).toBe(true);
   expect(state.post.inventory.find(i=>i.name==="Krasnoludzki proch").quantity).toBe(1);
 });
 test("opening an item again cannot generate a different price",()=>{
-  const {state}=setup();change("Odbiorca zakupów","inventory");change("Szukaj przedmiotu","Krasnoludzki proch");
+  const {state}=setup();change("Postać","inventory");change("Szukaj przedmiotu","Krasnoludzki proch");
   click("Wybierz: Krasnoludzki proch");
   const group=within(screen.getByRole("group",{name:"Cena: Krasnoludzki proch · 2K6"}));fireEvent.click(group.getByRole("button",{name:"Rzuć"}));
   const dice=group.getAllByRole("spinbutton").map(i=>i.value);
@@ -70,8 +70,8 @@ test("the normal catalog hides equipment outside the recipient's list",()=>{
 test("resuming a selected purchase keeps the second recipient instead of equipping the first hero",()=>{
   const second={...R.clone(unit),uniqueId:"h2",unitName:"Sieciarz"};
   const {state,resume}=setup({},100,[second]);
-  change("Odbiorca zakupów","h2");change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");resume();
-  expect(screen.getByLabelText("Odbiorca zakupów").value).toBe("h2");click("Kup za 10 zk");
+  change("Postać","h2");change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");resume();
+  expect(screen.getByLabelText("Postać").value).toBe("h2");click("Kup za 10 zk");
   expect(state.post.units[0].optionalEquipment).not.toContain("Miecz");
   expect(state.post.units[1].optionalEquipment).toContain("Miecz");
 });
@@ -97,8 +97,59 @@ test("the step 9 shop lists only common items", () => {
     startingEquipment: [], optionalEquipment: [], equipmentList: {}, campaignModelStatus: [{}] };
   r(<Trade post={{ units: [unit], treasury: 100, inventory: [], journal: [], availability: null }} update={() => {}}
     army={{ name: "" }} commonOnly />);
-  sc.getByLabelText("Pokaż również niedozwolone dla postaci").click();
+  fireEvent.click(sc.getByText("Opcje listy i pula dostępności", { selector: "summary" }));
+  fireEvent.click(sc.getByLabelText("Pokaż również niedozwolone dla postaci"));
   const rare = catalog.find((i) => i.availability);
   expect(sc.queryByRole("button", { name: `Wybierz: ${rare.name}` })).toBeNull();
   expect(sc.getByText("Ekwipunek powszechny")).toBeTruthy();
+});
+
+test("five henchmen each pay a separate tax, with partial rolls preserved after resume",()=>{
+  const {state,resume}=setup({type:"Stronnik",selectedNumber:5},100,[],{armyRules:["Podatek"]});
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  const label=i=>`Podatek — sztuka ${i} z 5 (cena podstawowa 10 zk): +1K6, kość 1`;
+  expect(screen.getAllByRole("spinbutton")).toHaveLength(5);
+  change(label(1),"1");change(label(2),"2");
+  expect(screen.getByRole("button",{name:"Kup przedmiot"}).disabled).toBe(true);
+  resume();expect(screen.getByLabelText(label(1)).value).toBe("1");
+  expect(screen.getByLabelText(label(1)).disabled).toBe(true);
+  for(const i of [3,4,5])change(label(i),String(i));
+  click("Kup za 65 zk");expect(state.post.treasury).toBe(35);
+  const quote=Object.values(state.post.quotes)[0];
+  expect(quote.unitPrices).toEqual([11,12,13,14,15]);
+  expect(quote.taxRolls).toEqual([[1],[2],[3],[4],[5]]);
+  expect(state.post.journal.find(x=>x.type==="purchase").total).toBe(65);
+});
+test("each member rolls both tax dice for a base price over 20 gold",()=>{
+  const {state}=setup({type:"Stronnik",selectedNumber:3,equipmentList:{Kusza:[25,1]}},100,[],{armyRules:["Podatek"]});
+  change("Szukaj przedmiotu","Kusza");click("Wybierz: Kusza");
+  expect(screen.getAllByRole("spinbutton")).toHaveLength(6);
+  for(let i=1;i<=3;i++)for(let j=1;j<=2;j++)change(`Podatek — sztuka ${i} z 3 (cena podstawowa 25 zk): +2K6, kość ${j}`,String((i-1)*2+j));
+  click("Kup za 96 zk");expect(state.post.treasury).toBe(4);
+  expect(Object.values(state.post.quotes)[0].unitPrices).toEqual([28,32,36]);
+});
+test("the group tax and purchase cover living models only",()=>{
+  const {state}=setup({type:"Stronnik",selectedNumber:5,campaignModelStatus:[{dead:true},{},{},{dead:true},{}]},100,[],{armyRules:["Podatek"]});
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  expect(screen.getAllByRole("spinbutton")).toHaveLength(3);
+  for(let i=1;i<=3;i++)change(`Podatek — sztuka ${i} z 3 (cena podstawowa 10 zk): +1K6, kość 1`,String(i));
+  click("Kup za 36 zk");expect(state.post.treasury).toBe(64);
+});
+test("an older shared group tax becomes the first item's roll, without duplicating or discarding it",()=>{
+  const item=R.catalog.find(i=>i.name==="Miecz");
+  const key=`${item.id}:h`;
+  const old={id:"old",itemId:item.id,price:16,dice:[],discountRoll:[],taxRoll:[6],basePrice:10,used:false};
+  const {state}=setup({type:"Stronnik",selectedNumber:3},100,[],{armyRules:["Podatek"],quotes:{[key]:old}});
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  const label=i=>`Podatek — sztuka ${i} z 3 (cena podstawowa 10 zk): +1K6, kość 1`;
+  expect(screen.getByLabelText(label(1)).value).toBe("6");expect(screen.getByLabelText(label(1)).disabled).toBe(true);
+  expect(screen.getByRole("button",{name:"Kup przedmiot"}).disabled).toBe(true);
+  change(label(2),"1");change(label(3),"2");click("Kup za 39 zk");
+  expect(state.post.treasury).toBe(61);expect(state.post.quotes[key].unitPrices).toEqual([16,11,12]);
+});
+test("the purchase rule rejects an obsolete shared tax quote before charging the group",()=>{
+  const {state}=setup({type:"Stronnik",selectedNumber:3},100,[],{armyRules:["Podatek"]});
+  const item=R.catalog.find(i=>i.name==="Miecz");
+  expect(()=>R.buyItem(state.post,"h",item,{id:"old",itemId:item.id,price:16,taxRoll:[6]},army.name)).toThrow(/osobny rzut/);
+  expect(state.post.treasury).toBe(100);
 });

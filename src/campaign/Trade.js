@@ -1,3 +1,4 @@
+import { livingCount } from "./effects";
 import useRollDraft from "./useRollDraft";
 import NumberInput from "./NumberInput";
 import React, { useEffect, useRef, useState } from "react";
@@ -23,6 +24,7 @@ import {
   validDice,
   modelCount,
   buyItem,
+  purchaseTotal,
   log,
   uid,
   sum,
@@ -270,9 +272,12 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
   const saved = quote && !quote.used ? quote : null;
   const dice = saved?.dice || draftDice;
   const discountRoll = saved?.discountRoll || draftDiscount;
-  const taxRoll = saved?.taxRoll || draftTax;
+  // Flat rolls from older drafts cover only the first item, never the group.
+  const rawTaxes = saved?.taxRolls || draftTax;
+  let taxRolls = Array.isArray(rawTaxes[0]) ? rawTaxes : rawTaxes.length ? [rawTaxes] : [];
+  if (!taxRolls[0]?.length && saved?.taxRoll) taxRolls = [saved.taxRoll, ...taxRolls.slice(1)];
   const count = priceDiceCount(item.price), discounts = discountDice(post, item);
-  const quantity = toInventory ? 1 : modelCount(unit || {});
+  const quantity = toInventory ? 1 : livingCount(unit || {});
   const recipient = toInventory ? "Skarbiec kompanii" : (unit?.unitDisplayName || unit?.unitName || "Brak postaci");
   const reason = toInventory ? null : !unit ? "Wybierz postać, dla której kupujesz ekwipunek." : giantArmourBlocked(unit, item) || equipmentPermission(unit, item, armyName) || equipmentCapacity(unit, item);
   const priceUnit = toInventory ? null : unit;
@@ -281,9 +286,12 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
   const priceAllowed = /^(\d+\+)?(\d*K[236](X\d+)?|\d+)$/i.test(item.price);
   const tokens = (post.availability || []).filter(t => t.locked && !t.used && availabilityValue(t, item) >= item.availability);
   const tokenId = saved?.tokenId || token || (tokens.length === 1 ? tokens[0].id : "");
-  const priceReady = priceAllowed && (count === 0 || validDice(dice, count)) && (discounts === 0 || validDice(discountRoll, discounts)) && (taxes === 0 || validDice(taxRoll, taxes));
-  const price = saved ? saved.price : priceReady ? quotePrice(post, item, dice, discountRoll, { taxRoll, unit: priceUnit }) : null;
-  const total = price == null ? null : price * quantity;
+  const priceReady = priceAllowed && (count === 0 || validDice(dice, count)) && (discounts === 0 || validDice(discountRoll, discounts)) && (taxes === 0 || Array.from({ length: quantity }, (_, i) => validDice(taxRolls[i], taxes)).every(Boolean));
+  const legacyGroupTax = !!saved && !saved.unitPrices && quantity > 1 && taxes > 0;
+  const unitPrices = saved && !legacyGroupTax
+    ? (saved.unitPrices || Array(quantity).fill(saved.price))
+    : priceReady ? Array.from({ length: quantity }, (_, i) => quotePrice(post, item, dice, discountRoll, { taxRoll: taxRolls[i], unit: priceUnit })) : null;
+  const total = unitPrices?.length === quantity ? sum(unitPrices) : null;
   const availabilityReady = !item.availability || tokens.some(t=>t.id === tokenId);
   return (
     <article className="campaign-purchase" aria-label={`Zakup: ${item.name}`}>
@@ -295,7 +303,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
       {completed ? (
         <div className="campaign-purchase-success" role="status">
           <strong>Zakupiono: {item.name}</strong>
-          <p>Przedmiot trafił do: {recipient}. Zapłacono {quote.price * quantity} zk. Skarbiec: {post.treasury} zk.</p>
+          <p>Przedmiot trafił do: {recipient}. Zapłacono {purchaseTotal(quote, quote.quantity ?? quantity)} zk. Skarbiec: {post.treasury} zk.</p>
           <button className="button" onClick={onBack}>Wróć do listy</button>
           <button className="button button-secondary" onClick={()=>setRepeatOf(quote.id)}>Kup kolejne</button>
         </div>
@@ -322,20 +330,30 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
             {count > 0 && <DiceInput label={`Cena: ${item.name}`} count={count} value={dice} onChange={setDice} disabled={!!saved} />}
             {discounts > 0 && <DiceInput label={`Zniżka: ${item.name}`} count={discounts} value={discountRoll} onChange={setDiscount} disabled={!!saved} />}
             {giantArmour(priceUnit, item) && <p className="campaign-source">Wielkolud: koszt pancerza x2 ({base ?? "…"} zk).</p>}
-            {taxes > 0 && <DiceInput label={`Podatek (cena podstawowa ${base} zk): +${taxes}K6`} count={taxes} value={taxRoll} onChange={setTax} disabled={!!saved} />}
+            {taxes > 0 && Array.from({ length: quantity }, (_, i) => (
+              <div key={i} className="campaign-item-tax">
+                <DiceInput
+                  label={`${quantity > 1 ? `Podatek — sztuka ${i + 1} z ${quantity}` : "Podatek"} (cena podstawowa ${base} zk): +${taxes}K6`}
+                  count={taxes} value={taxRolls[i] || []}
+                  onChange={(value) => setTax(Array.from({ length: quantity }, (_, j) => j === i ? value : taxRolls[j] || []))}
+                  disabled={!!saved?.unitPrices || (i === 0 && !!saved?.taxRoll)}
+                />
+                {unitPrices && quantity > 1 && <p className="campaign-source">Sztuka {i + 1}: {unitPrices[i]} zk (podatek: {sum(taxRolls[i] || [])} zk)</p>}
+              </div>
+            ))}
             {!priceAllowed && <p>Wybierz wariant ceny według opisu przedmiotu.</p>}
           </section>
           <div className="campaign-purchase-total">
             <div><span>Do zapłaty</span><strong>{total == null ? "Ustal wynik rzutu" : `${total} zk`}</strong>
-              <small>{quantity > 1 && total != null ? `${quantity} × ${price} zk · ` : ""}W skarbcu: {post.treasury} zk</small></div>
-            <button className="button" disabled={!priceReady || !availabilityReady || total > post.treasury || post.tradeClosed}
+              <small>{quantity > 1 && total != null ? `${unitPrices.join(" + ")} zk · ` : ""}W skarbcu: {post.treasury} zk</small></div>
+            <button className="button" disabled={!priceReady || total == null || !availabilityReady || total > post.treasury || post.tradeClosed}
               onClick={()=>update(p=>{
                 if ((p.quotes[key]?.id || null) !== (quote?.id || null)) throw Error("Zakup został już rozliczony.");
-                if (!saved) {
-                  p.quotes[key] = { id: uid(), itemId: item.id, price: quotePrice(p,item,dice,discountRoll,{ taxRoll, unit: priceUnit }),
-                    discountRoll, taxRoll, chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
+                if (!saved || legacyGroupTax) {
+                  p.quotes[key] = { id: uid(), itemId: item.id, price: unitPrices[0], unitPrices, quantity,
+                    discountRoll, taxRolls: taxes ? taxRolls : [], chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
                     dice, tokenId, used: false };
-                  log(p,"price",`${item.name}: ${p.quotes[key].price} zk (kości: ${dice.join(",") || "cena stała"}${taxes ? `; podatek ${taxRoll.join("+")}` : ""}${giantArmour(priceUnit, item) ? "; wielkolud x2" : ""})`);
+                  log(p,"price",`${item.name}: ${total} zk za ${quantity} szt. (kości: ${dice.join(",") || "cena stała"}${taxes ? `; podatek ${taxRolls.map((r, i) => `szt. ${i + 1}: ${r.join("+")}`).join("; ")}` : ""}${giantArmour(priceUnit, item) ? "; wielkolud x2" : ""})`);
                 }
                 buyItem(p,unit?.uniqueId,item,p.quotes[key],armyName,toInventory);
               })}>
@@ -379,7 +397,7 @@ export default function Trade({ post, update, army, commonOnly = false }) {
       {post.tradeClosed && <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>}
       <fieldset disabled={post.tradeClosed}>
         <div className="campaign-shop-recipient">
-          <label>Odbiorca zakupów
+          <label>Postać
             <select value={inventory ? "inventory" : unitId} onChange={e=>{
               setInventory(e.target.value === "inventory");
               if(e.target.value !== "inventory") setUnitId(e.target.value);
