@@ -1,3 +1,4 @@
+import GroupTaxQA from "../campaign/GroupTaxQA";
 import React, { useState, useContext, useEffect, createContext } from "react";
 import {
   BrowserRouter as Router,
@@ -192,6 +193,7 @@ const App = () => {
           <Router>
             <Header handleSwitchTheme={handleSwitchTheme} theme={theme} />
             <Routes>
+              <Route path="/__qa-group-tax" element={<GroupTaxQA />} />
               <Route
                 path="/"
                 element={

@@ -4,10 +4,9 @@ import { companyLevel } from "./company";
 import * as R from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { recruit, recruitAvailability, recruitmentProblem } from "./recruiting";
-export default function Recruitment({ post, update, army }) {
+function RecruitmentForm({ post, update, army, mercenary }) {
   const [companyFree, setCompanyFree] = useState(false);
   const [name, setName] = useState(""),
-    [mercenary, setMercenary] = useState(false),
     [manual, setManual] = useState(0),
     [reason, setReason] = useState(""),
     [token, setToken] = useState("");
@@ -26,23 +25,10 @@ export default function Recruitment({ post, update, army }) {
   return (
     <>
       <p>
-        Nowi rekruci mogą otrzymać ekwipunek powszechny. Przedmioty rzadkie
-        dopiero po następnej potyczce, chyba że są już w skarbcu. Najemne Ostrza
-        korzystają z własnego ekwipunku.
+        {mercenary
+          ? "Najemne Ostrza korzystają z własnego ekwipunku. Wybierz najemnika dostępnego dla tej kompanii."
+          : "Nowi rekruci mogą otrzymać ekwipunek powszechny. Przedmioty rzadkie dopiero po następnej potyczce, chyba że są już w skarbcu."}
       </p>
-      <label className="campaign-check">
-        <input
-          type="checkbox"
-          checked={mercenary}
-          onChange={(e) => {
-            setMercenary(e.target.checked);
-            setCompanyFree(false);
-            setName("");
-            setToken("");
-          }}
-        />
-        Najemne Ostrza dostępne dla kompanii
-      </label>
       {mercenary && companyLevel(post, "Kompania najemników") > 0 && (
         <label className="campaign-check">
           <input
@@ -55,7 +41,7 @@ export default function Recruitment({ post, update, army }) {
         </label>
       )}
       <label>
-        Nowy rekrut
+        {mercenary ? "Najemne Ostrze" : "Model bandy"}
         <select
           value={name}
           onChange={(e) => {
@@ -148,10 +134,25 @@ export default function Recruitment({ post, update, army }) {
               )
             }
           >
-            Zrekrutuj
+            {mercenary ? "Zatrudnij Najemne Ostrze" : "Zrekrutuj model bandy"}
           </button>
         </>
       )}
     </>
+  );
+}
+
+export default function Recruitment(props) {
+  return (
+    <div className="campaign-recruitment-sections">
+      <section className="campaign-card" aria-label="Rekrutacja modeli bandy">
+        <h3>Modele bandy</h3>
+        <RecruitmentForm {...props} mercenary={false} />
+      </section>
+      <section className="campaign-card" aria-label="Rekrutacja Najemnych Ostrzy">
+        <h3>Najemne Ostrza</h3>
+        <RecruitmentForm {...props} mercenary />
+      </section>
+    </div>
   );
 }
