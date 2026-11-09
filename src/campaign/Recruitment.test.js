@@ -54,3 +54,16 @@ test("the mercenary form hires a mercenary, charges its own cost and preserves t
  expect(state.post.treasury).toBe(1000-mercenariesList[name].cost);
  expect(band.getByLabelText("Model bandy").value).toBe("Mecenas");
 });
+test("consuming an availability result in one form disables it in the other",()=>{
+ const state=setup();const band=within(screen.getByRole("region",{name:"Rekrutacja modeli bandy"}));
+ const merc=within(screen.getByRole("region",{name:"Rekrutacja Najemnych Ostrzy"}));
+ const bandName=Object.keys(army.heroes).find(n=>recruitAvailability(army,n)>0 && recruitAvailability(army,n)<=12);
+ const mercName=army.mercenaries.find(n=>mercenariesList[n] && recruitAvailability(army,n,true)>0 && recruitAvailability(army,n,true)<=12);
+ change(band,"Model bandy",bandName);change(merc,"Najemne Ostrze",mercName);
+ change(band,"Wynik puli dostępności","recruit-token");change(merc,"Wynik puli dostępności","recruit-token");
+ expect(band.getByRole("button",{name:"Zrekrutuj model bandy"}).disabled).toBe(false);
+ fireEvent.click(merc.getByRole("button",{name:"Zatrudnij Najemne Ostrze"}));
+ expect(state.post.availability[0].used).toBe(true);
+ expect(band.getByRole("button",{name:"Zrekrutuj model bandy"}).disabled).toBe(true);
+ expect(state.post.units).toHaveLength(1);
+});

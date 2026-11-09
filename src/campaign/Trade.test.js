@@ -97,7 +97,8 @@ test("the step 9 shop lists only common items", () => {
     startingEquipment: [], optionalEquipment: [], equipmentList: {}, campaignModelStatus: [{}] };
   r(<Trade post={{ units: [unit], treasury: 100, inventory: [], journal: [], availability: null }} update={() => {}}
     army={{ name: "" }} commonOnly />);
-  sc.getByLabelText("Pokaż również niedozwolone dla postaci").click();
+  fireEvent.click(sc.getByText("Opcje listy i pula dostępności", { selector: "summary" }));
+  fireEvent.click(sc.getByLabelText("Pokaż również niedozwolone dla postaci"));
   const rare = catalog.find((i) => i.availability);
   expect(sc.queryByRole("button", { name: `Wybierz: ${rare.name}` })).toBeNull();
   expect(sc.getByText("Ekwipunek powszechny")).toBeTruthy();

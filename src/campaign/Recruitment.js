@@ -119,7 +119,9 @@ function RecruitmentForm({ post, update, army, mercenary }) {
             disabled={
               !!problem ||
               (!companyFree && post.treasury < definition.cost) ||
-              (availability > 0 && !token) ||
+              (availability > 0 && !(post.availability || []).some(
+                (t) => t.id === token && t.locked && !t.used && t.total >= availability,
+              )) ||
               (imported === null && !reason.trim())
             }
             onClick={() =>
