@@ -84,12 +84,22 @@ export default function BattleTracker({ units, setUnits }) {
                 const absent = !!u.battleAbsentModels?.[i];
                 const out = !!u.battleOutOfActionModels?.[i];
                 const name = count > 1 ? `#${i + 1}` : "Model";
+                const state = blocked
+                  ? status.captured
+                    ? "pojmany"
+                    : `pauza ${status.skip}`
+                  : absent
+                    ? "nieobecny"
+                    : out
+                      ? "WzA"
+                      : "w grze";
                 return (
                   <button
                     key={i}
                     type="button"
                     aria-pressed={out}
-                    className={out ? "is-out" : ""}
+                    className={`${out ? "is-out" : ""}${count === 1 ? " is-single" : ""}`}
+                    title={blocked || absent ? undefined : out ? "Dotknij: z powrotem w grze" : "Dotknij: wyłączony z akcji"}
                     disabled={blocked || absent}
                     onClick={() =>
                       edit(u.uniqueId, (x) => {
@@ -97,18 +107,17 @@ export default function BattleTracker({ units, setUnits }) {
                       })
                     }
                   >
-                    <span>{name}</span>
-                    <small>
-                      {blocked
-                        ? status.captured
-                          ? "pojmany"
-                          : `pauza ${status.skip}`
-                        : absent
-                          ? "nieobecny"
-                          : out
-                            ? "WzA"
-                            : "w grze"}
-                    </small>
+                    {count > 1 ? (
+                      <>
+                        <span>{name}</span>
+                        <small>{state}</small>
+                      </>
+                    ) : (
+                      <span>
+                        <i className={`fa-solid ${out ? "fa-skull" : blocked || absent ? "fa-ban" : "fa-shield-halved"}`} aria-hidden="true"></i>{" "}
+                        {state === "w grze" ? "W grze" : state.charAt(0).toUpperCase() + state.slice(1)}
+                      </span>
+                    )}
                   </button>
                 );
               })}

@@ -208,7 +208,8 @@ const CampaignPage = () => {
         <h3>Twoja rozpiska w kampanii</h3>
         {savedLists.length === 0 ? (
           <p className="hub-muted">
-            Najpierw zapisz kompanię na koncie (Zapisz armię), a potem wgraj ją tutaj.
+            Nie masz jeszcze zapisanych rozpisek. Stwórz bandę: po zapisaniu trafi od razu do tej
+            kampanii.
           </p>
         ) : (
           <div className="hub-upload">
@@ -238,6 +239,17 @@ const CampaignPage = () => {
             </button>
           </div>
         )}
+        <div className="hub-actions">
+          <button
+            type="button"
+            className={savedLists.length ? "button button-secondary" : "button"}
+            onClick={() =>
+              navigate("/", { state: { newForCampaign: { id: campaign.id, name: campaign.name } } })
+            }
+          >
+            <i className="fa-solid fa-plus" aria-hidden="true"></i> Stwórz nową bandę
+          </button>
+        </div>
         <p className="hub-muted">
           Po sekwencji po potyczce wgraj rozpiskę ponownie, aby inni widzieli aktualny stan kompanii.
         </p>

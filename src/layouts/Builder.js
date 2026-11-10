@@ -6,7 +6,7 @@ import React, {
   useState,
   createContext,
 } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   doc,
   getDoc,
@@ -35,6 +35,11 @@ import { EditArmyContext, getDefaultCampaignNotes } from "./App";
 import "../styles/Builder.css";
 import ChaosMarkSelect from "../Components/ChaosMarkSelect";
 import StigmataPanel from "../Components/StigmataPanel";
+import CampaignTargetBanner, {
+  readCampaignTarget,
+  setCampaignTarget,
+} from "../campaignHub/CampaignTarget";
+import { uploadCampaignList } from "../campaignHub/campaignService";
 
 export const CommandContext = createContext();
 
@@ -147,6 +152,26 @@ const Builder = ({
     setIsPlayArmyView,
   } = useContext(EditArmyContext);
   const location = useLocation();
+  const navigate = useNavigate();
+  // A new band started from a campaign page ("Stwórz nową bandę").
+  const [campaignTarget, setTarget] = useState(readCampaignTarget);
+  const newForCampaign = location.state?.newForCampaign;
+  useEffect(() => {
+    if (!newForCampaign) return;
+    setCampaignTarget(newForCampaign);
+    setTarget(newForCampaign);
+    if (
+      !unitList.length ||
+      window.confirm(
+        `Wyczyścić obecną rozpiskę, aby zacząć nową bandę do kampanii „${newForCampaign.name}”?`,
+      )
+    ) {
+      setUnitList([]);
+      setArmyName("");
+      setCampaignNotes(getDefaultCampaignNotes());
+    }
+    navigate(location.pathname, { replace: true, state: null });
+  }, [newForCampaign]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setTotalCost(getTotalCost(unitList));
@@ -245,8 +270,9 @@ const Builder = ({
     }
   }, [isPlayArmyView, unitList, setUnitList]);
 
+  // Returns the saved list, or null when nothing was saved.
   const saveArmy = async (e) => {
-    e.preventDefault();
+    e?.preventDefault?.();
     try {
       const savedLists = await getDoc(doc(db, "lists", currentUser.user.uid));
       const arrayOfSavedLists = savedLists.data().lists;
@@ -254,7 +280,7 @@ const Builder = ({
 
       if (armyName.trim().length === 0) {
         alert("Nazwij swoją kompanię");
-        return;
+        return null;
       }
 
       const armyObj = {
@@ -287,7 +313,7 @@ const Builder = ({
             gameHistory: existingHistory,
           };
         } else {
-          return;
+          return null;
         }
       } else {
         arrayOfSavedLists.push(armyObj);
@@ -299,9 +325,22 @@ const Builder = ({
         armyNames: arrayArmyNames,
       });
       alert("Armia została zapisana");
+      return armyObj;
     } catch (err) {
       console.log(err);
+      return null;
     }
+  };
+  const saveAndUploadToCampaign = async () => {
+    if (!currentUser?.user?.uid)
+      throw new Error("Zaloguj się, aby zapisać bandę na koncie.");
+    if (!unitList.length) throw new Error("Dodaj modele do bandy.");
+    const saved = await saveArmy();
+    if (!saved) throw new Error("Banda nie została zapisana.");
+    await uploadCampaignList(campaignTarget.id, currentUser.user, saved);
+    setCampaignTarget(null);
+    setTarget(null);
+    navigate(`/campaigns/${campaignTarget.id}`);
   };
 
   const handleSavePDFClick = async (e) => {
@@ -440,6 +479,16 @@ const Builder = ({
       value={{ standardBearer, setStandardBearer, musician, setMusician }}
     >
       <div className="builder">
+        {campaignTarget && !isPlayArmyView && (
+          <CampaignTargetBanner
+            target={campaignTarget}
+            onSaveAndUpload={saveAndUploadToCampaign}
+            onCancel={() => {
+              setCampaignTarget(null);
+              setTarget(null);
+            }}
+          />
+        )}
         {isPlayArmyView && (
           <CampaignManager
             unitList={unitList}

@@ -593,3 +593,42 @@
   /* "Rzuć" sits next to the dice instead of stretching across the page. */
   .campaign .campaign-dice .button { flex: 0 0 auto; min-width: 110px; }
 }
+
+/* Grid fields line up: the generic "label + label" spacing must not push
+   every field after the first one down. */
+.campaign .campaign-grid > label { margin-top: 0; }
+
+/* Dane potyczki: one tidy grid; the area follows a rulebook scenario. */
+.campaign .campaign-battle-data { align-items: end; }
+.campaign .campaign-battle-data input, .campaign .campaign-battle-data select { width: 100%; height: 44px; box-sizing: border-box; }
+.campaign .campaign-battle-data > p { margin: 0; align-self: center; }
+@media (min-width: 901px) {
+  .campaign .campaign-battle-data { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .campaign .campaign-battle-data > .wide { grid-column: span 2; }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .campaign .campaign-battle-data { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .campaign .campaign-battle-data > .wide { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .campaign .campaign-battle-data > p { grid-column: 1 / -1; }
+}
+.campaign-battle-scenario { margin: 4px 0 16px; }
+.campaign .campaign-field-label { display: block; margin-bottom: 6px; font-size: .8rem; font-weight: 600; color: var(--text-muted); }
+.campaign-scenario-chosen { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); }
+.campaign-scenario-chosen strong { display: block; }
+.campaign-scenario-chosen small { color: var(--text-muted); }
+.campaign .campaign-scenario-chosen .button { width: auto; margin: 0; }
+.campaign-scenario-field .scenario-picker { padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); }
+
+/* Przebieg potyczki: on desktop each unit is a single row. */
+.campaign .campaign-tracker-models button.is-single { flex-direction: row; align-items: center; min-width: 120px; }
+.campaign .campaign-tracker-models button.is-single span { font-size: .9rem; }
+@media (min-width: 901px) {
+  .campaign .campaign-tracker-unit { display: grid; grid-template-columns: minmax(180px, 1fr) auto minmax(0, 1.3fr); align-items: center; gap: 6px 24px; padding: 10px 14px; }
+  .campaign .campaign-tracker-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .campaign .campaign-tracker-counters, .campaign .campaign-tracker-models { margin: 0; }
+  .campaign .campaign-tracker-models { justify-content: flex-end; }
+  .campaign .campaign-tracker-absent { grid-column: 1 / -1; }
+}
+.campaign .campaign-battle-data + label { margin-top: 14px; }

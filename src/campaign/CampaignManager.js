@@ -15,7 +15,7 @@ import Exploration from "./Exploration";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import Reference from "./Reference";
 import BattleTracker from "./BattleTracker";
 import GroupManager from "./GroupManager";
@@ -33,6 +33,9 @@ import {
 } from "./Extras";
 import * as R from "./rules";
 import "./Campaign.css";
+
+// The rulebook scenario tables are large; load them only on the battle form.
+const ScenarioField = lazy(() => import("./ScenarioField"));
 
 const STEPS = [
   "Potyczka",
@@ -551,6 +554,12 @@ export default function CampaignManager({
               )}
               <BattleTracker units={unitList} setUnits={setUnitList} />
               <h3>Dane potyczki</h3>
+              <div className="campaign-battle-scenario" role="group" aria-label="Scenariusz">
+                <span className="campaign-field-label">Scenariusz</span>
+                <Suspense fallback={<p className="campaign-source">Wczytywanie scenariuszy…</p>}>
+                  <ScenarioField battle={battle} setBattle={setBattle} />
+                </Suspense>
+              </div>
               <div className="campaign-grid campaign-battle-data">
                 <label className="wide">
                   Nazwa potyczki
@@ -571,7 +580,7 @@ export default function CampaignManager({
                     }
                   />
                 </label>
-                <label className="wide">
+                <label>
                   Przeciwnik
                   <input
                     value={battle.opponent}
@@ -580,19 +589,12 @@ export default function CampaignManager({
                     }
                   />
                 </label>
-                <label className="wide">
-                  Scenariusz
-                  <input
-                    value={battle.scenario}
-                    onChange={(e) =>
-                      setBattle({ ...battle, scenario: e.target.value })
-                    }
-                  />
-                </label>
                 <label>
                   Obszar
                   <select
                     value={battle.area}
+                    disabled={!!battle.scenarioRecord?.area}
+                    title={battle.scenarioRecord?.area ? "Obszar wynika ze scenariusza" : undefined}
                     onChange={(e) =>
                       setBattle({ ...battle, area: e.target.value })
                     }
@@ -667,8 +669,6 @@ export default function CampaignManager({
                     }
                   />
                 </label>
-              </div>
-              <div className="campaign-grid">
                 <label>
                   Prestiż przeciwnika
                   <NumberInput
@@ -683,7 +683,7 @@ export default function CampaignManager({
                     }
                   />
                 </label>
-                <p className="campaign-source">
+                <p className="campaign-source wide">
                   Prestiż Twojej kompanii: {safePrestige(unitList) ?? "?"}
                   {(() => {
                     const b = R.underdogBonus(

@@ -658,3 +658,11 @@
 .stigma-error { color: var(--accent); font-weight: 600; font-size: .85rem; }
 .chaos-mark, .chaos-mark label { min-width: 0; max-width: 100%; }
 .chaos-mark select { width: 100%; max-width: 100%; box-sizing: border-box; }
+
+/* "Stwórz nową bandę" from a campaign: save + upload in one step. */
+.campaign-target { box-sizing: border-box; width: calc(100% - 32px); max-width: 1440px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin: 0; padding: 14px 16px; border: 1px solid var(--accent, #9b1c1c); border-left-width: 4px; border-radius: 10px; background: var(--surface-2, rgba(155, 28, 28, .08)); }
+.campaign-target strong { display: block; }
+.campaign-target small { display: block; margin-top: 2px; color: var(--text-muted, inherit); }
+.campaign-target .campaign-target-error { color: var(--accent, #c0392b); font-weight: 600; }
+.campaign-target-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.campaign-target-actions .button { width: auto; margin: 0; }

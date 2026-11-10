@@ -119,6 +119,7 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     opponent: opponentName || "",
     scenario: game.scenario?.name || "",
     area: game.scenario?.area || "inside",
+    scenarioRecord: game.scenario || null,
     result: winner === "draw" ? "draw" : winner === owner ? "win" : winner ? "loss" : "loss",
     round: Math.max(1, play?.round || 1),
     opponentModels: (opponentList?.armyList || []).reduce((n, u) => n + modelCount(u), 0),
