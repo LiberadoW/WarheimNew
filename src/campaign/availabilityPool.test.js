@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import * as R from "./rules";
-import { AvailabilityPool } from "./Trade";
+import { AvailabilityPool, unavailableReason } from "./Trade";
+import { ExperiencedRecruits } from "./Extras";
 
 // Rozdział 14, s. 426: DOSTĘPNOŚĆ, BOGATY MOŻE WIĘCEJ…, SPOŁEM…
 const hero = (id, extra = {}) => ({
@@ -127,4 +128,36 @@ test("the panel creates the pool by itself and rolls every result at once", () =
   expect(chips.map((li) => li.textContent)).toEqual(
     latest.availability.map((t) => expect.stringContaining(`${t.name}${t.total}`)),
   );
+});
+
+describe("the shop greys out what cannot be bought now", () => {
+  const rapier = { id: "r", name: "Rapier", category: "Oręż — walka wręcz", availability: 9, price: "10" };
+  const sword = { id: "m", name: "Miecz", category: "Oręż — walka wręcz", availability: 0, price: "10" };
+  test("a rare item waits for the roll, then needs a high enough result", () => {
+    const p = post([hero("a"), hero("b")]);
+    R.createAvailabilityPool(p);
+    const [a, b] = p.availability.map((t) => t.id);
+    R.setAvailabilityDice(p, a, [4, 4]);
+    expect(unavailableReason(p, p.units[0], rapier)).toBeNull(); // b has not rolled yet
+    R.setAvailabilityDice(p, b, [3, 3]);
+    expect(unavailableReason(p, p.units[0], rapier)).toBe("Wynik puli za niski");
+    p.availability[0].modifier = 1;
+    R.refreshAvailability(p.availability);
+    expect(unavailableReason(p, p.units[0], rapier)).toBeNull();
+  });
+  test("even the cheapest price must fit the treasury, for every model of a group", () => {
+    const p = post([{ ...hero("g"), type: "Stronnik", selectedNumber: 3 }], { treasury: 25 });
+    expect(unavailableReason(p, p.units[0], sword)).toBe("Za mało zk (od 30 zk)");
+    expect(unavailableReason(p, p.units[0], sword, true)).toBeNull();
+    expect(unavailableReason(p, p.units[0], { ...sword, price: "5+K6" })).toBeNull();
+  });
+});
+
+test("joining a recruit says why it is not possible", () => {
+  const group = { ...hero("Hobgoblin"), type: "Stronnik", selectedNumber: 3, number: 15, cost: 20, exp: 2 };
+  const p = post([group], { treasury: 20, recruitBudgetLocked: true, recruitBudget: 7 });
+  render(<ExperiencedRecruits post={p} update={() => {}} army={{ maxModels: 15 }} />);
+  fireEvent.change(screen.getByLabelText("Dołącz rekruta do istniejącej grupy"), { target: { value: "Hobgoblin" } });
+  expect(screen.getByRole("button", { name: "Dołącz rekruta" }).disabled).toBe(true);
+  expect(screen.getByText("Brakuje 4 zk (w skarbcu 20 zk).")).toBeTruthy();
 });

@@ -428,6 +428,30 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
     </article>
   );
 }
+// Why an item cannot be bought right now (greyed out in the list): no result
+// in the pool is high enough once every hero has rolled, or even the cheapest
+// possible price (lowest dice, best discount) exceeds the treasury.
+export function unavailableReason(post, unit, item, toInventory = false) {
+  if (item.availability > 0) {
+    if (!toInventory && unit?.campaignNewRecruit) return "Nowy rekrut: tylko ze skarbca";
+    const pool = post.availability || [];
+    const waiting = pool.some((t) => !t.used && !t.helping && !t.locked);
+    if (!waiting && !usableAvailability(post, item.availability, (t) => availabilityValue(t, item)).length)
+      return pool.some((t) => !t.used && !t.helping) ? "Wynik puli za niski" : "Brak wyniku puli";
+  }
+  try {
+    const ones = (n) => Array(n).fill(1);
+    const base = basePriceOf(item, ones(priceDiceCount(item.price)), unit);
+    if (base == null) return null;
+    const cheapest = quotePrice(post, item, ones(priceDiceCount(item.price)), Array(discountDice(post, item)).fill(6),
+      { taxRoll: ones(taxDice(post, base)), unit });
+    const quantity = toInventory || !unit ? 1 : Math.max(1, livingCount(unit));
+    if (cheapest * quantity > post.treasury) return `Za mało zk (od ${cheapest * quantity} zk)`;
+  } catch {
+    return null;
+  }
+  return null;
+}
 export default function Trade({ post, update, army, commonOnly = false }) {
   const [theftDice, setTheftDice] = useRollDraft(post, update, "strigos-theft");
   const [selectedId, setSelected] = useRollDraft(post, update, "trade-selected", "");
@@ -488,9 +512,12 @@ export default function Trade({ post, update, army, commonOnly = false }) {
             <div className="campaign-shop-list">
               {shown.slice(0,limit).map(item=>{
                 const reason=inventory ? null : giantArmourBlocked(unit,item) || equipmentPermission(unit,item,army.name) || equipmentCapacity(unit,item);
-                return <button type="button" className="campaign-shop-item" key={item.id} aria-label={`Wybierz: ${item.name}`} onClick={()=>setSelected(item.id)}>
+                const blocked=unavailableReason(post,unit,item,inventory);
+                const tag=item.availability ? `Dostępność ${item.availability}+` : "Powszechny";
+                return <button type="button" className={`campaign-shop-item${reason || blocked ? " is-unavailable" : ""}`} key={item.id}
+                  aria-label={`Wybierz: ${item.name}`} aria-describedby={!reason && blocked ? `why-${item.id}` : undefined} title={reason || blocked || undefined} onClick={()=>setSelected(item.id)}>
                   <span className="campaign-shop-item-name">{item.name}<small>{item.category}</small></span>
-                  <span className="campaign-shop-item-price">{item.price} zk<small>{reason ? "Sprawdź ograniczenia" : item.availability ? `Dostępność ${item.availability}+` : "Powszechny"}</small></span>
+                  <span className="campaign-shop-item-price">{item.price} zk<small>{reason ? "Sprawdź ograniczenia" : tag}</small>{!reason && blocked && <small className="campaign-shop-item-why" id={`why-${item.id}`}>{blocked}</small>}</span>
                   <span aria-hidden="true">›</span>
                 </button>;
               })}

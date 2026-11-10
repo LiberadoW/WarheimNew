@@ -133,6 +133,21 @@ export function ExperiencedRecruits({ post, update, army }) {
   const unit = groups.find((u) => u.uniqueId === id),
     exp = Number(unit?.exp) || 0,
     cost = (Number(unit?.cost) || 0) + exp * 2;
+  const groupLimit = Math.min(5, unit?.number || 5);
+  // The reason the button is off, so the player is never left guessing.
+  const blocker = !unit
+    ? ""
+    : !post.recruitBudgetLocked
+      ? "Najpierw rzuć i zatwierdź pulę PD rekrutów."
+      : exp > (post.recruitBudget || 0)
+        ? `Grupa ma ${exp} PD, a w puli zostało ${post.recruitBudget || 0} PD.`
+        : cost > post.treasury
+          ? `Brakuje ${cost - post.treasury} zk (w skarbcu ${post.treasury} zk).`
+          : livingCount(unit) >= groupLimit
+            ? `Grupa ma już maksymalną liczbę modeli (${groupLimit}).`
+            : army && rosterModels(post) >= campaignModelLimit(army, post)
+              ? `Kompania ma już limit ${campaignModelLimit(army, post)} modeli.`
+              : "";
   return (
     <>
       <p>Pozostała pula PD: {post.recruitBudget || 0}</p>
@@ -152,13 +167,7 @@ export function ExperiencedRecruits({ post, update, army }) {
           <p>Pełny ekwipunek i dopłata za PD: {cost} zk.</p>
           <button
             className="button"
-            disabled={
-              !post.recruitBudgetLocked ||
-              exp > (post.recruitBudget || 0) ||
-              cost > post.treasury ||
-              livingCount(unit) >= Math.min(5, unit.number || 5) ||
-              (army && rosterModels(post) >= campaignModelLimit(army, post))
-            }
+            disabled={!!blocker}
             onClick={() =>
               update((p) => {
                 const u = p.units.find((x) => x.uniqueId === id);
@@ -181,6 +190,7 @@ export function ExperiencedRecruits({ post, update, army }) {
           >
             Dołącz rekruta
           </button>
+          {blocker && <p className="campaign-error">{blocker}</p>}
         </>
       )}
     </>

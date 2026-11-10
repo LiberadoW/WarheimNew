@@ -1294,7 +1294,25 @@ export const battleSummary = (post) => {
     }),
   };
 };
-export const finalizePostBattle = (battle, notes) => {
+// Firestore cannot store an array directly inside another array. Older
+// journal entries (e.g. per-item tax rolls) did, so the finished battle is
+// flattened before it is saved: an inner array becomes "a+b" text.
+export const firestoreSafe = (value, nested = false) => {
+  if (Array.isArray(value)) {
+    if (nested)
+      return value.every((x) => x === null || typeof x !== "object")
+        ? value.join("+")
+        : JSON.stringify(value);
+    return value.map((x) => firestoreSafe(x, true));
+  }
+  if (value && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype)
+    return Object.fromEntries(
+      Object.entries(value).map(([k, x]) => [k, firestoreSafe(x)]),
+    );
+  return value;
+};
+export const finalizePostBattle = (battle, notes) => firestoreSafe(finalizeBattle(battle, notes));
+const finalizeBattle = (battle, notes) => {
   const p = clone(battle.post);
   if (
     !p.dissolved &&
@@ -1686,7 +1704,8 @@ export const buyItem = (
       catalogId: item.id,
       price: quote.price,
       unitPrices: quote.unitPrices || null,
-      taxRolls: quote.taxRolls || null,
+      // Firestore rejects nested arrays: one "3+4" string per item.
+      taxRolls: quote.taxRolls?.length ? quote.taxRolls.map((r) => [].concat(r).join("+")) : null,
       total,
       quantity,
       tokenId: quote.tokenId || null,

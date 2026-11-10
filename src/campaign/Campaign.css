@@ -582,3 +582,14 @@
 .campaign-availability > .button {
   align-self: flex-start;
 }
+
+/* Items that cannot be bought now: too rare for the pool or too expensive. */
+.campaign .campaign-shop-item.is-unavailable { opacity: .5; }
+.campaign .campaign-shop-item.is-unavailable:hover { opacity: .8; }
+.campaign .campaign-shop-item .campaign-shop-item-price small.campaign-shop-item-why { margin-top: 2px; max-width: none; white-space: nowrap; color: var(--accent); }
+.campaign-recruitment-sections > .campaign-availability { grid-column: 1 / -1; }
+.campaign-recruitment-sections > .campaign-card > h3 { margin-top: 0; }
+@media (min-width: 701px) {
+  /* "Rzuć" sits next to the dice instead of stretching across the page. */
+  .campaign .campaign-dice .button { flex: 0 0 auto; min-width: 110px; }
+}

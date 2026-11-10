@@ -324,7 +324,13 @@ export default function CampaignManager({
         throw Error("Wypłać żołd albo odpraw Najemne Ostrza.");
       if (battle.stage === 5 && !post.lootSold)
         throw Error("Zatwierdź sprzedaż lub pozostawienie łupów.");
-      setBattle({ ...battle, stage: Math.min(11, battle.stage + 1) });
+      // Trading opens with the availability pool already drawn up (s. 426).
+      let nextPost = post;
+      if (battle.stage === 6 && !post.availability) {
+        nextPost = R.clone(post);
+        R.createAvailabilityPool(nextPost);
+      }
+      setBattle({ ...battle, post: nextPost, stage: Math.min(11, battle.stage + 1) });
       setError("");
     } catch (e) {
       setError(e.message);
@@ -816,9 +822,17 @@ export default function CampaignManager({
                   setBattle={setBattle}
                 />
               )}
-              {phase === 6 && <RecruitBudget post={post} update={update} />}
               {phase === 6 && (
-                <ExperiencedRecruits post={post} update={update} army={army} />
+                <div className="campaign-recruitment-sections">
+                  <section className="campaign-card" aria-label="Pula PD rekrutów">
+                    <h3>1. Pula PD rekrutów</h3>
+                    <RecruitBudget post={post} update={update} />
+                  </section>
+                  <section className="campaign-card" aria-label="Dołącz rekruta do grupy">
+                    <h3>2. Dołącz rekruta do grupy</h3>
+                    <ExperiencedRecruits post={post} update={update} army={army} />
+                  </section>
+                </div>
               )}
               {phase === 7 && <Trade post={post} update={update} army={army} />}
               {phase === 8 && <Drama post={post} update={update} army={army} />}
