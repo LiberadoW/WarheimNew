@@ -118,12 +118,10 @@ test("a generated availability roll survives a real persisted draft reload and c
   dice("Eksploracja",[4]); click("Zatwierdź pulę eksploracji"); click("Zatwierdź eksplorację");
   click("Dalej: Sprzedaż łupów"); click("Zatwierdź bez sprzedaży");
   click("Dalej: Doświadczeni stronnicy"); click("Dalej: Handel i dostępność");
-  fireEvent.click(screen.getByText("Opcje listy i pula dostępności",{selector:"summary"}));
-  click("Utwórz pulę (1 bohaterów)");
+  // The pool is created automatically when trading starts.
   const group=screen.getByRole("group",{name:"Dostępność: Herszt · 2K6"});
   click("Rzuć",within(group)); const result=post(state).availability[0].dice;
   resume();
-  fireEvent.click(screen.getByText("Opcje listy i pula dostępności",{selector:"summary"}));
   const restored=within(screen.getByRole("group",{name:"Dostępność: Herszt · 2K6"}));
   expect(button("Wynik zapisany",restored).disabled).toBe(true);
   expect(post(state).availability[0].dice).toEqual(result);

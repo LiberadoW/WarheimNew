@@ -37,9 +37,9 @@ test("an unaffordable item explains the missing gold and cannot be purchased",()
 test("a rare variable-price item keeps recipient and dice after resume, then consumes one availability result",()=>{
   const {state,resume}=setup();change("Postać","inventory");
   change("Szukaj przedmiotu","Krasnoludzki proch");click("Wybierz: Krasnoludzki proch");
-  click("Utwórz pulę (1 bohaterów)");
+  // The pool is created automatically; the hero's result is used straight away.
   for(const i of [1,2])change(`Dostępność: Herszt, kość ${i}`,"6");
-  click("Zatwierdź wynik");
+  expect(screen.getByLabelText("Zużyje wynik").value).toBe(state.post.availability[0].id);
   change("Cena: Krasnoludzki proch, kość 1","3");change("Cena: Krasnoludzki proch, kość 2","4");
   expect(screen.getByRole("button",{name:"Kup za 12 zk"}).disabled).toBe(false);
   resume();expect(screen.getByLabelText("Postać").value).toBe("inventory");
@@ -63,7 +63,7 @@ test("opening an item again cannot generate a different price",()=>{
 test("the normal catalog hides equipment outside the recipient's list",()=>{
   setup();change("Szukaj przedmiotu","Łuk długi");
   expect(screen.queryByRole("button",{name:"Wybierz: Łuk długi"})).toBeNull();
-  fireEvent.click(screen.getByText("Opcje listy i pula dostępności",{selector:"summary"}));fireEvent.click(screen.getByLabelText("Pokaż również niedozwolone dla postaci"));
+  fireEvent.click(screen.getByText("Opcje listy",{selector:"summary"}));fireEvent.click(screen.getByLabelText("Pokaż również niedozwolone dla postaci"));
   click("Wybierz: Łuk długi");expect(screen.queryByRole("button",{name:/Kup za/})).toBeNull();
 });
 
@@ -79,7 +79,6 @@ test("resuming a selected purchase keeps the second recipient instead of equippi
 test("Obrotność requires selecting a target before rolling and cannot reset its roll by switching targets",()=>{
   const token=id=>({id,unitId:id,name:id,dice:[6,6],total:12,modifier:0,reason:"",locked:true,used:false});
   const {state}=setup({},100,[],{armyRules:["Obrotność"],availability:[token("a"),token("b")]});
-  fireEvent.click(screen.getByText("Opcje listy i pula dostępności",{selector:"summary"}));
   const scope=within(screen.getByRole("group",{name:"Obrotność: nowy wynik dostępności · 2K6"}));
   expect(scope.getByRole("button",{name:"Rzuć"}).disabled).toBe(true);
   change("Wynik do modyfikacji zasadą kompanii","a");
@@ -97,7 +96,7 @@ test("the step 9 shop lists only common items", () => {
     startingEquipment: [], optionalEquipment: [], equipmentList: {}, campaignModelStatus: [{}] };
   r(<Trade post={{ units: [unit], treasury: 100, inventory: [], journal: [], availability: null }} update={() => {}}
     army={{ name: "" }} commonOnly />);
-  fireEvent.click(sc.getByText("Opcje listy i pula dostępności", { selector: "summary" }));
+  fireEvent.click(sc.getByText("Opcje listy", { selector: "summary" }));
   fireEvent.click(sc.getByLabelText("Pokaż również niedozwolone dla postaci"));
   const rare = catalog.find((i) => i.availability);
   expect(sc.queryByRole("button", { name: `Wybierz: ${rare.name}` })).toBeNull();

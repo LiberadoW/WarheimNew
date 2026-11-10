@@ -199,11 +199,9 @@ function AdvanceCard({ advance, unit, army, post, update }) {
                     const i = Number(choice.slice(5));
                     if (!R.availableStats(u, n).includes(i))
                       throw Error("To rozwinięcie jest niedostępne.");
+                    const taken = R.takenAdvances(u);
                     R.changeStat(u, i, 1);
-                    u.campaignAdvancements = [
-                      ...(u.campaignAdvancements || []),
-                      i,
-                    ];
+                    u.campaignAdvancements = [...taken, i];
                   } else if (choice.startsWith("spell:"))
                     u.learnedSpells = [
                       ...(u.learnedSpells || []),

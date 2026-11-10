@@ -82,7 +82,10 @@ export function recruit(
     if (!token?.locked || token.used || token.total < target)
       throw Error("Brak odpowiedniego wyniku dostępności.");
   }
-  if (token) token.used = true;
+  if (token) {
+    token.used = true;
+    token.usedFor = name;
+  }
   post.treasury -= cost;
   u.campaignNewRecruit = true;
   if (mercenary) {

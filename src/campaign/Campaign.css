@@ -516,3 +516,69 @@
 @media (max-width: 700px) {
   .campaign-recruitment-sections { grid-template-columns: 1fr; }
 }
+
+/* Pula dostępności: one chip per hero's result */
+.campaign-availability {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.campaign-availability-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.campaign-availability-tokens > li {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  gap: 0 8px;
+  min-width: 120px;
+  padding: 6px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.campaign-availability-tokens strong {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  text-align: right;
+}
+
+.campaign-availability-tokens small {
+  grid-column: 1 / -1;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.campaign-availability-tokens > li.is-ready {
+  border-color: var(--accent);
+}
+
+.campaign-availability-tokens > li.is-used {
+  opacity: 0.6;
+}
+
+.campaign-availability-tokens > li.is-used strong {
+  text-decoration: line-through;
+}
+
+.campaign-availability-tokens > li.is-helping strong {
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.campaign-availability-name {
+  font-weight: 600;
+}
+
+.campaign-availability > .button {
+  align-self: flex-start;
+}

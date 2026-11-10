@@ -28,132 +28,193 @@ import {
   log,
   uid,
   sum,
-  hasRule,
-  eligibleHeroes,
   availabilityValue,
+  createAvailabilityPool,
+  setAvailabilityDice,
+  setAvailabilityHelper,
+  bribeAvailability,
+  refreshAvailability,
+  usableAvailability,
+  roll,
 } from "./rules";
 
+// Pula Kości Dostępności (s. 426): one result per hero, used for rare
+// equipment and recruits; common items never need it.
 export function AvailabilityPool({ post, update, compact = false }) {
-  const heroes = eligibleHeroes(post.units).filter(
-    (u) => !hasRule(u, "Anoreksja") && !hasRule(u, "Żarłoczność"),
-  );
+  const pool = post.availability;
   const [reroll, setReroll] = useRollDraft(post, update, "availability-reroll"),
     [selected, setSelected] = useState("");
+  const [bribeCost, setBribeCost] = useRollDraft(post, update, "availability-bribe");
+  const [bribeTarget, setBribeTarget] = useState("");
+
+  // The pool exists as soon as trading starts; nothing to create by hand.
+  useEffect(() => {
+    if (pool === null || pool === undefined) update((p) => createAvailabilityPool(p));
+  }, [pool]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!pool) return null;
+  const open = pool.filter((t) => !t.used && !t.helping);
+  const unrolled = open.filter((t) => !t.locked);
+  const nameOf = (id) => pool.find((t) => t.id === id)?.name || "";
+
+  const rollAll = () =>
+    update((p) =>
+      p.availability
+        .filter((t) => !t.used && !t.helping && !t.locked)
+        .forEach((t) => setAvailabilityDice(p, t.id, roll(t.bribe ? 3 : 2), "app")),
+    );
+
   return (
-    <section>
-      {!compact && <><h3>Pula wyników dostępności</h3>
-      <p>
-        Każdy uprawniony bohater daje jeden wynik 2K6. Wynik zużywasz na jeden
-        rzadki przedmiot lub rekruta. Wyniki niewykorzystane przepadają.
-      </p></>}
-      {post.availability === null ? (
-        <button
-          className="button"
-          onClick={() =>
-            update((p) => {
-              p.availability = heroes.map((u) => ({
-                id: uid(),
-                unitId: u.uniqueId,
-                name: u.unitDisplayName || u.unitName,
-                dice: [],
-                total: 0,
-                modifier: hasRule(u, "Ulicznik") ? 3 : 0,
-                reason: hasRule(u, "Ulicznik") ? "Ulicznik" : "",
-                used: false,
-              }));
-              log(p, "availability", "Utworzono pulę dostępności.");
-            })
-          }
-        >
-          Utwórz pulę ({heroes.length} bohaterów)
-        </button>
+    <section className={`campaign-availability${compact ? " is-compact" : ""}`}>
+      {!compact && (
+        <>
+          <h3>Pula dostępności</h3>
+          <p className="campaign-muted">
+            Po jednym wyniku 2K6 za każdego bohatera, który nie rzucał na tabelę poważnych ran.
+            Wynik zużywasz na jeden rzadki przedmiot albo rekruta; powszechne przedmioty i rekruci
+            go nie potrzebują. Niewykorzystane wyniki przepadają po sekwencji.
+          </p>
+        </>
+      )}
+      {pool.length === 0 ? (
+        <p className="campaign-muted">Żaden bohater nie może w tej sekwencji szukać rzadkich towarów.</p>
       ) : (
-        <div className="campaign-grid">
-          {post.availability.map((token) => (
-            <div className="campaign-card" key={token.id}>
-              <strong>{token.name}</strong>
-              <DiceInput
-                label={`Dostępność: ${token.name}`}
-                count={2}
-                value={token.dice}
-                disabled={token.used || token.locked}
-                onChange={(dice, source) =>
-                  update((p) => {
-                    const t = p.availability.find((x) => x.id === token.id);
-                    t.dice = dice;
-                    t.source = source;
-                    t.total = validDice(dice, 2)
-                      ? sum(dice) + (Number(t.modifier) || 0)
-                      : 0;
-                  })
-                }
-              />
-              <details>
-                <summary>Modyfikatory wyniku</summary>
-              <label>
-                Modyfikator
-                <NumberInput
-                  type="number"
-                  value={token.modifier}
-                  disabled={token.used || token.locked}
-                  onChange={(e) =>
-                    update((p) => {
-                      const t = p.availability.find((x) => x.id === token.id);
-                      t.modifier = Number(e.target.value);
-                      t.total = validDice(t.dice, 2)
-                        ? sum(t.dice) + t.modifier
-                        : 0;
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Zasada / przedmiot uzasadniający modyfikator
-                <input
-                  value={token.reason}
-                  disabled={token.used || token.locked}
-                  onChange={(e) =>
-                    update((p) => {
-                      p.availability.find((x) => x.id === token.id).reason =
-                        e.target.value;
-                    })
-                  }
-                />
-              </label>
-              </details>
-              <p>
-                Wynik: <strong>{token.total}</strong> ·{" "}
-                {token.used
-                  ? "wykorzystany"
-                  : token.locked
-                    ? "zatwierdzony"
-                    : "niezatwierdzony"}
-              </p>
-              {!token.locked && (
-                <button
-                  className="button"
-                  disabled={
-                    !validDice(token.dice, 2) ||
-                    (token.modifier !== 0 && !token.reason.trim())
-                  }
-                  onClick={() =>
-                    update((p) => {
-                      p.availability.find((x) => x.id === token.id).locked =
-                        true;
-                      log(
-                        p,
-                        "roll",
-                        `Dostępność ${token.name}: ${token.dice.join("+")} ${token.modifier >= 0 ? "+" : ""}${token.modifier} = ${token.total}. ${token.reason}`,
-                      );
-                    })
-                  }
-                >
-                  Zatwierdź wynik
-                </button>
-              )}
+        <>
+          <ul className="campaign-availability-tokens" aria-label="Wyniki puli dostępności">
+            {pool.map((t) => (
+              <li
+                key={t.id}
+                className={t.used ? "is-used" : t.helping ? "is-helping" : t.locked ? "is-ready" : ""}
+              >
+                <span className="campaign-availability-name">{t.name}</span>
+                <strong>
+                  {t.helping ? "pomaga" : t.locked ? t.total : "—"}
+                </strong>
+                <small>
+                  {t.used
+                    ? `→ ${t.usedFor || "wykorzystany"}`
+                    : t.helping
+                      ? `Społem: ${nameOf(t.helping)}`
+                      : [
+                          t.bribe && "3K6",
+                          t.helpers && `+${t.helpers} społem`,
+                          t.modifier && `${t.modifier > 0 ? "+" : ""}${t.modifier} ${t.reason}`,
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")}
+                </small>
+              </li>
+            ))}
+          </ul>
+          {unrolled.length > 0 && (
+            <button type="button" className="button" onClick={rollAll}>
+              <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć wszystkie ({unrolled.length})
+            </button>
+          )}
+          <details open={!compact && unrolled.length > 0}>
+            <summary>Rzuty, Społem i modyfikatory</summary>
+            <div className="campaign-grid">
+              {pool.map((token) => (
+                <div className="campaign-card" key={token.id}>
+                  <strong>{token.name}</strong>
+                  {!token.helping && (
+                    <DiceInput
+                      label={`Dostępność: ${token.name}`}
+                      count={token.bribe ? 3 : 2}
+                      value={token.dice}
+                      disabled={token.used}
+                      onChange={(dice, source) =>
+                        update((p) => setAvailabilityDice(p, token.id, dice, source))
+                      }
+                    />
+                  )}
+                  {!token.used && !token.locked && !token.bribe && (
+                    <label>
+                      Społem: pomaga bohaterowi
+                      <select
+                        value={token.helping || ""}
+                        onChange={(e) =>
+                          update((p) => setAvailabilityHelper(p, token.id, e.target.value || null))
+                        }
+                      >
+                        <option value="">Nie pomaga (rzuca sam)</option>
+                        {pool
+                          .filter((t) => t.id !== token.id && !t.helping && !t.used)
+                          .map((t) => (
+                            <option key={t.id} value={t.id}>
+                              {t.name}
+                            </option>
+                          ))}
+                      </select>
+                    </label>
+                  )}
+                  {!token.helping && (
+                    <>
+                      <label>
+                        Modyfikator
+                        <NumberInput
+                          type="number"
+                          value={token.modifier}
+                          disabled={token.used}
+                          onChange={(e) =>
+                            update((p) => {
+                              const t = p.availability.find((x) => x.id === token.id);
+                              t.modifier = Number(e.target.value) || 0;
+                              refreshAvailability(p.availability);
+                            })
+                          }
+                        />
+                      </label>
+                      <label>
+                        Zasada / przedmiot uzasadniający modyfikator
+                        <input
+                          value={token.reason}
+                          disabled={token.used}
+                          onChange={(e) =>
+                            update((p) => {
+                              p.availability.find((x) => x.id === token.id).reason = e.target.value;
+                            })
+                          }
+                        />
+                      </label>
+                    </>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            {!pool.some((t) => t.bribe) && open.some((t) => !t.locked) && (
+              <div className="campaign-card">
+                <strong>Bogaty może więcej…</strong>
+                <p className="campaign-muted">
+                  Łapówka 2K6 zk: wybrany bohater rzuca 3K6 i odrzuca najniższą kość. Złoto przepada
+                  niezależnie od wyniku. Raz w sekwencji.
+                </p>
+                <label>
+                  Bohater
+                  <select value={bribeTarget} onChange={(e) => setBribeTarget(e.target.value)}>
+                    <option value="">Wybierz</option>
+                    {open
+                      .filter((t) => !t.locked)
+                      .map((t) => (
+                        <option key={t.id} value={t.id}>
+                          {t.name}
+                        </option>
+                      ))}
+                  </select>
+                </label>
+                <DiceInput label="Wysokość łapówki" count={2} value={bribeCost} onChange={setBribeCost} />
+                <button
+                  type="button"
+                  className="button button-secondary"
+                  disabled={!bribeTarget || !validDice(bribeCost, 2)}
+                  onClick={() => update((p) => bribeAvailability(p, bribeTarget, bribeCost))}
+                >
+                  Zapłać łapówkę{validDice(bribeCost, 2) ? ` (${sum(bribeCost)} zk)` : ""}
+                </button>
+              </div>
+            )}
+          </details>
+        </>
       )}
       {post.availability && ["Kontakty handlowe", "Alchemicy", "Truciciele", "Obrotność"].some((name) => companyLevel(post, name) > 0) && (
         <>
@@ -199,7 +260,7 @@ export function AvailabilityPool({ post, update, compact = false }) {
                       if (field) t[field] = bonus;
                       else {
                         t.modifier += bonus;
-                        t.total += bonus;
+                        refreshAvailability(p.availability);
                       }
                       p.availabilityBonuses = {
                         ...(p.availabilityBonuses || {}),
@@ -238,8 +299,8 @@ export function AvailabilityPool({ post, update, compact = false }) {
                       if (!t?.locked || t.used)
                         throw Error("Ten wynik jest niedostępny.");
                       t.originalDice = t.dice;
-                      t.dice = reroll;
-                      t.total = sum(reroll) + t.modifier;
+                      t.dice = t.bribe ? [...reroll, Math.min(...t.dice)] : reroll;
+                      refreshAvailability(p.availability);
                       p.availabilityRerolled = true;
                       log(
                         p,
@@ -284,8 +345,9 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
   const base = (count === 0 || validDice(dice, count)) ? basePriceOf(item, dice, priceUnit) : null;
   const taxes = taxDice(post, base);
   const priceAllowed = /^(\d+\+)?(\d*K[236](X\d+)?|\d+)$/i.test(item.price);
-  const tokens = (post.availability || []).filter(t => t.locked && !t.used && availabilityValue(t, item) >= item.availability);
-  const tokenId = saved?.tokenId || token || (tokens.length === 1 ? tokens[0].id : "");
+  // The smallest result that is enough, unless the player picks another.
+  const tokens = usableAvailability(post, item.availability, (t) => availabilityValue(t, item));
+  const tokenId = saved?.tokenId || (tokens.some((t) => t.id === token) ? token : tokens[0]?.id || "");
   const priceReady = priceAllowed && (count === 0 || validDice(dice, count)) && (discounts === 0 || validDice(discountRoll, discounts)) && (taxes === 0 || Array.from({ length: quantity }, (_, i) => validDice(taxRolls[i], taxes)).every(Boolean));
   const legacyGroupTax = !!saved && !saved.unitPrices && quantity > 1 && taxes > 0;
   const unitPrices = saved && !legacyGroupTax
@@ -312,17 +374,17 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
           {item.availability > 0 && (
             <section className="campaign-purchase-step">
               <h4>Dostępność {item.availability}+</h4>
-              {tokens.length === 0 && <p className="campaign-muted">Potrzebujesz niewykorzystanego wyniku co najmniej {item.availability}. Rzut wykonujesz raz na bohatera po potyczce.</p>}
-              <details open={tokens.length === 0}>
-                <summary>Rzuty i wyniki dostępności</summary>
-                <AvailabilityPool post={post} update={update} compact />
-              </details>
-              <label>Wynik dostępności
-                <select value={tokenId} disabled={!!saved} onChange={e=>setToken(e.target.value)}>
-                  <option value="">Wybierz zatwierdzony wynik</option>
-                  {tokens.map(t=><option key={t.id} value={t.id}>{t.name}: {availabilityValue(t,item)}</option>)}
-                </select>
-              </label>
+              <p className="campaign-muted">Rzadki przedmiot: potrzebny niewykorzystany wynik puli co najmniej {item.availability}.</p>
+              <AvailabilityPool post={post} update={update} compact />
+              {tokens.length > 0 ? (
+                <label>Zużyje wynik
+                  <select value={tokenId} disabled={!!saved} onChange={e=>setToken(e.target.value)}>
+                    {tokens.map(t=><option key={t.id} value={t.id}>{t.name}: {availabilityValue(t,item)}</option>)}
+                  </select>
+                </label>
+              ) : (
+                <p className="campaign-error">Żaden niewykorzystany wynik nie wystarcza ({item.availability}+).</p>
+              )}
             </section>
           )}
           <section className="campaign-purchase-step">
@@ -418,9 +480,9 @@ export default function Trade({ post, update, army, commonOnly = false }) {
                 <option value="">Wszystkie kategorie</option>{categories.map(c=><option key={c}>{c}</option>)}
               </select></label>
             </div>
-            <details className="campaign-shop-options"><summary>Opcje listy i pula dostępności</summary>
+            {!commonOnly && <AvailabilityPool post={post} update={update} />}
+            <details className="campaign-shop-options"><summary>Opcje listy</summary>
               <label className="campaign-check"><input type="checkbox" checked={all} onChange={e=>setAll(e.target.checked)} />Pokaż również niedozwolone dla postaci</label>
-              {!commonOnly && <AvailabilityPool post={post} update={update} />}
             </details>
             <p className="campaign-source">{shown.length} przedmiotów · wybierz przedmiot, aby zobaczyć zasady i kupić</p>
             <div className="campaign-shop-list">

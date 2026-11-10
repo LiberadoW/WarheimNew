@@ -4,6 +4,7 @@ import { companyLevel } from "./company";
 import * as R from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { recruit, recruitAvailability, recruitmentProblem } from "./recruiting";
+import { AvailabilityPool } from "./Trade";
 function RecruitmentForm({ post, update, army, mercenary }) {
   const [companyFree, setCompanyFree] = useState(false);
   const [name, setName] = useState(""),
@@ -22,6 +23,9 @@ function RecruitmentForm({ post, update, army, mercenary }) {
       companyFree && mercenary ? 0 : recruitAvailability(army, name, mercenary),
     availability = imported ?? manual;
   const problem = name ? recruitmentProblem(post, army, name, mercenary) : null;
+  // Rare recruits use the smallest pool result that is enough.
+  const tokens = availability > 0 ? R.usableAvailability(post, availability) : [];
+  const tokenId = tokens.some((t) => t.id === token) ? token : tokens[0]?.id || "";
   return (
     <>
       <p>
@@ -99,29 +103,29 @@ function RecruitmentForm({ post, update, army, mercenary }) {
               </label>
             </>
           )}
-          {availability > 0 && (
-            <label>
-              Wynik puli dostępności
-              <select value={token} onChange={(e) => setToken(e.target.value)}>
-                <option value="">Wybierz</option>
-                {(post.availability || [])
-                  .filter((t) => t.locked && !t.used && t.total >= availability)
-                  .map((t) => (
+          {availability > 0 &&
+            (tokens.length > 0 ? (
+              <label>
+                Zużyje wynik puli dostępności
+                <select value={tokenId} onChange={(e) => setToken(e.target.value)}>
+                  {tokens.map((t) => (
                     <option key={t.id} value={t.id}>
                       {t.name}: {t.total}
                     </option>
                   ))}
-              </select>
-            </label>
-          )}
+                </select>
+              </label>
+            ) : (
+              <p className="campaign-error">
+                Rzadki rekrut ({availability}+): żaden niewykorzystany wynik puli nie wystarcza.
+              </p>
+            ))}
           <button
             className="button"
             disabled={
               !!problem ||
               (!companyFree && post.treasury < definition.cost) ||
-              (availability > 0 && !(post.availability || []).some(
-                (t) => t.id === token && t.locked && !t.used && t.total >= availability,
-              )) ||
+              (availability > 0 && !tokenId) ||
               (imported === null && !reason.trim())
             }
             onClick={() =>
@@ -130,7 +134,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
                   mercenary,
                   companyFree: mercenary && companyFree,
                   availability,
-                  tokenId: token,
+                  tokenId,
                   sourceReason: reason,
                 }),
               )
@@ -147,6 +151,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
 export default function Recruitment(props) {
   return (
     <div className="campaign-recruitment-sections">
+      <AvailabilityPool post={props.post} update={props.update} compact />
       <section className="campaign-card" aria-label="Rekrutacja modeli bandy">
         <h3>Modele bandy</h3>
         <RecruitmentForm {...props} mercenary={false} />

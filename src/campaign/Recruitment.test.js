@@ -48,7 +48,7 @@ test("the mercenary form hires a mercenary, charges its own cost and preserves t
  change(band,"Model bandy","Mecenas");change(merc,"Najemne Ostrze",name);
  const availability=recruitAvailability(army,name,true);
  if(availability===null){change(merc,"Dostępność z opisu rekruta (0 = powszechna)","0");change(merc,"Źródło / zasada dostępności","Profil testowy: powszechny");}
- if(availability>0)change(merc,"Wynik puli dostępności","recruit-token");
+ if(availability>0)change(merc,"Zużyje wynik puli dostępności","recruit-token");
  fireEvent.click(merc.getByRole("button",{name:"Zatrudnij Najemne Ostrze"}));
  expect(state.post.units[0].unitName).toBe(name);expect(state.post.units[0].type).toBe("Najemne Ostrze");
  expect(state.post.treasury).toBe(1000-mercenariesList[name].cost);
@@ -60,7 +60,7 @@ test("consuming an availability result in one form disables it in the other",()=
  const bandName=Object.keys(army.heroes).find(n=>recruitAvailability(army,n)>0 && recruitAvailability(army,n)<=12);
  const mercName=army.mercenaries.find(n=>mercenariesList[n] && recruitAvailability(army,n,true)>0 && recruitAvailability(army,n,true)<=12);
  change(band,"Model bandy",bandName);change(merc,"Najemne Ostrze",mercName);
- change(band,"Wynik puli dostępności","recruit-token");change(merc,"Wynik puli dostępności","recruit-token");
+ change(band,"Zużyje wynik puli dostępności","recruit-token");change(merc,"Zużyje wynik puli dostępności","recruit-token");
  expect(band.getByRole("button",{name:"Zrekrutuj model bandy"}).disabled).toBe(false);
  fireEvent.click(merc.getByRole("button",{name:"Zatrudnij Najemne Ostrze"}));
  expect(state.post.availability[0].used).toBe(true);

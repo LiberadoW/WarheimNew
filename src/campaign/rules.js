@@ -320,6 +320,20 @@ export const priceDiceCount = (expression) => {
   const m = expression.match(/(\d*)K\d/i);
   return m ? Number(m[1] || 1) : 0;
 };
+// Rozwój stronników (s. 414): grupa nie może dwa razy otrzymać tego samego
+// rozwinięcia charakterystyki. Sekwencja po potyczce i ręczna edycja zapisują
+// rozwinięcia w campaignAdvancements; rozpiski sprzed tego zapisu traktują jako
+// rozwinięte współczynniki wyższe od początkowych.
+export const takenAdvances = (unit) =>
+  Array.isArray(unit.campaignAdvancements)
+    ? unit.campaignAdvancements
+    : (unit.stats?.Początkowa || []).flatMap((base, i) =>
+        typeof base === "number" &&
+        typeof currentStats(unit)[i] === "number" &&
+        currentStats(unit)[i] > base
+          ? [i]
+          : [],
+      );
 export const allAdvancementStatsMaxed = (unit) =>
   (heroDevelopment(unit) ? [1, 2, 3, 4, 5, 6, 7, 8] : [1, 2, 3, 6, 7, 8]).every(
     (i) =>
@@ -331,7 +345,7 @@ export const availableStats = (unit, result) => {
   if (allAdvancementStatsMaxed(unit))
     return typeof unit.stats.Maksymalna?.[0] === "number" &&
       currentStats(unit)[0] < unit.stats.Maksymalna[0] &&
-      (isHero(unit) || !(unit.campaignAdvancements || []).includes(0))
+      (isHero(unit) || !takenAdvances(unit).includes(0))
       ? [0]
       : [];
   const options = heroDevelopment(unit)
@@ -356,7 +370,7 @@ export const availableStats = (unit, result) => {
       typeof currentStats(unit)[i] === "number" &&
       (typeof unit.stats.Maksymalna?.[i] !== "number" ||
         currentStats(unit)[i] < unit.stats.Maksymalna[i]) &&
-      (isHero(unit) || !(unit.campaignAdvancements || []).includes(i)),
+      (isHero(unit) || !takenAdvances(unit).includes(i)),
   );
 };
 // Short name of a development roll, shown before the player picks a result.
@@ -1461,6 +1475,122 @@ export const equipItem = (unit, item, quote) => {
   unit.totalCost = unit.cost * modelCount(unit);
 };
 
+// --- Pula Kości Dostępności (rozdział 14, s. 426) --------------------------
+// Jedna 2K6 za każdego bohatera kompanii, który w tej sekwencji nie rzucał na
+// TABELĘ POWAŻNYCH RAN, także nieobecnego w potyczce. Postacie Dramatu nie
+// dają kości; Anoreksja i Żarłoczność wykluczają z handlu.
+export const availabilityHeroes = (post) =>
+  post.units.filter(
+    (u) =>
+      u.type === "Bohater" &&
+      !u.campaignModelStatus?.[0]?.dead &&
+      !u.campaignModelStatus?.[0]?.captured &&
+      !post.injuries?.[`${u.uniqueId}:0`] &&
+      !(u.battleOutOfActionModels?.[0] && !u.battleAbsentModels?.[0]) &&
+      !hasRule(u, "Anoreksja") &&
+      !hasRule(u, "Żarłoczność"),
+  );
+
+// BOGATY MOŻE WIĘCEJ: the bribed result is 3K6 without the lowest die.
+export const keptAvailabilityDice = (token) =>
+  token.bribe ? [...token.dice].sort((a, b) => b - a).slice(0, 2) : token.dice;
+
+// A result is usable once its dice are in; SPOŁEM helpers have no result and
+// give +1 each to the hero they help.
+export const refreshAvailability = (pool) =>
+  pool.forEach((token) => {
+    token.helpers = pool.filter((h) => h.helping === token.id).length;
+    token.locked = !token.helping && validDice(token.dice, token.bribe ? 3 : 2);
+    token.total = token.locked
+      ? sum(keptAvailabilityDice(token)) + (Number(token.modifier) || 0) + token.helpers
+      : 0;
+  });
+
+export const createAvailabilityPool = (post) => {
+  post.availability = availabilityHeroes(post).map((u) => ({
+    id: uid(),
+    unitId: u.uniqueId,
+    name: label(u),
+    dice: [],
+    total: 0,
+    modifier: hasRule(u, "Ulicznik") ? 3 : 0,
+    reason: hasRule(u, "Ulicznik") ? "Ulicznik" : "",
+    used: false,
+    locked: false,
+  }));
+  log(post, "availability", `Pula dostępności: ${post.availability.length} bohaterów.`);
+};
+
+const openToken = (post, id) => {
+  const token = post.availability?.find((t) => t.id === id);
+  if (!token) throw Error("Nie ma takiego wyniku w puli.");
+  if (token.used) throw Error("Ten wynik został już wykorzystany.");
+  return token;
+};
+
+export const setAvailabilityDice = (post, id, dice, source) => {
+  const token = openToken(post, id);
+  if (token.helping) throw Error("Bohater działający SPOŁEM nie rzuca kośćmi dostępności.");
+  token.dice = dice;
+  token.source = source;
+  refreshAvailability(post.availability);
+  if (token.locked)
+    log(
+      post,
+      "roll",
+      `Dostępność ${token.name}: ${token.dice.join("+")}${token.bribe ? " (3K6, odrzucona najniższa)" : ""}${token.modifier ? ` ${token.modifier > 0 ? "+" : ""}${token.modifier}` : ""}${token.helpers ? ` +${token.helpers} społem` : ""} = ${token.total}.`,
+    );
+};
+
+// SPOŁEM: the helper's result is given up for +1 on the seeker's.
+export const setAvailabilityHelper = (post, helperId, seekerId) => {
+  const helper = openToken(post, helperId);
+  if (seekerId) {
+    const seeker = openToken(post, seekerId);
+    if (seeker.id === helper.id || seeker.helping)
+      throw Error("Wybierz innego bohatera, który poszukuje towaru.");
+    if (validDice(helper.dice, helper.bribe ? 3 : 2))
+      throw Error("Bohater już rzucił; pomóc może tylko przed rzutem.");
+    if (helper.bribe) throw Error("Ten wynik ma już opłaconą łapówkę.");
+    if (post.availability.some((t) => t.helping === helper.id))
+      throw Error("Temu bohaterowi już ktoś pomaga.");
+  }
+  helper.helping = seekerId || null;
+  helper.dice = [];
+  refreshAvailability(post.availability);
+  log(
+    post,
+    "availability",
+    seekerId
+      ? `Społem: ${helper.name} pomaga ${post.availability.find((t) => t.id === seekerId).name} (+1).`
+      : `Społem: ${helper.name} nie pomaga już w handlu.`,
+  );
+};
+
+// BOGATY MOŻE WIĘCEJ: one result per sequence; the 2K6 zk bribe is paid
+// whatever the roll.
+export const bribeAvailability = (post, id, costDice) => {
+  if (post.availability?.some((t) => t.bribe)) throw Error("Łapówkę można dać raz w sekwencji.");
+  const token = openToken(post, id);
+  if (token.helping || validDice(token.dice, 2))
+    throw Error("Łapówkę daje się przed rzutem bohatera, który szuka towaru.");
+  if (!validDice(costDice, 2)) throw Error("Rzuć 2K6 na wysokość łapówki.");
+  const cost = sum(costDice);
+  if (post.treasury < cost) throw Error(`Łapówka kosztuje ${cost} zk, a w skarbcu jest ${post.treasury} zk.`);
+  post.treasury -= cost;
+  token.bribe = { cost, dice: costDice };
+  token.dice = [];
+  refreshAvailability(post.availability);
+  log(post, "availability", `Bogaty może więcej: łapówka ${cost} zk, ${token.name} rzuca 3K6.`);
+};
+
+// Results that reach `needed`, the lowest first, so a purchase uses the
+// smallest result that is enough.
+export const usableAvailability = (post, needed, value = (t) => t.total) =>
+  (post.availability || [])
+    .filter((t) => t.locked && !t.used && value(t) >= needed)
+    .sort((a, b) => value(a) - value(b));
+
 export const availabilityValue = (token, item) =>
   token.total +
   (/\(trucizna\)/i.test(item.name)
@@ -1536,6 +1666,7 @@ export const buyItem = (
     )
       throw Error("Brak niewykorzystanego wyniku dostępności.");
     token.used = true;
+    token.usedFor = item.name;
   }
   post.treasury -= total;
   quote.used = true;

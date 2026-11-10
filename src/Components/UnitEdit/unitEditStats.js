@@ -1,5 +1,6 @@
 import React from "react";
 import "./unitEditStats.css";
+import { isHero, takenAdvances } from "../../campaign/rules";
 
 const stats = ["Sz", "WW", "US", "S", "Wt", "Żw", "I", "A", "CP"];
 const MIN_STAT_VALUE = 1;
@@ -87,6 +88,8 @@ const UnitEditStats = ({ unitList, unit, setUnitList }) => {
       return;
     }
 
+    // A henchman group's manual advance counts towards "no repeated advance".
+    const taken = isHero(unit) ? null : takenAdvances(unit);
     statsModifiers[index] = nextModifier;
 
     const nextCurrentStats = getCurrentStats(baseStats, statsModifiers, maxStats);
@@ -95,6 +98,13 @@ const UnitEditStats = ({ unitList, unit, setUnitList }) => {
       unit.stats.Aktualna = [...nextCurrentStats];
     } else if (Object.prototype.hasOwnProperty.call(unit.stats, "Aktualna")) {
       delete unit.stats.Aktualna;
+    }
+
+    if (taken) {
+      const raised = nextCurrentStats[index] > baseStats[index];
+      unit.campaignAdvancements = raised
+        ? [...new Set([...taken, index])]
+        : taken.filter((i) => i !== index);
     }
 
     setUnitList([...unitList]);
