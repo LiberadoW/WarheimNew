@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RulesModal from "../Components/RulesModal";
 import { getRuleText } from "../Functions/getRuleText";
-import { groupRoster, STAT_LABELS } from "./roster";
+import { groupRoster, plural, STAT_LABELS } from "./roster";
 
 // A read-only company: one row per unit with its stats, short equipment and
 // rules. Tapping a rule shows its text.
@@ -20,7 +20,7 @@ const RosterView = ({ armyList, title }) => {
           <h4 className="roster-group-title">{group.title}</h4>
           {group.units.map((unit) => (
             <article key={unit.id} className="roster-unit">
-              <header className="roster-unit-header">
+              <div className="roster-unit-header">
                 <span className="roster-unit-name">
                   {unit.name}
                   {unit.name !== unit.profile && (
@@ -28,10 +28,10 @@ const RosterView = ({ armyList, title }) => {
                   )}
                 </span>
                 <span className="roster-unit-meta">
-                  {unit.models > 1 && `${unit.models} modele · `}
+                  {unit.models > 1 && `${plural(unit.models, "model", "modele", "modeli")} · `}
                   {unit.exp} PD · {unit.cost} zk
                 </span>
-              </header>
+              </div>
               <div className="roster-stats-scroll">
                 <table className="roster-stats">
                   <thead>

@@ -630,3 +630,279 @@
     padding-top: 0;
   }
 }
+
+/* Game screen */
+.game-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.game-stepper {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-stepper-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.game-stepper button {
+  width: 36px;
+  height: 36px;
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--text);
+  background-color: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.game-stepper button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.game-stepper-value {
+  min-width: 24px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+}
+
+.game-takedown,
+.game-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.game-takedown .hub-field {
+  flex: 1 1 220px;
+}
+
+.game-note input {
+  flex: 1 1 260px;
+}
+
+.game-event {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.game-event h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.game-event p {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.game-companies {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.game-switch {
+  display: none;
+}
+
+.game-company {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.game-unit .roster-stats {
+  min-width: 260px;
+}
+
+.game-models {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.game-model {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 4px 0;
+}
+
+.game-model.is-out .game-model-name {
+  color: var(--accent);
+  text-decoration: line-through;
+}
+
+.game-model.is-absent .game-model-name,
+.game-model.is-unavailable .game-model-name {
+  color: var(--text-muted);
+}
+
+.game-model-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.game-model-states {
+  display: inline-flex;
+  padding: 2px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.game-model-states button {
+  min-height: 32px;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.game-model-states button.is-active {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.game-model.is-in .game-model-states button.is-active {
+  color: var(--text);
+  background-color: var(--surface-3);
+}
+
+.game-model-states button:disabled {
+  cursor: default;
+}
+
+.game-counters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.game-log {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.game-log > li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 0.9rem;
+}
+
+.game-log > li + li {
+  border-top: 1px solid var(--border);
+}
+
+.game-log-round {
+  flex-shrink: 0;
+  min-width: 28px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.game-log-remove {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.game-log-remove:hover {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.game-pd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.game-pd h4 {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.game-pd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.game-pd-table th,
+.game-pd-table td {
+  padding: 4px 6px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+}
+
+.game-pd-table th[scope="row"],
+.game-pd-table thead th:first-child {
+  text-align: left;
+}
+
+.game-pd-table thead th {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Narrow screens: one company at a time, switched with the tabs. */
+@media screen and (max-width: 900px) {
+  .game-switch {
+    display: flex;
+  }
+
+  .game-companies {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .game-side {
+    display: none;
+  }
+
+  .game-side.is-shown {
+    display: flex;
+  }
+}

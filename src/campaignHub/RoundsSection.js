@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ScenarioPicker, { ScenarioDetails } from "./ScenarioPicker";
 import OptionalRulesPicker, { OptionalRuleChips } from "./OptionalRulesPicker";
 import { AREAS } from "./scenarios";
@@ -12,7 +13,7 @@ import {
   updateGame,
 } from "./campaignService";
 
-const STATUS = { planned: "Do rozegrania", done: "Rozegrana", bye: "Pauza" };
+const STATUS = { planned: "Do rozegrania", playing: "W trakcie", done: "Rozegrana", bye: "Pauza" };
 
 const ResultForm = ({ game, names, onSave, onCancel }) => {
   const [winner, setWinner] = useState("");
@@ -157,9 +158,13 @@ const GameCard = ({ campaign, game, names, user, isOrganizer, act }) => {
         />
       )}
 
-      {canEdit && !editing && (
+      {!editing && (
         <div className="hub-actions">
-          {game.status === "planned" ? (
+          <Link to={`/campaigns/${campaign.id}/games/${game.id}`} className="button button-secondary button-small">
+            <i className="fa-solid fa-chess-board" aria-hidden="true"></i>{" "}
+            {game.status === "done" ? "Przebieg gry" : "Ekran gry"}
+          </Link>
+          {!canEdit ? null : game.status !== "done" ? (
             <button type="button" className="button button-small" onClick={() => setEditing("result")}>
               Wpisz wynik
             </button>

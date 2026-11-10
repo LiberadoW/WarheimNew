@@ -14,6 +14,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  increment,
   onSnapshot,
   query,
   serverTimestamp,
@@ -201,6 +202,59 @@ export const reopenGame = (campaignId, gameId) =>
 
 export const deleteGame = (campaignId, gameId) =>
   deleteDoc(doc(db, "campaigns", campaignId, "games", gameId));
+
+// --- Game screen: live state under game.play, one field per change --------
+export const watchGame = (campaignId, gameId, onChange, onError) =>
+  onSnapshot(
+    doc(db, "campaigns", campaignId, "games", gameId),
+    (d) => onChange(d.exists() ? { id: d.id, campaignId, ...d.data() } : null),
+    onError,
+  );
+
+const unitPath = (owner, unitId) => `play.units.${owner}.${unitId}`;
+
+export const setPlayRound = (campaignId, gameId, round) =>
+  updateGame(campaignId, gameId, { "play.round": Math.max(1, round), status: "playing" });
+
+// state: "in" | "out" | "absent" for one model, in a single write.
+export const setModelState = (campaignId, gameId, owner, unitId, index, state) =>
+  updateGame(campaignId, gameId, {
+    [`${unitPath(owner, unitId)}.out.${index}`]: state === "out" ? true : deleteField(),
+    [`${unitPath(owner, unitId)}.absent.${index}`]: state === "absent" ? true : deleteField(),
+  });
+
+export const changeCounter = (campaignId, gameId, owner, unitId, field, delta) =>
+  updateGame(campaignId, gameId, { [`${unitPath(owner, unitId)}.${field}`]: increment(delta) });
+
+const logId = () =>
+  window.crypto?.randomUUID?.() || `log-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+// A model taken out of action, optionally by another model (which gets the
+// kill). Both changes and the log line are written together.
+export const recordTakedown = (campaignId, gameId, { victim, killer, round, text }) => {
+  const entry = { id: logId(), type: "takedown", round, victim, killer: killer || null, text };
+  const changes = {
+    [`${unitPath(victim.owner, victim.unitId)}.out.${victim.index}`]: true,
+    "play.log": arrayUnion(entry),
+  };
+  if (killer?.counts)
+    changes[`${unitPath(killer.owner, killer.unitId)}.kills`] = increment(1);
+  return updateGame(campaignId, gameId, changes);
+};
+
+export const addLogEntry = (campaignId, gameId, entry) =>
+  updateGame(campaignId, gameId, { "play.log": arrayUnion({ id: logId(), ...entry }) });
+
+// Removing a takedown also gives the model back and takes the kill away.
+export const removeLogEntry = (campaignId, gameId, entry) => {
+  const changes = { "play.log": arrayRemove(entry) };
+  if (entry.type === "takedown") {
+    changes[`${unitPath(entry.victim.owner, entry.victim.unitId)}.out.${entry.victim.index}`] = deleteField();
+    if (entry.killer?.counts)
+      changes[`${unitPath(entry.killer.owner, entry.killer.unitId)}.kills`] = increment(-1);
+  }
+  return updateGame(campaignId, gameId, changes);
+};
 
 export const updateCampaignSettings = (campaignId, settings) =>
   updateDoc(campaignRef(campaignId), { settings });

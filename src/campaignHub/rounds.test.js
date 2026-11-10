@@ -1,5 +1,6 @@
 import React from "react";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render as rtlRender, screen, within } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import {
   OPTIONAL_RULE_PD,
   findScenario,
@@ -23,6 +24,12 @@ jest.mock("./campaignService", () => ({
   reopenGame: jest.fn(() => Promise.resolve()),
   updateGame: jest.fn(() => Promise.resolve()),
 }));
+
+// Game cards link to the game screen, so they need a router.
+const render = (ui) => {
+  const result = rtlRender(<MemoryRouter>{ui}</MemoryRouter>);
+  return { ...result, rerender: (next) => result.rerender(<MemoryRouter>{next}</MemoryRouter>) };
+};
 
 describe("scenario data", () => {
   test("both tables cover K66 13–64 and three special scenarios exist", () => {

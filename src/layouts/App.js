@@ -31,6 +31,7 @@ import "../index.css";
 // Campaign pages carry the scenario and rule texts; load them only when opened.
 const CampaignsPage = lazy(() => import("../campaignHub/CampaignsPage"));
 const CampaignPage = lazy(() => import("../campaignHub/CampaignPage"));
+const GamePage = lazy(() => import("../campaignHub/GamePage"));
 const pageFallback = <div className="hub-page">Wczytywanie…</div>;
 
 export const EditArmyContext = createContext();
@@ -317,6 +318,21 @@ const App = () => {
                   <RequireAuth>
                     <Suspense fallback={pageFallback}>
                       <CampaignPage />
+                    </Suspense>
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/campaigns/:id/games/:gameId"
+                element={
+                  <RequireAuth>
+                    <Suspense fallback={pageFallback}>
+                      <GamePage
+                        setUnitList={setUnitList}
+                        setArmy={setArmy}
+                        setArmyName={setArmyName}
+                        setCampaignNotes={setCampaignNotes}
+                      />
                     </Suspense>
                   </RequireAuth>
                 }
