@@ -50,3 +50,10 @@
     font-size: 0.82rem;
   }
 }
+
+/* Phones: the external blog link makes room for the account links. */
+@media screen and (max-width: 480px) {
+  .navbar .navbar-blog {
+    display: none;
+  }
+}

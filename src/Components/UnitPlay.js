@@ -14,6 +14,10 @@ import {
   lastingInjuries,
 } from "../campaign/rules";
 import { getModifiers } from "../Functions/getModifiers";
+import {
+  getDisplayEquipment,
+  formatCustomEquipmentEntry,
+} from "../Functions/displayEquipment";
 
 const MENU = [
   "Statystyki",
@@ -36,97 +40,12 @@ const getBattleModelCount = (unit) => {
     : 1;
 };
 
-const shouldSplitEquipmentName = (name) =>
-  typeof name === "string" &&
-  name.includes("/") &&
-  !name.includes("(") &&
-  !name.includes(")");
-
-const getEquipmentAliases = (name) => {
-  if (!shouldSplitEquipmentName(name)) {
-    return [name];
-  }
-
-  return name
-    .split("/")
-    .map((item) => item.trim())
-    .filter((item) => item.length > 0);
-};
-
-const getAliasSelectionQueue = (aliasSelections, canonicalName) => {
-  const selected = aliasSelections?.[canonicalName];
-
-  if (Array.isArray(selected)) {
-    return [...selected];
-  }
-
-  if (typeof selected === "string" && selected.length > 0) {
-    return [selected];
-  }
-
-  return [];
-};
-
-const getDisplayEquipment = (unit, equipmentList) => {
-  const aliasQueues = {};
-  const startingCounts = (unit.startingEquipment || []).reduce(
-    (acc, equipment) => {
-      acc[equipment] = (acc[equipment] || 0) + 1;
-      return acc;
-    },
-    {},
-  );
-  const seenCounts = {};
-
-  return equipmentList.map((equipment) => {
-    const aliases = getEquipmentAliases(equipment);
-
-    if (aliases.length === 1) {
-      return equipment;
-    }
-
-    const seenCount = seenCounts[equipment] || 0;
-    seenCounts[equipment] = seenCount + 1;
-
-    if (seenCount < (startingCounts[equipment] || 0)) {
-      return aliases[0];
-    }
-
-    if (!aliasQueues[equipment]) {
-      aliasQueues[equipment] = getAliasSelectionQueue(
-        unit.equipmentAliasSelections,
-        equipment,
-      );
-    }
-
-    if (aliasQueues[equipment].length > 0) {
-      return aliasQueues[equipment].shift();
-    }
-
-    return aliases[0];
-  });
-};
-
-// 1 potyczka, 2–4 potyczki, 0 and 5+ potyczek.
 const gamesLabel = (n) =>
   n === 1
     ? "1 potyczka"
     : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)
       ? `${n} potyczki`
       : `${n} potyczek`;
-
-const formatCustomEquipmentEntry = (entry) => {
-  if (entry && typeof entry === "object" && !Array.isArray(entry)) {
-    const name = String(entry.name || "").trim();
-    return name.length > 0 ? name : null;
-  }
-
-  if (typeof entry === "string" && entry.trim().length > 0) {
-    return entry.trim();
-  }
-
-  return null;
-};
 
 const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   const [menu, setMenu] = useState(

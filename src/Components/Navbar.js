@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <ul className="navbar">
-      <li>
+      <li className="navbar-blog">
         <a href="https://warheim.blogspot.com/" target="_blank">Blog Warheim</a>
       </li>
       {currentUser === null && (
@@ -24,6 +24,9 @@ const Navbar = () => {
       )}
       {currentUser && (
         <>
+          <li>
+            <Link to="/campaigns">Kampanie</Link>
+          </li>
           <li>
             <Link to="/userDashboard">
               <FontAwesomeIcon icon={faCircleUser} size="2xl"></FontAwesomeIcon>

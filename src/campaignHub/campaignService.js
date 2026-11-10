@@ -1,0 +1,166 @@
+// Shared campaigns in Firestore. Every read and write the campaign pages make
+// goes through this file, so it can be checked against firestore.rules:
+//
+//   campaigns/{campaignId}            name, ownerId, inviteCode, members[], memberNames{}
+//   campaigns/{campaignId}/lists/{uid}  one uploaded roster per member
+//   campaigns/{campaignId}/games/{id}   pairings and results (one entry per game)
+//   inviteCodes/{code}                campaignId, ownerId (lets players find a campaign)
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  deleteDoc,
+  deleteField,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+  writeBatch,
+} from "firebase/firestore";
+import { db } from "../Database/database";
+import { normalizeRosterNames } from "../Data.js/RulebookNames";
+
+// No 0/O, 1/I/L: codes are read aloud and typed on phones.
+const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+
+export const makeInviteCode = (random = Math.random) =>
+  Array.from(
+    { length: 6 },
+    () => CODE_ALPHABET[Math.floor(random() * CODE_ALPHABET.length)],
+  ).join("");
+
+export const normalizeInviteCode = (code) =>
+  String(code || "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "");
+
+export const playerName = (user) =>
+  user?.displayName || user?.email?.split("@")[0] || "Gracz";
+
+const campaignRef = (campaignId) => doc(db, "campaigns", campaignId);
+
+export async function createCampaign(name, user) {
+  const ref = doc(collection(db, "campaigns"));
+  // A clash is unlikely (31^6 codes); retry a few times to be sure.
+  let inviteCode = makeInviteCode();
+  for (let i = 0; i < 5; i += 1) {
+    if (!(await getDoc(doc(db, "inviteCodes", inviteCode))).exists()) break;
+    inviteCode = makeInviteCode();
+  }
+  const batch = writeBatch(db);
+  batch.set(ref, {
+    name: name.trim(),
+    ownerId: user.uid,
+    inviteCode,
+    members: [user.uid],
+    memberNames: { [user.uid]: playerName(user) },
+    settings: { optionalRules: [] },
+    createdAt: serverTimestamp(),
+  });
+  batch.set(doc(db, "inviteCodes", inviteCode), {
+    campaignId: ref.id,
+    ownerId: user.uid,
+  });
+  await batch.commit();
+  return ref.id;
+}
+
+export async function joinCampaignByCode(code, user) {
+  const normalized = normalizeInviteCode(code);
+  const invite = await getDoc(doc(db, "inviteCodes", normalized));
+  if (!invite.exists()) throw new Error("Nie znaleziono kampanii o tym kodzie.");
+  const { campaignId } = invite.data();
+  await updateDoc(campaignRef(campaignId), {
+    members: arrayUnion(user.uid),
+    [`memberNames.${user.uid}`]: playerName(user),
+  });
+  return campaignId;
+}
+
+export async function getMyCampaigns(uid) {
+  const snapshot = await getDocs(
+    query(collection(db, "campaigns"), where("members", "array-contains", uid)),
+  );
+  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+export const watchCampaign = (campaignId, onChange, onError) =>
+  onSnapshot(
+    campaignRef(campaignId),
+    (d) => onChange(d.exists() ? { id: d.id, ...d.data() } : null),
+    onError,
+  );
+
+export const watchCampaignLists = (campaignId, onChange, onError) =>
+  onSnapshot(
+    collection(db, "campaigns", campaignId, "lists"),
+    (snapshot) =>
+      onChange(
+        Object.fromEntries(snapshot.docs.map((d) => [d.id, d.data()])),
+      ),
+    onError,
+  );
+
+export const watchCampaignGames = (campaignId, onChange, onError) =>
+  onSnapshot(
+    collection(db, "campaigns", campaignId, "games"),
+    (snapshot) =>
+      onChange(snapshot.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    onError,
+  );
+
+// The player's saved lists ("Moje rozpiski") to choose an upload from.
+export async function getMySavedLists(uid) {
+  const saved = await getDoc(doc(db, "lists", uid));
+  return saved.data()?.lists || [];
+}
+
+export async function uploadCampaignList(campaignId, user, savedList) {
+  const list = normalizeRosterNames(savedList);
+  await setDoc(doc(db, "campaigns", campaignId, "lists", user.uid), {
+    uid: user.uid,
+    playerName: playerName(user),
+    armyType: list.armyType,
+    armyName: list.armyName,
+    armyList: list.armyList || [],
+    campaignNotes: list.campaignNotes || {},
+    totalCost: list.totalCost ?? null,
+    prestige: list.prestige ?? null,
+    uploadedAt: serverTimestamp(),
+  });
+}
+
+// Owner removing a player, or a player leaving. The player's uploaded list
+// goes with them; their games stay in the history.
+export async function removeMember(campaignId, uid) {
+  await deleteDoc(doc(db, "campaigns", campaignId, "lists", uid));
+  await updateDoc(campaignRef(campaignId), {
+    members: arrayRemove(uid),
+    [`memberNames.${uid}`]: deleteField(),
+  });
+}
+
+export async function deleteCampaign(campaign) {
+  const [lists, games] = await Promise.all([
+    getDocs(collection(db, "campaigns", campaign.id, "lists")),
+    getDocs(collection(db, "campaigns", campaign.id, "games")),
+  ]);
+  const batch = writeBatch(db);
+  lists.docs.forEach((d) => batch.delete(d.ref));
+  games.docs.forEach((d) => batch.delete(d.ref));
+  batch.delete(doc(db, "inviteCodes", campaign.inviteCode));
+  batch.delete(campaignRef(campaign.id));
+  await batch.commit();
+}
+
+// Firestore says "Missing or insufficient permissions" for both a stale login
+// and an outdated rule set; tell the player what to try.
+export const describeError = (error) =>
+  error?.code === "permission-denied"
+    ? "Brak dostępu. Zaloguj się ponownie; jeśli to nie pomoże, sprawdź reguły Firestore."
+    : error?.message || "Coś poszło nie tak.";

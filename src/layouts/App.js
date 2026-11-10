@@ -14,6 +14,8 @@ import armies from "../Data.js/Armies";
 import { AuthContext } from "../Context/AuthContext";
 import UserDashboard from "../Components/UserDashboard";
 import MyLists from "../User/MyLists";
+import CampaignsPage from "../campaignHub/CampaignsPage";
+import CampaignPage from "../campaignHub/CampaignPage";
 import Header from "./Header";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { filterMercenaries } from "../Functions/filterMercenaries";
@@ -36,6 +38,11 @@ export const getDefaultCampaignNotes = () => ({ ...DEFAULT_CAMPAIGN_NOTES });
 
 const App = () => {
   const RequireAuth = ({ children }) => {
+    if (!currentUser) {
+      // An invite link opened before logging in: keep its code for later.
+      const invite = window.location.pathname.match(/^\/campaigns\/join\/([^/]+)/);
+      if (invite) sessionStorage.setItem("pendingInvite", invite[1]);
+    }
     return currentUser ? children : <Navigate to="/login"></Navigate>;
   };
   const { currentUser } = useContext(AuthContext);
@@ -274,6 +281,30 @@ const App = () => {
                 }
               />
 
+              <Route
+                path="/campaigns"
+                element={
+                  <RequireAuth>
+                    <CampaignsPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/campaigns/join/:code"
+                element={
+                  <RequireAuth>
+                    <CampaignsPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/campaigns/:id"
+                element={
+                  <RequireAuth>
+                    <CampaignPage />
+                  </RequireAuth>
+                }
+              />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route
