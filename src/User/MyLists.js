@@ -294,9 +294,10 @@ const MyLists = (
                                                       key={`${historyKey}-game-${gameIndex}-unit-${unitIndex}-model-${modelIndex}`}
                                                     >
                                                       {`${modelResult.modelLabel}: ${
-                                                        modelResult.isOutOfAction
+                                                        modelResult.status ||
+                                                        (modelResult.isOutOfAction
                                                           ? "WzA"
-                                                          : "aktywny"
+                                                          : "aktywny")
                                                       }`}
                                                     </li>
                                                   ),

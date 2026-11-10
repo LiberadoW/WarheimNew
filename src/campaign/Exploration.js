@@ -10,6 +10,15 @@ import { encounterPlan } from "./encounters";
 import { applyEffects } from "./effects";
 import { explorationAuto, explorationAutoTotals } from "./auto-rules";
 
+// Polish plural: 1 uprawniony bohater, 2–4 uprawnieni bohaterowie,
+// 0 and 5+ uprawnionych bohaterów.
+export const eligibleHeroesLabel = (n) =>
+  n === 1
+    ? "1 uprawniony bohater"
+    : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)
+      ? `${n} uprawnieni bohaterowie`
+      : `${n} uprawnionych bohaterów`;
+
 export default function Exploration({
   battle,
   post,
@@ -58,7 +67,7 @@ export default function Exploration({
     <>
       <CraftReservations post={post} update={update} />
       <p>
-        {eligible.length} uprawnionych bohaterów
+        {eligibleHeroesLabel(eligible.length)}
         {battle.result === "win" ? " +1 za zwycięstwo" : ""} · pula podstawowa:{" "}
         {count} K6.
       </p>

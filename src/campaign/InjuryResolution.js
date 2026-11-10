@@ -5,7 +5,19 @@ import mental from "./mental-injuries.json";
 export default function InjuryResolution({ result, value, onChange }) {
   const d = value || {};
   const code = result.min || result.code;
-  const secondary = (next) => onChange({ ...d, secondary: next });
+  // Wielokrotnie zraniony: a corrected K3 trims the extra wounds to the new count.
+  const secondary = (next) =>
+    onChange(
+      code === 16 && validDice(next, 1)
+        ? {
+            ...d,
+            secondary: next,
+            children: (d.children || []).slice(0, Math.ceil(next[0] / 2)),
+          }
+        : { ...d, secondary: next },
+    );
+  const hasSecondary =
+    [16, 23, 25, 56].includes(code) || (code === 35 && !result.simple);
   const children = d.children || [];
   const child = (i, next) => {
     const list = [...children];
@@ -27,7 +39,7 @@ export default function InjuryResolution({ result, value, onChange }) {
       : null;
   return (
     <div>
-      {[16, 23, 25, 35, 56].includes(code) && (
+      {hasSecondary && (
         <DiceInput
           label={
             code === 16

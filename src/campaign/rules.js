@@ -566,6 +566,7 @@ export const beginPostBattle = (battle, units, notes, army = {}) => ({
       })),
     })),
     battleId: battle.id,
+    obledSetting: !!notes.campaign?.settings?.obled,
     sanityBefore: Object.fromEntries(
       units.map((u) => [u.uniqueId, Number(u.obled) || 0]),
     ),
@@ -637,6 +638,7 @@ export const injuryTasks = (post) =>
       index: i,
       key: `${u.uniqueId}:${i}`,
       unit: u,
+      outOfAction: true,
     })).filter(
       (t) =>
         !u.battleAbsentModels?.[t.index] &&
@@ -672,12 +674,107 @@ export function grantExperience(post, unit, amount, reason) {
     post,
     "experience",
     `${label(unit)}: ${old} → ${unit.exp} PD · ${reason}`,
+    { unitId: unit.uniqueId, gained: unit.exp - old },
   );
 }
+// Tabela poważnych ran (s. 410): tylko trwałe skutki zostają na karcie
+// postaci. Śmierć, pauza, niewola, ograbienie i premie PD są jednorazowe;
+// trwałą część Rany ręki i Strzaskanej nogi zapisuje osobna zasada.
+export const LASTING_INJURY_CODES = [22, 24, 26, 31, 32, 33, 34, 56, 62, 64];
+export const TEMPORARY_INJURY_NAMES = [
+  "Martwy",
+  "Opuszcza następną potyczkę",
+  "Powrót do zdrowia",
+  "Wielokrotnie zraniony",
+  "Rana ręki",
+  "Strzaskana noga",
+  "Głębokie rany",
+  "Ograbiony",
+  "Pojmany",
+  "Zwerbowany na arenę",
+  "Wbrew wszystkiemu",
+];
+export const lastingInjuries = (list) =>
+  (list || []).filter((name) => !TEMPORARY_INJURY_NAMES.includes(name));
+// Rozdział 13, Obłęd (s. 411): bohater otrzymuje +K3 PO za każde WzA, chyba
+// że podlega zasadzie NIEZŁOMNY.
+export const wzaSanityRequired = (post, task) =>
+  !!post.obledSetting &&
+  !!task.outOfAction &&
+  isHero(task.unit || post.units.find((u) => u.uniqueId === task.unitId)) &&
+  !hasRule(
+    task.unit || post.units.find((u) => u.uniqueId === task.unitId),
+    "Niezłomny",
+  );
+// Tabela chorób psychicznych (s. 412-413): jedna procedura dla progów Obłędu
+// i wyniku SZALEŃSTWO z tabeli poważnych ran.
+const ILLNESS_RULES = {
+  14: ["Alkoholizm"],
+  16: ["Animozja"],
+  22: ["Berserk"],
+  23: ["Zimnokrwisty"],
+  32: ["Furia"],
+  33: ["Głód krwi"],
+  34: ["Głupota"],
+  52: ["Animozja", "Nienawiść"],
+  66: ["Przepastne trzewia"],
+};
+export function applyIllness(post, unit, dice, note = "") {
+  if (!validDice(dice, 2))
+    throw Error("Wpisz wynik K66 choroby psychicznej.");
+  const entry = mental.find((e) => e.code === k66(dice));
+  const text = String(note || "");
+  if (entry.code === 15 && !text.trim())
+    throw Error(
+      "Rozstrzygnij utratę umiejętności z opisu amnezji i zapisz wynik w notatce.",
+    );
+  addRule(unit, entry.name);
+  unit.mentalIllnesses = [
+    ...(unit.mentalIllnesses || []),
+    { ...entry, acquiredAt: post.battleId || null, age: 0, note: text },
+  ];
+  unit.campaignRuleTexts = {
+    ...(unit.campaignRuleTexts || {}),
+    [entry.name]: entry.text,
+  };
+  // The named illness remains the authoritative description for conditional effects.
+  (ILLNESS_RULES[entry.code] || []).forEach((name) => addRule(unit, name));
+  log(post, "mental", `${label(unit)}: ${entry.name}. ${text}`);
+  return entry;
+}
+// Ograbiony / porażka na arenie: model traci cały ekwipunek, a koszt wraca do
+// kosztu profilu (ekwipunek startowy jest wliczony w cenę profilu).
+export const stripEquipment = (unit) => {
+  const baseIds = Array.isArray(unit.baseCustomEquipmentIds)
+    ? unit.baseCustomEquipmentIds
+    : null;
+  const optional = (unit.optionalEquipment || [])
+    .filter((n) => n !== "Sygnalista" && n !== "Chorąży")
+    .reduce((n, name) => n + (Number(unit.equipmentList?.[name]?.[0]) || 0), 0);
+  const custom = (unit.customEquipment || [])
+    .filter((e) => e && typeof e === "object" && !baseIds?.includes(e.id))
+    .reduce((n, e) => n + Math.max(0, Number(e.price) || 0), 0);
+  unit.cost = Math.max(0, (Number(unit.cost) || 0) - optional - custom);
+  unit.totalCost = unit.cost * modelCount(unit);
+  unit.startingEquipment = [];
+  unit.optionalEquipment = [];
+  unit.customEquipment = [];
+  unit.campaignEquipment = [];
+  unit.craftedEquipment = {};
+  unit.weaponEnhancements = {};
+  unit.equipmentAliasSelections = {};
+  if (baseIds) unit.baseCustomEquipmentIds = [];
+};
 export const applyInjury = (post, task, result, detail = {}) => {
   if (post.injuries[task.key])
     throw Error("Obrażenia tego modelu już rozstrzygnięto.");
   const unit = post.units.find((u) => u.uniqueId === task.unitId);
+  const sanityDie = wzaSanityRequired(post, { ...task, unit });
+  if (sanityDie && !validDice(detail.obled, 1))
+    throw Error("Rzuć K3 Punktów Obłędu za Wyłączenie z akcji!.");
+  // Wspólna lista ran grupy nie wskazuje jednego modelu, więc powtórzenia
+  // (druga noga, oko, ramię) liczą się tylko dla pojedynczych postaci.
+  const single = modelCount(unit) === 1;
   const status = {
     ...(unit.campaignModelStatus?.[task.index] || {}),
     dead: false,
@@ -690,9 +787,11 @@ export const applyInjury = (post, task, result, detail = {}) => {
       if (!validDice(d.secondary, 1))
         throw Error("Rzuć na liczbę dodatkowych ran K3.");
       const count = Math.ceil(d.secondary[0] / 2);
-      if (d.children?.length !== count)
+      // A corrected K3 must not leave stale extra wounds behind.
+      const children = (d.children || []).slice(0, count);
+      if (children.length !== count)
         throw Error("Rozstrzygnij wszystkie dodatkowe rany.");
-      d.children.forEach((child) => {
+      children.forEach((child) => {
         if (!validDice(child?.dice, 2))
           throw Error("Wpisz K66 każdej dodatkowej rany.");
         apply(multipleInjury(child.dice), child);
@@ -701,21 +800,7 @@ export const applyInjury = (post, task, result, detail = {}) => {
     if (code === 24) {
       if (!validDice(d.mental, 2))
         throw Error("Wykonaj rzut K66 na chorobę psychiczną.");
-      const illness = mental.find((x) => x.code === k66(d.mental));
-      addRule(unit, illness.name);
-      unit.mentalIllnesses = [
-        ...(unit.mentalIllnesses || []),
-        {
-          code: illness.code,
-          name: illness.name,
-          text: illness.text,
-          acquiredAt: post.battleId || null,
-        },
-      ];
-      unit.campaignRuleTexts = {
-        ...(unit.campaignRuleTexts || {}),
-        [illness.name]: illness.text,
-      };
+      applyIllness(post, unit, d.mental, d.note);
     }
     if (code === 56) {
       if (!validDice(d.secondary, 1))
@@ -728,7 +813,15 @@ export const applyInjury = (post, task, result, detail = {}) => {
             : d.secondary[0] === 5
               ? "kompania przeciwnika"
               : "kompania przeciwnika i wszystkie tego typu";
-      addRule(unit, `Nienawiść (${target})`);
+      // Owner's decision: an existing NIENAWIŚĆ is kept; the roll is logged.
+      if (hasRule(unit, "Nienawiść"))
+        log(
+          post,
+          "injury",
+          `${label(unit)}: Zawzięty wróg (${target}) — nienawiści nie dodano, bohater już podlega zasadzie Nienawiść.`,
+          { unitId: unit.uniqueId },
+        );
+      else addRule(unit, `Nienawiść (${target})`);
     }
     if (code === 65) {
       if (!["win", "loss"].includes(d.arena))
@@ -745,19 +838,16 @@ export const applyInjury = (post, task, result, detail = {}) => {
           if (!validDice(child?.dice, 2))
             throw Error("Wpisz K66 dodatkowej rany z areny.");
           apply(multipleInjury(child.dice), child);
-        } else {
-          unit.startingEquipment = [];
-          unit.optionalEquipment = [];
-          unit.customEquipment = [];
-        }
+        } else stripEquipment(unit);
       }
     }
-    unit.injuries = [...(unit.injuries || []), r.name];
+    if (!r.simple && LASTING_INJURY_CODES.includes(code))
+      unit.injuries = [...(unit.injuries || []), r.name];
     if (r.code === 11 || r.min === 11) status.dead = true;
     if (r.simple) status.skip = Math.max(status.skip, r.skip);
     if (code === 22) {
       const n = (unit.injuries || []).filter((s) => s === r.name).length;
-      if (n >= 2) status.dead = true;
+      if (single && n >= 2) status.dead = true;
       else
         changeStat(
           unit,
@@ -769,13 +859,17 @@ export const applyInjury = (post, task, result, detail = {}) => {
     if ([26, 31, 33, 34].includes(code)) {
       const index = { 26: 4, 31: 2, 33: 6, 34: 1 }[code];
       if (currentStats(unit)[index] > 1) changeStat(unit, index, -1);
-      if (code === 31 && unit.injuries.filter((s) => s === r.name).length >= 2)
+      if (
+        single &&
+        code === 31 &&
+        unit.injuries.filter((s) => s === r.name).length >= 2
+      )
         status.dead = true;
     }
     if ([23, 25].includes(code)) {
       if (!validDice(d.secondary, 1)) throw Error("Wykonaj dodatkowy rzut K6.");
       if (d.secondary[0] === 1) {
-        if (code === 23 && hasRule(unit, "Amputowane ramię"))
+        if (single && code === 23 && hasRule(unit, "Amputowane ramię"))
           status.dead = true;
         addRule(
           unit,
@@ -795,13 +889,19 @@ export const applyInjury = (post, task, result, detail = {}) => {
         grantExperience(post, unit, 1, "Przeżył wbrew przeciwnościom");
       else unit.battleExp = (Number(unit.battleExp) || 0) + 1;
     }
-    if (code === 36) {
-      unit.startingEquipment = [];
-      unit.optionalEquipment = [];
-      unit.customEquipment = [];
-    }
+    if (code === 36) stripEquipment(unit);
   };
   apply(result);
+  if (sanityDie) {
+    const gained = Math.ceil(detail.obled[0] / 2);
+    unit.battleObled = (Number(unit.battleObled) || 0) + gained;
+    log(
+      post,
+      "sanity",
+      `${label(unit)}: +${gained} PO za Wyłączenie z akcji! (K3).`,
+      { unitId: unit.uniqueId, gained },
+    );
+  }
   if (detail.note)
     unit.campaignNotes = [...(unit.campaignNotes || []), detail.note];
   unit.campaignModelStatus = Array.from({ length: modelCount(unit) }, (_, i) =>
@@ -816,6 +916,11 @@ export const applyInjury = (post, task, result, detail = {}) => {
     code: result.code,
     detail,
     status,
+    unitId: unit.uniqueId,
+    index: task.index,
+    label:
+      modelCount(unit) > 1 ? `${label(unit)} #${task.index + 1}` : label(unit),
+    outOfAction: !!task.outOfAction,
   };
   if (
     status.dead &&
@@ -1017,7 +1122,9 @@ export const leaderSuccession = (post) => {
       (u) =>
         u !== leader &&
         u.type === "Bohater" &&
-        !u.campaignModelStatus?.[0]?.dead,
+        !u.campaignModelStatus?.[0]?.dead &&
+        // Owner's decision: a captured hero cannot take command.
+        !u.campaignModelStatus?.[0]?.captured,
     )
     .sort((a, b) => score(b)[0] - score(a)[0] || score(b)[1] - score(a)[1]);
   const best = candidates[0];
@@ -1077,23 +1184,26 @@ export const applyExperience = (post) => {
   if (injuryTasks(post).some((t) => !post.injuries[t.key]))
     throw Error("Najpierw rozstrzygnij obrażenia.");
   post.units.forEach((u) => {
-    const survived = Array.from(
+    // +1 PD (s. 414) needs a model that both took part and survived.
+    const survivedBattle = Array.from(
       { length: modelCount(u) },
-      (_, i) => !u.campaignModelStatus?.[i]?.dead,
+      (_, i) =>
+        !u.battleAbsentModels?.[i] && !u.campaignModelStatus?.[i]?.dead,
     ).some(Boolean);
-    const participated = Array.from(
-      { length: modelCount(u) },
-      (_, i) => !u.battleAbsentModels?.[i],
-    ).some(Boolean);
-    if (survived && participated)
-      u.obled = Math.min(
-        89,
-        (Number(u.obled) || 0) + (Number(u.battleObled) || 0),
-      );
-    if (!survived || !participated || !canEarnExperience(u)) return;
+    if (survivedBattle) {
+      const before = Number(u.obled) || 0;
+      u.obled = Math.min(89, before + (Number(u.battleObled) || 0));
+      if (u.obled !== before)
+        post.obledGained = {
+          ...(post.obledGained || {}),
+          [u.uniqueId]: u.obled - before,
+        };
+    }
+    if (!survivedBattle || !canEarnExperience(u)) return;
     const gained =
       1 +
-      (Number(post.underdog?.exp) || 0) +
+      // Żółtodzioby (s. 414): bohaterowie i grupy stronników, bez najmitów.
+      (u.type === "Najemne Ostrze" ? 0 : Number(post.underdog?.exp) || 0) +
       (Number(u.battleExp) || 0) +
       (u.type === "Bohater" ? Number(u.battleKills) || 0 : 0);
     const old = Number(u.exp) || 0;
@@ -1114,6 +1224,62 @@ export const applyExperience = (post) => {
   });
   post.expApplied = true;
 };
+// Result of one battle for the saved-list history ("Moje rozpiski").
+export const battleSummary = (post) => {
+  const expBy = {};
+  let totalExpGained = 0;
+  for (const j of post.journal || [])
+    if (j.type === "experience" && Number(j.gained)) {
+      totalExpGained += Number(j.gained);
+      if (j.unitId) expBy[j.unitId] = (expBy[j.unitId] || 0) + Number(j.gained);
+    }
+  const obled = post.obledGained || {};
+  const injuries = Object.values(post.injuries || {}).filter(
+    (i) => i.outOfAction || i.unitId === undefined,
+  );
+  const injuryOf = (u, i) =>
+    Object.values(post.injuries || {}).find(
+      (x) => x.outOfAction && x.unitId === u.uniqueId && x.index === i,
+    );
+  return {
+    totalExpGained,
+    totalObledGained: Object.values(obled).reduce(
+      (n, v) => n + (Number(v) || 0),
+      0,
+    ),
+    outOfActionModels: injuries.map(
+      (i) => `${i.label || "Model"}: ${i.result}`,
+    ),
+    unitResults: post.units.map((u) => {
+      const count = modelCount(u);
+      return {
+        unitId: u.uniqueId,
+        unitLabel: label(u),
+        gainedExp: expBy[u.uniqueId] || 0,
+        gainedObled: Number(obled[u.uniqueId]) || 0,
+        modelResults: Array.from({ length: count }, (_, i) => {
+          const s = u.campaignModelStatus?.[i] || {};
+          const injury = injuryOf(u, i);
+          return {
+            modelLabel: count > 1 ? `${label(u)} #${i + 1}` : label(u),
+            isOutOfAction: !!(injury || u.battleOutOfActionModels?.[i]),
+            status: s.dead
+              ? "poległ"
+              : s.captured
+                ? "pojmany"
+                : u.battleAbsentModels?.[i]
+                  ? "nieobecny"
+                  : injury
+                    ? `WzA: ${injury.result}`
+                    : u.battleOutOfActionModels?.[i]
+                      ? "WzA"
+                      : "aktywny",
+          };
+        }),
+      };
+    }),
+  };
+};
 export const finalizePostBattle = (battle, notes) => {
   const p = clone(battle.post);
   if (
@@ -1123,6 +1289,7 @@ export const finalizePostBattle = (battle, notes) => {
       p.advances.some((a) => !a.resolved))
   )
     throw Error("Rozstrzygnij obrażenia, doświadczenie i awanse.");
+  const summary = battleSummary(p);
   const units = p.units.flatMap((u) => {
     const statuses = Array.from({ length: modelCount(u) }, (_, i) => ({
       i,
@@ -1136,6 +1303,8 @@ export const finalizePostBattle = (battle, notes) => {
       skip: Math.max(0, s.skip || 0),
     }));
     delete u.campaignNewRecruit;
+    // Older rosters stored one-off results (Martwy, pauza…) as wounds.
+    if (Array.isArray(u.injuries)) u.injuries = lastingInjuries(u.injuries);
     u.battleExp = 0;
     u.battleKills = 0;
     u.battleObled = 0;
@@ -1170,6 +1339,7 @@ export const finalizePostBattle = (battle, notes) => {
     journal: p.journal,
     treasury: p.treasury,
     loot: p.loot,
+    summary,
   };
   campaign.history = [...campaign.history, entry];
   return {

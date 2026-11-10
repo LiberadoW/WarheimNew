@@ -35,7 +35,7 @@ import {
 
 export function AvailabilityPool({ post, update, compact = false }) {
   const heroes = eligibleHeroes(post.units).filter(
-    (u) => !hasRule(u, "Anoreksja"),
+    (u) => !hasRule(u, "Anoreksja") && !hasRule(u, "Żarłoczność"),
   );
   const [reroll, setReroll] = useRollDraft(post, update, "availability-reroll"),
     [selected, setSelected] = useState("");

@@ -11,6 +11,7 @@ import {
   isHero,
   activeModel,
   canEarnExperience,
+  lastingInjuries,
 } from "../campaign/rules";
 import { getModifiers } from "../Functions/getModifiers";
 
@@ -106,6 +107,14 @@ const getDisplayEquipment = (unit, equipmentList) => {
   });
 };
 
+// 1 potyczka, 2–4 potyczki, 0 and 5+ potyczek.
+const gamesLabel = (n) =>
+  n === 1
+    ? "1 potyczka"
+    : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)
+      ? `${n} potyczki`
+      : `${n} potyczek`;
+
 const formatCustomEquipmentEntry = (entry) => {
   if (entry && typeof entry === "object" && !Array.isArray(entry)) {
     const name = String(entry.name || "").trim();
@@ -183,7 +192,10 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   }, [unit.stats, baseStats]);
 
   const rules = Array.isArray(unit.rules) ? unit.rules : [];
-  const injuries = Array.isArray(unit.injuries) ? unit.injuries : [];
+  // One-off results (Martwy, pauza…) of older rosters are not lasting wounds.
+  const injuries = lastingInjuries(
+    Array.isArray(unit.injuries) ? unit.injuries : [],
+  );
   const modelCount = getBattleModelCount(unit);
   const battleExp = Math.max(0, Number(unit.battleExp) || 0);
   const battleObled = Math.max(0, Number(unit.battleObled) || 0);
@@ -384,6 +396,16 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
     );
   };
 
+  // Temporary states are listed only while the model status lasts.
+  const temporary = Array.from({ length: modelCount }, (_, index) => {
+    const status = unit.campaignModelStatus?.[index] || {};
+    const name = modelCount > 1 ? `#${index + 1}: ` : "";
+    return [
+      status.captured && `${name}pojmany`,
+      status.skip > 0 && `${name}pauza: ${gamesLabel(status.skip)}`,
+    ].filter(Boolean);
+  }).flat();
+
   const renderInjuries = () => (
     <div className="unit-play-list-container">
       {injuries.length === 0 ? (
@@ -394,6 +416,16 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
             {injury}
           </div>
         ))
+      )}
+      {temporary.length > 0 && (
+        <>
+          <p className="unit-play-wza-title">Tymczasowe</p>
+          {temporary.map((text) => (
+            <div key={text} className="unit-play-list-item">
+              {text}
+            </div>
+          ))}
+        </>
       )}
     </div>
   );
@@ -451,7 +483,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
         </span>
       </div>
 
-      {campaign?.settings?.obled && (
+      {campaign?.settings?.obled && isHero(unit) && (
         <div className="unit-play-counter">
           <span className="unit-play-counter-label">Obłęd</span>
           <button

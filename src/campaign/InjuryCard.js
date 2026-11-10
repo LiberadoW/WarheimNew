@@ -100,8 +100,19 @@ function InjuryCard({ task, post, update }) {
                 value={draft}
                 onChange={setDraft}
               />
+              {R.wzaSanityRequired(post, task) && (
+                <DiceInput
+                  label="Obłęd za WzA (K3)"
+                  value={draft.obled || []}
+                  onChange={(obled) => setDraft({ obled })}
+                />
+              )}
               <button
                 className="button"
+                disabled={
+                  R.wzaSanityRequired(post, task) &&
+                  !R.validDice(draft.obled, 1)
+                }
                 onClick={() =>
                   update((p) => R.applyInjury(p, task, result, draft))
                 }

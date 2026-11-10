@@ -728,7 +728,7 @@ export default function CampaignManager({
                     przeciwnika WzA. Dodatkowe PD ze scenariusza są dodawane
                     osobno.
                     {post.underdog
-                      ? ` Żółtodzioby: +${post.underdog.exp} PD dla każdego uczestnika.`
+                      ? ` Żółtodzioby: +${post.underdog.exp} PD dla każdego uczestnika (bez Najemnych Ostrzy).`
                       : ""}
                   </p>
                   <UnderdogGold post={post} update={update} />

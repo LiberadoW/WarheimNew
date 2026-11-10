@@ -21,38 +21,9 @@ export function sanityTasks(post) {
     )
     .filter((t) => !post.sanityResolved?.[t.key]);
 }
-export function addIllness(post, unit, dice, note = "") {
-  if (!R.validDice(dice, 2))
-    throw Error("Wpisz wynik K66 choroby psychicznej.");
-  const entry = mental.find((e) => e.code === R.k66(dice));
-  if (entry.code === 15 && !note.trim())
-    throw Error(
-      "Rozstrzygnij utratę umiejętności z opisu amnezji i zapisz wynik w notatce.",
-    );
-  R.addRule(unit, entry.name);
-  unit.mentalIllnesses = [
-    ...(unit.mentalIllnesses || []),
-    { ...entry, acquiredAt: post.battleId, age: 0, note },
-  ];
-  unit.campaignRuleTexts = {
-    ...(unit.campaignRuleTexts || {}),
-    [entry.name]: entry.text,
-  };
-  const ruleNames = {
-    14: ["Alkoholizm"],
-    16: ["Animozja"],
-    22: ["Berserk"],
-    32: ["Furia"],
-    33: ["Głód krwi"],
-    34: ["Głupota"],
-    52: ["Animozja", "Nienawiść"],
-    66: ["Przepastne trzewia"],
-  };
-  // The named illness remains the authoritative description for conditional effects.
-  (ruleNames[entry.code] || []).forEach((name) => R.addRule(unit, name));
-  R.log(post, "mental", `${R.label(unit)}: ${entry.name}. ${note}`);
-  return entry;
-}
+// Shared with the SZALEŃSTWO injury result (rules.js).
+export const addIllness = (post, unit, dice, note = "") =>
+  R.applyIllness(post, unit, dice, note);
 export function resolveSanity(post, task, dice, note) {
   if (!sanityTasks(post).some((t) => t.key === task.key))
     throw Error(
@@ -190,17 +161,17 @@ export function applyMutation(
       const wound = R.injuries.find(
         (i) => i.min === (secondary[0] <= 4 ? 23 : 22),
       );
-      for (let index = 0; index < R.modelCount(u); index++)
-        R.applyInjury(
-          post,
-          {
-            unitId,
-            index,
-            key: `mutation:${post.battleId}:${unitId}:${(u.mutations || []).length}:${index}`,
-          },
-          wound,
-          secondary[0] <= 4 ? { secondary: [1] } : {},
-        );
+      // Stats and rules are shared by the whole group: apply the wound once.
+      R.applyInjury(
+        post,
+        {
+          unitId,
+          index: 0,
+          key: `mutation:${post.battleId}:${unitId}:${(u.mutations || []).length}:0`,
+        },
+        wound,
+        secondary[0] <= 4 ? { secondary: [1] } : {},
+      );
     }
   }
   const failed =

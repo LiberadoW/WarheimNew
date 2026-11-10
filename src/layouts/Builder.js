@@ -422,12 +422,11 @@ const Builder = ({
             id: entry.id,
             gameName: entry.gameName,
             finishedAt: Timestamp.now(),
-            totalExpGained: entry.journal
-              .filter((j) => j.type === "experience")
-              .reduce((n, j) => n + (j.gained || 0), 0),
-            totalObledGained: 0,
-            outOfActionModels: [],
-            unitResults: [],
+            // Summary of the finalized sequence (rules.battleSummary).
+            totalExpGained: entry.summary?.totalExpGained || 0,
+            totalObledGained: entry.summary?.totalObledGained || 0,
+            outOfActionModels: entry.summary?.outOfActionModels || [],
+            unitResults: entry.summary?.unitResults || [],
             campaignEntryId: entry.id,
           },
         ],

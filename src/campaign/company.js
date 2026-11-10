@@ -119,7 +119,9 @@ export function explorationRules(battle, post) {
       !u.campaignModelStatus?.[0]?.dead &&
       !u.campaignNewRecruit &&
       !post.craftReservations?.[u.uniqueId] &&
+      // Anoreksja and Żarłoczność (s. 412-413): no exploration or trade.
       !R.hasRule(u, "Anoreksja") &&
+      !R.hasRule(u, "Żarłoczność") &&
       (companyLevel(post, "Pazerność") ||
         (R.activeModel(u, 0) && !u.battleOutOfActionModels?.[0])),
   );

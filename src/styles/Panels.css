@@ -22,6 +22,12 @@
   .unit-edit-menu { flex-direction: row; }
   .unit-edit-menu .menu-button { flex: 0 0 auto; }
 }
+/* Phones, play view: the five tabs wrap into a 3-column grid, so every tab
+   (and the active one) stays visible without a hidden horizontal scroll. */
+@media screen and (max-width: 768px) {
+  .unit-play .unit-edit-menu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
+  .unit-play .unit-edit-menu .menu-button { min-width: 0; padding: 8px 6px; white-space: normal; overflow-wrap: anywhere; }
+}
 
 /* Inline unit details card */
 .unit-inline-details { border-top: 0; }
