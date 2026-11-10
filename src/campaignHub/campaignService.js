@@ -158,6 +158,53 @@ export async function deleteCampaign(campaign) {
   await batch.commit();
 }
 
+// --- Rounds, pairings and games (organizer creates, players record) --------
+const newGame = (round, players, optionalRules, bye = false) => ({
+  round,
+  players,
+  bye,
+  status: bye ? "bye" : "planned",
+  scenario: null,
+  optionalRules: [...optionalRules],
+  result: null,
+  createdAt: serverTimestamp(),
+});
+
+export async function createRound(campaign, round, pairs, bye) {
+  const defaults = campaign.settings?.optionalRules || [];
+  const batch = writeBatch(db);
+  const games = collection(db, "campaigns", campaign.id, "games");
+  pairs.forEach((players) => batch.set(doc(games), newGame(round, players, defaults)));
+  if (bye) batch.set(doc(games), newGame(round, [bye], defaults, true));
+  await batch.commit();
+}
+
+export async function addGame(campaign, round, players) {
+  await setDoc(
+    doc(collection(db, "campaigns", campaign.id, "games")),
+    newGame(round, players, campaign.settings?.optionalRules || []),
+  );
+}
+
+export const updateGame = (campaignId, gameId, changes) =>
+  updateDoc(doc(db, "campaigns", campaignId, "games", gameId), changes);
+
+export const recordResult = (campaignId, gameId, result, user) =>
+  updateGame(campaignId, gameId, {
+    status: "done",
+    result: { ...result, recordedBy: user.uid },
+    playedAt: serverTimestamp(),
+  });
+
+export const reopenGame = (campaignId, gameId) =>
+  updateGame(campaignId, gameId, { status: "planned", result: null, playedAt: deleteField() });
+
+export const deleteGame = (campaignId, gameId) =>
+  deleteDoc(doc(db, "campaigns", campaignId, "games", gameId));
+
+export const updateCampaignSettings = (campaignId, settings) =>
+  updateDoc(campaignRef(campaignId), { settings });
+
 // Firestore says "Missing or insufficient permissions" for both a stale login
 // and an outdated rule set; tell the player what to try.
 export const describeError = (error) =>

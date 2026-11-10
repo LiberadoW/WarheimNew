@@ -1,0 +1,504 @@
+{
+ "source": "Warheim FS AD2026.04.15, rozdział 12, Zdarzenia losowe (s. 398–404)",
+ "inside": [
+  {
+   "code": 11,
+   "max": 11,
+   "name": "Ochroniarz",
+   "page": 399,
+   "text": "Na pole bitwy wkracza Ogr.\nOchroniarz wyczuwając możliwość zarobku narzuca swe usługi kompanii, która posiada najniższe notowania prestiżu drużyny, nawet jeśli drużyna normalnie nie może zatrudnić Ochroniarza.\nJeżeli dwie kompanie posiadają takie same notowania należy wykonać rzut kostką, aby określić drużynę, do której przyłączy się Ogr.\nNa czas bieżącej rozgrywki należy zapisać charakterystykę Ogra na KARCIE DRUŻYNY, współczynniki zamieszczone zostały w paragrafie NAJEMNE OSTRZA w ROZDZIALE 15: NAJEMNE OSTRZA & POSTACI DRAMATU.\nJeśli Ochroniarz przeżyje rozgrywkę to przed odejściem zażąda żołdu za swe usługi.\nJeśli drużyna nie zapłaci lub w jej szeregach służy już Ochroniarz lub Miotacz Ołowiu to Ogr wyładuje swą frustrację na losowo wybranym bohaterze i odejdzie. Dla pobitego bohatera należy natychmiast wykonać rzut w TABELI POWAŻNYCH RAN."
+  },
+  {
+   "code": 12,
+   "max": 12,
+   "name": "Udręczony byt",
+   "page": 399,
+   "text": "Inwazja Chaosu pochłonęła niezliczoną ilość ofiar, a jeszcze więcej istot doznało niewyobrażalnych cierpień. Co gorsza, nie wszyscy zmarli trafili do Ogrodów Morra.\nWiele dusz zostało zdruzgotanych i uwięzionych w pasmach Dhar, bluźniercza energia kierowana kapryśną wolą Mrocznych Bogów przemieniła dusze ofiar Chaosu we wzbudzający GROZĘ udręczony byt.\nUdręczony byt porusza się o 2K6” się w losowo określonym kierunku i nie oddziałuje na świat materialny oraz zdaje się nie zauważać toczących walkę modeli.\nJeśli udręczony byt wejdzie w kontakt z podstawką modelu z zasadą specjalną DUCHOWNY to zostanie natychmiast odesłany do Domeny Chaosu, a model DUCHOWNEGO otrzyma +1 Punkt Doświadczenia."
+  },
+  {
+   "code": 13,
+   "max": 13,
+   "name": "Znalezisko",
+   "page": 399,
+   "text": "Losowo wybrany model bohatera, który nie jest związany walką wręcz lub nie został Oszołomiony! lub Powalony na ziemię! lub nie Ucieka!, odnajduje ukryty pośród ruin miejskich zabudowań jeden znacznik kosztowności.\nPo zakończeniu gry kompania zwiększa liczbę znalezionych w fazie eksploracji Łupów! o liczbę ewentualnych znaczników kosztowności, z którymi zakończyła rozgrywkę."
+  },
+  {
+   "code": 14,
+   "max": 14,
+   "name": "Burza",
+   "page": 399,
+   "text": "Niebo nad polem bitwy zaciąga się ciemnymi, burzowymi chmurami.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwała będzie burza.\nW fazie ruchu modele nie mogą biegać oraz wykonać wysokiego lotu, a zasięg ruchu modeli latających zostaje zmniejszony do 8”.\nWszystkie rzuty na trafienie z broni dystansowej (nieprochowej) wykonywane są z modyfikatorem -2.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą jedynie na 6+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania.\nEfekty burzy odczuwają wszystkie modele znajdujące się pod gołym niebem."
+  },
+  {
+   "code": 15,
+   "max": 15,
+   "name": "Pakt percepcji",
+   "page": 399,
+   "text": "Osłona rzeczywistości zostaje rozdarta, gdy na niebie zaczynają kłębić się pastelowe chmury, a pole bitwy owiewa lubieżny wiatr. Slaanesh kierowany chwilowym kaprysem zwraca swe spojrzenie na jednego ze śmiertelników, by zaoferować mu swe wątpliwe błogosławieństwo.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię!\nlub Uciekający!, musi wykonać test I.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Księcia Chaosu i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 16,
+   "max": 16,
+   "name": "Gorączka",
+   "page": 399,
+   "text": "Gracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie.\nAby określić skutki jakie przyniesie zdarzenie losowe należy losowo określić model bohatera, także związanego walką wręcz, należącego do gracza zdarzenia i wykonać rzut K6, zaś wynik odczytać z poniższej tabeli:\nK6 REZULTAT 1-2 OSPA! Na czas trwania zdarzenia losowego wartość współczynników WW, US, S i CP bohatera zostają zmniejszone o -1 punkt (do minimalnej wartości 1).\n3-4 STRUPY! Na czas trwania zdarzenia losowego, wartość współczynnika WT bohatera zostaje zmniejszona o -1 punkt (do minimalnej wartości 1).\n5-6 TRĄD! Należy umieścić obok bohatera sześciościenną kostkę, tak aby wskazywała wynik ‘1’. W trakcie trwania zdarzenia losowego na początku każdej tury bohatera należy obracać kostkę tak, by wskazywała wynik o +1 większy. Wynik na kostce oznacza ujemny modyfikator do współczynników S i WT jaki otrzymuje ofiara zdarzenia losowego (do minimalnej wartości 1)."
+  },
+  {
+   "code": 21,
+   "max": 21,
+   "name": "Katakumby",
+   "page": 400,
+   "text": "Pod stopami losowo określonego modelu, który nie podlega zasadzie specjalnej GENIUS lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub LOT, należącego do kompanii gracza zdarzenia, zapada się ziemia.\nSpadający model musi natychmiast wykonać test S albo I w zależności od tego, który ze współczynników modelu jest większy.\nUdany test oznacza, że nieszczęśnik w miarę bezpiecznie wylądował pośród szczątków stropu starożytnych katakumb.\nNieudany test oznacza, że model otrzymuje trafienie z SIŁĄ K6 bez możliwości skorzystania z Ochrony Pancerza.\nJeżeli model w wyniku upadku nie zostanie Wyłączony z akcji! to po zakończeniu rozgrywki kompania zwiększa liczbę znalezionych w fazie eksploracji Łupów! o +1.\nJeżeli model nie posiada liny z hakiem lub nie podlega zasadzie specjalnej MUROŁAZ to pozostaje uwięziony w katakumbach i do końca rozgrywki traktowany jest jako Wyłączony z akcji!. Za wyłączony w ten sposób model nie należy w sekwencji po potyczce wykonywać rzutów na TABELĘ POWAŻNYCH RAN.\nModel, który posiada linę z hakiem lub podlega zasadzie specjalnej MUROŁAZ po K3 turach pojawia się na parterze losowo określonego budynku."
+  },
+  {
+   "code": 22,
+   "max": 22,
+   "name": "Wewnętrzny wróg",
+   "page": 400,
+   "text": "Mroczne Potęgi kierują swe spojrzenie na pole bitwy i powodowani chwilowym kaprysem postanawiają zmienić losy bitwy.\nGracz zdarzenia musi wykonać dwa rzutu K66 przerzucając wynik 22 i odczytać efekt z tabeli zdarzenie losowe.\nNastępnie przeciwnik wybiera jedno ze zdarzeń losowych, którego efekty odczuwa gracz zdarzenia."
+  },
+  {
+   "code": 23,
+   "max": 23,
+   "name": "Wybuch",
+   "page": 400,
+   "text": "Gracz zdarzenia wybiera dowolny obszar na powierzchni stołu, który należy przykryć 5” okrągłym wzornikiem.\nTrafione modele zostają Oszołomione!."
+  },
+  {
+   "code": 24,
+   "max": 24,
+   "name": "Zakazany owoc",
+   "page": 400,
+   "text": "Na ziemię, w losowo określonym kierunku, w odległości K3” od losowo określonego modelu należącego do kompanii gracza zdarzenia, upadają splugawione Upiorytem nasiona. Zarodki wypuszczają pędy i korzenie w chwili dotknięcia ziemi, a po chwili na łodygach pojawiają się pierwsze wielokolorowe kwiaty, które przeradzają się w kuszące zmysły owoce.\nNależy użyć 5” okrągłego wzornika, którego środek należy umieścić w miejscu zakorzenienia zarodka.\nNa początku każdej tury, w fazie rozpoczęcia tury wszystkie trafione modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, muszą wykonać test CP.\nNieudany test oznacza, że ulegają pokusie i w fazie ruchów przymusowych ruszają w stronę owocującej rośliny. Modele, które zbliżą się na odległość 1” do rośliny zrywają owoc, po zjedzeniu którego padają sparaliżowane silną trucizną.\nSparaliżowane modele do końca rozgrywki traktowane są jako Wyłączone z akcji!. Za wyłączony w ten sposób model nie należy w sekwencji po potyczce wykonywać rzutów na TABELĘ POWAŻNYCH RAN."
+  },
+  {
+   "code": 25,
+   "max": 25,
+   "name": "Szczury",
+   "page": 400,
+   "text": "Przerażone szczury w popłochu opuszczają miejskie kanały atakując wszystko co stanie im na drodze.\nNależy użyć 3” okrągłego wzornika, który będzie reprezentował rój szczurów.\nRój szczurów porusza się o 2K6” w losowo określonym kierunku, ignorując kary za ruch przez przeszkody i rodzaje terenu (z wyjątkiem terenu niedostępnego).\nRój nie może zostać obrany na cel zaklęć lub modlitw lub związany walką wręcz lub ostrzelany (także magicznymi pociskami), a wszystkie modele, które nie podlegają zasadzie specjalnej SZCZUROŁAP, które znajdą się na drodze roju otrzymują trafienie z SIŁĄ K6 bez możliwości skorzystania z Ochrony Pancerza.\nNależy zauważyć, że rój szczurów który wejdzie w kontakt z podstawką modelu z zasadą specjalną SZCZUROŁAP zostanie natychmiast zneutralizowany, a model SZCZUROŁAPA otrzyma +1 Punkt Doświadczenia."
+  },
+  {
+   "code": 26,
+   "max": 26,
+   "name": "Pakt dominacji",
+   "page": 400,
+   "text": "Potężny ryk wydobywający się z mosiężnego gardła Pana Krwi przetacza się nad horyzontem. Khorne kieruje swe ogniste spojrzenie na jednego ze śmiertelników.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony!\nlub Powalony na ziemię! lub Uciekający!, musi wykonać test S.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Khorna i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 31,
+   "max": 31,
+   "name": "Mgła",
+   "page": 401,
+   "text": "Okolicę spowija gęsta, zimna i lepka mgła, która pochłania w mlecznym oparze pobliskie zabudowania.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwała będzie mgła.\nPole widzenia modeli, które nie podlegają zasadzie specjalnej DEMON lub LEŚNY DUCH lub ISTOTA ETERYCZNA lub NIEUMARŁY lub OPĘTANY, zostaje ograniczone do 3K6”. Rzut określający zasięg pola widzenia, należy wykonać na początku tury każdego z graczy, a wynik obowiązuje wszystkie należące do kompanii modele.\nWszystkie rzuty na trafienie wykonywane dla broni dystansowych przeprowadzane są z karą -1."
+  },
+  {
+   "code": 32,
+   "max": 32,
+   "name": "Zdruzgotana budowla",
+   "page": 401,
+   "text": "Losowo określona budowla z hukiem obraca się w ruinę.\nWszystkie modele znajdujące się wewnątrz budowli muszą wykonać udany test I lub otrzymają trafienie z SIŁĄ 5 z zasadą specjalną DRUZGOCZĄCY.\nModele, które się wspinały lub znajdowały się na dachu upadają z wysokości, na której się znajdowały. Następnie należy zamienić makietę budowli na ruiny, a modele które znajdowały się wewnątrz budowli lub z niej spadły należy umieścić w odległości do 1” od krawędzi ruin."
+  },
+  {
+   "code": 33,
+   "max": 33,
+   "name": "Opętanie",
+   "page": 401,
+   "text": "Losowo określony model, który nie podlega zasadzie specjalnej DEMON lub DUCHOWNY lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, należący do kompanii gracza zdarzenia zostaje opętany.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie opętanie.\nW każdej turze gracza zdarzenia opętany samobójczymi myślami model będzie próbował odebrać sobie życie. Model na początku fazy walki wręcz zadaje sobie jedno automatyczne trafienie losowo określoną bronią do walki wręcz lub BRONIĄ NATURALNĄ.\nRzut na zranienie wykonuje się z SIŁĄ opętanego modelu.\nW trakcie opętania model nie może robić nic innego poza próbą samobójstwa."
+  },
+  {
+   "code": 34,
+   "max": 34,
+   "name": "Kwaśny deszcz",
+   "page": 401,
+   "text": "Na czas trwania zdarzenia losowego nad polem bitwy szaleje wichura (zobacz POGODA W STARYM ŚWIECIE w ROZDZIALE 11: SCENARIUSZE).\nNad polem bitwy gromadzą się wielobarwne chmury najeżone różnokolorowymi błyskawicami. Obłoki nieustannie zmieniają kształt przybierając wygląd przeklętych Bogów Chaosu. Sine chmury suną nisko nad polem bitwy zalewając ziemię strumieniami kwaśnego deszczu. Zmieszany z deszczem Czarci Pył pali skórę i wgryza się w kamień i metal.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nW czasie trwania zdarzenia losowego wszystkie modele znajdujące się pod gołym niebem otrzymują trafienie z SIŁĄ K3 bez możliwości skorzystania z Ochrony Pancerza."
+  },
+  {
+   "code": 35,
+   "max": 35,
+   "name": "Trzęsienie ziemi",
+   "page": 401,
+   "text": "Siedzące na dachu kruki zrywają się z głośnym krakaniem a psy zaczynają panicznie ujadać. Po chwili pierwsze gwałtowne wstrząsy niemal rzucają drużynników na ziemię.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie trzęsienie ziemi.\nW czasie trwania trzęsienia ziemi teren otwarty traktowany jest jak teren trudny, teren trudny staje się bardzo trudny, a teren bardzo trudny staje się śmiertelnie niebezpieczny – wszystkie modele które w momencie rozpoczęcia trzęsienia ziemi znajdują się na terenie bardzo trudnym otrzymują trafienie z SIŁĄ K6 bez możliwości skorzystania z Ochrony Pancerza.\nW czasie trwania trzęsienia ziemi modele nie mogą biegać, skakać i wspinać się, a wszystkie rzuty na trafienie wykonywane są z karą -1.\nWszystkie modele z zasadą specjalną ZWIERZĘ muszą wykonać test CP.\nNieudany test oznacza, że spłoszone modele zaczynają Uciekać!."
+  },
+  {
+   "code": 36,
+   "max": 36,
+   "name": "Burza Chaosu",
+   "page": 401,
+   "text": "Struktura rzeczywistości zostaje splugawiona dotykiem Mrocznych Bogów.\nImmaterium przenika Materium mamiąc i zwodząc zmysły śmiertelników.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie Burza Chaosu.\nDopóki zdarzenie losowe będzie miało miejsce każdy z graczy na początku swojej tury musi wykonać rzut K6, którego wynik mierzony w calach określi zasięg zasady specjalnej DOWODZENIE kompanii oraz wartość o jaką należy zwiększyć, mierzone na potrzeby szarż i zasięgu broni dystansowej, odległości pomiędzy modelami.\nNależy zwrócić uwagę, że Burza Chaosu zakłóca zdolność percepcji postaci, a same modele nie zostają przesunięte."
+  },
+  {
+   "code": 41,
+   "max": 41,
+   "name": "Silny wiatr",
+   "page": 402,
+   "text": "Podmuchy silnego, porywistego wiatru poruszają konarami i kołyszą mniejszymi drzewami.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwał będzie silny wiatr.\nW fazie ruchu modele nie mogą wykonać wysokiego lotu, a dystans ruchu modeli latających zostaje zmniejszony do 8”.\nWszystkie rzuty na trafienie wykonywane dla broni dystansowej (nieprochowej) przeprowadzane są z karą -1.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa)wypalą na 4+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania.\nEfekty silnego wiatru odczuwają wszystkie modele znajdujące się pod gołym niebem."
+  },
+  {
+   "code": 42,
+   "max": 42,
+   "name": "Krzyczące ściany",
+   "page": 402,
+   "text": "Wiele ofiar Hord Chaosu zostało stopionych z kamieniem tworząc przerażające półżywe posągi. Krzyczące z niewyobrażalnego bólu twarze przebudzonych podmuchem Wiatrów Magii ofiar Kamienia Przemian ukazują się na ścianach budynków.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nWszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY znajdujące się wewnątrz losowo określonego budynku lub w odległości 8” od jego krawędzi muszą wykonać test CP.\nNieudany test oznacza, że tracą tyle punktów ŻW o ile nie powiódł się test CP.\nW trakcie trwania zdarzenia losowego wszystkie modele które będą chciały wejść do środka budynku będą musiały wykonać test STRACHU."
+  },
+  {
+   "code": 43,
+   "max": 43,
+   "name": "Pakt przetrwania",
+   "page": 402,
+   "text": "Rzeczywistość wypacza się i pęka niczym nabrzmiały wrzód, gdy Nurgle, kieruje swe zaropiałe oko na jednego ze śmiertelników. Materia zostaje skażona tłustym, cuchnącym błogosławieństwem Pana Choroby, które przychodzi na świat w plugawym smrodzie.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię! lub Uciekający!, musi wykonać test WT.\nPowodzenie oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Nurgla i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 44,
+   "max": 44,
+   "name": "Próba krwi",
+   "page": 402,
+   "text": "Przez nieboskłon przetacza się gardłowy śmiech Pana Krwi. Khorne postanawia nagrodzić swych drużynników wątpliwą łaską doświadczenia próby krwi.\nDo końca potyczki każdy model, który Wyłączy z akcji! wrogą postać musi wykonać test SIŁY albo INICJATYWY w zależności od tego, który ze współczynników modelu jest większy.\nNieudany test oznacza, że model zostaje Powalony na ziemię! przez potok krwi tryskającej z ziemi."
+  },
+  {
+   "code": 45,
+   "max": 45,
+   "name": "Deszcz ryb",
+   "page": 402,
+   "text": "Na czas trwania zdarzenia losowego nad polem bitwy szaleje wichura (zobacz POGODA W STARYM ŚWIECIE w ROZDZIALE 11: SCENARIUSZE).\nNad polem bitwy gromadzą się wielobarwne chmury najeżone różnokolorowymi błyskawicami. Obłoki nieustannie zmieniają kształt przybierając wygląd przeklętych Bogów Chaosu. Nabrzmiałe kuliste chmury pękają z głuchym trzaskiem a na ziemię zaczynają spadać tłuste ryby.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nW czasie trwania zdarzenia losowego teren otwarty traktowany jest jak teren trudny, teren trudny staje się bardzo trudny, a teren bardzo trudny staje się niebezpieczny – modele które w momencie rozpoczęcia zdarzenia losowego znajdują się na terenie bardzo trudnym muszą wykonać test S albo I w zależności od tego, który ze współczynników modelu jest większy.\nNieudany test oznacza, że model otrzymuje trafienie z SIŁĄ K3 bez możliwości skorzystania z Ochrony Pancerza.\nW czasie trwania zdarzenia losowego modele nie mogą biegać, skakać oraz wspinać się i korzystać z zasady specjalnej LOT, a wszystkie rzuty na trafienie wykonywane są z modyfikatorem -1."
+  },
+  {
+   "code": 46,
+   "max": 46,
+   "name": "Wędrowny handlarz",
+   "page": 402,
+   "text": "Nieopodal pola bitwy zatrzymuje się wędrowny handlarz, który po zakończeniu rozgrywki zaoferuje zwycięskiej kompanii swe towary. Handlarz sprzeda, za połowę wartości podanej w ROZDZIALE 14: EKWIPUNEK, następujące przedmioty: warkocz czosnku, hełm, kusza, latarnia sztormowa, lina z hakiem, maczuga, mapa, miecz, młot bojowy, pistolet, pistolet pojedynkowy, święta relikwia, sztylet, psia łapka, topór bojowy, wodę błogosławioną oraz dowolną TRUCIZNĘ & MIKSTURĘ. Aby określić ilość posiadanego przez handlarza towaru należy dla każdego przedmiotu wykonać rzut K3."
+  },
+  {
+   "code": 51,
+   "max": 51,
+   "name": "Nawiedzony budynek",
+   "page": 403,
+   "text": "Wnętrze losowo określonego budynku rozświetla wielobarwne eteryczne światło przebijające się na zewnątrz oknami i szczelinami.\nWszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, znajdujące się wewnątrz budynku oraz te które wspinały się lub znajdowały się na dachu muszą wykonać udany test STRACHU lub zaczną Uciekać!.\nBudynek będzie nawiedzany przez niematerialne byty do zakończenia rozgrywki, a wszystkie modele które będą chciały wejść do środka będą musiały wykonać test STRACHU."
+  },
+  {
+   "code": 52,
+   "max": 52,
+   "name": "Rój much",
+   "page": 403,
+   "text": "Nad polem bitwy gromadzi się chmura tłustych i brzęczących much. Owady wchodzą do ust, nosa i uszu.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nW czasie trwania zdarzenia losowego wszystkie rzuty na trafienie przeprowadzane przez modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, które znajdują się na terenie otwartym wykonywane są z karą -1."
+  },
+  {
+   "code": 53,
+   "max": 53,
+   "name": "Pojedynek",
+   "page": 403,
+   "text": "Niebiosa rozdziera szyderczy śmiech.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!) z każdej kompani biorącej udział w rozgrywce zostaje naznaczony runą wyzwania.\nWybrane przez Mrocznych Bogów modele bohaterów w każdej turze, w której nie pozostają związane walką wręcz lub nie zostały Oszołomione! lub Powalone na ziemię! lub nie Uciekają! muszą wykonać ruch w kierunku naznaczonej postaci przeciwnika by rozpocząć z nim walkę wręcz.\nNaznaczone modele będą walczyć dopóty, dopóki na polu bitwy nie pozostanie jeden wybraniec Mrocznych Bogów, nawet jeśli drużyny w szeregach, których służą bohaterowie nie zdadzą testu rozbicia.\nModel, który zwycięży zostaje obdarzony błogosławieństwem Bogów Chaosu. Należy wykonać rzut 2K6, którego wynik odczytany z TABELI DARY CHAOSU (zobacz OKO CHAOSU w ROZDZIALE 8: ZASADY SPECJALNE) określi nagrodę jaką otrzymał czempion.\nNależy zauważyć, że otrzymane w ten sposób nagrody mają charakter trwały i obowiązują także w czasie rozgrywania kolejnych rozgrywek."
+  },
+  {
+   "code": 54,
+   "max": 54,
+   "name": "Rozpadlina",
+   "page": 403,
+   "text": "Pod stopami należącego do kompanii gracza zdarzenia losowo określonego modelu, który nie podlega zasadzie specjalnej GENIUS lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub LOT, zapada się ziemia.\nModel musi natychmiast wykonać test SIŁY albo INICJATYWY w zależności od tego, który ze współczynników modelu jest większy.\nUdany test oznacza, że model zdołał uniknąć upadku.\nNieudany test oznacza, że model zostaje uwięziony w rozpadlinie i do końca rozgrywki traktowany jest jako Wyłączony z akcji!. Za wyłączony w ten sposób model nie należy w sekwencji po potyczce wykonywać rzutów na TABELĘ POWAŻNYCH RAN."
+  },
+  {
+   "code": 55,
+   "max": 55,
+   "name": "Zwoje",
+   "page": 403,
+   "text": "Losowo określony model bohatera, który nie jest związany walką wręcz lub nie został Oszołomiony! lub Powalony na ziemię! lub nie Ucieka!, należący do gracza zdarzenia dostrzega zwoje rozrzucone pod ścianą najbliższej budowli. Należy wykonać rzut K6, a wynik odczytać z poniższej tabeli:\nK6 REZULTAT 1 Zwój rozsypuje się ze starości.\n2 Bohater złamał zaklętą pieczęć i zostaje objęty działaniem zaklęcia KLĄTWA SHYISH (zobacz paragraf TRADYCJA ŚMIERCI w ROZDZIALE 22: MAGIA), następnie należy powtórzyć rzut K6 przerzucając rezultat 2.\n3 Zwój zawiera informacje o kosztownościach ukrytych w pobliżu budowli, model odnajduje K6x5 zk.\n4 Zwój zawiera informacje na temat okolicznych kryjówek gildii złodziei. Do zakończenia rozgrywki model bohatera może się UKRYĆ na terenie otwartym.\n5 Model odnajduje plan kanałów. Na początku następnej tury bohater może pojawić się na parterze wybranej przez gracza zdarzenia budowli.\n6 Na zwojach rozrysowano mapę okolicy, a gracz zdarzenia może automatycznie wybrać następny scenariusz, który będzie rozgrywany."
+  },
+  {
+   "code": 56,
+   "max": 56,
+   "name": "Grom z jasnego nieba",
+   "page": 403,
+   "text": "Gracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nWszystkie modele, wyekwipowane w LEKKI PANCERZ lub ŚREDNI PANCERZ lub CIĘŻKI PANCERZ, które znajdują się pod otwartym niebem muszą natychmiast wykonać rzut na Ochronę Pancerza.\nUdany rzut oznacza, że model został trafiony BŁYSKAWICĄ i otrzymuje uderzenie z SIŁĄ 4 bez możliwości skorzystania z Ochrony Pancerza."
+  },
+  {
+   "code": 61,
+   "max": 61,
+   "name": "Zaraza",
+   "page": 404,
+   "text": "Na polu bitwy pojawia się grupa K6 toczonych zarazą mieszczan.\nPozbawieni nadziei nieszczęśnicy poruszają się o 4” w kierunku najbliższego modelu, a po ewentualnym dotarciu czepiają się szat błagając o pomoc i ulgę w cierpieniu.\nModel pozostający w kontakcie z podstawką ofiary zarazy nie może biegać oraz latać.\nMieszczanie zaatakowani w jakikolwiek sposób automatycznie nie zdają testu ROZBICIA i Uciekają! w kierunku najbliższej krawędzi stołu.\nPo zakończeniu potyczki dla wszystkich modeli, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, które były obecne na polu bitwy w chwili pojawienia się ofiar zarazy, należy wykonać test WT.\nNieudany test oznacza, że model także padł ofiarą zarazy. Aby określić skutki zarazy należy wykonać rzut K6. Wynik 1 oznacza, że ofiara zarazy umiera – model należy traktować tak, jakby w rzucie na TABELĘ POWAŻNYCH RAN wylosował wynik MARTWY. Rezultat 2-5 oznacza, że model opuszcza następną rozgrywkę. Z kolei 6 oznacza POWRÓT DO ZDROWIA."
+  },
+  {
+   "code": 62,
+   "max": 62,
+   "name": "Płonąca budowla",
+   "page": 404,
+   "text": "Losowo określona budowla z nieznanych przyczyn gwałtownie staje w płomieniach.\nWszystkie modele znajdujące się wewnątrz budowli muszą wykonać udany test I lub otrzymają trafienie z SIŁĄ 4 z zasadą specjalną PŁONĄCY ATAK.\nBudowla będzie płonąć do zakończenia rozgrywki, a wszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub NIEUMARŁY lub OPĘTANY, które będą chciały wejść do środka będą musiały wykonać test STRACHU."
+  },
+  {
+   "code": 63,
+   "max": 63,
+   "name": "Pakt wiedzy",
+   "page": 404,
+   "text": "Rzeczywistość zapada się w sobie, a następnie z trzaskiem wywraca na lewą stronę, gdy z Immaterium przebija się upiorne spojrzenie jednego z Panów Przemian.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię! lub Uciekający!, musi wykonać test CP.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Tzeentcha i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 64,
+   "max": 64,
+   "name": "Wichura",
+   "page": 404,
+   "text": "Gwałtowne podmuchy wiatru gaszą pochodnie i nieosłonięte latarnie, kołyszą drzewami oraz utrudniają poruszanie się.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwała będzie wichura.\nW fazie ruchu modele nie mogą biegać oraz wykonać wysokiego lotu, a zasięg ruchu modeli latających zostaje zmniejszony do 4”.\nWszystkie rzuty na trafienie z broni dystansowej (nieprochowej) wykonywane są z modyfikatorem -2.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą jedynie na 6+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania.\nEfekty wichury odczuwają wszystkie modele znajdujące się pod gołym niebem."
+  },
+  {
+   "code": 65,
+   "max": 65,
+   "name": "Kamienne ręce",
+   "page": 404,
+   "text": "Wiele ofiar Hord Chaosu zostało stopionych z kamieniem tworząc przerażające półżywe posągi. Przebudzone podmuchem Wiatrów Magii ofiary Kamienia Przemian wyciągają swe ręce by pochwycić żywych.\nGracz zdarzenia wybiera dowolny obszar na powierzchni stołu, który należy przykryć 3” okrągłym wzornikiem.\nDo początku następnej tury gracza zdarzenia teren przykryty wzornikiem należy traktować jako teren bardzo trudny."
+  },
+  {
+   "code": 66,
+   "max": 66,
+   "name": "Gladiator",
+   "page": 404,
+   "text": "Na pole bitwy wkracza Gladiator.\nNajemne Ostrze węsząc możliwość zarobku narzuca swe usługi kompanii, która posiada najniższe notowania prestiżu drużyny, nawet jeśli drużyna normalnie nie może zatrudnić Gladiatora.\nJeżeli dwie kompanie posiadają takie same notowania prestiżu drużyny należy wykonać rzut kostką, aby określić drużynę, do której przyłączy się Gladiator.\nNa czas bieżącej rozgrywki należy zapisać charakterystykę Gladiatora na KARCIE DRUŻYNY, współczynniki zamieszczone zostały w paragrafie NAJEMNE OSTRZA w ROZDZIALE 15: NAJEMNE OSTRZA & POSTACI DRAMATU.\nJeśli Gladiator przeżyje rozgrywkę to przed odejściem zażąda żołdu za swe usługi.\nJeśli drużyna nie zapłaci lub w jej szeregach służy już Gladiator to najmita wyładuje swą frustrację na losowo wybranym bohaterze i odejdzie. Dla pobitego bohatera należy natychmiast wykonać rzut w TABELI POWAŻNYCH RAN."
+  }
+ ],
+ "outside": [
+  {
+   "code": 11,
+   "max": 11,
+   "name": "Miotacz ołowiu",
+   "page": 399,
+   "text": "Z głośnym rykiem, na pole bitwy wkracza Ogr.\nMiotacz Ołowiu wyczuwając możliwość zarobku narzuca swe usługi kompanii, która posiada najniższe notowania prestiżu drużyny, nawet jeśli drużyna normalnie nie może zatrudnić Miotacza Ołowiu.\nJeżeli dwie kompanie posiadają takie same notowania należy wykonać rzut kostką, aby określić drużynę, do której przyłączy się Ogr.\nNa czas bieżącej rozgrywki należy zapisać charakterystykę Ogra na KARCIE DRUŻYNY, współczynniki zamieszczone zostały w paragrafie NAJEMNE OSTRZA w ROZDZIALE 15: NAJEMNE OSTRZA & POSTACI DRAMATU.\nJeśli Miotacz Ołowiu przeżyje rozgrywkę to przed odejściem zażąda żołdu za swe usługi.\nJeśli drużyna nie zapłaci lub w jej szeregach służy już Miotacz Ołowiu lub Ochroniarz to Ogr wyładuje swą frustrację na losowo wybranym bohaterze i odejdzie. Dla pobitego bohatera należy natychmiast wykonać rzut w TABELI POWAŻNYCH RAN."
+  },
+  {
+   "code": 12,
+   "max": 12,
+   "name": "Glify",
+   "page": 399,
+   "text": "Losowo określony model bohatera, który nie jest związany walką wręcz lub nie został Oszołomiony! lub Powalony na ziemię! lub nie Ucieka!, należący do gracza zdarzenia dostrzega tajemnicze glify wyryte na pobliskim głazie. Należy wykonać rzut K6, a wynik odczytać z poniższej tabeli.\nK6 REZULTAT 1 Głaz obraca się w pył.\n2 Bohater złamał zaklętą pieczęć i zostaje objęty działaniem zaklęcia KLĄTWA SHYISH (zobacz paragraf TRADYCJA ŚMIERCI w ROZDZIALE 22: MAGIA), następnie należy powtórzyć rzut K6 przerzucając rezultat 2.\n3 Glify zawierają informacje o kosztownościach ukrytych w pobliżu, bohater odnajduje K6x5 zk.\n4 Glify zawiera informacje na temat okolicznych kryjówek myśliwych i traperów. Do zakończenia rozgrywki model bohatera może się UKRYĆ na terenie otwartym.\n5 Model odnajduje plan tuneli. Na początku następnej tury bohater może pojawić się w odległości do 2” od wybranego przez gracza zdarzenia PRASTAREGO DRZEWA.\n6 Na głazie wyryto mapę okolicy, a gracz zdarzenia może automatycznie wybrać następny scenariusz, który będzie rozgrywany."
+  },
+  {
+   "code": 13,
+   "max": 13,
+   "name": "Popłoch",
+   "page": 399,
+   "text": "Spłoszone leśne zwierzęta wybiegają w pełnym galopie z lasu, pędząc wprost na zaskoczonych drużynników, modele przerywają dotychczasowe działania i ze wszystkich sił starają się uniknąć stratowania.\nTura gracza zdarzenia zostaje natychmiast zakończona."
+  },
+  {
+   "code": 14,
+   "max": 14,
+   "name": "Wichura",
+   "page": 399,
+   "text": "Gwałtowne podmuchy wiatru gaszą pochodnie i nieosłonięte latarnie, kołyszą drzewami oraz utrudniają poruszanie się.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwała będzie wichura.\nW fazie ruchu modele nie mogą biegać oraz wykonać wysokiego lotu, a zasięg ruchu modeli latających zostaje zmniejszony do 4”.\nWszystkie rzuty na trafienie z broni dystansowej (nieprochowej) wykonywane są z karą -2.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą jedynie na 6+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania.\nEfekty wichury odczuwają wszystkie modele znajdujące się pod gołym niebem."
+  },
+  {
+   "code": 15,
+   "max": 15,
+   "name": "Fantasmagoria",
+   "page": 399,
+   "text": "Silny wiatr podnosi z ziemi tumany kurzu, liści i kwiatów. Fragmenty zaczynają łączyć się tworząc upiorne, lubieżne iluzje napełniające serca śmiertelników strachem i pożądaniem.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nW trakcie trwania zdarzenia losowego, wszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub NIEUMARŁY lub OPĘTANY, znajdujące się na stole przeprowadzając test oparty na współczynniku CP wykonują rzut 3K6 odrzucając kostkę z najniższym wynikiem."
+  },
+  {
+   "code": 16,
+   "max": 16,
+   "name": "Pakt przetrwania",
+   "page": 399,
+   "text": "Rzeczywistość wypacza się i pęka niczym nabrzmiały wrzód, gdy Nurgle kieruje swe zaropiałe oko na jednego ze śmiertelników. Materia zostaje skażona tłustym, cuchnącym błogosławieństwem Pana Choroby, które przychodzi na świat w plugawym smrodzie.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię! lub Uciekający!, musi wykonać test WT.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nZ kolei nieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Nurgla i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 21,
+   "max": 21,
+   "name": "Wilczy dół",
+   "page": 400,
+   "text": "Pod stopami należącego do kompanii gracza zdarzenia losowo określonego modelu, który nie podlega zasadzie specjalnej GENIUS lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub LOT, zapada się ziemia.\nModel musi natychmiast wykonać test SIŁY albo INICJATYWY w zależności od tego, który ze współczynników modelu jest większy.\nUdany test oznacza, że model zdołał uniknąć upadku.\nNieudany test oznacza, że model zostaje uwięziony w wilczym dole i do końca rozgrywki traktowany jest jako Wyłączony z akcji!. Za wyłączony w ten sposób model nie należy w sekwencji po potyczce wykonywać rzutów na TABELĘ POWAŻNYCH RAN."
+  },
+  {
+   "code": 22,
+   "max": 23,
+   "name": "Leśne licho",
+   "page": 400,
+   "text": "Prastare lasy roją się od wszelkiego rodzaju duchów. W swych prawdziwych formach są to najczęściej lśniące, kuliste poświaty bądź widmowe kształty. Znane są pod wspólną nazwą Leśnego Licha, zastępów nieobliczalnych i upartych istot, które równie dobrze wyratować mogą zbłąkanego podróżnika jak też powieść go do zguby.\nAby określić skutki jakie przyniesie zdarzenie należy losowo określić model bohatera należący do gracza zdarzenia, także związany walką wręcz i wykonać rzut K6, a wynik odczytać z poniższej tabeli:\nK6 REZULTAT 1 DZIERZBY! Postać zostaje obrana na cel przez niesione na grzbiecie ptaków Dzierzby.\nNależy wykonać rzut 2K6, wynik 8+ oznacza, że model otrzymuje trafienie z SIŁĄ 4 z zasadą specjalną MAGICZNY ATAK i PRZEBICIE PANCERZA.\n2 PSOTNIKI! Postać zostaje omamiona przez Psotniki.\nModel, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, do zakończenia rozgrywki podlega zasadzie specjalnej GŁUPOTA.\n3 PRZERAŻACZE! Postać zostaje omamiona i przestraszona iluzjami wywołanymi przez leśne licho.\nModel musi wykonać test STRACHU. Nieudany test oznacza, że Ucieka! w losowo określonym kierunku.\n4 ZŁOŚLIWCE! Postać zostaje otoczona przez maleńkich, skrzydlatych wojowników uzbrojonych w maciupkie bronie.\nModel w najbliższej fazie walki wręcz podlega zasadą specjalnym MAGICZNY ATAK oraz ZATRUTY ATAK i ŻNIWIARZ.\n5 PROMIENIUSZKI! Postać napotyka rój Promieniuszków, które prowadzą ją poprzez sieć świetlistych tuneli.\nModel może w fazie ruchu wykonać LOT na 16”, który może być również ruchem szarży (szarża ta podlegać będzie wszystkim zasadom szarży, z wyjątkiem tego, że nie można próbować przejąć szarży modelu, który wykonał LOT). Model może także, jeśli gracz sobie tego życzy, przerwać walkę, w której brał udział, ale w takim wypadku nie będzie mógł szarżować.\n6 ŚWIETLIKI! Postać odnajduje pozostawione przez Świetliki znaki i symbole.\nGracz zdarzenia może automatycznie wybrać następny scenariusz, który będzie rozgrywany."
+  },
+  {
+   "code": 24,
+   "max": 24,
+   "name": "Pakt percepcji",
+   "page": 400,
+   "text": "Osłona rzeczywistości zostaje rozdarta, gdy na niebie zaczynają kłębić się pastelowe chmury, a pole bitwy owiewa lubieżny wiatr. Slaanesh kierowany chwilowym kaprysem zwraca swe spojrzenie na jednego ze śmiertelników, by zaoferować mu swe wątpliwe błogosławieństwo.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię! lub Uciekający!, musi wykonać test I.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Księcia Chaosu i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 25,
+   "max": 25,
+   "name": "Wrzody",
+   "page": 400,
+   "text": "Losowo określony model należący do gracza zdarzenia, także taki który jest związany walką wręcz, zostaje pogryziony przez plugawe Nurglingi, które śmiejąc się radośnie wyskoczyły z pobliskiej sterty odchodów.\nPokąsany przez Nurglingi modelu musi wykonać test WT.\nNieudany test oznacza, że model traci 1 punkt Żw bez możliwości skorzystania z Ochrony Pancerza."
+  },
+  {
+   "code": 26,
+   "max": 26,
+   "name": "Piekielny żar",
+   "page": 400,
+   "text": "Chmury skrywające słońce z głośnym sykiem znikają z przestworzy, a pole bitwy przez K3 rundy zalewają fale piekielnego żaru.\nWszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub UPORCZYWOŚĆ, wyekwipowane w LEKKI PANCERZ lub ŚREDNI PANCERZ lub CIĘŻKI PANCERZ i znajdujące się pod gołym niebem do końca trwania zdarzenia losowego otrzymują modyfikator -1 do współczynników SZ i S."
+  },
+  {
+   "code": 31,
+   "max": 31,
+   "name": "Silny wiatr",
+   "page": 401,
+   "text": "Podmuchy porywistego wiatru poruszają konarami i kołyszą drzewami.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwał będzie silny wiatr.\nW fazie ruchu modele nie mogą wykonać wysokiego lotu, a dystans ruchu modeli latających zostaje zmniejszony do 8”.\nWszystkie rzuty na trafienie wykonywane dla broni dystansowej (nieprochowej) przeprowadzane są z karą -1.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa)wypalą na 4+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania.\nEfekty silnego wiatru odczuwają wszystkie modele znajdujące się pod gołym niebem."
+  },
+  {
+   "code": 32,
+   "max": 32,
+   "name": "Szał",
+   "page": 401,
+   "text": "Losowo określony model, który podlega zasadzie specjalnej LEŚNY DUCH lub POTWÓR lub ZWIERZĘ, należący do kompanii gracza zdarzenia zostaje opętany przez leśne licho.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwał będzie szał.\nW trakcie trwania zdarzenia losowego oszalały model natychmiast szarżuje i będzie walczyć z najbliższym sprzymierzonym drużynnikiem.\nModel podlegające zasadzie specjalnej WIERZCHOWIEC atakuje dosiadającego go KAWALERZYSTĘ, a ZWIERZĘ POCIĄGOWE atakuje woźnicę.\nPo zakończeniu zdarzenia losowego modele które walczyły wręcz należy ustawić 1” od siebie."
+  },
+  {
+   "code": 33,
+   "max": 33,
+   "name": "Błędne ogniki",
+   "page": 401,
+   "text": "Nad losowo określonym modelem należącym do kompanii gracza zdarzenia pojawiają się eteryczne ognie.\nBłędne ogniki w każdej turze przemieszczają się w kierunku wyznaczonym za pomocą Kostki Rozrzutu, wynik TRAFIENIE! oznacza, że pozostają w miejscu.\nDystans należy wyznaczyć za pomocą rzutu Kostką Artyleryjską, wynik NIEWYPAŁ!\noznacza, że istoty eteryczne po wykonaniu ruchu znikają równie nagle jak się pojawiły.\nNależy użyć 3” okrągłego wzornika, którego środek należy umieścić w miejscu pojawienia się błędnych ogników.\nTrafione modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, które znalazły się na drodze istot eterycznych, na początku każdej własnej tury, w fazie rozpoczęcia tury muszą przeprowadzić test CP wykonując rzut 3K6 i odrzucając kostkę z najniższym wynikiem.\nNieudany test oznacza, że model obraca się (wokół środka podstawki) w kierunku na wprost od błędnych ogników i zaczyna Uciekać!."
+  },
+  {
+   "code": 34,
+   "max": 34,
+   "name": "Bagno",
+   "page": 401,
+   "text": "Gracz zdarzenia wybiera dowolny obszar na powierzchni stołu, który należy przykryć 3”\nokrągłym wzornikiem.\nTrafione modele, które nie podlegają zasadzie specjalnej GENIUS lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub LOT, które posiadają Ochronę Pancerza muszą natychmiast wykonać test SIŁY albo INICJATYWY w zależności od tego, który ze współczynników modelu jest większy.\nUdany test oznacza, że udało im się uniknąć zapadnięcia w bagnie.\nNieudany test oznacza, że model musi wykonać rzut na Ochronę Pancerza. Udany rzut na Ochronę Pancerza oznacza, że obciążony zbroją model zapada się w bagnie i zostaje natychmiast Powalony na ziemię!."
+  },
+  {
+   "code": 35,
+   "max": 35,
+   "name": "Pakt dominacji",
+   "page": 401,
+   "text": "Potężny ryk wydobywający się z mosiężnego gardła Pana Krwi przetacza się nad horyzontem. Khorne kieruje swe ogniste spojrzenie na jednego ze śmiertelników.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię!\nlub Uciekający!, musi wykonać test S.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Khorna i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 36,
+   "max": 36,
+   "name": "Złowady",
+   "page": 401,
+   "text": "Mroczny cień rozpaczy i beznadziei spowija okolicę w ciemnościach, gdy nad polem bitwy pojawia się złowieszczy rój przeklętych Złowadów.\nNależy użyć 3” okrągłego wzornika, który będzie reprezentował rój Złowadów.\nZłowady poruszają się o 2K6” w losowo określonym kierunku, ignorując kary za ruch przez przeszkody i rodzaje terenu (z wyjątkiem terenu niedostępnego). Rój złowadów nie może zostać obrany na cel zaklęć lub modlitw, związany walką wręcz oraz ostrzelany (także magicznymi pociskami), a wszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY) które znajdą się na drodze Złowadów muszą wykonać udany test WT lub zostaną Powalone na ziemię!."
+  },
+  {
+   "code": 41,
+   "max": 41,
+   "name": "Mgła",
+   "page": 402,
+   "text": "Okolicę spowija gęsta, zimna i lepka mgła, która pochłania w mlecznym oparze pobliskie zabudowania.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwała będzie mgła.\nPole widzenia modeli, które nie podlegają zasadzie specjalnej DEMON lub LEŚNY DUCH lub ISTOTA ETERYCZNA lub NIEUMARŁY lub OPĘTANY, zostaje ograniczone do 3K6”. Rzut określający zasięg pola widzenia, należy wykonać na początku tury każdego z graczy, a wynik obowiązuje wszystkie należące do kompanii modele.\nWszystkie rzuty na trafienie wykonywane dla broni dystansowych przeprowadzane są z karą -1."
+  },
+  {
+   "code": 42,
+   "max": 42,
+   "name": "Uroczysko",
+   "page": 402,
+   "text": "Nienaturalna cisza i duszna, złowroga atmosfera uroczyska rozciągają się nad polem bitwy.\nStrzępy Immaterium mamią i zwodzą zmysły śmiertelników.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nDopóki zdarzenie losowe będzie miało miejsce wartość współczynnika CP wszystkich modeli, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub NIEUMARŁY lub OPĘTANY, znajdujących się na powierzchni stołu zostaje zmniejszona o -1 punkt (aż do minimalnej wartości 2 punktów)."
+  },
+  {
+   "code": 43,
+   "max": 43,
+   "name": "Chłościel",
+   "page": 402,
+   "text": "Losowo określony model, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY, należący do kompanii gracza zdarzenia zostaje zaatakowany przez mięsożerną roślinę.\nRoślina zwana przez mieszkańców Imperium Chłościelem żywi się krwią i niewielkimi kawałkami mięsa, które wyrywa z ciała ofiary długą, pokrytą ostrymi kolcami witką.\nTrafiony model otrzymuje uderzenie z SIŁĄ K6 z zasadą specjalną PRECYZYJNE UDERZENIE i PRZEBICIE PANCERZA."
+  },
+  {
+   "code": 44,
+   "max": 44,
+   "name": "Niechaj będzie wola moja!",
+   "page": 402,
+   "text": "Ziemia drży, gdy przez horyzont przetacza się gardłowy śmiech Pana Krwi.\nKhorne obdarza zgromadzonych na polu bitwy śmiertelników wątpliwą łaską swego spojrzenia.\nWszystkie modele należące do gracza zdarzenia, które nie są związane walką wręcz muszą wykonać test SIŁY.\nNieudany test oznacza, że tchórzliwa i słaba postać z woli Pana Krwi zostaje Powalona na ziemię!."
+  },
+  {
+   "code": 45,
+   "max": 45,
+   "name": "Potęga magii",
+   "page": 402,
+   "text": "Nad horyzontem przetacza się skrzek jednego z Panów Przemian, a powietrze nad polem bitwy zaczyna iskrzyć od nadmiaru energii magicznej, która przedostała się do rzeczywistości z Immaterium.\nJeżeli w kompanii gracza zdarzenia służy model z zasadą specjalną MAG, to gracz może natychmiast rzucić jedno z zaklęć. Nie wymaga to rzutu na wymagany poziom mocy – zaklęcie rzucone jest automatycznie, a przeciwnik nie ma prawa podjęcia próby rozproszenia zaklęcia.\nPotędze magii nie można się oprzeć!"
+  },
+  {
+   "code": 46,
+   "max": 46,
+   "name": "Studnia",
+   "page": 402,
+   "text": "Pod stopami należącego do kompanii gracza zdarzenia losowo określonego modelu, który nie podlega zasadzie specjalnej GENIUS lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub LOT, zapada się ziemia.\nSpadający model musi natychmiast wykonać test SIŁY albo INICJATYWY w zależności od tego, który ze współczynników modelu jest większy.\nUdany test oznacza, że nieszczęśnik w miarę bezpiecznie wylądował na dnie zapomnianej studni.\nNieudany test oznacza, że model otrzymuje trafienie z SIŁĄ K3 bez możliwości skorzystania z Ochrony Pancerza.\nJeżeli model w wyniku upadku nie zostanie Wyłączony z akcji! to po zakończeniu rozgrywki kompania zwiększa liczbę znalezionych w fazie eksploracji Łupów! o +1.\nJeżeli model nie posiada liny z hakiem lub nie podlega zasadzie specjalnej MUROŁAZ to pozostaje uwięziony na dnie studni i do końca rozgrywki traktowany jest jako Wyłączony z akcji!. Za wyłączony w ten sposób z rozgrywki model nie należy w sekwencji po potyczce wykonywać rzutów na TABELĘ POWAŻNYCH RAN.\nModel, który posiada linę z hakiem lub podlega zasadzie specjalnej MUROŁAZ po K3 turach pojawia się na górze szybu."
+  },
+  {
+   "code": 51,
+   "max": 51,
+   "name": "Nieoczekiwana zamiana miejsc",
+   "page": 403,
+   "text": "Nieboskłon rozdziera przenikliwy, perwersyjny śmiech Slaanesha, który z lubieżnym uśmiechem oszukując przestawia figury na boskiej szachownicy.\nK3 losowo określone modele bohaterów (lub stronników, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!, także związane walką wręcz lub Oszołomione! lub Powalone na ziemię! lub Uciekające!) należące do gracza zdarzenia zamienia się miejscem z losowo określonymi modelami należącymi do kompanii przeciwnika."
+  },
+  {
+   "code": 52,
+   "max": 52,
+   "name": "Gorączka",
+   "page": 403,
+   "text": "Gracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie Aby określić skutki jakie przyniesie zdarzenie losowe należy losowo określić model bohatera, także związanego walką wręcz, należącego do gracza zdarzenia i wykonać rzut K6, zaś wynik odczytać z poniższej tabeli:\nK6 REZULTAT 1-2 OSPA! Na czas trwania zdarzenia losowego wartość współczynników WW, US, S i CP bohatera zostają zmniejszone o -1 punkt (do minimalnej wartości 1).\n3-4 STRUPY! Na czas trwania zdarzenia losowego, wartość współczynnika WT bohatera zostaje zmniejszona o -1 punkt (do minimalnej wartości 1).\n5-6 TRĄD! Należy umieścić obok bohatera sześciościenną kostkę, tak aby wskazywała wynik ‘1’. W trakcie trwania zdarzenia losowego na początku każdej tury bohatera należy obracać kostkę tak, by wskazywała wynik o +1 większy. Wynik na kostce oznacza ujemny modyfikator do współczynników S i WT jaki otrzymuje ofiara zdarzenia losowego (do minimalnej wartości 1)."
+  },
+  {
+   "code": 53,
+   "max": 53,
+   "name": "Krwawiec",
+   "page": 403,
+   "text": "Przebudzone podmuchami Dhar mięsożerne rośliny wyciągają swe korzenie by ugasić pragnienie.\nGracz zdarzenia wybiera dowolny obszar na powierzchni stołu, który należy przykryć 3” okrągłym wzornikiem.\nTrafione modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY otrzymują uderzenie z SIŁĄ K3."
+  },
+  {
+   "code": 54,
+   "max": 54,
+   "name": "Pakt wiedzy",
+   "page": 403,
+   "text": "Rzeczywistość zapada się w sobie, a następnie z trzaskiem wywraca na lewą stronę, gdy z Immaterium przebija się upiorne spojrzenie jednego z Panów Przemian.\nLosowo określony model bohatera (lub stronnika, jeśli w momencie rozpoczęcia zdarzenia losowego wszystkie służące w szeregach drużyny modele bohaterów zostały Wyłączone z akcji!), także związany walką wręcz lub Oszołomiony! lub Powalony na ziemię! lub Uciekający!, musi wykonać test CP.\nUdany test oznacza, że model bohatera otrzymuje +1 Punkt Doświadczenia.\nNieudany test oznacza, że bohater ‘odrzucił’ błogosławieństwo Tzeentcha i zostaje natychmiast Wyłączony z akcji!."
+  },
+  {
+   "code": 55,
+   "max": 55,
+   "name": "Sadzawka Dhar",
+   "page": 403,
+   "text": "Emocje i pragnienia toczących potyczkę drużynników ściągają na pole bitwy silne podmuchy Wiatrów Magii, które zostają wessane i zdruzgotane przez spoczywający pod powierzchnią ziemi odłamek Upiorytu. Zakłócenia spowodowane przenikaniem Immaterium do świata materialnego wypaczają wszelkie próby splatania zaklęć.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nAby określić jaki wpływ na rzucane zaklęcia będzie miała sadzawka Dhar na początku każdej fazy magii należy wykonać rzut K6 i odczytać wynik z poniższej tabeli:\nK6 REZULTAT 1 Upioryt wysysa magiczną energię zgromadzoną nad polem bitwy. Wszystkie zaklęcia pozostające aktualnie w grze zostają automatycznie rozproszone.\nPrzepadają także wszystkie Kostki Mocy i Rozproszenia przechowywane w magicznych przedmiotach. Faza magii zostaje natychmiast zakończona.\n2 Wymagany poziom mocy wszystkich zaklęć zostaje zwiększony o +K3 punkty.\n3 Zasięg wszystkich zaklęć zostaje zmniejszony o połowę.\n4 Wymagany poziom mocy wszystkich zaklęć zostaje zmniejszony o -K3 punkty.\n5 Zasięg wszystkich zaklęć zostaje podwojony.\n6 Na skutek działania Kamienia Przemian pula Kości Mocy zostaje podwojona."
+  },
+  {
+   "code": 56,
+   "max": 56,
+   "name": "Burza",
+   "page": 403,
+   "text": "Niebo nad polem bitwy zaciąga się ciemnymi, burzowymi chmurami.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwała będzie burza.\nW fazie ruchu modele nie mogą biegać oraz wykonać wysokiego lotu, a zasięg ruchu modeli latających zostaje zmniejszony do 8”.\nWszystkie rzuty na trafienie z broni dystansowej (nieprochowej) wykonywane są z modyfikatorem -2.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą jedynie na 6+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania.\nEfekty burzy odczuwają wszystkie modele znajdujące się pod gołym niebem."
+  },
+  {
+   "code": 61,
+   "max": 61,
+   "name": "Cmentarzysko",
+   "page": 404,
+   "text": "Losowo określony model bohatera, który nie jest związany walką wręcz lub nie został Oszołomiony! lub Powalony na ziemię! lub nie Ucieka!, należący do gracza zdarzenia dostrzega wokół siebie dziesiątki ciał, zmasakrowanych i zbezczeszczonych przez Hordy Chaosu.\nPod modelem należy umieścić okrągły 5” wzornik.\nDo zakończenia potyczki, wszystkie modele które wejdą na teren objęty wzornikiem muszą wykonać test STRACHU lub zaczną Uciekać!.\nDo zakończenia potyczki, wszystkie modele, które nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub NIEUMARŁY lub OPĘTANY, które będą chciały wejść na cmentarzysko muszą wykonać test STRACHU.\nModele z zasadą specjalną ISTOTA ETERYCZNA lub NIEUMARŁY, które wejdą na teren objęty wzornikiem podlegają zasadzie specjalnej REGENERACJA."
+  },
+  {
+   "code": 62,
+   "max": 62,
+   "name": "Wulkan",
+   "page": 404,
+   "text": "Gwałtowny huk przetacza się przez nieboskłon, a ziemia trzęsie się w posadach.\nPogrążony przez lata w uśpieniu wulkan wybucha, wyrzucając w niebo chmurę pyłu, żrących gazów i płonącej skały.\nSine chmury suną nisko nad polem bitwy zalewając ziemię strumieniami ognistego deszczu.\nWulkaniczny deszcz pali skórę i wgryza się w kamień i metal.\nGracz zdarzenia wykonuje rzut K3, którego wynik określi, ile rund trwało będzie zdarzenie losowe.\nW czasie trwania zdarzenia losowego wszystkie modele znajdujące się pod otwartym niebem otrzymują trafienie z SIŁĄ K3 z zasadą specjalną PŁONĄCY ATAK bez możliwości skorzystania z Ochrony Pancerza."
+  },
+  {
+   "code": 63,
+   "max": 63,
+   "name": "Dezercja",
+   "page": 404,
+   "text": "Koszmar wojny, śmierć, głód, cierpienie, niekończące się potyczki i przelew krwi, nienawiść, zarazy, bezduszność, chciwość. To, co miała być wspaniałą przygodą okazało się horrorem.\nLosowo określony stronnik, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NAJMITA lub NIEUMARŁY lub ZWIERZĘ opuszcza wraz z posiadanym EKWIPUNKIEM szeregi kompanii gracza zdarzenia.\nModel dezertera należy usunąć z KARTY DRUŻYNY."
+  },
+  {
+   "code": 64,
+   "max": 64,
+   "name": "Dobry omen",
+   "page": 404,
+   "text": "Losowo określony model bohatera, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub NIEUMARŁY lub OPĘTANY, który nie jest związany walką wręcz lub nie został Oszołomiony! lub Powalony na ziemię! lub nie Ucieka!, należący do gracza zdarzenia dostrzega pomyślne znaki, które podnoszą jego morale.\nEfekty zdarzenia losowego trwają K3 tury, w tym czasie model bohatera może przerzucić wszystkie nieudane rzuty na trafienie, zranienie, Ochronę Pancerza oraz Magiczną Ochronę."
+  },
+  {
+   "code": 65,
+   "max": 65,
+   "name": "Ups!",
+   "page": 404,
+   "text": "Losowo określony model bohatera, który nie podlegają zasadzie specjalnej DEMON lub LEŚNY DUCH lub ISTOTA ETERYCZNA lub NIEUMARŁY lub OPĘTANY, który nie jest związany walką wręcz lub nie został Oszołomiony! lub Powalony na ziemię! lub nie Ucieka!) należący do gracza zdarzenia musi wykonać test I.\nNieudany test oznacza, że model potyka się o porastające podłoże cierniste rośliny i zostaje Oszołomiony!.\nJeśli model zdoła podnieść się z ziemi wśród roślin odnajduje K3 porcje ziół, które po spożyciu działają tak jak ELIKSIR WITALNOŚCI (zobacz paragraf TRUCIZNY, MIKSTURY & NARKOTYKI w ROZDZIALE 14: EKWIPUNEK)."
+  },
+  {
+   "code": 66,
+   "max": 66,
+   "name": "Łowca nagród",
+   "page": 404,
+   "text": "Na pole bitwy wkracza Łowca Nagród.\nNajemne Ostrze węsząc możliwość zarobku narzuca swe usługi kompanii, która posiada najniższe notowania prestiżu drużyny, nawet jeśli drużyna normalnie nie może zatrudnić Łowcy Nagród.\nJeżeli dwie kompanie posiadają takie same notowania należy wykonać rzut kostką, aby określić drużynę, do której przyłączy się Łowca Nagród.\nNa czas bieżącej rozgrywki należy zapisać charakterystykę najmity na KARCIE DRUŻYNY, współczynniki zamieszczone zostały w paragrafie NAJEMNE OSTRZA w ROZDZIALE 15: NAJEMNE OSTRZA & POSTACI DRAMATU.\nJeśli Łowca Nagród przeżyje rozgrywkę to przed odejściem zażąda żołdu za swe usługi. Jeśli drużyna nie zapłaci lub w jej szeregach służy już Łowca Nagród to najmita wyładuje swą frustrację na losowo wybranym bohaterze i odejdzie. Dla pobitego bohatera należy natychmiast wykonać rzut w TABELI POWAŻNYCH RAN."
+  }
+ ]
+}

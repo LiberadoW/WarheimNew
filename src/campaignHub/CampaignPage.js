@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import useHidePrintSheet from "../Functions/useHidePrintSheet";
 import RosterView from "./RosterView";
+import RoundsSection from "./RoundsSection";
+import CampaignSettings from "./CampaignSettings";
 import { countModels, plural } from "./roster";
 import {
   deleteCampaign,
@@ -150,8 +152,10 @@ const CampaignPage = () => {
     try {
       await action();
       if (message) setNotice(message);
+      return true;
     } catch (e) {
       setError(describeError(e));
+      return false;
     } finally {
       setBusy(false);
     }
@@ -257,6 +261,17 @@ const CampaignPage = () => {
           ))}
         </ul>
       </section>
+
+      <RoundsSection
+        campaign={campaign}
+        games={games}
+        names={names}
+        user={user}
+        isOrganizer={isOrganizer}
+        act={act}
+      />
+
+      <CampaignSettings campaign={campaign} isOrganizer={isOrganizer} act={act} />
 
       <section className="hub-card">
         <div className="hub-card-head">

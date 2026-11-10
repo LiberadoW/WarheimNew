@@ -1,4 +1,11 @@
-import React, { useState, useContext, useEffect, createContext } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  createContext,
+  lazy,
+  Suspense,
+} from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,14 +21,17 @@ import armies from "../Data.js/Armies";
 import { AuthContext } from "../Context/AuthContext";
 import UserDashboard from "../Components/UserDashboard";
 import MyLists from "../User/MyLists";
-import CampaignsPage from "../campaignHub/CampaignsPage";
-import CampaignPage from "../campaignHub/CampaignPage";
 import Header from "./Header";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { filterMercenaries } from "../Functions/filterMercenaries";
 import { withChaosMark } from "../Functions/chaosMark";
 import useLocalStorage from "use-local-storage";
 import "../index.css";
+
+// Campaign pages carry the scenario and rule texts; load them only when opened.
+const CampaignsPage = lazy(() => import("../campaignHub/CampaignsPage"));
+const CampaignPage = lazy(() => import("../campaignHub/CampaignPage"));
+const pageFallback = <div className="hub-page">Wczytywanie…</div>;
 
 export const EditArmyContext = createContext();
 
@@ -285,7 +295,9 @@ const App = () => {
                 path="/campaigns"
                 element={
                   <RequireAuth>
-                    <CampaignsPage />
+                    <Suspense fallback={pageFallback}>
+                      <CampaignsPage />
+                    </Suspense>
                   </RequireAuth>
                 }
               />
@@ -293,7 +305,9 @@ const App = () => {
                 path="/campaigns/join/:code"
                 element={
                   <RequireAuth>
-                    <CampaignsPage />
+                    <Suspense fallback={pageFallback}>
+                      <CampaignsPage />
+                    </Suspense>
                   </RequireAuth>
                 }
               />
@@ -301,7 +315,9 @@ const App = () => {
                 path="/campaigns/:id"
                 element={
                   <RequireAuth>
-                    <CampaignPage />
+                    <Suspense fallback={pageFallback}>
+                      <CampaignPage />
+                    </Suspense>
                   </RequireAuth>
                 }
               />
