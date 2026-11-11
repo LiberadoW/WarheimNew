@@ -65,7 +65,7 @@ test("injuries, a group casualty, an absent hero and an animal survive resume an
   expect(card("Stronnicy #1").getByText(/poległy/).textContent).toMatch(/poległy/);
   dice("Obrażenia", [3], card("Stronnicy #2")); click("Zastosuj obrażenia",card("Stronnicy #2"));
   experienceToExploration(() => {
-    expect(screen.getByLabelText("Dodatkowe PD: Squig").disabled).toBe(true);
+    expect(screen.queryByLabelText("Dodatkowe PD: Squig")).toBeNull();
     expect(screen.getByText("Nie zdobywa PD")).toBeTruthy();
   });
   expect(post(state).units.find(u=>u.uniqueId==="beast").exp).toBe(0);
@@ -99,7 +99,7 @@ test.each(["stat", "skill"])("an unresolved %s advance blocks Next and its selec
   expect(post(state).advances[0].resolved).toBe(true);
   if (kind==="stat") expect(R.currentStats(post(state).units[0])[1]).toBe(5);
   else expect(post(state).units[0].rules).toContain("Błyskawiczny blok");
-  fireEvent.click(screen.getByRole("button",{name:"1. Poważne rany",exact:true}));
+  fireEvent.change(screen.getByLabelText("Etap kampanii"),{target:{value:"1"}});
   click("Dalej: Doświadczenie i rozwój"); expect(screen.queryByRole("button",{name:"Nalicz doświadczenie"})).toBeNull();
   expect(screen.getByText("✓ Doświadczenie naliczone")).toBeTruthy();
   expect(post(state).units[0].exp).toBe(24);

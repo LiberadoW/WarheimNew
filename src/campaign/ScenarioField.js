@@ -7,7 +7,8 @@ import "../styles/CampaignHub.css";
 // rulebook tables (like campaign games), or typed in. A rulebook scenario also
 // sets the area, which is then read from it.
 export default function ScenarioField({ battle, setBattle }) {
-  const [open, setOpen] = useState(!battle.scenario);
+  // The picker is long: it opens only when the player asks for it.
+  const [open, setOpen] = useState(false);
   const record = battle.scenarioRecord || (battle.scenario ? { name: battle.scenario, area: battle.area } : null);
   return (
     <div className="campaign-scenario-field">
@@ -25,6 +26,16 @@ export default function ScenarioField({ battle, setBattle }) {
           </div>
           <button type="button" className="button button-secondary" onClick={() => setOpen(true)}>
             Zmień scenariusz
+          </button>
+        </div>
+      ) : !open ? (
+        <div className="campaign-scenario-chosen">
+          <div>
+            <strong>Nie wybrano</strong>
+            <small>Wylosuj, wybierz z listy albo wpisz własny.</small>
+          </div>
+          <button type="button" className="button button-secondary" onClick={() => setOpen(true)}>
+            Wybierz scenariusz
           </button>
         </div>
       ) : (

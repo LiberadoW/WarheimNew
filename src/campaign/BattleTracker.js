@@ -52,14 +52,23 @@ export default function BattleTracker({ units, setUnits }) {
     (n, u) => n + (u.battleOutOfActionModels || []).filter(Boolean).length,
     0,
   );
+  // Models that can sit out a game: not captured and not resting.
+  const absentCandidates = units
+    .map((u) => ({
+      u,
+      indices: Array.from({ length: R.modelCount(u) }, (_, i) => i).filter(
+        (i) =>
+          !u.campaignModelStatus?.[i]?.captured &&
+          !(u.campaignModelStatus?.[i]?.skip > 0),
+      ),
+    }))
+    .filter((x) => x.indices.length);
   return (
     <section className="campaign-tracker" aria-label="Przebieg potyczki">
       <h3>
         Przebieg potyczki <small>· WzA: {outTotal}</small>
       </h3>
-      <p className="campaign-source">
-        Dotknij modelu, aby oznaczyć go jako wyłączonego z akcji (WzA).
-      </p>
+      <p className="campaign-source">Dotknij modelu, aby oznaczyć go jako WzA.</p>
       {units.map((u) => {
         const count = R.modelCount(u);
         return (
@@ -73,9 +82,9 @@ export default function BattleTracker({ units, setUnits }) {
             </div>
             <div className="campaign-tracker-counters">
               {u.type === "Bohater" &&
-                counter(u, "battleKills", "Pokonani wrogowie")}
+                counter(u, "battleKills", "Wrogowie WzA")}
               {R.canEarnExperience(u) &&
-                counter(u, "battleExp", "PD ze scenariusza")}
+                counter(u, "battleExp", "Dodatkowe PD")}
             </div>
             <div className="campaign-tracker-models" role="group" aria-label={`Wyłączeni z akcji: ${R.label(u)}`}>
               {Array.from({ length: count }, (_, i) => {
@@ -122,45 +131,48 @@ export default function BattleTracker({ units, setUnits }) {
                 );
               })}
             </div>
-            {Array.from({ length: count }).some(
-              (_, i) =>
-                !u.campaignModelStatus?.[i]?.captured &&
-                !(u.campaignModelStatus?.[i]?.skip > 0),
-            ) && (
-              <details className="campaign-help campaign-tracker-absent">
-                <summary>
-                  Nieobecni na stole (
-                  {(u.battleAbsentModels || []).filter(Boolean).length})
-                </summary>
-                <div className="campaign-chips">
-                  {Array.from({ length: count }, (_, i) => {
-                    const status = u.campaignModelStatus?.[i] || {};
-                    if (status.captured || status.skip > 0) return null;
-                    const name = count > 1 ? `#${i + 1}` : "Model";
-                    return (
-                      <label className="campaign-chip-toggle" key={i}>
-                        <input
-                          type="checkbox"
-                          aria-label={`Nieobecny: ${R.label(u)} ${name}`}
-                          checked={!!u.battleAbsentModels?.[i]}
-                          onChange={(e) =>
-                            edit(u.uniqueId, (x) => {
-                              x.battleAbsentModels[i] = e.target.checked;
-                              if (e.target.checked)
-                                x.battleOutOfActionModels[i] = false;
-                            })
-                          }
-                        />
-                        <span>{name}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </details>
-            )}
           </article>
         );
       })}
+      {absentCandidates.length > 0 && (
+        <details className="campaign-help campaign-tracker-absent">
+          <summary>
+            Nieobecni na stole (
+            {units.reduce(
+              (n, u) => n + (u.battleAbsentModels || []).filter(Boolean).length,
+              0,
+            )}
+            )
+          </summary>
+          {absentCandidates.map(({ u, indices }) => (
+            <div className="campaign-absent-row" key={u.uniqueId}>
+              <span>{R.label(u)}</span>
+              <div className="campaign-chips">
+                {indices.map((i) => {
+                  const name = R.modelCount(u) > 1 ? `#${i + 1}` : "Model";
+                  return (
+                    <label className="campaign-chip-toggle" key={i}>
+                      <input
+                        type="checkbox"
+                        aria-label={`Nieobecny: ${R.label(u)} ${name}`}
+                        checked={!!u.battleAbsentModels?.[i]}
+                        onChange={(e) =>
+                          edit(u.uniqueId, (x) => {
+                            x.battleAbsentModels[i] = e.target.checked;
+                            if (e.target.checked)
+                              x.battleOutOfActionModels[i] = false;
+                          })
+                        }
+                      />
+                      <span>{name}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </details>
+      )}
     </section>
   );
 }

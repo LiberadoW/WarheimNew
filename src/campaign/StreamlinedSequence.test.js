@@ -74,7 +74,8 @@ test("each confirmation step takes a single click", () => {
 
 test("a step chip ahead never makes the player's decisions for later steps", () => {
   const { state } = setup([hero()], { notes: { kosztownosci: 2 } });
-  fireEvent.click(screen.getByRole("button", { name: /Sprzedaż łupów/ }));
+  // The step picker jumps ahead.
+  fireEvent.change(screen.getByLabelText("Etap kampanii"), { target: { value: "5" } });
   // Jumping ahead stops at the first step that still needs the player.
   expect(battle(state).stage).toBe(2);
   expect(battle(state).post.expApplied).toBeFalsy();
@@ -84,7 +85,7 @@ test("a step chip ahead never makes the player's decisions for later steps", () 
 test("jumping forward confirms only the current step and stops at the next open one", () => {
   const { state } = setup();
   click("Dalej: Doświadczenie i rozwój");
-  fireEvent.click(screen.getByRole("button", { name: /^11\. Podsumowanie$/ }));
+  fireEvent.change(screen.getByLabelText("Etap kampanii"), { target: { value: "11" } });
   expect(battle(state).post.expApplied).toBe(true);
   expect(battle(state).post.campaignPointsApplied).toBeFalsy();
   expect(battle(state).stage).toBe(3);

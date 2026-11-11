@@ -545,6 +545,17 @@ export default function CampaignManager({
     }
   };
   const phase = battle?.stage || 0;
+  // What "Nalicz doświadczenie" will give each model, shown before applying.
+  let expPreview = null;
+  if (phase === 2 && post && !post.expApplied) {
+    try {
+      const next = R.clone(post);
+      R.applyExperience(next);
+      expPreview = Object.fromEntries(next.units.map((u) => [u.uniqueId, u.exp || 0]));
+    } catch {
+      expPreview = null;
+    }
+  }
   const fromCampaign = !!battle?.campaignGame?.gameId;
   const panel = useRef(null);
   const previousStage = useRef(phase);
@@ -655,15 +666,18 @@ export default function CampaignManager({
               <h2>{phase ? STEPS[phase] : "Przebieg potyczki"}</h2>
               <label className="campaign-step-picker">
                 <span>
-                  {phase + 1}/{STEPS.length}
+                  Krok {phase + 1}/{STEPS.length}
                 </span>
                 <select
                   aria-label="Etap kampanii"
                   value={phase}
                   onChange={(e) => {
                     const stage = Number(e.target.value);
-                    if (stage < phase && !(stage === 0 && post))
+                    if (stage < phase && !(stage === 0 && post)) {
+                      setError("");
+                      setNotice("");
                       setBattle({ ...battle, stage });
+                    }
                     else if (stage > phase) goTo(stage);
                   }}
                 >
@@ -697,48 +711,22 @@ export default function CampaignManager({
             </div>
             <p className="campaign-lead">{LEADS[phase]}</p>
             {post && (
-              <dl className="campaign-meters">
-                <div>
-                  <dt>Skarbiec</dt>
-                  <dd>{post.treasury} zk</dd>
-                </div>
-                <div>
-                  <dt>Łupy</dt>
-                  <dd>{post.loot}</dd>
-                </div>
-                <div>
-                  <dt>Awanse</dt>
-                  <dd>
-                    {post.advances.filter((x) => !x.resolved).length
-                      ? `${post.advances.filter((x) => !x.resolved).length} do wyboru`
-                      : "—"}
-                  </dd>
-                </div>
-              </dl>
+              <p className="campaign-status">
+                <span>
+                  Skarbiec <strong>{post.treasury} zk</strong>
+                </span>
+                <span>
+                  Łupy <strong>{post.loot}</strong>
+                </span>
+                {post.advances.some((x) => !x.resolved) && (
+                  <span className="is-pending">
+                    Awanse do wyboru{" "}
+                    <strong>{post.advances.filter((x) => !x.resolved).length}</strong>
+                  </span>
+                )}
+              </p>
             )}
           </div>
-          <nav className="campaign-nav" aria-label="Sekwencja po potyczce">
-            {STEPS.map((s, i) => (
-              <button
-                type="button"
-                key={s}
-                className={i < phase ? "is-done" : undefined}
-                disabled={(i === 0 && !!post) || (!post && i > 1)}
-                aria-current={i === phase ? "step" : undefined}
-                title={i > phase ? `Przejdź do: ${s}` : undefined}
-                onClick={() => {
-                  if (i < phase) {
-                    setError("");
-                    setNotice("");
-                    setBattle({ ...battle, stage: i });
-                  } else if (i > phase) goTo(i);
-                }}
-              >
-                {i < phase && <i className="fa-solid fa-check" aria-hidden="true"></i>}
-                {i}. {s}
-              </button>
-            ))}
-          </nav>
           {error && (
             <p role="alert" className="campaign-error">
               {error}
@@ -807,29 +795,13 @@ export default function CampaignManager({
               </Collapsible>
               <Collapsible collapsed={fromCampaign} title="Popraw dane potyczki">
               {!fromCampaign && <h3>Dane potyczki</h3>}
-              <div className="campaign-battle-scenario" role="group" aria-label="Scenariusz">
-                <span className="campaign-field-label">Scenariusz</span>
-                <Suspense fallback={<p className="campaign-source">Wczytywanie scenariuszy…</p>}>
-                  <ScenarioField battle={battle} setBattle={setBattle} />
-                </Suspense>
-              </div>
               <div className="campaign-grid campaign-battle-data">
-                <label className="wide">
+                <label>
                   Nazwa potyczki
                   <input
                     value={battle.gameName}
                     onChange={(e) =>
                       setBattle({ ...battle, gameName: e.target.value })
-                    }
-                  />
-                </label>
-                <label>
-                  Data
-                  <input
-                    type="date"
-                    value={battle.date}
-                    onChange={(e) =>
-                      setBattle({ ...battle, date: e.target.value })
                     }
                   />
                 </label>
@@ -841,20 +813,6 @@ export default function CampaignManager({
                       setBattle({ ...battle, opponent: e.target.value })
                     }
                   />
-                </label>
-                <label>
-                  Obszar
-                  <select
-                    value={battle.area}
-                    disabled={!!battle.scenarioRecord?.area}
-                    title={battle.scenarioRecord?.area ? "Obszar wynika ze scenariusza" : undefined}
-                    onChange={(e) =>
-                      setBattle({ ...battle, area: e.target.value })
-                    }
-                  >
-                    <option value="inside">Wewnątrz murów</option>
-                    <option value="outside">Poza murami</option>
-                  </select>
                 </label>
                 <label>
                   Wynik
@@ -869,6 +827,41 @@ export default function CampaignManager({
                     <option value="draw">Remis</option>
                   </select>
                 </label>
+                <label>
+                  Data
+                  <input
+                    type="date"
+                    value={battle.date}
+                    onChange={(e) =>
+                      setBattle({ ...battle, date: e.target.value })
+                    }
+                  />
+                </label>
+              </div>
+              <div className="campaign-battle-scenario" role="group" aria-label="Scenariusz">
+                <span className="campaign-field-label">Scenariusz</span>
+                <Suspense fallback={<p className="campaign-source">Wczytywanie scenariuszy…</p>}>
+                  <ScenarioField battle={battle} setBattle={setBattle} />
+                </Suspense>
+              </div>
+              <div className="campaign-grid campaign-battle-data">
+                <label>
+                  Obszar
+                  <select
+                    value={battle.area}
+                    disabled={!!battle.scenarioRecord?.area}
+                    title={battle.scenarioRecord?.area ? "Obszar wynika ze scenariusza" : undefined}
+                    onChange={(e) =>
+                      setBattle({ ...battle, area: e.target.value })
+                    }
+                  >
+                    <option value="inside">Wewnątrz murów</option>
+                    <option value="outside">Poza murami</option>
+                  </select>
+                </label>
+              </div>
+              <h4 className="campaign-subhead">Do punktów kampanii</h4>
+              <div className="campaign-grid campaign-battle-data">
                 <label>
                   Runda zakończenia
                   <NumberInput
@@ -949,6 +942,8 @@ export default function CampaignManager({
                   })()}
                 </p>
               </div>
+              <details className="campaign-section">
+                <summary>Notatki{battle.notes ? " ✓" : ""}</summary>
               <label>
                 Notatki
                 <textarea
@@ -958,6 +953,7 @@ export default function CampaignManager({
                   }
                 />
               </label>
+              </details>
               </Collapsible>
             </>
           ) : (
@@ -984,53 +980,66 @@ export default function CampaignManager({
               )}
               {phase === 2 && (
                 <>
-                  <p>
-                    +1 PD za przeżycie; bohaterowie dodatkowo +1 PD za
-                    przeciwnika WzA. Dodatkowe PD ze scenariusza są dodawane
-                    osobno.
+                  <p className="campaign-muted">
+                    +1 PD za przeżycie, bohaterowie +1 za każdego wroga WzA.
+                    Dodatkowe PD (scenariusz, zdarzenia) wpisz przy postaci.
                     {post.underdog
                       ? ` Żółtodzioby: +${post.underdog.exp} PD dla każdego uczestnika (bez Najemnych Ostrzy).`
                       : ""}
                   </p>
                   <UnderdogGold post={post} update={update} />
-                  <table className="campaign-experience">
-                    <thead>
-                      <tr>
-                        <th>Postać</th>
-                        <th>{post.expApplied ? "Aktualne PD" : "PD przed"}</th>
-                        <th>Przeciwnicy WzA</th>
-                        <th>Dodatkowe PD</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {post.units.map((u) => (
-                        <tr key={u.uniqueId}>
-                          <td data-label="Postać">{R.label(u)}{!R.canEarnExperience(u) && <small className="campaign-no-experience">Nie zdobywa PD</small>}</td>
-                          <td data-label={post.expApplied ? "Aktualne PD" : "PD przed"}>{u.exp || 0}</td>
-                          <td data-label="Przeciwnicy WzA">{u.battleKills || 0}</td>
-                          <td data-label="Dodatkowe PD">
-                            <NumberInput
-                              aria-label={`Dodatkowe PD: ${R.label(u)}`}
-                              type="number"
-                              min="0"
-                              disabled={post.expApplied || !R.canEarnExperience(u)}
-                              value={u.battleExp || 0}
-                              onChange={(e) =>
-                                update((p) => {
-                                  p.units.find(
-                                    (x) => x.uniqueId === u.uniqueId,
-                                  ).battleExp = Math.max(
-                                    0,
-                                    Number(e.target.value),
-                                  );
-                                })
-                              }
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <ul className="campaign-xp-list">
+                    {post.units.map((u) => {
+                      const after = expPreview?.[u.uniqueId];
+                      const earns = R.canEarnExperience(u);
+                      return (
+                        <li key={u.uniqueId}>
+                          <div className="campaign-xp-name">
+                            <strong>{R.label(u)}</strong>
+                            {earns ? (
+                              u.battleKills > 0 && (
+                                <small>Wrogowie WzA: {u.battleKills}</small>
+                              )
+                            ) : (
+                              <small className="campaign-no-experience">Nie zdobywa PD</small>
+                            )}
+                          </div>
+                          <span className="campaign-xp-value">
+                            {after != null && after !== (u.exp || 0) ? (
+                              <>
+                                {u.exp || 0} → <strong>{after}</strong> PD
+                              </>
+                            ) : (
+                              <>
+                                <strong>{u.exp || 0}</strong> PD
+                              </>
+                            )}
+                          </span>
+                          {!post.expApplied && earns && (
+                            <label className="campaign-xp-extra">
+                              <span>Dodatkowe</span>
+                              <NumberInput
+                                aria-label={`Dodatkowe PD: ${R.label(u)}`}
+                                type="number"
+                                min="0"
+                                value={u.battleExp || 0}
+                                onChange={(e) =>
+                                  update((p) => {
+                                    p.units.find(
+                                      (x) => x.uniqueId === u.uniqueId,
+                                    ).battleExp = Math.max(
+                                      0,
+                                      Number(e.target.value),
+                                    );
+                                  })
+                                }
+                              />
+                            </label>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
                   {post.expApplied && (
                     <p className="campaign-done">✓ Doświadczenie naliczone</p>
                   )}
@@ -1085,26 +1094,30 @@ export default function CampaignManager({
               {phase === 7 && <Trade post={post} update={update} army={army} />}
               {phase === 8 && <Drama post={post} update={update} army={army} />}
               {phase === 9 && (
-                <ImmortalRecruits post={post} update={update} army={army} />
+                <>
+                  <Wages post={post} update={update} />
+                  <ImmortalRecruits post={post} update={update} army={army} />
+                  <Recruitment post={post} update={update} army={army} />
+                  {post.effects?.strigosDiscount || post.tradeClosed ? (
+                    <p className="campaign-source">
+                      Handel w tej sekwencji odbył się z taborytami Strigosu i
+                      został zamknięty w kroku 7.
+                    </p>
+                  ) : (
+                    <details className="campaign-card">
+                      <summary>Kup ekwipunek powszechny (nowi rekruci)</summary>
+                      <Trade post={post} update={update} army={army} commonOnly />
+                    </details>
+                  )}
+                  {post.units.some((u) => R.isGroup(u) && R.groupSize(u) > 0) && (
+                    <details className="campaign-card">
+                      <summary>Podziel lub połącz grupy stronników</summary>
+                      <GroupManager post={post} update={update} />
+                    </details>
+                  )}
+                  <Crafting post={post} update={update} />
+                </>
               )}
-              {phase === 9 && <Crafting post={post} update={update} />}
-              {phase === 9 && <Wages post={post} update={update} />}
-              {phase === 9 && (
-                <Recruitment post={post} update={update} army={army} />
-              )}
-              {phase === 9 && <GroupManager post={post} update={update} />}
-              {phase === 9 &&
-                (post.effects?.strigosDiscount || post.tradeClosed ? (
-                  <p className="campaign-source">
-                    Handel w tej sekwencji odbył się z taborytami Strigosu i
-                    został zamknięty w kroku 7.
-                  </p>
-                ) : (
-                  <details className="campaign-card">
-                    <summary>Kup ekwipunek powszechny (nowi rekruci)</summary>
-                    <Trade post={post} update={update} army={army} commonOnly />
-                  </details>
-                ))}
               {phase === 10 && (
                 <Inventory post={post} update={update} army={army} />
               )}
@@ -1178,18 +1191,8 @@ export default function CampaignManager({
                     />
                   ))}
               {post.expApplied && <SanityTasks post={post} update={update} />}
-              {phase !== 11 && (
-                <details className="campaign-tools campaign-more">
-                  <summary>Narzędzia: testy, żołd, korekty</summary>
-                  <RollNotebook post={post} update={update} />
-                  <EconomyAdjustment post={post} update={update} />
-                  <UnitAdjustments post={post} update={update} />
-                  {campaign.settings.mutacje && (
-                    <Mutations post={post} update={update} />
-                  )}
-                </details>
-              )}
-              <div className="campaign-more">
+              <details className="campaign-more campaign-extras">
+                <summary>Więcej: zasady, dziennik, narzędzia</summary>
                 {PAGES[phase] && <Reference pages={PAGES[phase]} />}
                 <details>
                   <summary>Dziennik rozliczenia ({post.journal.length})</summary>
@@ -1199,7 +1202,18 @@ export default function CampaignManager({
                     ))}
                   </ul>
                 </details>
-              </div>
+                {phase !== 11 && (
+                  <details className="campaign-tools">
+                    <summary>Narzędzia: testy, żołd, korekty</summary>
+                    <RollNotebook post={post} update={update} />
+                    <EconomyAdjustment post={post} update={update} />
+                    <UnitAdjustments post={post} update={update} />
+                    {campaign.settings.mutacje && (
+                      <Mutations post={post} update={update} />
+                    )}
+                  </details>
+                )}
+              </details>
             </>
           )}
           <div className="campaign-footer">

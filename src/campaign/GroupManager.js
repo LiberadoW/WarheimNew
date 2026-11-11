@@ -8,8 +8,7 @@ export default function GroupManager({ post, update }) {
   const [picked, setPicked] = useState([]);
   if (!groups.length) return null;
   return (
-    <section className="campaign-section">
-      <h3>Grupy stronników</h3>
+    <section aria-label="Grupy stronników">
       <p className="campaign-lead">
         Podziel grupę albo połącz dwie takie same (ten sam oręż, pancerz, PD i
         rozwinięcia).

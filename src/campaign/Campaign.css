@@ -362,7 +362,7 @@
 .campaign-meters dd { margin: 2px 0 0; overflow: hidden; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; text-overflow: ellipsis; }
 .campaign .campaign-nav { display: none; }
 @media (min-width: 900px) {
-  .campaign .campaign-step-picker { display: none; }
+  .campaign .campaign-step-picker { display: flex; }
   .campaign .campaign-nav { display: flex; gap: 4px; margin: -4px 0 16px; }
   .campaign .campaign-nav button { min-height: 32px; padding: 4px 10px; border-radius: 999px; font-size: .78rem; }
   .campaign .campaign-nav button:disabled { opacity: .45; }
@@ -661,3 +661,41 @@
 .campaign-option h4 { margin: 0 0 6px; font-size: 1rem; }
 .campaign-option p { margin: 0 0 10px; }
 .campaign .campaign-option .button { margin-top: 0; }
+
+/* Clearer step screen: one status line, one "more" fold, less chrome. */
+.campaign-status { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 10px 0 0; font-size: .9rem; color: var(--text-muted); }
+.campaign-status strong { color: var(--text); font-variant-numeric: tabular-nums; }
+.campaign-status .is-pending strong { color: var(--accent); }
+.campaign .campaign-head { padding-bottom: 12px; margin-bottom: 14px; }
+.campaign .campaign-lead { margin: 6px 0 0; }
+.campaign .campaign-extras { margin-top: 24px; padding: 4px 0; border-top: 1px solid var(--border); }
+.campaign .campaign-extras > summary { color: var(--text-muted); font-size: .9rem; }
+.campaign .campaign-extras > details { margin: 6px 0 0 4px; padding: 6px 0 6px 12px; border-left: 2px solid var(--border); }
+.campaign .campaign-extras > details > summary { font-size: .9rem; color: var(--text); }
+
+/* Experience: one line per model, with the result before it is applied. */
+.campaign-xp-list { display: flex; flex-direction: column; margin: 12px 0; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+.campaign-xp-list > li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 4px 14px; padding: 10px 12px; border-top: 1px solid var(--border); }
+.campaign-xp-list > li:first-child { border-top: 0; }
+.campaign-xp-name { display: flex; flex-direction: column; min-width: 0; }
+.campaign-xp-name small { color: var(--text-muted); font-size: .8rem; }
+.campaign-xp-value { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.campaign .campaign-xp-extra { flex-direction: row; align-items: center; gap: 6px; font-size: .8rem; color: var(--text-muted); }
+.campaign .campaign-xp-extra input { width: 60px; min-height: 36px; padding: 4px 6px; text-align: center; }
+@media (max-width: 420px) {
+  .campaign-xp-list > li { grid-template-columns: minmax(0, 1fr) auto; }
+  .campaign .campaign-xp-extra { grid-column: 1 / -1; justify-content: flex-end; }
+}
+
+/* Battle tracker: compact unit rows; absences in one fold under the list. */
+.campaign .campaign-tracker-unit { padding: 10px 12px; margin: 8px 0; }
+.campaign .campaign-tracker-counters { gap: 6px 16px; }
+.campaign .campaign-tracker-counter { gap: 6px; }
+.campaign .campaign-tracker-counter > span { min-width: 0; font-size: .8rem; }
+.campaign .campaign-tracker-counter button { width: 36px; min-height: 36px; font-size: 1rem; }
+.campaign-absent-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; padding: 6px 0; border-top: 1px solid var(--border); }
+.campaign-absent-row:first-of-type { border-top: 0; }
+@media (max-width: 600px) {
+  .campaign .campaign-tracker-counter { width: auto; justify-content: flex-start; }
+}
+.campaign .campaign-subhead { margin: 18px 0 8px; font-size: .8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); }

@@ -111,8 +111,8 @@ export function AvailabilityPool({ post, update, compact = false }) {
               <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć wszystkie ({unrolled.length})
             </button>
           )}
-          <details open={!compact && unrolled.length > 0}>
-            <summary>Rzuty, Społem i modyfikatory</summary>
+          <details>
+            <summary>Wpisz rzuty, Społem i modyfikatory</summary>
             <div className="campaign-grid">
               {pool.map((token) => (
                 <div className="campaign-card" key={token.id}>
@@ -217,7 +217,13 @@ export function AvailabilityPool({ post, update, compact = false }) {
         </>
       )}
       {post.availability && ["Kontakty handlowe", "Alchemicy", "Truciciele", "Obrotność"].some((name) => companyLevel(post, name) > 0) && (
-        <>
+        <details className="campaign-help">
+          <summary>
+            Premie z zasad kompanii:{" "}
+            {["Kontakty handlowe", "Alchemicy", "Truciciele", "Obrotność"]
+              .filter((name) => companyLevel(post, name) > 0)
+              .join(", ")}
+          </summary>
           <label>
             Wynik do modyfikacji zasadą kompanii
             <select
@@ -314,7 +320,7 @@ export function AvailabilityPool({ post, update, compact = false }) {
                 </button>
               </>
             )}
-        </>
+        </details>
       )}
       {!compact && <Reference pages={[426]} />}
     </section>

@@ -12,6 +12,9 @@ test("a rulebook scenario sets the area of the skirmish", () => {
     return <ScenarioField battle={battle} setBattle={setBattle} />;
   }
   render(<Harness />);
+  // The picker stays folded until the player opens it.
+  expect(screen.queryByRole("tab", { name: "Wybierz z listy" })).toBeNull();
+  fireEvent.click(screen.getByRole("button", { name: "Wybierz scenariusz" }));
   fireEvent.click(screen.getByRole("tab", { name: "Wybierz z listy" }));
   const select = screen.getByLabelText("Scenariusz");
   const option = within(select).getAllByRole("option").find((o) => o.closest("optgroup")?.label === "Poza murami");
