@@ -4,6 +4,7 @@ import ScenarioPicker, { ScenarioDetails } from "./ScenarioPicker";
 import OptionalRulesPicker, { OptionalRuleChips } from "./OptionalRulesPicker";
 import { AREAS } from "./scenarios";
 import { generatePairings, nextRound, playedPairs } from "./pairings";
+import { settlementLine } from "./gamePlay";
 import {
   addGame,
   createRound,
@@ -142,6 +143,7 @@ const GameCard = ({ campaign, game, names, user, isOrganizer, act }) => {
           <span>
             {game.result.winner === "draw" ? "Remis" : `Wygrywa ${names[game.result.winner] || "gracz"}`}
             {game.result.notes && <span className="hub-muted"> · {game.result.notes}</span>}
+            <span className="hub-muted"> · sekwencje: {settlementLine(game, names)}</span>
           </span>
         </div>
       )}

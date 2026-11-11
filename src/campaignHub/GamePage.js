@@ -20,6 +20,7 @@ import {
   parseModelKey,
   pdSummary,
   randomEventFor,
+  settlementLine,
   toBattle,
   unitPlay,
 } from "./gamePlay";
@@ -493,6 +494,7 @@ export const GameScreen = ({
               : `Wygrywa ${names[game.result?.winner] || "gracz"}`}
             {game.result?.rounds ? <span className="hub-muted"> · {game.result.rounds} rund</span> : null}
           </h3>
+          <p className="hub-muted">Sekwencja po potyczce: {settlementLine(game, names)}</p>
           {settled ? (
             <p className="hub-notice">✓ Sekwencja po potyczce Twojej kompanii jest już rozliczona.</p>
           ) : (
@@ -653,6 +655,9 @@ export const GameScreen = ({
             {game.result?.rounds ? ` · ${game.result.rounds} rund` : ""}
             {game.result?.notes && <span className="hub-muted"> · {game.result.notes}</span>}
           </p>
+        ) : null}
+        {done ? (
+          <p className="hub-muted">Sekwencja po potyczce: {settlementLine(game, names)}</p>
         ) : canEdit ? (
           <form
             className="hub-result-form"

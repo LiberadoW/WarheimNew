@@ -219,3 +219,31 @@ describe("game screen", () => {
     expect(setters.setCampaignNotes).not.toHaveBeenCalled();
   });
 });
+
+describe("both players settle from the same snapshot", () => {
+  const play = { round: 5, units: { b: { sz: { out: { 0: true } } } } };
+  const listB = { armyList: [unit("Szarlatan", { uniqueId: "sz" }), unit("Cyrkowiec", { uniqueId: "c2", selectedNumber: 2 })], prestige: 60 };
+  const game = { id: "g9", campaignId: "c1", round: 3, players: ["a", "b"], status: "done", result: { winner: "a" }, scenario: { name: "Most" } };
+
+  test("the snapshot counts models, those out of action and prestige before the fight", () => {
+    const { companySnapshot } = require("./gamePlay");
+    expect(companySnapshot(listB, play, "b")).toEqual({ models: 3, out: 1, prestige: 60 });
+  });
+
+  test("a later hand-off uses the snapshot, not the opponent's re-uploaded list", () => {
+    // B settled first: Szarlatan died and the list was uploaded with a new prestige.
+    const afterB = { armyList: [unit("Cyrkowiec", { uniqueId: "c2", selectedNumber: 2 })], prestige: 45 };
+    const { battle } = toBattle({
+      savedList: { armyList: armyA }, play, owner: "a",
+      game: { ...game, before: { b: { models: 3, out: 1, prestige: 60 } } },
+      opponentName: "Bartek", opponentList: afterB, campaignName: "Jesień",
+    });
+    expect(battle).toMatchObject({ opponentModels: 3, opponentOut: 1, opponentPrestige: 60 });
+  });
+
+  test("the settlement line names who has settled", () => {
+    const { settlementLine } = require("./gamePlay");
+    expect(settlementLine({ players: ["a", "b"], sequenceDone: { b: {} } }, { a: "Ania", b: "Bartek" }))
+      .toBe("Ania: czeka · Bartek: rozliczona");
+  });
+});

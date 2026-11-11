@@ -54,6 +54,21 @@ export const countOut = (play, owner, armyList = []) =>
     0,
   );
 
+// Both companies as they stood when the result was recorded: models, models
+// out of action and prestige from before the fight (Gniew, Żółtodzioby). A
+// player who settles later must not see the other's post-sequence roster.
+export const companySnapshot = (list, play, owner) => ({
+  models: (list?.armyList || []).reduce((n, u) => n + modelCount(u), 0),
+  out: countOut(play, owner, list?.armyList),
+  prestige: Number(list?.prestige) || 0,
+});
+
+// "Ania: rozliczona · Bartek: czeka" for a finished game.
+export const settlementLine = (game, names = {}) =>
+  (game.players || [])
+    .map((uid) => `${names[uid] || "Gracz"}: ${game.sequenceDone?.[uid] ? "rozliczona" : "czeka"}`)
+    .join(" · ");
+
 // --- Optional-rule PD --------------------------------------------------------
 // A rule's company PD applies when it was used; Nagła śmierć also needs 6+ rounds.
 export const activePdRules = (optionalRules = [], rounds = 0) =>
@@ -122,6 +137,9 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     };
   });
   const winner = game.result?.winner;
+  const opponentId = game.players.find((p) => p !== owner);
+  const opponentBefore =
+    game.before?.[opponentId] || companySnapshot(opponentList, play, opponentId);
   const battle = {
     ...R.newBattle(units),
     gameName: [campaignName, game.round && `runda ${game.round}`].filter(Boolean).join(" · "),
@@ -131,9 +149,10 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     scenarioRecord: game.scenario || null,
     result: winner === "draw" ? "draw" : winner === owner ? "win" : winner ? "loss" : "loss",
     round: Math.max(1, play?.round || 1),
-    opponentModels: (opponentList?.armyList || []).reduce((n, u) => n + modelCount(u), 0),
-    opponentOut: countOut(play, game.players.find((p) => p !== owner), opponentList?.armyList),
-    opponentPrestige: Number(opponentList?.prestige) || 0,
+    // Games recorded before snapshots existed fall back to the current list.
+    opponentModels: opponentBefore.models,
+    opponentOut: opponentBefore.out,
+    opponentPrestige: opponentBefore.prestige,
     campaignGame: { campaignId: game.campaignId || null, gameId: game.id || null },
   };
   return { units, battle };

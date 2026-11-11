@@ -25,6 +25,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../Database/database";
 import { normalizeRosterNames } from "../Data.js/RulebookNames";
+import { companySnapshot } from "./gamePlay";
 
 // No 0/O, 1/I/L: codes are read aloud and typed on phones.
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
@@ -196,12 +197,30 @@ export const markSequenceDone = (campaignId, gameId, uid, entryId) =>
     [`sequenceDone.${uid}`]: { at: serverTimestamp(), entryId: entryId || null },
   });
 
-export const recordResult = (campaignId, gameId, result, user) =>
-  updateGame(campaignId, gameId, {
+// The result also freezes both companies as they were before the fight, so
+// each player's sequence sees the opponent's numbers from the game itself.
+export async function recordResult(campaignId, gameId, result, user) {
+  const game = (await getDoc(doc(db, "campaigns", campaignId, "games", gameId))).data() || {};
+  const players = game.players || [];
+  const lists = await Promise.all(
+    players.map((uid) => getDoc(doc(db, "campaigns", campaignId, "lists", uid))),
+  );
+  // A result recorded again (after "Cofnij wynik") keeps the first models and
+  // prestige: a player may have settled and re-uploaded in between.
+  const before = Object.fromEntries(
+    players.map((uid, i) => {
+      const now = companySnapshot(lists[i].data(), game.play, uid);
+      const first = game.before?.[uid];
+      return [uid, first ? { ...now, models: first.models, prestige: first.prestige } : now];
+    }),
+  );
+  return updateGame(campaignId, gameId, {
     status: "done",
     result: { ...result, recordedBy: user.uid },
     playedAt: serverTimestamp(),
+    before,
   });
+}
 
 export const reopenGame = (campaignId, gameId) =>
   updateGame(campaignId, gameId, { status: "planned", result: null, playedAt: deleteField() });
