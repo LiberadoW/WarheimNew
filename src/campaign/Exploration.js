@@ -114,7 +114,9 @@ export default function Exploration({
     autoTotals,
     autoReason,
     autoRerolls,
+    rerolls,
     result,
+    plan,
   } = explorationState(battle, post, army);
   const eligible = privileges.heroes,
     count = privileges.count;
@@ -291,12 +293,16 @@ export default function Exploration({
         disabled={post.explorationApplied || e.locked}
         onChange={(dice, source) => set({ dice, source, encounter: {} })}
       />
-      {result && !e.locked && (
+      {/* The main button locks the pool itself when rerolls or an encounter
+          need it; otherwise it confirms at once, so this is the way in for a
+          reroll the app does not know about. */}
+      {result && !e.locked && !rerolls && plan.ready && (
         <button
-          className="button button-secondary"
+          type="button"
+          className="button button-ghost campaign-link-button"
           onClick={() => set({ locked: true, originalDice: [...e.dice] })}
         >
-          Zatwierdź pulę eksploracji
+          Przerzut lub korekta przed zatwierdzeniem
         </button>
       )}
       {result && e.locked && (
@@ -424,14 +430,17 @@ export default function Exploration({
               onChange={(encounter) => set({ encounter })}
             />
           )}
-          <label>
-            Notatki eksploracji
-            <textarea
-              disabled={post.explorationApplied}
-              value={e.note || ""}
-              onChange={(ev) => set({ note: ev.target.value })}
-            />
-          </label>
+          <details className="campaign-section">
+            <summary>Notatki eksploracji{e.note ? " ✓" : ""}</summary>
+            <label>
+              Notatki eksploracji
+              <textarea
+                disabled={post.explorationApplied}
+                value={e.note || ""}
+                onChange={(ev) => set({ note: ev.target.value })}
+              />
+            </label>
+          </details>
           {post.explorationApplied && (
             <p className="campaign-done">
               ✓ Eksploracja zatwierdzona · +

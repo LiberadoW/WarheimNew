@@ -59,11 +59,11 @@ const LEADS = [
   "Determinacja, Gniew i Odporność oraz rozwinięcia kompanii.",
   "Pula kostek eksploracji, powtórzenia i znalezione łupy.",
   "Łupy można sprzedać tylko raz w sekwencji.",
-  "Rzut 2K6 na sumę PD rekrutów dołączających do grup.",
+  "Opcjonalne: rekruci z PD dołączający do istniejących grup stronników.",
   "Pula dostępności i zakup rzadkiego ekwipunku.",
-  "Wynajęcie Postaci Dramatu i ich żołd.",
+  "Opcjonalne: wynajęcie Postaci Dramatu i ich żołd.",
   "Nowi drużynnicy, Najemne Ostrza, rzemiosło i grupy stronników.",
-  "Wymiana oręża i ekwipunku między postaciami i skarbcem.",
+  "Opcjonalne: przydziel przedmioty ze skarbca albo odłóż je do niego.",
   "Sprawdź wynik i zapisz rozliczenie.",
 ];
 const PAGES = {

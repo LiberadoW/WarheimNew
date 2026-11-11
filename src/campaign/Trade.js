@@ -69,11 +69,14 @@ export function AvailabilityPool({ post, update, compact = false }) {
       {!compact && (
         <>
           <h3>Pula dostępności</h3>
-          <p className="campaign-muted">
-            Po jednym wyniku 2K6 za każdego bohatera, który nie rzucał na tabelę poważnych ran.
-            Wynik zużywasz na jeden rzadki przedmiot albo rekruta; powszechne przedmioty i rekruci
-            go nie potrzebują. Niewykorzystane wyniki przepadają po sekwencji.
-          </p>
+          <details className="campaign-help">
+            <summary>Jak działa pula?</summary>
+            <p className="campaign-muted">
+              Po jednym wyniku 2K6 za każdego bohatera, który nie rzucał na tabelę poważnych ran.
+              Wynik zużywasz na jeden rzadki przedmiot albo rekruta; powszechne przedmioty i rekruci
+              go nie potrzebują. Niewykorzystane wyniki przepadają po sekwencji.
+            </p>
+          </details>
         </>
       )}
       {pool.length === 0 ? (

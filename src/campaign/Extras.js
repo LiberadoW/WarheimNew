@@ -210,6 +210,8 @@ export const wageUnits = (post) =>
 export function Wages({ post, update }) {
   const mercs = wageUnits(post);
   const [banDice, setBanDice] = useRollDraft(post, update, "wage-refusal", {});
+  // Nothing to pay: the section stays out of the way.
+  if (!mercs.length) return null;
   return (
     <>
       <h3>Żołd Najemnych Ostrzy</h3>

@@ -70,7 +70,7 @@ test("injuries, a group casualty, an absent hero and an animal survive resume an
   });
   expect(post(state).units.find(u=>u.uniqueId==="beast").exp).toBe(0);
   expect(post(state).units.find(u=>u.uniqueId==="absent").exp).toBe(20);
-  dice("Eksploracja",[4]); click("Zatwierdź pulę eksploracji");
+  dice("Eksploracja",[4]); click("Przerzut lub korekta przed zatwierdzeniem");
   resume();
   expect(button("Wynik zapisany").disabled).toBe(true);
   click("Zatwierdź eksplorację i dalej");

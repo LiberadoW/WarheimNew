@@ -77,6 +77,8 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                   </span>
                   <span className="roster-unit-meta">{summary.exp} PD</span>
                 </div>
+                <details className="game-unit-profile">
+                  <summary>Profil, ekwipunek i zasady</summary>
                 <div className="roster-stats-scroll">
                   <table className="roster-stats">
                     <thead>
@@ -109,6 +111,7 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                     ))}
                   </div>
                 )}
+                </details>
                 <div className="game-models">
                   {Array.from({ length: modelCount(unit) }, (_, i) => {
                     const state = modelState(play, owner, unit, i);
@@ -152,7 +155,6 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                     label="Dodatkowe PD"
                     value={Number(p.extraPd) || 0}
                     disabled={!canEdit}
-                    hint="scenariusz, zdarzenia"
                     onChange={(d) => run(() => changeCounter(ids.c, ids.g, owner, unit.uniqueId, "extraPd", d))}
                   />
                 </div>
@@ -561,8 +563,8 @@ export const GameScreen = ({
         )}
       </section>
 
-      <section className="hub-card">
-        <h3>PD z potyczki</h3>
+      <details className="hub-card hub-details">
+        <summary>PD z potyczki</summary>
         <p className="hub-muted">
           Bez +1 za przeżycie: to nalicza sekwencja po potyczce. +1 za zwycięstwo dla DOWÓDCY zwycięzcy
           liczy się po wpisaniu wyniku (scenariusze z podręcznika).
@@ -605,8 +607,10 @@ export const GameScreen = ({
             );
           })}
         </div>
-      </section>
+      </details>
 
+      {/* A player of a finished game sees the result in the card at the top. */}
+      {!(done && isPlayer) && (
       <section className="hub-card">
         <h3>{done ? "Wynik" : "Zakończenie gry"}</h3>
         {done ? (
@@ -648,6 +652,7 @@ export const GameScreen = ({
           <p className="hub-muted">Gra w toku.</p>
         )}
       </section>
+      )}
 
       {rule && (
         <RulesModal

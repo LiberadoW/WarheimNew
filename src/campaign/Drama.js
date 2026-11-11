@@ -115,7 +115,7 @@ export default function Drama({ post, update, army }) {
           )}
         </>
       )}
-      <h3>Żołd Postaci Dramatu za potyczkę</h3>
+      {dramaWageUnits(post).length > 0 && <h3>Żołd Postaci Dramatu za potyczkę</h3>}
       {dramaWageUnits(post).length ? (
         dramaWageUnits(post).map((u) => (
           <DramaWage
@@ -127,7 +127,7 @@ export default function Drama({ post, update, army }) {
           />
         ))
       ) : (
-        <p>Brak Postaci Dramatu wymagających rozliczenia.</p>
+        null
       )}
     </>
   );

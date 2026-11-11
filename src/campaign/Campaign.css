@@ -699,3 +699,16 @@
   .campaign .campaign-tracker-counter { width: auto; justify-content: flex-start; }
 }
 .campaign .campaign-subhead { margin: 18px 0 8px; font-size: .8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); }
+.campaign .campaign-link-button { min-height: 36px; padding: 6px 0; border: 0; background: none; color: var(--text-muted); font-size: .85rem; text-decoration: underline; width: auto; }
+
+/* Stash: one row per item, assigning is the main action. */
+.campaign-stash { margin: 8px 0 12px; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+.campaign-stash > li { padding: 10px 12px; border-top: 1px solid var(--border); }
+.campaign-stash > li:first-child { border-top: 0; }
+.campaign-stash-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.campaign-stash-name { flex: 1 1 160px; min-width: 0; display: flex; flex-direction: column; }
+.campaign-stash-name small { color: var(--text-muted); font-size: .8rem; }
+.campaign .campaign-stash-row .button { width: auto; margin: 0; }
+.campaign-stash-use { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin-top: 8px; }
+.campaign-stash-use label { flex: 1 1 200px; }
+.campaign .campaign-stash-use .button { width: auto; margin: 0; }

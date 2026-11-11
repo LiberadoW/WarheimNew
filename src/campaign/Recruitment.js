@@ -151,7 +151,11 @@ function RecruitmentForm({ post, update, army, mercenary }) {
 export default function Recruitment(props) {
   return (
     <div className="campaign-recruitment-sections">
-      <AvailabilityPool post={props.post} update={props.update} compact />
+      <section aria-label="Pula dostępności dla rekrutów">
+        <h3>Pula dostępności</h3>
+        <p className="campaign-muted">Potrzebna tylko dla rzadkich rekrutów.</p>
+        <AvailabilityPool post={props.post} update={props.update} compact />
+      </section>
       <section className="campaign-card" aria-label="Rekrutacja modeli bandy">
         <h3>Modele bandy</h3>
         <RecruitmentForm {...props} mercenary={false} />
