@@ -545,17 +545,6 @@ export default function CampaignManager({
     }
   };
   const phase = battle?.stage || 0;
-  // What "Nalicz doświadczenie" will give each model, shown before applying.
-  let expPreview = null;
-  if (phase === 2 && post && !post.expApplied) {
-    try {
-      const next = R.clone(post);
-      R.applyExperience(next);
-      expPreview = Object.fromEntries(next.units.map((u) => [u.uniqueId, u.exp || 0]));
-    } catch {
-      expPreview = null;
-    }
-  }
   const fromCampaign = !!battle?.campaignGame?.gameId;
   const panel = useRef(null);
   const previousStage = useRef(phase);
@@ -981,56 +970,69 @@ export default function CampaignManager({
               {phase === 2 && (
                 <>
                   <p className="campaign-muted">
-                    +1 PD za przeżycie, bohaterowie +1 za każdego wroga WzA.
-                    Dodatkowe PD (scenariusz, zdarzenia) wpisz przy postaci.
-                    {post.underdog
-                      ? ` Żółtodzioby: +${post.underdog.exp} PD dla każdego uczestnika (bez Najemnych Ostrzy).`
-                      : ""}
+                    Przy każdej postaci widać, za co dostaje PD. Punkty za
+                    scenariusz lub zdarzenia, których aplikacja nie zna, wpisz
+                    w polu przy postaci.
                   </p>
                   <UnderdogGold post={post} update={update} />
                   <ul className="campaign-xp-list">
                     {post.units.map((u) => {
-                      const after = expPreview?.[u.uniqueId];
                       const earns = R.canEarnExperience(u);
+                      const done = post.expApplied && post.expBreakdown?.[u.uniqueId];
+                      const parts = done ? done.parts : R.experienceBreakdown(post, u);
+                      const gained = parts.reduce((n, x) => n + x.pd, 0);
+                      const from = done ? done.from : u.exp || 0;
+                      const to = done
+                        ? done.to
+                        : Math.min(R.isHero(u) ? 90 : 14, from + gained);
                       return (
                         <li key={u.uniqueId}>
                           <div className="campaign-xp-name">
                             <strong>{R.label(u)}</strong>
-                            {earns ? (
-                              u.battleKills > 0 && (
-                                <small>Wrogowie WzA: {u.battleKills}</small>
-                              )
-                            ) : (
+                            {!earns ? (
                               <small className="campaign-no-experience">Nie zdobywa PD</small>
+                            ) : parts.length ? (
+                              <small className="campaign-xp-parts">
+                                {parts
+                                  .map(
+                                    (x) =>
+                                      `${x.pd > 0 ? "+" : ""}${x.pd} ${x.label.charAt(0).toLowerCase()}${x.label.slice(1)}`,
+                                  )
+                                  .join(" · ")}
+                                {to - from < gained ? ` (limit ${to} PD)` : ""}
+                              </small>
+                            ) : (
+                              <small>Nie grał albo poległ: bez PD</small>
                             )}
                           </div>
                           <span className="campaign-xp-value">
-                            {after != null && after !== (u.exp || 0) ? (
+                            {to !== from ? (
                               <>
-                                {u.exp || 0} → <strong>{after}</strong> PD
+                                {from} → <strong>{to}</strong> PD
                               </>
                             ) : (
                               <>
-                                <strong>{u.exp || 0}</strong> PD
+                                <strong>{post.expApplied ? u.exp || 0 : from}</strong> PD
                               </>
                             )}
                           </span>
                           {!post.expApplied && earns && (
                             <label className="campaign-xp-extra">
-                              <span>Dodatkowe</span>
+                              <span>Za scenariusz / zdarzenia</span>
                               <NumberInput
                                 aria-label={`Dodatkowe PD: ${R.label(u)}`}
                                 type="number"
                                 min="0"
-                                value={u.battleExp || 0}
+                                value={Math.max(0, R.typedBattleExp(u))}
                                 onChange={(e) =>
                                   update((p) => {
-                                    p.units.find(
-                                      (x) => x.uniqueId === u.uniqueId,
-                                    ).battleExp = Math.max(
-                                      0,
-                                      Number(e.target.value),
+                                    const x = p.units.find(
+                                      (y) => y.uniqueId === u.uniqueId,
                                     );
+                                    x.battleExp =
+                                      (Number(x.battleExp) || 0) -
+                                      R.typedBattleExp(x) +
+                                      Math.max(0, Number(e.target.value));
                                   })
                                 }
                               />

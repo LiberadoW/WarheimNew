@@ -843,7 +843,7 @@ export const applyInjury = (post, task, result, detail = {}) => {
       if (d.arena === "win") {
         post.treasury += 50;
         if (post.expApplied) grantExperience(post, unit, 2, "Walki na arenie");
-        else unit.battleExp = (Number(unit.battleExp) || 0) + 2;
+        else addBattleExp(unit, 2, "Walki na arenie");
       } else {
         if (!validDice(d.secondary, 1))
           throw Error("Rzuć na następstwa porażki na arenie.");
@@ -901,7 +901,7 @@ export const applyInjury = (post, task, result, detail = {}) => {
     if (code === 66) {
       if (post.expApplied)
         grantExperience(post, unit, 1, "Przeżył wbrew przeciwnościom");
-      else unit.battleExp = (Number(unit.battleExp) || 0) + 1;
+      else addBattleExp(unit, 1, "Przeżył wbrew przeciwnościom");
     }
     if (code === 36) stripEquipment(unit);
   };
@@ -1193,6 +1193,36 @@ export const assignLeader = (post, unitId) => {
   post.succession = unitId;
   log(post, "leader", `${label(unit)} obejmuje dowództwo po ${label(s.leader)}.`);
 };
+// PD a model earns in this skirmish with a named source, kept so the
+// experience step can show where each point comes from.
+export const addBattleExp = (unit, pd, label) => {
+  unit.battleExp = (Number(unit.battleExp) || 0) + pd;
+  unit.battleExpParts = [...(unit.battleExpParts || []), { label, pd }];
+};
+// What a model gains in the experience step, source by source (s. 414).
+// Empty when it did not take part or did not survive.
+export const experienceBreakdown = (post, u) => {
+  const survived = Array.from(
+    { length: modelCount(u) },
+    (_, i) => !u.battleAbsentModels?.[i] && !u.campaignModelStatus?.[i]?.dead,
+  ).some(Boolean);
+  if (!survived || !canEarnExperience(u)) return [];
+  const parts = [{ label: "Przeżycie", pd: 1 }];
+  const underdog = u.type === "Najemne Ostrze" ? 0 : Number(post.underdog?.exp) || 0;
+  if (underdog) parts.push({ label: "Żółtodzioby", pd: underdog });
+  const kills = u.type === "Bohater" ? Number(u.battleKills) || 0 : 0;
+  if (kills) parts.push({ label: "Wrogowie WzA", pd: kills });
+  const named = (u.battleExpParts || []).filter((x) => Number(x.pd));
+  named.forEach((x) => parts.push({ label: x.label, pd: Number(x.pd) }));
+  const rest = (Number(u.battleExp) || 0) - named.reduce((n, x) => n + Number(x.pd), 0);
+  if (rest) parts.push({ label: rest > 0 ? "Scenariusz, zdarzenia" : "Korekta", pd: rest });
+  return parts;
+};
+// The part of battleExp the player typed (scenario, events): total minus
+// the points that came with a named source.
+export const typedBattleExp = (u) =>
+  (Number(u.battleExp) || 0) -
+  (u.battleExpParts || []).reduce((n, x) => n + (Number(x.pd) || 0), 0);
 export const applyExperience = (post) => {
   if (post.expApplied) throw Error("Doświadczenie już naliczono.");
   if (injuryTasks(post).some((t) => !post.injuries[t.key]))
@@ -1214,14 +1244,15 @@ export const applyExperience = (post) => {
         };
     }
     if (!survivedBattle || !canEarnExperience(u)) return;
-    const gained =
-      1 +
-      // Żółtodzioby (s. 414): bohaterowie i grupy stronników, bez najmitów.
-      (u.type === "Najemne Ostrze" ? 0 : Number(post.underdog?.exp) || 0) +
-      (Number(u.battleExp) || 0) +
-      (u.type === "Bohater" ? Number(u.battleKills) || 0 : 0);
+    // Żółtodzioby (s. 414): bohaterowie i grupy stronników, bez najmitów.
+    const parts = experienceBreakdown(post, u);
+    const gained = parts.reduce((n, x) => n + x.pd, 0);
     const old = Number(u.exp) || 0;
     u.exp = Math.min(isHero(u) ? 90 : 14, old + gained);
+    post.expBreakdown = {
+      ...(post.expBreakdown || {}),
+      [u.uniqueId]: { from: old, to: u.exp, parts },
+    };
     crossed(old, u.exp, u).forEach((threshold) =>
       post.advances.push({
         id: uid(),
@@ -1338,6 +1369,7 @@ const finalizeBattle = (battle, notes) => {
     // Older rosters stored one-off results (Martwy, pauza…) as wounds.
     if (Array.isArray(u.injuries)) u.injuries = lastingInjuries(u.injuries);
     u.battleExp = 0;
+    delete u.battleExpParts;
     u.battleKills = 0;
     u.battleObled = 0;
     u.battlePacts = 0;

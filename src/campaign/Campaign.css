@@ -712,3 +712,4 @@
 .campaign-stash-use { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin-top: 8px; }
 .campaign-stash-use label { flex: 1 1 200px; }
 .campaign .campaign-stash-use .button { width: auto; margin: 0; }
+.campaign-xp-name .campaign-xp-parts { color: var(--text-muted); line-height: 1.4; }

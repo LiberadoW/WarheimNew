@@ -99,12 +99,21 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
   const units = R.clone(savedList.armyList || []).map((unit) => {
     const p = unitPlay(play, owner, unit.uniqueId);
     const n = modelCount(unit);
+    // Named sources first, so the experience step can show them; what the
+    // players added on the game screen stays the typed part.
+    const parts = [
+      ...activePdRules(game.optionalRules, play?.round || 0)
+        .filter((key) => ruleBonusFor(unit, [key], play?.round || 0))
+        .map((key) => ({ label: key.charAt(0) + key.slice(1).toLowerCase(), pd: ruleBonusFor(unit, [key], play?.round || 0) })),
+      ...(winBonusFor(unit, game, owner) ? [{ label: "Zwycięstwo (DOWÓDCA)", pd: 1 }] : []),
+    ];
     return {
       ...unit,
       battleExp:
         (Number(p.extraPd) || 0) +
         ruleBonusFor(unit, game.optionalRules, play?.round || 0) +
         winBonusFor(unit, game, owner),
+      battleExpParts: parts,
       battleKills: isHero(unit) ? Number(p.kills) || 0 : 0,
       battleObled: 0,
       battlePacts: 0,

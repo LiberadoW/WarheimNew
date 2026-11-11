@@ -491,6 +491,8 @@ export default function Trade({ post, update, army, commonOnly = false }) {
       {commonOnly && <p className="campaign-source">Krok 9: nowi rekruci i pozostali drużynnicy mogą kupić przedmioty powszechne. Rzadkie kupujesz w kroku 7.</p>}
       {post.tradeClosed && <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>}
       <fieldset disabled={post.tradeClosed}>
+        {/* The pool comes first: its results decide which rare items can be bought. */}
+        {!commonOnly && !selected && <AvailabilityPool post={post} update={update} />}
         <div className="campaign-shop-recipient">
           <label>Postać
             <select value={inventory ? "inventory" : unitId} onChange={e=>{
@@ -513,7 +515,6 @@ export default function Trade({ post, update, army, commonOnly = false }) {
                 <option value="">Wszystkie kategorie</option>{categories.map(c=><option key={c}>{c}</option>)}
               </select></label>
             </div>
-            {!commonOnly && <AvailabilityPool post={post} update={update} />}
             <details className="campaign-shop-options"><summary>Opcje listy</summary>
               <label className="campaign-check"><input type="checkbox" checked={all} onChange={e=>setAll(e.target.checked)} />Pokaż również niedozwolone dla postaci</label>
             </details>

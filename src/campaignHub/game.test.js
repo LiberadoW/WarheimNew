@@ -86,6 +86,11 @@ describe("game state", () => {
     });
     const m = units.find((u) => u.uniqueId === "m1");
     expect(m).toMatchObject({ battleKills: 2, battleExp: 3 }); // +1 extra, +1 Mgła wojny, +1 zwycięstwo
+    // The named sources travel with the unit; the +1 typed on the game screen stays unnamed.
+    expect(m.battleExpParts).toEqual([
+      { label: "Mgła wojny", pd: 1 },
+      { label: "Zwycięstwo (DOWÓDCA)", pd: 1 },
+    ]);
     const c = units.find((u) => u.uniqueId === "cy");
     expect(c.battleOutOfActionModels).toEqual([false, true, false]);
     expect(c.battleAbsentModels).toEqual([false, false, true]);

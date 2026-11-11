@@ -183,3 +183,22 @@ test("Głód trzewi and Szał change the loot sale without a manual modifier", (
     "Głód trzewi: −1 poziom liczebności", "Szał: +2 do liczby modeli"]));
   expect(q.gold).toBe(R.income(3, 8, 2, 3, -1));
 });
+
+test("the experience step names every source of PD and applies exactly that sum", () => {
+  const h = hero({ battleKills: 2, battleExp: 3,
+    battleExpParts: [{ label: "Zwycięstwo (DOWÓDCA)", pd: 1 }] });
+  const post = R.beginPostBattle(R.newBattle([h]), [h], {}, army).post;
+  post.underdog = { exp: 1 };
+  const parts = R.experienceBreakdown(post, post.units[0]);
+  expect(parts).toEqual([
+    { label: "Przeżycie", pd: 1 },
+    { label: "Żółtodzioby", pd: 1 },
+    { label: "Wrogowie WzA", pd: 2 },
+    { label: "Zwycięstwo (DOWÓDCA)", pd: 1 },
+    { label: "Scenariusz, zdarzenia", pd: 2 },
+  ]);
+  expect(R.typedBattleExp(post.units[0])).toBe(2);
+  R.applyExperience(post);
+  expect(post.units[0].exp).toBe(27);
+  expect(post.expBreakdown.hero).toMatchObject({ from: 20, to: 27 });
+});
