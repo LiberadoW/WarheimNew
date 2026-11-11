@@ -1,4 +1,3 @@
-import { armies } from "../layouts/Builder";
 import { getUnitNumbers } from "../Functions/getUnitNumbers";
 
 const getModelAmount = (unitList, army) => {

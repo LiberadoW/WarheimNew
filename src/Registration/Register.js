@@ -19,7 +19,7 @@ import { AuthContext } from "../Context/AuthContext";
 import useHidePrintSheet from "../Functions/useHidePrintSheet";
 
 const USER_REGEX = /^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
-const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PASSWORD_REGEX = /^(?=.*\d).{6,24}$/;
 
 const Register = () => {
@@ -44,7 +44,7 @@ const Register = () => {
   const [matchFocus, setMatchFocus] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [, setSuccess] = useState(false);
 
   const { dispatch } = useContext(AuthContext);
 

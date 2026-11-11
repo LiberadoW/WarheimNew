@@ -9,6 +9,7 @@ export const getUnitNumbers = (unitList) => {
     unitList.forEach((item) => {
       let number = 0;
       unitNumberArr.forEach((itemNumber) => {
+        // eslint-disable-next-line eqeqeq
         if (itemNumber[0] == item.unitName) {
           number += Number(itemNumber[1]);
         }

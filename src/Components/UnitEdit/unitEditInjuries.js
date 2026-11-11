@@ -1,5 +1,4 @@
 import "./unitEditInjuries.css";
-import { useEffect } from "react";
 
 const INJURIES_LIST = [
   "Rana nogi",

@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <ul className="navbar">
       <li className="navbar-blog">
-        <a href="https://warheim.blogspot.com/" target="_blank">Blog Warheim</a>
+        <a href="https://warheim.blogspot.com/" target="_blank" rel="noreferrer">Blog Warheim</a>
       </li>
       {currentUser === null && (
         <li>
@@ -33,6 +33,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="logout-button">
+           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
            <a onClick={handleLogout}>Wyloguj się</a>
           </li>
         </>

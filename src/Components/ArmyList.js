@@ -1,16 +1,11 @@
 import React from "react";
-import { getAllRules } from "../Functions/getAllRules";
-import { rulesObject } from "../Data.js/Rules";
 import UnitTable from "./UnitTable";
 import Treasury from "./Treasury";
 import ArmyListHeader from "./ArmyListHeader";
 import CampaignPoints from "./CampaignPoints";
 import ArmyRulesAppendix from "./ArmyRulesAppendix";
 import "../styles/ArmyList.css";
-import { magic } from "../Data.js/Magic";
-import { getMagicLore } from "../Functions/getMagicLore";
 import { getAllUniqueEquipment } from "../Functions/getAllUniqueEquipment";
-import { getItemText } from "../Functions/getItemText";
 
 const ArmyList = ({
   unitList,
@@ -30,10 +25,6 @@ const ArmyList = ({
       unit.type === "Machina" ||
       unit.type === "Najemne Ostrze",
   );
-  const uniqueRulesList = getAllRules(unitList);
-
-  const magicPath = getMagicLore(unitList);
-
   const uniqueEquipmentArray = getAllUniqueEquipment(unitList);
 
   console.log(uniqueEquipmentArray);

@@ -76,7 +76,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
     useContext(CommandContext);
 
   const baseCost =
-    unitList[id].type != "Najemne Ostrze"
+    unitList[id].type !== "Najemne Ostrze"
       ? heroes[unitList[id].unitName].cost
       : null;
 
@@ -207,9 +207,6 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
         (value) => value[1] < 3
       );
 
-      const indexOfSpellSchool = unit.rules.findIndex(
-        (el) => el.indexOf("Mag") !== -1
-      );
 
       if (unit.rules.includes(target.name)) {
         unit.rules.splice(unit.rules.indexOf(target.name), 1);
@@ -240,7 +237,7 @@ const WeaponList = ({ heroes, id, unitList, setUnitList, army }) => {
         );
 
         if (usesLoreEquipment && Object.keys(mageEquipment).length > 0 &&
-          JSON.stringify(differentEquipmentNames) ==
+          JSON.stringify(differentEquipmentNames) ===
           JSON.stringify(Object.keys(mageEquipment))
         ) {
           unit.equipmentList = spellSchools;
