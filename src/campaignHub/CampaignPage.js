@@ -43,6 +43,49 @@ const gameLine = (game, names) => {
   return `${names[a] || "?"} vs ${names[b] || "?"} · ${outcome}`;
 };
 
+// The player's own game in the latest round they play: the first thing they
+// need on the campaign page.
+export const myCurrentGame = (games, uid) =>
+  games
+    .filter((g) => !g.bye && (g.players || []).includes(uid))
+    .sort(
+      (a, b) =>
+        (b.round || 0) - (a.round || 0) ||
+        Number(a.status === "done") - Number(b.status === "done"),
+    )[0] || null;
+
+const MyGame = ({ campaignId, game, names, uid }) => {
+  if (!game) return null;
+  const opponent = (game.players || []).find((p) => p !== uid);
+  const done = game.status === "done";
+  return (
+    <section className="hub-card hub-my-game">
+      <div className="hub-card-head">
+        <h3>
+          {done ? "Twoja ostatnia gra" : "Twoja gra"} · runda {game.round}
+        </h3>
+        <span className={`hub-status is-${game.status}`}>
+          {done ? "Rozegrana" : game.status === "playing" ? "W trakcie" : "Do rozegrania"}
+        </span>
+      </div>
+      <p>
+        vs <strong>{names[opponent] || "Gracz"}</strong>
+        <span className="hub-muted">
+          {" · "}
+          {game.scenario?.name || "scenariusz nie wybrany"}
+          {done && game.result?.winner
+            ? ` · ${game.result.winner === "draw" ? "remis" : game.result.winner === uid ? "wygrana" : "porażka"}`
+            : ""}
+        </span>
+      </p>
+      <Link to={`/campaigns/${campaignId}/games/${game.id}`} className="button">
+        <i className="fa-solid fa-chess-board" aria-hidden="true"></i>{" "}
+        {done ? "Sekwencja po potyczce" : "Otwórz ekran gry"}
+      </Link>
+    </section>
+  );
+};
+
 const PlayerRow = ({ uid, name, list, isOwner, canRemove, onRemove, isOpen, onToggle }) => (
   <li className="hub-player">
     <div className="hub-player-row">
@@ -89,22 +132,17 @@ const PlayerRow = ({ uid, name, list, isOwner, canRemove, onRemove, isOpen, onTo
   </li>
 );
 
+// Loads the campaign, its lists and games live from Firestore.
 const CampaignPage = () => {
   useHidePrintSheet();
   const { id } = useParams();
-  const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
   const user = currentUser?.user;
   const [campaign, setCampaign] = useState(undefined);
   const [lists, setLists] = useState({});
   const [games, setGames] = useState([]);
   const [savedLists, setSavedLists] = useState([]);
-  const [selected, setSelected] = useState("");
-  const [openRoster, setOpenRoster] = useState(null);
-  const [historyFilter, setHistoryFilter] = useState("");
   const [error, setError] = useState("");
-  const [notice, setNotice] = useState("");
-  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     const fail = (e) => setError(describeError(e));
@@ -133,6 +171,28 @@ const CampaignPage = () => {
         <Link to="/campaigns">Wróć do kampanii</Link>
       </div>
     );
+  return (
+    <CampaignView
+      campaign={campaign}
+      lists={lists}
+      games={games}
+      savedLists={savedLists}
+      user={user}
+      loadError={error}
+    />
+  );
+};
+
+// The campaign page for loaded data; writes go through campaignService.
+export const CampaignView = ({ campaign, lists, games, savedLists, user, loadError = "" }) => {
+  const navigate = useNavigate();
+  const [selected, setSelected] = useState("");
+  const [openRoster, setOpenRoster] = useState(null);
+  const [historyFilter, setHistoryFilter] = useState("");
+  const [actionError, setError] = useState("");
+  const error = actionError || loadError;
+  const [notice, setNotice] = useState("");
+  const [busy, setBusy] = useState(false);
 
   const isOrganizer = campaign.ownerId === user.uid;
   const names = campaign.memberNames || {};
@@ -166,46 +226,28 @@ const CampaignPage = () => {
       act(() => removeMember(campaign.id, uid), `${name} nie należy już do kampanii.`);
   };
 
-  return (
-    <div className="hub-page">
-      <Link to="/campaigns" className="hub-back">
-        <i className="fa-solid fa-arrow-left" aria-hidden="true"></i> Kampanie
-      </Link>
-      <h2 className="hub-title">{campaign.name}</h2>
-      {error && (
-        <p className="hub-error" role="alert">
-          {error}
+  // Until the player uploads a company it is the first thing to do; later it
+  // only needs changing occasionally.
+  const rosterCard = (
+    <section className="hub-card">
+      <h3>Twoja rozpiska w kampanii</h3>
+      {lists[user.uid] ? (
+        <p>
+          {lists[user.uid].armyName}
+          <span className="hub-muted">
+            {" · "}
+            {lists[user.uid].armyType}
+            {lists[user.uid].uploadedAt && ` · wgrano ${formatDate(lists[user.uid].uploadedAt)}`}
+          </span>
         </p>
+      ) : (
+        <p className="hub-muted">Nie wgrano jeszcze rozpiski.</p>
       )}
-      {notice && (
-        <p className="hub-notice" role="status">
-          {notice}
-        </p>
-      )}
-
-      <section className="hub-card hub-invite">
-        <div>
-          <h3>Zaproszenie</h3>
-          <p className="hub-muted">Gracze dołączają kodem albo linkiem (muszą być zalogowani).</p>
-        </div>
-        <div className="hub-invite-code">
-          <span className="hub-code">{campaign.inviteCode}</span>
-          <button
-            type="button"
-            className="button button-secondary button-small"
-            onClick={() =>
-              navigator.clipboard
-                ?.writeText(inviteLink)
-                .then(() => setNotice("Skopiowano link zaproszenia."))
-            }
-          >
-            <i className="fa-solid fa-link" aria-hidden="true"></i> Kopiuj link
-          </button>
-        </div>
-      </section>
-
-      <section className="hub-card">
-        <h3>Twoja rozpiska w kampanii</h3>
+      <p className="hub-muted">
+        Po sekwencji po potyczce rozpiska w kampanii aktualizuje się sama.
+      </p>
+      <details className="hub-details" open={!lists[user.uid]}>
+        <summary>{lists[user.uid] ? "Zmień rozpiskę" : "Wgraj rozpiskę"}</summary>
         {savedLists.length === 0 ? (
           <p className="hub-muted">
             Nie masz jeszcze zapisanych rozpisek. Stwórz bandę: po zapisaniu trafi od razu do tej
@@ -250,13 +292,59 @@ const CampaignPage = () => {
             <i className="fa-solid fa-plus" aria-hidden="true"></i> Stwórz nową bandę
           </button>
         </div>
-        <p className="hub-muted">
-          Po sekwencji po potyczce wgraj rozpiskę ponownie, aby inni widzieli aktualny stan kompanii.
+      </details>
+    </section>
+  );
+
+  return (
+    <div className="hub-page">
+      <Link to="/campaigns" className="hub-back">
+        <i className="fa-solid fa-arrow-left" aria-hidden="true"></i> Kampanie
+      </Link>
+      <h2 className="hub-title">{campaign.name}</h2>
+      {error && (
+        <p className="hub-error" role="alert">
+          {error}
         </p>
-      </section>
+      )}
+      {notice && (
+        <p className="hub-notice" role="status">
+          {notice}
+        </p>
+      )}
+
+      {!lists[user.uid] && rosterCard}
+
+      <MyGame campaignId={campaign.id} game={myCurrentGame(games, user.uid)} names={names} uid={user.uid} />
+
+      <RoundsSection
+        campaign={campaign}
+        games={games}
+        names={names}
+        user={user}
+        isOrganizer={isOrganizer}
+        act={act}
+      />
 
       <section className="hub-card">
-        <h3>Gracze ({campaign.members.length})</h3>
+        <div className="hub-card-head">
+          <h3>Gracze ({campaign.members.length})</h3>
+          <div className="hub-invite-code" title="Gracze dołączają kodem albo linkiem (muszą być zalogowani).">
+            <span className="hub-muted">Kod</span>
+            <span className="hub-code">{campaign.inviteCode}</span>
+            <button
+              type="button"
+              className="button button-secondary button-small"
+              onClick={() =>
+                navigator.clipboard
+                  ?.writeText(inviteLink)
+                  .then(() => setNotice("Skopiowano link zaproszenia."))
+              }
+            >
+              <i className="fa-solid fa-link" aria-hidden="true"></i> Kopiuj zaproszenie
+            </button>
+          </div>
+        </div>
         <ul className="hub-players">
           {members.map((uid) => (
             <PlayerRow
@@ -274,14 +362,7 @@ const CampaignPage = () => {
         </ul>
       </section>
 
-      <RoundsSection
-        campaign={campaign}
-        games={games}
-        names={names}
-        user={user}
-        isOrganizer={isOrganizer}
-        act={act}
-      />
+      {lists[user.uid] && rosterCard}
 
       <CampaignSettings campaign={campaign} isOrganizer={isOrganizer} act={act} />
 

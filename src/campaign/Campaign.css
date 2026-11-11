@@ -632,3 +632,25 @@
   .campaign .campaign-tracker-absent { grid-column: 1 / -1; }
 }
 .campaign .campaign-battle-data + label { margin-top: 14px; }
+
+/* Streamlined sequence: one main button per step, notices, bulk rolls. */
+.campaign-notice { padding: 10px 14px; border-left: 3px solid #3c8d4f; border-radius: 6px; background: var(--surface-2); font-weight: 600; }
+.campaign .campaign-footer { align-items: center; }
+.campaign-footer-main { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px; }
+.campaign .campaign-footer-main .button { margin: 0; }
+.campaign .campaign-footer > .button { margin: 0; }
+.campaign .campaign-nav button { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.campaign .campaign-nav button.is-done { border-color: var(--border-strong); color: var(--text); }
+.campaign .campaign-nav button.is-done i { color: #3c8d4f; font-size: .7rem; }
+.campaign .campaign-nav button:not(:disabled):not(.is-done):not([aria-current="step"]) { opacity: .75; }
+.campaign-bulk { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 10px 14px; border: 1px dashed var(--border-strong); border-radius: 8px; }
+.campaign .campaign-bulk .button { margin: 0; width: auto; }
+.campaign-section { margin: 12px 0; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; }
+.campaign-section > summary { color: var(--text-muted); font-size: .9rem; }
+.campaign-handoff h3 { margin-top: 0; }
+.campaign-finished .button { display: inline-flex; width: auto; text-decoration: none; }
+@media (max-width: 600px) {
+  .campaign .campaign-footer { align-items: stretch; }
+  .campaign-footer-main { flex-direction: column-reverse; align-items: stretch; }
+  .campaign .campaign-footer-main .button { width: 100%; }
+}

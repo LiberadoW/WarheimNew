@@ -56,6 +56,7 @@ function InjuryCard({ task, post, update }) {
             label="Obrażenia"
             count={count}
             value={draft.dice}
+            rolled={draft.source === "app"}
             onChange={(dice, source) => setDraft({ dice, source })}
           />
           {result &&
@@ -108,7 +109,7 @@ function InjuryCard({ task, post, update }) {
                 />
               )}
               <button
-                className="button"
+                className="button button-secondary"
                 disabled={
                   R.wzaSanityRequired(post, task) &&
                   !R.validDice(draft.obled, 1)

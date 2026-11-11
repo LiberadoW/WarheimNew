@@ -38,16 +38,15 @@ function setup(units = [hero()], extraNotes = {}, prepared = true) {
 }
 const post = (state) => state.draft.campaignNotes.campaign.activeBattle.post;
 function experienceToExploration(checkExperience = () => {}) {
-  click("Dalej: Doświadczenie i rozwój"); click("Nalicz doświadczenie");
+  click("Dalej: Doświadczenie i rozwój");
   checkExperience();
-  click("Dalej: Punkty kampanii"); click("Zatwierdź punkty kampanii");
-  click("Dalej: Eksploracja");
+  click("Nalicz doświadczenie i dalej");
+  click("Zatwierdź punkty i dalej");
 }
+// From the loot sale: sell nothing, skip the optional steps and save.
 function completeRemaining() {
-  click("Dalej: Sprzedaż łupów"); click("Zatwierdź bez sprzedaży");
-  click("Dalej: Doświadczeni stronnicy"); click("Dalej: Handel i dostępność");
-  click("Dalej: Postacie Dramatu"); click("Dalej: Rekrutacja");
-  click("Dalej: Podział ekwipunku"); click("Dalej: Podsumowanie");
+  click("Bez sprzedaży łupów, dalej");
+  click("Pomiń do podsumowania");
   click("Zapisz rozliczenie i zakończ potyczkę");
 }
 beforeEach(() => localStorage.clear());
@@ -71,9 +70,10 @@ test("injuries, a group casualty, an absent hero and an animal survive resume an
   });
   expect(post(state).units.find(u=>u.uniqueId==="beast").exp).toBe(0);
   expect(post(state).units.find(u=>u.uniqueId==="absent").exp).toBe(20);
-  dice("Eksploracja",[4]); click("Zatwierdź pulę eksploracji"); click("Zatwierdź eksplorację");
+  dice("Eksploracja",[4]); click("Zatwierdź pulę eksploracji");
   resume();
   expect(button("Wynik zapisany").disabled).toBe(true);
+  click("Zatwierdź eksplorację i dalej");
   completeRemaining();
   await waitFor(()=>expect(state.draft.campaignNotes.campaign.activeBattle).toBeNull());
   expect(state.draft.unitList.find(u=>u.uniqueId==="group").selectedNumber).toBe(2);
@@ -87,7 +87,9 @@ test("injuries, a group casualty, an absent hero and an animal survive resume an
 
 test.each(["stat", "skill"])("an unresolved %s advance blocks Next and its selected result survives resume", (kind) => {
   const {state, resume} = setup([hero({exp:23})]);
-  click("Dalej: Doświadczenie i rozwój"); click("Nalicz doświadczenie");
+  click("Dalej: Doświadczenie i rozwój"); click("Nalicz doświadczenie i dalej");
+  // Applying PD that crosses a threshold stays on the step for the advance.
+  expect(screen.getByRole("status").textContent).toMatch(/awanse/);
   click("Dalej: Punkty kampanii"); expect(screen.getByRole("alert").textContent).toMatch(/awanse/);
   dice("Rozwój 1",kind==="stat" ? [3,4] : [2,2]); dice("Rozwój 2",[1,1]);
   click(kind==="stat" ? "Wybierz 7 · WW lub US +1" : "Wybierz 4 · Nowa umiejętność"); resume();
@@ -108,16 +110,15 @@ test("all heroes wounded: zero exploration dice can finish without a fabricated 
   dice("Obrażenia",[4,1],card("Herszt #1")); click("Zastosuj obrażenia",card("Herszt #1"));
   experienceToExploration();
   expect(screen.queryByLabelText("Eksploracja, kość 1")).toBeNull();
-  click("Zatwierdź pulę eksploracji"); click("Zatwierdź eksplorację");
+  click("Zatwierdź eksplorację i dalej");
   expect(post(state).loot).toBe(0);
   completeRemaining(); await waitFor(()=>expect(state.draft.campaignNotes.campaign.history).toHaveLength(1));
 });
 
 test("a generated availability roll survives a real persisted draft reload and cannot reroll", () => {
   const {state,resume} = setup(); experienceToExploration();
-  dice("Eksploracja",[4]); click("Zatwierdź pulę eksploracji"); click("Zatwierdź eksplorację");
-  click("Dalej: Sprzedaż łupów"); click("Zatwierdź bez sprzedaży");
-  click("Dalej: Doświadczeni stronnicy"); click("Dalej: Handel i dostępność");
+  dice("Eksploracja",[4]); click("Zatwierdź eksplorację i dalej");
+  click("Bez sprzedaży łupów, dalej"); click("Dalej: Handel i dostępność");
   // The pool is created automatically when trading starts.
   const group=screen.getByRole("group",{name:"Dostępność: Herszt · 2K6"});
   click("Rzuć",within(group)); const result=post(state).availability[0].dice;

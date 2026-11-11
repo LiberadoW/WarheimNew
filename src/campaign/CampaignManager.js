@@ -9,9 +9,10 @@ import { companyChoices } from "./company";
 import PreBattle, { oldWoundUnits } from "./PreBattle";
 import ImmortalRecruits from "./ImmortalRecruits";
 import Recruitment from "./Recruitment";
-import CampaignPoints from "./CampaignPoints";
-import LootSale from "./LootSale";
-import Exploration from "./Exploration";
+import CampaignPoints, { applyCampaignPoints } from "./CampaignPoints";
+import LootSale, { applyLootSale, lootQuote } from "./LootSale";
+import Exploration, { applyExploration, explorationState } from "./Exploration";
+import { companyInjuryModifier } from "./company";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
@@ -79,6 +80,161 @@ const PAGES = {
   11: [408],
 };
 const RESULTS = { win: "Zwycięstwo", loss: "Porażka", draw: "Remis" };
+// From here on every step is optional: the player may skip to the summary.
+const FIRST_OPTIONAL = 6;
+
+const injuryDice = (unit) => (R.injuryKind(unit) === "hero" ? 2 : 1);
+// Rolled injuries the player has not applied yet.
+const rolledInjuries = (post) =>
+  R.injuryTasks(post).filter(
+    (t) =>
+      !post.injuries[t.key] &&
+      R.validDice(post.injuryDrafts?.[t.key]?.dice, injuryDice(t.unit)),
+  );
+// Applies every rolled injury that needs no further input; the others stay
+// on their cards with the reason shown there.
+const applyRolledInjuries = (post) => {
+  let current = post;
+  rolledInjuries(post).forEach(({ key }) => {
+    const next = R.clone(current);
+    const task = R.injuryTasks(next).find((t) => t.key === key);
+    const draft = next.injuryDrafts[key];
+    try {
+      const result = R.injuryResult(
+        task.unit,
+        draft.dice,
+        companyInjuryModifier(next, task.unit),
+      );
+      R.applyInjury(next, task, result, draft);
+      current = next;
+    } catch {
+      // Left for the card: a follow-up roll or choice is still missing.
+    }
+  });
+  return current;
+};
+const withClone = (post, fn) => {
+  const next = R.clone(post);
+  fn(next);
+  return next;
+};
+
+// What the main button does on a step before moving on: the step's own
+// confirmation, when nothing else has to be decided for it.
+const pendingAction = (stage, battle, post, notes, army) => {
+  if (!post) return null;
+  if (stage === 1) {
+    const n = rolledInjuries(post).length;
+    return n
+      ? {
+          label: n > 1 ? `Zastosuj obrażenia (${n}) i dalej` : "Zastosuj obrażenia i dalej",
+          run: applyRolledInjuries,
+        }
+      : null;
+  }
+  if (stage === 2 && !post.expApplied)
+    return {
+      label: "Nalicz doświadczenie i dalej",
+      run: (p) => withClone(p, R.applyExperience),
+    };
+  if (stage === 3 && !post.campaignPointsApplied)
+    return {
+      label: "Zatwierdź punkty i dalej",
+      run: (p) => withClone(p, (c) => applyCampaignPoints(c, battle, notes)),
+    };
+  if (stage === 4 && !post.explorationApplied) {
+    const x = explorationState(battle, post, army);
+    if (!x.result) return null;
+    // Rerolls and the encounter's choices are made on the locked pool.
+    if (!x.e.locked && (x.rerolls > 0 || !x.plan.ready))
+      return {
+        label: "Zatwierdź wynik eksploracji",
+        stay:
+          x.rerolls > 0
+            ? "Pula zatwierdzona. Użyj przerzutów z zasad albo przejdź dalej."
+            : "Pula zatwierdzona. Rozstrzygnij zdarzenie z eksploracji.",
+        run: (p) =>
+          withClone(p, (c) => {
+            c.exploration = { ...x.e, locked: true, originalDice: [...x.e.dice] };
+          }),
+      };
+    return x.plan.ready && x.autoTotals
+      ? {
+          label: "Zatwierdź eksplorację i dalej",
+          run: (p) => withClone(p, (c) => applyExploration(c, battle, army)),
+        }
+      : null;
+  }
+  if (stage === 5 && !post.lootSold) {
+    const q = lootQuote(battle, post);
+    if (q.needsCp) return null;
+    return {
+      label: q.quantity
+        ? `Sprzedaj ${q.quantity} za ${q.gold} zk i dalej`
+        : "Bez sprzedaży łupów, dalej",
+      run: (p) => withClone(p, (c) => applyLootSale(c, battle)),
+    };
+  }
+  return null;
+};
+
+// Why the sequence cannot leave a step yet, or "" when it can.
+const blocker = (stage, battle, post, notes, army) => {
+  if (stage === 1) {
+    if (R.injuryTasks(post).some((t) => !post.injuries[t.key]))
+      return "Rozstrzygnij obrażenia wszystkich modeli WzA.";
+    if (post.dissolved) return "";
+    const succession = R.leaderSuccession(post);
+    if (succession?.dissolves) return "Potwierdź rozpad kompanii nieumarłych.";
+    if (succession?.candidates.length && !post.succession)
+      return "Wskaż nowego dowódcę kompanii.";
+  }
+  if (stage === 2) {
+    if (!post.expApplied) return "Nalicz PD i rozstrzygnij wszystkie awanse.";
+    if (post.advances.some((a) => !a.resolved))
+      return "Rozstrzygnij wszystkie awanse poniżej.";
+    if (sanityTasks(post).length)
+      return "Rozstrzygnij choroby psychiczne z nowych progów Obłędu.";
+    if (post.underdog && !post.underdogGoldApplied)
+      return "Rzuć na dodatkowe złote korony Żółtodziobów.";
+  }
+  if (
+    stage === 3 &&
+    (!post.campaignPointsApplied ||
+      companyChoices(post, notes).some((c) => !c.selected))
+  )
+    return post.campaignPointsApplied
+      ? "Wybierz rozwinięcie kompanii."
+      : "Zatwierdź punkty kampanii.";
+  if (stage === 4) {
+    if (!post.explorationApplied) {
+      const x = explorationState(battle, post, army);
+      if (!x.result) return "Rzuć kości eksploracji.";
+      if (!x.plan.ready)
+        return x.plan.error || "Rozstrzygnij zdarzenie z eksploracji.";
+      if (!x.autoTotals) return "Wykonaj rzuty z zasad kompanii.";
+      return "Zatwierdź eksplorację.";
+    }
+    if (post.advances.some((a) => !a.resolved))
+      return "Rozstrzygnij awanse z eksploracji.";
+  }
+  if (stage === 5 && !post.lootSold)
+    return lootQuote(battle, post).needsCp
+      ? "Rzuć test CP dowódcy (Rozrzutność)."
+      : "Zatwierdź sprzedaż lub pozostawienie łupów.";
+  if (stage === 7 && post.effects?.strigosTheftPending)
+    return "Zakończ handel z taborytami i rozstrzygnij kradzież.";
+  if (
+    stage === 8 &&
+    dramaWageUnits(post).some((u) => !post.dramaWages?.[u.uniqueId])
+  )
+    return "Rozlicz żołd Postaci Dramatu.";
+  if (stage === 9 && post.craftQuote && !post.craftQuote.used)
+    return "Rozstrzygnij rozpoczętą próbę rzemiosła.";
+  if (stage === 9 && wageUnits(post).some((u) => !post.wages?.[u.uniqueId]))
+    return "Wypłać żołd albo odpraw Najemne Ostrza.";
+  return "";
+};
 const safePrestige = (units) => {
   try {
     return getPrestige(units)[0];
@@ -200,6 +356,56 @@ function Succession({ post, update }) {
   );
 }
 
+// One tap rolls the injury dice of every model still waiting for a roll.
+function RollAllInjuries({ post, update }) {
+  const waiting = R.injuryTasks(post).filter(
+    (t) =>
+      !post.injuries[t.key] &&
+      !(post.injuryDrafts?.[t.key]?.dice || []).some((d) => d !== "" && d != null),
+  );
+  if (waiting.length < 2) return null;
+  return (
+    <div className="campaign-bulk">
+      <span>
+        {waiting.length} modeli czeka na rzut obrażeń.
+      </span>
+      <button
+        type="button"
+        className="button button-secondary"
+        onClick={() =>
+          update((p) => {
+            p.injuryDrafts = p.injuryDrafts || {};
+            waiting.forEach((t) => {
+              p.injuryDrafts[t.key] = {
+                secondary: [],
+                note: "",
+                resolved: false,
+                ...p.injuryDrafts[t.key],
+                dice: R.roll(injuryDice(t.unit)),
+                source: "app",
+              };
+            });
+          })
+        }
+      >
+        <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć za
+        wszystkich
+      </button>
+    </div>
+  );
+}
+
+// Hand-offs from a campaign game arrive filled in: their editors start folded.
+const Collapsible = ({ collapsed, title, children }) =>
+  collapsed ? (
+    <details className="campaign-section">
+      <summary>{title}</summary>
+      {children}
+    </details>
+  ) : (
+    children
+  );
+
 const checkLabel = (text, value, onChange) => (
   <label className="campaign-check">
     <input
@@ -221,6 +427,8 @@ export default function CampaignManager({
 }) {
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
+  // The last saved sequence, shown until the next skirmish starts.
+  const [finished, setFinished] = useState(null);
   const campaign = {
     ...R.campaignDefaults(),
     ...(campaignNotes.campaign || {}),
@@ -241,104 +449,75 @@ export default function CampaignManager({
       latestPost.current = p;
       setBattle({ ...battle, post: p });
       setError("");
+      setNotice("");
     } catch (e) {
       setError(e.message);
     }
   };
-  const next = () => {
+  // Leaves the current step: runs its confirmation (only when `act`), checks
+  // what is still open and moves on. Returns the battle and why it stopped.
+  const stepOnce = (b, act) => {
+    if (b.stage === 0 && b.post) return { battle: { ...b, stage: 1 } };
+    if (b.stage === 0) {
+      if (oldWoundUnits(unitList).some((u) => !b.preBattle?.[u.uniqueId]))
+        return {
+          battle: b,
+          error: "Rozstrzygnij testy starych wojennych ran przed potyczką.",
+        };
+      if (!b.gameName.trim())
+        return { battle: b, error: "Wpisz nazwę potyczki." };
+      return {
+        battle: R.beginPostBattle(
+          { ...b, ownPrestige: safePrestige(unitList) ?? 0 },
+          unitList,
+          campaignNotes,
+          army,
+        ),
+      };
+    }
+    const action = act && pendingAction(b.stage, b, b.post, campaignNotes, army);
+    let p = action ? action.run(b.post) : b.post;
+    if (action?.stay) return { battle: { ...b, post: p }, notice: action.stay };
+    const reason = blocker(b.stage, b, p, campaignNotes, army);
+    // After a confirmation, what is left is the next thing to do, not a mistake.
+    if (reason)
+      return { battle: { ...b, post: p }, [action ? "notice" : "error"]: reason };
+    if (b.stage === 1 && p.dissolved)
+      return { battle: { ...b, post: p, stage: 11 } };
+    // Trading opens with the availability pool already drawn up (s. 426).
+    if (b.stage === 6 && !p.availability) {
+      p = p === b.post ? R.clone(p) : p;
+      R.createAvailabilityPool(p);
+    }
+    return { battle: { ...b, post: p, stage: Math.min(11, b.stage + 1) } };
+  };
+  const [notice, setNotice] = useState("");
+  // Moves forward to `target`, confirming only the current step; a later
+  // step that still needs the player stops the jump there.
+  const goTo = (target) => {
     setError("");
+    setNotice("");
     try {
-      if (battle.stage === 0 && post) {
-        setBattle({ ...battle, stage: 1 });
-        return;
+      let b = battle;
+      let first = true;
+      while (b.stage < target) {
+        const r = stepOnce(b, first);
+        first = false;
+        b = r.battle;
+        if (r.error || r.notice) {
+          const stopped = target > b.stage + 1 && b.stage !== battle.stage;
+          if (r.error)
+            setError(stopped ? `${STEPS[b.stage]}: ${r.error}` : r.error);
+          else setNotice(r.notice);
+          break;
+        }
       }
-      if (battle.stage === 0) {
-        if (
-          oldWoundUnits(unitList).some((u) => !battle.preBattle?.[u.uniqueId])
-        )
-          throw Error(
-            "Rozstrzygnij testy starych wojennych ran przed potyczką.",
-          );
-        if (!battle.gameName.trim()) throw Error("Wpisz nazwę potyczki.");
-        setBattle(
-          R.beginPostBattle(
-            { ...battle, ownPrestige: safePrestige(unitList) ?? 0 },
-            unitList,
-            campaignNotes,
-            army,
-          ),
-        );
-        return;
-      }
-      if (
-        battle.stage === 1 &&
-        R.injuryTasks(post).some((t) => !post.injuries[t.key])
-      )
-        throw Error("Rozstrzygnij obrażenia wszystkich modeli WzA.");
-      if (battle.stage === 1 && post.dissolved) {
-        setBattle({ ...battle, stage: 11 });
-        return;
-      }
-      if (
-        battle.stage === 1 &&
-        R.leaderSuccession(post)?.dissolves &&
-        !post.dissolved
-      )
-        throw Error("Potwierdź rozpad kompanii nieumarłych.");
-      if (
-        battle.stage === 1 &&
-        R.leaderSuccession(post)?.candidates.length &&
-        !post.succession
-      )
-        throw Error("Wskaż nowego dowódcę kompanii.");
-      if (
-        battle.stage === 2 &&
-        (!post.expApplied ||
-          post.advances.some((a) => !a.resolved) ||
-          sanityTasks(post).length)
-      )
-        throw Error("Nalicz PD i rozstrzygnij wszystkie awanse.");
-      if (battle.stage === 2 && post.underdog && !post.underdogGoldApplied)
-        throw Error("Rzuć na dodatkowe złote korony Żółtodziobów.");
-      if (
-        battle.stage === 3 &&
-        (!post.campaignPointsApplied ||
-          companyChoices(post, campaignNotes).some((c) => !c.selected))
-      )
-        throw Error("Zatwierdź punkty kampanii.");
-      if (
-        battle.stage === 4 &&
-        (!post.explorationApplied || post.advances.some((a) => !a.resolved))
-      )
-        throw Error("Zatwierdź eksplorację.");
-      if (battle.stage === 7 && post.effects?.strigosTheftPending)
-        throw Error("Zakończ handel z taborytami i rozstrzygnij kradzież.");
-      if (
-        battle.stage === 8 &&
-        dramaWageUnits(post).some((u) => !post.dramaWages?.[u.uniqueId])
-      )
-        throw Error("Rozlicz żołd Postaci Dramatu.");
-      if (battle.stage === 9 && post.craftQuote && !post.craftQuote.used)
-        throw Error("Rozstrzygnij rozpoczętą próbę rzemiosła.");
-      if (
-        battle.stage === 9 &&
-        wageUnits(post).some((u) => !post.wages?.[u.uniqueId])
-      )
-        throw Error("Wypłać żołd albo odpraw Najemne Ostrza.");
-      if (battle.stage === 5 && !post.lootSold)
-        throw Error("Zatwierdź sprzedaż lub pozostawienie łupów.");
-      // Trading opens with the availability pool already drawn up (s. 426).
-      let nextPost = post;
-      if (battle.stage === 6 && !post.availability) {
-        nextPost = R.clone(post);
-        R.createAvailabilityPool(nextPost);
-      }
-      setBattle({ ...battle, post: nextPost, stage: Math.min(11, battle.stage + 1) });
-      setError("");
+      setBattle(b);
     } catch (e) {
       setError(e.message);
     }
   };
+  const next = () => goTo((battle.stage || 0) + 1);
   const finish = async () => {
     setSaving(true);
     setError("");
@@ -346,9 +525,17 @@ export default function CampaignManager({
       if (sanityTasks(post).length)
         throw Error("Rozstrzygnij choroby psychiczne z nowych progów Obłędu.");
       const result = R.finalizePostBattle(battle, campaignNotes);
-      await onFinish(result);
+      const outcome = await onFinish({
+        ...result,
+        campaignGame: battle.campaignGame || null,
+      });
       setUnitList(result.units);
       setCampaignNotes(result.notes);
+      setFinished({
+        name: battle.gameName,
+        campaignId: outcome?.campaignId || null,
+        uploaded: !!outcome?.uploaded,
+      });
     } catch (e) {
       setError(
         `Nie zapisano zakończenia: ${e.message}. Wersja robocza pozostaje do ponownej próby.`,
@@ -358,6 +545,7 @@ export default function CampaignManager({
     }
   };
   const phase = battle?.stage || 0;
+  const fromCampaign = !!battle?.campaignGame?.gameId;
   const panel = useRef(null);
   const previousStage = useRef(phase);
   useEffect(() => {
@@ -374,6 +562,27 @@ export default function CampaignManager({
         <p role="alert" className="campaign-error">
           {error}
         </p>
+      )}
+      {!battle && finished && (
+        <section className="campaign-finished" role="status">
+          <p className="campaign-done">
+            ✓ Zapisano rozliczenie: {finished.name}
+          </p>
+          {finished.campaignId &&
+            (finished.uploaded ? (
+              <p>Rozpiska w kampanii została zaktualizowana.</p>
+            ) : (
+              <p className="campaign-error">
+                Nie udało się zaktualizować rozpiski w kampanii. Wgraj ją na
+                stronie kampanii.
+              </p>
+            ))}
+          {finished.campaignId && (
+            <a className="button" href={`/campaigns/${finished.campaignId}`}>
+              Wróć do kampanii
+            </a>
+          )}
+        </section>
       )}
       {!battle ? (
         <>
@@ -429,6 +638,7 @@ export default function CampaignManager({
                 ),
               }));
               setUnitList(units);
+              setFinished(null);
               setBattle(R.newBattle(units));
             }}
           >
@@ -454,14 +664,16 @@ export default function CampaignManager({
                     const stage = Number(e.target.value);
                     if (stage < phase && !(stage === 0 && post))
                       setBattle({ ...battle, stage });
+                    else if (stage > phase) goTo(stage);
                   }}
                 >
                   {STEPS.map((s, i) => (
                     <option
                       key={s}
                       value={i}
-                      disabled={i > phase || (i === 0 && !!post)}
+                      disabled={(i === 0 && !!post) || (!post && i > 1)}
                     >
+                      {i < phase ? "✓ " : ""}
                       {i}. {s}
                     </option>
                   ))}
@@ -510,12 +722,19 @@ export default function CampaignManager({
               <button
                 type="button"
                 key={s}
-                disabled={i > phase || (i === 0 && !!post)}
+                className={i < phase ? "is-done" : undefined}
+                disabled={(i === 0 && !!post) || (!post && i > 1)}
                 aria-current={i === phase ? "step" : undefined}
+                title={i > phase ? `Przejdź do: ${s}` : undefined}
                 onClick={() => {
-                  if (i < phase) setBattle({ ...battle, stage: i });
+                  if (i < phase) {
+                    setError("");
+                    setNotice("");
+                    setBattle({ ...battle, stage: i });
+                  } else if (i > phase) goTo(i);
                 }}
               >
+                {i < phase && <i className="fa-solid fa-check" aria-hidden="true"></i>}
                 {i}. {s}
               </button>
             ))}
@@ -523,6 +742,11 @@ export default function CampaignManager({
           {error && (
             <p role="alert" className="campaign-error">
               {error}
+            </p>
+          )}
+          {notice && (
+            <p role="status" className="campaign-notice">
+              {notice}
             </p>
           )}
           {phase === 0 ? (
@@ -552,8 +776,37 @@ export default function CampaignManager({
                   ))}
                 </details>
               )}
-              <BattleTracker units={unitList} setUnits={setUnitList} />
-              <h3>Dane potyczki</h3>
+              {fromCampaign && (
+                <section className="campaign-card campaign-handoff">
+                  <h3>Gra z kampanii</h3>
+                  <p>
+                    {[
+                      battle.scenario,
+                      battle.opponent && `vs ${battle.opponent}`,
+                      RESULTS[battle.result],
+                      `runda ${battle.round}`,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                  <p className="campaign-source">
+                    Wyłączenia z akcji, pokonani wrogowie i PD zostały przeniesione z
+                    ekranu gry. Sprawdź je i rozpocznij sekwencję.
+                  </p>
+                </section>
+              )}
+              <Collapsible
+                collapsed={fromCampaign}
+                title={`Popraw przebieg potyczki (WzA: ${unitList.reduce(
+                  (n, u) =>
+                    n + (u.battleOutOfActionModels || []).filter(Boolean).length,
+                  0,
+                )})`}
+              >
+                <BattleTracker units={unitList} setUnits={setUnitList} />
+              </Collapsible>
+              <Collapsible collapsed={fromCampaign} title="Popraw dane potyczki">
+              {!fromCampaign && <h3>Dane potyczki</h3>}
               <div className="campaign-battle-scenario" role="group" aria-label="Scenariusz">
                 <span className="campaign-field-label">Scenariusz</span>
                 <Suspense fallback={<p className="campaign-source">Wczytywanie scenariuszy…</p>}>
@@ -705,11 +958,13 @@ export default function CampaignManager({
                   }
                 />
               </label>
+              </Collapsible>
             </>
           ) : (
             <>
               {phase === 1 && (
                 <>
+                  <RollAllInjuries post={post} update={update} />
                   {R.injuryTasks(post).length ? (
                     R.injuryTasks(post).map((task) => (
                       <InjuryCard
@@ -776,15 +1031,8 @@ export default function CampaignManager({
                       ))}
                     </tbody>
                   </table>
-                  {post.expApplied ? (
+                  {post.expApplied && (
                     <p className="campaign-done">✓ Doświadczenie naliczone</p>
-                  ) : (
-                    <button
-                      className="button"
-                      onClick={() => update(R.applyExperience)}
-                    >
-                      Nalicz doświadczenie
-                    </button>
                   )}
                   {post.advances.map((a) => (
                     <AdvanceCard
@@ -969,19 +1217,31 @@ export default function CampaignManager({
             >
               Anuluj potyczkę
             </button>
-            {phase < 11 ? (
-              <button className="button" disabled={saving} onClick={next}>
-                {phase === 0
-                  ? "Rozpocznij sekwencję po potyczce"
-                  : `Dalej: ${STEPS[phase + 1]}`}
-              </button>
-            ) : (
-              <button className="button" disabled={saving} onClick={finish}>
-                {saving
-                  ? "Zapisywanie…"
-                  : "Zapisz rozliczenie i zakończ potyczkę"}
-              </button>
-            )}
+            <div className="campaign-footer-main">
+              {phase >= FIRST_OPTIONAL && phase < 10 && (
+                <button
+                  className="button button-ghost"
+                  disabled={saving}
+                  onClick={() => goTo(11)}
+                >
+                  Pomiń do podsumowania
+                </button>
+              )}
+              {phase < 11 ? (
+                <button className="button" disabled={saving} onClick={next}>
+                  {phase === 0
+                    ? "Rozpocznij sekwencję po potyczce"
+                    : pendingAction(phase, battle, post, campaignNotes, army)
+                        ?.label || `Dalej: ${STEPS[phase + 1]}`}
+                </button>
+              ) : (
+                <button className="button" disabled={saving} onClick={finish}>
+                  {saving
+                    ? "Zapisywanie…"
+                    : "Zapisz rozliczenie i zakończ potyczkę"}
+                </button>
+              )}
+            </div>
           </div>
         </>
       )}

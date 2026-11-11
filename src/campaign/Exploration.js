@@ -19,22 +19,17 @@ export const eligibleHeroesLabel = (n) =>
       ? `${n} uprawnieni bohaterowie`
       : `${n} uprawnionych bohaterów`;
 
-export default function Exploration({
-  battle,
-  post,
-  update,
-  army = { name: "", heroes: {} },
-}) {
-  const privileges = explorationRules(battle, post),
-    eligible = privileges.heroes,
-    count = privileges.count;
+// Everything the exploration step derives from the saved draft. The step
+// screen and the sequence's main button share it, so both see one result.
+export function explorationState(battle, post, army = { name: "", heroes: {} }) {
+  const privileges = explorationRules(battle, post);
   const e = post.exploration || {
     dice: [],
     modifierReason: "",
     note: "",
     encounter: {},
   };
-  const diceCount = e.countOverride ?? count;
+  const diceCount = e.countOverride ?? privileges.count;
   const kept = e.dice
     .filter((_, i) => !(e.discarded || []).includes(i))
     .sort((a, b) => a - b)
@@ -47,7 +42,6 @@ export default function Exploration({
     e.thieves || {},
   );
   const autoReason = auto.rerolls.map((r) => r.source).join(", ");
-  const rerollReason = e.rerollReason ?? autoReason;
   const autoRerolls = auto.rerolls.reduce((n, r) => n + r.count, 0);
   const sumModifier =
     privileges.totalModifier +
@@ -59,6 +53,72 @@ export default function Exploration({
   const plan = result?.best
     ? encounterPlan(result.best, e.encounter || {}, post, army)
     : { ready: true, effects: [] };
+  return {
+    privileges,
+    e,
+    diceCount,
+    auto,
+    autoTotals,
+    autoReason,
+    autoRerolls,
+    rerolls: privileges.rerolls + autoRerolls,
+    result,
+    plan,
+  };
+}
+
+// Locks the pool, applies the encounter and adds the loot (s. 424).
+export function applyExploration(p, battle, army) {
+  if (p.explorationApplied) throw Error("Eksploracja została już rozliczona.");
+  const { e, result, autoTotals } = explorationState(battle, p, army);
+  if (!result) throw Error("Rzuć kości eksploracji.");
+  if (!e.locked)
+    p.exploration = { ...e, locked: true, originalDice: [...e.dice] };
+  if (result.best) {
+    const validated = encounterPlan(
+      result.best,
+      p.exploration.encounter || {},
+      p,
+      army,
+    );
+    if (!validated.ready)
+      throw Error(validated.error || "Uzupełnij wszystkie wybory zdarzenia.");
+    applyEffects(p, validated.effects, result.best.name, army);
+  }
+  if (!autoTotals) throw Error("Wykonaj rzuty z zasad kompanii.");
+  p.loot += Math.max(0, result.loot + autoTotals.loot);
+  p.explorationApplied = true;
+  R.log(
+    p,
+    "exploration",
+    `Eksploracja: ${e.dice.join(", ")}. ${result.best?.name || "Bez powtórzeń"}. Łupy z puli: ${result.loot}${autoTotals?.loot ? ` (${autoTotals.loot > 0 ? "+" : ""}${autoTotals.loot} z zasad)` : ""}${autoTotals?.sum ? `; suma ${autoTotals.sum > 0 ? "+" : ""}${autoTotals.sum} z zasad` : ""}. ${e.note || ""}`,
+    {
+      dice: e.dice,
+      originalDice: p.exploration.originalDice || e.originalDice,
+      encounter: e.encounter || {},
+    },
+  );
+}
+
+export default function Exploration({
+  battle,
+  post,
+  update,
+  army = { name: "", heroes: {} },
+}) {
+  const {
+    privileges,
+    e,
+    diceCount,
+    auto,
+    autoTotals,
+    autoReason,
+    autoRerolls,
+    result,
+  } = explorationState(battle, post, army);
+  const eligible = privileges.heroes,
+    count = privileges.count;
+  const rerollReason = e.rerollReason ?? autoReason;
   const set = (patch) =>
     update((p) => {
       p.exploration = { ...e, ...patch };
@@ -233,7 +293,7 @@ export default function Exploration({
       />
       {result && !e.locked && (
         <button
-          className="button"
+          className="button button-secondary"
           onClick={() => set({ locked: true, originalDice: [...e.dice] })}
         >
           Zatwierdź pulę eksploracji
@@ -372,52 +432,11 @@ export default function Exploration({
               onChange={(ev) => set({ note: ev.target.value })}
             />
           </label>
-          {post.explorationApplied ? (
+          {post.explorationApplied && (
             <p className="campaign-done">
               ✓ Eksploracja zatwierdzona · +
               {Math.max(0, result.loot + (autoTotals?.loot || 0))} łupów
             </p>
-          ) : (
-          <button
-            className="button"
-            disabled={post.explorationApplied || !plan.ready || !autoTotals}
-            onClick={() =>
-              update((p) => {
-                if (p.explorationApplied)
-                  throw Error("Eksploracja została już rozliczona.");
-                if (result.best) {
-                  const validated = encounterPlan(
-                    result.best,
-                    p.exploration.encounter || {},
-                    p,
-                    army,
-                  );
-                  if (!validated.ready)
-                    throw Error(
-                      validated.error ||
-                        "Uzupełnij wszystkie wybory zdarzenia.",
-                    );
-                  applyEffects(p, validated.effects, result.best.name, army);
-                }
-                if (!autoTotals)
-                  throw Error("Wykonaj rzuty z zasad kompanii.");
-                p.loot += Math.max(0, result.loot + autoTotals.loot);
-                p.explorationApplied = true;
-                R.log(
-                  p,
-                  "exploration",
-                  `Eksploracja: ${e.dice.join(", ")}. ${result.best?.name || "Bez powtórzeń"}. Łupy z puli: ${result.loot}${autoTotals?.loot ? ` (${autoTotals.loot > 0 ? "+" : ""}${autoTotals.loot} z zasad)` : ""}${autoTotals?.sum ? `; suma ${autoTotals.sum > 0 ? "+" : ""}${autoTotals.sum} z zasad` : ""}. ${e.note || ""}`,
-                  {
-                    dice: e.dice,
-                    originalDice: e.originalDice,
-                    encounter: e.encounter || {},
-                  },
-                );
-              })
-            }
-          >
-            Zatwierdź eksplorację
-          </button>
           )}
         </>
       )}

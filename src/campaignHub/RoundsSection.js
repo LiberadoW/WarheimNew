@@ -286,21 +286,30 @@ const RoundTools = ({ campaign, games, names, act }) => {
 
 const RoundsSection = ({ campaign, games, names, user, isOrganizer, act }) => {
   const rounds = [...new Set(games.map((g) => g.round))].sort((x, y) => y - x);
+  const roundOpen = games.some((g) => g.round === rounds[0] && !g.bye && g.status !== "done");
   return (
     <section className="hub-card">
       <h3>Rundy i pary</h3>
-      {isOrganizer && <RoundTools campaign={campaign} games={games} names={names} act={act} />}
+      {isOrganizer &&
+        (roundOpen ? (
+          // While the round is played the organizer's tools stay folded.
+          <details className="hub-details hub-round-tools">
+            <summary>Nowa runda lub para</summary>
+            <RoundTools campaign={campaign} games={games} names={names} act={act} />
+          </details>
+        ) : (
+          <RoundTools campaign={campaign} games={games} names={names} act={act} />
+        ))}
       {rounds.length === 0 ? (
         <p className="hub-muted">
           {isOrganizer ? "Wygeneruj pary pierwszej rundy albo dodaj parę ręcznie." : "Organizator nie ustalił jeszcze par."}
         </p>
       ) : (
-        rounds.map((round) => (
-          <div key={round} className="hub-round">
-            <h4>Runda {round}</h4>
+        rounds.map((round, i) => {
+          const roundGames = games.filter((g) => g.round === round);
+          const list = (
             <ul className="hub-games">
-              {games
-                .filter((g) => g.round === round)
+              {roundGames
                 .sort((x, y) => Number(!!x.bye) - Number(!!y.bye))
                 .map((game) => (
                   <GameCard
@@ -314,8 +323,27 @@ const RoundsSection = ({ campaign, games, names, user, isOrganizer, act }) => {
                   />
                 ))}
             </ul>
-          </div>
-        ))
+          );
+          // Only the latest round is open; finished ones are also in the history.
+          return i === 0 ? (
+            <div key={round} className="hub-round">
+              <h4>Runda {round}</h4>
+              {list}
+            </div>
+          ) : (
+            <details key={round} className="hub-round hub-details">
+              <summary>
+                Runda {round}
+                <span className="hub-muted">
+                  {" · "}
+                  {roundGames.filter((g) => g.status === "done").length}/
+                  {roundGames.filter((g) => !g.bye).length} rozegranych
+                </span>
+              </summary>
+              {list}
+            </details>
+          );
+        })
       )}
     </section>
   );

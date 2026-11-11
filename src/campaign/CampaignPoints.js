@@ -3,6 +3,27 @@ import React from "react";
 import * as R from "./rules";
 import { companyChoices, selectCompanyAdvance } from "./company";
 
+// Adds this skirmish's Determinacja, Gniew and Odporność (s. 418), capped at 40.
+export function applyCampaignPoints(p, battle, notes) {
+  if (p.campaignPointsApplied) return;
+  const { suggested } = R.suggestCampaignPoints(battle, p);
+  const points = p.pointsDraft || suggested;
+  p.campaignPoints = Object.fromEntries(
+    Object.keys(suggested).map((k) => [
+      k,
+      Math.min(40, (Number(notes[k]) || 0) + points[k]),
+    ]),
+  );
+  p.campaignPointsApplied = true;
+  R.log(
+    p,
+    "campaign-points",
+    Object.keys(points)
+      .map((k) => `${k}: +${points[k]}`)
+      .join(", "),
+  );
+}
+
 function CampaignPoints({ battle, post, update, notes }) {
   const { suggested, out, count, khorne } = R.suggestCampaignPoints(
     battle,
@@ -82,33 +103,8 @@ function CampaignPoints({ battle, post, update, notes }) {
           </label>
         ))}
       </div>
-      {post.campaignPointsApplied ? (
+      {post.campaignPointsApplied && (
         <p className="campaign-done">✓ Punkty kampanii zatwierdzone</p>
-      ) : (
-      <button
-        className="button"
-        disabled={post.campaignPointsApplied}
-        onClick={() =>
-          update((p) => {
-            p.campaignPoints = Object.fromEntries(
-              Object.keys(suggested).map((k) => [
-                k,
-                Math.min(40, (Number(notes[k]) || 0) + points[k]),
-              ]),
-            );
-            p.campaignPointsApplied = true;
-            R.log(
-              p,
-              "campaign-points",
-              Object.keys(points)
-                .map((k) => `${k}: +${points[k]}`)
-                .join(", "),
-            );
-          })
-        }
-      >
-        Zatwierdź punkty kampanii
-      </button>
       )}
       {companyChoices(post, notes).map((choice) => (
         <section

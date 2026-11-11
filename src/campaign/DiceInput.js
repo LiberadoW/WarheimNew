@@ -6,6 +6,8 @@ export default function DiceInput({
   value = [],
   onChange,
   disabled = false,
+  // The app rolled these dice elsewhere (e.g. "roll all"): keep them locked.
+  rolled = false,
 }) {
   const [appRolled, setAppRolled] = useState(validDice(value, count));
   const used = useRef(appRolled);
@@ -13,8 +15,11 @@ export default function DiceInput({
     if (!value.some((die) => die !== "" && die != null)) {
       used.current = false;
       setAppRolled(false);
+    } else if (rolled && validDice(value, count)) {
+      used.current = true;
+      setAppRolled(true);
     }
-  }, [value]);
+  }, [value, rolled, count]);
   const complete = validDice(value, count);
   return (
     <fieldset className="campaign-dice" disabled={disabled}>

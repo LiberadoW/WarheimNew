@@ -906,3 +906,40 @@
     display: flex;
   }
 }
+
+/* Streamlined campaign page: the player's own game first, the rest folded. */
+.hub-my-game,
+.hub-handoff {
+  border-left: 4px solid var(--accent);
+}
+
+.hub-my-game p,
+.hub-handoff p {
+  margin: 0;
+}
+
+.hub-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.hub-details[open] > summary {
+  margin-bottom: 10px;
+}
+
+details.hub-round {
+  padding: 10px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+details.hub-round > summary {
+  font-size: 0.95rem;
+}
+
+.hub-card-head .hub-invite-code {
+  gap: 8px;
+}
+
+.hub-card-head .hub-code {
+  font-size: 1.1rem;
+}

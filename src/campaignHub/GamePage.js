@@ -457,6 +457,24 @@ export const GameScreen = ({
       {notice && <p className="hub-notice" role="status">{notice}</p>}
       {!canEdit && !done && <p className="hub-notice">Podgląd: zapisywać mogą gracze tej gry i organizator.</p>}
 
+      {done && isPlayer && (
+        <section className="hub-card hub-handoff">
+          <h3>
+            {game.result?.winner === "draw"
+              ? "Remis"
+              : `Wygrywa ${names[game.result?.winner] || "gracz"}`}
+            {game.result?.rounds ? <span className="hub-muted"> · {game.result.rounds} rund</span> : null}
+          </h3>
+          <p className="hub-muted">
+            Wyłączenia z akcji, nieobecni, pokonani wrogowie i PD z tej gry trafią do sekwencji po potyczce.
+            Po jej zapisaniu rozpiska w kampanii zaktualizuje się sama.
+          </p>
+          <button type="button" className="button" onClick={handOff}>
+            <i className="fa-solid fa-forward" aria-hidden="true"></i> Sekwencja po potyczce mojej kompanii
+          </button>
+        </section>
+      )}
+
       <section className="hub-card game-info">
         <div className="hub-game-row">
           <span className="hub-game-label">Scenariusz</span>
@@ -628,17 +646,6 @@ export const GameScreen = ({
           </form>
         ) : (
           <p className="hub-muted">Gra w toku.</p>
-        )}
-        {done && isPlayer && (
-          <div className="hub-editor">
-            <p>
-              Przejdź do sekwencji po potyczce swojej kompanii. Wyłączenia z akcji, nieobecni, pokonani wrogowie i PD
-              z tej gry zostaną wpisane do trybu gry.
-            </p>
-            <button type="button" className="button" onClick={handOff}>
-              Sekwencja po potyczce mojej kompanii
-            </button>
-          </div>
         )}
       </section>
 

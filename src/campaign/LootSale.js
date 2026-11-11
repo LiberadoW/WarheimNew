@@ -6,22 +6,17 @@ import DiceInput from "./DiceInput";
 import useRollDraft from "./useRollDraft";
 import { lootSaleAuto } from "./auto-rules";
 
-function LootSale({ battle, post, update, setBattle }) {
-  // Draft values live in the saved battle, so a reload or step change keeps them.
+// The sale as the draft stands: quantity, income and the rules applied.
+// Shared by the step screen and the sequence's main button.
+export function lootQuote(battle, post) {
   const auto = lootSaleAuto(post);
-  const [cpTest, setCpTest] = useRollDraft(post, update, "spendthrift-cp");
+  const cpTest = post.rollDrafts?.["spendthrift-cp"] ?? [];
   const cpRolled = R.validDice(cpTest, 2);
   const cpPassed = cpRolled && R.sum(cpTest) <= auto.leaderCp;
   // Rozrzutność: a failed CP test forces the sale of all loot.
   const forceAll = auto.spendthrift && cpRolled && !cpPassed;
   const quantity = forceAll ? post.loot : Number(post.lootDraft?.quantity) || 0;
   const modifier = Number(post.lootDraft?.modifier) || 0;
-  const setDraft = (patch) =>
-    update((p) => {
-      p.lootDraft = { quantity, modifier, ...p.lootDraft, ...patch };
-    });
-  const setQuantity = (value) => setDraft({ quantity: value });
-  const setModifier = (value) => setDraft({ modifier: value });
   const models = post.units
     .filter((u) => !["Najemne Ostrze", "Postać Dramatu"].includes(u.type))
     .reduce(
@@ -49,7 +44,6 @@ function LootSale({ battle, post, update, setBattle }) {
       (post.effects?.incomeLevel || 0) -
       companyLevel(post, "Samowystarczalni"),
   );
-  const step = (value) => setQuantity(Math.max(0, Math.min(post.loot, value)));
   const notes = [
     auto.gluttons && `Przepastne trzewia: +${auto.gluttons} do liczby modeli`,
     auto.economists && `Ekonom: −${auto.economists} poziom liczebności`,
@@ -57,6 +51,63 @@ function LootSale({ battle, post, update, setBattle }) {
     auto.wagon && "Wóz przemytniczy: +1 łup przy sprzedaży",
     companyLevel(post, "Rządcy") && "Rządcy: +1 łup przy sprzedaży",
   ].filter(Boolean);
+  return {
+    auto,
+    cpTest,
+    cpRolled,
+    cpPassed,
+    // The leader's CP test must be rolled before anything is sold.
+    needsCp: auto.spendthrift && !!auto.leader && !cpRolled,
+    forceAll,
+    quantity,
+    modifier,
+    models,
+    others,
+    totalSold,
+    players,
+    gold,
+    notes,
+  };
+}
+
+export function applyLootSale(p, battle) {
+  if (p.lootSold) throw Error("Łupy zostały już sprzedane w tej sekwencji.");
+  const q = lootQuote(battle, p);
+  if (q.needsCp) throw Error("Rzuć test CP dowódcy (Rozrzutność).");
+  p.loot -= q.quantity;
+  p.treasury += q.gold;
+  p.lootSold = true;
+  R.log(
+    p,
+    "income",
+    `Sprzedano ${q.quantity} łupów za ${q.gold} zk. Gracze: ${q.players}, łączna sprzedaż: ${q.totalSold}, modyfikator: ${q.modifier}${q.notes.length ? `; ${q.notes.join("; ")}` : ""}${q.auto.spendthrift && q.cpRolled ? `; Rozrzutność: test CP ${R.sum(q.cpTest)} vs ${q.auto.leaderCp}` : ""}.`,
+  );
+}
+
+function LootSale({ battle, post, update, setBattle }) {
+  // Draft values live in the saved battle, so a reload or step change keeps them.
+  const [cpTest, setCpTest] = useRollDraft(post, update, "spendthrift-cp");
+  const {
+    auto,
+    cpRolled,
+    cpPassed,
+    forceAll,
+    quantity,
+    modifier,
+    models,
+    others,
+    totalSold,
+    players,
+    gold,
+    notes,
+  } = lootQuote(battle, post);
+  const setDraft = (patch) =>
+    update((p) => {
+      p.lootDraft = { quantity, modifier, ...p.lootDraft, ...patch };
+    });
+  const setQuantity = (value) => setDraft({ quantity: value });
+  const setModifier = (value) => setDraft({ modifier: value });
+  const step = (value) => setQuantity(Math.max(0, Math.min(post.loot, value)));
   return (
     <>
       {!!notes.length && (
@@ -169,27 +220,8 @@ function LootSale({ battle, post, update, setBattle }) {
           </label>
         </div>
       </details>
-      {post.lootSold ? (
+      {post.lootSold && (
         <p className="campaign-done">✓ Sprzedaż łupów rozliczona</p>
-      ) : (
-        <button
-          className="button"
-          disabled={auto.spendthrift && !!auto.leader && !cpRolled}
-          onClick={() =>
-            update((p) => {
-              p.loot -= quantity;
-              p.treasury += gold;
-              p.lootSold = true;
-              R.log(
-                p,
-                "income",
-                `Sprzedano ${quantity} łupów za ${gold} zk. Gracze: ${players}, łączna sprzedaż: ${totalSold}, modyfikator: ${modifier}${notes.length ? `; ${notes.join("; ")}` : ""}${auto.spendthrift && cpRolled ? `; Rozrzutność: test CP ${R.sum(cpTest)} vs ${auto.leaderCp}` : ""}.`,
-              );
-            })
-          }
-        >
-          {quantity ? `Sprzedaj ${quantity} za ${gold} zk` : "Zatwierdź bez sprzedaży"}
-        </button>
       )}
     </>
   );

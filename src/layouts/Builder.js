@@ -412,8 +412,9 @@ const Builder = ({
     setCustomArmyCost(e.target.value);
   };
 
-  const finishCampaignBattle = async ({ units, notes, entry }) => {
+  const finishCampaignBattle = async ({ units, notes, entry, campaignGame }) => {
     if (!currentUser?.user?.uid) return; // Guest campaigns remain in the device draft.
+    let savedList = null;
     if (!armyName.trim())
       throw new Error(
         "Nazwij i zapisz kompanię na koncie przed zakończeniem potyczki.",
@@ -470,8 +471,20 @@ const Builder = ({
           },
         ],
       };
+      savedList = lists[index];
       transaction.update(ref, { lists });
     });
+    // A game from a shared campaign: the other players see the company after
+    // the sequence without a manual re-upload. The sequence itself is saved
+    // already, so a failed upload only asks for the manual one.
+    const campaignId = campaignGame?.campaignId;
+    if (!campaignId || !savedList) return null;
+    try {
+      await uploadCampaignList(campaignId, currentUser.user, savedList);
+      return { campaignId, uploaded: true };
+    } catch {
+      return { campaignId, uploaded: false };
+    }
   };
 
   return (

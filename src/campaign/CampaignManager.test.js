@@ -50,23 +50,16 @@ function toSummary() {
   });
   click("Rozpocznij sekwencję po potyczce");
   click("Dalej: Doświadczenie i rozwój");
-  click("Nalicz doświadczenie");
-  click("Dalej: Punkty kampanii");
-  click("Zatwierdź punkty kampanii");
-  click("Dalej: Eksploracja");
+  // Each step's main button confirms it and moves on.
+  click("Nalicz doświadczenie i dalej");
+  click("Zatwierdź punkty i dalej");
   fireEvent.change(screen.getByLabelText("Eksploracja, kość 1"), {
     target: { value: "4" },
   });
-  click("Zatwierdź pulę eksploracji");
-  click("Zatwierdź eksplorację");
-  click("Dalej: Sprzedaż łupów");
-  click("Zatwierdź bez sprzedaży");
-  click("Dalej: Doświadczeni stronnicy");
-  click("Dalej: Handel i dostępność");
-  click("Dalej: Postacie Dramatu");
-  click("Dalej: Rekrutacja");
-  click("Dalej: Podział ekwipunku");
-  click("Dalej: Podsumowanie");
+  click("Zatwierdź eksplorację i dalej");
+  click("Bez sprzedaży łupów, dalej");
+  // Steps 6–10 are optional.
+  click("Pomiń do podsumowania");
 }
 test("the complete sequence applies PD and loot once and records its history", async () => {
   const { state, finish } = setup();
