@@ -654,3 +654,10 @@
   .campaign-footer-main { flex-direction: column-reverse; align-items: stretch; }
   .campaign .campaign-footer-main .button { width: 100%; }
 }
+
+/* Company advances: each option is its own block with room around its button. */
+.campaign-option { padding: 12px 0; border-top: 1px solid var(--border); }
+.campaign-option:first-of-type { border-top: 0; padding-top: 4px; }
+.campaign-option h4 { margin: 0 0 6px; font-size: 1rem; }
+.campaign-option p { margin: 0 0 10px; }
+.campaign .campaign-option .button { margin-top: 0; }

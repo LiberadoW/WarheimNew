@@ -300,7 +300,7 @@
     "track": "odpornosc",
     "threshold": 6,
     "name": "Nieśmiertelni",
-    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCHRANmodel (lub modele) stronnika, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub POTWÓR lub WIELKOLUD lub ZWIERZĘ automatycznie rekrutuje jednego stronnika tego samego typu. Ponadto, należy zauważyć, że rekrutowany stronnik rozpoczyna grę nie posiadając Punktów Doświadczenia.",
+    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCH RAN model (lub modele) stronnika, który nie podlega zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub POTWÓR lub WIELKOLUD lub ZWIERZĘ automatycznie rekrutuje jednego stronnika tego samego typu. Ponadto, należy zauważyć, że rekrutowany stronnik rozpoczyna grę nie posiadając Punktów Doświadczenia.",
     "page": 417
   },
   {
@@ -308,7 +308,7 @@
     "track": "odpornosc",
     "threshold": 6,
     "name": "Pazerność",
-    "text": "Służący w kompanii bohaterowie w fazie eksploracji generują Kostkę Eksploracji nawet wtedy, gdy nie brali udziału w rozgrywce lub w bieżącej sekwencji po potyczce wykonywali rzut na TABELĘ POWAŻNYCHRAN.",
+    "text": "Służący w kompanii bohaterowie w fazie eksploracji generują Kostkę Eksploracji nawet wtedy, gdy nie brali udziału w rozgrywce lub w bieżącej sekwencji po potyczce wykonywali rzut na TABELĘ POWAŻNYCH RAN.",
     "page": 417
   },
   {
@@ -348,7 +348,7 @@
     "track": "odpornosc",
     "threshold": 20,
     "name": "Konsyliarze",
-    "text": "W trakcie sekwencji po potyczce kompania otrzymuje kumulatywny modyfikator +1 do rzutu na TABELĘ POWAŻNYCHRANdla wszystkich Wyłączonych z akcji! modeli stronników, którzy nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub POTWÓR lub WIELKOLUD lub ZWIERZĘ.",
+    "text": "W trakcie sekwencji po potyczce kompania otrzymuje kumulatywny modyfikator +1 do rzutu na TABELĘ POWAŻNYCH RAN dla wszystkich Wyłączonych z akcji! modeli stronników, którzy nie podlegają zasadzie specjalnej DEMON lub ISTOTA ETERYCZNA lub LEŚNY DUCH lub MACHINA WOJENNA lub NIEUMARŁY lub OPĘTANY lub POTWÓR lub WIELKOLUD lub ZWIERZĘ.",
     "page": 417
   },
   {
@@ -356,7 +356,7 @@
     "track": "odpornosc",
     "threshold": 20,
     "name": "Nieśmiertelni",
-    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCHRANmodel (lub modele) stronnika automatycznie rekrutuje jednego stronnika tego samego typu. Ponadto, należy zauważyć, że rekrutowany stronnik rozpoczyna grę nie posiadając Punktów Doświadczenia.",
+    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCH RAN model (lub modele) stronnika automatycznie rekrutuje jednego stronnika tego samego typu. Ponadto, należy zauważyć, że rekrutowany stronnik rozpoczyna grę nie posiadając Punktów Doświadczenia.",
     "page": 417
   },
   {
@@ -404,7 +404,7 @@
     "track": "odpornosc",
     "threshold": 40,
     "name": "Nieśmiertelni",
-    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCHRANmodel (lub modele) bohatera lub stronnika automatycznie rekrutuje jednego bohatera lub jednego stronnika tego samego typu. Rekrutowany bohater posiada jedynie początkową liczbę Punktów Doświadczenia, a model stronnika rozpoczyna grę nie posiadając Punktów Doświadczenia, ponadto oprócz sztyletu i ewentualnej broni wymienionej w opisie modelu, może zostać wyposażony jedynie w przedmioty Powszechnie dostępne. Nowo rekrutowany model bohatera może zostać wyposażony w przedmioty rzadkie dopiero w czasie rozgrywania następnej sekwencji po potyczce, chyba że drużyna posiada takie przedmioty w swoim skarbcu.",
+    "text": "Gdy kompania straci w wyniku rzutu MARTWY na TABELĘ POWAŻNYCH RAN model (lub modele) bohatera lub stronnika automatycznie rekrutuje jednego bohatera lub jednego stronnika tego samego typu. Rekrutowany bohater posiada jedynie początkową liczbę Punktów Doświadczenia, a model stronnika rozpoczyna grę nie posiadając Punktów Doświadczenia, ponadto oprócz sztyletu i ewentualnej broni wymienionej w opisie modelu, może zostać wyposażony jedynie w przedmioty Powszechnie dostępne. Nowo rekrutowany model bohatera może zostać wyposażony w przedmioty rzadkie dopiero w czasie rozgrywania następnej sekwencji po potyczce, chyba że drużyna posiada takie przedmioty w swoim skarbcu.",
     "page": 417
   }
 ]

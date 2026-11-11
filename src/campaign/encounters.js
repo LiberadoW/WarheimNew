@@ -104,6 +104,12 @@ export function encounterPlan(event, answers = {}, post, army) {
     });
   };
   const test = (id, u, index, label = R.STATS[index]) => {
+    // CP is tested on 2K6: equal to or below the characteristic passes.
+    if (index === 8)
+      return (
+        dice(id, "2K6", `${R.label(u)}: test ${label} (CP ${R.currentStats(u)[8]})`) <=
+        R.currentStats(u)[8]
+      );
     const n = dice(id, "K6", `${R.label(u)}: test ${label}`);
     return n === 1 || (n !== 6 && n <= R.currentStats(u)[index]);
   };

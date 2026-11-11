@@ -90,3 +90,18 @@ test("late encounter experience schedules new advances after normal PD was alrea
   expect(p.units[0].exp).toBe(24);
   expect(p.advances[0].threshold).toBe(24);
 });
+
+// Gospoda (s. 420): the leader's CP test is 2K6, passed at or below CP.
+test.each([
+  [[6, 2], true],
+  [[6, 3], false],
+])("the tavern CP test rolls 2K6 against CP 8: %p passes = %p", (roll, passes) => {
+  const post = setup();
+  const event = R.exploration.find((e) => e.key === "111" && e.area === "inside");
+  const plan = encounterPlan(event, { leader: "h", innCP: roll, innGold: [1, 1, 1, 1] }, post, army);
+  const input = plan.inputs.find((i) => i.id === "innCP");
+  expect(input.count).toBe(2);
+  expect(plan.ready).toBe(true);
+  expect(plan.effects.some((e) => e.type === "gold")).toBe(passes);
+  expect(plan.effects.some((e) => e.key === "drunken")).toBe(!passes);
+});

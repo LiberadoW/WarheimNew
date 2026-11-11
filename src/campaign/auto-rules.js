@@ -115,6 +115,18 @@ export function lootSaleAuto(post) {
     if (has(u, "Rewelator")) revelators.push(...fit(u).map(() => R.label(u)));
   }
   const wagon = post.units.some((u) => has(u, "Wóz przemytniczy") && alive(u).length);
+  // Depend on what happened at the table: the player ticks them, the level
+  // and the model count follow (Głód trzewi, Szał; rozdz. 8).
+  const devourers = post.units
+    .filter((u) => has(u, "Głód trzewi") && alive(u).length)
+    .map((u) => R.label(u));
+  const frenzied = post.units
+    .map((u) => ({
+      unitId: u.uniqueId,
+      label: R.label(u),
+      max: alive(u).filter((i) => !u.battleAbsentModels?.[i]).length,
+    }))
+    .filter((f, i) => f.max && has(post.units[i], "Szał"));
   const spendthrift = (post.armyRules || []).some(
     (r) => R.baseName(r) === "rozrzutność",
   );
@@ -123,6 +135,8 @@ export function lootSaleAuto(post) {
     economists,
     revelators,
     wagon,
+    devourers,
+    frenzied,
     extraLoot: revelators.length + (wagon ? 1 : 0),
     spendthrift,
     leader,

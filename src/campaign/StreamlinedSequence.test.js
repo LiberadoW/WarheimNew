@@ -160,3 +160,25 @@ test("the campaign page leads with the player's game in the latest round", () =>
   expect(myCurrentGame(games, "d").id).toBe("3");
   expect(myCurrentGame(games, "z")).toBeNull();
 });
+
+test("Głód trzewi and Szał change the loot sale without a manual modifier", () => {
+  const glutton = hero({ uniqueId: "g", unitName: "Ghul", type: "Stronnik", exp: 0,
+    rules: ["Głód trzewi"], selectedNumber: 3, battleOutOfActionModels: [false, false, false],
+    battleAbsentModels: [false, false, false] });
+  const berserk = hero({ uniqueId: "s", unitName: "Berserk", type: "Stronnik", exp: 0,
+    rules: ["Szał"], selectedNumber: 2, battleOutOfActionModels: [false, false],
+    battleAbsentModels: [false, false] });
+  const { lootQuote } = require("./LootSale");
+  const b = { ...R.newBattle([hero(), glutton, berserk]) };
+  const post = R.beginPostBattle(b, [hero(), glutton, berserk], { kosztownosci: 3 }, army).post;
+  post.lootDraft = { quantity: 3 };
+  const base = lootQuote(b, post);
+  expect(base.models).toBe(6);
+  post.lootDraft = { quantity: 3, devoured: true, frenzy: { s: 5 } };
+  const q = lootQuote(b, post);
+  // Szał: two models in frenzy (capped at the group) count twice.
+  expect(q.models).toBe(8);
+  expect(q.notes).toEqual(expect.arrayContaining([
+    "Głód trzewi: −1 poziom liczebności", "Szał: +2 do liczby modeli"]));
+  expect(q.gold).toBe(R.income(3, 8, 2, 3, -1));
+});

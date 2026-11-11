@@ -1,7 +1,9 @@
 import NumberInput from "./NumberInput";
 import React from "react";
 import * as R from "./rules";
-import { companyChoices, selectCompanyAdvance } from "./company";
+import { companyChoices, selectCompanyAdvance, TRACK_NAMES } from "./company";
+
+const TRACKS = TRACK_NAMES;
 
 // Adds this skirmish's Determinacja, Gniew and Odporność (s. 418), capped at 40.
 export function applyCampaignPoints(p, battle, notes) {
@@ -76,7 +78,7 @@ function CampaignPoints({ battle, post, update, notes }) {
         {Object.keys(suggested).map((k) => (
           <label key={k}>
             <span>
-              {{ determinacja: "Determinacja", gniew: "Gniew", odpornosc: "Odporność" }[k]}{" "}
+              {TRACKS[k] || k}{" "}
               +
             </span>
             <NumberInput
@@ -112,13 +114,16 @@ function CampaignPoints({ battle, post, update, notes }) {
           key={`${choice.track}:${choice.threshold}`}
         >
           <h3>
-            {choice.track}: {choice.threshold} punktów
+            {TRACKS[choice.track] || choice.track}: {choice.threshold} punktów
+            {!choice.selected && (
+              <small className="campaign-muted"> · wybierz jedno rozwinięcie</small>
+            )}
           </h3>
           {choice.selected ? (
             <p>Wybrano: {choice.selected.name}</p>
           ) : (
             choice.options.map((entry) => (
-              <article key={entry.id}>
+              <article key={entry.id} className="campaign-option">
                 <h4>{entry.name}</h4>
                 <p>{entry.text}</p>
                 <button

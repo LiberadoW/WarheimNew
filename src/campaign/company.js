@@ -64,6 +64,11 @@ export function companyChoices(post, notes) {
       })),
   );
 }
+export const TRACK_NAMES = {
+  determinacja: "Determinacja",
+  gniew: "Gniew",
+  odpornosc: "Odporność",
+};
 export function selectCompanyAdvance(post, notes, id) {
   const entry = entries.find((e) => e.id === id);
   if (!entry) throw Error("Nieznane rozwinięcie kompanii.");
@@ -77,7 +82,7 @@ export function selectCompanyAdvance(post, notes, id) {
   R.log(
     post,
     "company-advance",
-    `${entry.track} ${entry.threshold}: ${entry.name}`,
+    `${TRACK_NAMES[entry.track] || entry.track} ${entry.threshold}: ${entry.name}`,
     { entryId: id },
   );
 }

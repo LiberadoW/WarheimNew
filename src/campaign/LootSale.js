@@ -17,6 +17,12 @@ export function lootQuote(battle, post) {
   const forceAll = auto.spendthrift && cpRolled && !cpPassed;
   const quantity = forceAll ? post.loot : Number(post.lootDraft?.quantity) || 0;
   const modifier = Number(post.lootDraft?.modifier) || 0;
+  const devoured = !!post.lootDraft?.devoured && auto.devourers.length > 0;
+  const frenzy = auto.frenzied.reduce(
+    (n, f) =>
+      n + Math.min(f.max, Math.max(0, Number(post.lootDraft?.frenzy?.[f.unitId]) || 0)),
+    0,
+  );
   const models = post.units
     .filter((u) => !["Najemne Ostrze", "Postać Dramatu"].includes(u.type))
     .reduce(
@@ -25,9 +31,9 @@ export function lootQuote(battle, post) {
         R.modelCount(u) -
         (u.campaignModelStatus || []).filter((s) => s.dead).length,
       0,
-    ) + auto.gluttons;
+    ) + auto.gluttons + frenzy;
   const ruleLevels =
-    -auto.economists + (auto.spendthrift && cpRolled ? 1 : 0);
+    -auto.economists - (devoured ? 1 : 0) + (auto.spendthrift && cpRolled ? 1 : 0);
   // Nadpodaż uses everyone's sales; the player enters only the others' loot.
   const others = Math.max(0, Number(battle.othersSold) || 0);
   const totalSold = quantity + others;
@@ -50,6 +56,11 @@ export function lootQuote(battle, post) {
     auto.revelators.length && `Rewelator: +${auto.revelators.length} łup przy sprzedaży`,
     auto.wagon && "Wóz przemytniczy: +1 łup przy sprzedaży",
     companyLevel(post, "Rządcy") && "Rządcy: +1 łup przy sprzedaży",
+    devoured && "Głód trzewi: −1 poziom liczebności",
+    frenzy && `Szał: +${frenzy} do liczby modeli`,
+    companyLevel(post, "Samowystarczalni") && "Samowystarczalni: −1 poziom liczebności",
+    post.effects?.incomeLevel &&
+      `Efekt eksploracji: ${post.effects.incomeLevel > 0 ? "+" : ""}${post.effects.incomeLevel} poziom liczebności`,
   ].filter(Boolean);
   return {
     auto,
@@ -116,6 +127,43 @@ function LootSale({ battle, post, update, setBattle }) {
             <li key={n}>{n}</li>
           ))}
         </ul>
+      )}
+      {(auto.devourers.length > 0 || auto.frenzied.length > 0) && (
+        <section className="campaign-card" aria-label="Zasady zależne od przebiegu potyczki">
+          <h3>Co się wydarzyło w potyczce?</h3>
+          {auto.devourers.length > 0 && (
+            <label className="campaign-check">
+              <input
+                type="checkbox"
+                disabled={post.lootSold}
+                checked={!!post.lootDraft?.devoured}
+                onChange={(e) => setDraft({ devoured: e.target.checked })}
+              />
+              Głód trzewi: {auto.devourers.join(", ")} pożarł model (poziom
+              liczebności −1)
+            </label>
+          )}
+          {auto.frenzied.map((f) => (
+            <label key={f.unitId}>
+              Szał: modele {f.label}, które wpadły w szał (liczone podwójnie)
+              <NumberInput
+                type="number"
+                min="0"
+                max={f.max}
+                disabled={post.lootSold}
+                value={Math.min(f.max, Number(post.lootDraft?.frenzy?.[f.unitId]) || 0)}
+                onChange={(e) =>
+                  setDraft({
+                    frenzy: {
+                      ...(post.lootDraft?.frenzy || {}),
+                      [f.unitId]: Math.max(0, Math.min(f.max, Math.floor(Number(e.target.value)))),
+                    },
+                  })
+                }
+              />
+            </label>
+          ))}
+        </section>
       )}
       {auto.spendthrift && (
         <section className="campaign-card">
@@ -210,7 +258,7 @@ function LootSale({ battle, post, update, setBattle }) {
             />
           </label>
           <label>
-            Modyfikator poziomu liczebności z zasad
+            Inny modyfikator poziomu liczebności (np. scenariusz)
             <NumberInput
               type="number"
               disabled={post.lootSold}
