@@ -357,6 +357,7 @@ export const GameScreen = ({
   setArmy,
   setArmyName,
   setCampaignNotes,
+  campaignNotes,
 }) => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -397,7 +398,17 @@ export const GameScreen = ({
     }
   };
 
+  // This player's sequence for this game: saved already, or open in play mode.
+  const settled = game.sequenceDone?.[user.uid];
+  const openHere = campaignNotes?.campaign?.activeBattle?.campaignGame?.gameId === game.id;
+
   const handOff = async () => {
+    if (settled) return;
+    // Coming back to an unfinished sequence of this game keeps its progress.
+    if (openHere) {
+      navigate("/play");
+      return;
+    }
     const mine = sides.find((s) => s.owner === user.uid);
     const opponent = sides.find((s) => s.owner !== user.uid);
     const saved = (await getMySavedLists(user.uid)).find(
@@ -408,6 +419,21 @@ export const GameScreen = ({
       return;
     }
     const list = normalizeRosterNames(saved);
+    const history = list.campaignNotes?.campaign?.history || [];
+    if (history.some((h) => h.campaignGame?.gameId === game.id)) {
+      setError("Sekwencja po tej grze została już rozliczona dla tej kompanii.");
+      return;
+    }
+    // Sequences saved before games were tracked carry only their name.
+    const expectedName = [campaign.name, game.round && `runda ${game.round}`].filter(Boolean).join(" · ");
+    const earlier = history.find((h) => !h.campaignGame && h.gameName === expectedName);
+    if (
+      earlier &&
+      !window.confirm(
+        `Kompania ma już rozliczenie „${earlier.gameName}” z ${earlier.date}. Jeśli to była ta gra, wybierz Anuluj. Rozliczyć ją ponownie?`,
+      )
+    )
+      return;
     if (
       list.campaignNotes?.campaign?.activeBattle &&
       !window.confirm("Ta kompania ma już rozpoczętą potyczkę w trybie gry. Zastąpić ją tą grą?")
@@ -467,13 +493,21 @@ export const GameScreen = ({
               : `Wygrywa ${names[game.result?.winner] || "gracz"}`}
             {game.result?.rounds ? <span className="hub-muted"> · {game.result.rounds} rund</span> : null}
           </h3>
-          <p className="hub-muted">
-            Wyłączenia z akcji, nieobecni, pokonani wrogowie i PD z tej gry trafią do sekwencji po potyczce.
-            Po jej zapisaniu rozpiska w kampanii zaktualizuje się sama.
-          </p>
-          <button type="button" className="button" onClick={handOff}>
-            <i className="fa-solid fa-forward" aria-hidden="true"></i> Sekwencja po potyczce mojej kompanii
-          </button>
+          {settled ? (
+            <p className="hub-notice">✓ Sekwencja po potyczce Twojej kompanii jest już rozliczona.</p>
+          ) : (
+            <>
+              <p className="hub-muted">
+                {openHere
+                  ? "Sekwencja po tej grze jest rozpoczęta w trybie gry. Wróć do niej, postęp jest zapisany."
+                  : "Wyłączenia z akcji, nieobecni, pokonani wrogowie i PD z tej gry trafią do sekwencji po potyczce. Po jej zapisaniu rozpiska w kampanii zaktualizuje się sama."}
+              </p>
+              <button type="button" className="button" onClick={handOff}>
+                <i className="fa-solid fa-forward" aria-hidden="true"></i>{" "}
+                {openHere ? "Wróć do sekwencji po potyczce" : "Sekwencja po potyczce mojej kompanii"}
+              </button>
+            </>
+          )}
         </section>
       )}
 

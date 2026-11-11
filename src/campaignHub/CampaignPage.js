@@ -58,6 +58,7 @@ const MyGame = ({ campaignId, game, names, uid }) => {
   if (!game) return null;
   const opponent = (game.players || []).find((p) => p !== uid);
   const done = game.status === "done";
+  const settled = !!game.sequenceDone?.[uid];
   return (
     <section className="hub-card hub-my-game">
       <div className="hub-card-head">
@@ -65,7 +66,7 @@ const MyGame = ({ campaignId, game, names, uid }) => {
           {done ? "Twoja ostatnia gra" : "Twoja gra"} · runda {game.round}
         </h3>
         <span className={`hub-status is-${game.status}`}>
-          {done ? "Rozegrana" : game.status === "playing" ? "W trakcie" : "Do rozegrania"}
+          {settled ? "Rozliczona" : done ? "Rozegrana" : game.status === "playing" ? "W trakcie" : "Do rozegrania"}
         </span>
       </div>
       <p>
@@ -80,7 +81,7 @@ const MyGame = ({ campaignId, game, names, uid }) => {
       </p>
       <Link to={`/campaigns/${campaignId}/games/${game.id}`} className="button">
         <i className="fa-solid fa-chess-board" aria-hidden="true"></i>{" "}
-        {done ? "Sekwencja po potyczce" : "Otwórz ekran gry"}
+        {!done ? "Otwórz ekran gry" : settled ? "Przebieg gry" : "Sekwencja po potyczce"}
       </Link>
     </section>
   );

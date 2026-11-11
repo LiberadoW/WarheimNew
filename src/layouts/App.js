@@ -328,6 +328,7 @@ const App = () => {
                   <RequireAuth>
                     <Suspense fallback={pageFallback}>
                       <GamePage
+                        campaignNotes={campaignNotes}
                         setUnitList={setUnitList}
                         setArmy={setArmy}
                         setArmyName={setArmyName}

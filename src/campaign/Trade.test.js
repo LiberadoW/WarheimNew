@@ -152,3 +152,33 @@ test("the purchase rule rejects an obsolete shared tax quote before charging the
   expect(()=>R.buyItem(state.post,"h",item,{id:"old",itemId:item.id,price:16,taxRoll:[6]},army.name)).toThrow(/osobny rzut/);
   expect(state.post.treasury).toBe(100);
 });
+
+// Sprzedaż (s. 426): half the market or base price, rounded down.
+test("stash items and carried gear can be sold for half price", () => {
+  const {state} = setup({optionalEquipment:["Miecz"]}, 100, [], {
+    inventory: [{id:"s1", name:"Tarcza", quantity:2, basePrice:5}, {id:"s2", name:"Krasnoludzki proch", quantity:1, basePrice:10, catalogId:"x"}],
+  });
+  fireEvent.click(screen.getByRole("tab", {name:"Sprzedaj"}));
+  click("Sprzedaj 1 za 2 zk");
+  expect(state.post.treasury).toBe(102);
+  expect(state.post.inventory.find((i) => i.id === "s1").quantity).toBe(1);
+  click("Sprzedaj 1 za 5 zk");
+  expect(state.post.inventory.some((i) => i.id === "s2")).toBe(false);
+  jest.spyOn(window, "confirm").mockReturnValue(true);
+  // Miecz (10 zk) on the hero: 5 zk.
+  click("Sprzedaj za 5 zk");
+  expect(state.post.units[0].optionalEquipment).not.toContain("Miecz");
+  expect(state.post.treasury).toBe(112);
+  window.confirm.mockRestore();
+});
+
+test("a group sells the whole set and mercenaries keep their gear", () => {
+  const post = R.beginPostBattle(R.newBattle([]), [
+    {...R.clone(unit), uniqueId:"g", type:"Stronnik", selectedNumber:3, optionalEquipment:["Miecz"]},
+    {...R.clone(unit), uniqueId:"m", type:"Najemne Ostrze", optionalEquipment:["Miecz"]},
+  ], {skarbiec:0}, army).post;
+  expect(R.sellUnitItem(post, "g", "optionalEquipment", 0)).toBe(15);
+  expect(post.treasury).toBe(15);
+  expect(R.canSellCarried(post.units[1], "optionalEquipment", 0)).toBe(false);
+  expect(() => R.sellUnitItem(post, "m", "optionalEquipment", 0)).toThrow();
+});

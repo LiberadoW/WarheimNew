@@ -39,7 +39,7 @@ import CampaignTargetBanner, {
   readCampaignTarget,
   setCampaignTarget,
 } from "../campaignHub/CampaignTarget";
-import { uploadCampaignList } from "../campaignHub/campaignService";
+import { markSequenceDone, uploadCampaignList } from "../campaignHub/campaignService";
 
 export const CommandContext = createContext();
 
@@ -479,6 +479,12 @@ const Builder = ({
     // already, so a failed upload only asks for the manual one.
     const campaignId = campaignGame?.campaignId;
     if (!campaignId || !savedList) return null;
+    try {
+      if (campaignGame.gameId)
+        await markSequenceDone(campaignId, campaignGame.gameId, currentUser.user.uid, entry.id);
+    } catch {
+      // The saved list's history still records the game (entry.campaignGame).
+    }
     try {
       await uploadCampaignList(campaignId, currentUser.user, savedList);
       return { campaignId, uploaded: true };

@@ -131,7 +131,7 @@ describe("game screen", () => {
   const campaign = { id: "c1", name: "Jesień", ownerId: "a", members: ["a", "b"], memberNames: { a: "Ania", b: "Bartek" } };
   const listB = { armyName: "Banda B", armyType: "Cyrkowcy z Ligii Ostermarku", armyList: [unit("Szarlatan", { uniqueId: "sz" })], prestige: 30 };
   const listA = { armyName: "Banda A", armyType: "Cyrkowcy z Ligii Ostermarku", armyList: armyA, prestige: 80 };
-  const setup = (game) => {
+  const setup = (game, extra = {}) => {
     service.watchCampaign.mockImplementation((id, cb) => { cb(campaign); return () => {}; });
     service.watchGame.mockImplementation((id, gid, cb) => { cb(game); return () => {}; });
     service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
@@ -140,7 +140,7 @@ describe("game screen", () => {
       <AuthContext.Provider value={{ currentUser: { user: { uid: "a" } } }}>
         <MemoryRouter initialEntries={["/campaigns/c1/games/g1"]}>
           <Routes>
-            <Route path="/campaigns/:id/games/:gameId" element={<GamePage {...setters} />} />
+            <Route path="/campaigns/:id/games/:gameId" element={<GamePage {...setters} {...extra} />} />
             <Route path="/play" element={<p>tryb gry</p>} />
           </Routes>
         </MemoryRouter>
@@ -191,5 +191,31 @@ describe("game screen", () => {
     expect(setters.setArmyName).toHaveBeenCalledWith("Banda A");
     const notes = setters.setCampaignNotes.mock.calls[0][0];
     expect(notes.campaign.activeBattle).toMatchObject({ opponent: "Bartek", result: "loss", scenario: "Ruiny" });
+  });
+
+  test("a settled sequence is not offered again", () => {
+    setup({ ...baseGame, status: "done", result: { winner: "b" }, sequenceDone: { a: { entryId: "e1" } } });
+    expect(screen.getByText(/jest już rozliczona/)).not.toBeNull();
+    expect(screen.queryByRole("button", { name: /Sekwencja po potyczce/ })).toBeNull();
+  });
+
+  test("the saved list's history blocks settling the same game twice", async () => {
+    service.getMySavedLists.mockResolvedValue([
+      { ...listA, campaignNotes: { campaign: { history: [{ id: "e1", campaignGame: { campaignId: "c1", gameId: "g1" } }] } } },
+    ]);
+    const setters = setup({ ...baseGame, status: "done", result: { winner: "b" } });
+    fireEvent.click(screen.getByRole("button", { name: "Sekwencja po potyczce mojej kompanii" }));
+    expect(await screen.findByText(/została już rozliczona/)).not.toBeNull();
+    expect(setters.setCampaignNotes).not.toHaveBeenCalled();
+  });
+
+  test("an unfinished sequence of this game is resumed, not replaced", async () => {
+    const setters = setup(
+      { ...baseGame, status: "done", result: { winner: "b" } },
+      { campaignNotes: { campaign: { activeBattle: { stage: 3, campaignGame: { campaignId: "c1", gameId: "g1" } } } } },
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Wróć do sekwencji po potyczce" }));
+    await screen.findByText("tryb gry");
+    expect(setters.setCampaignNotes).not.toHaveBeenCalled();
   });
 });

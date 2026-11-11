@@ -1399,6 +1399,8 @@ const finalizeBattle = (battle, notes) => {
     result: battle.result,
     area: battle.area,
     notes: battle.notes,
+    // Which shared-campaign game this settles, so it is not settled twice.
+    campaignGame: battle.campaignGame || null,
     finishedAt: new Date().toISOString(),
     journal: p.journal,
     treasury: p.treasury,
@@ -1810,6 +1812,73 @@ export const equipStoredItem = (post, unitId, storedId, armyName) => {
   log(post, "inventory", `${stored.name} ×${amount} → ${label(unit)}`);
 };
 
+// Sprzedaż (s. 426): half the market value of common equipment and half
+// the base price of rare equipment. The book gives no rounding; the app
+// rounds down. Rune and mechanism upgrades add nothing to the price.
+export const saleValue = (stored) => {
+  const definition =
+    catalog.find((i) => i.id === stored.catalogId) ||
+    catalog.find((i) => normal(i.name) === normal(stored.name));
+  const base =
+    stored.basePrice ??
+    (definition ? Number(String(definition.price).match(/^\d+/)?.[0] || 0) : 0);
+  return Math.floor((Number(base) || 0) / 2);
+};
+export const sellStoredItem = (post, storedId, quantity = 1) => {
+  if (post.tradeClosed) throw Error("Handel w tej sekwencji został zamknięty.");
+  const stored = post.inventory.find((i) => i.id === storedId);
+  if (!stored || stored.quantity < quantity)
+    throw Error("Brak tego przedmiotu w skarbcu.");
+  const value = saleValue(stored) * quantity;
+  stored.quantity -= quantity;
+  post.inventory = post.inventory.filter((i) => i.quantity > 0);
+  post.treasury += value;
+  log(
+    post,
+    "sale",
+    `Sprzedano: ${stored.name} ×${quantity} za ${value} zk (połowa ceny).`,
+  );
+  return value;
+};
+// Base price of what a model carries, as unequipItem stores it.
+export const carriedBasePrice = (unit, field, index) => {
+  const entry = unit?.[field]?.[index];
+  if (!entry) return 0;
+  const name = typeof entry === "string" ? entry : entry.name;
+  const metadata = (unit.campaignEquipment || []).find(
+    (i) => normal(i.name) === normal(name),
+  );
+  return Number(
+    metadata?.basePrice ??
+      (typeof entry === "object"
+        ? Number(entry.price) || 0
+        : unit.equipmentList?.[name]?.[0] || 0),
+  ) || 0;
+};
+// Whether the player may sell this (s. 426, 484, 496): never a mercenary's
+// own gear, nor what a Drama character starts with.
+export const canSellCarried = (unit, field, index) => {
+  const entry = unit?.[field]?.[index];
+  return (
+    !!entry &&
+    unit.type !== "Najemne Ostrze" &&
+    !(unit.type === "Postać Dramatu" && (field === "startingEquipment" || entry.personal))
+  );
+};
+// Sells what a model (or every living model of a group) carries.
+export const sellUnitItem = (post, unitId, field, index) => {
+  const unit = post.units.find((u) => u.uniqueId === unitId);
+  const entry = unit?.[field]?.[index];
+  if (!entry) throw Error("Brak przedmiotu do sprzedaży.");
+  const name = typeof entry === "string" ? entry : entry.name;
+  const before = Object.fromEntries(post.inventory.map((i) => [i.id, i.quantity]));
+  unequipItem(post, unitId, field, index);
+  const stored = post.inventory.find(
+    (i) => normal(i.name) === normal(name) && i.quantity > (before[i.id] || 0),
+  );
+  if (!stored) throw Error("Nie udało się sprzedać przedmiotu.");
+  return sellStoredItem(post, stored.id, stored.quantity - (before[stored.id] || 0));
+};
 export const unequipItem = (post, unitId, field, index) => {
   const unit = post.units.find((u) => u.uniqueId === unitId),
     entry = unit?.[field]?.[index];

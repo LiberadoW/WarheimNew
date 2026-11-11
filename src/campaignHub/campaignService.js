@@ -190,6 +190,12 @@ export async function addGame(campaign, round, players) {
 export const updateGame = (campaignId, gameId, changes) =>
   updateDoc(doc(db, "campaigns", campaignId, "games", gameId), changes);
 
+// A player saved the post-battle sequence of this game: it is not offered again.
+export const markSequenceDone = (campaignId, gameId, uid, entryId) =>
+  updateGame(campaignId, gameId, {
+    [`sequenceDone.${uid}`]: { at: serverTimestamp(), entryId: entryId || null },
+  });
+
 export const recordResult = (campaignId, gameId, result, user) =>
   updateGame(campaignId, gameId, {
     status: "done",

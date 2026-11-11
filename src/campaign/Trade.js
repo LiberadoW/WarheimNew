@@ -36,11 +36,17 @@ import {
   refreshAvailability,
   usableAvailability,
   roll,
+  saleValue,
+  sellStoredItem,
+  sellUnitItem,
+  carriedBasePrice,
+  canSellCarried,
+  label as unitLabel,
 } from "./rules";
 
 // Pula Kości Dostępności (s. 426): one result per hero, used for rare
 // equipment and recruits; common items never need it.
-export function AvailabilityPool({ post, update, compact = false }) {
+export function AvailabilityPool({ post, update, compact = false, title = "Pula dostępności" }) {
   const pool = post.availability;
   const [reroll, setReroll] = useRollDraft(post, update, "availability-reroll"),
     [selected, setSelected] = useState("");
@@ -68,7 +74,7 @@ export function AvailabilityPool({ post, update, compact = false }) {
     <section className={`campaign-availability${compact ? " is-compact" : ""}`}>
       {!compact && (
         <>
-          <h3>Pula dostępności</h3>
+          <h4 className="campaign-shop-step">{title}</h4>
           <details className="campaign-help">
             <summary>Jak działa pula?</summary>
             <p className="campaign-muted">
@@ -461,6 +467,92 @@ export function unavailableReason(post, unit, item, toInventory = false) {
   }
   return null;
 }
+const GEAR_FIELDS = ["startingEquipment", "optionalEquipment", "customEquipment"];
+const living = (u) =>
+  modelCount(u) - (u.campaignModelStatus || []).filter((st) => st.dead).length;
+
+// Sprzedaż (s. 426): the stash first, then what each model carries.
+function SellPanel({ post, update }) {
+  const owners = post.units.filter((u) => living(u) > 0 && u.type !== "Najemne Ostrze");
+  return (
+    <div className="campaign-sell">
+      <p className="campaign-muted">
+        Ekwipunek powszechny: połowa ceny rynkowej, rzadki: połowa ceny podstawowej
+        (zaokrąglone w dół). Najemne Ostrza nie sprzedają swojego ekwipunku.
+      </p>
+      <h4>Skarbiec kompanii</h4>
+      {post.inventory.length ? (
+        <ul className="campaign-stash">
+          {post.inventory.map((item) => (
+            <li key={item.id}>
+              <div className="campaign-stash-row">
+                <div className="campaign-stash-name">
+                  <strong>{item.name}</strong>
+                  <small>×{item.quantity} · {saleValue(item)} zk za sztukę</small>
+                </div>
+                <button
+                  type="button"
+                  className="button button-secondary"
+                  onClick={() => update((p) => sellStoredItem(p, item.id, 1))}
+                >
+                  Sprzedaj 1 za {saleValue(item)} zk
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="campaign-muted">Skarbiec ekwipunku jest pusty.</p>
+      )}
+      <h4>Ekwipunek postaci</h4>
+      {owners.map((u) => {
+        const rows = GEAR_FIELDS.flatMap((field) =>
+          (u[field] || []).map((entry, index) => ({ field, index, entry })),
+        ).filter(({ field, index }) => canSellCarried(u, field, index));
+        if (!rows.length) return null;
+        const n = living(u);
+        return (
+          <div className="campaign-sell-owner" key={u.uniqueId}>
+            <strong>
+              {unitLabel(u)}
+              {n > 1 ? <small> · {n} modele, sprzedajesz komplet</small> : null}
+            </strong>
+            <ul className="campaign-stash">
+              {rows.map(({ field, index, entry }) => {
+                const name = typeof entry === "string" ? entry : entry.name;
+                const value = Math.floor(carriedBasePrice(u, field, index) / 2) * n;
+                return (
+                  <li key={`${field}:${index}`}>
+                    <div className="campaign-stash-row">
+                      <div className="campaign-stash-name">
+                        <strong>{name}</strong>
+                      </div>
+                      <button
+                        type="button"
+                        className="button button-secondary"
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              `Sprzedać ${name}${n > 1 ? ` (${n} szt.)` : ""} postaci ${unitLabel(u)} za ${value} zk?`,
+                            )
+                          )
+                            update((p) => sellUnitItem(p, u.uniqueId, field, index));
+                        }}
+                      >
+                        Sprzedaj za {value} zk
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Trade({ post, update, army, commonOnly = false }) {
   const [theftDice, setTheftDice] = useRollDraft(post, update, "strigos-theft");
   const [selectedId, setSelected] = useRollDraft(post, update, "trade-selected", "");
@@ -468,6 +560,8 @@ export default function Trade({ post, update, army, commonOnly = false }) {
   const [category, setCategory] = useState(""), [query, setQuery] = useState("");
   const [all, setAll] = useState(false), [limit, setLimit] = useState(24);
   const [inventory, setInventory] = useRollDraft(post, update, "trade-inventory", false);
+  const [tradeMode, setTradeMode] = useRollDraft(post, update, "trade-mode", "buy");
+  const selling = !commonOnly && tradeMode === "sell";
   const unit = post.units.find(u=>u.uniqueId === recipientId && !u.campaignModelStatus?.every(s=>s.dead)) || post.units.find(u=>!u.campaignModelStatus?.every(s=>s.dead));
   const unitId = unit?.uniqueId || "";
   const categories = [...new Set(catalog.map(i=>i.category))];
@@ -491,8 +585,26 @@ export default function Trade({ post, update, army, commonOnly = false }) {
       {commonOnly && <p className="campaign-source">Krok 9: nowi rekruci i pozostali drużynnicy mogą kupić przedmioty powszechne. Rzadkie kupujesz w kroku 7.</p>}
       {post.tradeClosed && <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>}
       <fieldset disabled={post.tradeClosed}>
+        {!commonOnly && !selected && (
+          <div className="campaign-mode-switch" role="tablist" aria-label="Rodzaj handlu">
+            {[["buy", "Kup"], ["sell", "Sprzedaj"]].map(([key, text]) => (
+              <button
+                type="button"
+                role="tab"
+                key={key}
+                aria-selected={tradeMode === key}
+                className={tradeMode === key ? "is-active" : ""}
+                onClick={() => setTradeMode(key)}
+              >
+                {text}
+              </button>
+            ))}
+          </div>
+        )}
+        {selling ? <SellPanel post={post} update={update} /> : <>
         {/* The pool comes first: its results decide which rare items can be bought. */}
-        {!commonOnly && !selected && <AvailabilityPool post={post} update={update} />}
+        {!commonOnly && !selected && <AvailabilityPool post={post} update={update} title="1. Pula dostępności (dla rzadkich)" />}
+        {!selected && <h4 className="campaign-shop-step">{commonOnly ? "1. Dla kogo kupujesz" : "2. Dla kogo kupujesz"}</h4>}
         <div className="campaign-shop-recipient">
           <label>Postać
             <select value={inventory ? "inventory" : unitId} onChange={e=>{
@@ -505,10 +617,15 @@ export default function Trade({ post, update, army, commonOnly = false }) {
             </select>
           </label>
           <p className="campaign-muted">{inventory ? "Przedmioty do późniejszego przydziału." : unit && modelCount(unit)>1 ? `Kupujesz komplet dla ${modelCount(unit)} modeli.` : "Ekwipunek z listy wybranej postaci."}</p>
+          {!inventory && unit && (() => {
+            const carried = GEAR_FIELDS.flatMap((f) => (unit[f] || []).map((e) => (typeof e === "string" ? e : e.name)));
+            return <p className="campaign-source">Ma teraz: {carried.length ? carried.join(", ") : "nic"}</p>;
+          })()}
         </div>
         {selected ? <CatalogItem key={`${selected.id}:${unitId}:${inventory}`} item={selected} unit={unit}
           post={post} update={update} armyName={army.name} toInventory={inventory} onBack={()=>setSelected("")} /> : (
           <>
+            <h4 className="campaign-shop-step">{commonOnly ? "2. Wybierz przedmiot" : "3. Wybierz przedmiot"}</h4>
             <div className="campaign-shop-filters">
               <label>Szukaj przedmiotu<input type="search" placeholder="Nazwa, np. miecz lub trucizna" value={query} onChange={e=>{setQuery(e.target.value);setLimit(24);}} /></label>
               <label>Kategoria<select value={category} onChange={e=>{setCategory(e.target.value);setLimit(24);}}>
@@ -536,6 +653,7 @@ export default function Trade({ post, update, army, commonOnly = false }) {
             {shown.length>limit && <button className="button button-secondary" onClick={()=>setLimit(limit+24)}>Pokaż kolejne ({shown.length-limit})</button>}
           </>
         )}
+        </>}
         {post.effects?.strigosTheftPending && <section className="campaign-card">
           <h3>Zakończenie handlu ze Strigosem</h3><p>50% zniżki. Po wszystkich zakupach rzuć K6: na 5+ tracisz całe złoto i wszystkie łupy. Zatwierdzenie zamyka handel.</p>
           <DiceInput label="Strigos: kradzież po handlu" value={theftDice} onChange={setTheftDice} />
