@@ -183,6 +183,14 @@ describe("game screen", () => {
     expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "event", code: 11, area: "inside" }));
   });
 
+  test("the rolled random event can be picked straight from the table", () => {
+    setup(baseGame);
+    fireEvent.change(screen.getAllByLabelText("Wynik z tabeli")[0], { target: { value: "11" } });
+    expect(screen.getByText("(11) Ochroniarz")).not.toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz w przebiegu" }));
+    expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "event", code: 11, area: "inside" }));
+  });
+
   test("after the game a player sends their company to the post-battle sequence", async () => {
     service.getMySavedLists.mockResolvedValue([{ ...listA, campaignNotes: {} }]);
     const setters = setup({ ...baseGame, status: "done", result: { winner: "b", rounds: 3 } });

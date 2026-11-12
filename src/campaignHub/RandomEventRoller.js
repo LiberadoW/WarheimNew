@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AREAS, k66 } from "./scenarios";
 import { randomEventFor } from "./gamePlay";
+import randomEvents from "./data/randomEvents.json";
 import "../styles/CampaignHub.css";
 
 // Zdarzenia losowe: the table follows the scenario's area; the player rolls
@@ -9,9 +10,24 @@ import "../styles/CampaignHub.css";
 export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave }) {
   const [area, setArea] = useState(fixedArea);
   const [dice, setDice] = useState([null, null]);
+  // The rolled result can also be picked straight from the table.
+  const [picked, setPicked] = useState("");
   const valid = dice.every((d) => Number.isInteger(d) && d >= 1 && d <= 6);
-  const event = valid && area ? randomEventFor(area, k66(dice)) : null;
-  const setDie = (i, value) => setDice(dice.map((d, j) => (j === i ? (value === "" ? null : Number(value)) : d)));
+  const table = area ? randomEvents[area] || [] : [];
+  const event = picked
+    ? table.find((e) => String(e.code) === picked) || null
+    : valid && area
+      ? randomEventFor(area, k66(dice))
+      : null;
+  const code = picked ? Number(picked) : valid ? k66(dice) : null;
+  const reset = () => {
+    setDice([null, null]);
+    setPicked("");
+  };
+  const setDie = (i, value) => {
+    setPicked("");
+    setDice(dice.map((d, j) => (j === i ? (value === "" ? null : Number(value)) : d)));
+  };
 
   return (
     <section className="hub-card">
@@ -19,7 +35,13 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
       {!fixedArea && (
         <label className="hub-field">
           Tabela
-          <select value={area} onChange={(e) => setArea(e.target.value)}>
+          <select
+            value={area}
+            onChange={(e) => {
+              setArea(e.target.value);
+              setPicked("");
+            }}
+          >
             <option value="">Wybierz obszar</option>
             <option value="inside">{AREAS.inside}</option>
             <option value="outside">{AREAS.outside}</option>
@@ -27,6 +49,26 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
         </label>
       )}
       {area && <p className="hub-muted">Tabela: {AREAS[area]} (s. 399–404). Rzut K6 na wystąpienie zdarzenia wykonujesz sam.</p>}
+      {area && (
+        <label className="hub-field">
+          Wynik z tabeli
+          <select
+            value={picked}
+            onChange={(e) => {
+              setPicked(e.target.value);
+              setDice([null, null]);
+            }}
+          >
+            <option value="">Wybierz, co wypadło (albo wpisz K66 niżej)</option>
+            {table.map((e) => (
+              <option key={e.code} value={e.code}>
+                {e.code}
+                {e.max !== e.code ? `–${e.max}` : ""} · {e.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <div className="hub-dice-row">
         <label className="hub-field hub-die">
           K66 dziesiątki
@@ -39,7 +81,10 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
         <button
           type="button"
           className="button button-secondary"
-          onClick={() => setDice([1 + Math.floor(Math.random() * 6), 1 + Math.floor(Math.random() * 6)])}
+          onClick={() => {
+            setPicked("");
+            setDice([1 + Math.floor(Math.random() * 6), 1 + Math.floor(Math.random() * 6)]);
+          }}
         >
           <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć
         </button>
@@ -56,8 +101,8 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
               type="button"
               className="button button-small"
               onClick={() =>
-                Promise.resolve(onSave({ area, code: k66(dice), name: event.name, text: event.text })).then(
-                  (ok) => ok !== false && setDice([null, null]),
+                Promise.resolve(onSave({ area, code, name: event.name, text: event.text })).then(
+                  (ok) => ok !== false && reset(),
                 )
               }
             >
