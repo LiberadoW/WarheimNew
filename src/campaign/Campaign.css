@@ -722,3 +722,24 @@
 .campaign-sell h4 { margin: 16px 0 6px; font-size: .95rem; }
 .campaign-sell-owner { margin: 10px 0; }
 .campaign-sell-owner > strong small { font-weight: 400; color: var(--text-muted); }
+.campaign .campaign-inline-field { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.campaign .campaign-inline-field input { width: 80px; }
+.campaign-treasure-chest { padding: 4px 0; border-top: 1px solid var(--border); }
+
+/* Play mode game screen: round, notes, log. */
+.campaign-play { margin: 12px 0; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); }
+.campaign-play-round { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.campaign .campaign-play-round button { width: 44px; padding: 0; font-size: 1.2rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); }
+.campaign-play-round output { min-width: 2ch; text-align: center; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.campaign-play-note { display: flex; gap: 8px; margin: 10px 0 0; }
+.campaign .campaign-play-note .button { width: auto; margin: 0; }
+.campaign-play-log { margin: 6px 0 0; padding: 0; list-style: none; max-height: 260px; overflow: auto; font-size: .9rem; }
+.campaign-play-log li { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; border-top: 1px solid var(--border); }
+.campaign-play-log li > span:nth-child(2) { flex: 1; }
+.campaign-play-log-round { font-weight: 700; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.campaign .campaign-play-log button { min-height: 28px; padding: 0 8px; border: 0; background: none; color: var(--text-muted); }
+.campaign .campaign-play .campaign-section { background: var(--surface); }
+.campaign .campaign-play .hub-card { padding: 12px 0 0; border: 0; background: none; }
+.campaign > .campaign-play-round, .campaign .campaign-tracker + .campaign-play { margin-top: 12px; }
+.campaign .campaign-play-round { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); width: fit-content; }
+.campaign .campaign-play-note { margin-top: 0; }

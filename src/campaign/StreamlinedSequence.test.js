@@ -202,3 +202,29 @@ test("the experience step names every source of PD and applies exactly that sum"
   expect(post.units[0].exp).toBe(27);
   expect(post.expBreakdown.hero).toMatchObject({ from: 20, to: 27 });
 });
+
+test("treasure markers from the battle give PD at the start and loot with the exploration", () => {
+  const units = [hero({ battleTreasure: 2 })];
+  const notes = { skarbiec: 100, kosztownosci: 0, campaign: { history: [], activeBattle: {
+    ...R.newBattle(units), gameName: "Ruiny", scenarioRecord: { key: "inside:15:Ruiny", name: "Ruiny", area: "inside" } } } };
+  localStorage.setItem(`warheim:draft:${OWNER}`, JSON.stringify({ owner: OWNER, army: army.name, armyName: "QA", unitList: units, campaignNotes: notes }));
+  const state = {};
+  function Harness() {
+    const [draft, setField] = useCampaignDraft(OWNER);
+    state.draft = draft;
+    return <CampaignManager unitList={draft.unitList} setUnitList={(v) => setField("unitList", v)} army={army}
+      campaignNotes={draft.campaignNotes} setCampaignNotes={(v) => setField("campaignNotes", v)} onFinish={jest.fn()} />;
+  }
+  render(<Harness />);
+  click("Rozpocznij sekwencję po potyczce");
+  click("Dalej: Doświadczenie i rozwój");
+  expect(screen.getByText(/\+2 znaczniki kosztowności/)).toBeTruthy();
+  click("Nalicz doświadczenie i dalej");
+  expect(battle(state).post.units[0].exp).toBe(23);
+  click("Zatwierdź punkty i dalej");
+  expect(screen.getByText(/Razem: \+2 łupów/)).toBeTruthy();
+  fireEvent.change(screen.getByLabelText("Eksploracja, kość 1"), { target: { value: "4" } });
+  click("Zatwierdź eksplorację i dalej");
+  // One die without doubles finds 0 loot in the pool; the markers add 2.
+  expect(battle(state).post.loot).toBe(2 + R.explorationResult([4], "inside", 0).loot);
+});

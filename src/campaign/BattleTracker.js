@@ -4,7 +4,14 @@ import * as R from "./rules";
 // Compact, phone-friendly record of the skirmish itself: one card per unit with
 // kills, scenario PD and the status of every model. It edits the same fields as
 // the "Bitwa" tab of each unit card, so both views stay in sync.
-export default function BattleTracker({ units, setUnits }) {
+// What a counter change means for the battle log (onLog is optional).
+const LOG_TEXT = {
+  battleKills: (name, d) => (d > 0 ? `${name} wyłącza wroga z akcji` : `${name}: cofnięto wyłączenie wroga`),
+  battleExp: (name, d) => `${name}: ${d > 0 ? "+1" : "−1"} dodatkowe PD`,
+  battleTreasure: (name, d) => (d > 0 ? `${name} zdobywa znacznik kosztowności` : `${name} traci znacznik kosztowności`),
+};
+
+export default function BattleTracker({ units, setUnits, onLog }) {
   const edit = (id, fn) =>
     setUnits(
       units.map((u) => {
@@ -33,7 +40,10 @@ export default function BattleTracker({ units, setUnits }) {
           type="button"
           aria-label={`${label}: ${R.label(u)} −1`}
           disabled={!value}
-          onClick={() => edit(u.uniqueId, (x) => (x[field] = value - 1))}
+          onClick={() => {
+            edit(u.uniqueId, (x) => (x[field] = value - 1));
+            onLog?.(LOG_TEXT[field]?.(R.label(u), -1));
+          }}
         >
           −
         </button>
@@ -41,7 +51,10 @@ export default function BattleTracker({ units, setUnits }) {
         <button
           type="button"
           aria-label={`${label}: ${R.label(u)} +1`}
-          onClick={() => edit(u.uniqueId, (x) => (x[field] = value + 1))}
+          onClick={() => {
+            edit(u.uniqueId, (x) => (x[field] = value + 1));
+            onLog?.(LOG_TEXT[field]?.(R.label(u), 1));
+          }}
         >
           +
         </button>
@@ -85,6 +98,7 @@ export default function BattleTracker({ units, setUnits }) {
                 counter(u, "battleKills", "Wrogowie WzA")}
               {R.canEarnExperience(u) &&
                 counter(u, "battleExp", "Dodatkowe PD")}
+              {counter(u, "battleTreasure", "Kosztowności")}
             </div>
             <div className="campaign-tracker-models" role="group" aria-label={`Wyłączeni z akcji: ${R.label(u)}`}>
               {Array.from({ length: count }, (_, i) => {
@@ -110,11 +124,12 @@ export default function BattleTracker({ units, setUnits }) {
                     className={`${out ? "is-out" : ""}${count === 1 ? " is-single" : ""}`}
                     title={blocked || absent ? undefined : out ? "Dotknij: z powrotem w grze" : "Dotknij: wyłączony z akcji"}
                     disabled={blocked || absent}
-                    onClick={() =>
+                    onClick={() => {
                       edit(u.uniqueId, (x) => {
                         x.battleOutOfActionModels[i] = !out;
-                      })
-                    }
+                      });
+                      onLog?.(`${R.label(u)}${count > 1 ? ` ${name}` : ""}: ${out ? "wraca do gry" : "wyłączony z akcji"}`);
+                    }}
                   >
                     {count > 1 ? (
                       <>

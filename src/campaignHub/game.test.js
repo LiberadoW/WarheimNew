@@ -29,7 +29,7 @@ describe("game state", () => {
     round: 7,
     units: {
       a: {
-        m1: { kills: 2, extraPd: 1 },
+        m1: { kills: 2, extraPd: 1, treasure: 1 },
         cy: { out: { 1: true }, absent: { 2: true } },
       },
     },
@@ -85,7 +85,7 @@ describe("game state", () => {
       campaignName: "Jesień",
     });
     const m = units.find((u) => u.uniqueId === "m1");
-    expect(m).toMatchObject({ battleKills: 2, battleExp: 3 }); // +1 extra, +1 Mgła wojny, +1 zwycięstwo
+    expect(m).toMatchObject({ battleKills: 2, battleExp: 3, battleTreasure: 1 }); // +1 extra, +1 Mgła wojny, +1 zwycięstwo
     // The named sources travel with the unit; the +1 typed on the game screen stays unnamed.
     expect(m.battleExpParts).toEqual([
       { label: "Mgła wojny", pd: 1 },

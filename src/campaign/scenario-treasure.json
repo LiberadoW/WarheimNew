@@ -1,0 +1,347 @@
+{
+ "inside:13:Rogatki": {
+  "name": "Rogatki",
+  "page": 338,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "inside:14:Przypadkowe spotkanie": {
+  "name": "Przypadkowe spotkanie",
+  "page": 338,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:15:Ruiny": {
+  "name": "Ruiny",
+  "page": 339,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:16:Święte źródło": {
+  "name": "Święte źródło",
+  "page": 339,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:21:Fontanna": {
+  "name": "Fontanna",
+  "page": 340,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:22:Fajerwerki": {
+  "name": "Fajerwerki",
+  "page": 340,
+  "pdPerMarker": true,
+  "chest": {
+   "loot": [
+    3,
+    6
+   ],
+   "other": {
+    "from": 1,
+    "to": 2,
+    "kind": "item",
+    "item": "Krasnoludzki proch",
+    "dice": "K3"
+   }
+  }
+ },
+ "inside:23:Łowcy skarbów": {
+  "name": "Łowcy skarbów",
+  "page": 341,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:25:Ukryte kosztowności": {
+  "name": "Ukryte kosztowności",
+  "page": 342,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Zwycięska drużyna, która odnalazła skradziony skarb zwiększa o K3+2 liczbę znalezionych w fazie eksploracji Łupów!."
+  }
+ },
+ "inside:31:Skład celny": {
+  "name": "Skład celny",
+  "page": 343,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "inside:33:Porzucone skarby": {
+  "name": "Porzucone skarby",
+  "page": 344,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:36:Okupacja": {
+  "name": "Okupacja",
+  "page": 345,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "inside:41:Doki": {
+  "name": "Doki",
+  "page": 346,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:42:Relikwie": {
+  "name": "Relikwie",
+  "page": 346,
+  "pdPerMarker": true
+ },
+ "inside:43:Składnice": {
+  "name": "Składnice",
+  "page": 347,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:44:Zagubiony syn kupca": {
+  "name": "Zagubiony syn kupca",
+  "page": 347,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Przekazane przez kupca kosztowności zwiększają o K3+2 liczbę znalezionych w fazie eksploracji Łupów!."
+  }
+ },
+ "inside:51:Płonący dyliżans": {
+  "name": "Płonący dyliżans",
+  "page": 349,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:53:Przedarcie": {
+  "name": "Przedarcie",
+  "page": 350,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "inside:54:Złowady": {
+  "name": "Złowady",
+  "page": 350,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:55:Pożar": {
+  "name": "Pożar",
+  "page": 351,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:61:Wieża magusa": {
+  "name": "Wieża magusa",
+  "page": 352,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "inside:62:Atak z zaskoczenia": {
+  "name": "Atak z zaskoczenia",
+  "page": 352,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "inside:64:O jeden most za daleko": {
+  "name": "O jeden most za daleko",
+  "page": 353,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:13:O jeden most za daleko": {
+  "name": "O jeden most za daleko",
+  "page": 354,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:15:Natarcie": {
+  "name": "Natarcie",
+  "page": 355,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "outside:21:Pożoga": {
+  "name": "Pożoga",
+  "page": 356,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:22:Zaginiona córka kupca": {
+  "name": "Zaginiona córka kupca",
+  "page": 356,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Przekazane przez kupca kosztowności zwiększają liczbę znalezionych w fazie eksploracji Łupów! o K3+2."
+  }
+ },
+ "outside:23:Złowady": {
+  "name": "Złowady",
+  "page": 357,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:24:Napad": {
+  "name": "Napad",
+  "page": 357,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:26:Skrzynia skarbów": {
+  "name": "Skrzynia skarbów",
+  "page": 358,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Zwycięska drużyna, która odnalazła skradziony skarb zwiększa o K3+2 liczbę znalezionych w fazie eksploracji Łupów!."
+  }
+ },
+ "outside:31:Chata guślarza": {
+  "name": "Chata guślarza",
+  "page": 359,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "outside:32:Płonący furgon": {
+  "name": "Płonący furgon",
+  "page": 359,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:35:'Pod łysym zbójem'": {
+  "name": "'Pod łysym zbójem'",
+  "page": 361,
+  "pdPerMarker": true,
+  "chest": {
+   "loot": [
+    1,
+    5
+   ],
+   "other": {
+    "from": 6,
+    "to": 6,
+    "kind": "manual"
+   }
+  }
+ },
+ "outside:36:Przydrożna świątynia": {
+  "name": "Przydrożna świątynia",
+  "page": 361,
+  "pdPerMarker": true
+ },
+ "outside:41:Splądrowane kurhany": {
+  "name": "Splądrowane kurhany",
+  "page": 362,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:42:Trollowy most": {
+  "name": "Trollowy most",
+  "page": 362,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Zwycięska drużyna, która pokonała Rzecznego Trolla odnajduje ukryte pod mostem kosztowności i zwiększa o K3+2 liczbę znalezionych w fazie eksploracji Łupów!."
+  }
+ },
+ "outside:43:Pole bitwy": {
+  "name": "Pole bitwy",
+  "page": 363,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:45:Tabor": {
+  "name": "Tabor",
+  "page": 364,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "outside:52:Złoto piratów": {
+  "name": "Złoto piratów",
+  "page": 365,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Zwycięska drużyna, która odnalazła złoto piratów zwiększa o K3+2 liczbę znalezionych w fazie eksploracji Łupów!."
+  }
+ },
+ "outside:53:Grzmiąca góra": {
+  "name": "Grzmiąca góra",
+  "page": 366,
+  "pdPerMarker": true,
+  "chest": {
+   "loot": [
+    3,
+    6
+   ],
+   "other": {
+    "from": 1,
+    "to": 2,
+    "kind": "gold",
+    "dice": "K6x15"
+   }
+  }
+ },
+ "outside:54:Zaginione kosztowności": {
+  "name": "Zaginione kosztowności",
+  "page": 366,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:56:Las skarbów": {
+  "name": "Las skarbów",
+  "page": 367,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:61:Moczary": {
+  "name": "Moczary",
+  "page": 368,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:62:Leśna sadzawka": {
+  "name": "Leśna sadzawka",
+  "page": 368,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:63:Spotkanie na trakcie": {
+  "name": "Spotkanie na trakcie",
+  "page": 369,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "outside:64:Rogatki": {
+  "name": "Rogatki",
+  "page": 369,
+  "bonus": {
+   "dice": "K3",
+   "condition": "Zwycięska drużyna odnajduje w najbliższej sekwencji po potyczce dodatkowe K3 Łupy! oraz otrzymuje kumulatywny modyfikator +3 do jednego wybrane WYNIKU rzutu w puli Kości Dostępności."
+  }
+ },
+ "special:0:Misja ratunkowa": {
+  "name": "Misja ratunkowa",
+  "page": 370,
+  "lootPerMarker": true,
+  "pdPerMarker": true
+ },
+ "special:0:Magiczne koryto": {
+  "name": "Magiczne koryto",
+  "page": 371,
+  "bonus": {
+   "dice": "K3+2",
+   "condition": "Przekazane przez kupca kosztowności zwiększają o K3+2 liczbę znalezionych w fazie eksploracji Łupów!."
+  }
+ }
+}

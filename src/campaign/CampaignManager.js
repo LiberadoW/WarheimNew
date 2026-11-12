@@ -13,12 +13,14 @@ import CampaignPoints, { applyCampaignPoints } from "./CampaignPoints";
 import LootSale, { applyLootSale, lootQuote } from "./LootSale";
 import Exploration, { applyExploration, explorationState } from "./Exploration";
 import { companyInjuryModifier } from "./company";
+import { addTreasurePd } from "./treasure";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
 import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import Reference from "./Reference";
 import BattleTracker from "./BattleTracker";
+import PlayPanel, { RoundCounter } from "./PlayPanel";
 import GroupManager from "./GroupManager";
 import DiceInput from "./DiceInput";
 import useRollDraft from "./useRollDraft";
@@ -158,7 +160,7 @@ const pendingAction = (stage, battle, post, notes, army) => {
             c.exploration = { ...x.e, locked: true, originalDice: [...x.e.dice] };
           }),
       };
-    return x.plan.ready && x.autoTotals
+    return x.plan.ready && x.autoTotals && !x.treasure?.missing
       ? {
           label: "Zatwierdź eksplorację i dalej",
           run: (p) => withClone(p, (c) => applyExploration(c, battle, army)),
@@ -213,6 +215,7 @@ const blocker = (stage, battle, post, notes, army) => {
       if (!x.plan.ready)
         return x.plan.error || "Rozstrzygnij zdarzenie z eksploracji.";
       if (!x.autoTotals) return "Wykonaj rzuty z zasad kompanii.";
+      if (x.treasure?.missing) return x.treasure.missing;
       return "Zatwierdź eksplorację.";
     }
     if (post.advances.some((a) => !a.resolved))
@@ -466,14 +469,14 @@ export default function CampaignManager({
         };
       if (!b.gameName.trim())
         return { battle: b, error: "Wpisz nazwę potyczki." };
-      return {
-        battle: R.beginPostBattle(
-          { ...b, ownPrestige: safePrestige(unitList) ?? 0 },
-          unitList,
-          campaignNotes,
-          army,
-        ),
-      };
+      const started = R.beginPostBattle(
+        { ...b, ownPrestige: safePrestige(unitList) ?? 0 },
+        unitList,
+        campaignNotes,
+        army,
+      );
+      addTreasurePd(started.post, started);
+      return { battle: started };
     }
     const action = act && pendingAction(b.stage, b, b.post, campaignNotes, army);
     let p = action ? action.run(b.post) : b.post;
@@ -546,6 +549,16 @@ export default function CampaignManager({
   };
   const phase = battle?.stage || 0;
   const fromCampaign = !!battle?.campaignGame?.gameId;
+  // One line in the band's battle log, at the current round.
+  const addLog = (text) =>
+    text &&
+    setBattle({
+      ...battle,
+      log: [
+        ...(battle.log || []),
+        { id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, round: battle.playRound || 1, text },
+      ],
+    });
   const panel = useRef(null);
   const previousStage = useRef(phase);
   useEffect(() => {
@@ -624,6 +637,7 @@ export default function CampaignManager({
                 ...u,
                 battleExp: 0,
                 battleKills: 0,
+                battleTreasure: 0,
                 battleObled: 0,
                 battlePacts: 0,
                 battleOutOfActionModels: Array.from(
@@ -780,7 +794,15 @@ export default function CampaignManager({
                   0,
                 )})`}
               >
-                <BattleTracker units={unitList} setUnits={setUnitList} />
+                {!fromCampaign && <RoundCounter battle={battle} setBattle={setBattle} />}
+                <BattleTracker
+                  units={unitList}
+                  setUnits={setUnitList}
+                  onLog={fromCampaign ? undefined : addLog}
+                />
+                {!fromCampaign && (
+                  <PlayPanel battle={battle} setBattle={setBattle} addLog={addLog} />
+                )}
               </Collapsible>
               <Collapsible collapsed={fromCampaign} title="Popraw dane potyczki">
               {!fromCampaign && <h3>Dane potyczki</h3>}
@@ -1016,7 +1038,7 @@ export default function CampaignManager({
                               </>
                             )}
                           </span>
-                          {!post.expApplied && earns && (
+                          {!post.expApplied && earns && parts.length > 0 && (
                             <label className="campaign-xp-extra">
                               <span>Za scenariusz / zdarzenia</span>
                               <NumberInput
@@ -1274,6 +1296,19 @@ export default function CampaignManager({
                   .filter(Boolean)
                   .join(" · ")}
               </p>
+              {!!h.log?.length && (
+                <>
+                  <h4>Przebieg potyczki</h4>
+                  <ul>
+                    {h.log.map((e) => (
+                      <li key={e.id}>
+                        R{e.round}: {e.text}
+                      </li>
+                    ))}
+                  </ul>
+                  <h4>Rozliczenie</h4>
+                </>
+              )}
               <ul>
                 {h.journal.map((e) => (
                   <li key={e.id}>{e.text}</li>

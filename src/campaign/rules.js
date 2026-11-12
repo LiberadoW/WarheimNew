@@ -1370,6 +1370,7 @@ const finalizeBattle = (battle, notes) => {
     if (Array.isArray(u.injuries)) u.injuries = lastingInjuries(u.injuries);
     u.battleExp = 0;
     delete u.battleExpParts;
+    u.battleTreasure = 0;
     u.battleKills = 0;
     u.battleObled = 0;
     u.battlePacts = 0;
@@ -1401,6 +1402,8 @@ const finalizeBattle = (battle, notes) => {
     notes: battle.notes,
     // Which shared-campaign game this settles, so it is not settled twice.
     campaignGame: battle.campaignGame || null,
+    // The live log of a skirmish played in play mode.
+    log: battle.log || [],
     finishedAt: new Date().toISOString(),
     journal: p.journal,
     treasury: p.treasury,

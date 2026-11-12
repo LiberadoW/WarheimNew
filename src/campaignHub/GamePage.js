@@ -8,8 +8,9 @@ import RulesModal from "../Components/RulesModal";
 import { normalizeSpecialRules } from "../Components/CampaignPoints";
 import { getDefaultCampaignNotes } from "../layouts/App";
 import { ScenarioDetails } from "./ScenarioPicker";
+import RandomEventRoller from "./RandomEventRoller";
 import { OptionalRuleChips } from "./OptionalRulesPicker";
-import { AREAS, k66 } from "./scenarios";
+import { AREAS } from "./scenarios";
 import { STAT_LABELS, groupRoster } from "./roster";
 import {
   companyModels,
@@ -19,7 +20,6 @@ import {
   modelState,
   parseModelKey,
   pdSummary,
-  randomEventFor,
   settlementLine,
   toBattle,
   unitPlay,
@@ -158,6 +158,12 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                     disabled={!canEdit}
                     onChange={(d) => run(() => changeCounter(ids.c, ids.g, owner, unit.uniqueId, "extraPd", d))}
                   />
+                  <Stepper
+                    label="Kosztowności"
+                    value={Number(p.treasure) || 0}
+                    disabled={!canEdit}
+                    onChange={(d) => run(() => changeCounter(ids.c, ids.g, owner, unit.uniqueId, "treasure", d))}
+                  />
                 </div>
               </article>
             );
@@ -234,78 +240,25 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
   );
 };
 
-// Zdarzenia losowe: the table follows the scenario's area; the player rolls
-// the K66 (typed or in the app) and gets the event's text.
-const RandomEvents = ({ game, round, canEdit, run, ids }) => {
-  const [area, setArea] = useState(game.scenario?.area || "");
-  const [dice, setDice] = useState([null, null]);
-  const valid = dice.every((d) => Number.isInteger(d) && d >= 1 && d <= 6);
-  const event = valid && area ? randomEventFor(area, k66(dice)) : null;
-  const setDie = (i, value) => setDice(dice.map((d, j) => (j === i ? (value === "" ? null : Number(value)) : d)));
-
-  return (
-    <section className="hub-card">
-      <h3>Zdarzenia losowe</h3>
-      {!game.scenario?.area && (
-        <label className="hub-field">
-          Tabela
-          <select value={area} onChange={(e) => setArea(e.target.value)}>
-            <option value="">Wybierz obszar</option>
-            <option value="inside">{AREAS.inside}</option>
-            <option value="outside">{AREAS.outside}</option>
-          </select>
-        </label>
-      )}
-      {area && <p className="hub-muted">Tabela: {AREAS[area]} (s. 399–404). Rzut K6 na wystąpienie zdarzenia wykonujesz sam.</p>}
-      <div className="hub-dice-row">
-        <label className="hub-field hub-die">
-          K66 dziesiątki
-          <input type="number" min="1" max="6" inputMode="numeric" value={dice[0] ?? ""} onChange={(e) => setDie(0, e.target.value)} />
-        </label>
-        <label className="hub-field hub-die">
-          K66 jedności
-          <input type="number" min="1" max="6" inputMode="numeric" value={dice[1] ?? ""} onChange={(e) => setDie(1, e.target.value)} />
-        </label>
-        <button
-          type="button"
-          className="button button-secondary"
-          onClick={() => setDice([1 + Math.floor(Math.random() * 6), 1 + Math.floor(Math.random() * 6)])}
-        >
-          <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć
-        </button>
-      </div>
-      {event && (
-        <div className="game-event">
-          <h4>
-            ({event.code}
-            {event.max !== event.code ? `–${event.max}` : ""}) {event.name}
-          </h4>
-          <p>{event.text}</p>
-          {canEdit && (
-            <button
-              type="button"
-              className="button button-small"
-              onClick={() =>
-                run(() =>
-                  addLogEntry(ids.c, ids.g, {
-                    type: "event",
-                    round,
-                    area,
-                    code: k66(dice),
-                    name: event.name,
-                    text: `Zdarzenie losowe (${k66(dice)}): ${event.name}`,
-                  }),
-                ).then((ok) => ok && setDice([null, null]))
-              }
-            >
-              Zapisz w przebiegu
-            </button>
-          )}
-        </div>
-      )}
-    </section>
-  );
-};
+// Zdarzenia losowe on the shared game screen: saved in the game's log.
+const RandomEvents = ({ game, round, canEdit, run, ids }) => (
+  <RandomEventRoller
+    fixedArea={game.scenario?.area || ""}
+    canSave={canEdit}
+    onSave={(event) =>
+      run(() =>
+        addLogEntry(ids.c, ids.g, {
+          type: "event",
+          round,
+          area: event.area,
+          code: event.code,
+          name: event.name,
+          text: `Zdarzenie losowe (${event.code}): ${event.name}`,
+        }),
+      )
+    }
+  />
+);
 
 // Loads the campaign, the game and both rosters live from Firestore.
 const GamePage = (props) => {
@@ -602,7 +555,7 @@ export const GameScreen = ({
       <details className="hub-card hub-details">
         <summary>PD z potyczki</summary>
         <p className="hub-muted">
-          Bez +1 za przeżycie: to nalicza sekwencja po potyczce. +1 za zwycięstwo dla DOWÓDCY zwycięzcy
+          Bez +1 za przeżycie i PD za znaczniki kosztowności: to nalicza sekwencja po potyczce. +1 za zwycięstwo dla DOWÓDCY zwycięzcy
           liczy się po wpisaniu wyniku (scenariusze z podręcznika).
         </p>
         <div className="game-pd">

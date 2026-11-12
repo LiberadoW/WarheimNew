@@ -130,6 +130,8 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
         winBonusFor(unit, game, owner),
       battleExpParts: parts,
       battleKills: isHero(unit) ? Number(p.kills) || 0 : 0,
+      // Treasure markers the unit ended the game with (rozdział 11).
+      battleTreasure: Number(p.treasure) || 0,
       battleObled: 0,
       battlePacts: 0,
       battleOutOfActionModels: Array.from({ length: n }, (_, i) => !!p.out?.[i]),

@@ -9,6 +9,8 @@ import AdvanceCard from "./Advancement";
 import { encounterPlan } from "./encounters";
 import { applyEffects } from "./effects";
 import { explorationAuto, explorationAutoTotals } from "./auto-rules";
+import { applyTreasure, treasureState } from "./treasure";
+import TreasureCard from "./TreasureCard";
 
 // Polish plural: 1 uprawniony bohater, 2–4 uprawnieni bohaterowie,
 // 0 and 5+ uprawnionych bohaterów.
@@ -54,6 +56,7 @@ export function explorationState(battle, post, army = { name: "", heroes: {} }) 
     ? encounterPlan(result.best, e.encounter || {}, post, army)
     : { ready: true, effects: [] };
   return {
+    treasure: treasureState(battle, post),
     privileges,
     e,
     diceCount,
@@ -86,6 +89,8 @@ export function applyExploration(p, battle, army) {
     applyEffects(p, validated.effects, result.best.name, army);
   }
   if (!autoTotals) throw Error("Wykonaj rzuty z zasad kompanii.");
+  // Treasure markers add to the loot "found in the exploration phase".
+  applyTreasure(p, battle);
   p.loot += Math.max(0, result.loot + autoTotals.loot);
   p.explorationApplied = true;
   R.log(
@@ -449,6 +454,7 @@ export default function Exploration({
           )}
         </>
       )}
+      <TreasureCard battle={battle} post={post} update={update} />
       {post.advances
         .filter((a) => !a.resolved)
         .map((a) => (
