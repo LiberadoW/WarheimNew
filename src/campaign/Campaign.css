@@ -767,3 +767,7 @@
   .campaign .campaign-tracker-counter button { width: 32px; min-height: 32px; }
 }
 .campaign .campaign-profile-link { min-height: 28px; padding: 0; border: 0; background: none; color: var(--accent); font-size: .78rem; font-weight: 600; text-decoration: underline; width: auto; }
+/* Magic panel inside the play-mode screen: compact number fields. */
+.campaign .magic-extra label { flex-direction: row; align-items: center; gap: 8px; }
+.campaign .magic-extra input { width: 72px; min-height: 36px; }
+.campaign .magic-panel .button { width: auto; }

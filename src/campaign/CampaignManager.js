@@ -22,6 +22,7 @@ import Reference from "./Reference";
 import BattleTracker from "./BattleTracker";
 import PlayPanel, { RoundCounter } from "./PlayPanel";
 import WeatherRoller, { weatherHints } from "../campaignHub/WeatherRoller";
+import MagicPanel from "./MagicPanel";
 import GroupManager from "./GroupManager";
 import DiceInput from "./DiceInput";
 import useRollDraft from "./useRollDraft";
@@ -815,6 +816,13 @@ export default function CampaignManager({
                   units={unitList}
                   setUnits={setUnitList}
                   onLog={fromCampaign ? undefined : addLog}
+                />
+                <MagicPanel
+                  units={unitList}
+                  storageKey={battle.id}
+                  onAssign={(id, patch) =>
+                    setUnitList(unitList.map((u) => (u.uniqueId === id ? { ...u, ...patch } : u)))
+                  }
                 />
                 {!fromCampaign && (
                   <PlayPanel battle={battle} setBattle={setBattle} addLog={addLog} />

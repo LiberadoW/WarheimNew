@@ -14,6 +14,18 @@ export const isMage = (unit) => R.isHero(unit) && R.hasRule(unit, "Mag");
 
 export const unitPlay = (play, owner, unitId) => play?.units?.[owner]?.[unitId] || {};
 
+// The company as it plays this game: saved units with the lore and spells
+// chosen on the game screen.
+export const withGameMagic = (armyList = [], play, owner) =>
+  armyList.map((u) => {
+    const p = unitPlay(play, owner, u.uniqueId);
+    return {
+      ...u,
+      ...(p.magicLore && !u.magicLore ? { magicLore: p.magicLore } : {}),
+      ...(p.learnedSpells?.length && !u.learnedSpells?.length ? { learnedSpells: p.learnedSpells } : {}),
+    };
+  });
+
 // Models already missing before the game (resting after an injury, captured).
 export const unavailable = (unit, i) =>
   (unit.campaignModelStatus?.[i]?.skip || 0) > 0 || !!unit.campaignModelStatus?.[i]?.captured;
@@ -124,6 +136,9 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     ];
     return {
       ...unit,
+      // Lore and first spells chosen on the game screen.
+      ...(p.magicLore && !unit.magicLore ? { magicLore: p.magicLore } : {}),
+      ...(p.learnedSpells?.length && !unit.learnedSpells?.length ? { learnedSpells: p.learnedSpells } : {}),
       battleExp:
         (Number(p.extraPd) || 0) +
         ruleBonusFor(unit, game.optionalRules, play?.round || 0) +

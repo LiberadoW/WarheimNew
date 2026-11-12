@@ -4,8 +4,16 @@ import DiceInput from "./DiceInput";
 import specialSkills from "./special-skills.json";
 import characterProfiles from "./drama.json";
 import mercenaryProfiles from "./mercenary-profiles.json";
-import { getMagicLore } from "../Functions/getMagicLore";
-import { magic } from "../Data.js/Magic";
+import {
+  isCaster,
+  isPriest,
+  knownSpells,
+  learnDice,
+  learnTotal,
+  loreOf,
+  masteryText,
+  spellForRoll,
+} from "./spells";
 import { getRuleText } from "../Functions/getRuleText";
 
 const checkLabel = (text, value, onChange) => (
@@ -18,6 +26,70 @@ const checkLabel = (text, value, onChange) => (
     {text}
   </label>
 );
+// Nauka nowych zaklęć (s. 550) / modlitw (s. 590): a mage rolls 2K6 on the
+// common spells or his lore, a priest 3K3 on his prayers. A known result may
+// be rerolled or taken as mastery of that spell.
+function LearnSpell({ unit, advance, lore, patch, update }) {
+  const d = learnDice(unit);
+  const dice = advance.spellDice || [];
+  const ready = R.validDice(dice, d.count);
+  const total = ready ? learnTotal(unit, dice) : null;
+  const spell = total != null ? spellForRoll(lore, total) : null;
+  const known = spell && knownSpells(unit).some((s) => s.key === spell.key);
+  const finish = (fn, description) =>
+    update((p) => {
+      const u = p.units.find((x) => x.uniqueId === unit.uniqueId),
+        a = p.advances.find((x) => x.id === advance.id);
+      fn(u);
+      a.resolved = true;
+      a.description = description;
+      R.log(p, "advance", `${R.label(u)}: ${description} (${d.label}: ${total})`);
+    });
+  return (
+    <div className="campaign-learn-spell">
+      <DiceInput
+        label={`${isPriest(unit) ? "Modlitwa" : "Zaklęcie"}: ${d.label}${isPriest(unit) ? " (K6 ÷ 2)" : ""}`}
+        count={d.count}
+        value={dice}
+        onChange={(v) => patch((a) => { a.spellDice = v; })}
+      />
+      {spell && (
+        <>
+          <p>
+            {isPriest(unit) ? `K3: ${dice.map((x) => Math.ceil(x / 2)).join(" + ")} = ${total}` : `Wynik: ${total}`} ·{" "}
+            <strong>{spell.name}</strong> <span className="campaign-muted">{spell.cast}</span>
+          </p>
+          <p className="campaign-muted">{spell.text}</p>
+          {!known ? (
+            <button className="button" onClick={() => finish((u) => { u.learnedSpells = [...(u.learnedSpells || []), spell.key]; }, `nowe ${isPriest(unit) ? "modlitwa" : "zaklęcie"}: ${spell.name}`)}>
+              Naucz się: {spell.name}
+            </button>
+          ) : (
+            <>
+              <p>Postać zna już to {isPriest(unit) ? "modlitwę" : "zaklęcie"}. Rzuć ponownie albo wybierz lepsze opanowanie: {masteryText(unit)}.</p>
+              <div className="campaign-row">
+                <button className="button button-secondary" onClick={() => patch((a) => { a.spellDice = []; })}>
+                  Rzuć ponownie
+                </button>
+                <button
+                  className="button"
+                  onClick={() =>
+                    finish((u) => {
+                      u.spellMastery = { ...(u.spellMastery || {}), [spell.key]: (Number(u.spellMastery?.[spell.key]) || 0) + 1 };
+                    }, `opanowanie: ${spell.name}`)
+                  }
+                >
+                  Lepiej opanuje: {spell.name}
+                </button>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 function AdvanceCard({ advance, unit, army, post, update }) {
   const [choice, setChoice] = useState("");
   const personalProfile = (
@@ -48,11 +120,7 @@ function AdvanceCard({ advance, unit, army, post, update }) {
           .map((s) => ({ ...s, list: "Specjalne" }))
       : []),
   ];
-  const lore = getMagicLore([unit]);
-  const spells =
-    (R.hasRule(unit, "Mag") || R.hasRule(unit, "Duchowny")) && magic[lore]
-      ? Object.values(magic[lore]).map(([name, , text]) => ({ name, text }))
-      : [];
+  const lore = isCaster(unit) ? loreOf(unit) : null;
   const patch = (fn) =>
     update((p) => fn(p.advances.find((a) => a.id === advance.id)));
   if (advance.resolved)
@@ -150,15 +218,16 @@ function AdvanceCard({ advance, unit, army, post, update }) {
                       {s.restriction ? ` (${s.restriction})` : ""}
                     </option>
                   ))}
-                  {spells
-                    .filter((s) => !unit.learnedSpells?.includes(s.name))
-                    .map((s) => (
-                      <option key={s.name} value={`spell:${s.name}`}>
-                        Zaklęcie / modlitwa: {s.name}
-                      </option>
-                    ))}
+                  {lore && (
+                    <option value="spell:roll">
+                      {isPriest(unit) ? "Nowa modlitwa (rzut 3K3)" : "Nowe zaklęcie (rzut 2K6)"}
+                    </option>
+                  )}
                 </select>
               </label>
+              {choice === "spell:roll" && (
+                <LearnSpell unit={unit} advance={advance} lore={lore} patch={patch} update={update} />
+              )}
               {choice.startsWith("rule:") && (
                 <p>{getRuleText(choice.slice(5))}</p>
               )}
@@ -188,7 +257,7 @@ function AdvanceCard({ advance, unit, army, post, update }) {
             </p>
           )}
           {!promotion ? (
-            <button
+            choice !== "spell:roll" && <button
               className="button"
               disabled={!choice}
               onClick={() =>

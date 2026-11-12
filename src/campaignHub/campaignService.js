@@ -248,6 +248,15 @@ export const setModelState = (campaignId, gameId, owner, unitId, index, state) =
     [`${unitPath(owner, unitId)}.absent.${index}`]: state === "absent" ? true : deleteField(),
   });
 
+// A caster's lore or first spells chosen before the game; the hand-off
+// writes them to the saved company.
+export const setUnitMagic = (campaignId, gameId, owner, unitId, patch) =>
+  updateGame(
+    campaignId,
+    gameId,
+    Object.fromEntries(Object.entries(patch).map(([k, v]) => [`${unitPath(owner, unitId)}.${k}`, v])),
+  );
+
 export const changeCounter = (campaignId, gameId, owner, unitId, field, delta) =>
   updateGame(campaignId, gameId, { [`${unitPath(owner, unitId)}.${field}`]: increment(delta) });
 

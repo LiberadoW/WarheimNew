@@ -3,6 +3,7 @@ import * as R from "./rules";
 import RulesModal from "../Components/RulesModal";
 import { describeEquipment, describeRule, unitEquipmentItems } from "../Functions/unitInfo";
 import { summarizeUnit, STAT_LABELS } from "../campaignHub/roster";
+import { knownSpells, loreOf } from "./spells";
 
 // Everything about a unit in one dialog: profile, gear with weapon rules and
 // special rules.
@@ -27,6 +28,10 @@ const unitProfile = (u) => {
         entries: gear.flatMap((g) => g.sections[1].entries).filter((e, i, a) => a.findIndex((x) => x.name === e.name) === i),
       },
       { title: "Zasady specjalne", entries: (u.rules || []).flatMap((r) => describeRule(u, r).sections[0].entries) },
+      {
+        title: loreOf(u) || "Zaklęcia",
+        entries: knownSpells(u).map((s) => ({ name: [s.name, s.cast && `(${s.cast.toLowerCase()})`].filter(Boolean).join(" "), text: s.text })),
+      },
       ...(s.injuries.length ? [{ title: "Rany", entries: s.injuries.map((n) => ({ name: n, text: "" })) }] : []),
     ].filter((sec) => sec.entries.length),
   };

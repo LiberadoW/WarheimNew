@@ -10,6 +10,7 @@ import { getDefaultCampaignNotes } from "../layouts/App";
 import { ScenarioDetails } from "./ScenarioPicker";
 import RandomEventRoller from "./RandomEventRoller";
 import WeatherRoller, { weatherHints } from "./WeatherRoller";
+import MagicPanel from "../campaign/MagicPanel";
 import { OptionalRuleChips } from "./OptionalRulesPicker";
 import { AREAS } from "./scenarios";
 import { STAT_LABELS, groupRoster } from "./roster";
@@ -22,11 +23,13 @@ import {
   parseModelKey,
   pdSummary,
   settlementLine,
+  withGameMagic,
   toBattle,
   unitPlay,
 } from "./gamePlay";
 import {
   updateGame,
+  setUnitMagic,
   addLogEntry,
   changeCounter,
   describeError,
@@ -535,6 +538,20 @@ export const GameScreen = ({
       <div className="game-companies">
         {sides.map((s, i) => (
           <section key={s.owner} className={`hub-card game-side${view === i ? " is-shown" : ""}`}>
+            {s.list && (
+              <MagicPanel
+                units={withGameMagic(s.list.armyList, play, s.owner)}
+                isActive={(u) =>
+                  Array.from({ length: modelCount(u) }, (_, k) => modelState(play, s.owner, u, k)).some((st) => st === "in")
+                }
+                storageKey={`${gameId}:${s.owner}`}
+                onAssign={
+                  canEdit && s.owner === user.uid
+                    ? (unitId, patch) => run(() => setUnitMagic(id, gameId, s.owner, unitId, patch))
+                    : undefined
+                }
+              />
+            )}
             <h3>
               {s.name}
               {s.list && <span className="hub-muted"> · {s.list.armyName}</span>}

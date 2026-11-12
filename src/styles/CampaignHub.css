@@ -989,3 +989,116 @@ details.hub-round > summary {
 .game-unit-injuries {
   margin: 0;
 }
+
+/* Magic: casters, spell chips and dice to tap off during the magic phase. */
+.magic-caster {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+.magic-caster p {
+  margin: 0;
+}
+.magic-first-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px 16px;
+}
+.magic-list {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.magic-list li {
+  padding: 2px 0;
+  font-size: 0.85rem;
+}
+.magic-list-item {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  text-align: left;
+  text-decoration: none !important;
+  color: var(--text) !important;
+}
+.magic-list-item span {
+  min-width: 2.6em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.magic-list-item small {
+  color: var(--text-muted);
+}
+.magic-dice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.magic-dice h4 {
+  margin: 0;
+}
+.magic-pips {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.magic-pips > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.magic-pips button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  background: var(--accent);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.magic-pips button.is-used {
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+  opacity: 0.55;
+}
+.magic-pips small {
+  min-width: 3ch;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.magic-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.magic-extra input {
+  width: 64px;
+}
+@media screen and (max-width: 640px) {
+  .magic-pips {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .magic-pips > div {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+.magic-list-item {
+  width: 100%;
+  min-height: 32px;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
