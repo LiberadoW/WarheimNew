@@ -1,0 +1,41 @@
+{
+  "source": "Warheim FS, ROZDZIAŁ 11: SCENARIUSZE, POGODA W STARYM ŚWIECIE, s. 337",
+  "rule": "Należy wykonać rzut 3K6, którego wynik odczytany w TABELI POGODA pozwoli określić panujące w czasie rozgrywki warunki atmosferyczne. O ile w scenariuszu nie podano inaczej pogoda nie zmienia się do końca potyczki. Efekty pogody odczuwają wszystkie modele znajdujące się pod gołym niebem.",
+  "table": [
+    {
+      "min": 3,
+      "max": 3,
+      "name": "Burza",
+      "lead": "Nad polem bitwy przetacza się gwałtowna burza.",
+      "text": "W fazie ruchu modele nie mogą biegać oraz wykonać wysokiego lotu, a zasięg ruchu modeli latających zostaje zmniejszony do 8”.\nWszystkie rzuty na trafienie z broni dystansowej (nieprochowej) wykonywane są z karą -2.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą jedynie na 6+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania."
+    },
+    {
+      "min": 4,
+      "max": 6,
+      "name": "Silny wiatr",
+      "lead": "Podmuchy silnego, porywistego wiatru poruszają konarami i kołyszą mniejszymi drzewami.",
+      "text": "W fazie ruchu modele nie mogą wykonać wysokiego lotu, a dystans ruchu modeli latających zostaje zmniejszony do 8”.\nWszystkie rzuty na trafienie wykonywane dla broni dystansowej (nieprochowej) przeprowadzane są z karą -1.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą na 4+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania."
+    },
+    {
+      "min": 7,
+      "max": 14,
+      "name": "Pogodny dzień",
+      "lead": "Nad polem bitwy utrzymuje się piękna, słoneczna pogoda.",
+      "text": ""
+    },
+    {
+      "min": 15,
+      "max": 17,
+      "name": "Mgła",
+      "lead": "Okolicę spowija gęsta, zimna i lepka mgła.",
+      "text": "Pole widzenia modeli, które nie podlegają zasadzie specjalnej DEMON lub LEŚNY DUCH lub ISTOTA ETERYCZNA lub NIEUMARŁY lub OPĘTANY, zostaje ograniczone do 3K6”. Rzut określający zasięg pola widzenia, należy wykonać na początku tury każdego z graczy, a wynik obowiązuje wszystkie należące do kompanii modele.\nWszystkie rzuty na trafienie wykonywane dla broni dystansowych przeprowadzane są z karą -1."
+    },
+    {
+      "min": 18,
+      "max": 18,
+      "name": "Wichura",
+      "lead": "Gwałtowne podmuchy wiatru gaszą pochodnie i nieosłonięte latarnie, kołyszą drzewami oraz utrudniają poruszanie się.",
+      "text": "W fazie ruchu modele nie mogą biegać oraz wykonać wysokiego lotu, a zasięg ruchu modeli latających zostaje zmniejszony do 4”.\nWszystkie rzuty na trafienie z broni dystansowej (nieprochowej) wykonywane są z karą -2.\nARTYLERIA i broń dystansowa (nieprochowa), które nie wymagają rzutu na trafienie oraz broń dystansowa (prochowa) wypalą jedynie na 6+. Rzut należy wykonać osobno dla każdej takiej broni na początku fazy strzelania."
+    }
+  ]
+}

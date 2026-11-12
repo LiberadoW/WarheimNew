@@ -1,5 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import * as R from "./rules";
+import RulesModal from "../Components/RulesModal";
+import { describeEquipment, describeRule, unitEquipmentItems } from "../Functions/unitInfo";
+import { summarizeUnit, STAT_LABELS } from "../campaignHub/roster";
+
+// Everything about a unit in one dialog: profile, gear with weapon rules and
+// special rules.
+const unitProfile = (u) => {
+  const s = summarizeUnit(u);
+  const gear = unitEquipmentItems(u).map((item) => describeEquipment(u, item));
+  return {
+    title: R.label(u),
+    sections: [
+      {
+        title: "Profil",
+        entries: [
+          {
+            name: s.profile,
+            text: `${STAT_LABELS.map((l, i) => `${l} ${s.stats[i] ?? "-"}`).join(" · ")} · OP ${s.armour}`,
+          },
+        ],
+      },
+      { title: "Ekwipunek", entries: gear.flatMap((g) => g.sections[0].entries) },
+      {
+        title: "Zasady broni",
+        entries: gear.flatMap((g) => g.sections[1].entries).filter((e, i, a) => a.findIndex((x) => x.name === e.name) === i),
+      },
+      { title: "Zasady specjalne", entries: (u.rules || []).flatMap((r) => describeRule(u, r).sections[0].entries) },
+      ...(s.injuries.length ? [{ title: "Rany", entries: s.injuries.map((n) => ({ name: n, text: "" })) }] : []),
+    ].filter((sec) => sec.entries.length),
+  };
+};
 
 // Compact, phone-friendly record of the skirmish itself: one card per unit with
 // kills, scenario PD and the status of every model. It edits the same fields as
@@ -12,6 +43,7 @@ const LOG_TEXT = {
 };
 
 export default function BattleTracker({ units, setUnits, onLog }) {
+  const [profile, setProfile] = useState(null);
   const edit = (id, fn) =>
     setUnits(
       units.map((u) => {
@@ -92,6 +124,9 @@ export default function BattleTracker({ units, setUnits, onLog }) {
                 {u.type}
                 {count > 1 ? ` · ${count} modele` : ""} · {u.exp || 0} PD
               </small>
+              <button type="button" className="campaign-profile-link" onClick={() => setProfile(unitProfile(u))}>
+                Profil i zasady
+              </button>
             </div>
             <div className="campaign-tracker-counters">
               {u.type === "Bohater" &&
@@ -188,6 +223,7 @@ export default function BattleTracker({ units, setUnits, onLog }) {
           ))}
         </details>
       )}
+      {profile && <RulesModal title={profile.title} sections={profile.sections} onClose={() => setProfile(null)} />}
     </section>
   );
 }

@@ -21,6 +21,7 @@ import React, { Suspense, lazy, useEffect, useRef, useState } from "react";
 import Reference from "./Reference";
 import BattleTracker from "./BattleTracker";
 import PlayPanel, { RoundCounter } from "./PlayPanel";
+import WeatherRoller, { weatherHints } from "../campaignHub/WeatherRoller";
 import GroupManager from "./GroupManager";
 import DiceInput from "./DiceInput";
 import useRollDraft from "./useRollDraft";
@@ -795,6 +796,21 @@ export default function CampaignManager({
                 )})`}
               >
                 {!fromCampaign && <RoundCounter battle={battle} setBattle={setBattle} />}
+                <WeatherRoller
+                  value={battle.weather}
+                  canEdit={!fromCampaign || !battle.weather}
+                  hints={weatherHints(unitList, campaignNotes.specialRules)}
+                  onSave={(weather) =>
+                    setBattle({
+                      ...battle,
+                      weather,
+                      log: [
+                        ...(battle.log || []),
+                        { id: `${Date.now()}-w`, round: battle.playRound || 1, text: `Pogoda: ${weather.name} (${weather.total})` },
+                      ],
+                    })
+                  }
+                />
                 <BattleTracker
                   units={unitList}
                   setUnits={setUnitList}
@@ -1292,7 +1308,7 @@ export default function CampaignManager({
                 {h.date} · {h.gameName} · {h.opponent}
               </summary>
               <p>
-                {[h.scenario, RESULTS[h.result] || h.result, h.notes]
+                {[h.scenario, h.weather && `pogoda: ${h.weather}`, RESULTS[h.result] || h.result, h.notes]
                   .filter(Boolean)
                   .join(" · ")}
               </p>

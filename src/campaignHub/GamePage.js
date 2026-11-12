@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import useHidePrintSheet from "../Functions/useHidePrintSheet";
-import { getRuleText } from "../Functions/getRuleText";
+import { describeEquipment, describeRule, equipmentHint, unitEquipmentItems } from "../Functions/unitInfo";
 import { normalizeRosterNames } from "../Data.js/RulebookNames";
 import RulesModal from "../Components/RulesModal";
 import { normalizeSpecialRules } from "../Components/CampaignPoints";
 import { getDefaultCampaignNotes } from "../layouts/App";
 import { ScenarioDetails } from "./ScenarioPicker";
 import RandomEventRoller from "./RandomEventRoller";
+import WeatherRoller, { weatherHints } from "./WeatherRoller";
 import { OptionalRuleChips } from "./OptionalRulesPicker";
 import { AREAS } from "./scenarios";
 import { STAT_LABELS, groupRoster } from "./roster";
@@ -25,6 +26,7 @@ import {
   unitPlay,
 } from "./gamePlay";
 import {
+  updateGame,
   addLogEntry,
   changeCounter,
   describeError,
@@ -78,8 +80,6 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                   </span>
                   <span className="roster-unit-meta">{summary.exp} PD</span>
                 </div>
-                <details className="game-unit-profile">
-                  <summary>Profil, ekwipunek i zasady</summary>
                 <div className="roster-stats-scroll">
                   <table className="roster-stats">
                     <thead>
@@ -102,17 +102,29 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                     </tbody>
                   </table>
                 </div>
-                {summary.equipment.length > 0 && <p className="roster-unit-equipment">{summary.equipment.join(", ")}</p>}
+                {/* Every item and rule opens its full text: weapon profile and rules too. */}
+                {unitEquipmentItems(unit).length > 0 && (
+                  <div className="roster-unit-rules game-unit-gear" aria-label="Ekwipunek">
+                    {unitEquipmentItems(unit).map((item, k) => (
+                      <button type="button" key={`${item}-${k}`} className="roster-rule is-gear" onClick={() => onRule(describeEquipment(unit, item))}>
+                        {item}
+                        {equipmentHint(item) && <small>{equipmentHint(item)}</small>}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 {summary.rules.length > 0 && (
-                  <div className="roster-unit-rules">
+                  <div className="roster-unit-rules" aria-label="Zasady specjalne">
                     {summary.rules.map((rule) => (
-                      <button type="button" key={rule} className="roster-rule" onClick={() => onRule(rule)}>
+                      <button type="button" key={rule} className="roster-rule" onClick={() => onRule(describeRule(unit, rule))}>
                         {rule}
                       </button>
                     ))}
                   </div>
                 )}
-                </details>
+                {summary.injuries.length > 0 && (
+                  <p className="hub-muted game-unit-injuries">Rany: {summary.injuries.join(", ")}</p>
+                )}
                 <div className="game-models">
                   {Array.from({ length: modelCount(unit) }, (_, i) => {
                     const state = modelState(play, owner, unit, i);
@@ -487,6 +499,21 @@ export const GameScreen = ({
         </div>
       </section>
 
+      <WeatherRoller
+        value={game.weather}
+        canEdit={canEdit}
+        hints={weatherHints(
+          sides.find((s) => s.owner === user.uid)?.list?.armyList,
+          sides.find((s) => s.owner === user.uid)?.list?.campaignNotes?.specialRules,
+        )}
+        onSave={(weather) =>
+          run(async () => {
+            await updateGame(id, gameId, { weather });
+            await addLogEntry(id, gameId, { type: "weather", round, text: `Pogoda: ${weather.name} (${weather.total})` });
+          })
+        }
+      />
+
       {canEdit && (
         <section className="hub-card">
           <h3>Wyłączenie z akcji</h3>
@@ -646,13 +673,7 @@ export const GameScreen = ({
       </section>
       )}
 
-      {rule && (
-        <RulesModal
-          title={rule}
-          sections={[{ title: "Zasada", entries: [{ name: rule, text: getRuleText(rule) }] }]}
-          onClose={() => setRule(null)}
-        />
-      )}
+      {rule && <RulesModal title={rule.title} sections={rule.sections} onClose={() => setRule(null)} />}
     </div>
   );
 };

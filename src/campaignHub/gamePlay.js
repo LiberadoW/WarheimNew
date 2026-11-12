@@ -149,6 +149,7 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     scenario: game.scenario?.name || "",
     area: game.scenario?.area || "inside",
     scenarioRecord: game.scenario || null,
+    weather: game.weather || null,
     result: winner === "draw" ? "draw" : winner === owner ? "win" : winner ? "loss" : "loss",
     round: Math.max(1, play?.round || 1),
     // Games recorded before snapshots existed fall back to the current list.

@@ -30,7 +30,7 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
   };
 
   return (
-    <section className="hub-card">
+    <section className="hub-card" aria-label="Zdarzenia losowe">
       <h3>Zdarzenia losowe</h3>
       {!fixedArea && (
         <label className="hub-field">

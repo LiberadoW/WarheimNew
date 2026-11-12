@@ -766,3 +766,4 @@
   .campaign .campaign-tracker-counter > span { grid-column: 1 / -1; justify-self: start; font-size: .72rem; line-height: 1.2; }
   .campaign .campaign-tracker-counter button { width: 32px; min-height: 32px; }
 }
+.campaign .campaign-profile-link { min-height: 28px; padding: 0; border: 0; background: none; color: var(--accent); font-size: .78rem; font-weight: 600; text-decoration: underline; width: auto; }

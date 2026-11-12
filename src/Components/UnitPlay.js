@@ -2,22 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import "../styles/UnitEdit.css";
 import "./UnitPlay.css";
 import RulesModal from "./RulesModal";
-import { getRuleText, getWeaponRuleNames } from "../Functions/getRuleText";
-import { getEquipmentStats } from "../Data.js/EquipmentStats";
+import { describeEquipment, describeRule, unitEquipmentItems } from "../Functions/unitInfo";
 import DiceInput from "../campaign/DiceInput";
 import { darkPact } from "../campaign/sanity";
 import {
-  catalog,
   isHero,
   activeModel,
   canEarnExperience,
   lastingInjuries,
 } from "../campaign/rules";
 import { getModifiers } from "../Functions/getModifiers";
-import {
-  getDisplayEquipment,
-  formatCustomEquipmentEntry,
-} from "../Functions/displayEquipment";
 
 const MENU = [
   "Statystyki",
@@ -202,25 +196,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
             type="button"
             key={`${rule}-${index}`}
             className="unit-play-list-item equipment-details-link"
-            onClick={() =>
-              setDescription({
-                title: rule,
-                sections: [
-                  {
-                    title: "Zasada jednostki",
-                    entries: [
-                      {
-                        name: rule,
-                        text:
-                          unit.campaignRuleTexts?.[rule] ||
-                          unit.dramaProfileText ||
-                          getRuleText(rule),
-                      },
-                    ],
-                  },
-                ],
-              })
-            }
+            onClick={() => setDescription(describeRule(unit, rule))}
           >
             {rule}
           </button>
@@ -230,27 +206,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
   );
 
   const renderEquipment = () => {
-    const standardEquipment = [
-      ...(unit.startingEquipment || []),
-      ...(unit.optionalEquipment || []),
-    ];
-
-    const standardEquipmentString = getDisplayEquipment(
-      unit,
-      standardEquipment,
-    ).map((item) => {
-      if (["Lekki", "Średni", "Ciężki"].includes(item)) {
-        return `${item} pancerz`;
-      }
-      return item;
-    });
-
-    const customEquipmentString = (unit.customEquipment || [])
-      .map((entry) => formatCustomEquipmentEntry(entry))
-      .filter((entry) => entry !== null);
-
-    const equipment = standardEquipmentString.concat(customEquipmentString);
-
+    const equipment = unitEquipmentItems(unit);
     return (
       <div className="unit-play-list-container">
         {equipment.length === 0 ? (
@@ -261,51 +217,7 @@ const UnitPlay = ({ unit, unitList, setUnitList, campaign }) => {
               type="button"
               key={`${item}-${index}`}
               className="unit-play-list-item equipment-details-link"
-              onClick={() => {
-                const name = item.replace(/ pancerz$/, "");
-                const stats = getEquipmentStats(name);
-                const custom = (unit.customEquipment || []).find(
-                  (e) => e.name === item,
-                );
-                const crafted = (unit.craftedEquipment?.[name] || []).map(
-                  (r) => ({
-                    name: r.name + (r.active ? "" : " (nieaktywne)"),
-                    text: r.text,
-                  }),
-                );
-                const definition = catalog.find(
-                  (eq) => eq.name.toLowerCase() === item.toLowerCase(),
-                );
-                setDescription({
-                  title: item,
-                  sections: [
-                    {
-                      title: "Profil",
-                      entries: [
-                        {
-                          name: item,
-                          text: stats
-                            ? `${stats.armour ? `Ochrona: ${stats.armour}` : `Zasięg: ${stats.range}; Siła: ${stats.strength}`}. Zasady: ${stats.rules || "brak"}`
-                            : custom?.text ||
-                              definition?.text ||
-                              "Brak profilu w katalogu.",
-                        },
-                      ],
-                    },
-                    {
-                      title: "Zasady broni",
-                      entries: [
-                        ...new Set([
-                          ...getWeaponRuleNames(stats?.rules),
-                          ...(unit.weaponEnhancements?.[name] || []),
-                        ]),
-                      ]
-                        .map((name) => ({ name, text: getRuleText(name) }))
-                        .concat(crafted),
-                    },
-                  ],
-                });
-              }}
+              onClick={() => setDescription(describeEquipment(unit, item))}
             >
               {item}
             </button>

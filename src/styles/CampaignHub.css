@@ -969,3 +969,23 @@ details.hub-round > summary {
     height: 32px;
   }
 }
+
+/* Game screen: gear chips show a short profile under the name. */
+.roster-rule.is-gear {
+  border-radius: 8px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+.roster-rule.is-gear small {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.game-unit-gear {
+  margin-top: 2px;
+}
+.game-unit-injuries {
+  margin: 0;
+}

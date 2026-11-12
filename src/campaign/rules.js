@@ -1404,6 +1404,7 @@ const finalizeBattle = (battle, notes) => {
     campaignGame: battle.campaignGame || null,
     // The live log of a skirmish played in play mode.
     log: battle.log || [],
+    weather: battle.weather?.name || null,
     finishedAt: new Date().toISOString(),
     journal: p.journal,
     treasury: p.treasury,

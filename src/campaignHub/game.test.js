@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import armies from "../Data.js/Armies";
 import { createUnit } from "../Functions/createUnit";
@@ -123,6 +123,7 @@ jest.mock("./campaignService", () => {
     setModelState: jest.fn(() => Promise.resolve()),
     changeCounter: jest.fn(() => Promise.resolve()),
     recordResult: jest.fn(() => Promise.resolve()),
+    updateGame: jest.fn(() => Promise.resolve()),
     getMySavedLists: jest.fn(),
   };
 });
@@ -185,10 +186,29 @@ describe("game screen", () => {
 
   test("the rolled random event can be picked straight from the table", () => {
     setup(baseGame);
-    fireEvent.change(screen.getAllByLabelText("Wynik z tabeli")[0], { target: { value: "11" } });
+    const events = within(screen.getByRole("region", { name: "Zdarzenia losowe" }));
+    fireEvent.change(events.getByLabelText("Wynik z tabeli"), { target: { value: "11" } });
     expect(screen.getByText("(11) Ochroniarz")).not.toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Zapisz w przebiegu" }));
     expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "event", code: 11, area: "inside" }));
+  });
+
+  test("the weather is rolled on 3K6 or picked, saved to the game and logged", async () => {
+    const update = service.updateGame;
+    setup(baseGame);
+    const weather = within(screen.getByRole("region", { name: "Pogoda" }));
+    fireEvent.change(weather.getByLabelText("Wynik z tabeli"), { target: { value: "15" } });
+    expect(weather.getByText("(15–17) Mgła")).not.toBeNull();
+    fireEvent.click(weather.getByRole("button", { name: "Ustaw pogodę: Mgła" }));
+    await waitFor(() => expect(update).toHaveBeenCalledWith("c1", "g1", { weather: expect.objectContaining({ name: "Mgła", total: 15 }) }));
+    expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather" }));
+  });
+
+  test("units show their profile, gear with weapon rules and special rules", () => {
+    setup(baseGame);
+    fireEvent.click(screen.getAllByRole("button", { name: /^Miecz/ })[0]);
+    expect(screen.getByRole("dialog")).not.toBeNull();
+    expect(screen.getAllByText(/Siła/).length).toBeGreaterThan(0);
   });
 
   test("after the game a player sends their company to the post-battle sequence", async () => {
@@ -254,4 +274,26 @@ describe("both players settle from the same snapshot", () => {
     expect(settlementLine({ players: ["a", "b"], sequenceDone: { b: {} } }, { a: "Ania", b: "Bartek" }))
       .toBe("Ania: czeka · Bartek: rozliczona");
   });
+});
+
+test("the weather table covers 3K6 and clamps modified results", () => {
+  const { weatherFor } = require("./WeatherRoller");
+  expect(weatherFor(3).name).toBe("Burza");
+  expect(weatherFor(6).name).toBe("Silny wiatr");
+  expect(weatherFor(7).name).toBe("Pogodny dzień");
+  expect(weatherFor(14).name).toBe("Pogodny dzień");
+  expect(weatherFor(17).name).toBe("Mgła");
+  expect(weatherFor(18).name).toBe("Wichura");
+  // Meteorolog / Władcy pogody can push the roll past the table.
+  expect(weatherFor(1).name).toBe("Burza");
+  expect(weatherFor(21).name).toBe("Wichura");
+});
+
+test("the game's weather travels to the post-battle sequence", () => {
+  const { battle } = toBattle({
+    savedList: { armyList: [] }, play: {}, owner: "a",
+    game: { id: "g", players: ["a", "b"], weather: { name: "Mgła", total: 16 } },
+    opponentName: "B", opponentList: { armyList: [] }, campaignName: "K",
+  });
+  expect(battle.weather).toEqual({ name: "Mgła", total: 16 });
 });
