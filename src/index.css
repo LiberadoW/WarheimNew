@@ -181,3 +181,9 @@ select {
 }
 /* Pages without a roster (login, account) do not show the print sheet. */
 body.no-print-sheet .armylist-shell { display: none; }
+
+/* Links styled as buttons never show the link underline. */
+a.button,
+a.button:visited {
+  text-decoration: none;
+}

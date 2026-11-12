@@ -151,7 +151,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
 export default function Recruitment(props) {
   return (
     <div className="campaign-recruitment-sections">
-      <section aria-label="Pula dostępności dla rekrutów">
+      <section className="campaign-recruit-pool" aria-label="Pula dostępności dla rekrutów">
         <h3>Pula dostępności</h3>
         <p className="campaign-muted">Potrzebna tylko dla rzadkich rekrutów.</p>
         <AvailabilityPool post={props.post} update={props.update} compact />

@@ -943,3 +943,29 @@ details.hub-round > summary {
 .hub-card-head .hub-code {
   font-size: 1.1rem;
 }
+
+/* Phones: the counters of a unit sit side by side with labels on top. */
+@media screen and (max-width: 640px) {
+  .game-counters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .game-counters .game-stepper {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) 32px;
+    align-items: center;
+    justify-items: center;
+    gap: 2px;
+  }
+  .game-counters .game-stepper-label {
+    grid-column: 1 / -1;
+    justify-self: start;
+    font-size: 0.72rem;
+    line-height: 1.2;
+  }
+  .game-counters .game-stepper button {
+    width: 32px;
+    height: 32px;
+  }
+}

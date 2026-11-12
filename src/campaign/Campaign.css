@@ -743,3 +743,26 @@
 .campaign > .campaign-play-round, .campaign .campaign-tracker + .campaign-play { margin-top: 12px; }
 .campaign .campaign-play-round { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2); width: fit-content; }
 .campaign .campaign-play-note { margin-top: 0; }
+
+/* Responsive polish (phone / tablet / desktop sweep). */
+.campaign-recruitment-sections > .campaign-recruit-pool { grid-column: 1 / -1; min-width: 0; }
+.campaign-recruit-pool h3 { margin-top: 0; }
+/* Touch screens keep :hover after a tap; ghost buttons must not stay tinted. */
+@media (hover: none) {
+  .campaign .button-ghost:hover { color: var(--text-muted); background-color: transparent; }
+}
+
+/* Phones: a unit is one compact card. Name and the single model's toggle
+   share the first row; the counters sit side by side with labels on top. */
+@media (max-width: 600px) {
+  .campaign .campaign-tracker-unit { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "head head" "models models" "counters counters"; align-items: center; gap: 8px 10px; }
+  .campaign .campaign-tracker-unit:has(.is-single) { grid-template-areas: "head models" "counters counters"; }
+  .campaign .campaign-tracker-head { grid-area: head; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .campaign .campaign-tracker-models { grid-area: models; margin: 0; }
+  .campaign .campaign-tracker-unit:has(.is-single) .campaign-tracker-models { justify-content: flex-end; }
+  .campaign .campaign-tracker-models button.is-single { min-width: 0; min-height: 40px; padding: 6px 12px; }
+  .campaign .campaign-tracker-counters { grid-area: counters; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 0; }
+  .campaign .campaign-tracker-counter { display: grid; grid-template-columns: 32px minmax(0, 1fr) 32px; align-items: center; justify-items: center; gap: 2px; width: auto; padding: 0; }
+  .campaign .campaign-tracker-counter > span { grid-column: 1 / -1; justify-self: start; font-size: .72rem; line-height: 1.2; }
+  .campaign .campaign-tracker-counter button { width: 32px; min-height: 32px; }
+}

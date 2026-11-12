@@ -1,7 +1,7 @@
 import React from "react";
 import DiceInput from "./DiceInput";
 import NumberInput from "./NumberInput";
-import { treasureState } from "./treasure";
+import { lootWord, treasureState } from "./treasure";
 
 // Exploration step: treasure markers and the scenario's reward, added to
 // the loot together with the exploration (rozdział 11).
@@ -90,7 +90,7 @@ export default function TreasureCard({ battle, post, update }) {
               checked={!!t.bonusMet}
               onChange={(e) => set({ bonusMet: e.target.checked })}
             />
-            Nagroda ze scenariusza ({rule.bonus.dice} łupów): {rule.bonus.condition}
+            Nagroda ze scenariusza ({rule.bonus.dice} łupy): {rule.bonus.condition}
           </label>
           {t.bonusMet && (
             <DiceInput
@@ -107,7 +107,7 @@ export default function TreasureCard({ battle, post, update }) {
       ))}
       <p className={s.missing ? "campaign-source" : "campaign-done"}>
         {s.missing ||
-          `Razem: +${s.loot} łupów${s.gold ? `, +${s.gold} zk` : ""}${s.items.length ? `, ${s.items.map((i) => `${i.name} ×${i.quantity}`).join(", ")}` : ""}${locked ? " · doliczone" : " · doliczy się z eksploracją"}`}
+          `Razem: +${s.loot} ${lootWord(s.loot)}${s.gold ? `, +${s.gold} zk` : ""}${s.items.length ? `, ${s.items.map((i) => `${i.name} ×${i.quantity}`).join(", ")}` : ""}${locked ? " · doliczone" : " · doliczy się z eksploracją"}`}
       </p>
     </section>
   );

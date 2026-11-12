@@ -222,7 +222,7 @@ test("treasure markers from the battle give PD at the start and loot with the ex
   click("Nalicz doświadczenie i dalej");
   expect(battle(state).post.units[0].exp).toBe(23);
   click("Zatwierdź punkty i dalej");
-  expect(screen.getByText(/Razem: \+2 łupów/)).toBeTruthy();
+  expect(screen.getByText(/Razem: \+2 łupy/)).toBeTruthy();
   fireEvent.change(screen.getByLabelText("Eksploracja, kość 1"), { target: { value: "4" } });
   click("Zatwierdź eksplorację i dalej");
   // One die without doubles finds 0 loot in the pool; the markers add 2.

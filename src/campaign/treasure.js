@@ -9,6 +9,12 @@ export const treasureRules = (battle) => table[battle?.scenarioRecord?.key] || n
 export const markerCount = (units = []) =>
   units.reduce((n, u) => n + Math.max(0, Number(u.battleTreasure) || 0), 0);
 const k3 = (die) => Math.ceil(die / 2);
+// Polish plural: 1 łup, 2–4 łupy (not 12–14), otherwise łupów.
+export const lootWord = (n) => {
+  const a = Math.abs(n);
+  if (a === 1) return "łup";
+  return a % 10 >= 2 && a % 10 <= 4 && (a % 100 < 12 || a % 100 > 14) ? "łupy" : "łupów";
+};
 const roll = (expression, die) =>
   expression === "K3+2" ? k3(die) + 2 : expression === "K3" ? k3(die) : expression === "K6x15" ? die * 15 : die;
 
@@ -38,12 +44,12 @@ export function treasureState(battle, post) {
     // A custom scenario: the player reads their own rules.
     const loot = Number.isInteger(t.manualLoot) ? t.manualLoot : markers;
     out.loot += loot;
-    out.lines.push(`Scenariusz własny: +${loot} łupów za kosztowności`);
+    out.lines.push(`Scenariusz własny: +${loot} ${lootWord(loot)} za kosztowności`);
     return out;
   }
   if (rule.lootPerMarker && markers) {
     out.loot += markers;
-    out.lines.push(`${markers} × znacznik kosztowności: +${markers} łupów`);
+    out.lines.push(`${markers} × znacznik kosztowności: +${markers} ${lootWord(markers)}`);
   }
   if (rule.chest && markers) {
     const dice = t.chest || [];
@@ -85,7 +91,7 @@ export function treasureState(battle, post) {
     else {
       const value = roll(rule.bonus.dice, d);
       out.loot += value;
-      out.lines.push(`Nagroda ze scenariusza (${rule.bonus.dice}, K6: ${d}): +${value} łupów`);
+      out.lines.push(`Nagroda ze scenariusza (${rule.bonus.dice}, K6: ${d}): +${value} ${lootWord(value)}`);
     }
   }
   return out;

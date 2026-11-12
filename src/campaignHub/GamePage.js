@@ -146,7 +146,7 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                 <div className="game-counters">
                   {isHero(unit) && (
                     <Stepper
-                      label="Pokonani wrogowie"
+                      label="Wrogowie WzA"
                       value={Number(p.kills) || 0}
                       disabled={!canEdit}
                       onChange={(d) => run(() => changeCounter(ids.c, ids.g, owner, unit.uniqueId, "kills", d))}

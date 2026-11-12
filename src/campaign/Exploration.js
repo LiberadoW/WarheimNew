@@ -9,7 +9,7 @@ import AdvanceCard from "./Advancement";
 import { encounterPlan } from "./encounters";
 import { applyEffects } from "./effects";
 import { explorationAuto, explorationAutoTotals } from "./auto-rules";
-import { applyTreasure, treasureState } from "./treasure";
+import { applyTreasure, lootWord, treasureState } from "./treasure";
 import TreasureCard from "./TreasureCard";
 
 // Polish plural: 1 uprawniony bohater, 2–4 uprawnieni bohaterowie,
@@ -449,7 +449,8 @@ export default function Exploration({
           {post.explorationApplied && (
             <p className="campaign-done">
               ✓ Eksploracja zatwierdzona · +
-              {Math.max(0, result.loot + (autoTotals?.loot || 0))} łupów
+              {Math.max(0, result.loot + (autoTotals?.loot || 0))}{" "}
+              {lootWord(Math.max(0, result.loot + (autoTotals?.loot || 0)))}
             </p>
           )}
         </>
