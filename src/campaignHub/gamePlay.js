@@ -122,6 +122,12 @@ export const randomEventFor = (area, code) =>
 // --- Hand-off to the player's own post-battle sequence --------------------
 // Units of the player's saved company with this game's battle fields filled
 // in, and the battle record the play view starts from.
+// The game's random events, for those with effects after the game (Zaraza).
+export const gameEvents = (play) =>
+  (play?.log || [])
+    .filter((e) => e.type === "event")
+    .map((e) => ({ code: e.code ?? null, area: e.area || null, name: e.name || "", round: e.round || null }));
+
 export const toBattle = ({ savedList, play, owner, game, opponentName, opponentList, campaignName }) => {
   const units = R.clone(savedList.armyList || []).map((unit) => {
     const p = unitPlay(play, owner, unit.uniqueId);
@@ -170,9 +176,7 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     // Every random event gives each company +1 loot (s. 398).
     randomEvents: (play?.log || []).filter((e) => e.type === "event").length,
     // The events themselves, for those with effects after the game (Zaraza).
-    events: (play?.log || [])
-      .filter((e) => e.type === "event")
-      .map((e) => ({ code: e.code ?? null, area: e.area || null, name: e.name || "", round: e.round || null })),
+    events: gameEvents(play),
     // Optional rules that add loot (Uszkodzenie pancerza).
     optionalRules: game.optionalRules || [],
     result: winner === "draw" ? "draw" : winner === owner ? "win" : winner ? "loss" : "loss",

@@ -20,11 +20,12 @@ const group = (id, out) =>
 const army = { name: "Gang przemytników", heroes: { Herszt: hero() }, maxModels: 15 };
 const click = (name) => fireEvent.click(screen.getByRole("button", { name, exact: true }));
 
-function setup(units = [hero()], { battle = {}, notes = {}, finish } = {}) {
+function setup(units = [hero()], { battle = {}, notes = {}, finish, stage } = {}) {
   const campaignNotes = { skarbiec: 100, ...notes };
+  const started = R.beginPostBattle(
+    { ...R.newBattle(units), gameName: "QA", ...battle }, units, campaignNotes, army);
   campaignNotes.campaign = {
-    activeBattle: R.beginPostBattle(
-      { ...R.newBattle(units), gameName: "QA", ...battle }, units, campaignNotes, army),
+    activeBattle: stage ? { ...started, stage } : started,
     history: [],
   };
   localStorage.setItem(`warheim:draft:${OWNER}`, JSON.stringify({
@@ -251,4 +252,16 @@ test("a sequence from a campaign game is cancelled without touching the game", (
   expect(confirm.mock.calls[0][0]).toMatch(/Gra w kampanii i jej wynik zostają/);
   expect(state.draft.campaignNotes.campaign.activeBattle).toBeNull();
   confirm.mockRestore();
+});
+
+test("a sequence started before the plague step still gets it on a later step", () => {
+  const plague = { events: [{ code: 61, area: "inside", name: "Zaraza" }] };
+  const { state } = setup([hero()], { battle: plague, stage: 4 });
+  expect(battle(state).stage).toBe(4);
+  expect(screen.getByRole("region", { name: "Zaraza" })).toBeTruthy();
+  fireEvent.change(screen.getByLabelText("Test WT, kość 1"), { target: { value: "6" } });
+  fireEvent.change(screen.getByLabelText("Skutek zarazy, kość 1"), { target: { value: "3" } });
+  click("Zatwierdź");
+  expect(battle(state).post.plague["hero:0"].result).toBe("skip");
+  expect(screen.queryByRole("region", { name: "Zaraza" })).toBeNull();
 });

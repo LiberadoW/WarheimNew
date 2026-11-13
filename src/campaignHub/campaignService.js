@@ -25,7 +25,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../Database/database";
 import { normalizeRosterNames } from "../Data.js/RulebookNames";
-import { companySnapshot } from "./gamePlay";
+import { companySnapshot, gameEvents } from "./gamePlay";
 
 // No 0/O, 1/I/L: codes are read aloud and typed on phones.
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
@@ -229,6 +229,13 @@ export const deleteGame = (campaignId, gameId) =>
   deleteDoc(doc(db, "campaigns", campaignId, "games", gameId));
 
 // --- Game screen: live state under game.play, one field per change --------
+// The random events of a game, for a sequence started before they were
+// passed along with the hand-off.
+export const getGameEvents = async (campaignId, gameId) => {
+  const game = (await getDoc(doc(db, "campaigns", campaignId, "games", gameId))).data();
+  return game ? gameEvents(game.play) : null;
+};
+
 export const watchGame = (campaignId, gameId, onChange, onError) =>
   onSnapshot(
     doc(db, "campaigns", campaignId, "games", gameId),

@@ -186,6 +186,9 @@ const pendingAction = (stage, battle, post, notes, army) => {
 
 // Why the sequence cannot leave a step yet, or "" when it can.
 const blocker = (stage, battle, post, notes, army) => {
+  // Zaraza found after the injuries step (a sequence started earlier).
+  if (stage > 1 && plagueTasks(post, battle).some((t) => !post.plague?.[t.key]))
+    return "Rozstrzygnij skutki zarazy (test WT po potyczce).";
   if (stage === 1) {
     if (R.injuryTasks(post).some((t) => !post.injuries[t.key]))
       return "Rozstrzygnij obrażenia wszystkich modeli WzA.";
@@ -528,6 +531,28 @@ export default function CampaignManager({
   const setBattle = (next) => setCampaign({ ...campaign, activeBattle: next });
   // A sequence started from a campaign game: cancelling it keeps the game.
   const fromGame = !!battle?.campaignGame?.gameId;
+  // Sequences started before the game's events were handed over fetch them
+  // once, so after-game effects (Zaraza) still reach them.
+  const missingEvents =
+    fromGame && !Array.isArray(battle?.events) && Number(battle?.randomEvents) > 0 ? battle.campaignGame : null;
+  useEffect(() => {
+    if (!missingEvents?.campaignId) return undefined;
+    let live = true;
+    import("../campaignHub/campaignService")
+      .then(({ getGameEvents }) => getGameEvents(missingEvents.campaignId, missingEvents.gameId))
+      .then((events) => {
+        if (!live || !events) return;
+        setCampaignNotes((current) => {
+          const active = current.campaign?.activeBattle;
+          if (active?.campaignGame?.gameId !== missingEvents.gameId) return current;
+          return { ...current, campaign: { ...current.campaign, activeBattle: { ...active, events } } };
+        });
+      })
+      .catch(() => {});
+    return () => {
+      live = false;
+    };
+  }, [missingEvents?.campaignId, missingEvents?.gameId]); // eslint-disable-line react-hooks/exhaustive-deps
   // Several draft setters can run in one event (e.g. finish a test and clear
   // its dice). Compose those edits before React renders the next snapshot.
   const latestPost = useRef(post);
@@ -615,6 +640,8 @@ export default function CampaignManager({
     try {
       if (sanityTasks(post).length)
         throw Error("Rozstrzygnij choroby psychiczne z nowych progów Obłędu.");
+      if (plagueTasks(post, battle).some((t) => !post.plague?.[t.key]))
+        throw Error("Rozstrzygnij skutki zarazy (test WT po potyczce).");
       const result = R.finalizePostBattle(battle, campaignNotes);
       const outcome = await onFinish({
         ...result,
@@ -1084,6 +1111,9 @@ export default function CampaignManager({
             </>
           ) : (
             <>
+              {phase > 1 && plagueTasks(post, battle).some((t) => !post.plague?.[t.key]) && (
+                <PlagueCard battle={battle} post={post} update={update} />
+              )}
               {phase === 1 && (
                 <>
                   <RollAllInjuries post={post} update={update} />
