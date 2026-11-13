@@ -54,11 +54,12 @@ export default function MerchantCard({ post, update }) {
           } catch {
             quote = null;
           }
+          // Podatek follows the merchant's half price.
           const taxes = priceCount
             ? R.validDice(d.price, priceCount)
-              ? taxDice(post, R.priceRoll(item.price, d.price).price)
+              ? taxDice(post, Math.ceil(R.priceRoll(item.price, d.price).price / 2))
               : 0
-            : taxDice(post, Number(item.price));
+            : taxDice(post, Math.ceil(Number(item.price) / 2));
           return (
             <li key={key}>
               <div className="campaign-merchant-head">

@@ -25,14 +25,15 @@ test("half price, K3 stock, Podatek and the item lands in the stash", () => {
   expect(() => buyFromMerchant(p, "Kusza")).toThrow(/zapas/);
   setMerchantStock(p, "Kusza", 2); // K3 = 1
   expect(() => buyFromMerchant(p, "Kusza")).toThrow(/podatek/);
-  buyFromMerchant(p, "Kusza", { taxRoll: [2, 3] }); // 25 → 13, base 25 → 2K6
-  expect(p.treasury).toBe(100 - 13 - 5);
+  expect(() => buyFromMerchant(p, "Kusza", { taxRoll: [2, 3] })).toThrow(/podatek/); // 13 zk → K6, not 2K6
+  buyFromMerchant(p, "Kusza", { taxRoll: [4] }); // 25 → 13 + K6 tax
+  expect(p.treasury).toBe(100 - 13 - 4);
   expect(p.inventory[0]).toMatchObject({ name: "Kusza", quantity: 1, basePrice: 25 });
   expect(() => buyFromMerchant(p, "Kusza", { taxRoll: [1, 1] })).toThrow(/nie ma już/);
   setMerchantStock(p, "Święta relikwia", 6); // K3 = 3
-  // 50+2K6 = 52: half 26; over 50 zk → 3K6 tax.
-  buyFromMerchant(p, "Święta relikwia", { priceDice: [1, 1], taxRoll: [1, 1, 1] });
-  expect(p.treasury).toBe(82 - 29);
+  // 50+2K6 = 52: half 26 → 2K6 tax (21–50 zk).
+  buyFromMerchant(p, "Święta relikwia", { priceDice: [1, 1], taxRoll: [1, 1] });
+  expect(p.treasury).toBe(83 - 28);
 });
 
 test("the card rolls the stock and buys at half price", () => {

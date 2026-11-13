@@ -56,10 +56,11 @@ export const setMerchantStock = (post, key, die) => {
   m.stock[key] = Math.ceil(die / 2);
 };
 
-// Half the price (rolled for a price with dice), plus PODATEK on the base price.
+// Half the price (rolled for a price with dice), plus PODATEK on that half:
+// the merchant's price is what the company pays for the item.
 export const merchantQuote = (post, item, priceDice = [], taxRoll = []) => {
   const base = R.priceRoll(item.price, priceDice).price;
-  const tax = taxDice(post, base);
+  const tax = taxDice(post, Math.ceil(base / 2));
   if (tax && !R.validDice(taxRoll, tax)) throw Error("Wykonaj rzut na podatek.");
   return { base, half: Math.ceil(base / 2), tax: tax ? R.sum(taxRoll) : 0, price: Math.ceil(base / 2) + (tax ? R.sum(taxRoll) : 0) };
 };
