@@ -142,3 +142,25 @@ test("the lore picked in the builder is used; the panel does not ask again", () 
   // A profile whose builder list has no lore keeps the choice in the panel.
   expect(needsLoreChoice(unit("c", ["Guślarstwo", "Mag (Kolegia Magii)"], { equipmentList: { Sztylet: [2, 0] } }))).toBe(true);
 });
+
+test("Guślarstwo: a new spell from any college, K6 read from the brackets (spells 7–12)", () => {
+  const AdvanceCard = require("./Advancement").default;
+  const R = require("./rules");
+  const { hedgeSpell } = require("./spells");
+  expect(hedgeSpell("Tradycja Ognia", 1).name).toBe("Gorejący miecz Rhuin");
+  expect(hedgeSpell("Tradycja Ognia", 6).name).toBe("Ogniste odrodzenie feniksa");
+  const hedge = unit("c", ["Guślarstwo", "Mag (Kolegia Magii)"], { unitName: "Czarownik", magicLore: "Tradycja Ognia", exp: 12, skills: [2, 4, 5],
+    learnedSpells: ["7 (1) GOREJĄCY MIECZ RHUIN"], stats: { Początkowa: [4,3,3,3,3,1,3,1,8], Maksymalna: [5,6,6,4,4,3,6,4,9] } });
+  let post = { units: [hedge], journal: [], advances: [{ id: "a", unitId: "c", threshold: 14, resolved: false, rolls: [{ dice: [1, 3] }, { dice: [1, 1] }], selectedRoll: 0 }] };
+  const update = (fn) => { const n = R.clone(post); fn(n); post = n; view.rerender(card()); };
+  const card = () => <AdvanceCard advance={post.advances[0]} unit={post.units[0]} army={{ name: "x", heroes: {} }} post={post} update={update} />;
+  const view = render(card());
+  fireEvent.change(screen.getByLabelText("Umiejętność"), { target: { value: "spell:roll" } });
+  fireEvent.change(screen.getByLabelText(/Kolegium Magii dla tego zaklęcia/), { target: { value: "Tradycja Cienia" } });
+  fireEvent.change(screen.getByLabelText("Zaklęcie: K6, kość 1"), { target: { value: "2" } });
+  const learn = screen.getByRole("button", { name: /^Naucz się:/ });
+  fireEvent.click(learn);
+  const known = knownSpells(post.units[0]);
+  expect(known).toHaveLength(2);
+  expect(known[1]).toMatchObject({ lore: "Tradycja Cienia", from: 8 });
+});

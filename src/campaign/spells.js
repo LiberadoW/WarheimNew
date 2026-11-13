@@ -105,14 +105,28 @@ export const spellList = (lore) =>
 export const spellForRoll = (lore, total) =>
   spellList(lore).find((s) => total >= s.from && total <= s.to) || null;
 
-// Known spells are stored by their list heading (unit.learnedSpells).
+// GUŚLARSTWO: every further spell comes from any college lore the player
+// picks; a K6 reads the number in brackets on that list, i.e. spells 7–12.
+export const isHedgeWizard = (unit) => has(unit, "Guślarstwo");
+export const hedgeSpell = (lore, roll) => spellForRoll(lore, roll + 6);
+
+// Known spells are stored by their list heading (unit.learnedSpells); the
+// spell is looked up in the caster's lore, then in the college lores (a
+// GUŚLARZ knows spells of several).
 export const knownSpells = (unit) => {
   const lore = loreOf(unit);
-  const list = lore ? spellList(lore) : [];
+  const lores = [lore, ...(isHedgeWizard(unit) ? COLLEGE_LORES : [])].filter((l, i, a) => l && magic[l] && a.indexOf(l) === i);
   return (unit.learnedSpells || []).map((key) => {
-    const spell = list.find((s) => s.key === key || s.name.toLowerCase() === String(key).toLowerCase());
+    let found = null;
+    for (const l of lores) {
+      const spell = spellList(l).find((s) => s.key === key || s.name.toLowerCase() === String(key).toLowerCase());
+      if (spell) {
+        found = { ...spell, lore: l };
+        break;
+      }
+    }
     return {
-      ...(spell || { key, name: titleCase(parseHead(key).name), cast: "", text: "" }),
+      ...(found || { key, name: titleCase(parseHead(key).name), cast: "", text: "", lore }),
       mastery: Number(unit.spellMastery?.[key]) || 0,
     };
   });
@@ -140,7 +154,12 @@ export const firstSpellOptions = (unit, roll) => {
 };
 
 // Learning a new spell after "nowa umiejętność": a mage rolls 2K6, a priest 3K3.
-export const learnDice = (unit) => (isPriest(unit) ? { count: 3, sides: 3, label: "3K3" } : { count: 2, sides: 6, label: "2K6" });
+export const learnDice = (unit) =>
+  isPriest(unit)
+    ? { count: 3, sides: 3, label: "3K3" }
+    : isHedgeWizard(unit)
+      ? { count: 1, sides: 6, label: "K6" }
+      : { count: 2, sides: 6, label: "2K6" };
 export const learnTotal = (unit, dice) =>
   isPriest(unit) ? dice.reduce((n, d) => n + Math.ceil(d / 2), 0) : dice.reduce((n, d) => n + d, 0);
 // A repeated spell: the mage casts it at +1, the opponent dispels a prayer at −1.

@@ -5,7 +5,10 @@ import specialSkills from "./special-skills.json";
 import characterProfiles from "./drama.json";
 import mercenaryProfiles from "./mercenary-profiles.json";
 import {
+  collegeLores,
+  hedgeSpell,
   isCaster,
+  isHedgeWizard,
   isPriest,
   knownSpells,
   learnDice,
@@ -29,12 +32,15 @@ const checkLabel = (text, value, onChange) => (
 // Nauka nowych zaklęć (s. 550) / modlitw (s. 590): a mage rolls 2K6 on the
 // common spells or his lore, a priest 3K3 on his prayers. A known result may
 // be rerolled or taken as mastery of that spell.
-function LearnSpell({ unit, advance, lore, patch, update }) {
+function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
   const d = learnDice(unit);
+  const hedge = isHedgeWizard(unit);
+  // GUŚLARSTWO: the player picks the college for this spell.
+  const lore = hedge ? advance.spellLore || ownLore : ownLore;
   const dice = advance.spellDice || [];
   const ready = R.validDice(dice, d.count);
   const total = ready ? learnTotal(unit, dice) : null;
-  const spell = total != null ? spellForRoll(lore, total) : null;
+  const spell = total != null ? (hedge ? hedgeSpell(lore, total) : spellForRoll(lore, total)) : null;
   const known = spell && knownSpells(unit).some((s) => s.key === spell.key);
   const finish = (fn, description) =>
     update((p) => {
@@ -47,6 +53,21 @@ function LearnSpell({ unit, advance, lore, patch, update }) {
     });
   return (
     <div className="campaign-learn-spell">
+      {hedge && (
+        <label>
+          Guślarstwo: Kolegium Magii dla tego zaklęcia
+          <select
+            value={lore || ""}
+            disabled={ready}
+            onChange={(e) => patch((a) => { a.spellLore = e.target.value; a.spellDice = []; })}
+          >
+            {collegeLores().map((l) => (
+              <option key={l}>{l}</option>
+            ))}
+          </select>
+          <small className="campaign-muted">K6 = numer w nawiasie na liście (zaklęcia 7–12).</small>
+        </label>
+      )}
       <DiceInput
         label={`${isPriest(unit) ? "Modlitwa" : "Zaklęcie"}: ${d.label}${isPriest(unit) ? " (K6 ÷ 2)" : ""}`}
         count={d.count}
@@ -56,7 +77,11 @@ function LearnSpell({ unit, advance, lore, patch, update }) {
       {spell && (
         <>
           <p>
-            {isPriest(unit) ? `K3: ${dice.map((x) => Math.ceil(x / 2)).join(" + ")} = ${total}` : `Wynik: ${total}`} ·{" "}
+            {isPriest(unit)
+              ? `K3: ${dice.map((x) => Math.ceil(x / 2)).join(" + ")} = ${total}`
+              : hedge
+                ? `K6: ${total} → (${total}) na liście ${lore}`
+                : `Wynik: ${total}`} ·{" "}
             <strong>{spell.name}</strong> <span className="campaign-muted">{spell.cast}</span>
           </p>
           <p className="campaign-muted">{spell.text}</p>

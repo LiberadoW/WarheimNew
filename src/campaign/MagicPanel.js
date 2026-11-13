@@ -24,7 +24,7 @@ const spellModal = (unit, s) => ({
   title: s.name,
   sections: [
     {
-      title: `${loreOf(unit) || "Zaklęcie"} · ${s.from === s.to ? s.from : `${s.from}–${s.to}`}`,
+      title: `${s.lore || loreOf(unit) || "Zaklęcie"} · ${s.from === s.to ? s.from : `${s.from}–${s.to}`}`,
       entries: [
         {
           name: [s.cast, s.mastery ? `opanowane: ${masteryText(unit)}` : ""].filter(Boolean).join(" · ") || s.name,
@@ -158,7 +158,7 @@ export default function MagicPanel({ units = [], isActive, onAssign, storageKey,
                   <button key={s.key} type="button" className="roster-rule is-gear" onClick={() => setModal(spellModal(u, s))}>
                     {s.name}
                     <small>
-                      {[s.cast.replace(/^RZUCON[YE] NA /i, "moc ").toLowerCase(), s.mastery ? `+${s.mastery}` : ""].filter(Boolean).join(" · ")}
+                      {[s.lore && s.lore !== lore ? s.lore : "", s.cast.replace(/^RZUCON[YE] NA /i, "moc ").toLowerCase(), s.mastery ? `+${s.mastery}` : ""].filter(Boolean).join(" · ")}
                     </small>
                   </button>
                 ))}
