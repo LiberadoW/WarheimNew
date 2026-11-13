@@ -43,6 +43,20 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
         />
         Zdarzenia losowe: najwyżej jedno na grę (s. 398)
       </label>
+      <label className="hub-field hub-field-inline">
+        <input
+          type="checkbox"
+          disabled={!isOrganizer}
+          checked={campaign.settings?.weatherFrom === 5}
+          onChange={(e) =>
+            act(
+              () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), weatherFrom: e.target.checked ? 5 : 6 }),
+              e.target.checked ? "Zmiana pogody na 5+." : "Zmiana pogody tylko na 6.",
+            )
+          }
+        />
+        Zdarzenia losowe: zmiana pogody na 5+ (podręcznik: tylko na 6)
+      </label>
       {editing ? (
         <>
           <OptionalRulesPicker value={rules} onChange={setRules} />

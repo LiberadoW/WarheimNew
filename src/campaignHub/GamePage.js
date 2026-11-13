@@ -322,18 +322,19 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
 };
 
 // Zdarzenia losowe on the shared game screen: saved in the game's log.
-const RandomEvents = ({ game, round, canEdit, run, ids, hints, limit }) => (
+const RandomEvents = ({ game, round, canEdit, run, ids, hints, limit, weatherFrom }) => (
   <RandomEventRoller
     limit={limit}
+    weatherFrom={weatherFrom}
     fixedArea={game.scenario?.area || ""}
     canSave={canEdit}
     occurred={(game.play?.log || []).some((e) => e.type === "event")}
     weather={game.weather}
     weatherHints={hints}
-    onWeather={(weather) =>
+    onWeather={(weather, roll = 6) =>
       run(async () => {
         await updateGame(ids.c, ids.g, { weather });
-        await addLogEntry(ids.c, ids.g, { type: "weather", round, text: `Zmiana pogody (K6: 6): ${weather.name} (${weather.total})` });
+        await addLogEntry(ids.c, ids.g, { type: "weather", round, text: `Zmiana pogody (K6: ${roll}): ${weather.name} (${weather.total})` });
       })
     }
     onSave={(event) =>
@@ -604,6 +605,7 @@ export const GameScreen = ({
       {(game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
         <RandomEvents
           limit={campaign.settings?.randomEventLimit !== false}
+          weatherFrom={campaign.settings?.weatherFrom === 5 ? 5 : 6}
           game={game}
           round={round}
           canEdit={canEdit}

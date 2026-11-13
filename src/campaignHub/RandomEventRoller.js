@@ -10,16 +10,17 @@ import "../styles/CampaignHub.css";
 // (the shared game log or the play-mode battle log) and resolves to true.
 // The check before each player's turn (s. 398): K6, 1 = an event (then the
 // K66), 6 = roll the weather again at once. Only one event per game unless
-// the players agreed otherwise (`occurred` stops the check).
-const CHECK = {
-  1: "Zdarzenie losowe! Rzuć K66 na tabelę poniżej.",
-  6: "Zmiana pogody: natychmiast rzuć na pogodę.",
-};
-export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, limit = true, weather, onWeather, weatherHints = [] }) {
+// the players agreed otherwise (`occurred` stops the check). A campaign may
+// agree on the weather changing from 5+ (`weatherFrom`).
+const EVENT = "Zdarzenie losowe! Rzuć K66 na tabelę poniżej.";
+const WEATHER = "Zmiana pogody: natychmiast rzuć na pogodę.";
+export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, limit = true, weather, onWeather, weatherHints = [], weatherFrom = 6 }) {
   const [area, setArea] = useState(fixedArea);
   const [check, setCheck] = useState(null);
   const rollCheck = (v) => setCheck(v === "" || v == null ? null : Math.max(1, Math.min(6, Number(v))));
   const showTable = check === 1 || !onWeather;
+  const weatherRoll = check != null && check >= weatherFrom;
+  const weatherText = weatherFrom >= 6 ? "6" : `${weatherFrom}+`;
   const [dice, setDice] = useState([null, null]);
   // The rolled result can also be picked straight from the table.
   const [picked, setPicked] = useState("");
@@ -51,7 +52,7 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
       ) : (
         <div className="event-check">
           <p className="hub-muted">
-            Przed każdą swoją turą gracz rzuca K6: 1 = zdarzenie losowe, 6 = rzut na pogodę.
+            Przed każdą swoją turą gracz rzuca K6: 1 = zdarzenie losowe, {weatherText} = rzut na pogodę.
             {limit ? " Po pierwszym zdarzeniu rzuty się kończą." : " Bez limitu zdarzeń."}
           </p>
           <div className="hub-dice-row">
@@ -64,11 +65,11 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
             </button>
           </div>
           {check != null && (
-            <p className={check === 1 || check === 6 ? "hub-notice" : "hub-muted"} role="status">
-              K6: {check} · {CHECK[check] || "Nic się nie dzieje."}
+            <p className={check === 1 || weatherRoll ? "hub-notice" : "hub-muted"} role="status">
+              K6: {check} · {check === 1 ? EVENT : weatherRoll ? WEATHER : "Nic się nie dzieje."}
             </p>
           )}
-          {check === 6 && onWeather && (
+          {weatherRoll && onWeather && (
             <WeatherRoller
               key={`w-${check}`}
               title="Nowa pogoda"
@@ -76,7 +77,7 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
               startEditing
               hints={weatherHints}
               canEdit={canSave}
-              onSave={(w) => Promise.resolve(onWeather(w)).then((ok) => { if (ok !== false) setCheck(null); return ok; })}
+              onSave={(w) => Promise.resolve(onWeather(w, check)).then((ok) => { if (ok !== false) setCheck(null); return ok; })}
             />
           )}
         </div>

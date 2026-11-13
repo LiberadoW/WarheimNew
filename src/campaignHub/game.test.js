@@ -251,6 +251,26 @@ describe("game screen", () => {
     expect(units[0].battleArmourDamage).toEqual([null, { shield: true }, null]);
   });
 
+  test("a campaign may change the weather on 5+", async () => {
+    service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { weatherFrom: 5 } }); return () => {}; });
+    service.watchGame.mockImplementation((id, gid, cb) => { cb(baseGame); return () => {}; });
+    service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
+    render(
+      <AuthContext.Provider value={{ currentUser: { user: { uid: "a" } } }}>
+        <MemoryRouter initialEntries={["/campaigns/c1/games/g1"]}>
+          <Routes><Route path="/campaigns/:id/games/:gameId" element={<GamePage setUnitList={jest.fn()} setArmy={jest.fn()} setArmyName={jest.fn()} setCampaignNotes={jest.fn()} />} /></Routes>
+        </MemoryRouter>
+      </AuthContext.Provider>,
+    );
+    const events = within(screen.getByRole("region", { name: "Zdarzenia losowe" }));
+    expect(events.getByText(/5\+ = rzut na pogodę/)).toBeTruthy();
+    fireEvent.change(events.getByLabelText("K6 przed turą"), { target: { value: "5" } });
+    const fresh = within(screen.getByRole("region", { name: "Nowa pogoda" }));
+    fireEvent.change(fresh.getByLabelText("Wynik z tabeli"), { target: { value: "18" } });
+    fireEvent.click(fresh.getByRole("button", { name: "Ustaw pogodę: Wichura" }));
+    await waitFor(() => expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather", text: expect.stringMatching(/K6: 5/) })));
+  });
+
   test("without the one-event limit the checks go on after an event", () => {
     service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { randomEventLimit: false } }); return () => {}; });
     service.watchGame.mockImplementation((id, gid, cb) => { cb({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } }); return () => {}; });
