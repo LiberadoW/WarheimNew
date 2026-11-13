@@ -771,3 +771,24 @@
 .campaign .magic-extra label { flex-direction: row; align-items: center; gap: 8px; }
 .campaign .magic-extra input { width: 72px; min-height: 36px; }
 .campaign .magic-panel .button { width: auto; }
+
+/* Zaraza after the skirmish. */
+.campaign-plague-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.campaign-plague-list .campaign-row {
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.campaign-plague-done .button {
+  margin-left: 8px;
+}

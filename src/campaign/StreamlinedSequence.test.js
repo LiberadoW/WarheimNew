@@ -228,3 +228,18 @@ test("treasure markers from the battle give PD at the start and loot with the ex
   // One die without doubles finds 0 loot in the pool; the markers add 2.
   expect(battle(state).post.loot).toBe(2 + R.explorationResult([4], "inside", 0).loot);
 });
+
+test("after Zaraza every model on the table takes a WT test before moving on", () => {
+  const plague = { events: [{ code: 61, area: "inside", name: "Zaraza" }] };
+  const { state } = setup([hero(), group("a", false)], { battle: plague });
+  click("Dalej: Doświadczenie i rozwój");
+  expect(battle(state).stage).toBe(1);
+  expect(screen.getByText(/Rozstrzygnij skutki zarazy/)).toBeTruthy();
+  fireEvent.change(screen.getAllByLabelText("Test WT, kość 1")[0], { target: { value: "2" } });
+  fireEvent.click(screen.getAllByRole("button", { name: "Zatwierdź" })[0]);
+  fireEvent.click(screen.getByRole("button", { name: "Nie było go na stole" }));
+  expect(battle(state).post.plague["hero:0"].result).toBe("passed");
+  expect(battle(state).post.plague["a:0"].result).toBe("absent");
+  click("Dalej: Doświadczenie i rozwój");
+  expect(battle(state).stage).toBe(2);
+});

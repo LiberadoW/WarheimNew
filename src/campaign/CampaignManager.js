@@ -15,6 +15,7 @@ import Exploration, { applyExploration, explorationState } from "./Exploration";
 import { companyInjuryModifier } from "./company";
 import { addTreasurePd } from "./treasure";
 import { applyArmourDamage } from "./armourDamage";
+import { PLAGUE_TEXT, applyPlague, failsToughness, plagueTasks, undoPlague } from "./plague";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
@@ -188,6 +189,8 @@ const blocker = (stage, battle, post, notes, army) => {
   if (stage === 1) {
     if (R.injuryTasks(post).some((t) => !post.injuries[t.key]))
       return "Rozstrzygnij obrażenia wszystkich modeli WzA.";
+    if (plagueTasks(post, battle).some((t) => !post.plague?.[t.key]))
+      return "Rozstrzygnij skutki zarazy (test WT po potyczce).";
     if (post.dissolved) return "";
     const succession = R.leaderSuccession(post);
     if (succession?.dissolves) return "Potwierdź rozpad kompanii nieumarłych.";
@@ -398,6 +401,85 @@ function RollAllInjuries({ post, update }) {
         wszystkich
       </button>
     </div>
+  );
+}
+
+// ZARAZA (zdarzenie 61, s. 404): a WT test for every model that was on the
+// table when the plague victims appeared; a failed test rolls the effect.
+function PlagueCard({ battle, post, update }) {
+  const [drafts, setDrafts] = useState({});
+  const tasks = plagueTasks(post, battle);
+  if (!tasks.length) return null;
+  const injuriesOpen = R.injuryTasks(post).some((t) => !post.injuries[t.key]);
+  const draft = (key) => drafts[key] || { test: [], effect: [] };
+  const setDraft = (key, patch) => setDrafts({ ...drafts, [key]: { ...draft(key), ...patch } });
+  const waiting = tasks.filter((t) => !post.plague?.[t.key]);
+  return (
+    <section className="campaign-section campaign-plague" aria-label="Zaraza">
+      <h3>Zaraza (zdarzenie losowe 61)</h3>
+      <p className="campaign-muted">
+        Test WT dla każdego modelu, który był na stole, gdy pojawiły się ofiary zarazy (1 zawsze zdany, 6 zawsze
+        nieudany). Nieudany: K6, 1 = śmierć jak MARTWY, 2–5 = opuszcza następną potyczkę, 6 = powrót do zdrowia.
+        Modele wyłączone z akcji przed pojawieniem się zarazy oznacz jako nieobecne.
+      </p>
+      {injuriesOpen ? (
+        <p className="campaign-muted">Najpierw rozstrzygnij poważne rany powyżej.</p>
+      ) : (
+        <>
+          {waiting.length > 1 && (
+            <div className="campaign-bulk">
+              <span>{waiting.length} modeli czeka na test WT.</span>
+              <button
+                type="button"
+                className="button button-secondary"
+                onClick={() =>
+                  update((p) =>
+                    plagueTasks(p, battle)
+                      .filter((t) => !p.plague?.[t.key])
+                      .forEach((t) => applyPlague(p, t, { test: R.roll(1), effect: R.roll(1) })),
+                  )
+                }
+              >
+                <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć za wszystkich
+              </button>
+            </div>
+          )}
+          <ul className="campaign-plague-list">
+            {tasks.map((t) => {
+              const done = post.plague?.[t.key];
+              const d = draft(t.key);
+              const failed = R.validDice(d.test, 1) && failsToughness(t.unit, d.test[0]);
+              return (
+                <li key={t.key}>
+                  <strong>{t.label}</strong> <span className="campaign-muted">WT {R.currentStats(t.unit)[4]}</span>
+                  {done ? (
+                    <span className="campaign-plague-done">
+                      {" "}· {PLAGUE_TEXT[done.result]}
+                      <button type="button" className="button button-ghost button-small" onClick={() => update((p) => undoPlague(p, t))}>
+                        Cofnij
+                      </button>
+                    </span>
+                  ) : (
+                    <div className="campaign-row">
+                      <DiceInput label="Test WT" count={1} value={d.test} onChange={(v) => setDraft(t.key, { test: v })} />
+                      {failed && (
+                        <DiceInput label="Skutek zarazy" count={1} value={d.effect} onChange={(v) => setDraft(t.key, { effect: v })} />
+                      )}
+                      <button type="button" className="button button-small" onClick={() => update((p) => applyPlague(p, t, d))}>
+                        Zatwierdź
+                      </button>
+                      <button type="button" className="button button-ghost button-small" onClick={() => update((p) => applyPlague(p, t, { absent: true }))}>
+                        Nie było go na stole
+                      </button>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </section>
   );
 }
 
@@ -1017,6 +1099,7 @@ export default function CampaignManager({
                       Żaden uczestniczący model nie został wyłączony z akcji.
                     </p>
                   )}
+                  <PlagueCard battle={battle} post={post} update={update} />
                   <Succession post={post} update={update} />
                 </>
               )}

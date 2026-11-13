@@ -169,6 +169,10 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     weather: game.weather || null,
     // Every random event gives each company +1 loot (s. 398).
     randomEvents: (play?.log || []).filter((e) => e.type === "event").length,
+    // The events themselves, for those with effects after the game (Zaraza).
+    events: (play?.log || [])
+      .filter((e) => e.type === "event")
+      .map((e) => ({ code: e.code ?? null, area: e.area || null, name: e.name || "", round: e.round || null })),
     // Optional rules that add loot (Uszkodzenie pancerza).
     optionalRules: game.optionalRules || [],
     result: winner === "draw" ? "draw" : winner === owner ? "win" : winner ? "loss" : "loss",
