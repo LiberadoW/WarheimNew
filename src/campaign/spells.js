@@ -24,6 +24,7 @@ const LORE_ALIASES = {
   "dziedzina nehekhary": "Domena Nehekhary",
   "dziedzina nehekary": "Domena Nehekhary",
   "dziedzina boga pajonka": "Dziedzina Boga-Pajonka",
+  "dziedzina slaneesha": "Dziedzina Slaanesha",
 };
 const toLore = (name) => {
   const n = String(name).trim();
@@ -41,8 +42,22 @@ export const loreChoices = (unit) => {
 };
 export const collegeLores = () => COLLEGE_LORES.filter((l) => magic[l]);
 
+// Lores the builder offers for this profile (ekwipunek, category 4).
+export const builderLoreOptions = (unit) =>
+  Object.entries(unit.equipmentList || {})
+    .filter(([k, v]) => Array.isArray(v) && (v[1] === 4 || /^Dualizm \(/.test(k)))
+    .map(([k]) => (k === "Dualizm (Yin)" ? "Tradycja Yin" : k === "Dualizm (Yang)" ? "Tradycja Yang" : toLore(k)))
+    .filter(Boolean);
+// The lore picked in the builder: stored in the unit's rules.
+const builderLore = (unit) =>
+  [...(unit.rules || []), ...(unit.optionalEquipment || [])]
+    .filter((r) => !/^(mag|wiedza tajemna|duchowny)\s*\(/i.test(String(r)))
+    .map(toLore)
+    .find(Boolean) || null;
+
 export const loreOf = (unit) => {
   if (unit.magicLore && magic[unit.magicLore]) return unit.magicLore;
+  if (isMage(unit) && builderLore(unit)) return builderLore(unit);
   const choices = loreChoices(unit);
   if (choices.length > 1) {
     // Chosen in the builder: Dualizm (Yin / Yang) or a lore taken as an option.
@@ -61,7 +76,11 @@ export const loreOf = (unit) => {
   return lore && magic[lore] ? lore : null;
 };
 // A mage with more than one possible lore picks one (s. 550).
-export const needsLoreChoice = (unit) => isMage(unit) && !loreOf(unit) && loreChoices(unit).length > 1;
+// Only where the builder offers no lore option (s. 550); otherwise the
+// lore is picked when the company is created.
+export const needsLoreChoice = (unit) =>
+  isMage(unit) && !loreOf(unit) && loreChoices(unit).length > 1 && !builderLoreOptions(unit).length;
+export const loreMissingInBuilder = (unit) => isMage(unit) && !loreOf(unit) && builderLoreOptions(unit).length > 0;
 
 // "1-2 MAGICZNE ŻĄDŁO", "7 (1) GOREJĄCY MIECZ RHUIN" → { from, to, name }.
 const parseHead = (head) => {

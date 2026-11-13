@@ -4,6 +4,7 @@ import DiceInput from "./DiceInput";
 import {
   LEVEL_NAMES,
   loreChoices,
+  loreMissingInBuilder,
   dicePools,
   firstSpellOptions,
   isCaster,
@@ -166,7 +167,13 @@ export default function MagicPanel({ units = [], isActive, onAssign, storageKey,
               <FirstSpell unit={u} onAssign={(patch) => onAssign(u.uniqueId, patch)} />
             ) : (
               <p className="hub-muted">
-                {lore ? "Nie zna jeszcze zaklęć: wylosuj je w trybie gry." : "Nie rozpoznano tradycji magii tej postaci."}
+                {lore
+                  ? "Nie zna jeszcze zaklęć: wylosuj je w kreatorze przed pierwszą grą."
+                  : loreMissingInBuilder(u)
+                    ? "Tradycja magii nie jest wybrana: zaznacz ją w kreatorze, w ekwipunku postaci."
+                    : needsLoreChoice(u)
+                      ? "Wybierz tradycję magii."
+                      : "Nie rozpoznano tradycji magii tej postaci."}
               </p>
             )}
             {lore && (
@@ -252,7 +259,7 @@ export function FirstSpellsPanel({ unitList, setUnitList }) {
         <article className="stigma-row" key={u.uniqueId}>
           <div className="stigma-row-head">
             <strong>{nameOf(u)}</strong>
-            <small>{loreOf(u) || "wybierz tradycję"}</small>
+            <small>{loreOf(u) || (loreMissingInBuilder(u) ? "tradycja: wybierz w ekwipunku" : "wybierz tradycję")}</small>
           </div>
           {needsLoreChoice(u) && (
             <label className="hub-field">
@@ -268,7 +275,13 @@ export function FirstSpellsPanel({ unitList, setUnitList }) {
           {loreOf(u) ? (
             <FirstSpell unit={u} onAssign={(patch) => assign(u.uniqueId, patch)} />
           ) : (
-            !needsLoreChoice(u) && <p className="stigma-error">Nie rozpoznano tradycji magii tej postaci.</p>
+            !needsLoreChoice(u) && (
+              <p className="stigma-error">
+                {loreMissingInBuilder(u)
+                  ? "Najpierw zaznacz tradycję magii w ekwipunku postaci (lista jednostek obok)."
+                  : "Nie rozpoznano tradycji magii tej postaci."}
+              </p>
+            )
           )}
         </article>
       ))}

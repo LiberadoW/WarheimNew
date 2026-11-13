@@ -129,3 +129,16 @@ test("the builder asks casters without spells for their first one", () => {
   view.rerender(<FirstSpellsPanel unitList={units} setUnitList={() => {}} />);
   expect(screen.queryByRole("region", { name: "Zaklęcia przed pierwszą grą" })).toBeNull();
 });
+
+test("the lore picked in the builder is used; the panel does not ask again", () => {
+  const { loreMissingInBuilder, needsLoreChoice } = require("./spells");
+  const offered = { "Tradycja Ognia": [0, 4], "Tradycja Metalu": [0, 4], Sztylet: [2, 0] };
+  const magister = unit("m", ["Mag (Kolegia Magii)"], { equipmentList: offered });
+  expect(loreMissingInBuilder(magister)).toBe(true);
+  expect(needsLoreChoice(magister)).toBe(false);
+  const picked = { ...magister, rules: [...magister.rules, "Tradycja Metalu"] };
+  expect(loreOf(picked)).toBe("Tradycja Metalu");
+  expect(loreMissingInBuilder(picked)).toBe(false);
+  // A profile whose builder list has no lore keeps the choice in the panel.
+  expect(needsLoreChoice(unit("c", ["Guślarstwo", "Mag (Kolegia Magii)"], { equipmentList: { Sztylet: [2, 0] } }))).toBe(true);
+});
