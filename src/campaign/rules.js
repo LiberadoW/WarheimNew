@@ -1049,6 +1049,32 @@ const injuriesSettled = (post) => {
   if (injuryTasks(post).some((t) => !post.injuries?.[t.key]))
     throw Error("Najpierw rozstrzygnij poważne rany.");
 };
+// Manual correction: one model leaves its group (index); in a group of the
+// banner bearer and the musician the player says which one it was.
+export const removeGroupModel = (post, unitId, index, role = null) => {
+  injuriesSettled(post);
+  const u = post.units.find((x) => x.uniqueId === unitId);
+  if (!u) throw Error("Nie znaleziono grupy.");
+  const n = modelCount(u);
+  if (n < 2) throw Error("To ostatni model grupy: usuń całą grupę.");
+  if (index < 0 || index >= n) throw Error("Nie ma takiego modelu.");
+  const roles = commandRoles(u);
+  if (roles.length > 1 && !roles.includes(role)) throw Error("Wskaż, czy odchodzi chorąży, czy sygnalista.");
+  const without = (arr) => (Array.isArray(arr) ? arr.filter((_, i) => i !== index) : arr);
+  u.campaignModelStatus = without(u.campaignModelStatus || Array.from({ length: n }, () => ({})));
+  u.battleAbsentModels = without(u.battleAbsentModels);
+  // Injuries are settled and keyed by model index (see keepModels).
+  u.battleOutOfActionModels = Array.from({ length: n - 1 }, () => false);
+  // With one role recorded the other model was an ordinary henchman.
+  const leaving = roles.length > 1 ? role : null;
+  if (leaving) {
+    const i = (u.optionalEquipment || []).lastIndexOf(leaving);
+    u.optionalEquipment = u.optionalEquipment.filter((_, j) => j !== i);
+  }
+  u.selectedNumber = n - 1;
+  u.totalCost = groupTotalCost(u);
+  return leaving;
+};
 export const splitGroup = (post, unitId, moved) => {
   injuriesSettled(post);
   const u = post.units.find((x) => x.uniqueId === unitId);

@@ -17,21 +17,68 @@ function UnitAdjustments({ post, update }) {
   const [rule, setRule] = useState("");
   const [note, setNote] = useState("");
   const [removeRule, setRemoveRule] = useState("");
+  const [model, setModel] = useState(0);
+  const [role, setRole] = useState("");
   const unit = post.units.find((u) => u.uniqueId === id);
   if (!unit) return null;
+  // A group of henchmen: pause, capture and removal concern one model.
+  const count = R.modelCount(unit);
+  const m = Math.min(model, count - 1);
+  const who = count > 1 ? `${R.label(unit)} #${m + 1}` : R.label(unit);
+  const status = unit.campaignModelStatus?.[m] || {};
+  const roles = R.commandRoles(unit);
+  const setStatus = (patch, text) =>
+    update((p) => {
+      const u = p.units.find((x) => x.uniqueId === id);
+      u.campaignModelStatus = Array.from({ length: R.modelCount(u) }, (_, i) => ({
+        ...(u.campaignModelStatus?.[i] || {}),
+        ...(i === m ? patch : {}),
+      }));
+      R.log(p, "adjustment", `${who}: ${text}. ${note}`);
+    });
   return (
     <details className="campaign-card">
       <summary>Korekty postaci: rany, współczynniki, zasady</summary>
       <label>
         Postać
-        <select value={id} onChange={(e) => setId(e.target.value)}>
+        <select
+          value={id}
+          onChange={(e) => {
+            setId(e.target.value);
+            setModel(0);
+            setRole("");
+          }}
+        >
           {post.units.map((u) => (
             <option value={u.uniqueId} key={u.uniqueId}>
               {R.label(u)}
+              {R.modelCount(u) > 1 ? ` (${R.modelCount(u)} modeli)` : ""}
             </option>
           ))}
         </select>
       </label>
+      {count > 1 && (
+        <label>
+          Model w grupie (pauza, pojmanie, usunięcie)
+          <select value={m} onChange={(e) => setModel(Number(e.target.value))}>
+            {Array.from({ length: count }, (_, i) => {
+              const s = unit.campaignModelStatus?.[i] || {};
+              const notes = [s.dead && "martwy", s.skip > 0 && `pauza ${s.skip}`, s.captured && "pojmany"].filter(Boolean);
+              return (
+                <option key={i} value={i}>
+                  #{i + 1}
+                  {notes.length ? ` · ${notes.join(", ")}` : ""}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+      )}
+      {count > 1 && (
+        <p className="campaign-muted">
+          Współczynniki i zasady są wspólne dla całej grupy (jeden profil stronników).
+        </p>
+      )}
       <label>
         Uzasadnienie zmiany / wynik z tabeli
         <input value={note} onChange={(e) => setNote(e.target.value)} />
@@ -162,48 +209,50 @@ function UnitAdjustments({ post, update }) {
           setId(post.units.find((u) => u.uniqueId !== id)?.uniqueId || "");
         }}
       >
-        Usuń postać z kompanii (z ekwipunkiem)
+        {count > 1 ? "Usuń całą grupę z kompanii (z ekwipunkiem)" : "Usuń postać z kompanii (z ekwipunkiem)"}
       </button>
       <label>
-        Opuszczone kolejne potyczki
+        Opuszczone kolejne potyczki{count > 1 ? ` (model #${m + 1})` : ""}
         <NumberInput
           type="number"
           min="0"
-          value={unit.campaignModelStatus?.[0]?.skip || 0}
-          onChange={(e) =>
-            update((p) => {
-              const u = p.units.find((x) => x.uniqueId === id);
-              u.campaignModelStatus = u.campaignModelStatus || [{}];
-              u.campaignModelStatus[0] = {
-                ...u.campaignModelStatus[0],
-                skip: Math.max(0, Number(e.target.value)),
-              };
-              R.log(
-                p,
-                "adjustment",
-                `${R.label(u)}: pauza ${e.target.value}. ${note}`,
-              );
-            })
-          }
+          value={status.skip || 0}
+          onChange={(e) => setStatus({ skip: Math.max(0, Number(e.target.value)) }, `pauza ${e.target.value}`)}
         />
       </label>
       {checkLabel(
-        "Pojmany",
-        unit.campaignModelStatus?.[0]?.captured,
-        (checked) =>
-          update((p) => {
-            const u = p.units.find((x) => x.uniqueId === id);
-            u.campaignModelStatus = u.campaignModelStatus || [{}];
-            u.campaignModelStatus[0] = {
-              ...u.campaignModelStatus[0],
-              captured: checked,
-            };
-            R.log(
-              p,
-              "adjustment",
-              `${R.label(u)}: pojmany ${checked}. ${note}`,
-            );
-          }),
+        count > 1 ? `Pojmany (model #${m + 1})` : "Pojmany",
+        status.captured,
+        (checked) => setStatus({ captured: checked }, `pojmany ${checked}`),
+      )}
+      {count > 1 && (
+        <>
+          {roles.length > 1 && (
+            <label>
+              Który to model
+              <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <option value="">Wybierz</option>
+                {roles.map((r) => (
+                  <option key={r}>{r}</option>
+                ))}
+              </select>
+            </label>
+          )}
+          <button
+            className="button button-secondary"
+            disabled={!note.trim() || (roles.length > 1 && !role)}
+            onClick={() => {
+              update((p) => {
+                const left = R.removeGroupModel(p, id, m, role || null);
+                R.log(p, "dismissal", `${who}${left ? ` (${left.toLowerCase()})` : ""} opuszcza grupę. ${note}`);
+              });
+              setModel(0);
+              setRole("");
+            }}
+          >
+            Usuń model #{m + 1} z grupy
+          </button>
+        </>
       )}
     </details>
   );
