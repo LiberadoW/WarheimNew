@@ -42,6 +42,21 @@ export const taxDice = (post, basePrice) =>
       : basePrice <= 50
         ? 2
         : 3;
+// A recruit joining a group buys the group's equipment (s. 427), so PODATEK
+// is due on every item bought for it: the base price sets the dice.
+export const recruitTaxes = (post, unit) => {
+  if (!unit || !hasTax(post)) return [];
+  const baseIds = Array.isArray(unit.baseCustomEquipmentIds) ? unit.baseCustomEquipmentIds : null;
+  const bought = [
+    ...(unit.optionalEquipment || [])
+      .filter((name) => name !== "Sygnalista" && name !== "Chorąży")
+      .map((name, i) => ({ key: `o${i}`, name, price: Number(unit.equipmentList?.[name]?.[0]) || 0 })),
+    ...(unit.customEquipment || [])
+      .filter((e) => e && typeof e === "object" && !baseIds?.includes(e.id))
+      .map((e, i) => ({ key: `c${i}`, name: e.name, price: Math.max(0, Number(e.price) || 0) })),
+  ];
+  return bought.filter((i) => i.price > 0).map((i) => ({ ...i, dice: taxDice(post, i.price) }));
+};
 export const basePriceOf = (item, baseDice, unit) => {
   try {
     const price = R.priceRoll(item.price, baseDice).price;

@@ -8,6 +8,7 @@ import { companyLevel } from "./company";
 import DiceInput from "./DiceInput";
 import { modelCount, hasRule, log, validDice, sum, label } from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
+import { recruitTaxes } from "./trading";
 
 export function RollNotebook({ post, update }) {
   const [dice, setDice] = useRollDraft(post, update, "notebook-dice", []),
@@ -132,13 +133,19 @@ export function ExperiencedRecruits({ post, update, army }) {
   );
   const unit = groups.find((u) => u.uniqueId === id),
     exp = Number(unit?.exp) || 0,
-    cost = (Number(unit?.cost) || 0) + exp * 2;
+    taxes = recruitTaxes(post, unit),
+    [taxRolls, setTaxRolls] = useRollDraft(post, update, `join-tax:${id}`, {}),
+    taxOk = taxes.every((t) => validDice(taxRolls[t.key] || [], t.dice)),
+    tax = taxOk ? taxes.reduce((n, t) => n + sum(taxRolls[t.key]), 0) : 0,
+    cost = (Number(unit?.cost) || 0) + exp * 2 + tax;
   const groupLimit = Math.min(5, unit?.number || 5);
   // The reason the button is off, so the player is never left guessing.
   const blocker = !unit
     ? ""
     : !post.recruitBudgetLocked
       ? "Najpierw rzuć i zatwierdź pulę PD rekrutów."
+      : !taxOk
+        ? "Rzuć na podatek za ekwipunek rekruta."
       : exp > (post.recruitBudget || 0)
         ? `Grupa ma ${exp} PD, a w puli zostało ${post.recruitBudget || 0} PD.`
         : cost > post.treasury
@@ -164,7 +171,24 @@ export function ExperiencedRecruits({ post, update, army }) {
       </label>
       {unit && (
         <>
-          <p>Pełny ekwipunek i dopłata za PD: {cost} zk.</p>
+          {taxes.length > 0 && (
+            <div className="campaign-join-tax">
+              <p>Podatek za ekwipunek rekruta (Podatek):</p>
+              {taxes.map((t) => (
+                <DiceInput
+                  key={t.key}
+                  label={`Podatek: ${t.name} (cena podstawowa ${t.price} zk)`}
+                  count={t.dice}
+                  value={taxRolls[t.key] || []}
+                  onChange={(v) => setTaxRolls({ ...taxRolls, [t.key]: v })}
+                />
+              ))}
+            </div>
+          )}
+          <p>
+            Pełny ekwipunek i dopłata za PD: {(Number(unit.cost) || 0) + exp * 2} zk
+            {taxes.length > 0 && (taxOk ? ` + podatek ${tax} zk = ${cost} zk` : " + podatek (rzuć powyżej)")}.
+          </p>
           <button
             className="button"
             disabled={!!blocker}
@@ -183,8 +207,9 @@ export function ExperiencedRecruits({ post, update, army }) {
                 log(
                   p,
                   "recruitment",
-                  `Doświadczony ${label(u)}: ${cost} zk, ${exp} PD puli.`,
+                  `Doświadczony ${label(u)}: ${cost} zk${tax ? ` (w tym podatek ${tax} zk: ${taxes.map((t) => `${t.name} ${(taxRolls[t.key] || []).join("+")}`).join(", ")})` : ""}, ${exp} PD puli.`,
                 );
+                p.rollDrafts = { ...p.rollDrafts, [`join-tax:${id}`]: {} };
               })
             }
           >
