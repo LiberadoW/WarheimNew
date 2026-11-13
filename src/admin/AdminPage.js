@@ -56,7 +56,11 @@ const AdminPage = () => {
   return (
     <div className="hub-page">
       <h2 className="hub-title">Wszystkie rozpiski</h2>
-      {error && <p className="hub-error" role="alert">{error}</p>}
+      {error && (
+        <p className="hub-error" role="alert">
+          {error} Zalogowano jako: {email}.
+        </p>
+      )}
       {!players && !error && <p className="hub-muted">Wczytywanie…</p>}
       {players && (
         <>

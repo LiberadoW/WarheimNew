@@ -20,7 +20,7 @@ service cloud.firestore {
     // The app's administrator may read every saved list and campaign
     // (read only; "Rozpiski graczy" in the app).
     function isAdmin() {
-      return signedIn() && request.auth.token.email == "wojtek.szemik@gmail.com";
+      return signedIn() && request.auth.token.email.lower() == "wojtek.szemik@gmail.com";
     }
 
     // "Moje rozpiski": one document per user, private to that user.
