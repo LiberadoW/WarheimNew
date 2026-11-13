@@ -74,3 +74,16 @@ test("a joined recruit can be undone: gold, PD pool and the role come back", () 
   expect(latest.units[0]).toMatchObject({ selectedNumber: 1, optionalEquipment: ["Chorąży"], totalCost: 40 });
   expect(latest.experiencedJoins).toEqual([]);
 });
+
+test("a recruit joined before joins were recorded is undone from the journal", () => {
+  const { undoLegacyJoin, legacyJoins } = require("./Extras");
+  const g = zelota([], { selectedNumber: 2, campaignModelStatus: [{}, {}], totalCost: 40, exp: 1 });
+  const p = { units: [g], treasury: 10, recruitBudget: 2, journal: [{ id: "j1", type: "recruitment", text: "Doświadczony Zelota: 27 zk, 1 PD puli." }] };
+  expect(legacyJoins(p)).toEqual([{ id: "j1", legacy: true, name: "Zelota", role: null, cost: 27, exp: 1 }]);
+  undoLegacyJoin(p, "j1");
+  expect(p.treasury).toBe(37);
+  expect(p.recruitBudget).toBe(3);
+  expect(g.selectedNumber).toBe(1);
+  expect(g.campaignModelStatus).toEqual([{}]);
+  expect(legacyJoins(p)).toEqual([]);
+});

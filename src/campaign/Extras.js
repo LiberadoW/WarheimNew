@@ -146,6 +146,37 @@ export function undoExperiencedJoin(p, recordId) {
   log(p, "recruitment", `Cofnięto doświadczonego rekruta: ${rec.name}${rec.role ? ` (${rec.role.toLowerCase()})` : ""}, zwrot ${rec.cost} zk i ${rec.exp} PD puli.`);
 }
 
+// Recruits joined before joins were recorded: read back from the journal
+// ("Doświadczony Zelota: 27 zk, 2 PD puli.").
+const LEGACY = /^Doświadczony (.+?)(?: \(dołącza jako (\S+)\))?: (\d+) zk.*?, (\d+) PD puli\.$/;
+export const legacyJoins = (p) =>
+  (p.journal || [])
+    .filter((e) => e.type === "recruitment" && !e.joinId && !e.undone && LEGACY.test(e.text || ""))
+    .map((e) => {
+      const [, name, role, cost, exp] = e.text.match(LEGACY);
+      return {
+        id: e.id,
+        legacy: true,
+        name,
+        role: role ? role.charAt(0).toUpperCase() + role.slice(1) : null,
+        cost: Number(cost),
+        exp: Number(exp),
+      };
+    });
+export function undoLegacyJoin(p, entryId) {
+  const rec = legacyJoins(p).find((r) => r.id === entryId);
+  if (!rec) throw Error("Nie znaleziono tego rekruta.");
+  const u = p.units.find((x) => x.type === "Stronnik" && label(x) === rec.name && modelCount(x) > 1);
+  if (!u) throw Error(`Grupa ${rec.name} ma już tylko jeden model: cofnij ręcznie w narzędziach.`);
+  p.experiencedJoins = [
+    ...(p.experiencedJoins || []),
+    { id: rec.id, unitId: u.uniqueId, name: rec.name, cost: rec.cost, exp: rec.exp, role: rec.role, count: modelCount(u) },
+  ];
+  undoExperiencedJoin(p, rec.id);
+  const entry = p.journal.find((e) => e.id === entryId);
+  if (entry) entry.undone = true;
+}
+
 export function ExperiencedRecruits({ post, update, army }) {
   const [id, setId] = useState("");
   const groups = post.units.filter(
@@ -238,10 +269,12 @@ export function ExperiencedRecruits({ post, update, army }) {
                   ...(p.experiencedJoins || []),
                   { id: uid(), unitId: u.uniqueId, name: label(u), cost, exp, role: joined || null, count: modelCount(u) },
                 ];
+                const joinId = p.experiencedJoins[p.experiencedJoins.length - 1].id;
                 log(
                   p,
                   "recruitment",
                   `Doświadczony ${label(u)}${joined ? ` (dołącza jako ${joined.toLowerCase()})` : ""}: ${cost} zk${tax ? ` (w tym podatek ${tax} zk: ${taxes.map((t) => `${t.name} ${(taxRolls[t.key] || []).join("+")}`).join(", ")})` : ""}, ${exp} PD puli.`,
+                  { joinId },
                 );
                 p.rollDrafts = { ...p.rollDrafts, [`join-tax:${id}`]: {} };
               })
@@ -252,15 +285,19 @@ export function ExperiencedRecruits({ post, update, army }) {
           {blocker && <p className="campaign-error">{blocker}</p>}
         </>
       )}
-      {(post.experiencedJoins || []).length > 0 && (
+      {[...(post.experiencedJoins || []), ...legacyJoins(post)].length > 0 && (
         <div className="campaign-joined">
           <p>Dołączeni w tej sekwencji:</p>
           <ul>
-            {post.experiencedJoins.map((r) => (
+            {[...(post.experiencedJoins || []), ...legacyJoins(post)].map((r) => (
               <li key={r.id}>
                 {r.name}
                 {r.role ? ` (${r.role.toLowerCase()})` : ""} · {r.cost} zk, {r.exp} PD{" "}
-                <button type="button" className="button button-ghost button-small" onClick={() => update((p) => undoExperiencedJoin(p, r.id))}>
+                <button
+                  type="button"
+                  className="button button-ghost button-small"
+                  onClick={() => update((p) => (r.legacy ? undoLegacyJoin(p, r.id) : undoExperiencedJoin(p, r.id)))}
+                >
                   Cofnij
                 </button>
               </li>
