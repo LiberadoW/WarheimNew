@@ -604,8 +604,8 @@ export const GameScreen = ({
 
       {(game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
         <RandomEvents
-          limit={campaign.settings?.randomEventLimit !== false}
-          weatherFrom={campaign.settings?.weatherFrom === 5 ? 5 : 6}
+          limit={campaign.settings?.randomEventLimit === true}
+          weatherFrom={campaign.settings?.weatherFrom === 6 ? 6 : 5}
           game={game}
           round={round}
           canEdit={canEdit}

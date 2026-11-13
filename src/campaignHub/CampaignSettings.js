@@ -33,7 +33,7 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
         <input
           type="checkbox"
           disabled={!isOrganizer}
-          checked={campaign.settings?.randomEventLimit !== false}
+          checked={campaign.settings?.randomEventLimit === true}
           onChange={(e) =>
             act(
               () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), randomEventLimit: e.target.checked }),
@@ -41,13 +41,13 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
             )
           }
         />
-        Zdarzenia losowe: najwyżej jedno na grę (s. 398)
+        Zdarzenia losowe: najwyżej jedno na grę (podręcznik, s. 398; domyślnie bez limitu)
       </label>
       <label className="hub-field hub-field-inline">
         <input
           type="checkbox"
           disabled={!isOrganizer}
-          checked={campaign.settings?.weatherFrom === 5}
+          checked={campaign.settings?.weatherFrom !== 6}
           onChange={(e) =>
             act(
               () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), weatherFrom: e.target.checked ? 5 : 6 }),
@@ -55,7 +55,7 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
             )
           }
         />
-        Zdarzenia losowe: zmiana pogody na 5+ (podręcznik: tylko na 6)
+        Zdarzenia losowe: zmiana pogody na 5+ (domyślnie; podręcznik: tylko na 6)
       </label>
       {editing ? (
         <>

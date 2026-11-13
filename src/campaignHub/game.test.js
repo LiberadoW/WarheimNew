@@ -293,10 +293,28 @@ describe("game screen", () => {
     expect(battle.randomEvents).toBe(1);
   });
 
-  test("after one event no further checks are offered", () => {
-    setup({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } });
+  test("with the one-event limit switched on no further checks are offered", () => {
+    const limited = { ...campaign, settings: { randomEventLimit: true } };
+    service.watchCampaign.mockImplementation((id, cb) => { cb(limited); return () => {}; });
+    service.watchGame.mockImplementation((id, gid, cb) => { cb({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } }); return () => {}; });
+    service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
+    render(
+      <AuthContext.Provider value={{ currentUser: { user: { uid: "a" } } }}>
+        <MemoryRouter initialEntries={["/campaigns/c1/games/g1"]}>
+          <Routes><Route path="/campaigns/:id/games/:gameId" element={<GamePage setUnitList={jest.fn()} setArmy={jest.fn()} setArmyName={jest.fn()} setCampaignNotes={jest.fn()} />} /></Routes>
+        </MemoryRouter>
+      </AuthContext.Provider>,
+    );
     expect(screen.getByText(/wystąpiło już zdarzenie losowe/)).not.toBeNull();
     expect(screen.queryByLabelText("K6 przed turą")).toBeNull();
+  });
+
+  test("by default the checks go on after an event and the weather changes on 5+", () => {
+    setup({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } });
+    const events = within(screen.getByRole("region", { name: "Zdarzenia losowe" }));
+    expect(events.getByText(/5\+ = rzut na pogodę/)).toBeTruthy();
+    fireEvent.change(events.getByLabelText("K6 przed turą"), { target: { value: "5" } });
+    expect(screen.getByRole("region", { name: "Nowa pogoda" })).toBeTruthy();
   });
 
   test("units show their profile, gear with weapon rules and special rules", () => {
