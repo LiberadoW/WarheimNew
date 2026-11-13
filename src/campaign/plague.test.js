@@ -47,7 +47,7 @@ test("a failed WT test rolls the effect: 1 dead, 2–5 misses a game, 6 recovers
 });
 
 
-test("a hero struck by the plague still explores and rolls for availability", () => {
+test("a hero laid up by the plague still explores and trades; a dead one does not", () => {
   const units = ["a", "b"].map((id) => unit("Łowca czarownic", { uniqueId: id, battleAbsentModels: [false], battleOutOfActionModels: [false] }));
   const p = post(units);
   const [a, b] = plagueTasks(p, battle);
@@ -55,6 +55,18 @@ test("a hero struck by the plague still explores and rolls for availability", ()
   applyPlague(p, b, { test: [6], effect: [3] });
   expect(units[0].campaignModelStatus[0].dead).toBe(true);
   expect(units[1].campaignModelStatus[0].skip).toBe(1);
-  expect(R.availabilityHeroes(p).map((u) => u.uniqueId)).toEqual(["a", "b"]);
-  expect(explorationRules({ result: "loss" }, p).heroes.map((u) => u.uniqueId)).toEqual(["a", "b"]);
+  expect(R.availabilityHeroes(p).map((u) => u.uniqueId)).toEqual(["b"]);
+  expect(explorationRules({ result: "loss" }, p).heroes.map((u) => u.uniqueId)).toEqual(["b"]);
+});
+
+test("a hero killed by the plague leaves an availability pool drawn up already", () => {
+  const units = ["a", "b"].map((id) => unit("Łowca czarownic", { uniqueId: id, battleAbsentModels: [false], battleOutOfActionModels: [false] }));
+  const p = post(units);
+  R.createAvailabilityPool(p);
+  expect(p.availability.map((t) => t.unitId)).toEqual(["a", "b"]);
+  const [a] = plagueTasks(p, battle);
+  applyPlague(p, a, { test: [6], effect: [1] });
+  expect(p.availability.map((t) => t.unitId)).toEqual(["b"]);
+  undoPlague(p, a);
+  expect(p.availability.map((t) => t.unitId).sort()).toEqual(["a", "b"]);
 });

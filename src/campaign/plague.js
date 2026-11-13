@@ -72,7 +72,13 @@ export function applyPlague(post, task, { absent = false, test = [], effect = []
   );
   if (result === "dead" && unit.type === "Postać Dramatu")
     post.deadDrama = [...new Set([...(post.deadDrama || []), unit.dramaId || unit.unitName])];
-  post.plague[task.key] = { result, test, effect, before, label: task.label };
+  // A dead hero leaves an availability pool drawn up already (unused token).
+  let token = null;
+  if (result === "dead" && task.index === 0 && post.availability) {
+    token = post.availability.find((t) => t.unitId === unit.uniqueId && !t.used) || null;
+    if (token) post.availability = post.availability.filter((t) => t !== token);
+  }
+  post.plague[task.key] = { result, test, effect, before, label: task.label, ...(token ? { token } : {}) };
   if (result !== "absent")
     R.log(post, "injury", `Zaraza: ${task.label} ${PLAGUE_TEXT[result]}${test.length ? ` (WT K6: ${test[0]}${effect.length && result !== "passed" ? `, skutek K6: ${effect[0]}` : ""})` : ""}.`, { unitId: unit.uniqueId });
 }
@@ -84,5 +90,6 @@ export function undoPlague(post, task) {
   unit.campaignModelStatus = Array.from({ length: R.modelCount(unit) }, (_, i) =>
     i === task.index ? { ...done.before } : { ...(unit.campaignModelStatus?.[i] || {}) },
   );
+  if (done.token && post.availability) post.availability = [...post.availability, done.token];
   delete post.plague[task.key];
 }
