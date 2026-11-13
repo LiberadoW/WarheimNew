@@ -1,4 +1,5 @@
 import * as R from "./rules";
+import { hadEvent } from "./gameEvents";
 
 // ZARAZA (zdarzenie losowe 61, „Wewnątrz murów”, s. 404): after the skirmish
 // every model present when the plague victims appeared takes a WT test.
@@ -10,9 +11,7 @@ export const isImmune = (unit) =>
   (unit.rules || []).some((r) => IMMUNE.some((name) => String(r).toLowerCase().startsWith(name)));
 
 // The game's events (battle.events from a campaign game) or the play-mode log.
-export const hadPlague = (battle) =>
-  (battle?.events || []).some((e) => e.area === "inside" && Number(e.code) === 61) ||
-  (battle?.log || []).some((e) => /^Zdarzenie losowe \(61\): Zaraza/.test(e.text || ""));
+export const hadPlague = (battle) => hadEvent(battle, 61, "inside");
 
 const modelName = (u, i) => (R.modelCount(u) > 1 ? `${R.label(u)} #${i + 1}` : R.label(u));
 

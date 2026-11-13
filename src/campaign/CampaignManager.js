@@ -15,6 +15,8 @@ import Exploration, { applyExploration, explorationState } from "./Exploration";
 import { companyInjuryModifier } from "./company";
 import { addTreasurePd } from "./treasure";
 import { applyArmourDamage } from "./armourDamage";
+import MerchantCard from "./MerchantCard";
+import { merchantVisits } from "./merchant";
 import { PLAGUE_TEXT, applyPlague, failsToughness, plagueTasks, undoPlague } from "./plague";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
@@ -1261,6 +1263,7 @@ export default function CampaignManager({
                   </section>
                 </div>
               )}
+              {phase === 7 && merchantVisits(battle) && <MerchantCard post={post} update={update} />}
               {phase === 7 && <Trade post={post} update={update} army={army} />}
               {phase === 8 && <Drama post={post} update={update} army={army} />}
               {phase === 9 && (

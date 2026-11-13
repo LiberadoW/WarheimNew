@@ -792,3 +792,32 @@
 .campaign-plague-done .button {
   margin-left: 8px;
 }
+
+/* Wędrowny handlarz. */
+.campaign-merchant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.campaign-merchant-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.campaign-merchant-list .campaign-row {
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.campaign-merchant-potion .campaign-row {
+  flex-wrap: wrap;
+  gap: 8px;
+}
