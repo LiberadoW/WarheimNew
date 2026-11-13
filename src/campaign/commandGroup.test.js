@@ -54,3 +54,23 @@ test("the recruit joining the banner bearer becomes the musician for +20 zk", ()
   expect(latest.units[0].optionalEquipment).toEqual(["Chorąży", "Sygnalista"]);
   expect(latest.journal[0].text).toMatch(/dołącza jako sygnalista/);
 });
+
+test("a joined recruit can be undone: gold, PD pool and the role come back", () => {
+  let latest;
+  function Harness() {
+    const [p, setP] = useState({ units: [zelota(["Chorąży"], { exp: 2 })], armyRules: [], treasury: 100, recruitBudget: 5, recruitBudgetLocked: true, journal: [], rollDrafts: {} });
+    latest = p;
+    const update = (fn) => setP((cur) => { const c = JSON.parse(JSON.stringify(cur)); fn(c); return c; });
+    return <ExperiencedRecruits post={p} update={update} army={null} />;
+  }
+  render(<Harness />);
+  fireEvent.change(screen.getByRole("combobox"), { target: { value: "Chorąży" } });
+  fireEvent.click(screen.getByRole("button", { name: "Dołącz rekruta" }));
+  expect(latest.treasury).toBe(100 - 44); // 20 + 2 PD × 2 + 20 for the role
+  expect(latest.recruitBudget).toBe(3);
+  fireEvent.click(screen.getByRole("button", { name: "Cofnij" }));
+  expect(latest.treasury).toBe(100);
+  expect(latest.recruitBudget).toBe(5);
+  expect(latest.units[0]).toMatchObject({ selectedNumber: 1, optionalEquipment: ["Chorąży"], totalCost: 40 });
+  expect(latest.experiencedJoins).toEqual([]);
+});

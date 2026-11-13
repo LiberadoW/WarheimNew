@@ -6,7 +6,7 @@ import { campaignModelLimit } from "./company";
 import { rosterModels } from "./recruiting";
 import { companyLevel } from "./company";
 import DiceInput from "./DiceInput";
-import { modelCount, hasRule, log, validDice, sum, label, joiningRole, addGroupModel, COMMAND_COST } from "./rules";
+import { modelCount, hasRule, log, validDice, sum, label, joiningRole, addGroupModel, groupTotalCost, uid, COMMAND_COST } from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { recruitTaxes } from "./trading";
 
@@ -123,6 +123,29 @@ export function EconomyAdjustment({ post, update }) {
     </details>
   );
 }
+// Undoing a joined recruit gives back the gold and the PD pool; it works
+// while the group still ends with that model (no split or merge since).
+export function undoExperiencedJoin(p, recordId) {
+  const rec = (p.experiencedJoins || []).find((r) => r.id === recordId);
+  if (!rec) throw Error("Nie znaleziono tego rekruta.");
+  const u = p.units.find((x) => x.uniqueId === rec.unitId);
+  if (!u || modelCount(u) !== rec.count)
+    throw Error("Grupa zmieniła się od dołączenia (podział, łączenie, nowy rekrut): cofnij najpierw późniejsze zmiany.");
+  if (rec.role) {
+    const i = (u.optionalEquipment || []).lastIndexOf(rec.role);
+    if (i >= 0) u.optionalEquipment = u.optionalEquipment.filter((_, j) => j !== i);
+  }
+  u.selectedNumber = rec.count - 1;
+  u.campaignModelStatus = (u.campaignModelStatus || []).slice(0, rec.count - 1);
+  if (Array.isArray(u.battleAbsentModels)) u.battleAbsentModels = u.battleAbsentModels.slice(0, rec.count - 1);
+  if (Array.isArray(u.battleOutOfActionModels)) u.battleOutOfActionModels = u.battleOutOfActionModels.slice(0, rec.count - 1);
+  u.totalCost = groupTotalCost(u);
+  p.treasury += rec.cost;
+  p.recruitBudget = (p.recruitBudget || 0) + rec.exp;
+  p.experiencedJoins = p.experiencedJoins.filter((r) => r !== rec);
+  log(p, "recruitment", `Cofnięto doświadczonego rekruta: ${rec.name}${rec.role ? ` (${rec.role.toLowerCase()})` : ""}, zwrot ${rec.cost} zk i ${rec.exp} PD puli.`);
+}
+
 export function ExperiencedRecruits({ post, update, army }) {
   const [id, setId] = useState("");
   const groups = post.units.filter(
@@ -211,6 +234,10 @@ export function ExperiencedRecruits({ post, update, army }) {
                 p.treasury -= cost;
                 p.recruitBudget -= exp;
                 const joined = addGroupModel(u);
+                p.experiencedJoins = [
+                  ...(p.experiencedJoins || []),
+                  { id: uid(), unitId: u.uniqueId, name: label(u), cost, exp, role: joined || null, count: modelCount(u) },
+                ];
                 log(
                   p,
                   "recruitment",
@@ -224,6 +251,22 @@ export function ExperiencedRecruits({ post, update, army }) {
           </button>
           {blocker && <p className="campaign-error">{blocker}</p>}
         </>
+      )}
+      {(post.experiencedJoins || []).length > 0 && (
+        <div className="campaign-joined">
+          <p>Dołączeni w tej sekwencji:</p>
+          <ul>
+            {post.experiencedJoins.map((r) => (
+              <li key={r.id}>
+                {r.name}
+                {r.role ? ` (${r.role.toLowerCase()})` : ""} · {r.cost} zk, {r.exp} PD{" "}
+                <button type="button" className="button button-ghost button-small" onClick={() => update((p) => undoExperiencedJoin(p, r.id))}>
+                  Cofnij
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </>
   );
