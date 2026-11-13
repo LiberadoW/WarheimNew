@@ -2,6 +2,7 @@ import armies from "../Data.js/Armies";
 import { createUnit } from "../Functions/createUnit";
 import * as R from "./rules";
 import { applyPlague, hadPlague, plagueTasks, undoPlague } from "./plague";
+import { explorationRules } from "./company";
 
 const h = armies["Łowcy czarownic"].heroes;
 const unit = (name, extra = {}) => ({ ...createUnit(h, name), ...extra });
@@ -45,3 +46,15 @@ test("a failed WT test rolls the effect: 1 dead, 2–5 misses a game, 6 recovers
   expect(p.journal.some((e) => /Zaraza: Łowca czarownic umiera/.test(e.text))).toBe(true);
 });
 
+
+test("a hero struck by the plague still explores and rolls for availability", () => {
+  const units = ["a", "b"].map((id) => unit("Łowca czarownic", { uniqueId: id, battleAbsentModels: [false], battleOutOfActionModels: [false] }));
+  const p = post(units);
+  const [a, b] = plagueTasks(p, battle);
+  applyPlague(p, a, { test: [6], effect: [1] });
+  applyPlague(p, b, { test: [6], effect: [3] });
+  expect(units[0].campaignModelStatus[0].dead).toBe(true);
+  expect(units[1].campaignModelStatus[0].skip).toBe(1);
+  expect(R.availabilityHeroes(p).map((u) => u.uniqueId)).toEqual(["a", "b"]);
+  expect(explorationRules({ result: "loss" }, p).heroes.map((u) => u.uniqueId)).toEqual(["a", "b"]);
+});

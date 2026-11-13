@@ -118,8 +118,9 @@ export const ordinaryHenchman = (unit) =>
 export const companyInjuryModifier = (post, unit) =>
   companyLevel(post, "Konsyliarze") && ordinaryHenchman(unit) ? 1 : 0;
 export function explorationRules(battle, post) {
-  const heroes = post.units.filter(
-    (u) =>
+  const heroes = post.units.filter((unit) => {
+    const u = R.beforePlague(post, unit);
+    return (
       u.type === "Bohater" &&
       !u.campaignModelStatus?.[0]?.dead &&
       !u.campaignNewRecruit &&
@@ -128,8 +129,9 @@ export function explorationRules(battle, post) {
       !R.hasRule(u, "Anoreksja") &&
       !R.hasRule(u, "Żarłoczność") &&
       (companyLevel(post, "Pazerność") ||
-        (R.activeModel(u, 0) && !u.battleOutOfActionModels?.[0])),
-  );
+        (R.activeModel(u, 0) && !u.battleOutOfActionModels?.[0]))
+    );
+  });
   const future = (post.activeFutureEffects || []).filter(
     (e) => e.key === "extraExplorationDropLowest",
   );

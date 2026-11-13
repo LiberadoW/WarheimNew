@@ -1535,17 +1535,31 @@ export const equipItem = (unit, item, quote) => {
 // Jedna 2K6 za każdego bohatera kompanii, który w tej sekwencji nie rzucał na
 // TABELĘ POWAŻNYCH RAN, także nieobecnego w potyczce. Postacie Dramatu nie
 // dają kości; Anoreksja i Żarłoczność wykluczają z handlu.
+// ZARAZA strikes after the skirmish (s. 404): a model it kills or lays up
+// still explores and rolls for availability in this sequence.
+export const beforePlague = (post, u) => {
+  const plague = post.plague || {};
+  if (!Object.keys(plague).some((k) => k.startsWith(`${u.uniqueId}:`))) return u;
+  return {
+    ...u,
+    campaignModelStatus: (u.campaignModelStatus || []).map(
+      (s, i) => plague[`${u.uniqueId}:${i}`]?.before ?? s,
+    ),
+  };
+};
 export const availabilityHeroes = (post) =>
-  post.units.filter(
-    (u) =>
+  post.units.filter((unit) => {
+    const u = beforePlague(post, unit);
+    return (
       u.type === "Bohater" &&
       !u.campaignModelStatus?.[0]?.dead &&
       !u.campaignModelStatus?.[0]?.captured &&
       !post.injuries?.[`${u.uniqueId}:0`] &&
       !(u.battleOutOfActionModels?.[0] && !u.battleAbsentModels?.[0]) &&
       !hasRule(u, "Anoreksja") &&
-      !hasRule(u, "Żarłoczność"),
-  );
+      !hasRule(u, "Żarłoczność")
+    );
+  });
 
 // BOGATY MOŻE WIĘCEJ: the bribed result is 3K6 without the lowest die.
 export const keptAvailabilityDice = (token) =>
