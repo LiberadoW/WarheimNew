@@ -33,10 +33,10 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
         <input
           type="checkbox"
           disabled={!isOrganizer}
-          checked={campaign.settings?.randomEventLimit === true}
+          checked={campaign.settings?.oneEventLimit === true}
           onChange={(e) =>
             act(
-              () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), randomEventLimit: e.target.checked }),
+              () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), oneEventLimit: e.target.checked }),
               e.target.checked ? "Limit: jedno zdarzenie losowe na grę." : "Bez limitu zdarzeń losowych.",
             )
           }
@@ -47,10 +47,10 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
         <input
           type="checkbox"
           disabled={!isOrganizer}
-          checked={campaign.settings?.weatherFrom !== 6}
+          checked={campaign.settings?.weatherOnlyOn6 !== true}
           onChange={(e) =>
             act(
-              () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), weatherFrom: e.target.checked ? 5 : 6 }),
+              () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), weatherOnlyOn6: !e.target.checked }),
               e.target.checked ? "Zmiana pogody na 5+." : "Zmiana pogody tylko na 6.",
             )
           }

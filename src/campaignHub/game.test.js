@@ -251,8 +251,8 @@ describe("game screen", () => {
     expect(units[0].battleArmourDamage).toEqual([null, { shield: true }, null]);
   });
 
-  test("a campaign may change the weather on 5+", async () => {
-    service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { weatherFrom: 5 } }); return () => {}; });
+  test("an old saved weather setting is ignored: the weather changes on 5+", async () => {
+    service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { weatherFrom: 6 } }); return () => {}; });
     service.watchGame.mockImplementation((id, gid, cb) => { cb(baseGame); return () => {}; });
     service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
     render(
@@ -271,8 +271,8 @@ describe("game screen", () => {
     await waitFor(() => expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather", text: expect.stringMatching(/K6: 5/) })));
   });
 
-  test("without the one-event limit the checks go on after an event", () => {
-    service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { randomEventLimit: false } }); return () => {}; });
+  test("an old saved one-event limit is ignored: the checks go on after an event", () => {
+    service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { randomEventLimit: true } }); return () => {}; });
     service.watchGame.mockImplementation((id, gid, cb) => { cb({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } }); return () => {}; });
     service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
     render(
@@ -294,7 +294,7 @@ describe("game screen", () => {
   });
 
   test("with the one-event limit switched on no further checks are offered", () => {
-    const limited = { ...campaign, settings: { randomEventLimit: true } };
+    const limited = { ...campaign, settings: { oneEventLimit: true } };
     service.watchCampaign.mockImplementation((id, cb) => { cb(limited); return () => {}; });
     service.watchGame.mockImplementation((id, gid, cb) => { cb({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } }); return () => {}; });
     service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
