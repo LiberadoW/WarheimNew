@@ -309,6 +309,15 @@ describe("game screen", () => {
     expect(screen.queryByLabelText("K6 przed turą")).toBeNull();
   });
 
+  test("after the game a player can add a forgotten random event", () => {
+    setup({ ...baseGame, status: "done", result: { winner: "a" } });
+    const card = within(screen.getByRole("region", { name: "Dopisz zapomniane zdarzenie losowe" }));
+    expect(card.queryByLabelText("K6 przed turą")).toBeNull();
+    fireEvent.change(card.getByLabelText("Wynik z tabeli"), { target: { value: "46" } });
+    fireEvent.click(card.getByRole("button", { name: "Zapisz w przebiegu" }));
+    expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "event", code: 46, area: "inside", name: "Wędrowny handlarz" }));
+  });
+
   test("by default the checks go on after an event and the weather changes on 5+", () => {
     setup({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } });
     const events = within(screen.getByRole("region", { name: "Zdarzenia losowe" }));

@@ -5,6 +5,12 @@ import useCampaignDraft from "./useCampaignDraft";
 import * as R from "./rules";
 import { myCurrentGame } from "../campaignHub/CampaignPage";
 
+// Campaign games read their events from Firestore when the sequence opens.
+jest.mock("../campaignHub/campaignService", () => ({
+  ...jest.requireActual("../campaignHub/campaignService"),
+  getGameEvents: jest.fn(() => Promise.resolve(null)),
+}));
+
 const OWNER = "streamlined-qa";
 const hero = (extra = {}) => ({
   uniqueId: "hero", unitName: "Herszt", type: "Bohater", selectedNumber: 1,

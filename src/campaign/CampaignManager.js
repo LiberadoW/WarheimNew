@@ -533,28 +533,32 @@ export default function CampaignManager({
   const setBattle = (next) => setCampaign({ ...campaign, activeBattle: next });
   // A sequence started from a campaign game: cancelling it keeps the game.
   const fromGame = !!battle?.campaignGame?.gameId;
-  // Sequences started before the game's events were handed over fetch them
-  // once, so after-game effects (Zaraza) still reach them.
-  const missingEvents =
-    fromGame && !Array.isArray(battle?.events) && Number(battle?.randomEvents) > 0 ? battle.campaignGame : null;
+  // A sequence from a campaign game reads the game's events each time it is
+  // opened: one added on the game screen afterwards (a forgotten Wędrowny
+  // handlarz or Zaraza) reaches a sequence already under way.
+  const gameRef = fromGame ? battle.campaignGame : null;
   useEffect(() => {
-    if (!missingEvents?.campaignId) return undefined;
+    if (!gameRef?.campaignId) return undefined;
     let live = true;
     import("../campaignHub/campaignService")
-      .then(({ getGameEvents }) => getGameEvents(missingEvents.campaignId, missingEvents.gameId))
+      .then(({ getGameEvents }) => getGameEvents(gameRef.campaignId, gameRef.gameId))
       .then((events) => {
         if (!live || !events) return;
         setCampaignNotes((current) => {
           const active = current.campaign?.activeBattle;
-          if (active?.campaignGame?.gameId !== missingEvents.gameId) return current;
-          return { ...current, campaign: { ...current.campaign, activeBattle: { ...active, events } } };
+          if (active?.campaignGame?.gameId !== gameRef.gameId) return current;
+          if (JSON.stringify(active.events || []) === JSON.stringify(events)) return current;
+          return {
+            ...current,
+            campaign: { ...current.campaign, activeBattle: { ...active, events, randomEvents: events.length } },
+          };
         });
       })
       .catch(() => {});
     return () => {
       live = false;
     };
-  }, [missingEvents?.campaignId, missingEvents?.gameId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [gameRef?.campaignId, gameRef?.gameId]); // eslint-disable-line react-hooks/exhaustive-deps
   // Several draft setters can run in one event (e.g. finish a test and clear
   // its dice). Compose those edits before React renders the next snapshot.
   const latestPost = useRef(post);

@@ -39,3 +39,22 @@ test("a sequence handed off before events were passed fetches them and shows Zar
   await waitFor(() => expect(screen.getByRole("region", { name: "Zaraza" })).toBeTruthy());
   expect(service.getGameEvents).toHaveBeenCalledWith("c", "g");
 });
+
+test("an event added on the game screen later reaches a sequence that has events already", async () => {
+  service.getGameEvents.mockResolvedValue([{ code: 46, area: "inside", name: "Wędrowny handlarz", round: 3 }]);
+  const notes = { skarbiec: 0 };
+  const started = R.beginPostBattle(
+    { ...R.newBattle([hero]), gameName: "QA", result: "win", events: [], randomEvents: 0, campaignGame: { campaignId: "c", gameId: "g" } },
+    [hero], notes, army);
+  notes.campaign = { activeBattle: { ...started, stage: 7 }, history: [] };
+  localStorage.setItem(`warheim:draft:${OWNER}`, JSON.stringify({ owner: OWNER, army: army.name, armyName: "QA", unitList: [hero], campaignNotes: notes }));
+  function Harness() {
+    const [draft, setField] = useCampaignDraft(OWNER);
+    return (
+      <CampaignManager unitList={draft.unitList} setUnitList={(v) => setField("unitList", v)} army={army}
+        campaignNotes={draft.campaignNotes} setCampaignNotes={(v) => setField("campaignNotes", v)} onFinish={jest.fn()} />
+    );
+  }
+  render(<Harness />);
+  await waitFor(() => expect(screen.getByRole("region", { name: "Wędrowny handlarz" })).toBeTruthy());
+});

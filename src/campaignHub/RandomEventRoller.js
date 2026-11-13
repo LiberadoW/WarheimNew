@@ -14,11 +14,11 @@ import "../styles/CampaignHub.css";
 // agree on the weather changing from 5+ (`weatherFrom`).
 const EVENT = "Zdarzenie losowe! Rzuć K66 na tabelę poniżej.";
 const WEATHER = "Zmiana pogody: natychmiast rzuć na pogodę.";
-export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, limit = true, weather, onWeather, weatherHints = [], weatherFrom = 6 }) {
+export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, limit = true, weather, onWeather, weatherHints = [], weatherFrom = 6, afterGame = false, title = "Zdarzenia losowe" }) {
   const [area, setArea] = useState(fixedArea);
   const [check, setCheck] = useState(null);
   const rollCheck = (v) => setCheck(v === "" || v == null ? null : Math.max(1, Math.min(6, Number(v))));
-  const showTable = check === 1 || !onWeather;
+  const showTable = afterGame || check === 1 || !onWeather;
   const weatherRoll = check != null && check >= weatherFrom;
   const weatherText = weatherFrom >= 6 ? "6" : `${weatherFrom}+`;
   const [dice, setDice] = useState([null, null]);
@@ -42,9 +42,14 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
   };
 
   return (
-    <section className="hub-card" aria-label="Zdarzenia losowe">
-      <h3>Zdarzenia losowe</h3>
-      {occurred && limit ? (
+    <section className="hub-card" aria-label={title}>
+      <h3>{title}</h3>
+      {afterGame ? (
+        <p className="hub-muted">
+          Zdarzenie, które wypadło w grze, ale nie zostało zapisane. Trafi do przebiegu gry, a rozpoczęta sekwencja
+          po potyczce pobierze je przy następnym otwarciu.
+        </p>
+      ) : occurred && limit ? (
         <p className="hub-notice">
           W tej grze wystąpiło już zdarzenie losowe. Przy limicie jednego zdarzenia nie wykonuje się dalszych
           rzutów K6, więc pogoda też już się nie zmieni.

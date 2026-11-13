@@ -602,7 +602,27 @@ export const GameScreen = ({
         </section>
       )}
 
-      {(game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
+      {done && isPlayer && (game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
+        <RandomEventRoller
+          afterGame
+          title="Dopisz zapomniane zdarzenie losowe"
+          fixedArea={game.scenario?.area || ""}
+          onSave={(event) =>
+            run(() =>
+              addLogEntry(id, gameId, {
+                type: "event",
+                round: game.play?.round || 1,
+                area: event.area,
+                code: event.code,
+                name: event.name,
+                text: `Zdarzenie losowe (${event.code}): ${event.name}`,
+              }),
+            )
+          }
+        />
+      )}
+
+      {(game.optionalRules || []).includes("ZDARZENIA LOSOWE") && !done && (
         <RandomEvents
           limit={campaign.settings?.oneEventLimit === true}
           weatherFrom={campaign.settings?.weatherOnlyOn6 === true ? 6 : 5}
