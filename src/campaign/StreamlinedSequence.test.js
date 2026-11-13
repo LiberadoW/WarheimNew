@@ -243,3 +243,12 @@ test("after Zaraza every model on the table takes a WT test before moving on", (
   click("Dalej: Doświadczenie i rozwój");
   expect(battle(state).stage).toBe(2);
 });
+
+test("a sequence from a campaign game is cancelled without touching the game", () => {
+  const { state } = setup([hero()], { battle: { campaignGame: { campaignId: "c", gameId: "g" } } });
+  const confirm = jest.spyOn(window, "confirm").mockReturnValue(true);
+  click("Anuluj sekwencję");
+  expect(confirm.mock.calls[0][0]).toMatch(/Gra w kampanii i jej wynik zostają/);
+  expect(state.draft.campaignNotes.campaign.activeBattle).toBeNull();
+  confirm.mockRestore();
+});

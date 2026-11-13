@@ -526,6 +526,8 @@ export default function CampaignManager({
   const setCampaign = (next) =>
     setCampaignNotes((current) => ({ ...current, campaign: next }));
   const setBattle = (next) => setCampaign({ ...campaign, activeBattle: next });
+  // A sequence started from a campaign game: cancelling it keeps the game.
+  const fromGame = !!battle?.campaignGame?.gameId;
   // Several draft setters can run in one event (e.g. finish a test and clear
   // its dice). Compose those edits before React renders the next snapshot.
   const latestPost = useRef(post);
@@ -1361,13 +1363,15 @@ export default function CampaignManager({
               onClick={() => {
                 if (
                   window.confirm(
-                    "Anulować całą bieżącą potyczkę i jej rozliczenie?",
+                    fromGame
+                      ? "Przerwać to rozliczenie? Gra w kampanii i jej wynik zostają bez zmian, a sekwencję zaczniesz od nowa przyciskiem na ekranie gry."
+                      : "Anulować całą bieżącą potyczkę i jej rozliczenie?",
                   )
                 )
                   setBattle(null);
               }}
             >
-              Anuluj potyczkę
+              {fromGame ? "Anuluj sekwencję" : "Anuluj potyczkę"}
             </button>
             <div className="campaign-footer-main">
               {phase >= FIRST_OPTIONAL && phase < 10 && (
