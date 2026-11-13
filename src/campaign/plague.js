@@ -77,7 +77,9 @@ export function applyPlague(post, task, { absent = false, test = [], effect = []
     token = post.availability.find((t) => t.unitId === unit.uniqueId && !t.used) || null;
     if (token) post.availability = post.availability.filter((t) => t !== token);
   }
-  post.plague[task.key] = { result, test, effect, before, label: task.label, ...(token ? { token } : {}) };
+  // Like MARTWY on the serious injury table: the equipment goes to the stash.
+  const stored = result === "dead" ? R.storeDeadEquipment(post, unit) : [];
+  post.plague[task.key] = { result, test, effect, before, label: task.label, stored, ...(token ? { token } : {}) };
   if (result !== "absent")
     R.log(post, "injury", `Zaraza: ${task.label} ${PLAGUE_TEXT[result]}${test.length ? ` (WT K6: ${test[0]}${effect.length && result !== "passed" ? `, skutek K6: ${effect[0]}` : ""})` : ""}.`, { unitId: unit.uniqueId });
 }
@@ -90,5 +92,18 @@ export function undoPlague(post, task) {
     i === task.index ? { ...done.before } : { ...(unit.campaignModelStatus?.[i] || {}) },
   );
   if (done.token && post.availability) post.availability = [...post.availability, done.token];
+  if (done.stored?.length) R.unstoreItems(post, done.stored);
   delete post.plague[task.key];
+}
+
+// Plague deaths settled before the equipment went to the stash.
+export const plagueDeathsWithoutStash = (post) =>
+  Object.entries(post.plague || {})
+    .filter(([, d]) => d.result === "dead" && !Array.isArray(d.stored))
+    .map(([key, d]) => ({ key, label: d.label, unitId: key.split(":")[0] }));
+export function stashPlagueDeath(post, key) {
+  const d = post.plague?.[key];
+  if (!d || d.result !== "dead" || Array.isArray(d.stored)) return;
+  const unit = post.units.find((u) => u.uniqueId === key.split(":")[0]);
+  d.stored = unit ? R.storeDeadEquipment(post, unit) : [];
 }

@@ -779,6 +779,44 @@ export const stripEquipment = (unit) => {
   unit.equipmentAliasSelections = {};
   if (baseIds) unit.baseCustomEquipmentIds = [];
 };
+// A dead model's equipment goes to the stash: real items only, not natural
+// weapons, a lore of magic or the banner / musician role. Returns what was
+// stored, so a correction can take it back.
+const NOT_ITEMS = /^(broń naturalna|chorąży|sygnalista|dualizm)/i;
+export const storeDeadEquipment = (post, unit) => {
+  if (["Najemne Ostrze", "Postać Dramatu"].includes(unit.type)) return [];
+  const stored = [];
+  [
+    ...(unit.startingEquipment || []),
+    ...(unit.optionalEquipment || []),
+    ...(unit.customEquipment || []),
+  ].forEach((entry) => {
+    const name = typeof entry === "string" ? entry : entry?.name;
+    if (!name || NOT_ITEMS.test(name) || unit.equipmentList?.[name]?.[1] === 4) return;
+    const metadata = (unit.campaignEquipment || []).find(
+      (item) => normal(item.name) === normal(name),
+    );
+    storeItem(post, name, 1, {
+      ...(metadata?.catalogId ? { catalogId: metadata.catalogId } : {}),
+      basePrice: metadata?.basePrice || unit.equipmentList?.[name]?.[0] || 0,
+      ...(unit.craftedEquipment?.[name]
+        ? { crafting: clone(unit.craftedEquipment[name]) }
+        : {}),
+    });
+    stored.push(name);
+  });
+  if (stored.length)
+    log(post, "inventory", `${label(unit)}: ekwipunek poległego do skarbca (${stored.join(", ")}).`);
+  return stored;
+};
+// Taking back what storeDeadEquipment put in the stash (one of each).
+export const unstoreItems = (post, names = []) => {
+  names.forEach((name) => {
+    const item = (post.inventory || []).find((i) => normal(i.name) === normal(name) && i.quantity > 0);
+    if (item) item.quantity -= 1;
+  });
+  post.inventory = (post.inventory || []).filter((i) => i.quantity > 0);
+};
 export const applyInjury = (post, task, result, detail = {}) => {
   if (post.injuries[task.key])
     throw Error("Obrażenia tego modelu już rozstrzygnięto.");
@@ -936,28 +974,7 @@ export const applyInjury = (post, task, result, detail = {}) => {
       modelCount(unit) > 1 ? `${label(unit)} #${task.index + 1}` : label(unit),
     outOfAction: !!task.outOfAction,
   };
-  if (
-    status.dead &&
-    !["Najemne Ostrze", "Postać Dramatu"].includes(unit.type)
-  ) {
-    [
-      ...(unit.startingEquipment || []),
-      ...(unit.optionalEquipment || []),
-      ...(unit.customEquipment || []),
-    ].forEach((entry) => {
-      const name = typeof entry === "string" ? entry : entry.name;
-      const metadata = (unit.campaignEquipment || []).find(
-        (item) => normal(item.name) === normal(name),
-      );
-      storeItem(post, name, 1, {
-        ...(metadata?.catalogId ? { catalogId: metadata.catalogId } : {}),
-        basePrice: metadata?.basePrice || unit.equipmentList?.[name]?.[0] || 0,
-        ...(unit.craftedEquipment?.[name]
-          ? { crafting: clone(unit.craftedEquipment[name]) }
-          : {}),
-      });
-    });
-  }
+  if (status.dead) storeDeadEquipment(post, unit);
   log(post, "injury", `${label(unit)} #${task.index + 1}: ${result.name}`, {
     unitId: unit.uniqueId,
   });

@@ -17,7 +17,7 @@ import { addTreasurePd } from "./treasure";
 import { applyArmourDamage } from "./armourDamage";
 import MerchantCard from "./MerchantCard";
 import { merchantVisits } from "./merchant";
-import { PLAGUE_TEXT, applyPlague, failsToughness, plagueTasks, undoPlague } from "./plague";
+import { PLAGUE_TEXT, applyPlague, failsToughness, plagueDeathsWithoutStash, plagueTasks, stashPlagueDeath, undoPlague } from "./plague";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
@@ -1117,6 +1117,21 @@ export default function CampaignManager({
             </>
           ) : (
             <>
+              {phase >= 1 && phase < 11 && plagueDeathsWithoutStash(post).length > 0 && (
+                <div className="campaign-bulk" role="status">
+                  <span>
+                    Ekwipunek zmarłych na zarazę nie trafił do skarbca:{" "}
+                    {plagueDeathsWithoutStash(post).map((d) => d.label).join(", ")}.
+                  </span>
+                  <button
+                    type="button"
+                    className="button button-secondary"
+                    onClick={() => update((p) => plagueDeathsWithoutStash(p).forEach((d) => stashPlagueDeath(p, d.key)))}
+                  >
+                    Przenieś do skarbca
+                  </button>
+                </div>
+              )}
               {phase > 1 && plagueTasks(post, battle).some((t) => !post.plague?.[t.key]) && (
                 <PlagueCard battle={battle} post={post} update={update} />
               )}

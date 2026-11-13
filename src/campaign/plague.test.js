@@ -6,7 +6,7 @@ import { explorationRules } from "./company";
 
 const h = armies["Łowcy czarownic"].heroes;
 const unit = (name, extra = {}) => ({ ...createUnit(h, name), ...extra });
-const post = (units) => ({ units, journal: [], injuries: {}, plague: {} });
+const post = (units) => ({ units, journal: [], injuries: {}, plague: {}, inventory: [] });
 const battle = { events: [{ code: 61, area: "inside", name: "Zaraza" }] };
 
 test("the plague is found in a campaign game's events or the play-mode log", () => {
@@ -69,4 +69,31 @@ test("a hero killed by the plague leaves an availability pool drawn up already",
   expect(p.availability.map((t) => t.unitId)).toEqual(["b"]);
   undoPlague(p, a);
   expect(p.availability.map((t) => t.unitId).sort()).toEqual(["a", "b"]);
+});
+
+test("a hero dead of the plague leaves his equipment in the stash; undo takes it back", () => {
+  const u = unit("Łowca czarownic", { uniqueId: "l", optionalEquipment: ["Średni", "Tarcza"], battleAbsentModels: [false] });
+  const p = { ...post([u]), inventory: [] };
+  const [t] = plagueTasks(p, battle);
+  applyPlague(p, t, { test: [6], effect: [1] });
+  expect(p.inventory.map((i) => i.name).sort()).toEqual(["Miecz", "Sztylet", "Tarcza", "Średni"]);
+  undoPlague(p, t);
+  expect(p.inventory).toEqual([]);
+});
+
+test("plague deaths settled earlier can still send the equipment to the stash", () => {
+  const { plagueDeathsWithoutStash, stashPlagueDeath } = require("./plague");
+  const u = unit("Łowca czarownic", { uniqueId: "l" });
+  const p = { ...post([u]), inventory: [], plague: { "l:0": { result: "dead", label: "Łowca czarownic" } } };
+  expect(plagueDeathsWithoutStash(p)).toHaveLength(1);
+  stashPlagueDeath(p, "l:0");
+  expect(p.inventory.map((i) => i.name).sort()).toEqual(["Miecz", "Sztylet"]);
+  expect(plagueDeathsWithoutStash(p)).toHaveLength(0);
+});
+
+test("natural weapons and command roles never go to the stash", () => {
+  const dog = { uniqueId: "d", unitName: "Pies", type: "Stronnik", startingEquipment: ["Broń naturalna"], optionalEquipment: ["Chorąży"], equipmentList: {} };
+  const p = { inventory: [], journal: [] };
+  expect(R.storeDeadEquipment(p, dog)).toEqual([]);
+  expect(p.inventory).toEqual([]);
 });
