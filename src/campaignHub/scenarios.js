@@ -82,4 +82,16 @@ export const OPTIONAL_RULE_PD = {
   "NIENATURALNA OBECNOŚĆ": { pd: 1, who: "mages" },
 };
 export const PD_WHO = { heroes: "bohaterowie", mages: "magowie" };
+// Rules that add loot in the exploration phase, for each player's company.
+export const OPTIONAL_RULE_LOOT = { "USZKODZENIE PANCERZA": 1 };
+// What the app does with a rule; the rest is played at the table.
+export const OPTIONAL_RULE_APP = {
+  "MGŁA WOJNY": "+1 PD dla bohaterów dolicza się samo.",
+  "OGRANICZONE POLE WIDZENIA": "+1 PD dla bohaterów dolicza się samo.",
+  "NAGŁA ŚMIERĆ": "+1 PD dla bohaterów dolicza się samo, gdy licznik rund dojdzie do 6. Modyfikatory od 6. rundy stosujecie przy stole.",
+  "ZMIENNE WIATRY MAGII": "+1 PD dla magów dolicza się samo.",
+  "NIENATURALNA OBECNOŚĆ": "+1 PD dla magów dolicza się samo.",
+  "USZKODZENIE PANCERZA": "+1 łup w eksploracji dolicza się sam. Uszkodzone pancerze odnotujcie przy stole.",
+  "ZDARZENIA LOSOWE": "Rzut K6 przed turą i tabela zdarzeń są na ekranie gry; +1 łup za każde zdarzenie dolicza się sam.",
+};
 export const findOptionalRule = (key) => optionalRules.find((r) => r.key === key) || null;

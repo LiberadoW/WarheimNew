@@ -69,7 +69,7 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
   return (
     <div className="game-company">
       {groupRoster(list.armyList).map((group) => (
-        <section key={group.type}>
+        <section key={group.type} className="game-group">
           <h4 className="roster-group-title">{group.title}</h4>
           {group.units.map((summary) => {
             const unit = units[summary.id];
@@ -647,11 +647,11 @@ export const GameScreen = ({
                       {rows.map((r) => (
                         <tr key={r.unitId}>
                           <th scope="row">{r.label}</th>
-                          <td>{r.kills}</td>
-                          <td>{r.extra}</td>
-                          <td>{r.rules}</td>
-                          <td>{r.win}</td>
-                          <td>{r.total}</td>
+                          <td data-label="Wrogowie">{r.kills}</td>
+                          <td data-label="Dodatkowe">{r.extra}</td>
+                          <td data-label="Zasady opc.">{r.rules}</td>
+                          <td data-label="Zwycięstwo">{r.win}</td>
+                          <td data-label="Razem" className="game-pd-total">{r.total}</td>
                         </tr>
                       ))}
                     </tbody>

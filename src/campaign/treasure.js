@@ -1,5 +1,6 @@
 import table from "./scenario-treasure.json";
 import * as R from "./rules";
+import { OPTIONAL_RULE_LOOT, findOptionalRule } from "../campaignHub/scenarios";
 
 // Znaczniki kosztowności (rozdział 11). Each unit records the markers it
 // ended the skirmish with (battleTreasure); the scenario's text decides what
@@ -38,12 +39,19 @@ export const eventCount = (battle) =>
     ? battle.randomEvents
     : (battle?.log || []).filter((e) => /^Zdarzenie losowe/.test(e.text || "")).length;
 
+// Optional rules with loot (USZKODZENIE PANCERZA, s. 398): +1 for each company.
+export const ruleLoot = (battle) =>
+  (battle?.optionalRules || [])
+    .filter((key) => OPTIONAL_RULE_LOOT[key])
+    .map((key) => ({ name: findOptionalRule(key)?.name || key, loot: OPTIONAL_RULE_LOOT[key] }));
+
 export function treasureState(battle, post) {
   const rule = treasureRules(battle);
   const t = post.exploration?.treasure || {};
   const counted = markerCount(post.units);
   const countedEvents = eventCount(battle);
-  if (!rule && !counted && !countedEvents && !Number.isInteger(t.events)) return null;
+  const rules = ruleLoot(battle);
+  if (!rule && !counted && !countedEvents && !Number.isInteger(t.events) && !rules.length) return null;
   const markers = Number.isInteger(t.markers) ? t.markers : counted;
   const events = Number.isInteger(t.events) ? t.events : countedEvents;
   const out = { rule, counted, markers, countedEvents, events, loot: 0, gold: 0, items: [], manual: [], missing: "", lines: [] };
@@ -54,6 +62,10 @@ export function treasureState(battle, post) {
     out.loot += events;
     out.lines.push(`Zdarzenia losowe (${events}): +${events} ${lootWord(events)}`);
   }
+  rules.forEach((r) => {
+    out.loot += r.loot;
+    out.lines.push(`${r.name}: +${r.loot} ${lootWord(r.loot)}`);
+  });
   if (!rule && !markers && !Number.isInteger(t.manualLoot)) return out;
   if (!rule) {
     // A custom scenario: the player reads their own rules.

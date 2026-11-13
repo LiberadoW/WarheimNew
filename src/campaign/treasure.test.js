@@ -105,3 +105,10 @@ test("every random event gives the company +1 loot, also without treasure marker
   shared.post.exploration = { dice: [], encounter: {}, treasure: { events: 0 } };
   expect(treasureState(shared, shared.post).loot).toBe(1);
 });
+
+test("Uszkodzenie pancerza adds one loot for the company", () => {
+  const s = treasureState({ optionalRules: ["USZKODZENIE PANCERZA", "MGŁA WOJNY"] }, { units: [] });
+  expect(s.loot).toBe(1);
+  expect(s.lines).toEqual(["Uszkodzenie pancerza: +1 łup"]);
+  expect(treasureState({ optionalRules: ["MGŁA WOJNY"] }, { units: [] })).toBeNull();
+});
