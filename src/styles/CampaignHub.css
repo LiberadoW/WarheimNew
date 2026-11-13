@@ -1116,3 +1116,11 @@ details.hub-round > summary {
   border: 0;
   background: none;
 }
+
+.admin-folder > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.admin-folder[open] > summary {
+  margin-bottom: 8px;
+}

@@ -220,6 +220,28 @@ describe("game screen", () => {
     expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather", text: expect.stringMatching(/Zmiana pogody/) }));
   });
 
+  test("without the one-event limit the checks go on after an event", () => {
+    service.watchCampaign.mockImplementation((id, cb) => { cb({ ...campaign, settings: { randomEventLimit: false } }); return () => {}; });
+    service.watchGame.mockImplementation((id, gid, cb) => { cb({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } }); return () => {}; });
+    service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
+    render(
+      <AuthContext.Provider value={{ currentUser: { user: { uid: "a" } } }}>
+        <MemoryRouter initialEntries={["/campaigns/c1/games/g1"]}>
+          <Routes><Route path="/campaigns/:id/games/:gameId" element={<GamePage setUnitList={jest.fn()} setArmy={jest.fn()} setArmyName={jest.fn()} setCampaignNotes={jest.fn()} />} /></Routes>
+        </MemoryRouter>
+      </AuthContext.Provider>,
+    );
+    expect(screen.getByLabelText("K6 przed turą")).not.toBeNull();
+  });
+
+  test("the hand-off counts the game's random events", () => {
+    const { battle } = toBattle({
+      savedList: { armyList: [] }, play: { log: [{ type: "event" }, { type: "note" }] }, owner: "a",
+      game: { id: "g", players: ["a", "b"] }, opponentName: "B", opponentList: { armyList: [] }, campaignName: "K",
+    });
+    expect(battle.randomEvents).toBe(1);
+  });
+
   test("after one event no further checks are offered", () => {
     setup({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } });
     expect(screen.getByText(/wystąpiło już zdarzenie losowe/)).not.toBeNull();

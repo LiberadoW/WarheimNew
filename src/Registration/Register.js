@@ -97,6 +97,7 @@ const Register = () => {
       await setDoc(doc(db, "lists", userLogin.user.uid), {
         lists: [],
         armyNames: [],
+        ownerName: user,
       });
       setSuccess(true);
       //clear state and controlled inputs

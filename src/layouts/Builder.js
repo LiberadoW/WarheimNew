@@ -324,6 +324,8 @@ const Builder = ({
       await updateDoc(doc(db, "lists", currentUser.user.uid), {
         lists: arrayOfSavedLists,
         armyNames: arrayArmyNames,
+        // Shown to the admin in "Wszystkie rozpiski".
+        ownerName: currentUser.user.displayName || "",
       });
       alert("Armia została zapisana");
       return armyObj;

@@ -77,7 +77,16 @@ export default function PlayPanel({ battle, setBattle, addLog, weatherHints = []
         <summary>Zdarzenia losowe</summary>
         {events && (
           <Suspense fallback={<p className="campaign-source">Wczytywanie tabel…</p>}>
+            <label className="campaign-check event-limit">
+              <input
+                type="checkbox"
+                checked={battle.eventLimit !== false}
+                onChange={(e) => setBattle({ ...battle, eventLimit: e.target.checked })}
+              />
+              Limit: jedno zdarzenie losowe na grę
+            </label>
             <RandomEventRoller
+              limit={battle.eventLimit !== false}
               fixedArea={battle.scenarioRecord?.area || ""}
               occurred={(battle.log || []).some((e) => /^Zdarzenie losowe/.test(e.text))}
               weather={battle.weather}

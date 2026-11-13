@@ -256,8 +256,9 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
 };
 
 // Zdarzenia losowe on the shared game screen: saved in the game's log.
-const RandomEvents = ({ game, round, canEdit, run, ids, hints }) => (
+const RandomEvents = ({ game, round, canEdit, run, ids, hints, limit }) => (
   <RandomEventRoller
+    limit={limit}
     fixedArea={game.scenario?.area || ""}
     canSave={canEdit}
     occurred={(game.play?.log || []).some((e) => e.type === "event")}
@@ -535,6 +536,7 @@ export const GameScreen = ({
 
       {(game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
         <RandomEvents
+          limit={campaign.settings?.randomEventLimit !== false}
           game={game}
           round={round}
           canEdit={canEdit}

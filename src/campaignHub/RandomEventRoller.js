@@ -15,12 +15,11 @@ const CHECK = {
   1: "Zdarzenie losowe! Rzuć K66 na tabelę poniżej.",
   6: "Zmiana pogody: natychmiast rzuć na pogodę.",
 };
-export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, weather, onWeather, weatherHints = [] }) {
+export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, limit = true, weather, onWeather, weatherHints = [] }) {
   const [area, setArea] = useState(fixedArea);
   const [check, setCheck] = useState(null);
-  const [again, setAgain] = useState(false);
   const rollCheck = (v) => setCheck(v === "" || v == null ? null : Math.max(1, Math.min(6, Number(v))));
-  const showTable = check === 1 || (occurred && again) || !onWeather;
+  const showTable = check === 1 || !onWeather;
   const [dice, setDice] = useState([null, null]);
   // The rolled result can also be picked straight from the table.
   const [picked, setPicked] = useState("");
@@ -44,16 +43,17 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
   return (
     <section className="hub-card" aria-label="Zdarzenia losowe">
       <h3>Zdarzenia losowe</h3>
-      {occurred && !again ? (
+      {occurred && limit ? (
         <p className="hub-notice">
-          W tej grze wystąpiło już zdarzenie losowe: kolejnych nie losuje się, chyba że gracze ustalili inaczej.{" "}
-          <button type="button" className="button button-ghost button-small" onClick={() => setAgain(true)}>
-            Graj dalej ze zdarzeniami
-          </button>
+          W tej grze wystąpiło już zdarzenie losowe. Przy limicie jednego zdarzenia nie wykonuje się dalszych
+          rzutów K6, więc pogoda też już się nie zmieni.
         </p>
       ) : (
         <div className="event-check">
-          <p className="hub-muted">Przed każdą swoją turą gracz rzuca K6: 1 = zdarzenie losowe, 6 = rzut na pogodę.</p>
+          <p className="hub-muted">
+            Przed każdą swoją turą gracz rzuca K6: 1 = zdarzenie losowe, 6 = rzut na pogodę.
+            {limit ? " Po pierwszym zdarzeniu rzuty się kończą." : " Bez limitu zdarzeń."}
+          </p>
           <div className="hub-dice-row">
             <label className="hub-field hub-die">
               K6 przed turą

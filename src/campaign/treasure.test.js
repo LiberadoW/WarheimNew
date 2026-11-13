@@ -90,3 +90,18 @@ test("the play panel's round is the skirmish's end round and notes go to the log
   expect(latest.log).toEqual([{ id: "0", round: 3, text: "Szarża na most" }]);
   expect(screen.getByText("Szarża na most")).not.toBeNull();
 });
+
+test("every random event gives the company +1 loot, also without treasure markers", () => {
+  const { eventCount } = require("./treasure");
+  const battle = start(null, [hero()]);
+  battle.log = [{ id: "1", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }, { id: "2", round: 3, text: "Notatka" }];
+  expect(eventCount(battle)).toBe(1);
+  expect(treasureState(battle, battle.post)).toMatchObject({ events: 1, loot: 1, missing: "" });
+  // From a shared game the count arrives with the hand-off.
+  const shared = start(RUINY, [hero({ battleTreasure: 1 })]);
+  shared.randomEvents = 1;
+  expect(treasureState(shared, shared.post).loot).toBe(2);
+  // The player can correct it.
+  shared.post.exploration = { dice: [], encounter: {}, treasure: { events: 0 } };
+  expect(treasureState(shared, shared.post).loot).toBe(1);
+});

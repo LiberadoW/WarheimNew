@@ -17,9 +17,16 @@ service cloud.firestore {
       return signedIn() && request.auth.uid in campaign(campaignId).members;
     }
 
+    // The app's administrator may read every saved list and campaign
+    // (read only; "Rozpiski graczy" in the app).
+    function isAdmin() {
+      return signedIn() && request.auth.token.email == "wojtek.szemik@gmail.com";
+    }
+
     // "Moje rozpiski": one document per user, private to that user.
     match /lists/{uid} {
       allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
     }
 
     // A code only reveals which campaign to join; codes cannot be listed.
@@ -50,7 +57,7 @@ service cloud.firestore {
             == resource.data.members.toSet().difference([request.auth.uid].toSet());
       }
 
-      allow read: if signedIn() && request.auth.uid in resource.data.members;
+      allow read: if (signedIn() && request.auth.uid in resource.data.members) || isAdmin();
       allow create: if signedIn()
         && request.resource.data.ownerId == request.auth.uid
         && request.resource.data.members == [request.auth.uid];
@@ -64,7 +71,7 @@ service cloud.firestore {
 
       // Each member uploads only their own roster; every member can read all.
       match /lists/{uid} {
-        allow read: if isMember(campaignId);
+        allow read: if isMember(campaignId) || isAdmin();
         allow create, update: if isMember(campaignId) && request.auth.uid == uid;
         allow delete: if signedIn()
           && (request.auth.uid == uid || campaign(campaignId).ownerId == request.auth.uid);

@@ -27,7 +27,7 @@ export default function TreasureCard({ battle, post, update }) {
   const rule = s.rule;
   return (
     <section className="campaign-card" aria-label="Kosztowności ze scenariusza">
-      <h3>Kosztowności ze scenariusza</h3>
+      <h3>Kosztowności i zdarzenia</h3>
       <p className="campaign-muted">
         {rule ? `${rule.name} (s. ${rule.page})` : "Scenariusz własny: sprawdź jego opis."}
         {rule?.pdPerMarker ? " · bohaterowie dostali +1 PD za każdy swój znacznik." : ""}
@@ -45,6 +45,16 @@ export default function TreasureCard({ battle, post, update }) {
       {s.markers !== s.counted && (
         <p className="campaign-source">Na ekranie potyczki zapisano {s.counted}.</p>
       )}
+      <label className="campaign-inline-field">
+        Zdarzenia losowe w potyczce (+1 łup każde, s. 398)
+        <NumberInput
+          type="number"
+          min="0"
+          disabled={locked}
+          value={s.events}
+          onChange={(e) => set({ events: Math.max(0, Math.floor(Number(e.target.value))) })}
+        />
+      </label>
       {!rule && (
         <label className="campaign-inline-field">
           Łupy z kosztowności według scenariusza

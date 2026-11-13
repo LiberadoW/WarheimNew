@@ -29,6 +29,20 @@ const CampaignSettings = ({ campaign, isOrganizer, act }) => {
       <p className="hub-muted">
         Domyślne zasady dla nowych gier (rozdział 12). Gracze danej gry mogą je zmienić przed potyczką.
       </p>
+      <label className="hub-field hub-field-inline">
+        <input
+          type="checkbox"
+          disabled={!isOrganizer}
+          checked={campaign.settings?.randomEventLimit !== false}
+          onChange={(e) =>
+            act(
+              () => updateCampaignSettings(campaign.id, { ...(campaign.settings || {}), randomEventLimit: e.target.checked }),
+              e.target.checked ? "Limit: jedno zdarzenie losowe na grę." : "Bez limitu zdarzeń losowych.",
+            )
+          }
+        />
+        Zdarzenia losowe: najwyżej jedno na grę (s. 398)
+      </label>
       {editing ? (
         <>
           <OptionalRulesPicker value={rules} onChange={setRules} />

@@ -30,16 +30,31 @@ export function addTreasurePd(post, battle) {
 
 // What the markers and the scenario's reward add in the exploration phase,
 // and which dice or answers are still missing.
+// ZDARZENIA LOSOWE (s. 398): +1 loot in the exploration for every random
+// event of the skirmish, for each player's company. Counted from the
+// shared game's log (battle.randomEvents) or the play-mode battle log.
+export const eventCount = (battle) =>
+  Number.isInteger(battle?.randomEvents)
+    ? battle.randomEvents
+    : (battle?.log || []).filter((e) => /^Zdarzenie losowe/.test(e.text || "")).length;
+
 export function treasureState(battle, post) {
   const rule = treasureRules(battle);
   const t = post.exploration?.treasure || {};
   const counted = markerCount(post.units);
-  if (!rule && !counted) return null;
+  const countedEvents = eventCount(battle);
+  if (!rule && !counted && !countedEvents && !Number.isInteger(t.events)) return null;
   const markers = Number.isInteger(t.markers) ? t.markers : counted;
-  const out = { rule, counted, markers, loot: 0, gold: 0, items: [], manual: [], missing: "", lines: [] };
+  const events = Number.isInteger(t.events) ? t.events : countedEvents;
+  const out = { rule, counted, markers, countedEvents, events, loot: 0, gold: 0, items: [], manual: [], missing: "", lines: [] };
   const need = (text) => {
     if (!out.missing) out.missing = text;
   };
+  if (events) {
+    out.loot += events;
+    out.lines.push(`Zdarzenia losowe (${events}): +${events} ${lootWord(events)}`);
+  }
+  if (!rule && !markers && !Number.isInteger(t.manualLoot)) return out;
   if (!rule) {
     // A custom scenario: the player reads their own rules.
     const loot = Number.isInteger(t.manualLoot) ? t.manualLoot : markers;

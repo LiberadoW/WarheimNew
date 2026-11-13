@@ -32,6 +32,7 @@ import "../index.css";
 const CampaignsPage = lazy(() => import("../campaignHub/CampaignsPage"));
 const CampaignPage = lazy(() => import("../campaignHub/CampaignPage"));
 const GamePage = lazy(() => import("../campaignHub/GamePage"));
+const AdminPage = lazy(() => import("../admin/AdminPage"));
 const pageFallback = <div className="hub-page">Wczytywanie…</div>;
 
 export const EditArmyContext = createContext();
@@ -358,6 +359,16 @@ const App = () => {
                       setArmyName={setArmyName}
                       setCampaignNotes={setCampaignNotes}
                     />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <RequireAuth>
+                    <Suspense fallback={pageFallback}>
+                      <AdminPage />
+                    </Suspense>
                   </RequireAuth>
                 }
               />
