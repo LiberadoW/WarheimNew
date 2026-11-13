@@ -26,7 +26,7 @@ export function RoundCounter({ battle, setBattle }) {
 
 // Live record of a skirmish played without a shared campaign: the band's
 // log (taps on the tracker add to it) and random events.
-export default function PlayPanel({ battle, setBattle, addLog }) {
+export default function PlayPanel({ battle, setBattle, addLog, weatherHints = [] }) {
   const [note, setNote] = useState("");
   const [events, setEvents] = useState(false);
   const log = battle.log || [];
@@ -79,6 +79,20 @@ export default function PlayPanel({ battle, setBattle, addLog }) {
           <Suspense fallback={<p className="campaign-source">Wczytywanie tabel…</p>}>
             <RandomEventRoller
               fixedArea={battle.scenarioRecord?.area || ""}
+              occurred={(battle.log || []).some((e) => /^Zdarzenie losowe/.test(e.text))}
+              weather={battle.weather}
+              weatherHints={weatherHints}
+              onWeather={(weather) => {
+                setBattle({
+                  ...battle,
+                  weather,
+                  log: [
+                    ...(battle.log || []),
+                    { id: `${Date.now()}-w`, round: battle.playRound || 1, text: `Zmiana pogody (K6: 6): ${weather.name} (${weather.total})` },
+                  ],
+                });
+                return true;
+              }}
               onSave={(event) => {
                 addLog(`Zdarzenie losowe (${event.code}): ${event.name}`);
                 return true;

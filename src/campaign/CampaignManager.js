@@ -825,7 +825,12 @@ export default function CampaignManager({
                   }
                 />
                 {!fromCampaign && (
-                  <PlayPanel battle={battle} setBattle={setBattle} addLog={addLog} />
+                  <PlayPanel
+                    battle={battle}
+                    setBattle={setBattle}
+                    addLog={addLog}
+                    weatherHints={weatherHints(unitList, campaignNotes.specialRules)}
+                  />
                 )}
               </Collapsible>
               <Collapsible collapsed={fromCampaign} title="Popraw dane potyczki">

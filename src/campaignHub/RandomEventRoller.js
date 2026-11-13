@@ -2,13 +2,25 @@ import React, { useState } from "react";
 import { AREAS, k66 } from "./scenarios";
 import { randomEventFor } from "./gamePlay";
 import randomEvents from "./data/randomEvents.json";
+import WeatherRoller from "./WeatherRoller";
 import "../styles/CampaignHub.css";
 
 // Zdarzenia losowe: the table follows the scenario's area; the player rolls
 // the K66 (typed or in the app) and gets the event's text. onSave records it
 // (the shared game log or the play-mode battle log) and resolves to true.
-export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave }) {
+// The check before each player's turn (s. 398): K6, 1 = an event (then the
+// K66), 6 = roll the weather again at once. Only one event per game unless
+// the players agreed otherwise (`occurred` stops the check).
+const CHECK = {
+  1: "Zdarzenie losowe! Rzuć K66 na tabelę poniżej.",
+  6: "Zmiana pogody: natychmiast rzuć na pogodę.",
+};
+export default function RandomEventRoller({ fixedArea = "", canSave = true, onSave, occurred = false, weather, onWeather, weatherHints = [] }) {
   const [area, setArea] = useState(fixedArea);
+  const [check, setCheck] = useState(null);
+  const [again, setAgain] = useState(false);
+  const rollCheck = (v) => setCheck(v === "" || v == null ? null : Math.max(1, Math.min(6, Number(v))));
+  const showTable = check === 1 || (occurred && again) || !onWeather;
   const [dice, setDice] = useState([null, null]);
   // The rolled result can also be picked straight from the table.
   const [picked, setPicked] = useState("");
@@ -32,7 +44,44 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
   return (
     <section className="hub-card" aria-label="Zdarzenia losowe">
       <h3>Zdarzenia losowe</h3>
-      {!fixedArea && (
+      {occurred && !again ? (
+        <p className="hub-notice">
+          W tej grze wystąpiło już zdarzenie losowe: kolejnych nie losuje się, chyba że gracze ustalili inaczej.{" "}
+          <button type="button" className="button button-ghost button-small" onClick={() => setAgain(true)}>
+            Graj dalej ze zdarzeniami
+          </button>
+        </p>
+      ) : (
+        <div className="event-check">
+          <p className="hub-muted">Przed każdą swoją turą gracz rzuca K6: 1 = zdarzenie losowe, 6 = rzut na pogodę.</p>
+          <div className="hub-dice-row">
+            <label className="hub-field hub-die">
+              K6 przed turą
+              <input type="number" min="1" max="6" inputMode="numeric" value={check ?? ""} onChange={(e) => rollCheck(e.target.value)} />
+            </label>
+            <button type="button" className="button button-secondary" onClick={() => rollCheck(1 + Math.floor(Math.random() * 6))}>
+              <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć K6
+            </button>
+          </div>
+          {check != null && (
+            <p className={check === 1 || check === 6 ? "hub-notice" : "hub-muted"} role="status">
+              K6: {check} · {CHECK[check] || "Nic się nie dzieje."}
+            </p>
+          )}
+          {check === 6 && onWeather && (
+            <WeatherRoller
+              key={`w-${check}`}
+              title="Nowa pogoda"
+              value={weather}
+              startEditing
+              hints={weatherHints}
+              canEdit={canSave}
+              onSave={(w) => Promise.resolve(onWeather(w)).then((ok) => { if (ok !== false) setCheck(null); return ok; })}
+            />
+          )}
+        </div>
+      )}
+      {!fixedArea && showTable && (
         <label className="hub-field">
           Tabela
           <select
@@ -48,8 +97,8 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
           </select>
         </label>
       )}
-      {area && <p className="hub-muted">Tabela: {AREAS[area]} (s. 399–404). Rzut K6 na wystąpienie zdarzenia wykonujesz sam.</p>}
-      {area && (
+      {area && showTable && <p className="hub-muted">Tabela: {AREAS[area]} (s. 399–404). Każde zdarzenie daje kompanii +1 łup w eksploracji.</p>}
+      {area && showTable && (
         <label className="hub-field">
           Wynik z tabeli
           <select
@@ -69,7 +118,7 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
           </select>
         </label>
       )}
-      <div className="hub-dice-row">
+      {showTable && <div className="hub-dice-row">
         <label className="hub-field hub-die">
           K66 dziesiątki
           <input type="number" min="1" max="6" inputMode="numeric" value={dice[0] ?? ""} onChange={(e) => setDie(0, e.target.value)} />
@@ -88,8 +137,8 @@ export default function RandomEventRoller({ fixedArea = "", canSave = true, onSa
         >
           <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć
         </button>
-      </div>
-      {event && (
+      </div>}
+      {showTable && event && (
         <div className="game-event">
           <h4>
             ({event.code}

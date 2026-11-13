@@ -176,6 +176,9 @@ describe("game screen", () => {
 
   test("a typed K66 shows the random event from the scenario's table", () => {
     setup(baseGame);
+    // The table opens after a 1 on the K6 before the turn.
+    expect(screen.queryByText(/Tabela: Wewnątrz murów/)).toBeNull();
+    fireEvent.change(screen.getByLabelText("K6 przed turą"), { target: { value: "1" } });
     expect(screen.getByText(/Tabela: Wewnątrz murów/)).not.toBeNull();
     fireEvent.change(screen.getAllByLabelText("K66 dziesiątki")[0], { target: { value: "1" } });
     fireEvent.change(screen.getAllByLabelText("K66 jedności")[0], { target: { value: "1" } });
@@ -187,6 +190,7 @@ describe("game screen", () => {
   test("the rolled random event can be picked straight from the table", () => {
     setup(baseGame);
     const events = within(screen.getByRole("region", { name: "Zdarzenia losowe" }));
+    fireEvent.change(events.getByLabelText("K6 przed turą"), { target: { value: "1" } });
     fireEvent.change(events.getByLabelText("Wynik z tabeli"), { target: { value: "11" } });
     expect(screen.getByText("(11) Ochroniarz")).not.toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Zapisz w przebiegu" }));
@@ -202,6 +206,24 @@ describe("game screen", () => {
     fireEvent.click(weather.getByRole("button", { name: "Ustaw pogodę: Mgła" }));
     await waitFor(() => expect(update).toHaveBeenCalledWith("c1", "g1", { weather: expect.objectContaining({ name: "Mgła", total: 15 }) }));
     expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather" }));
+  });
+
+  test("a 6 before the turn rolls the weather again and saves it", async () => {
+    setup(baseGame);
+    const events = within(screen.getByRole("region", { name: "Zdarzenia losowe" }));
+    fireEvent.change(events.getByLabelText("K6 przed turą"), { target: { value: "6" } });
+    expect(events.getByText(/Zmiana pogody/)).not.toBeNull();
+    const fresh = within(screen.getByRole("region", { name: "Nowa pogoda" }));
+    fireEvent.change(fresh.getByLabelText("Wynik z tabeli"), { target: { value: "18" } });
+    fireEvent.click(fresh.getByRole("button", { name: "Ustaw pogodę: Wichura" }));
+    await waitFor(() => expect(service.updateGame).toHaveBeenCalledWith("c1", "g1", { weather: expect.objectContaining({ name: "Wichura" }) }));
+    expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather", text: expect.stringMatching(/Zmiana pogody/) }));
+  });
+
+  test("after one event no further checks are offered", () => {
+    setup({ ...baseGame, play: { round: 3, log: [{ id: "e", type: "event", round: 2, text: "Zdarzenie losowe (11): Ochroniarz" }] } });
+    expect(screen.getByText(/wystąpiło już zdarzenie losowe/)).not.toBeNull();
+    expect(screen.queryByLabelText("K6 przed turą")).toBeNull();
   });
 
   test("units show their profile, gear with weapon rules and special rules", () => {

@@ -26,8 +26,8 @@ export const WeatherText = ({ entry }) =>
 // Weather before the skirmish: rolled in the app, typed, or picked from the
 // table, with modifiers from company rules (Meteorolog, Władcy pogody).
 // `value` is the saved weather; onSave receives { total, name, dice, modifier }.
-export default function WeatherRoller({ value, canEdit = true, onSave, hints = [] }) {
-  const [editing, setEditing] = useState(!value);
+export default function WeatherRoller({ value, canEdit = true, onSave, hints = [], startEditing = false, title = "Pogoda" }) {
+  const [editing, setEditing] = useState(!value || startEditing);
   const [dice, setDice] = useState([null, null, null]);
   const [modifier, setModifier] = useState(0);
   const [picked, setPicked] = useState("");
@@ -41,9 +41,9 @@ export default function WeatherRoller({ value, canEdit = true, onSave, hints = [
   };
 
   return (
-    <section className="hub-card" aria-label="Pogoda">
+    <section className="hub-card" aria-label={title}>
       <div className="hub-card-head">
-        <h3>Pogoda{saved ? `: ${saved.name}` : ""}</h3>
+        <h3>{title}{saved ? `: ${saved.name}` : ""}</h3>
         {saved && canEdit && !editing && (
           <button type="button" className="button button-secondary button-small" onClick={() => setEditing(true)}>
             Zmień
@@ -62,7 +62,11 @@ export default function WeatherRoller({ value, canEdit = true, onSave, hints = [
         <p className="hub-muted">Pogoda nie została jeszcze ustalona.</p>
       ) : (
         <>
-          <p className="hub-muted">Rzut 3K6 przed potyczką (s. 337). Pogoda nie zmienia się do końca gry, chyba że scenariusz mówi inaczej.</p>
+          <p className="hub-muted">
+            {startEditing
+              ? "Rzut 3K6 na nową pogodę (s. 337)."
+              : "Rzut 3K6 przed potyczką (s. 337). Pogoda nie zmienia się do końca gry, chyba że scenariusz albo zdarzenie mówi inaczej."}
+          </p>
           <label className="hub-field">
             Wynik z tabeli
             <select

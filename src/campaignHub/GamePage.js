@@ -256,10 +256,19 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
 };
 
 // Zdarzenia losowe on the shared game screen: saved in the game's log.
-const RandomEvents = ({ game, round, canEdit, run, ids }) => (
+const RandomEvents = ({ game, round, canEdit, run, ids, hints }) => (
   <RandomEventRoller
     fixedArea={game.scenario?.area || ""}
     canSave={canEdit}
+    occurred={(game.play?.log || []).some((e) => e.type === "event")}
+    weather={game.weather}
+    weatherHints={hints}
+    onWeather={(weather) =>
+      run(async () => {
+        await updateGame(ids.c, ids.g, { weather });
+        await addLogEntry(ids.c, ids.g, { type: "weather", round, text: `Zmiana pogody (K6: 6): ${weather.name} (${weather.total})` });
+      })
+    }
     onSave={(event) =>
       run(() =>
         addLogEntry(ids.c, ids.g, {
@@ -525,7 +534,17 @@ export const GameScreen = ({
       )}
 
       {(game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
-        <RandomEvents game={game} round={round} canEdit={canEdit} run={run} ids={ids} />
+        <RandomEvents
+          game={game}
+          round={round}
+          canEdit={canEdit}
+          run={run}
+          ids={ids}
+          hints={weatherHints(
+            sides.find((s) => s.owner === user.uid)?.list?.armyList,
+            sides.find((s) => s.owner === user.uid)?.list?.campaignNotes?.specialRules,
+          )}
+        />
       )}
 
       <div className="game-switch hub-segmented" role="tablist" aria-label="Kompania">
