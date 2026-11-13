@@ -49,11 +49,17 @@ export const summarizeUnit = (unit) => {
   };
 };
 
+// The company's leader (DOWÓDCA) heads the list; the rest keep their order.
+const isLeader = (u) => (u?.rules || []).some((r) => /^dowódca\b/i.test(String(r).trim()));
 export const groupRoster = (armyList = []) =>
   TYPE_ORDER.map((type) => ({
     type,
     title: TYPE_GROUPS[type],
-    units: armyList.filter((u) => u?.type === type).map(summarizeUnit),
+    units: armyList
+      .filter((u) => u?.type === type)
+      .map((u, i) => ({ u, i }))
+      .sort((a, b) => isLeader(b.u) - isLeader(a.u) || a.i - b.i)
+      .map(({ u }) => summarizeUnit(u)),
   })).filter((group) => group.units.length > 0);
 
 export const countModels = (armyList = []) =>
