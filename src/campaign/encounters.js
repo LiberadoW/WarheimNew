@@ -269,6 +269,7 @@ export function encounterPlan(event, answers = {}, post, army) {
           campaignModelLimit(army, post) &&
         livingCount(u) > 0 &&
         livingCount(u) < Math.min(u.number || 5, 5) &&
+        R.joiningRole(u) !== "full" &&
         !["Wielkolud", "Potwór", "Kawalerzysta", "Machina wojenna"].some((r) =>
           R.hasRule(u, r),
         ),
@@ -282,7 +283,10 @@ export function encounterPlan(event, answers = {}, post, army) {
       { value: "leave", label: "Nie przyjmuj rekruta" },
       ...groups.map((u) => ({
         value: "group:" + u.uniqueId,
-        label: "Do grupy: " + R.label(u),
+        label:
+          "Do grupy: " +
+          R.label(u) +
+          (R.joiningRole(u) ? ` (jako ${R.joiningRole(u).toLowerCase()}, +${R.COMMAND_COST} zk)` : ""),
       })),
       ...(allowMercenary
         ? mercs.map((n) => ({ value: "merc:" + n, label: n }))
@@ -302,7 +306,10 @@ export function encounterPlan(event, answers = {}, post, army) {
       const cost = [
         ...(u.startingEquipment || []),
         ...(u.optionalEquipment || []),
-      ].reduce((n, name) => n + (u.equipmentList?.[name]?.[0] || 0), 0);
+      ].reduce((n, name) => n + (u.equipmentList?.[name]?.[0] || 0), 0) +
+        // Joining a banner bearer's group the recruit becomes his musician
+        // (or the other way round): +20 zk.
+        (R.joiningRole(u) ? R.COMMAND_COST : 0);
       if (post.treasury < cost)
         throw Error("Za mało złota na wyposażenie rekruta.");
       amount("gold", -cost);

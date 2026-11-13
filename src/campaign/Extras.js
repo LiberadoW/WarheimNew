@@ -6,7 +6,7 @@ import { campaignModelLimit } from "./company";
 import { rosterModels } from "./recruiting";
 import { companyLevel } from "./company";
 import DiceInput from "./DiceInput";
-import { modelCount, hasRule, log, validDice, sum, label } from "./rules";
+import { modelCount, hasRule, log, validDice, sum, label, joiningRole, addGroupModel, COMMAND_COST } from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import { recruitTaxes } from "./trading";
 
@@ -137,12 +137,17 @@ export function ExperiencedRecruits({ post, update, army }) {
     [taxRolls, setTaxRolls] = useRollDraft(post, update, `join-tax:${id}`, {}),
     taxOk = taxes.every((t) => validDice(taxRolls[t.key] || [], t.dice)),
     tax = taxOk ? taxes.reduce((n, t) => n + sum(taxRolls[t.key]), 0) : 0,
-    cost = (Number(unit?.cost) || 0) + exp * 2 + tax;
+    // CHORĄŻY & SYGNALISTA (s. 62): the recruit takes the other role, +20 zk.
+    role = unit ? joiningRole(unit) : null,
+    roleCost = role && role !== "full" ? COMMAND_COST : 0,
+    cost = (Number(unit?.cost) || 0) + exp * 2 + roleCost + tax;
   const groupLimit = Math.min(5, unit?.number || 5);
   // The reason the button is off, so the player is never left guessing.
   const blocker = !unit
     ? ""
-    : !post.recruitBudgetLocked
+    : role === "full"
+      ? "Grupa chorążego i sygnalisty jest pełna: dołączyć może tylko drugi z nich."
+      : !post.recruitBudgetLocked
       ? "Najpierw rzuć i zatwierdź pulę PD rekrutów."
       : !taxOk
         ? "Rzuć na podatek za ekwipunek rekruta."
@@ -185,8 +190,16 @@ export function ExperiencedRecruits({ post, update, army }) {
               ))}
             </div>
           )}
+          {roleCost > 0 && (
+            <p className="campaign-notice">
+              W grupie jest {role === "Sygnalista" ? "chorąży" : "sygnalista"}: rekrut dołącza jako{" "}
+              <strong>{role.toLowerCase()}</strong> (+{COMMAND_COST} zk). Do tej grupy nie może dołączyć zwykły
+              stronnik (s. 62).
+            </p>
+          )}
           <p>
-            Pełny ekwipunek i dopłata za PD: {(Number(unit.cost) || 0) + exp * 2} zk
+            Pełny ekwipunek i dopłata za PD{roleCost ? ` oraz awans na ${role.toLowerCase()}` : ""}:{" "}
+            {(Number(unit.cost) || 0) + exp * 2 + roleCost} zk
             {taxes.length > 0 && (taxOk ? ` + podatek ${tax} zk = ${cost} zk` : " + podatek (rzuć powyżej)")}.
           </p>
           <button
@@ -197,17 +210,11 @@ export function ExperiencedRecruits({ post, update, army }) {
                 const u = p.units.find((x) => x.uniqueId === id);
                 p.treasury -= cost;
                 p.recruitBudget -= exp;
-                u.selectedNumber = modelCount(u) + 1;
-                u.totalCost = u.cost * u.selectedNumber;
-                u.campaignModelStatus = [
-                  ...(u.campaignModelStatus ||
-                    Array.from({ length: u.selectedNumber - 1 }, () => ({}))),
-                  {},
-                ];
+                const joined = addGroupModel(u);
                 log(
                   p,
                   "recruitment",
-                  `Doświadczony ${label(u)}: ${cost} zk${tax ? ` (w tym podatek ${tax} zk: ${taxes.map((t) => `${t.name} ${(taxRolls[t.key] || []).join("+")}`).join(", ")})` : ""}, ${exp} PD puli.`,
+                  `Doświadczony ${label(u)}${joined ? ` (dołącza jako ${joined.toLowerCase()})` : ""}: ${cost} zk${tax ? ` (w tym podatek ${tax} zk: ${taxes.map((t) => `${t.name} ${(taxRolls[t.key] || []).join("+")}`).join(", ")})` : ""}, ${exp} PD puli.`,
                 );
                 p.rollDrafts = { ...p.rollDrafts, [`join-tax:${id}`]: {} };
               })

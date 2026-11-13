@@ -962,13 +962,42 @@ export const applyInjury = (post, task, result, detail = {}) => {
     unitId: unit.uniqueId,
   });
 };
+// CHORĄŻY & SYGNALISTA (s. 62): the banner bearer forms his own group, which
+// only the musician may join, and the other way round; each costs +20 zk.
+export const COMMAND_ROLES = ["Chorąży", "Sygnalista"];
+export const commandRoles = (u) => (u.optionalEquipment || []).filter((n) => COMMAND_ROLES.includes(n));
+// The role a model joining this group takes: null for an ordinary group,
+// "full" when both roles are there already.
+export const joiningRole = (u) => {
+  const roles = commandRoles(u);
+  if (!roles.length) return null;
+  if (roles.length >= 2) return "full";
+  return roles[0] === "Chorąży" ? "Sygnalista" : "Chorąży";
+};
+export const COMMAND_COST = 20;
+export const groupTotalCost = (u, n = modelCount(u)) =>
+  (Number(u.cost) || 0) * n + COMMAND_COST * Math.min(commandRoles(u).length, n);
+// A model joins a group: the role it takes in a command group is recorded.
+export const addGroupModel = (u) => {
+  const role = joiningRole(u);
+  if (role === "full") throw Error("Grupa chorążego i sygnalisty jest pełna.");
+  if (role) u.optionalEquipment = [...(u.optionalEquipment || []), role];
+  u.selectedNumber = modelCount(u) + 1;
+  u.totalCost = groupTotalCost(u);
+  u.campaignModelStatus = [
+    ...(u.campaignModelStatus || Array.from({ length: u.selectedNumber - 1 }, () => ({}))),
+    {},
+  ];
+  return role;
+};
+
 // Krok 9 (s. 408): grupy stronników można dzielić i łączyć; modele w grupie
 // muszą mieć ten sam oręż i pancerz (a tu także to samo doświadczenie i profil).
 const gear = (u) =>
   JSON.stringify(
     [
       ...(u.startingEquipment || []),
-      ...(u.optionalEquipment || []),
+      ...(u.optionalEquipment || []).filter((n) => !COMMAND_ROLES.includes(n)),
       ...(u.customEquipment || []).map((e) => e?.name || e),
     ]
       .map(String)
@@ -994,6 +1023,14 @@ export const mergeProblem = (a, b) => {
       JSON.stringify([...(b.rules || [])].sort())
   )
     return "Grupy mają różne rozwinięcia.";
+  const ra = commandRoles(a),
+    rb = commandRoles(b);
+  if (ra.length || rb.length) {
+    // Only the banner bearer and the musician make one group.
+    if (ra.length !== 1 || rb.length !== 1 || ra[0] === rb[0])
+      return "Do grupy chorążego może dołączyć tylko sygnalista (i na odwrót).";
+    return null;
+  }
   if (groupSize(a) + groupSize(b) > groupLimit(a))
     return `Grupa może liczyć najwyżej ${groupLimit(a)} modeli.`;
   return null;
@@ -1060,7 +1097,12 @@ export const mergeGroups = (post, targetId, sourceId) => {
   a.battleOutOfActionModels = all.map(() => false);
   a.battleAbsentModels = all.map((m) => m.ab);
   a.selectedNumber = all.length;
-  a.totalCost = (Number(a.cost) || 0) * all.length;
+  const roles = [...commandRoles(a), ...commandRoles(b)];
+  if (roles.length) {
+    a.optionalEquipment = [...(a.optionalEquipment || []).filter((n) => !COMMAND_ROLES.includes(n)), ...roles];
+    a.number = 2;
+  }
+  a.totalCost = groupTotalCost(a, all.length);
   post.units = post.units.filter((x) => x !== b);
   log(post, "group", `${label(b)} dołącza do ${label(a)} (${all.length} modeli).`);
 };
@@ -1360,7 +1402,7 @@ const finalizeBattle = (battle, notes) => {
     })).filter((s) => !s.dead);
     if (!statuses.length) return [];
     u.selectedNumber = statuses.length;
-    u.totalCost = Number(u.cost) * statuses.length;
+    u.totalCost = groupTotalCost(u, statuses.length);
     u.campaignModelStatus = statuses.map(({ i, ...s }) => ({
       ...s,
       skip: Math.max(0, s.skip || 0),

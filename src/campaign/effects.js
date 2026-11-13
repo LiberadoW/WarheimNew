@@ -196,13 +196,7 @@ export function applyEffects(post, effects, reason, army) {
       }
       case "groupRecruit": {
         if (!u) throw Error("Nie znaleziono grupy.");
-        u.selectedNumber = R.modelCount(u) + 1;
-        u.totalCost = u.cost * u.selectedNumber;
-        u.campaignModelStatus = [
-          ...(u.campaignModelStatus ||
-            Array.from({ length: u.selectedNumber - 1 }, () => ({}))),
-          {},
-        ];
+        R.addGroupModel(u);
         break;
       }
       default:
