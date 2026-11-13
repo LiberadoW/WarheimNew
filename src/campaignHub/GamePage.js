@@ -13,6 +13,7 @@ import WeatherRoller, { weatherHints } from "./WeatherRoller";
 import MagicPanel from "../campaign/MagicPanel";
 import { OptionalRuleChips } from "./OptionalRulesPicker";
 import { AREAS } from "./scenarios";
+import { armourAfter, damageableArmour, damagedSave, describeDamage, isDamaged } from "../campaign/armourDamage";
 import { STAT_LABELS, groupRoster } from "./roster";
 import {
   companyModels,
@@ -37,6 +38,7 @@ import {
   recordResult,
   recordTakedown,
   removeLogEntry,
+  setArmourDamage,
   setModelState,
   setPlayRound,
   watchCampaign,
@@ -63,7 +65,64 @@ const Stepper = ({ label, value, onChange, disabled, hint }) => (
 
 // One company: every unit with stats, short equipment, rules and the
 // per-model status, kills and extra PD for this game.
-const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) => {
+// USZKODZENIE PANCERZA on the game screen: each model's armour and shield.
+const ArmourDamage = ({ unit, owner, play, canEdit, run, ids }) => {
+  const { armour, shield } = damageableArmour(unit);
+  if (!armour && !shield) return null;
+  const p = unitPlay(play, owner, unit.uniqueId);
+  const n = modelCount(unit);
+  const states = Array.from({ length: n }, (_, i) => modelState(play, owner, unit, i));
+  const save = (i, d) =>
+    run(async () => {
+      await setArmourDamage(ids.c, ids.g, owner, unit.uniqueId, i, d);
+      const text = describeDamage(unit, d);
+      if (isDamaged(d) && text)
+        await addLogEntry(ids.c, ids.g, {
+          type: "armour",
+          round: play?.round || 1,
+          text: `${n > 1 ? modelLabel(unit, i) : unit.unitDisplayName || unit.unitName}: ${text}`,
+        });
+    });
+  return (
+    <div className="game-armour" aria-label="Uszkodzenie pancerza">
+      {states.map((state, i) => {
+        if (state === "unavailable") return null;
+        const d = p.armour?.[i] || {};
+        const steps = d.steps || 0;
+        const armourGone = armour && !armourAfter(armour, steps);
+        return (
+          <div key={i} className="game-armour-row">
+            <span className="game-armour-state">
+              {n > 1 ? `${modelLabel(unit, i)}: ` : "Pancerz: "}
+              {isDamaged(d) ? describeDamage(unit, d) : "cały"} · OP {damagedSave(unit, d)}
+            </span>
+            {canEdit && (
+              <span className="game-armour-actions">
+                {armour && !armourGone && (
+                  <button type="button" className="button button-secondary button-small" onClick={() => save(i, { ...d, steps: steps + 1 })}>
+                    Uszkodź pancerz
+                  </button>
+                )}
+                {shield && !d.shield && (
+                  <button type="button" className="button button-secondary button-small" onClick={() => save(i, { ...d, shield: true })}>
+                    Zniszcz tarczę
+                  </button>
+                )}
+                {isDamaged(d) && (
+                  <button type="button" className="button button-ghost button-small" onClick={() => save(i, null)}>
+                    Cofnij
+                  </button>
+                )}
+              </span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule, armourRule }) => {
   if (!list) return <p className="hub-muted">{name} nie wgrał(a) jeszcze rozpiski.</p>;
   const units = Object.fromEntries((list.armyList || []).map((u) => [u.uniqueId, u]));
   return (
@@ -100,7 +159,13 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                         {STAT_LABELS.map((l, i) => (
                           <td key={l}>{summary.stats[i] ?? "-"}</td>
                         ))}
-                        <td>{summary.armour}</td>
+                        <td>
+                          {armourRule && modelCount(unit) === 1 && isDamaged(p.armour?.[0]) ? (
+                            <span title={`Przed uszkodzeniem: ${summary.armour}`}>{damagedSave(unit, p.armour[0])}</span>
+                          ) : (
+                            summary.armour
+                          )}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -158,6 +223,7 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                     );
                   })}
                 </div>
+                {armourRule && <ArmourDamage unit={unit} owner={owner} play={play} canEdit={canEdit} run={run} ids={ids} />}
                 <div className="game-counters">
                   {isHero(unit) && (
                     <Stepper
@@ -358,6 +424,7 @@ export const GameScreen = ({
   const id = campaign.id;
   const gameId = game.id;
   const ids = { c: id, g: gameId };
+  const armourRule = (game.optionalRules || []).includes("USZKODZENIE PANCERZA");
   const play = game.play || {};
   const round = play.round || 1;
   const isPlayer = game.players.includes(user.uid);
@@ -577,7 +644,7 @@ export const GameScreen = ({
               {s.name}
               {s.list && <span className="hub-muted"> · {s.list.armyName}</span>}
             </h3>
-            <CompanyPanel owner={s.owner} name={s.name} list={s.list} play={play} canEdit={canEdit} run={run} ids={ids} onRule={setRule} />
+            <CompanyPanel owner={s.owner} name={s.name} list={s.list} play={play} canEdit={canEdit} run={run} ids={ids} onRule={setRule} armourRule={armourRule} />
           </section>
         ))}
       </div>

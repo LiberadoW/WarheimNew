@@ -257,6 +257,13 @@ export const setUnitMagic = (campaignId, gameId, owner, unitId, patch) =>
     Object.fromEntries(Object.entries(patch).map(([k, v]) => [`${unitPath(owner, unitId)}.${k}`, v])),
   );
 
+// USZKODZENIE PANCERZA: one model's damage, { steps, shield }.
+export const setArmourDamage = (campaignId, gameId, owner, unitId, index, damage) =>
+  updateGame(campaignId, gameId, {
+    [`${unitPath(owner, unitId)}.armour.${index}`]:
+      damage && (damage.steps > 0 || damage.shield) ? damage : deleteField(),
+  });
+
 export const changeCounter = (campaignId, gameId, owner, unitId, field, delta) =>
   updateGame(campaignId, gameId, { [`${unitPath(owner, unitId)}.${field}`]: increment(delta) });
 

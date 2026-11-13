@@ -122,6 +122,7 @@ jest.mock("./campaignService", () => {
     addLogEntry: jest.fn(() => Promise.resolve()),
     setModelState: jest.fn(() => Promise.resolve()),
     changeCounter: jest.fn(() => Promise.resolve()),
+    setArmourDamage: jest.fn(() => Promise.resolve()),
     recordResult: jest.fn(() => Promise.resolve()),
     updateGame: jest.fn(() => Promise.resolve()),
     getMySavedLists: jest.fn(),
@@ -218,6 +219,36 @@ describe("game screen", () => {
     fireEvent.click(fresh.getByRole("button", { name: "Ustaw pogodę: Wichura" }));
     await waitFor(() => expect(service.updateGame).toHaveBeenCalledWith("c1", "g1", { weather: expect.objectContaining({ name: "Wichura" }) }));
     expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "weather", text: expect.stringMatching(/Zmiana pogody/) }));
+  });
+
+  test("Uszkodzenie pancerza: a model's armour is damaged on the game screen", async () => {
+    const armoured = { ...mecenas, optionalEquipment: ["Średni", "Tarcza"] };
+    service.watchCampaign.mockImplementation((id, cb) => { cb(campaign); return () => {}; });
+    service.watchGame.mockImplementation((id, gid, cb) => {
+      cb({ ...baseGame, optionalRules: ["USZKODZENIE PANCERZA"], play: { round: 2, units: { a: { m1: { armour: { 0: { steps: 1 } } } } } } });
+      return () => {};
+    });
+    service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: { ...listA, armyList: [armoured] }, b: listB }); return () => {}; });
+    render(
+      <AuthContext.Provider value={{ currentUser: { user: { uid: "a" } } }}>
+        <MemoryRouter initialEntries={["/campaigns/c1/games/g1"]}>
+          <Routes><Route path="/campaigns/:id/games/:gameId" element={<GamePage setUnitList={jest.fn()} setArmy={jest.fn()} setArmyName={jest.fn()} setCampaignNotes={jest.fn()} />} /></Routes>
+        </MemoryRouter>
+      </AuthContext.Provider>,
+    );
+    const box = within(screen.getByLabelText("Uszkodzenie pancerza"));
+    expect(box.getByText(/średni pancerz chroni jak lekki pancerz · OP 5\+/)).toBeTruthy();
+    fireEvent.click(box.getByRole("button", { name: "Zniszcz tarczę" }));
+    await waitFor(() => expect(service.setArmourDamage).toHaveBeenCalledWith("c1", "g1", "a", "m1", 0, { steps: 1, shield: true }));
+    expect(service.addLogEntry).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({ type: "armour", text: expect.stringMatching(/tarcza zniszczona/) }));
+  });
+
+  test("the hand-off carries the armour damage of each model", () => {
+    const { units } = toBattle({
+      savedList: { armyList: [cyrkowcy] }, play: { units: { a: { cy: { armour: { 1: { shield: true } } } } } }, owner: "a",
+      game: { id: "g", players: ["a", "b"] }, opponentName: "B", opponentList: { armyList: [] }, campaignName: "K",
+    });
+    expect(units[0].battleArmourDamage).toEqual([null, { shield: true }, null]);
   });
 
   test("without the one-event limit the checks go on after an event", () => {

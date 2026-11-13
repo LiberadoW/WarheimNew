@@ -91,7 +91,7 @@ export const OPTIONAL_RULE_APP = {
   "NAGŁA ŚMIERĆ": "+1 PD dla bohaterów dolicza się samo, gdy licznik rund dojdzie do 6. Modyfikatory od 6. rundy stosujecie przy stole.",
   "ZMIENNE WIATRY MAGII": "+1 PD dla magów dolicza się samo.",
   "NIENATURALNA OBECNOŚĆ": "+1 PD dla magów dolicza się samo.",
-  "USZKODZENIE PANCERZA": "+1 łup w eksploracji dolicza się sam. Uszkodzone pancerze odnotujcie przy stole.",
+  "USZKODZENIE PANCERZA": "+1 łup w eksploracji dolicza się sam. Uszkodzenia zaznaczacie przy modelu na ekranie gry (OP przelicza się od razu), a sekwencja po potyczce zmienia ekwipunek na stałe.",
   "ZDARZENIA LOSOWE": "Rzut K6 przed turą i tabela zdarzeń są na ekranie gry; +1 łup za każde zdarzenie dolicza się sam.",
 };
 export const findOptionalRule = (key) => optionalRules.find((r) => r.key === key) || null;

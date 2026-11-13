@@ -1200,3 +1200,27 @@ details.hub-round > summary {
 .hub-card .hub-dice-row > .button {
   align-self: flex-end;
 }
+
+/* Uszkodzenie pancerza: one row per model. */
+.game-armour {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.game-armour-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.game-armour-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

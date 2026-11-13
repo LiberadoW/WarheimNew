@@ -147,6 +147,8 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
       battleKills: isHero(unit) ? Number(p.kills) || 0 : 0,
       // Treasure markers the unit ended the game with (rozdział 11).
       battleTreasure: Number(p.treasure) || 0,
+      // Armour damaged during the game (Uszkodzenie pancerza), per model.
+      battleArmourDamage: Array.from({ length: n }, (_, i) => p.armour?.[i] || null),
       battleObled: 0,
       battlePacts: 0,
       battleOutOfActionModels: Array.from({ length: n }, (_, i) => !!p.out?.[i]),

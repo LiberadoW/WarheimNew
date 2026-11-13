@@ -14,6 +14,7 @@ import LootSale, { applyLootSale, lootQuote } from "./LootSale";
 import Exploration, { applyExploration, explorationState } from "./Exploration";
 import { companyInjuryModifier } from "./company";
 import { addTreasurePd } from "./treasure";
+import { applyArmourDamage } from "./armourDamage";
 import UnitAdjustments from "./UnitAdjustments";
 import AdvanceCard from "./Advancement";
 import InjuryCard from "./InjuryCard";
@@ -478,6 +479,7 @@ export default function CampaignManager({
         army,
       );
       addTreasurePd(started.post, started);
+      applyArmourDamage(started.post);
       return { battle: started };
     }
     const action = act && pendingAction(b.stage, b, b.post, campaignNotes, army);
