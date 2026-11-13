@@ -1,6 +1,9 @@
 import { getModifiers } from "../Functions/getModifiers";
 import { getShortEquipment } from "../Functions/displayEquipment";
 import { lastingInjuries } from "../campaign/rules";
+import { unitRuleText } from "../Functions/getRuleText";
+import mutations from "../campaign/mutations.json";
+import { knownSpells, loreOf } from "../campaign/spells";
 
 export const STAT_LABELS = ["Sz", "WW", "US", "S", "Wt", "Żw", "I", "A", "CP"];
 const TYPE_ORDER = ["Bohater", "Stronnik", "Machina", "Najemne Ostrze", "Postać Dramatu"];
@@ -38,6 +41,10 @@ export const summarizeUnit = (unit) => {
     armour: armour < 7 ? `${armour}+` : "-",
     equipment: getShortEquipment(unit),
     rules: unit.rules || [],
+    // Rule texts as this unit has them (rolled stigmas, illnesses).
+    ruleTexts: Object.fromEntries((unit.rules || []).map((r) => [r, unitRuleText(unit, r, mutations)])),
+    lore: loreOf(unit),
+    spells: knownSpells(unit),
     injuries: lastingInjuries(unit.injuries),
   };
 };

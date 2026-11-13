@@ -119,3 +119,19 @@ export const getArmyRulesSummary = (unitList) => {
     equipment: [...equipment].sort(sortPolish),
   };
 };
+
+// The text of a rule as this unit has it: a rolled stigma, illness or other
+// campaign rule keeps its own text (stored on the unit); "Stygmat Chaosu
+// (Przerażający)" must not fall back to the general STYGMAT CHAOSU rule.
+export const unitRuleText = (unit, rule, mutationTable = []) => {
+  if (unit?.campaignRuleTexts?.[rule]) return unit.campaignRuleTexts[rule];
+  const stigma = String(rule).match(/^Stygmat Chaosu \((.+)\)$/i);
+  if (stigma) {
+    const name = stigma[1].trim().toLowerCase();
+    const own = (unit?.mutations || []).find((m) => String(m.name).toLowerCase() === name);
+    if (own?.text) return own.text;
+    const any = mutationTable.find((m) => String(m.name).toLowerCase() === name);
+    if (any?.text) return any.text;
+  }
+  return unit?.dramaProfileText && !getRuleText(rule) ? unit.dramaProfileText : getRuleText(rule);
+};

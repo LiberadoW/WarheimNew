@@ -35,6 +35,7 @@ import { EditArmyContext, getDefaultCampaignNotes } from "./App";
 import "../styles/Builder.css";
 import ChaosMarkSelect from "../Components/ChaosMarkSelect";
 import StigmataPanel from "../Components/StigmataPanel";
+import { FirstSpellsPanel } from "../campaign/MagicPanel";
 import CampaignTargetBanner, {
   readCampaignTarget,
   setCampaignTarget,
@@ -687,12 +688,15 @@ const Builder = ({
               </div>
             )}
             {!campaignNotes.campaign?.activeBattle && (
-              <StigmataPanel
-                army={army}
-                campaignNotes={campaignNotes}
-                unitList={unitList}
-                setUnitList={setUnitList}
-              />
+              <>
+                <StigmataPanel
+                  army={army}
+                  campaignNotes={campaignNotes}
+                  unitList={unitList}
+                  setUnitList={setUnitList}
+                />
+                <FirstSpellsPanel unitList={unitList} setUnitList={setUnitList} />
+              </>
             )}
             {!(
               isPlayArmyView && campaignNotes.campaign?.activeBattle?.post

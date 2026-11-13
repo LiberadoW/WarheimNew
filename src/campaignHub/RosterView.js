@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import RulesModal from "../Components/RulesModal";
-import { getRuleText } from "../Functions/getRuleText";
 import { groupRoster, plural, STAT_LABELS } from "./roster";
 
 // A read-only company: one row per unit with its stats, short equipment and
@@ -57,16 +56,26 @@ const RosterView = ({ armyList, title }) => {
               {unit.equipment.length > 0 && (
                 <p className="roster-unit-equipment">{unit.equipment.join(", ")}</p>
               )}
-              {(unit.rules.length > 0 || unit.injuries.length > 0) && (
+              {(unit.rules.length > 0 || unit.injuries.length > 0 || unit.spells.length > 0) && (
                 <div className="roster-unit-rules">
-                  {unit.rules.map((name) => (
+                  {unit.rules.map((name, i) => (
                     <button
                       type="button"
-                      key={name}
+                      key={`${name}-${i}`}
                       className="roster-rule"
-                      onClick={() => setRule(name)}
+                      onClick={() => setRule({ name, text: unit.ruleTexts[name] })}
                     >
                       {name}
+                    </button>
+                  ))}
+                  {unit.spells.map((s) => (
+                    <button
+                      type="button"
+                      key={s.key}
+                      className="roster-rule is-spell"
+                      onClick={() => setRule({ name: `${s.name}${s.cast ? ` · ${s.cast.toLowerCase()}` : ""}`, text: s.text, title: unit.lore })}
+                    >
+                      ✦ {s.name}
                     </button>
                   ))}
                   {unit.injuries.map((name, i) => (
@@ -82,8 +91,8 @@ const RosterView = ({ armyList, title }) => {
       ))}
       {rule && (
         <RulesModal
-          title={rule}
-          sections={[{ title: "Zasada", entries: [{ name: rule, text: getRuleText(rule) }] }]}
+          title={rule.name}
+          sections={[{ title: rule.title || "Zasada", entries: [{ name: rule.name, text: rule.text }] }]}
           onClose={() => setRule(null)}
         />
       )}

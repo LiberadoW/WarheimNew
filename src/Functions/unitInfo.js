@@ -1,4 +1,5 @@
-import { getRuleText, getWeaponRuleNames } from "./getRuleText";
+import { getRuleText, getWeaponRuleNames, unitRuleText } from "./getRuleText";
+import mutations from "../campaign/mutations.json";
 import { getEquipmentStats } from "../Data.js/EquipmentStats";
 import { getDisplayEquipment, formatCustomEquipmentEntry } from "./displayEquipment";
 import { catalog } from "../campaign/rules";
@@ -56,7 +57,7 @@ export const describeRule = (unit, rule) => ({
   sections: [
     {
       title: "Zasada jednostki",
-      entries: [{ name: rule, text: unit.campaignRuleTexts?.[rule] || unit.dramaProfileText || getRuleText(rule) }],
+      entries: [{ name: rule, text: unitRuleText(unit, rule, mutations) }],
     },
   ],
 });

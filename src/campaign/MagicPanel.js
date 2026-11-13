@@ -3,7 +3,7 @@ import RulesModal from "../Components/RulesModal";
 import DiceInput from "./DiceInput";
 import {
   LEVEL_NAMES,
-  collegeLores,
+  loreChoices,
   dicePools,
   firstSpellOptions,
   isCaster,
@@ -46,7 +46,7 @@ function FirstSpell({ unit, onAssign }) {
   return (
     <div className="magic-first">
       <p className="hub-muted">
-        Pierwsze {isPriest(unit) ? "modlitwa" : "zaklęcie"}: rzut K6 na liście
+        {isPriest(unit) ? "Pierwsza modlitwa" : "Pierwsze zaklęcie"}: rzut K6 na liście
         {isPriest(unit) ? " modlitw (można zamienić na pierwszą modlitwę)" : " magii powszechnej (można zamienić na 7. zaklęcie tradycji)"}.
       </p>
       <div className="magic-first-row">
@@ -142,10 +142,10 @@ export default function MagicPanel({ units = [], isActive, onAssign, storageKey,
             {lore && <p className="hub-muted">{lore}</p>}
             {needsLoreChoice(u) && onAssign && (
               <label className="hub-field">
-                Tradycja magii (Kolegia Magii)
+                Tradycja magii
                 <select value="" onChange={(e) => e.target.value && onAssign(u.uniqueId, { magicLore: e.target.value })}>
                   <option value="">Wybierz tradycję</option>
-                  {collegeLores().map((l) => (
+                  {loreChoices(u).map((l) => (
                     <option key={l}>{l}</option>
                   ))}
                 </select>
@@ -228,6 +228,50 @@ export default function MagicPanel({ units = [], isActive, onAssign, storageKey,
         </button>
       </div>
       {modal && <RulesModal title={modal.title} sections={modal.sections} onClose={() => setModal(null)} />}
+    </section>
+  );
+}
+
+// Builder, before the first game (s. 550 / 590): casters recruited without a
+// spell choose their lore if needed and take their first spell or prayer.
+// The result is stored on the unit, like a rolled stigma.
+export function FirstSpellsPanel({ unitList, setUnitList }) {
+  const pending = unitList.filter((u) => isCaster(u) && !(u.learnedSpells || []).length);
+  if (!pending.length) return null;
+  const assign = (id, patch) =>
+    setUnitList(unitList.map((u) => (u.uniqueId === id ? { ...u, ...patch } : u)));
+  return (
+    <section className="stigmata-panel" aria-label="Zaklęcia przed pierwszą grą">
+      <h3>Zaklęcia i modlitwy przed pierwszą grą</h3>
+      <p>
+        Magowie losują pierwsze zaklęcie (K6, magia powszechna, można zamienić na
+        7. zaklęcie tradycji), duchowni pierwszą modlitwę (K6, można zamienić na
+        pierwszą modlitwę). Wynik zapisuje się w karcie postaci.
+      </p>
+      {pending.map((u) => (
+        <article className="stigma-row" key={u.uniqueId}>
+          <div className="stigma-row-head">
+            <strong>{nameOf(u)}</strong>
+            <small>{loreOf(u) || "wybierz tradycję"}</small>
+          </div>
+          {needsLoreChoice(u) && (
+            <label className="hub-field">
+              Tradycja magii
+              <select value="" onChange={(e) => e.target.value && assign(u.uniqueId, { magicLore: e.target.value })}>
+                <option value="">Wybierz tradycję</option>
+                {loreChoices(u).map((l) => (
+                  <option key={l}>{l}</option>
+                ))}
+              </select>
+            </label>
+          )}
+          {loreOf(u) ? (
+            <FirstSpell unit={u} onAssign={(patch) => assign(u.uniqueId, patch)} />
+          ) : (
+            !needsLoreChoice(u) && <p className="stigma-error">Nie rozpoznano tradycji magii tej postaci.</p>
+          )}
+        </article>
+      ))}
     </section>
   );
 }

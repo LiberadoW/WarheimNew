@@ -73,7 +73,7 @@ test("a college mage chooses a lore first", () => {
     return <MagicPanel units={units} onAssign={(id, patch) => setUnits(units.map((u) => (u.uniqueId === id ? { ...u, ...patch } : u)))} />;
   }
   render(<Harness />);
-  fireEvent.change(screen.getByLabelText("Tradycja magii (Kolegia Magii)"), { target: { value: "Tradycja Cienia" } });
+  fireEvent.change(screen.getByLabelText("Tradycja magii"), { target: { value: "Tradycja Cienia" } });
   expect(latest[0].magicLore).toBe("Tradycja Cienia");
   expect(screen.getByText(/Pełna lista: Tradycja Cienia/)).not.toBeNull();
 });
@@ -94,4 +94,38 @@ test("a new skill learns a spell by 2K6; a known one may be mastered instead", (
   fireEvent.click(screen.getByRole("button", { name: "Lepiej opanuje: Gorejący miecz Rhuin" }));
   expect(post.units[0].spellMastery).toEqual({ "7 (1) GOREJĄCY MIECZ RHUIN": 1 });
   expect(post.advances[0].resolved).toBe(true);
+});
+
+test("mages are told apart from Magiczna ochrona and Magia krwi; 'albo' lores are a choice", () => {
+  const { loreChoices } = require("./spells");
+  expect(isMage(unit("t", ["Magiczna ochrona (6+)"]))).toBe(false);
+  expect(isMage(unit("v", ["Magia krwi"]))).toBe(false);
+  const either = unit("s", ["Mag (Tradycja Bestii albo Tradycja Niebios albo Tradycja Życia)"]);
+  expect(loreChoices(either)).toEqual(["Tradycja Bestii", "Tradycja Niebios", "Tradycja Życia"]);
+  expect(loreOf(either)).toBeNull();
+  expect(loreOf({ ...either, magicLore: "Tradycja Niebios" })).toBe("Tradycja Niebios");
+  expect(loreOf(unit("d", ["Mag (Dziedzina Dao)"], { optionalEquipment: ["Dualizm (Yang)"] }))).toBe("Tradycja Yang");
+});
+
+test("a rolled stigma shows its own text, not the general STYGMAT CHAOSU", () => {
+  const { unitRuleText, getRuleText } = require("../Functions/getRuleText");
+  const table = require("./mutations.json");
+  const own = { mutations: [{ name: "Przerażający", text: "Własny opis stygmatu." }] };
+  expect(unitRuleText(own, "Stygmat Chaosu (Przerażający)", table)).toBe("Własny opis stygmatu.");
+  // Older rosters without the stored text fall back to the stigma table.
+  const fallback = unitRuleText({}, "Stygmat Chaosu (Przerażający)", table);
+  expect(fallback).toBe(table.find((m) => m.name === "Przerażający").text);
+  expect(fallback).not.toBe(getRuleText("Stygmat Chaosu"));
+});
+
+test("the builder asks casters without spells for their first one", () => {
+  const { FirstSpellsPanel } = require("./MagicPanel");
+  let units = [unit("p", ["Duchowny (modlitwy do Sigmara)"], { unitName: "Kapłan" }), unit("w", ["Rycerz"])];
+  const view = render(<FirstSpellsPanel unitList={units} setUnitList={(u) => { units = u; }} />);
+  expect(screen.getByRole("region", { name: "Zaklęcia przed pierwszą grą" })).not.toBeNull();
+  fireEvent.change(screen.getByLabelText("albo wynik"), { target: { value: "4" } });
+  fireEvent.click(screen.getByRole("button", { name: "Weź: Młot na czarownice" }));
+  expect(units[0].learnedSpells).toEqual(["4 MŁOT NA CZAROWNICE"]);
+  view.rerender(<FirstSpellsPanel unitList={units} setUnitList={() => {}} />);
+  expect(screen.queryByRole("region", { name: "Zaklęcia przed pierwszą grą" })).toBeNull();
 });

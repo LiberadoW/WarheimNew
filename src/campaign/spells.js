@@ -14,19 +14,54 @@ const has = (unit, name) =>
   (unit.rules || []).some((r) => String(r).toLowerCase().startsWith(name.toLowerCase()));
 
 export const isPriest = (unit) => has(unit, "Duchowny") || has(unit, "Kapłan");
-export const isMage = (unit) => !isPriest(unit) && (has(unit, "Mag") || has(unit, "Wiedza tajemna"));
+// MAG, Magus, Magister, Wiedza tajemna; not "Magiczna ochrona" or the
+// vampires' "Magia krwi" (uroki, not spells).
+const MAGE_RULE = /^(mag(?![a-ząćęłńóśźż])|magus|magister|wiedza tajemna)/i;
+export const isMage = (unit) => !isPriest(unit) && (unit.rules || []).some((r) => MAGE_RULE.test(String(r).trim()));
 export const isCaster = (unit) => isMage(unit) || isPriest(unit);
 
-// A mage of the colleges picks one of the eight lores (s. 550).
-export const needsLoreChoice = (unit) =>
-  isMage(unit) && !loreOf(unit) && (unit.rules || []).some((r) => /Kolegia Magii/i.test(r));
+const LORE_ALIASES = {
+  "dziedzina nehekhary": "Domena Nehekhary",
+  "dziedzina nehekary": "Domena Nehekhary",
+  "dziedzina boga pajonka": "Dziedzina Boga-Pajonka",
+};
+const toLore = (name) => {
+  const n = String(name).trim();
+  return LORE_ALIASES[n.toLowerCase()] || Object.keys(magic).find((k) => k.toLowerCase() === n.toLowerCase()) || null;
+};
+// The lores a mage may practise, from "Mag (…)": the eight college lores,
+// Yin or Yang for Dao, or a list joined with "albo".
+export const loreChoices = (unit) => {
+  if (!isMage(unit)) return [];
+  const rule = (unit.rules || []).find((r) => /^mag\s*\(/i.test(r)) || (unit.rules || []).find((r) => /^wiedza tajemna\s*\(/i.test(r));
+  const inside = rule?.match(/\((.+)\)/)?.[1] || "";
+  if (/kolegia magii/i.test(inside)) return COLLEGE_LORES.filter((l) => magic[l]);
+  if (/dao/i.test(inside)) return ["Tradycja Yin", "Tradycja Yang"].filter((l) => magic[l]);
+  return [...new Set(inside.split(/\s+albo\s+/i).map(toLore).filter(Boolean))];
+};
 export const collegeLores = () => COLLEGE_LORES.filter((l) => magic[l]);
 
 export const loreOf = (unit) => {
   if (unit.magicLore && magic[unit.magicLore]) return unit.magicLore;
+  const choices = loreChoices(unit);
+  if (choices.length > 1) {
+    // Chosen in the builder: Dualizm (Yin / Yang) or a lore taken as an option.
+    const selected = [...(unit.optionalEquipment || []), ...(unit.rules || [])].map(String);
+    if (selected.includes("Dualizm (Yin)")) return choices.includes("Tradycja Yin") ? "Tradycja Yin" : null;
+    if (selected.includes("Dualizm (Yang)")) return choices.includes("Tradycja Yang") ? "Tradycja Yang" : null;
+    return choices.find((c) => selected.some((x) => toLore(x) === c)) || null;
+  }
+  if (choices.length === 1) return choices[0];
+  if (isMage(unit) && !(unit.rules || []).some((r) => /\(/.test(r) && MAGE_RULE.test(r))) {
+    const lore = getMagicLore([unit]);
+    return lore && magic[lore] ? lore : null;
+  }
+  if (!isPriest(unit) && !isMage(unit)) return null;
   const lore = getMagicLore([unit]);
   return lore && magic[lore] ? lore : null;
 };
+// A mage with more than one possible lore picks one (s. 550).
+export const needsLoreChoice = (unit) => isMage(unit) && !loreOf(unit) && loreChoices(unit).length > 1;
 
 // "1-2 MAGICZNE ŻĄDŁO", "7 (1) GOREJĄCY MIECZ RHUIN" → { from, to, name }.
 const parseHead = (head) => {

@@ -4,7 +4,8 @@ import WeaponList from "../layouts/WeaponList";
 import { magic } from "../Data.js/Magic";
 import { getMagicLore } from "../Functions/getMagicLore";
 import { getModifiers } from "../Functions/getModifiers";
-import { getRuleText } from "../Functions/getRuleText";
+import { unitRuleText } from "../Functions/getRuleText";
+import mutations from "../campaign/mutations.json";
 import RulesModal from "./RulesModal";
 import "../styles/UnitDetails.css";
 
@@ -86,7 +87,7 @@ const StatsSection = ({ unit }) => {
 const getRuleSections = (unit, magicLore, spells) => [
   {
     title: "Zasady specjalne",
-    entries: unit.rules.map((rule) => ({ name: rule, text: getRuleText(rule) })),
+    entries: unit.rules.map((rule) => ({ name: rule, text: unitRuleText(unit, rule, mutations) })),
   },
   {
     title: magicLore || "Zaklęcia",

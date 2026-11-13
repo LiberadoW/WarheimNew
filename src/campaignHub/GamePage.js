@@ -118,8 +118,8 @@ const CompanyPanel = ({ owner, name, list, play, canEdit, run, ids, onRule }) =>
                 )}
                 {summary.rules.length > 0 && (
                   <div className="roster-unit-rules" aria-label="Zasady specjalne">
-                    {summary.rules.map((rule) => (
-                      <button type="button" key={rule} className="roster-rule" onClick={() => onRule(describeRule(unit, rule))}>
+                    {summary.rules.map((rule, k) => (
+                      <button type="button" key={`${rule}-${k}`} className="roster-rule" onClick={() => onRule(describeRule(unit, rule))}>
                         {rule}
                       </button>
                     ))}
