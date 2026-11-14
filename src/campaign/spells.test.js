@@ -195,3 +195,22 @@ test("Wiedza tajemna: with a new spell the elf mage also learns one from a colle
   expect(known[2]).toMatchObject({ lore: "Tradycja Cienia", from: 8 });
   expect(post.advances[0].description).toMatch(/Wiedza tajemna: .+ \(Tradycja Cienia\)/);
 });
+
+test("Wiedza tajemna catch-up: missing extra spells are added in the builder", () => {
+  const { ArcaneCatchUpPanel } = require("./MagicPanel");
+  const { missingArcaneSpells } = require("./spells");
+  const armies = require("../Data.js/Armies").default;
+  const { createUnit } = require("../Functions/createUnit");
+  const base = createUnit(armies["Elfowie Wysokiego Rodu z Ulthuanu"].heroes, "Mag elfów");
+  // First spell, then two learned in advances without the extra ones.
+  let units = [{ ...base, uniqueId: "e", learnedSpells: [7, 8, 9].map((n) => spellForRoll("Wysoka Magia", n).key) }];
+  expect(missingArcaneSpells(units[0])).toBe(2);
+  const view = render(<ArcaneCatchUpPanel unitList={units} setUnitList={(u) => { units = u; }} />);
+  fireEvent.change(screen.getByLabelText("Tradycja dodatkowego czaru"), { target: { value: "Tradycja Życia" } });
+  fireEvent.change(screen.getByLabelText("Wiedza tajemna: Tradycja Życia, kość 1"), { target: { value: "3" } });
+  fireEvent.click(screen.getByRole("button", { name: /^Dopisz:/ }));
+  expect(knownSpells(units[0]).at(-1)).toMatchObject({ lore: "Tradycja Życia", from: 9 });
+  expect(missingArcaneSpells(units[0])).toBe(1);
+  view.unmount();
+  expect(missingArcaneSpells({ ...base, learnedSpells: [spellForRoll("Wysoka Magia", 7).key] })).toBe(0);
+});

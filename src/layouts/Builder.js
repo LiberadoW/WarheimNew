@@ -35,7 +35,7 @@ import { EditArmyContext, getDefaultCampaignNotes } from "./App";
 import "../styles/Builder.css";
 import ChaosMarkSelect from "../Components/ChaosMarkSelect";
 import StigmataPanel from "../Components/StigmataPanel";
-import { FirstSpellsPanel } from "../campaign/MagicPanel";
+import { ArcaneCatchUpPanel, FirstSpellsPanel } from "../campaign/MagicPanel";
 import CampaignTargetBanner, {
   readCampaignTarget,
   setCampaignTarget,
@@ -698,6 +698,7 @@ const Builder = ({
                   setUnitList={setUnitList}
                 />
                 <FirstSpellsPanel unitList={unitList} setUnitList={setUnitList} />
+                <ArcaneCatchUpPanel unitList={unitList} setUnitList={setUnitList} />
               </>
             )}
             {!(

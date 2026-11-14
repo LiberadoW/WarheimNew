@@ -221,3 +221,16 @@ export const dicePools = (units = [], isActive = inPlay) => {
     priests: present.filter(isPriest).map((u) => ({ id: u.uniqueId, label: nameOf(u) })),
   };
 };
+
+// WIEDZA TAJEMNA catch-up: every spell of the mage's own lore learned after
+// the first one came with an extra spell from the bracketed lore. A company
+// settled before the app knew the rule can add the missing ones.
+export const missingArcaneSpells = (unit) => {
+  const lores = arcaneLores(unit);
+  if (!lores.length) return 0;
+  const own = loreOf(unit);
+  const spells = knownSpells(unit);
+  const ownCount = spells.filter((s) => s.lore === own).length;
+  const extra = spells.filter((s) => s.lore && s.lore !== own && lores.includes(s.lore)).length;
+  return Math.max(0, ownCount - 1 - extra);
+};

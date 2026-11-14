@@ -5,8 +5,11 @@ import {
   LEVEL_NAMES,
   loreChoices,
   loreMissingInBuilder,
+  arcaneLores,
   dicePools,
   firstSpellOptions,
+  hedgeSpell,
+  missingArcaneSpells,
   isCaster,
   isPriest,
   knownSpells,
@@ -284,6 +287,78 @@ export function FirstSpellsPanel({ unitList, setUnitList }) {
             )
           )}
         </article>
+      ))}
+    </section>
+  );
+}
+
+// Builder: a mage with WIEDZA TAJEMNA whose extra spells were not added
+// (sequences settled before the app knew the rule) rolls them here.
+function ArcaneCatchUp({ unit, onLearn }) {
+  const lores = arcaneLores(unit);
+  const [lore, setLore] = useState(lores[0]);
+  const [dice, setDice] = useState([]);
+  const spell = dice[0] ? hedgeSpell(lore, dice[0]) : null;
+  const known = spell && knownSpells(unit).some((s) => s.key === spell.key);
+  return (
+    <article className="stigma-row">
+      <div className="stigma-row-head">
+        <strong>{nameOf(unit)}</strong>
+        <small>brakuje: {missingArcaneSpells(unit)}</small>
+      </div>
+      {lores.length > 1 && (
+        <label className="hub-field">
+          Tradycja dodatkowego czaru
+          <select value={lore} onChange={(e) => { setLore(e.target.value); setDice([]); }}>
+            {lores.map((l) => (
+              <option key={l}>{l}</option>
+            ))}
+          </select>
+        </label>
+      )}
+      <DiceInput label={`Wiedza tajemna: ${lore}`} count={1} value={dice} onChange={setDice} />
+      {spell && (
+        <p className="hub-muted">
+          K6: {dice[0]} → ({dice[0]}) {spell.name}
+          {known ? " · mag zna już to zaklęcie: rzuć ponownie." : ""}
+        </p>
+      )}
+      {spell && known && (
+        <button type="button" className="button button-secondary button-small" onClick={() => setDice([])}>
+          Rzuć ponownie
+        </button>
+      )}
+      {spell && !known && (
+        <button
+          type="button"
+          className="button button-small"
+          onClick={() => {
+            onLearn(spell.key);
+            setDice([]);
+          }}
+        >
+          Dopisz: {spell.name}
+        </button>
+      )}
+    </article>
+  );
+}
+
+export function ArcaneCatchUpPanel({ unitList, setUnitList }) {
+  const pending = unitList.filter((u) => missingArcaneSpells(u) > 0);
+  if (!pending.length) return null;
+  const learn = (id, key) =>
+    setUnitList(unitList.map((u) => (u.uniqueId === id ? { ...u, learnedSpells: [...(u.learnedSpells || []), key] } : u)));
+  return (
+    <section className="stigmata-panel" aria-label="Wiedza tajemna: brakujące czary">
+      <h3>Wiedza tajemna: brakujące dodatkowe czary</h3>
+      <p>
+        Za każde zaklęcie z własnej tradycji poznane w awansie mag z Wiedzą tajemną uczy się też czaru z tradycji
+        w nawiasie: K6 = numer w nawiasie (zaklęcia 7–12), znane zaklęcie rzuca się ponownie. Po dopisaniu zapisz
+        bandę i wgraj ją ponownie do kampanii.
+      </p>
+      {pending.map((u) => (
+        <ArcaneCatchUp key={u.uniqueId} unit={u} onLearn={(key) => learn(u.uniqueId, key)} />
       ))}
     </section>
   );
