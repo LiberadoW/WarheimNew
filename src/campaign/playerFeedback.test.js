@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import armies from "../Data.js/Armies";
 import { createUnit } from "../Functions/createUnit";
-import * as R from "./rules";
 import Inventory from "./Inventory";
 import { commandRoleProblem, recruit } from "./recruiting";
 import SequenceHistory from "../campaignHub/SequenceHistory";
@@ -40,15 +39,9 @@ test("a group with a dead model needs equipment only for the living", () => {
   expect(screen.getByRole("button", { name: "Przydziel" }).disabled).toBe(false);
 });
 
-test("an item removed without refund can be restored", () => {
-  const state = stash([{ ...createUnit(h, "Łowca czarownic"), uniqueId: "l" }], [{ id: "s", name: "Sztylet", quantity: 1, basePrice: 2 }]);
-  fireEvent.click(screen.getByRole("button", { name: "Usuń bez zwrotu" }));
-  fireEvent.change(screen.getByLabelText("Powód (zużyty, zgubiony, zniszczony…)"), { target: { value: "pomyłka" } });
-  fireEvent.click(screen.getByRole("button", { name: "Usuń jedną sztukę bez zwrotu złota" }));
-  expect(state.p.inventory).toEqual([]);
-  fireEvent.click(screen.getByRole("button", { name: "Przywróć" }));
-  expect(state.p.inventory).toMatchObject([{ name: "Sztylet", quantity: 1, basePrice: 2 }]);
-  expect(state.p.usedItems).toEqual([]);
+test("the stash has no discard button", () => {
+  stash([{ ...createUnit(h, "Łowca czarownic"), uniqueId: "l" }], [{ id: "s", name: "Sztylet", quantity: 1 }]);
+  expect(screen.queryByRole("button", { name: /Usuń|Zużyj/ })).toBeNull();
 });
 
 test("the roster shows the stash kept after the sequence", () => {
