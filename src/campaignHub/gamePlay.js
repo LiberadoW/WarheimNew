@@ -185,7 +185,7 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     opponentModels: opponentBefore.models,
     opponentOut: opponentBefore.out,
     opponentPrestige: opponentBefore.prestige,
-    campaignGame: { campaignId: game.campaignId || null, gameId: game.id || null },
+    campaignGame: { campaignId: game.campaignId || null, gameId: game.id || null, owner },
   };
   return { units, battle };
 };

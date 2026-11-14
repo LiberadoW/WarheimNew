@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, cleanup, act } from "@testing-library/react";
 import CampaignManager from "./CampaignManager";
 import useCampaignDraft from "./useCampaignDraft";
 import * as R from "./rules";
@@ -9,7 +9,18 @@ import { myCurrentGame } from "../campaignHub/CampaignPage";
 jest.mock("../campaignHub/campaignService", () => ({
   ...jest.requireActual("../campaignHub/campaignService"),
   getGameEvents: jest.fn(() => Promise.resolve(null)),
+  watchGame: jest.fn(),
 }));
+// CRA resets mock implementations before each test.
+beforeEach(() => {
+  const service = require("../campaignHub/campaignService");
+  service.getGameEvents.mockImplementation(() => Promise.resolve(null));
+  // Both players of a campaign game declare their loot sale in the game.
+  service.watchGame.mockImplementation((c, g, cb) => {
+    cb({ players: ["me", "op"], lootSales: { me: 0, op: 2 } });
+    return () => {};
+  });
+});
 
 const OWNER = "streamlined-qa";
 const hero = (extra = {}) => ({
@@ -123,7 +134,7 @@ test("a campaign game starts folded and its finish links back to the campaign", 
   const units = [hero()];
   const campaignNotes = { skarbiec: 100, campaign: { history: [], activeBattle: {
     ...R.newBattle(units), gameName: "Kampania · runda 1", opponent: "Kasia",
-    scenario: "Most", result: "win", round: 6, campaignGame: { campaignId: "c1", gameId: "g1" } } } };
+    scenario: "Most", result: "win", round: 6, campaignGame: { campaignId: "c1", gameId: "g1", owner: "me" } } } };
   localStorage.setItem(`warheim:draft:${OWNER}`, JSON.stringify({
     owner: OWNER, army: army.name, armyName: "QA", unitList: units, campaignNotes }));
   const state = {};
@@ -148,11 +159,13 @@ test("a campaign game starts folded and its finish links back to the campaign", 
   fireEvent.change(screen.getByLabelText("Eksploracja, kość 1"), { target: { value: "1" } });
   fireEvent.change(screen.getByLabelText("Eksploracja, kość 2"), { target: { value: "3" } });
   click("Zatwierdź eksplorację i dalej");
+  // The opponent's declared sale fills Nadpodaż.
+  await waitFor(() => expect(screen.getByText(/Przeciwnik: 2 łupów/)).toBeTruthy());
   click("Bez sprzedaży łupów, dalej");
   click("Pomiń do podsumowania");
   click("Zapisz rozliczenie i zakończ potyczkę");
   await waitFor(() => expect(state.draft.campaignNotes.campaign.activeBattle).toBeNull());
-  expect(finish.mock.calls[0][0].campaignGame).toEqual({ campaignId: "c1", gameId: "g1" });
+  expect(finish.mock.calls[0][0].campaignGame).toEqual({ campaignId: "c1", gameId: "g1", owner: "me" });
   expect(screen.getByText("Rozpiska w kampanii została zaktualizowana.")).toBeTruthy();
   expect(screen.getByRole("link", { name: "Wróć do kampanii" }).getAttribute("href")).toBe("/campaigns/c1");
 });
@@ -270,4 +283,26 @@ test("a sequence started before the plague step still gets it on a later step", 
   click("Zatwierdź");
   expect(battle(state).post.plague["hero:0"].result).toBe("skip");
   expect(screen.queryByRole("region", { name: "Zaraza" })).toBeNull();
+});
+
+test("in a campaign game the sale waits for the opponent's declaration", async () => {
+  const service = require("../campaignHub/campaignService");
+  let push;
+  service.watchGame.mockImplementation((c, g, cb) => {
+    push = cb;
+    cb({ players: ["me", "op"], lootSales: {} });
+    return () => {};
+  });
+  const { state } = setup([hero()], { battle: { campaignGame: { campaignId: "c1", gameId: "g1", owner: "me" } }, stage: 5 });
+  expect(await screen.findByText(/Przeciwnik: czekam na zgłoszenie/)).toBeTruthy();
+  click("Dalej: Doświadczeni stronnicy");
+  expect(battle(state).stage).toBe(5);
+  expect(screen.getAllByText(/Zgłoś przeciwnikowi/).length).toBeGreaterThan(0);
+  // Declarations arrive from Firestore: mine, then the opponent's.
+  await act(async () => push({ players: ["me", "op"], lootSales: { me: 0 } }));
+  expect(screen.getAllByText(/Czekam, aż przeciwnik wpisze/).length).toBeGreaterThan(0);
+  await act(async () => push({ players: ["me", "op"], lootSales: { me: 0, op: 7 } }));
+  expect(battle(state).othersSold).toBe(7);
+  click("Bez sprzedaży łupów, dalej");
+  expect(battle(state).post.lootSold).toBe(true);
 });

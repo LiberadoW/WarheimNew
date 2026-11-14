@@ -5,7 +5,7 @@ import useCampaignDraft from "./useCampaignDraft";
 import * as R from "./rules";
 import * as service from "../campaignHub/campaignService";
 
-jest.mock("../campaignHub/campaignService", () => ({ getGameEvents: jest.fn() }));
+jest.mock("../campaignHub/campaignService", () => ({ getGameEvents: jest.fn(), watchGame: jest.fn(() => () => {}) }));
 
 const OWNER = "started-plague";
 const hero = {
@@ -18,6 +18,7 @@ const hero = {
 const army = { name: "Gang przemytników", heroes: { Herszt: hero }, maxModels: 15 };
 
 afterEach(cleanup);
+beforeEach(() => service.watchGame.mockImplementation(() => () => {}));
 
 test("a sequence handed off before events were passed fetches them and shows Zaraza", async () => {
   service.getGameEvents.mockResolvedValue([{ code: 61, area: "inside", name: "Zaraza", round: 2 }]);

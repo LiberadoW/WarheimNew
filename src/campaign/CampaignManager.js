@@ -175,7 +175,7 @@ const pendingAction = (stage, battle, post, notes, army) => {
   }
   if (stage === 5 && !post.lootSold) {
     const q = lootQuote(battle, post);
-    if (q.needsCp) return null;
+    if (q.needsCp || q.syncProblem) return null;
     return {
       label: q.quantity
         ? `Sprzedaj ${q.quantity} za ${q.gold} zk i dalej`
@@ -235,6 +235,8 @@ const blocker = (stage, battle, post, notes, army) => {
   if (stage === 5 && !post.lootSold)
     return lootQuote(battle, post).needsCp
       ? "Rzuć test CP dowódcy (Rozrzutność)."
+      : lootQuote(battle, post).syncProblem
+        ? lootQuote(battle, post).syncProblem
       : "Zatwierdź sprzedaż lub pozostawienie łupów.";
   if (stage === 7 && post.effects?.strigosTheftPending)
     return "Zakończ handel z taborytami i rozstrzygnij kradzież.";
