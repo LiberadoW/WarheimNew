@@ -1,0 +1,13 @@
+{
+  "appId": "app.netlify.warheimbuilder",
+  "appName": "Warheim",
+  "webDir": "www",
+  "server": {
+    "url": "https://warheimbuilder.netlify.app",
+    "androidScheme": "https",
+    "cleartext": false
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "warheim-android",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Android wrapper (Capacitor) that opens the live Warheim site.",
+  "scripts": {
+    "android": "cap add android && capacitor-assets generate --android --iconBackgroundColor '#efe8db' --iconBackgroundColorDark '#121110' --splashBackgroundColor '#efe8db' --splashBackgroundColorDark '#121110' && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.3",
+    "@capacitor/core": "6.2.3"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "3.0.5",
+    "@capacitor/cli": "6.2.3"
+  }
+}
