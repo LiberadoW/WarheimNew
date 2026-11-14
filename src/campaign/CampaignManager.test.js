@@ -168,3 +168,24 @@ test("changing a step scrolls to and focuses the campaign heading", () => {
     HTMLElement.prototype.scrollIntoView = previous;
   }
 });
+
+test("validation errors receive focus and are scrolled into view", () => {
+  const scroll = jest.fn();
+  const previous = HTMLElement.prototype.scrollIntoView;
+  HTMLElement.prototype.scrollIntoView = scroll;
+  try {
+    setup();
+    click("Rozpocznij potyczkę");
+    click("Rozpocznij sekwencję po potyczce");
+    expect(document.activeElement).toBe(screen.getByRole("alert"));
+    expect(scroll).toHaveBeenCalledWith({ block: "center", behavior: "instant" });
+    fireEvent.change(screen.getByLabelText("Nazwa potyczki"), { target: { value: "Walidacja" } });
+    click("Rozpocznij sekwencję po potyczce");
+    click("Dalej: Doświadczenie i rozwój");
+    click("Dalej: Punkty kampanii");
+    expect(document.activeElement).toBe(screen.getByRole("alert"));
+    expect(screen.getByRole("alert").textContent).toMatch(/Nalicz PD/);
+  } finally {
+    HTMLElement.prototype.scrollIntoView = previous;
+  }
+});
