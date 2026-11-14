@@ -5,6 +5,7 @@ import specialSkills from "./special-skills.json";
 import characterProfiles from "./drama.json";
 import mercenaryProfiles from "./mercenary-profiles.json";
 import {
+  arcaneLores,
   collegeLores,
   hedgeSpell,
   isCaster,
@@ -42,7 +43,22 @@ function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
   const total = ready ? learnTotal(unit, dice) : null;
   const spell = total != null ? (hedge ? hedgeSpell(lore, total) : spellForRoll(lore, total)) : null;
   const known = spell && knownSpells(unit).some((s) => s.key === spell.key);
-  const finish = (fn, description) =>
+  // WIEDZA TAJEMNA: the own-lore result waits for the extra spell.
+  const arcane = arcaneLores(unit);
+  const chosen = advance.mainSpell || null;
+  const applyMain = (u, m) => {
+    if (m.mastery) u.spellMastery = { ...(u.spellMastery || {}), [m.key]: (Number(u.spellMastery?.[m.key]) || 0) + 1 };
+    else u.learnedSpells = [...(u.learnedSpells || []), m.key];
+  };
+  const finish = (fn, description) => {
+    if (arcane.length && !chosen) {
+      // Keep the own-lore result; the extra spell finishes the advance.
+      const mastery = /^opanowanie/.test(description);
+      patch((a) => {
+        a.mainSpell = { key: spell.key, mastery, description, roll: `${d.label}: ${total}` };
+      });
+      return;
+    }
     update((p) => {
       const u = p.units.find((x) => x.uniqueId === unit.uniqueId),
         a = p.advances.find((x) => x.id === advance.id);
@@ -51,6 +67,9 @@ function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
       a.description = description;
       R.log(p, "advance", `${R.label(u)}: ${description} (${d.label}: ${total})`);
     });
+  };
+  if (arcane.length && chosen)
+    return <ArcaneSpell unit={unit} advance={advance} lores={arcane} chosen={chosen} applyMain={applyMain} patch={patch} update={update} />;
   return (
     <div className="campaign-learn-spell">
       {hedge && (
@@ -108,6 +127,76 @@ function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
                 </button>
               </div>
             </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+// WIEDZA TAJEMNA (x): the extra spell from the lore in brackets, K6 read as
+// the number in brackets (spells 7–12); a known spell is rolled again.
+function ArcaneSpell({ unit, advance, lores, chosen, applyMain, patch, update }) {
+  const lore = lores.includes(advance.arcaneLore) ? advance.arcaneLore : lores[0];
+  const dice = advance.arcaneDice || [];
+  const ready = R.validDice(dice, 1);
+  const spell = ready ? hedgeSpell(lore, dice[0]) : null;
+  const known =
+    spell && (knownSpells(unit).some((s) => s.key === spell.key) || (!chosen.mastery && chosen.key === spell.key));
+  return (
+    <div className="campaign-learn-spell">
+      <p>
+        Z własnej tradycji: <strong>{chosen.description}</strong> ({chosen.roll}){" "}
+        <button type="button" className="button button-ghost button-small" onClick={() => patch((a) => { delete a.mainSpell; a.spellDice = []; })}>
+          Zmień
+        </button>
+      </p>
+      <p className="campaign-muted">
+        Wiedza tajemna: mag uczy się też dodatkowego czaru. K6 = numer w nawiasie na liście wybranej tradycji (zaklęcia
+        7–12); znane zaklęcie rzuca się ponownie.
+      </p>
+      {lores.length > 1 && (
+        <label>
+          Tradycja dodatkowego czaru
+          <select value={lore} disabled={ready} onChange={(e) => patch((a) => { a.arcaneLore = e.target.value; a.arcaneDice = []; })}>
+            {lores.map((l) => (
+              <option key={l}>{l}</option>
+            ))}
+          </select>
+        </label>
+      )}
+      <DiceInput label={`Dodatkowy czar: ${lore}`} count={1} value={dice} onChange={(v) => patch((a) => { a.arcaneDice = v; a.arcaneLore = lore; })} />
+      {spell && (
+        <>
+          <p>
+            K6: {dice[0]} → ({dice[0]}) na liście {lore} · <strong>{spell.name}</strong>{" "}
+            <span className="campaign-muted">{spell.cast}</span>
+          </p>
+          <p className="campaign-muted">{spell.text}</p>
+          {known ? (
+            <>
+              <p>Mag zna już to zaklęcie: rzuć ponownie.</p>
+              <button className="button button-secondary" onClick={() => patch((a) => { a.arcaneDice = []; })}>
+                Rzuć ponownie
+              </button>
+            </>
+          ) : (
+            <button
+              className="button"
+              onClick={() =>
+                update((p) => {
+                  const u = p.units.find((x) => x.uniqueId === unit.uniqueId),
+                    a = p.advances.find((x) => x.id === advance.id);
+                  applyMain(u, chosen);
+                  u.learnedSpells = [...(u.learnedSpells || []), spell.key];
+                  a.resolved = true;
+                  a.description = `${chosen.description}; Wiedza tajemna: ${spell.name} (${lore})`;
+                  R.log(p, "advance", `${R.label(u)}: ${a.description} (${chosen.roll}; K6: ${dice[0]})`);
+                })
+              }
+            >
+              Naucz się obu: {chosen.description.replace(/^nowe zaklęcie: /, "")} i {spell.name}
+            </button>
           )}
         </>
       )}

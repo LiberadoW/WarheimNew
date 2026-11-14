@@ -110,12 +110,26 @@ export const spellForRoll = (lore, total) =>
 export const isHedgeWizard = (unit) => has(unit, "Guślarstwo");
 export const hedgeSpell = (lore, roll) => spellForRoll(lore, roll + 6);
 
+// WIEDZA TAJEMNA (x): with every new spell of his own lore the mage also
+// learns one from the lore in brackets ("Kolegia Magii": any of the eight
+// college lores); a K6 reads the number in brackets, i.e. spells 7–12.
+export const arcaneLores = (unit) => {
+  if (!isMage(unit)) return [];
+  const rule = (unit.rules || []).find((r) => /^wiedza tajemna\s*\(/i.test(String(r)));
+  const inside = rule ? String(rule).match(/\((.+)\)/)?.[1] || "" : "";
+  if (!inside) return [];
+  if (/kolegia magii/i.test(inside)) return COLLEGE_LORES.filter((l) => magic[l]);
+  return [...new Set(inside.split(/\s+albo\s+/i).map(toLore).filter(Boolean))];
+};
+
 // Known spells are stored by their list heading (unit.learnedSpells); the
 // spell is looked up in the caster's lore, then in the college lores (a
 // GUŚLARZ knows spells of several).
 export const knownSpells = (unit) => {
   const lore = loreOf(unit);
-  const lores = [lore, ...(isHedgeWizard(unit) ? COLLEGE_LORES : [])].filter((l, i, a) => l && magic[l] && a.indexOf(l) === i);
+  const lores = [lore, ...(isHedgeWizard(unit) ? COLLEGE_LORES : []), ...arcaneLores(unit)].filter(
+    (l, i, a) => l && magic[l] && a.indexOf(l) === i,
+  );
   return (unit.learnedSpells || []).map((key) => {
     let found = null;
     for (const l of lores) {

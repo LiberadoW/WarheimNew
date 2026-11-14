@@ -164,3 +164,34 @@ test("Guślarstwo: a new spell from any college, K6 read from the brackets (spel
   expect(known).toHaveLength(2);
   expect(known[1]).toMatchObject({ lore: "Tradycja Cienia", from: 8 });
 });
+
+test("Wiedza tajemna: with a new spell the elf mage also learns one from a college lore", () => {
+  const AdvanceCard = require("./Advancement").default;
+  const R = require("./rules");
+  const { arcaneLores } = require("./spells");
+  const armies = require("../Data.js/Armies").default;
+  const { createUnit } = require("../Functions/createUnit");
+  const elf = { ...createUnit(armies["Elfowie Wysokiego Rodu z Ulthuanu"].heroes, "Mag elfów"), uniqueId: "e", exp: 20,
+    learnedSpells: [spellForRoll("Wysoka Magia", 12).key] };
+  expect(loreOf(elf)).toBe("Wysoka Magia");
+  expect(arcaneLores(elf)).toHaveLength(8);
+  let post = { units: [elf], journal: [], advances: [{ id: "a", unitId: "e", threshold: 21, resolved: false, rolls: [{ dice: [1, 3] }, { dice: [1, 1] }], selectedRoll: 0 }] };
+  const update = (fn) => { const n = R.clone(post); fn(n); post = n; view.rerender(card()); };
+  const card = () => <AdvanceCard advance={post.advances[0]} unit={post.units[0]} army={{ name: "x", heroes: {} }} post={post} update={update} />;
+  const view = render(card());
+  fireEvent.change(screen.getByLabelText("Umiejętność"), { target: { value: "spell:roll" } });
+  fireEvent.change(screen.getByLabelText("Zaklęcie: 2K6, kość 1"), { target: { value: "4" } });
+  fireEvent.change(screen.getByLabelText("Zaklęcie: 2K6, kość 2"), { target: { value: "4" } });
+  fireEvent.click(screen.getByRole("button", { name: /^Naucz się:/ }));
+  // The own-lore spell waits; the extra one comes from a chosen college lore.
+  expect(post.advances[0].resolved).toBe(false);
+  fireEvent.change(screen.getByLabelText("Tradycja dodatkowego czaru"), { target: { value: "Tradycja Cienia" } });
+  fireEvent.change(screen.getByLabelText("Dodatkowy czar: Tradycja Cienia, kość 1"), { target: { value: "2" } });
+  fireEvent.click(screen.getByRole("button", { name: /^Naucz się obu:/ }));
+  expect(post.advances[0].resolved).toBe(true);
+  const known = knownSpells(post.units[0]);
+  expect(known).toHaveLength(3);
+  expect(known[1]).toMatchObject({ lore: "Wysoka Magia", from: 8 });
+  expect(known[2]).toMatchObject({ lore: "Tradycja Cienia", from: 8 });
+  expect(post.advances[0].description).toMatch(/Wiedza tajemna: .+ \(Tradycja Cienia\)/);
+});
