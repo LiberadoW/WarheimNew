@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import RulesModal from "../Components/RulesModal";
 import { groupRoster, plural, STAT_LABELS } from "./roster";
+import StashList from "../campaign/StashList";
 
 // A read-only company: one row per unit with its stats, short equipment and
 // rules. Tapping a rule shows its text.
-const RosterView = ({ armyList, title }) => {
+const RosterView = ({ armyList, title, notes }) => {
   const [rule, setRule] = useState(null);
   const groups = groupRoster(armyList);
 
@@ -89,6 +90,16 @@ const RosterView = ({ armyList, title }) => {
           ))}
         </section>
       ))}
+      {notes && (
+        <section className="roster-group roster-stash">
+          <h4 className="roster-group-title">Skarbiec</h4>
+          <p className="roster-unit-equipment">
+            {Number(notes.skarbiec) || 0} zk
+            {Number(notes.kosztownosci) ? ` · ${notes.kosztownosci} łupów` : ""}
+          </p>
+          <StashList notes={notes} title="Przedmioty" />
+        </section>
+      )}
       {rule && (
         <RulesModal
           title={rule.name}

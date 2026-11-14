@@ -1224,3 +1224,32 @@ details.hub-round > summary {
   flex-wrap: wrap;
   gap: 6px;
 }
+
+/* The company's stash under the roster. */
+.stash-list ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 0.875rem;
+}
+
+.stash-list-empty {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Both players' sequences on a finished game. */
+.sequence-entry > summary {
+  font-weight: 600;
+}
+
+.sequence-units,
+.sequence-journal {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: 0.875rem;
+}
+
+.sequence-journal li + li {
+  margin-top: 2px;
+}

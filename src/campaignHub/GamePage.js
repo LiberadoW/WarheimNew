@@ -9,6 +9,7 @@ import { normalizeSpecialRules } from "../Components/CampaignPoints";
 import { getDefaultCampaignNotes } from "../layouts/App";
 import { ScenarioDetails } from "./ScenarioPicker";
 import RandomEventRoller from "./RandomEventRoller";
+import SequenceHistory from "./SequenceHistory";
 import WeatherRoller, { weatherHints } from "./WeatherRoller";
 import MagicPanel from "../campaign/MagicPanel";
 import { OptionalRuleChips } from "./OptionalRulesPicker";
@@ -670,6 +671,8 @@ export const GameScreen = ({
           </section>
         ))}
       </div>
+
+      {done && <SequenceHistory game={game} sides={sides} />}
 
       <section className="hub-card">
         <h3>Przebieg</h3>

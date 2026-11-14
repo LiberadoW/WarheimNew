@@ -197,3 +197,18 @@
 .campaign-points-editor-rules-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
 .campaign-points-editor-rules-list .campaign-points-editor-rule { min-height: 44px; padding: 8px 12px; margin: 0; border: 0 !important; border-bottom: 1px solid var(--border) !important; box-shadow: none !important; background: var(--surface); font-size: .9rem; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--text); }
 .campaign-points-editor-rules-list .campaign-points-editor-rule:last-child { border-bottom: 0 !important; }
+
+/* Items kept in the stash (read-only; the sequence after the skirmish fills it). */
+.stash-list {
+  margin-top: 12px;
+}
+
+.stash-list ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.stash-list-empty {
+  margin: 4px 0 0;
+  opacity: 0.7;
+}

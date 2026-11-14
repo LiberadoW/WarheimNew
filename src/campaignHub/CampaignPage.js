@@ -129,7 +129,7 @@ const PlayerRow = ({ uid, name, list, isOwner, canRemove, onRemove, isOpen, onTo
         )}
       </div>
     </div>
-    {isOpen && list && <RosterView armyList={list.armyList} title={`Rozpiska: ${name}`} />}
+    {isOpen && list && <RosterView armyList={list.armyList} notes={list.campaignNotes} title={`Rozpiska: ${name}`} />}
   </li>
 );
 
@@ -388,7 +388,9 @@ export const CampaignView = ({ campaign, lists, games, savedLists, user, loadErr
           <ul className="hub-history">
             {finished.map((game) => (
               <li key={game.id}>
-                <span className="hub-list-name">{gameLine(game, names)}</span>
+                <Link className="hub-list-name" to={`/campaigns/${campaign.id}/games/${game.id}`}>
+                  {gameLine(game, names)}
+                </Link>
                 <span className="hub-muted">
                   {[
                     game.round && `Runda ${game.round}`,

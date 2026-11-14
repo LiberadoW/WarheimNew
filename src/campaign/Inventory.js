@@ -23,6 +23,12 @@ function Inventory({ post, update, army }) {
         </select>
       </label>
       <h3>Skarbiec ekwipunku</h3>
+      <p className="campaign-muted">
+        Wybierz postać powyżej i kliknij <strong>Przydziel</strong> przy przedmiocie, żeby go jej dać. Grupa
+        stronników potrzebuje kompletu: po jednej sztuce dla każdego żyjącego modelu. Co zostanie w skarbcu,
+        przechodzi do następnej sekwencji. <strong>Usuń bez zwrotu</strong> jest dla przedmiotów zużytych lub
+        utraconych; żeby dostać złoto, sprzedaj przedmiot w kroku Handel (połowa ceny).
+      </p>
       {post.inventory.length ? (
         <ul className="campaign-stash">
           {post.inventory.map((item) => {
@@ -34,7 +40,11 @@ function Inventory({ post, update, army }) {
                   )
                 ? null
                 : "Sprawdź możliwość użycia tego znaleziska.";
-            const short = unit && item.quantity < R.modelCount(unit);
+            // A group needs one per living model (the dead keep nothing).
+            const living = unit
+              ? R.modelCount(unit) - (unit.campaignModelStatus || []).filter((s) => s.dead).length
+              : 0;
+            const short = unit && item.quantity < living;
             return (
               <li key={item.id}>
                 <div className="campaign-stash-row">
@@ -45,7 +55,7 @@ function Inventory({ post, update, army }) {
                       {permission
                         ? ` · ${permission}`
                         : short
-                          ? ` · za mało dla ${R.modelCount(unit)} modeli`
+                          ? ` · za mało dla ${living} modeli`
                           : ""}
                     </small>
                   </div>
@@ -69,13 +79,13 @@ function Inventory({ post, update, army }) {
                       setUseReason("");
                     }}
                   >
-                    Zużyj
+                    Usuń bez zwrotu
                   </button>
                 </div>
                 {using === item.id && (
                   <div className="campaign-stash-use">
                     <label>
-                      Powód zużycia / utraty przedmiotu
+                      Powód (zużyty, zgubiony, zniszczony…)
                       <input
                         value={useReason}
                         onChange={(e) => setUseReason(e.target.value)}
@@ -90,6 +100,10 @@ function Inventory({ post, update, army }) {
                           if (!stored || stored.quantity < 1)
                             throw Error("Brak przedmiotu.");
                           stored.quantity--;
+                          p.usedItems = [
+                            ...(p.usedItems || []),
+                            { id: R.uid(), item: { ...stored, quantity: 1 }, reason: useReason },
+                          ];
                           p.inventory = p.inventory.filter((i) => i.quantity > 0);
                           R.log(
                             p,
@@ -100,7 +114,7 @@ function Inventory({ post, update, army }) {
                         setUsing("");
                       }}
                     >
-                      Zużyj jedną sztukę
+                      Usuń jedną sztukę bez zwrotu złota
                     </button>
                   </div>
                 )}
@@ -110,6 +124,34 @@ function Inventory({ post, update, army }) {
         </ul>
       ) : (
         <p className="campaign-muted">Skarbiec ekwipunku jest pusty.</p>
+      )}
+      {(post.usedItems || []).length > 0 && (
+        <div className="campaign-joined">
+          <p>Usunięte w tej sekwencji:</p>
+          <ul>
+            {post.usedItems.map((u) => (
+              <li key={u.id}>
+                {u.item.name} · {u.reason}{" "}
+                <button
+                  type="button"
+                  className="button button-ghost button-small"
+                  onClick={() =>
+                    update((p) => {
+                      const used = (p.usedItems || []).find((x) => x.id === u.id);
+                      if (!used) return;
+                      const { id: _id, quantity: _q, name, ...extra } = used.item;
+                      R.storeItem(p, name, 1, extra);
+                      p.usedItems = p.usedItems.filter((x) => x !== used);
+                      R.log(p, "item-use", `${name}: przywrócono do skarbca.`);
+                    })
+                  }
+                >
+                  Przywróć
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
       {unit && (
         <details className="campaign-card">

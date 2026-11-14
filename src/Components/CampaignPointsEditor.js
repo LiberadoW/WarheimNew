@@ -1,4 +1,5 @@
 import NumberInput from "../campaign/NumberInput";
+import StashList from "../campaign/StashList";
 import React, { useState } from "react";
 import {
   CAMPAIGN_POINT_FIELDS,
@@ -159,7 +160,7 @@ const CampaignPointsEditor = ({ army, campaignNotes, setCampaignNotes }) => {
           />
         </label>
         <label className="campaign-notes-textarea-box">
-          <span className="bold">Skarbiec</span>
+          <span className="bold">Skarbiec (złote korony)</span>
           <textarea
             value={notes.skarbiec || ""}
             onChange={(event) =>
@@ -168,6 +169,7 @@ const CampaignPointsEditor = ({ army, campaignNotes, setCampaignNotes }) => {
           />
         </label>
       </div>
+      <StashList notes={notes} title="Przedmioty w skarbcu (z sekwencji po potyczce)" />
     </div>
   );
 };

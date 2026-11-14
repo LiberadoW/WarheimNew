@@ -112,7 +112,7 @@ const AdminPage = () => {
                             {open === key ? "Ukryj" : "Pokaż rozpiskę"}
                           </button>
                         </div>
-                        {open === key && <RosterView armyList={list.armyList || []} title={list.armyName} />}
+                        {open === key && <RosterView armyList={list.armyList || []} notes={list.campaignNotes} title={list.armyName} />}
                       </li>
                     );
                   })}

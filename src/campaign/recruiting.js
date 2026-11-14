@@ -56,6 +56,7 @@ export function recruit(
     tokenId,
     sourceReason = "",
     companyFree = false,
+    commandRole = "",
   } = {},
 ) {
   const problem = recruitmentProblem(post, army, name, mercenary);
@@ -74,7 +75,11 @@ export function recruit(
   if (!Number.isInteger(target) || target < 0)
     throw Error("Nieprawidłowa dostępność.");
   const u = createUnit(mercenary ? mercenariesList : army.heroes, name);
-  const cost = companyFree ? 0 : u.cost * R.modelCount(u);
+  if (commandRole) {
+    const problem = commandRoleProblem(post, u, commandRole);
+    if (problem) throw Error(problem);
+  }
+  const cost = (companyFree ? 0 : u.cost * R.modelCount(u)) + (commandRole ? R.COMMAND_COST : 0);
   if (post.treasury < cost) throw Error("Za mało złota na pełną rekrutację.");
   let token;
   if (target > 0) {
@@ -96,12 +101,33 @@ export function recruit(
     post.companyMercRecruited = true;
     u.campaignContract = { companyFree: true, recruitmentWaived: true };
   }
+  if (commandRole) {
+    // A banner bearer or musician forms his own group (s. 62).
+    u.optionalEquipment = [...(u.optionalEquipment || []), commandRole];
+    u.number = 2;
+    u.totalCost = R.groupTotalCost(u);
+  }
   post.units.push(u);
   applyCompanyRules(post);
   R.log(
     post,
     "recruitment",
-    `${name}: ${cost} zk · dostępność ${target || "powszechna"}. ${sourceReason}`,
+    `${name}${commandRole ? ` (${commandRole.toLowerCase()})` : ""}: ${cost} zk · dostępność ${target || "powszechna"}. ${sourceReason}`,
   );
   return u;
+}
+
+// CHORĄŻOWIE & SYGNALIŚCI (s. 62, rozdz. 9): a henchman recruited with this
+// rule may be promoted for 20 zk; the company has one banner bearer and one
+// musician at most.
+export const canCommand = (u) => (u?.rules || []).some((r) => /^chorążowie & sygnaliści/i.test(String(r)));
+export function commandRoleProblem(post, u, role) {
+  if (!["Chorąży", "Sygnalista"].includes(role)) return "Nieznana rola.";
+  if (!canCommand(u)) return "Ten model nie może zostać chorążym ani sygnalistą.";
+  if (R.modelCount(u) !== 1) return "Awansować można jeden model.";
+  const taken = post.units.some(
+    (x) => livingCount(x) > 0 && R.commandRoles(x).includes(role),
+  );
+  if (taken) return `Kompania ma już ${role === "Chorąży" ? "chorążego" : "sygnalistę"}.`;
+  return null;
 }

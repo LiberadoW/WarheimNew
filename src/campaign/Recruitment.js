@@ -3,14 +3,16 @@ import React, { useState } from "react";
 import { companyLevel } from "./company";
 import * as R from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
-import { recruit, recruitAvailability, recruitmentProblem } from "./recruiting";
+import { canCommand, commandRoleProblem, recruit, recruitAvailability, recruitmentProblem } from "./recruiting";
+import { createUnit } from "../Functions/createUnit";
 import { AvailabilityPool } from "./Trade";
 function RecruitmentForm({ post, update, army, mercenary }) {
   const [companyFree, setCompanyFree] = useState(false);
   const [name, setName] = useState(""),
     [manual, setManual] = useState(0),
     [reason, setReason] = useState(""),
-    [token, setToken] = useState("");
+    [token, setToken] = useState(""),
+    [role, setRole] = useState("");
   const definitions = mercenary
     ? Object.fromEntries(
         (army.mercenaries || [])
@@ -23,6 +25,10 @@ function RecruitmentForm({ post, update, army, mercenary }) {
       companyFree && mercenary ? 0 : recruitAvailability(army, name, mercenary),
     availability = imported ?? manual;
   const problem = name ? recruitmentProblem(post, army, name, mercenary) : null;
+  // Promotion to banner bearer / musician (+20 zk) for profiles with the rule.
+  const sample = !mercenary && definition ? createUnit(definitions, name) : null;
+  const roleOptions = sample && canCommand(sample) ? ["Chorąży", "Sygnalista"] : [];
+  const roleProblem = role && sample ? commandRoleProblem(post, sample, role) : null;
   // Rare recruits use the smallest pool result that is enough.
   const tokens = availability > 0 ? R.usableAvailability(post, availability) : [];
   const tokenId = tokens.some((t) => t.id === token) ? token : tokens[0]?.id || "";
@@ -52,6 +58,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
             setName(e.target.value);
             setToken("");
             setReason("");
+            setRole("");
           }}
         >
           <option value="">Wybierz</option>
@@ -75,12 +82,27 @@ function RecruitmentForm({ post, update, army, mercenary }) {
                     ? 2
                     : 1,
                 })}{" "}
-            zk{mercenary ? ` · żołd: ${definition.pay} zk` : ""} · Dostępność:{" "}
+            zk{role ? ` + ${R.COMMAND_COST} zk awansu na ${role.toLowerCase()}` : ""}
+            {mercenary ? ` · żołd: ${definition.pay} zk` : ""} · Dostępność:{" "}
             {imported === null
               ? "brak rozpoznanego profilu"
               : availability || "powszechna"}
           </p>
           {problem && <p>{problem}</p>}
+          {roleOptions.length > 0 && (
+            <label>
+              Awans (Chorążowie &amp; sygnaliści, +{R.COMMAND_COST} zk)
+              <select value={role} onChange={(e) => setRole(e.target.value)}>
+                <option value="">Bez awansu</option>
+                {roleOptions.map((r) => (
+                  <option key={r} value={r}>
+                    {r} (+{R.COMMAND_COST} zk)
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          {roleProblem && <p className="campaign-error">{roleProblem}</p>}
           {imported === null && (
             <>
               <label>
@@ -124,7 +146,8 @@ function RecruitmentForm({ post, update, army, mercenary }) {
             className="button"
             disabled={
               !!problem ||
-              (!companyFree && post.treasury < definition.cost) ||
+              !!roleProblem ||
+              (!companyFree && post.treasury < definition.cost + (role ? R.COMMAND_COST : 0)) ||
               (availability > 0 && !tokenId) ||
               (imported === null && !reason.trim())
             }
@@ -136,6 +159,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
                   availability,
                   tokenId,
                   sourceReason: reason,
+                  commandRole: role,
                 }),
               )
             }

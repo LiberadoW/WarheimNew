@@ -1,10 +1,10 @@
+import { stashItems } from "../campaign/StashList";
 import React from "react";
 import "../styles/Treasury.css";
 import { getPrestige } from "../Functions/getPrestige";
 
 const Treasury = ({ army, unitList, campaignNotes }) => {
   const prestigeValues = getPrestige(unitList, army);
-  console.log(campaignNotes, "campaignNotes in treasury");
   return (
     <div className="treasury-container">
       <div className="big-prestige">
@@ -107,6 +107,13 @@ const Treasury = ({ army, unitList, campaignNotes }) => {
         <div className="treasury-title">SKARBIEC</div>
         <div className="treasury-content">
           {campaignNotes?.skarbiec ? campaignNotes?.skarbiec : ""}
+          {stashItems(campaignNotes).length > 0 && (
+            <div className="treasury-items">
+              {stashItems(campaignNotes)
+                .map((i) => `${i.name}${Number(i.quantity) > 1 ? ` ×${i.quantity}` : ""}`)
+                .join(", ")}
+            </div>
+          )}
         </div>
       </div>
     </div>
