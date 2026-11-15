@@ -1253,3 +1253,11 @@ details.hub-round > summary {
 .sequence-journal li + li {
   margin-top: 2px;
 }
+
+/* Models missing games after wounds, or captured. */
+.roster-unit-pause {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}

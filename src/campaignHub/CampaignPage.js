@@ -5,7 +5,7 @@ import useHidePrintSheet from "../Functions/useHidePrintSheet";
 import RosterView from "./RosterView";
 import RoundsSection from "./RoundsSection";
 import CampaignSettings from "./CampaignSettings";
-import { countModels, plural } from "./roster";
+import { countModels, nextRoundFor, plural } from "./roster";
 import {
   deleteCampaign,
   describeError,
@@ -87,7 +87,7 @@ const MyGame = ({ campaignId, game, names, uid }) => {
   );
 };
 
-const PlayerRow = ({ uid, name, list, isOwner, canRemove, onRemove, isOpen, onToggle }) => (
+const PlayerRow = ({ uid, name, list, isOwner, canRemove, onRemove, isOpen, onToggle, nextRound }) => (
   <li className="hub-player">
     <div className="hub-player-row">
       <div className="hub-player-info">
@@ -129,7 +129,9 @@ const PlayerRow = ({ uid, name, list, isOwner, canRemove, onRemove, isOpen, onTo
         )}
       </div>
     </div>
-    {isOpen && list && <RosterView armyList={list.armyList} notes={list.campaignNotes} title={`Rozpiska: ${name}`} />}
+    {isOpen && list && (
+      <RosterView armyList={list.armyList} notes={list.campaignNotes} nextRound={nextRound} title={`Rozpiska: ${name}`} />
+    )}
   </li>
 );
 
@@ -358,6 +360,7 @@ export const CampaignView = ({ campaign, lists, games, savedLists, user, loadErr
               onRemove={handleRemove}
               isOpen={openRoster === uid}
               onToggle={() => setOpenRoster(openRoster === uid ? null : uid)}
+              nextRound={nextRoundFor(games, uid)}
             />
           ))}
         </ul>

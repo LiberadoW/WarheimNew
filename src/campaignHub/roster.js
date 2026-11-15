@@ -46,7 +46,33 @@ export const summarizeUnit = (unit) => {
     lore: loreOf(unit),
     spells: knownSpells(unit),
     injuries: lastingInjuries(unit.injuries),
+    // Models that miss games after wounds (skip = games left) or are captured.
+    pauses: Array.from({ length: modelCount(unit) }, (_, i) => ({
+      label: modelCount(unit) > 1 ? `#${i + 1}` : "",
+      skip: Math.max(0, Number(unit.campaignModelStatus?.[i]?.skip) || 0),
+      captured: !!unit.campaignModelStatus?.[i]?.captured,
+    })).filter((p) => p.skip > 0 || p.captured),
   };
+};
+
+// "opuszcza rundę 2" / "rundy 2 i 3" / "rundy 2–4"; without the campaign's
+// next round: "opuszcza następną potyczkę" / "2 następne potyczki".
+export const pauseText = (skip, nextRound) => {
+  if (!nextRound)
+    return skip === 1 ? "opuszcza następną potyczkę" : `opuszcza ${skip} następne potyczki`;
+  if (skip === 1) return `opuszcza rundę ${nextRound}`;
+  if (skip === 2) return `opuszcza rundy ${nextRound} i ${nextRound + 1}`;
+  return `opuszcza rundy ${nextRound}–${nextRound + skip - 1}`;
+};
+
+// The campaign round a player plays next: an unplayed game of theirs, or the
+// round after their last one.
+export const nextRoundFor = (games = [], uid) => {
+  const mine = games.filter((g) => !g.bye && (g.players || []).includes(uid));
+  const open = mine.filter((g) => g.status !== "done").map((g) => Number(g.round) || 0);
+  if (open.length) return Math.min(...open);
+  const done = mine.map((g) => Number(g.round) || 0);
+  return done.length ? Math.max(...done) + 1 : null;
 };
 
 // The company's leader (DOWÓDCA) heads the list; the rest keep their order.
