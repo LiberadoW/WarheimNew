@@ -16,6 +16,14 @@ const unit = (unitName, uniqueId) => ({
 });
 
 describe("getErrorMessages", () => {
+  test("a company that has played in a campaign has no gold limit", () => {
+    const list = [unit("Przemytnik", "a")];
+    const texts = (opts) => getErrorMessages(army, 900, 1, list, army.limit, opts).map((m) => m.message);
+    expect(texts()).toContain("Przekroczono liczbę złotych koron.");
+    expect(texts({ campaign: true })).not.toContain("Przekroczono liczbę złotych koron.");
+    expect(texts({ campaign: true })).toContain("Banda musi posiadać dowódcę.");
+  });
+
   test("the header count is the number of messages", () => {
     const list = [unit("Przemytnik", "a")];
     const messages = getErrorMessages(army, 900, 1, list, army.limit);

@@ -665,6 +665,9 @@ const Builder = ({
             errors={errors}
             setErrors={setErrors}
             onSelectUnit={handleSelectUnitFromError}
+            campaignStarted={
+              (campaignNotes?.campaign?.history || []).length > 0 || !!campaignNotes?.campaign?.activeBattle
+            }
           />
         </div>
 

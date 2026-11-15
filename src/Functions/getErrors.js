@@ -12,7 +12,9 @@ const unitWord = (count) =>
 // Every roster problem as { message, uniqueId? }. uniqueId points at the unit
 // to open when the message is selected. The count shown in the header is the
 // length of this list, so messages and count can never disagree.
-export const getErrorMessages = (army, totalCost, modelAmount, unitList, limit) => {
+// `campaign`: a company that has played in a campaign spends the gold it
+// earned, so the recruitment limit (and Zamożność's extra) no longer applies.
+export const getErrorMessages = (army, totalCost, modelAmount, unitList, limit, { campaign = false } = {}) => {
   const messages = [];
 
   unitList.forEach((item) => {
@@ -105,7 +107,7 @@ export const getErrorMessages = (army, totalCost, modelAmount, unitList, limit) 
     }
   });
 
-  if (totalCost > limit) {
+  if (!campaign && totalCost > limit) {
     messages.push({ message: "Przekroczono liczbę złotych koron." });
   }
   if (!isGeneral(unitList)) {
@@ -121,7 +123,7 @@ export const getErrorMessages = (army, totalCost, modelAmount, unitList, limit) 
       message: `Banda musi składać się z maksymalnie ${army.maxModels} modeli.`,
     });
   }
-  if (army.armyRules.includes("Zamożność") && totalCost > 500) {
+  if (!campaign && army.armyRules.includes("Zamożność") && totalCost > 500) {
     const valueOfOptionalEquipment = getValueOfOptionalEquipment(unitList);
 
     if (valueOfOptionalEquipment < totalCost - 500) {
@@ -135,7 +137,7 @@ export const getErrorMessages = (army, totalCost, modelAmount, unitList, limit) 
   return messages;
 };
 
-const getErrors = (army, totalCost, modelAmount, unitList, limit) =>
-  getErrorMessages(army, totalCost, modelAmount, unitList, limit).length;
+const getErrors = (army, totalCost, modelAmount, unitList, limit, options) =>
+  getErrorMessages(army, totalCost, modelAmount, unitList, limit, options).length;
 
 export default getErrors;

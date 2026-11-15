@@ -44,6 +44,7 @@ const ArmyInfo = ({
   isCustomArmyCost,
   customArmyCost,
   onSelectUnit,
+  campaignStarted = false,
 }) => {
   const [isErrorListOpen, setIsErrorListOpen] = useState(false);
   const { isEditArmyView } = useContext(EditArmyContext);
@@ -58,7 +59,7 @@ const ArmyInfo = ({
 
   const errorMessages = isEditArmyView
     ? []
-    : getErrorMessages(army, totalCost, modelAmount, unitList, limit);
+    : getErrorMessages(army, totalCost, modelAmount, unitList, limit, { campaign: campaignStarted });
 
   useEffect(() => {
     setErrors(errorMessages.length);
@@ -70,7 +71,7 @@ const ArmyInfo = ({
     }
   }, [errors]);
 
-  const isOverCost = !isEditArmyView && totalCost > limit;
+  const isOverCost = !isEditArmyView && !campaignStarted && totalCost > limit;
   const isOverModels = !isEditArmyView && modelAmount > army.maxModels;
 
   const handleSelectMessage = (uniqueId) => {
@@ -82,9 +83,9 @@ const ArmyInfo = ({
       <div className="army-summary-metrics">
         {!isEditArmyView && (
           <Metric
-            label="Złote korony"
+            label={campaignStarted ? "Wartość bandy (kampania, bez limitu)" : "Złote korony"}
             value={totalCost}
-            limit={limit}
+            limit={campaignStarted ? undefined : limit}
             isOver={isOverCost}
             overLabel="ponad limit"
           />
