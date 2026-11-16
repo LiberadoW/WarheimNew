@@ -99,3 +99,14 @@ export function settleStrigos(post, dice) {
     `Zakończenie handlu z taborytami: ${dice[0]}. ${dice[0] >= 5 ? "Kradzież: utrata całego złota i łupów." : "Bez kradzieży."}`,
   );
 }
+
+// A finished price roll binds: when a character's rolled price (with tax)
+// is within the treasury, that purchase must be made before anything else
+// is bought or the trade step is left. Rolling again with another character
+// to get a cheaper price is not allowed.
+export const quoteTotal = (q) => R.sum(Array.isArray(q?.unitPrices) && q.unitPrices.length ? q.unitPrices : [Number(q?.price) || 0]);
+export const purchaseObligations = (post) =>
+  Object.entries(post.quotes || {})
+    .filter(([, q]) => q?.committed && !q.used && quoteTotal(q) <= post.treasury)
+    .map(([key, q]) => ({ key, itemName: q.itemName || "przedmiot", recipient: q.recipient || "", total: quoteTotal(q) }));
+export const obligationText = (o) => `${o.itemName}${o.recipient ? ` dla: ${o.recipient}` : ""} za ${o.total} zk`;

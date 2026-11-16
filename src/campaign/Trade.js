@@ -14,6 +14,7 @@ import {
   giantArmourBlocked,
 } from "./trading";
 import DiceInput from "./DiceInput";
+import { obligationText, purchaseObligations } from "./trading";
 import Reference from "./Reference";
 import {
   catalog,
@@ -374,6 +375,30 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
     : priceReady ? Array.from({ length: quantity }, (_, i) => quotePrice(post, item, dice, discountRoll, { taxRoll: taxRolls[i], unit: priceUnit })) : null;
   const total = unitPrices?.length === quantity ? sum(unitPrices) : null;
   const availabilityReady = !item.availability || tokens.some(t=>t.id === tokenId);
+  // A finished roll is binding: it is saved at once and, if affordable, must
+  // be bought before anything else (and before another character rolls).
+  const committable = !saved && !completed && !reason && priceReady && availabilityReady && total != null;
+  useEffect(() => {
+    if (!committable) return;
+    update((p) => {
+      if (p.quotes[key] && !p.quotes[key].used) return;
+      p.quotes[key] = { id: uid(), itemId: item.id, price: unitPrices[0], unitPrices, quantity,
+        discountRoll, taxRolls: taxes ? taxRolls : [], chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
+        dice, tokenId, used: false, committed: true, itemName: item.name, recipient };
+      log(p,"price",`${item.name} (${recipient}): ${total} zk za ${quantity} szt. (kości: ${dice.join(",") || "cena stała"}${taxes ? `; podatek ${taxRolls.map((r, i) => `szt. ${i + 1}: ${r.join("+")}`).join("; ")}` : ""}${giantArmour(priceUnit, item) ? "; wielkolud x2" : ""})`);
+    });
+  }, [committable]); // eslint-disable-line react-hooks/exhaustive-deps
+  const otherObligation = purchaseObligations(post).find((o) => o.key !== key);
+  if (otherObligation && !completed)
+    return (
+      <article className="campaign-purchase" aria-label={`Zakup: ${item.name}`}>
+        <button type="button" className="campaign-back" onClick={onBack}>← Wróć do przedmiotów</button>
+        <h3>{item.name}</h3>
+        <p className="campaign-error">
+          Najpierw kup {obligationText(otherObligation)}: rzut ceny pozwala na ten zakup, więc trzeba go dokonać.
+        </p>
+      </article>
+    );
   return (
     <article className="campaign-purchase" aria-label={`Zakup: ${item.name}`}>
       <button type="button" className="campaign-back" onClick={onBack}>← Wróć do przedmiotów</button>

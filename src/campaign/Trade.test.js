@@ -182,20 +182,35 @@ test("a group sells the whole set and mercenaries keep their gear", () => {
   expect(R.canSellCarried(post.units[1], "optionalEquipment", 0)).toBe(false);
   expect(() => R.sellUnitItem(post, "m", "optionalEquipment", 0)).toThrow();
 });
-test("each recipient keeps his own tax roll for an item",()=>{
+test("each recipient keeps his own tax roll when the first one cannot pay",()=>{
   const second={...R.clone(unit),uniqueId:"h2",unitName:"Herszt",unitDisplayName:"Drugi"};
-  setup({},100,[second],{armyRules:["Podatek"]});
+  setup({},15,[second],{armyRules:["Podatek"]});
+  const tax="Podatek (cena podstawowa 10 zk): +1K6, kość 1";
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");change(tax,"6");
+  // 16 zk with 15 in the treasury: no obligation, another hero may try.
+  click("← Wróć do przedmiotów");change("Postać","h2");
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  expect(screen.getByLabelText(tax).value).toBe("");change(tax,"6");
+  click("← Wróć do przedmiotów");change("Postać","h");
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  expect(screen.getByLabelText(tax).value).toBe("6");
+  expect(screen.getByLabelText(tax).disabled).toBe(true);
+});
+test("an affordable rolled price must be bought before anything else",()=>{
+  const second={...R.clone(unit),uniqueId:"h2",unitName:"Herszt",unitDisplayName:"Drugi"};
+  const {state}=setup({},100,[second],{armyRules:["Podatek"]});
   const tax="Podatek (cena podstawowa 10 zk): +1K6, kość 1";
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");change(tax,"6");
   click("← Wróć do przedmiotów");change("Postać","h2");
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
-  // The second hero rolls his own tax.
-  expect(screen.getByLabelText(tax).value).toBe("");change(tax,"2");
+  expect(screen.getByText(/Najpierw kup Miecz dla: Herszt za 16 zk/)).toBeTruthy();
+  expect(screen.queryByLabelText(tax)).toBeNull();
   click("← Wróć do przedmiotów");change("Postać","h");
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");click("Kup za 16 zk");
+  expect(state.post.treasury).toBe(84);
+  click("Wróć do listy");change("Postać","h2");
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
-  // The first hero's roll is still there and cannot be changed.
-  expect(screen.getByLabelText(tax).value).toBe("6");
-  expect(screen.getByLabelText(tax).disabled).toBe(true);
+  expect(screen.getByLabelText(tax).value).toBe("");
 });
 test("the availability bribe is on view before rolling and costs 2K6 gold",()=>{
   const {state}=setup();

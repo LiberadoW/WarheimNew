@@ -17,6 +17,7 @@ import { addTreasurePd } from "./treasure";
 import { applyArmourDamage } from "./armourDamage";
 import { canReopen, packLastSequence, reopenSequence } from "./sequenceStore";
 import MerchantCard from "./MerchantCard";
+import { obligationText, purchaseObligations } from "./trading";
 import { merchantVisits } from "./merchant";
 import { PLAGUE_TEXT, applyPlague, failsToughness, plagueDeathsWithoutStash, plagueTasks, stashPlagueDeath, undoPlague } from "./plague";
 import UnitAdjustments from "./UnitAdjustments";
@@ -189,6 +190,9 @@ const pendingAction = (stage, battle, post, notes, army) => {
 
 // Why the sequence cannot leave a step yet, or "" when it can.
 const blocker = (stage, battle, post, notes, army) => {
+  // A rolled price the company can pay must be bought (trading steps).
+  if (stage >= 7 && purchaseObligations(post).length)
+    return `Najpierw kup ${obligationText(purchaseObligations(post)[0])}: rzut ceny pozwala na ten zakup.`;
   // Zaraza found after the injuries step (a sequence started earlier).
   if (stage > 1 && plagueTasks(post, battle).some((t) => !post.plague?.[t.key]))
     return "Rozstrzygnij skutki zarazy (test WT po potyczce).";
@@ -651,6 +655,8 @@ export default function CampaignManager({
         throw Error("Rozstrzygnij choroby psychiczne z nowych progów Obłędu.");
       if (plagueTasks(post, battle).some((t) => !post.plague?.[t.key]))
         throw Error("Rozstrzygnij skutki zarazy (test WT po potyczce).");
+      if (purchaseObligations(post).length)
+        throw Error(`Najpierw kup ${obligationText(purchaseObligations(post)[0])}: rzut ceny pozwala na ten zakup.`);
       const result = R.finalizePostBattle(battle, campaignNotes);
       // Kept so the sequence can be reopened until the next skirmish.
       result.notes.campaign = {
