@@ -817,6 +817,30 @@ export const unstoreItems = (post, names = []) => {
   });
   post.inventory = (post.inventory || []).filter((i) => i.quantity > 0);
 };
+// Undoing an advance (a reopened sequence): what an advance may change on the
+// unit is saved before it is applied and put back by undoAdvance.
+const ADVANCE_FIELDS = [
+  "stats", "campaignAdvancements", "rules", "baseRules", "newRules", "learnedSpells",
+  "spellMastery", "campaignRuleTexts", "mentalIllnesses",
+];
+export const snapshotAdvance = (advance, unit) => {
+  advance.undo = Object.fromEntries(
+    ADVANCE_FIELDS.filter((f) => unit[f] !== undefined).map((f) => [f, clone(unit[f])]),
+  );
+};
+export const undoAdvance = (post, advanceId) => {
+  const a = post.advances.find((x) => x.id === advanceId);
+  if (!a?.resolved || !a.undo) throw Error("Tego rozwinięcia nie można cofnąć.");
+  const u = post.units.find((x) => x.uniqueId === a.unitId);
+  if (!u) throw Error("Nie znaleziono postaci.");
+  ADVANCE_FIELDS.forEach((f) => {
+    if (f in a.undo) u[f] = clone(a.undo[f]);
+    else delete u[f];
+  });
+  log(post, "advance", `${label(u)}: cofnięto rozwinięcie (${a.description}).`);
+  a.resolved = false;
+  ["undo", "description", "mainSpell", "arcaneDice", "arcaneLore", "spellDice", "spellLore"].forEach((k) => delete a[k]);
+};
 export const applyInjury = (post, task, result, detail = {}) => {
   if (post.injuries[task.key])
     throw Error("Obrażenia tego modelu już rozstrzygnięto.");

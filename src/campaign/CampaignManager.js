@@ -15,6 +15,7 @@ import Exploration, { applyExploration, explorationState } from "./Exploration";
 import { companyInjuryModifier } from "./company";
 import { addTreasurePd } from "./treasure";
 import { applyArmourDamage } from "./armourDamage";
+import { canReopen, packLastSequence, reopenSequence } from "./sequenceStore";
 import MerchantCard from "./MerchantCard";
 import { merchantVisits } from "./merchant";
 import { PLAGUE_TEXT, applyPlague, failsToughness, plagueDeathsWithoutStash, plagueTasks, stashPlagueDeath, undoPlague } from "./plague";
@@ -651,9 +652,15 @@ export default function CampaignManager({
       if (plagueTasks(post, battle).some((t) => !post.plague?.[t.key]))
         throw Error("Rozstrzygnij skutki zarazy (test WT po potyczce).");
       const result = R.finalizePostBattle(battle, campaignNotes);
+      // Kept so the sequence can be reopened until the next skirmish.
+      result.notes.campaign = {
+        ...result.notes.campaign,
+        lastSequence: packLastSequence(unitList, campaignNotes),
+      };
       const outcome = await onFinish({
         ...result,
         campaignGame: battle.campaignGame || null,
+        reopened: !!battle.reopened,
       });
       setUnitList(result.units);
       setCampaignNotes(result.notes);
@@ -718,6 +725,29 @@ export default function CampaignManager({
               Wróć do kampanii
             </a>
           )}
+        </section>
+      )}
+      {!battle && canReopen(campaignNotes) && (
+        <section className="campaign-card campaign-reopen">
+          <p>
+            Ostatnią sekwencję po potyczce (
+            {(campaignNotes.campaign.history || []).at(-1)?.gameName || "ostatnia potyczka"}) możesz otworzyć
+            ponownie i zmienić decyzje, np. podział ekwipunku albo rozwinięcia. Rozpoczęcie kolejnej potyczki ją
+            zamyka.
+          </p>
+          <button
+            type="button"
+            className="button button-secondary"
+            onClick={() => {
+              if (!window.confirm("Otworzyć ostatnią sekwencję ponownie? Kompania wróci do stanu sprzed jej zapisania, a po zmianach zapiszesz ją jeszcze raz.")) return;
+              const reopened = reopenSequence(campaignNotes);
+              setUnitList(reopened.unitList);
+              setCampaignNotes(reopened.notes);
+              setFinished(null);
+            }}
+          >
+            Otwórz ostatnią sekwencję ponownie
+          </button>
         </section>
       )}
       {!battle ? (

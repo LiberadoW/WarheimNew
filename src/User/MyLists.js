@@ -1,3 +1,4 @@
+import { unpack } from "../campaign/sequenceStore";
 import { getArmyName, normalizeRosterNames } from "../Data.js/RulebookNames";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
@@ -121,12 +122,17 @@ const MyLists = (
     };
 
     const renamedList = normalizeRosterNames(list);
-    setUnitList(renamedList.armyList);
+    // A sequence under way saved on the account resumes where it was left.
+    const draft = unpack(list.sequenceDraft);
+    setUnitList(draft?.unitList || renamedList.armyList);
     setArmy(renamedList.armyType);
     setArmyName(list.armyName);
     setCampaignNotes({
       ...loadedCampaignNotes,
       specialRules: normalizeSpecialRules(loadedCampaignNotes.specialRules),
+      ...(draft?.battle
+        ? { campaign: { ...(loadedCampaignNotes.campaign || {}), activeBattle: draft.battle } }
+        : {}),
     });
     navigate(route);
   };

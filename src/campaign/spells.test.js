@@ -214,3 +214,22 @@ test("Wiedza tajemna catch-up: missing extra spells are added in the builder", (
   view.unmount();
   expect(missingArcaneSpells({ ...base, learnedSpells: [spellForRoll("Wysoka Magia", 7).key] })).toBe(0);
 });
+
+test("a resolved advance can be undone and chosen again", () => {
+  const AdvanceCard = require("./Advancement").default;
+  const R = require("./rules");
+  const mage = unit("m", ["Mag (Tradycja Ognia)"], { unitName: "Czarodziej", exp: 20, skills: [0, 1],
+    learnedSpells: ["7 (1) GOREJĄCY MIECZ RHUIN"], stats: { Początkowa: [4,3,3,3,3,1,4,1,7], Maksymalna: [4,6,6,4,4,3,6,4,9] } });
+  let post = { units: [mage], journal: [], advances: [{ id: "a", unitId: "m", threshold: 21, resolved: false, rolls: [{ dice: [1, 3] }, { dice: [1, 1] }], selectedRoll: 0 }] };
+  const update = (fn) => { const n = R.clone(post); fn(n); post = n; view.rerender(card()); };
+  const card = () => <AdvanceCard advance={post.advances[0]} unit={post.units[0]} army={{ name: "x", heroes: {} }} post={post} update={update} />;
+  const view = render(card());
+  fireEvent.change(screen.getByLabelText("Umiejętność"), { target: { value: "spell:roll" } });
+  fireEvent.change(screen.getByLabelText("Zaklęcie: 2K6, kość 1"), { target: { value: "3" } });
+  fireEvent.change(screen.getByLabelText("Zaklęcie: 2K6, kość 2"), { target: { value: "4" } });
+  fireEvent.click(screen.getByRole("button", { name: "Lepiej opanuje: Gorejący miecz Rhuin" }));
+  fireEvent.click(screen.getByRole("button", { name: "Cofnij i wybierz inaczej" }));
+  expect(post.advances[0].resolved).toBe(false);
+  expect(post.units[0].spellMastery).toBeUndefined();
+  expect(screen.getByLabelText("Umiejętność")).toBeTruthy();
+});

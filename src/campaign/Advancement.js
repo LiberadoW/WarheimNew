@@ -62,6 +62,7 @@ function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
     update((p) => {
       const u = p.units.find((x) => x.uniqueId === unit.uniqueId),
         a = p.advances.find((x) => x.id === advance.id);
+      R.snapshotAdvance(a, u);
       fn(u);
       a.resolved = true;
       a.description = description;
@@ -187,6 +188,7 @@ function ArcaneSpell({ unit, advance, lores, chosen, applyMain, patch, update })
                 update((p) => {
                   const u = p.units.find((x) => x.uniqueId === unit.uniqueId),
                     a = p.advances.find((x) => x.id === advance.id);
+                  R.snapshotAdvance(a, u);
                   applyMain(u, chosen);
                   u.learnedSpells = [...(u.learnedSpells || []), spell.key];
                   a.resolved = true;
@@ -241,6 +243,21 @@ function AdvanceCard({ advance, unit, army, post, update }) {
     return (
       <p className="campaign-card">
         {R.label(unit)} · {advance.threshold} PD: {advance.description}
+        {advance.undo && (
+          <>
+            {" "}
+            <button
+              type="button"
+              className="button button-ghost button-small"
+              onClick={() => {
+                setChoice("");
+                update((p) => R.undoAdvance(p, advance.id));
+              }}
+            >
+              Cofnij i wybierz inaczej
+            </button>
+          </>
+        )}
       </p>
     );
   const n =
@@ -378,6 +395,7 @@ function AdvanceCard({ advance, unit, army, post, update }) {
                 update((p) => {
                   const u = p.units.find((x) => x.uniqueId === unit.uniqueId),
                     a = p.advances.find((x) => x.id === advance.id);
+                  R.snapshotAdvance(a, u);
                   if (choice.startsWith("stat:")) {
                     const i = Number(choice.slice(5));
                     if (!R.availableStats(u, n).includes(i))

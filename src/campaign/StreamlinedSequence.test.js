@@ -306,3 +306,29 @@ test("in a campaign game the sale waits for the opponent's declaration", async (
   click("Bez sprzedaży łupów, dalej");
   expect(battle(state).post.lootSold).toBe(true);
 });
+
+test("a finished sequence can be reopened and saved again", async () => {
+  const finish = jest.fn().mockResolvedValue(null);
+  const { state } = setup([hero()], { finish });
+  click("Dalej: Doświadczenie i rozwój");
+  click("Nalicz doświadczenie i dalej");
+  click("Zatwierdź punkty i dalej");
+  fireEvent.change(screen.getByLabelText("Eksploracja, kość 1"), { target: { value: "4" } });
+  click("Zatwierdź eksplorację i dalej");
+  click("Bez sprzedaży łupów, dalej");
+  click("Pomiń do podsumowania");
+  const exp = battle(state).post.units[0].exp;
+  click("Zapisz rozliczenie i zakończ potyczkę");
+  await waitFor(() => expect(state.draft.campaignNotes.campaign.activeBattle).toBeNull());
+  expect(state.draft.campaignNotes.campaign.history).toHaveLength(1);
+  const confirm = jest.spyOn(window, "confirm").mockReturnValue(true);
+  click("Otwórz ostatnią sekwencję ponownie");
+  confirm.mockRestore();
+  expect(state.draft.campaignNotes.campaign.history).toHaveLength(0);
+  expect(battle(state)).toMatchObject({ stage: 11, reopened: true });
+  expect(battle(state).post.units[0].exp).toBe(exp);
+  click("Zapisz rozliczenie i zakończ potyczkę");
+  await waitFor(() => expect(state.draft.campaignNotes.campaign.activeBattle).toBeNull());
+  expect(state.draft.campaignNotes.campaign.history).toHaveLength(1);
+  expect(finish.mock.calls[1][0].reopened).toBe(true);
+});

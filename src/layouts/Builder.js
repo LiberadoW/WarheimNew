@@ -2,6 +2,7 @@ import { getArmyName } from "../Data.js/RulebookNames";
 import React, {
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
   createContext,
@@ -41,6 +42,7 @@ import CampaignTargetBanner, {
   setCampaignTarget,
 } from "../campaignHub/CampaignTarget";
 import { markSequenceDone, uploadCampaignList } from "../campaignHub/campaignService";
+import { packDraft } from "../campaign/sequenceStore";
 
 export const CommandContext = createContext();
 
@@ -415,7 +417,44 @@ const Builder = ({
     setCustomArmyCost(e.target.value);
   };
 
-  const finishCampaignBattle = async ({ units, notes, entry, campaignGame }) => {
+  // The sequence under way is copied to the saved company on the account
+  // (a few seconds after each change), so opening another company or another
+  // device does not lose it. Only a draft this device saved is ever cleared.
+  const activeBattle = campaignNotes?.campaign?.activeBattle || null;
+  const sequenceDraft = useMemo(
+    () => (activeBattle ? packDraft(unitList, activeBattle) : null),
+    [activeBattle, unitList],
+  );
+  const savedDraft = useRef(null);
+  const [draftSaveError, setDraftSaveError] = useState("");
+  useEffect(() => {
+    const uid = currentUser?.user?.uid;
+    if (!uid || !armyName.trim()) return undefined;
+    if (sequenceDraft === savedDraft.current) return undefined;
+    if (!sequenceDraft && !savedDraft.current) return undefined;
+    const timer = setTimeout(async () => {
+      try {
+        const ref = doc(db, "lists", uid);
+        await runTransaction(db, async (transaction) => {
+          const snapshot = await transaction.get(ref);
+          const lists = [...(snapshot.data()?.lists || [])];
+          const index = lists.findIndex(
+            (item) => item.armyName === armyName && getArmyName(item.armyType) === army.name,
+          );
+          if (index === -1 || (lists[index].sequenceDraft || null) === sequenceDraft) return;
+          lists[index] = { ...lists[index], sequenceDraft };
+          transaction.update(ref, { lists });
+        });
+        savedDraft.current = sequenceDraft;
+        setDraftSaveError("");
+      } catch {
+        setDraftSaveError("Nie udało się zapisać sekwencji na koncie; zostaje na tym urządzeniu.");
+      }
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [sequenceDraft, armyName, army.name, currentUser?.user?.uid]);
+
+  const finishCampaignBattle = async ({ units, notes, entry, campaignGame, reopened = false }) => {
     if (!currentUser?.user?.uid) return; // Guest campaigns remain in the device draft.
     let savedList = null;
     if (!armyName.trim())
@@ -436,12 +475,14 @@ const Builder = ({
           "Najpierw zapisz kompanię na koncie przyciskiem Zapisz armię.",
         );
       const saved = lists[index];
+      // A reopened sequence replaces the entry it saved before.
       if (
+        !reopened &&
         saved.campaignNotes?.campaign?.history?.some((h) => h.id === entry.id)
       )
         return;
       const knownIds = new Set(
-        (campaignNotes.campaign?.history || []).map((h) => h.id),
+        [...(campaignNotes.campaign?.history || []).map((h) => h.id), entry.id],
       );
       if (
         (saved.campaignNotes?.campaign?.history || []).some(
@@ -459,8 +500,10 @@ const Builder = ({
         timestamp: Timestamp.now(),
         totalCost: getTotalCost(units),
         prestige: getPrestige(units)[0],
+        // Finished: nothing under way to keep any more.
+        sequenceDraft: null,
         gameHistory: [
-          ...(saved.gameHistory || []),
+          ...(saved.gameHistory || []).filter((g) => g.id !== entry.id),
           {
             id: entry.id,
             gameName: entry.gameName,
@@ -477,6 +520,8 @@ const Builder = ({
       savedList = lists[index];
       transaction.update(ref, { lists });
     });
+    // The account no longer holds a sequence under way.
+    savedDraft.current = null;
     // A game from a shared campaign: the other players see the company after
     // the sequence without a manual re-upload. The sequence itself is saved
     // already, so a failed upload only asks for the manual one.
@@ -510,6 +555,11 @@ const Builder = ({
               setTarget(null);
             }}
           />
+        )}
+        {isPlayArmyView && draftSaveError && (
+          <p className="campaign-error" role="alert">
+            {draftSaveError}
+          </p>
         )}
         {isPlayArmyView && (
           <CampaignManager

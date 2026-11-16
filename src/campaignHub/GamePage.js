@@ -10,6 +10,7 @@ import { getDefaultCampaignNotes } from "../layouts/App";
 import { ScenarioDetails } from "./ScenarioPicker";
 import RandomEventRoller from "./RandomEventRoller";
 import SequenceHistory from "./SequenceHistory";
+import { canReopen, reopenSequence, unpack } from "../campaign/sequenceStore";
 import WeatherRoller, { weatherHints } from "./WeatherRoller";
 import MagicPanel from "../campaign/MagicPanel";
 import { OptionalRuleChips } from "./OptionalRulesPicker";
@@ -467,6 +468,21 @@ export const GameScreen = ({
       return;
     }
     const list = normalizeRosterNames(saved);
+    // This game's sequence under way, saved on the account: resume it.
+    const draft = unpack(saved.sequenceDraft);
+    if (draft?.battle?.campaignGame?.gameId === game.id) {
+      setUnitList(draft.unitList);
+      setArmy(list.armyType);
+      setArmyName(list.armyName);
+      setCampaignNotes({
+        ...getDefaultCampaignNotes(),
+        ...(list.campaignNotes || {}),
+        specialRules: normalizeSpecialRules(list.campaignNotes?.specialRules),
+        campaign: { ...(list.campaignNotes?.campaign || {}), activeBattle: draft.battle },
+      });
+      navigate("/play");
+      return;
+    }
     const history = list.campaignNotes?.campaign?.history || [];
     if (history.some((h) => h.campaignGame?.gameId === game.id)) {
       setError("Sekwencja po tej grze została już rozliczona dla tej kompanii.");
@@ -509,6 +525,28 @@ export const GameScreen = ({
     navigate("/play");
   };
 
+  // The settled sequence of this game, reopened until the next skirmish.
+  const reopen = async () => {
+    const mine = sides.find((s) => s.owner === user.uid);
+    const saved = (await getMySavedLists(user.uid)).find(
+      (l) => l.armyName === mine.list?.armyName && normalizeRosterNames(l).armyType === mine.list?.armyType,
+    );
+    const notes = saved && { ...getDefaultCampaignNotes(), ...(saved.campaignNotes || {}) };
+    const last = notes && unpack(notes.campaign?.lastSequence);
+    if (!saved || !canReopen(notes) || last?.battle?.campaignGame?.gameId !== game.id) {
+      setError("Tej sekwencji nie można już otworzyć: kompania rozpoczęła kolejną potyczkę albo zapisano ją w starszej wersji aplikacji.");
+      return;
+    }
+    if (!window.confirm("Otworzyć sekwencję ponownie? Kompania wróci do stanu sprzed jej zapisania, a po zmianach zapiszesz ją jeszcze raz.")) return;
+    const reopened = reopenSequence(notes);
+    const list = normalizeRosterNames(saved);
+    setUnitList(reopened.unitList);
+    setArmy(list.armyType);
+    setArmyName(list.armyName);
+    setCampaignNotes({ ...reopened.notes, specialRules: normalizeSpecialRules(reopened.notes.specialRules) });
+    navigate("/play");
+  };
+
   const log = [...(play.log || [])].reverse();
 
   return (
@@ -543,7 +581,16 @@ export const GameScreen = ({
           </h3>
           <p className="hub-muted">Sekwencja po potyczce: {settlementLine(game, names)}</p>
           {settled ? (
-            <p className="hub-notice">✓ Sekwencja po potyczce Twojej kompanii jest już rozliczona.</p>
+            <>
+              <p className="hub-notice">✓ Sekwencja po potyczce Twojej kompanii jest już rozliczona.</p>
+              <p className="hub-muted">
+                Do rozpoczęcia kolejnej potyczki możesz ją otworzyć ponownie i zmienić decyzje (podział ekwipunku,
+                rozwinięcia).
+              </p>
+              <button type="button" className="button button-secondary" onClick={reopen}>
+                Otwórz sekwencję ponownie
+              </button>
+            </>
           ) : (
             <>
               <p className="hub-muted">
