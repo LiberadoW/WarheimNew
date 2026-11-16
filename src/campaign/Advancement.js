@@ -6,7 +6,7 @@ import characterProfiles from "./drama.json";
 import mercenaryProfiles from "./mercenary-profiles.json";
 import {
   arcaneLores,
-  collegeLores,
+  bracketLores,
   hedgeSpell,
   isCaster,
   isHedgeWizard,
@@ -35,9 +35,11 @@ const checkLabel = (text, value, onChange) => (
 // be rerolled or taken as mastery of that spell.
 function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
   const d = learnDice(unit);
-  const hedge = isHedgeWizard(unit);
-  // GUŚLARSTWO: the player picks the college for this spell.
-  const lore = hedge ? advance.spellLore || ownLore : ownLore;
+  // GUŚLARSTWO (a college lore) and MAG DAO (Yin or Yang): the player picks
+  // the list, a K6 reads the number in brackets.
+  const choices = bracketLores(unit);
+  const hedge = !!choices;
+  const lore = hedge ? (choices.includes(advance.spellLore) ? advance.spellLore : choices.includes(ownLore) ? ownLore : choices[0]) : ownLore;
   const dice = advance.spellDice || [];
   const ready = R.validDice(dice, d.count);
   const total = ready ? learnTotal(unit, dice) : null;
@@ -75,13 +77,13 @@ function LearnSpell({ unit, advance, lore: ownLore, patch, update }) {
     <div className="campaign-learn-spell">
       {hedge && (
         <label>
-          Guślarstwo: Kolegium Magii dla tego zaklęcia
+          {isHedgeWizard(unit) ? "Guślarstwo: Kolegium Magii dla tego zaklęcia" : "Mag Dao: lista dla tego zaklęcia"}
           <select
             value={lore || ""}
             disabled={ready}
             onChange={(e) => patch((a) => { a.spellLore = e.target.value; a.spellDice = []; })}
           >
-            {collegeLores().map((l) => (
+            {choices.map((l) => (
               <option key={l}>{l}</option>
             ))}
           </select>

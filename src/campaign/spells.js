@@ -109,6 +109,18 @@ export const spellForRoll = (lore, total) =>
 // picks; a K6 reads the number in brackets on that list, i.e. spells 7–12.
 export const isHedgeWizard = (unit) => has(unit, "Guślarstwo");
 export const hedgeSpell = (lore, roll) => spellForRoll(lore, roll + 6);
+// MAG DAO (s. 562): each further spell comes from Tradycja Yin or Tradycja
+// Yang, the player's pick; a K6 reads the number in brackets.
+export const isDaoMage = (unit) =>
+  isMage(unit) && (unit.rules || []).some((r) => /^mag\s*\(.*dao/i.test(String(r)));
+// The lores a new spell may come from, read by a K6 on the bracketed number;
+// null for a caster who rolls on his own list.
+export const bracketLores = (unit) =>
+  isHedgeWizard(unit)
+    ? COLLEGE_LORES.filter((l) => magic[l])
+    : isDaoMage(unit)
+      ? ["Tradycja Yin", "Tradycja Yang"].filter((l) => magic[l])
+      : null;
 
 // WIEDZA TAJEMNA (x): with every new spell of his own lore the mage also
 // learns one from the lore in brackets ("Kolegia Magii": any of the eight
@@ -127,7 +139,7 @@ export const arcaneLores = (unit) => {
 // GUŚLARZ knows spells of several).
 export const knownSpells = (unit) => {
   const lore = loreOf(unit);
-  const lores = [lore, ...(isHedgeWizard(unit) ? COLLEGE_LORES : []), ...arcaneLores(unit)].filter(
+  const lores = [lore, ...(bracketLores(unit) || []), ...arcaneLores(unit)].filter(
     (l, i, a) => l && magic[l] && a.indexOf(l) === i,
   );
   return (unit.learnedSpells || []).map((key) => {
@@ -171,7 +183,7 @@ export const firstSpellOptions = (unit, roll) => {
 export const learnDice = (unit) =>
   isPriest(unit)
     ? { count: 3, sides: 3, label: "3K3" }
-    : isHedgeWizard(unit)
+    : bracketLores(unit)
       ? { count: 1, sides: 6, label: "K6" }
       : { count: 2, sides: 6, label: "2K6" };
 export const learnTotal = (unit, dice) =>

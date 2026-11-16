@@ -233,3 +233,21 @@ test("a resolved advance can be undone and chosen again", () => {
   expect(post.units[0].spellMastery).toBeUndefined();
   expect(screen.getByLabelText("Umiejętność")).toBeTruthy();
 });
+
+test("Mag Dao: a new spell from Yin or Yang, K6 read from the brackets", () => {
+  const AdvanceCard = require("./Advancement").default;
+  const R = require("./rules");
+  const { learnDice } = require("./spells");
+  const dao = unit("d", ["Mag (Dziedzina Dao)"], { unitName: "Mag Dao", optionalEquipment: ["Dualizm (Yin)"], exp: 20, skills: [0, 1],
+    learnedSpells: [spellForRoll("Tradycja Yin", 7).key], stats: { Początkowa: [4,3,3,3,3,1,4,1,7], Maksymalna: [4,6,6,4,4,3,6,4,9] } });
+  expect(learnDice(dao).label).toBe("K6");
+  let post = { units: [dao], journal: [], advances: [{ id: "a", unitId: "d", threshold: 21, resolved: false, rolls: [{ dice: [1, 3] }, { dice: [1, 1] }], selectedRoll: 0 }] };
+  const update = (fn) => { const n = R.clone(post); fn(n); post = n; view.rerender(card()); };
+  const card = () => <AdvanceCard advance={post.advances[0]} unit={post.units[0]} army={{ name: "x", heroes: {} }} post={post} update={update} />;
+  const view = render(card());
+  fireEvent.change(screen.getByLabelText("Umiejętność"), { target: { value: "spell:roll" } });
+  fireEvent.change(screen.getByLabelText(/Mag Dao: lista dla tego zaklęcia/), { target: { value: "Tradycja Yang" } });
+  fireEvent.change(screen.getByLabelText("Zaklęcie: K6, kość 1"), { target: { value: "3" } });
+  fireEvent.click(screen.getByRole("button", { name: /^Naucz się:/ }));
+  expect(knownSpells(post.units[0]).at(-1)).toMatchObject({ lore: "Tradycja Yang", from: 9 });
+});
