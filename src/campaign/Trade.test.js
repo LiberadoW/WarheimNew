@@ -182,13 +182,20 @@ test("a group sells the whole set and mercenaries keep their gear", () => {
   expect(R.canSellCarried(post.units[1], "optionalEquipment", 0)).toBe(false);
   expect(() => R.sellUnitItem(post, "m", "optionalEquipment", 0)).toThrow();
 });
-test("switching the recipient does not give a new tax roll",()=>{
-  setup({},100,[],{armyRules:["Podatek"]});
+test("each recipient keeps his own tax roll for an item",()=>{
+  const second={...R.clone(unit),uniqueId:"h2",unitName:"Herszt",unitDisplayName:"Drugi"};
+  setup({},100,[second],{armyRules:["Podatek"]});
+  const tax="Podatek (cena podstawowa 10 zk): +1K6, kość 1";
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");change(tax,"6");
+  click("← Wróć do przedmiotów");change("Postać","h2");
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
-  change("Podatek (cena podstawowa 10 zk): +1K6, kość 1","5");
-  click("← Wróć do przedmiotów");change("Postać","inventory");
+  // The second hero rolls his own tax.
+  expect(screen.getByLabelText(tax).value).toBe("");change(tax,"2");
+  click("← Wróć do przedmiotów");change("Postać","h");
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
-  expect(screen.getByLabelText("Podatek (cena podstawowa 10 zk): +1K6, kość 1").value).toBe("5");
+  // The first hero's roll is still there and cannot be changed.
+  expect(screen.getByLabelText(tax).value).toBe("6");
+  expect(screen.getByLabelText(tax).disabled).toBe(true);
 });
 test("the availability bribe is on view before rolling and costs 2K6 gold",()=>{
   const {state}=setup();

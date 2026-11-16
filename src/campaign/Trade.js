@@ -339,10 +339,10 @@ export function AvailabilityPool({ post, update, compact = false, title = "Pula 
 function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }) {
   const key = `${item.id}:${toInventory ? "inventory" : unit?.uniqueId}`;
   const quote = post.quotes[key];
-  // Rolls belong to the item, not to who it is for: a new roll comes only
-  // after a purchase, so switching the recipient or leaving the step keeps them.
-  const bought = Object.values(post.quotes || {}).filter((q) => q?.itemId === item.id && q.used).length;
-  const attempt = `${item.id}#${bought}`;
+  // Rolls belong to the item and its recipient (a character or the stash):
+  // another character rolls his own, each one's roll stays in the sequence
+  // when leaving and coming back, and a new roll comes only after a purchase.
+  const attempt = `${key}:${quote?.id || "first"}`;
   const [draftDice, setDice] = useRollDraft(post, update, `price:${attempt}`);
   const [draftDiscount, setDiscount] = useRollDraft(post, update, `discount:${attempt}`);
   const [draftTax, setTax] = useRollDraft(post, update, `tax:${attempt}`);
