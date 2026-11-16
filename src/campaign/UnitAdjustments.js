@@ -38,7 +38,7 @@ function UnitAdjustments({ post, update }) {
     });
   return (
     <details className="campaign-card">
-      <summary>Korekty postaci: rany, współczynniki, zasady</summary>
+      <summary>Korekty postaci: imię, rany, współczynniki, zasady</summary>
       <label>
         Postać
         <select
@@ -79,6 +79,19 @@ function UnitAdjustments({ post, update }) {
           Współczynniki i zasady są wspólne dla całej grupy (jeden profil stronników).
         </p>
       )}
+      <label>
+        Imię
+        <input
+          value={unit.unitDisplayName && unit.unitDisplayName !== unit.unitName ? unit.unitDisplayName : ""}
+          placeholder={unit.unitName}
+          onChange={(e) =>
+            update((p) => {
+              const u = p.units.find((x) => x.uniqueId === id);
+              u.unitDisplayName = e.target.value;
+            })
+          }
+        />
+      </label>
       <label>
         Uzasadnienie zmiany / wynik z tabeli
         <input value={note} onChange={(e) => setNote(e.target.value)} />

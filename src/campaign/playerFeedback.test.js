@@ -66,3 +66,10 @@ test("a finished game shows both players' sequences", () => {
   expect(box.getByText("Sprzedano 1 łupów za 20 zk.")).toBeTruthy();
   expect(box.getByText(/Bartek: jeszcze nie rozliczona/)).toBeTruthy();
 });
+
+test("a recruit can be named when recruited", () => {
+  const post = { units: [], treasury: 100, journal: [], availability: [], armyRules: [] };
+  const u = recruit(post, army, "Zelota", { displayName: "Brat Otto" });
+  expect(u.unitDisplayName).toBe("Brat Otto");
+  expect(post.journal.at(-1).text).toMatch(/^Brat Otto \(Zelota\)/);
+});

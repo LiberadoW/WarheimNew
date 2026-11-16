@@ -12,7 +12,8 @@ function RecruitmentForm({ post, update, army, mercenary }) {
     [manual, setManual] = useState(0),
     [reason, setReason] = useState(""),
     [token, setToken] = useState(""),
-    [role, setRole] = useState("");
+    [role, setRole] = useState(""),
+    [displayName, setDisplayName] = useState("");
   const definitions = mercenary
     ? Object.fromEntries(
         (army.mercenaries || [])
@@ -89,6 +90,10 @@ function RecruitmentForm({ post, update, army, mercenary }) {
               : availability || "powszechna"}
           </p>
           {problem && <p>{problem}</p>}
+          <label>
+            Imię (opcjonalnie)
+            <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder={name} />
+          </label>
           {roleOptions.length > 0 && (
             <label>
               Awans (Chorążowie &amp; sygnaliści, +{R.COMMAND_COST} zk)
@@ -151,7 +156,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
               (availability > 0 && !tokenId) ||
               (imported === null && !reason.trim())
             }
-            onClick={() =>
+            onClick={() => {
               update((p) =>
                 recruit(p, army, name, {
                   mercenary,
@@ -160,9 +165,11 @@ function RecruitmentForm({ post, update, army, mercenary }) {
                   tokenId,
                   sourceReason: reason,
                   commandRole: role,
+                  displayName,
                 }),
-              )
-            }
+              );
+              setDisplayName("");
+            }}
           >
             {mercenary ? "Zatrudnij Najemne Ostrze" : "Zrekrutuj model bandy"}
           </button>

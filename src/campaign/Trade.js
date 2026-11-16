@@ -115,13 +115,44 @@ export function AvailabilityPool({ post, update, compact = false, title = "Pula 
               </li>
             ))}
           </ul>
+          {!pool.some((t) => t.bribe) && open.some((t) => !t.locked) && (
+            <div className="campaign-card">
+              <strong>Łapówka (Bogaty może więcej…, s. 426)</strong>
+              <p className="campaign-muted">
+                Przed rzutem: zapłać 2K6 zk, a wybrany bohater rzuca 3K6 i odrzuca najniższą kość. Złoto
+                przepada niezależnie od wyniku. Raz w sekwencji.
+              </p>
+              <label>
+                Bohater
+                <select value={bribeTarget} onChange={(e) => setBribeTarget(e.target.value)}>
+                  <option value="">Wybierz</option>
+                  {open
+                    .filter((t) => !t.locked)
+                    .map((t) => (
+                      <option key={t.id} value={t.id}>
+                        {t.name}
+                      </option>
+                    ))}
+                </select>
+              </label>
+              <DiceInput label="Wysokość łapówki" count={2} value={bribeCost} onChange={setBribeCost} />
+              <button
+                type="button"
+                className="button button-secondary"
+                disabled={!bribeTarget || !validDice(bribeCost, 2)}
+                onClick={() => update((p) => bribeAvailability(p, bribeTarget, bribeCost))}
+              >
+                Zapłać łapówkę{validDice(bribeCost, 2) ? ` (${sum(bribeCost)} zk)` : ""}
+              </button>
+            </div>
+          )}
           {unrolled.length > 0 && (
             <button type="button" className="button" onClick={rollAll}>
               <i className="fa-solid fa-dice" aria-hidden="true"></i> Rzuć wszystkie ({unrolled.length})
             </button>
           )}
           <details>
-            <summary>Wpisz rzuty, Społem i modyfikatory</summary>
+            <summary>Wpisz rzuty ręcznie, Społem i modyfikatory</summary>
             <div className="campaign-grid">
               {pool.map((token) => (
                 <div className="campaign-card" key={token.id}>
@@ -191,37 +222,7 @@ export function AvailabilityPool({ post, update, compact = false, title = "Pula 
                 </div>
               ))}
             </div>
-            {!pool.some((t) => t.bribe) && open.some((t) => !t.locked) && (
-              <div className="campaign-card">
-                <strong>Bogaty może więcej…</strong>
-                <p className="campaign-muted">
-                  Łapówka 2K6 zk: wybrany bohater rzuca 3K6 i odrzuca najniższą kość. Złoto przepada
-                  niezależnie od wyniku. Raz w sekwencji.
-                </p>
-                <label>
-                  Bohater
-                  <select value={bribeTarget} onChange={(e) => setBribeTarget(e.target.value)}>
-                    <option value="">Wybierz</option>
-                    {open
-                      .filter((t) => !t.locked)
-                      .map((t) => (
-                        <option key={t.id} value={t.id}>
-                          {t.name}
-                        </option>
-                      ))}
-                  </select>
-                </label>
-                <DiceInput label="Wysokość łapówki" count={2} value={bribeCost} onChange={setBribeCost} />
-                <button
-                  type="button"
-                  className="button button-secondary"
-                  disabled={!bribeTarget || !validDice(bribeCost, 2)}
-                  onClick={() => update((p) => bribeAvailability(p, bribeTarget, bribeCost))}
-                >
-                  Zapłać łapówkę{validDice(bribeCost, 2) ? ` (${sum(bribeCost)} zk)` : ""}
-                </button>
-              </div>
-            )}
+
           </details>
         </>
       )}
@@ -338,10 +339,13 @@ export function AvailabilityPool({ post, update, compact = false, title = "Pula 
 function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }) {
   const key = `${item.id}:${toInventory ? "inventory" : unit?.uniqueId}`;
   const quote = post.quotes[key];
-  const attempt = quote?.id || "first";
-  const [draftDice, setDice] = useRollDraft(post, update, `price:${key}:${attempt}`);
-  const [draftDiscount, setDiscount] = useRollDraft(post, update, `discount:${key}:${attempt}`);
-  const [draftTax, setTax] = useRollDraft(post, update, `tax:${key}:${attempt}`);
+  // Rolls belong to the item, not to who it is for: a new roll comes only
+  // after a purchase, so switching the recipient or leaving the step keeps them.
+  const bought = Object.values(post.quotes || {}).filter((q) => q?.itemId === item.id && q.used).length;
+  const attempt = `${item.id}#${bought}`;
+  const [draftDice, setDice] = useRollDraft(post, update, `price:${attempt}`);
+  const [draftDiscount, setDiscount] = useRollDraft(post, update, `discount:${attempt}`);
+  const [draftTax, setTax] = useRollDraft(post, update, `tax:${attempt}`);
   const [token, setToken] = useState("");
   const [repeatOf, setRepeatOf] = useState(null);
   const completed = quote?.used && quote.id !== repeatOf;

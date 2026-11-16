@@ -57,6 +57,7 @@ export function recruit(
     sourceReason = "",
     companyFree = false,
     commandRole = "",
+    displayName = "",
   } = {},
 ) {
   const problem = recruitmentProblem(post, army, name, mercenary);
@@ -101,6 +102,7 @@ export function recruit(
     post.companyMercRecruited = true;
     u.campaignContract = { companyFree: true, recruitmentWaived: true };
   }
+  if (displayName.trim()) u.unitDisplayName = displayName.trim();
   if (commandRole) {
     // A banner bearer or musician forms his own group (s. 62).
     u.optionalEquipment = [...(u.optionalEquipment || []), commandRole];
@@ -112,7 +114,7 @@ export function recruit(
   R.log(
     post,
     "recruitment",
-    `${name}${commandRole ? ` (${commandRole.toLowerCase()})` : ""}: ${cost} zk · dostępność ${target || "powszechna"}. ${sourceReason}`,
+    `${displayName.trim() ? `${displayName.trim()} (${name})` : name}${commandRole ? ` (${commandRole.toLowerCase()})` : ""}: ${cost} zk · dostępność ${target || "powszechna"}. ${sourceReason}`,
   );
   return u;
 }

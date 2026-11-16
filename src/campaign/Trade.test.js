@@ -182,3 +182,20 @@ test("a group sells the whole set and mercenaries keep their gear", () => {
   expect(R.canSellCarried(post.units[1], "optionalEquipment", 0)).toBe(false);
   expect(() => R.sellUnitItem(post, "m", "optionalEquipment", 0)).toThrow();
 });
+test("switching the recipient does not give a new tax roll",()=>{
+  setup({},100,[],{armyRules:["Podatek"]});
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  change("Podatek (cena podstawowa 10 zk): +1K6, kość 1","5");
+  click("← Wróć do przedmiotów");change("Postać","inventory");
+  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
+  expect(screen.getByLabelText("Podatek (cena podstawowa 10 zk): +1K6, kość 1").value).toBe("5");
+});
+test("the availability bribe is on view before rolling and costs 2K6 gold",()=>{
+  const {state}=setup();
+  expect(screen.getByText(/Łapówka \(Bogaty może więcej/)).toBeTruthy();
+  change("Bohater",state.post.availability[0].id);
+  change("Wysokość łapówki, kość 1","3");change("Wysokość łapówki, kość 2","4");
+  click("Zapłać łapówkę (7 zk)");
+  expect(state.post.treasury).toBe(93);expect(state.post.availability[0].bribe).toMatchObject({cost:7});
+  click("Rzuć wszystkie (1)");expect(state.post.availability[0].dice).toHaveLength(3);
+});
