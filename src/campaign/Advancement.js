@@ -210,6 +210,12 @@ function ArcaneSpell({ unit, advance, lores, chosen, applyMain, patch, update })
 
 function AdvanceCard({ advance, unit, army, post, update }) {
   const [choice, setChoice] = useState("");
+  if (!unit)
+    return (
+      <p className="campaign-card">
+        {advance.threshold} PD: {advance.resolved ? advance.description : "Brak postaci do rozstrzygnięcia rozwoju."}
+      </p>
+    );
   const personalProfile = (
     unit.type === "Postać Dramatu"
       ? characterProfiles
@@ -490,11 +496,12 @@ function Promotion({ advance, unit, post, update }) {
         onClick={() =>
           update((p) => {
             const u = p.units.find((x) => x.uniqueId === unit.uniqueId);
+            const split = R.modelCount(u) > 1;
             const survivorIndex = (u.campaignModelStatus || []).findIndex(
               (s) => !s.dead,
             );
             const hero = R.clone(u);
-            hero.uniqueId = R.uid();
+            if (split) hero.uniqueId = R.uid();
             hero.type = "Bohater";
             hero.selectedNumber = 1;
             hero.number = 1;
@@ -503,7 +510,7 @@ function Promotion({ advance, unit, post, update }) {
             hero.totalCost = hero.cost;
             hero.battleOutOfActionModels = [false];
             hero.battleAbsentModels = [false];
-            if (R.modelCount(u) > 1) {
+            if (split) {
               u.selectedNumber -= 1;
               u.totalCost = u.cost * u.selectedNumber;
               u.campaignModelStatus = (u.campaignModelStatus || []).filter(
@@ -521,7 +528,7 @@ function Promotion({ advance, unit, post, update }) {
               resolved: false,
               rolls: [],
             });
-            if (R.modelCount(unit) > 1)
+            if (split)
               p.advances.push({
                 id: R.uid(),
                 unitId: u.uniqueId,

@@ -1,5 +1,6 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
+import AdvanceCard from "./Advancement";
 import * as R from "./rules";
 import UnitEditStats from "../Components/UnitEdit/unitEditStats";
 
@@ -16,6 +17,39 @@ const group = (extra = {}) => ({
     Maksymalna: [5, 6, 6, 4, 4, 3, 6, 4, 9],
   },
   ...extra,
+});
+
+test("a lone henchman can resolve Chłopak ma talent and roll as a hero", () => {
+  const post = {
+    units: [group({ selectedNumber: 1, exp: 2, cost: 25 })],
+    advances: [{ id: "a", unitId: "g", threshold: 2, rolls: [{ dice: [5, 6] }] }],
+    journal: [],
+  };
+  function Advances() {
+    const [draft, setDraft] = React.useState(post);
+    const update = (change) => {
+      const next = R.clone(draft);
+      change(next);
+      setDraft(next);
+    };
+    return draft.advances.map((advance) => (
+      <AdvanceCard key={advance.id} advance={advance} post={draft}
+        unit={draft.units.find((u) => u.uniqueId === advance.unitId)}
+        army={{ name: "Test" }} update={update} />
+    ));
+  }
+  render(<Advances />);
+  fireEvent.click(screen.getByRole("button", { name: /Wybierz 11.*Chłopak ma talent/ }));
+  fireEvent.click(screen.getByLabelText("Walki wręcz"));
+  fireEvent.click(screen.getByLabelText("Siłowe"));
+  fireEvent.click(screen.getByRole("button", { name: "Awansuj model na bohatera" }));
+  expect(screen.getByText(/Cyrkowiec.*Awans na bohatera/)).toBeTruthy();
+  expect(screen.getByLabelText("Rozwój 2, kość 1").disabled).toBe(false);
+});
+
+test("a saved promotion result can render after the source group ID is gone", () => {
+  render(<AdvanceCard advance={{ threshold: 2, resolved: true, description: "Awans na bohatera" }} />);
+  expect(screen.getByText(/2 PD: Awans na bohatera/)).toBeTruthy();
 });
 
 describe("henchman groups never repeat a characteristic advance", () => {
