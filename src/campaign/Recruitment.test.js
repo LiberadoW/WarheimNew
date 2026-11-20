@@ -4,12 +4,13 @@ import Recruitment from "./Recruitment";
 import { cyrkowcy } from "../Data.js/Armies/Cyrkowcy";
 import { mercenariesList } from "../Data.js/Mercenaries";
 import * as R from "./rules";
-import { recruitAvailability } from "./recruiting";
+import { recruit, recruitAvailability } from "./recruiting";
+import { createUnit } from "../Functions/createUnit";
 const army={...cyrkowcy,name:"Cyrkowcy z Ligii Ostermarku"};
-function setup(){
+function setup(extra = {}){
  const state={};
  function Harness(){const [post,setPost]=useState(()=>({...R.beginPostBattle(R.newBattle([]),[],{skarbiec:1000},army).post,
-   availability:[{id:"recruit-token",name:"Wynik testowy",dice:[6,6],total:12,locked:true,used:false}]}));state.post=post;
+   availability:[{id:"recruit-token",name:"Wynik testowy",dice:[6,6],total:12,locked:true,used:false}], ...extra}));state.post=post;
  return <Recruitment army={army} post={post} update={fn=>setPost(old=>{const p=R.clone(old);fn(p);return p;})}/>;}
  render(<Harness/>);return state;
 }
@@ -66,4 +67,65 @@ test("consuming an availability result in one form disables it in the other",()=
  expect(state.post.availability[0].used).toBe(true);
  expect(band.getByRole("button",{name:"Zrekrutuj model bandy"}).disabled).toBe(true);
  expect(state.post.units).toHaveLength(1);
+});
+
+test("joining offers only matching groups and waits for rare equipment from the stash", () => {
+  const group = createUnit(army.heroes, "Siłacz");
+  group.exp = 3;
+  group.optionalEquipment = ["Rapier"];
+  group.equipmentList.Rapier = [10, 0];
+  group.cost += 10;
+  const state = setup({
+    units: [group, createUnit(army.heroes, "Cyrkowiec")], recruitBudget: 7, recruitBudgetLocked: true,
+    availability: [
+      { id: "too-low", name: "Za niski", total: 7, locked: true, used: false },
+      { id: "recruit-token", name: "Pasujący", total: 8, locked: true, used: false },
+    ],
+  });
+  const band = within(screen.getByRole("region", { name: "Rekrutacja modeli bandy" }));
+  change(band, "Model bandy", "Siłacz");
+  const assignment = band.getByLabelText("Przydział stronnika");
+  expect(Array.from(assignment.options).map((option) => option.value)).toEqual(["", group.uniqueId]);
+  change(band, "Przydział stronnika", group.uniqueId);
+  const join = band.getByRole("button", { name: "Dołącz rekruta" });
+  expect(band.getByLabelText("Zużyje wynik puli dostępności").value).toBe("recruit-token");
+  expect(join.disabled).toBe(true);
+  expect(band.getByText(/Brak kompletu rzadkiego ekwipunku w skarbcu: Rapier/)).toBeTruthy();
+  const withRapier = { ...R.clone(state.post), inventory: [{ id: "rapier", name: "Rapier", quantity: 1 }] };
+  expect(() => recruit(withRapier, army, "Siłacz", { groupId: group.uniqueId, tokenId: "too-low" })).toThrow(/Brak odpowiedniego wyniku dostępności/);
+  expect(state.post.treasury).toBe(1000);
+});
+
+test("a rare model consumes one result per recruit and undo returns it with the gold, PD and stash item", () => {
+  const group = createUnit(army.heroes, "Siłacz");
+  group.exp = 3;
+  group.optionalEquipment = ["Rapier"];
+  group.equipmentList.Rapier = [10, 0];
+  group.cost += 10;
+  const rapier = { id: "stash-rapier", name: "Rapier", quantity: 2, basePrice: 10 };
+  const state = setup({ units: [group], recruitBudget: 7, recruitBudgetLocked: true, inventory: [rapier] });
+  const band = within(screen.getByRole("region", { name: "Rekrutacja modeli bandy" }));
+  change(band, "Model bandy", "Siłacz");
+  change(band, "Przydział stronnika", group.uniqueId);
+  const join = band.getByRole("button", { name: "Dołącz rekruta" });
+  const rejected = R.clone(state.post);
+  expect(() => recruit(rejected, army, "Siłacz", { groupId: group.uniqueId })).toThrow(/Brak odpowiedniego wyniku dostępności/);
+  expect(rejected).toEqual(state.post);
+  expect(join.disabled).toBe(false);
+  fireEvent.click(join);
+  expect(state.post.availability[0].used).toBe(true);
+  expect(state.post.units).toHaveLength(1);
+  expect(state.post.units[0]).toMatchObject({ selectedNumber: 2, exp: 3, optionalEquipment: ["Rapier"], campaignNewRecruit: true });
+  expect(state.post.treasury).toBe(1000 - army.heroes.Siłacz.cost - 6);
+  expect(state.post.recruitBudget).toBe(4);
+  expect(state.post.inventory[0].quantity).toBe(1);
+  expect(join.disabled).toBe(true);
+  fireEvent.click(band.getByRole("button", { name: "Cofnij" }));
+  expect(state.post.units[0].selectedNumber).toBe(1);
+  expect(state.post.units[0].campaignNewRecruit).toBeUndefined();
+  expect(state.post.treasury).toBe(1000);
+  expect(state.post.recruitBudget).toBe(7);
+  expect(state.post.inventory).toEqual([rapier]);
+  expect(state.post.availability[0].used).toBe(false);
+  expect(join.disabled).toBe(false);
 });

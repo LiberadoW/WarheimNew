@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { companyLevel } from "./company";
 import * as R from "./rules";
 import { mercenariesList } from "../Data.js/Mercenaries";
-import { canCommand, commandRoleProblem, recruit, recruitAvailability, recruitmentProblem } from "./recruiting";
+import {
+  canCommand, commandRoleProblem, groupRecruitQuote, legacyJoins, recruit,
+  recruitAvailability, recruitGroups, recruitmentProblem, undoExperiencedJoin, undoLegacyJoin,
+} from "./recruiting";
 import { createUnit } from "../Functions/createUnit";
+import { getShortEquipment } from "../Functions/displayEquipment";
+import DiceInput from "./DiceInput";
 import { AvailabilityPool } from "./Trade";
 function RecruitmentForm({ post, update, army, mercenary }) {
   const [companyFree, setCompanyFree] = useState(false);
@@ -13,6 +18,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
     [reason, setReason] = useState(""),
     [token, setToken] = useState(""),
     [role, setRole] = useState(""),
+    [groupId, setGroupId] = useState(""),
     [displayName, setDisplayName] = useState("");
   const definitions = mercenary
     ? Object.fromEntries(
@@ -28,8 +34,13 @@ function RecruitmentForm({ post, update, army, mercenary }) {
   const problem = name ? recruitmentProblem(post, army, name, mercenary) : null;
   // Promotion to banner bearer / musician (+20 zk) for profiles with the rule.
   const sample = !mercenary && definition ? createUnit(definitions, name) : null;
-  const roleOptions = sample && canCommand(sample) ? ["Chorąży", "Sygnalista"] : [];
-  const roleProblem = role && sample ? commandRoleProblem(post, sample, role) : null;
+  const groups = recruitGroups(post, name, sample);
+  const group = groups.find((candidate) => candidate.uniqueId === groupId);
+  const join = group ? groupRecruitQuote(post, group, sample) : null;
+  const roleOptions = !groupId && sample && canCommand(sample) ? ["Chorąży", "Sygnalista"] : [];
+  const roleProblem = !groupId && role && sample ? commandRoleProblem(post, sample, role) : null;
+  const baseCost = companyFree ? 0 : (definition?.cost || 0) * (sample ? R.modelCount(sample) : 1);
+  const cost = join?.cost ?? (baseCost + (!groupId && role ? R.COMMAND_COST : 0));
   // Rare recruits use the smallest pool result that is enough.
   const tokens = availability > 0 ? R.usableAvailability(post, availability) : [];
   const tokenId = tokens.some((t) => t.id === token) ? token : tokens[0]?.id || "";
@@ -60,6 +71,7 @@ function RecruitmentForm({ post, update, army, mercenary }) {
             setToken("");
             setReason("");
             setRole("");
+            setGroupId("");
           }}
         >
           <option value="">Wybierz</option>
@@ -70,30 +82,61 @@ function RecruitmentForm({ post, update, army, mercenary }) {
       </label>
       {definition && (
         <>
+          {(groups.length > 0 || groupId) && (
+            <label>
+              Przydział stronnika
+              <select value={groupId} onChange={(e) => setGroupId(e.target.value)}>
+                <option value="">Utwórz nową grupę</option>
+                {groupId && !group && <option value={groupId} disabled>Grupa niedostępna</option>}
+                {groups.map((candidate) => (
+                  <option key={candidate.uniqueId} value={candidate.uniqueId}>
+                    {R.label(candidate)} · {R.groupSize(candidate)}/{R.groupLimit(candidate)} modeli · {candidate.exp || 0} PD
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <p>
-            Koszt:{" "}
-            {companyFree
-              ? 0
-              : definition.cost *
-                R.modelCount({
-                  selectedNumber: [
-                    "Duże Dźgacze",
-                    "Drużyna ciężkich broni",
-                  ].includes(name)
-                    ? 2
-                    : 1,
-                })}{" "}
-            zk{role ? ` + ${R.COMMAND_COST} zk awansu na ${role.toLowerCase()}` : ""}
+            Koszt: {cost} zk{join && !join.taxReady ? " + podatek" : ""}
             {mercenary ? ` · żołd: ${definition.pay} zk` : ""} · Dostępność:{" "}
             {imported === null
               ? "brak rozpoznanego profilu"
               : availability || "powszechna"}
           </p>
-          {problem && <p>{problem}</p>}
-          <label>
-            Imię (opcjonalnie)
-            <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder={name} />
-          </label>
+          {join && (
+            <>
+              <p>
+                Ekwipunek grupy: {getShortEquipment(group).join(", ") || "brak"}.<br />
+                {join.exp} PD z puli ({post.recruitBudget || 0} PD dostępnych) · dopłata {join.exp * 2} zk.
+                {join.role && join.role !== "full" && ` Rekrut dołącza jako ${join.role.toLowerCase()} (+${R.COMMAND_COST} zk).`}
+                {join.fromStash.length > 0 && <> Ze skarbca: {join.fromStash.map((item) => item.name).join(", ")}.</>}
+              </p>
+              {join.taxes.length > 0 && (
+                <div className="campaign-join-tax" key={join.taxKey}>
+                  <p>Podatek za ekwipunek rekruta{join.taxReady ? `: ${join.tax} zk` : ""}.</p>
+                  {join.taxes.map((item) => (
+                    <DiceInput key={item.key}
+                      label={`Podatek: ${item.name} (cena podstawowa ${item.price} zk)`}
+                      count={item.dice} value={join.taxRolls[item.key] || []}
+                      onChange={(dice) => update((p) => {
+                        p.rollDrafts = {
+                          ...p.rollDrafts,
+                          [join.taxKey]: { ...p.rollDrafts?.[join.taxKey], [item.key]: dice },
+                        };
+                      })} />
+                  ))}
+                </div>
+              )}
+              {join.problem && <p className="campaign-error">{join.problem}</p>}
+            </>
+          )}
+          {problem && <p className="campaign-error">{problem}</p>}
+          {!groupId && (
+            <label>
+              Imię (opcjonalnie)
+              <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder={name} />
+            </label>
+          )}
           {roleOptions.length > 0 && (
             <label>
               Awans (Chorążowie &amp; sygnaliści, +{R.COMMAND_COST} zk)
@@ -152,7 +195,8 @@ function RecruitmentForm({ post, update, army, mercenary }) {
             disabled={
               !!problem ||
               !!roleProblem ||
-              (!companyFree && post.treasury < definition.cost + (role ? R.COMMAND_COST : 0)) ||
+              (!!groupId && (!join || !!join.problem)) ||
+              post.treasury < cost ||
               (availability > 0 && !tokenId) ||
               (imported === null && !reason.trim())
             }
@@ -164,18 +208,40 @@ function RecruitmentForm({ post, update, army, mercenary }) {
                   availability,
                   tokenId,
                   sourceReason: reason,
-                  commandRole: role,
-                  displayName,
+                  commandRole: groupId ? "" : role,
+                  displayName: groupId ? "" : displayName,
+                  groupId,
                 }),
               );
               setDisplayName("");
             }}
           >
-            {mercenary ? "Zatrudnij Najemne Ostrze" : "Zrekrutuj model bandy"}
+            {mercenary ? "Zatrudnij Najemne Ostrze" : groupId ? "Dołącz rekruta" : "Zrekrutuj model bandy"}
           </button>
         </>
       )}
     </>
+  );
+}
+
+function JoinedRecruits({ post, update }) {
+  const joins = [...(post.experiencedJoins || []), ...legacyJoins(post)];
+  if (!joins.length) return null;
+  return (
+    <div className="campaign-joined">
+      <p>Dołączeni w tej sekwencji:</p>
+      <ul>
+        {joins.map((join) => (
+          <li key={join.id}>
+            {join.name}{join.role ? ` (${join.role.toLowerCase()})` : ""} · {join.cost} zk, {join.exp} PD{" "}
+            <button type="button" className="button button-ghost button-small"
+              onClick={() => update((p) => (join.legacy ? undoLegacyJoin(p, join.id) : undoExperiencedJoin(p, join.id)))}>
+              Cofnij
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -190,6 +256,7 @@ export default function Recruitment(props) {
       <section className="campaign-card" aria-label="Rekrutacja modeli bandy">
         <h3>Modele bandy</h3>
         <RecruitmentForm {...props} mercenary={false} />
+        <JoinedRecruits {...props} />
       </section>
       <section className="campaign-card" aria-label="Rekrutacja Najemnych Ostrzy">
         <h3>Najemne Ostrza</h3>

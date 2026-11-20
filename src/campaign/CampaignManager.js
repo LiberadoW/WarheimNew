@@ -37,7 +37,6 @@ import Trade from "./Trade";
 import {
   RollNotebook,
   EconomyAdjustment,
-  ExperiencedRecruits,
   Wages,
   wageUnits,
   RecruitBudget,
@@ -1309,16 +1308,10 @@ export default function CampaignManager({
                 />
               )}
               {phase === 6 && (
-                <div className="campaign-recruitment-sections">
-                  <section className="campaign-card" aria-label="Pula PD rekrutów">
-                    <h3>1. Pula PD rekrutów</h3>
-                    <RecruitBudget post={post} update={update} />
-                  </section>
-                  <section className="campaign-card" aria-label="Dołącz rekruta do grupy">
-                    <h3>2. Dołącz rekruta do grupy</h3>
-                    <ExperiencedRecruits post={post} update={update} army={army} />
-                  </section>
-                </div>
+                <section className="campaign-card" aria-label="Pula PD rekrutów">
+                  <h3>Pula PD rekrutów</h3>
+                  <RecruitBudget post={post} update={update} />
+                </section>
               )}
               {phase === 7 && merchantVisits(battle) && <MerchantCard post={post} update={update} />}
               {phase === 7 && <Trade post={post} update={update} army={army} />}

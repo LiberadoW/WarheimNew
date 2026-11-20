@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import * as R from "./rules";
-import { ExperiencedRecruits } from "./Extras";
+import Recruitment from "./Recruitment";
+import { legacyJoins, undoLegacyJoin } from "./recruiting";
+
+const army = { name: "Kompania testowa", maxModels: 15, heroes: {
+  Zelota: { type: "Stronnik", cost: 20, number: 99, rules: ["Chorążowie & sygnaliści"] },
+} };
+
+function selectBannerGroup() {
+  fireEvent.change(screen.getByLabelText("Model bandy"), { target: { value: "Zelota" } });
+  fireEvent.change(screen.getByLabelText("Przydział stronnika"), { target: { value: "Chorąży" } });
+  fireEvent.change(screen.getByLabelText("Źródło / zasada dostępności"), { target: { value: "Profil testowy" } });
+}
 
 const zelota = (roles, extra = {}) => ({
   uniqueId: roles.join("") || "plain", unitName: "Zelota", type: "Stronnik", number: roles.length ? 2 : 99,
@@ -44,15 +55,15 @@ test("the recruit joining the banner bearer becomes the musician for +20 zk", ()
     const [p, setP] = useState({ units: [zelota(["Chorąży"])], armyRules: [], treasury: 100, recruitBudget: 5, recruitBudgetLocked: true, journal: [], rollDrafts: {} });
     latest = p;
     const update = (fn) => setP((cur) => { const c = JSON.parse(JSON.stringify(cur)); fn(c); return c; });
-    return <ExperiencedRecruits post={p} update={update} army={null} />;
+    return <Recruitment post={p} update={update} army={army} />;
   }
   render(<Harness />);
-  fireEvent.change(screen.getByRole("combobox"), { target: { value: "Chorąży" } });
-  expect(screen.getByText(/rekrut dołącza jako/)).toBeTruthy();
+  selectBannerGroup();
+  expect(screen.getByText(/rekrut dołącza jako/i)).toBeTruthy();
   fireEvent.click(screen.getByRole("button", { name: "Dołącz rekruta" }));
   expect(latest.treasury).toBe(100 - 40);
   expect(latest.units[0].optionalEquipment).toEqual(["Chorąży", "Sygnalista"]);
-  expect(latest.journal[0].text).toMatch(/dołącza jako sygnalista/);
+  expect(latest.journal.find((entry) => entry.type === "recruitment").text).toMatch(/dołącza jako sygnalista/);
 });
 
 test("a joined recruit can be undone: gold, PD pool and the role come back", () => {
@@ -61,10 +72,10 @@ test("a joined recruit can be undone: gold, PD pool and the role come back", () 
     const [p, setP] = useState({ units: [zelota(["Chorąży"], { exp: 2 })], armyRules: [], treasury: 100, recruitBudget: 5, recruitBudgetLocked: true, journal: [], rollDrafts: {} });
     latest = p;
     const update = (fn) => setP((cur) => { const c = JSON.parse(JSON.stringify(cur)); fn(c); return c; });
-    return <ExperiencedRecruits post={p} update={update} army={null} />;
+    return <Recruitment post={p} update={update} army={army} />;
   }
   render(<Harness />);
-  fireEvent.change(screen.getByRole("combobox"), { target: { value: "Chorąży" } });
+  selectBannerGroup();
   fireEvent.click(screen.getByRole("button", { name: "Dołącz rekruta" }));
   expect(latest.treasury).toBe(100 - 44); // 20 + 2 PD × 2 + 20 for the role
   expect(latest.recruitBudget).toBe(3);
@@ -76,7 +87,6 @@ test("a joined recruit can be undone: gold, PD pool and the role come back", () 
 });
 
 test("a recruit joined before joins were recorded is undone from the journal", () => {
-  const { undoLegacyJoin, legacyJoins } = require("./Extras");
   const g = zelota([], { selectedNumber: 2, campaignModelStatus: [{}, {}], totalCost: 40, exp: 1 });
   const p = { units: [g], treasury: 10, recruitBudget: 2, journal: [{ id: "j1", type: "recruitment", text: "Doświadczony Zelota: 27 zk, 1 PD puli." }] };
   expect(legacyJoins(p)).toEqual([{ id: "j1", legacy: true, name: "Zelota", role: null, cost: 27, exp: 1 }]);

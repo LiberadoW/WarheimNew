@@ -110,6 +110,17 @@ test("jumping forward confirms only the current step and stops at the next open 
   expect(screen.getByRole("alert").textContent).toMatch(/Punkty kampanii: Zatwierdź punkty kampanii/);
 });
 
+test("the experienced henchmen step only records the rolled PD budget", () => {
+  const { state } = setup([hero(), group("g", false)], { stage: 6 });
+  fireEvent.change(screen.getByLabelText("Dostępne PD rekrutów, kość 1"), { target: { value: "4" } });
+  fireEvent.change(screen.getByLabelText("Dostępne PD rekrutów, kość 2"), { target: { value: "2" } });
+  click("Zatwierdź pulę PD");
+  expect(battle(state).post.recruitBudget).toBe(6);
+  expect(battle(state).post.units).toHaveLength(2);
+  expect(screen.queryByLabelText("Model bandy")).toBeNull();
+  expect(screen.queryByRole("button", { name: /Dołącz rekruta/ })).toBeNull();
+});
+
 test("optional steps can be skipped straight to the summary", () => {
   const { state } = setup([hero()], { notes: { kosztownosci: 2 } });
   click("Dalej: Doświadczenie i rozwój");

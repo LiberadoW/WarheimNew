@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import * as R from "./rules";
 import { AvailabilityPool, unavailableReason } from "./Trade";
-import { ExperiencedRecruits } from "./Extras";
+import { groupRecruitQuote } from "./recruiting";
 
 // Rozdział 14, s. 426: DOSTĘPNOŚĆ, BOGATY MOŻE WIĘCEJ…, SPOŁEM…
 const hero = (id, extra = {}) => ({
@@ -156,8 +156,5 @@ describe("the shop greys out what cannot be bought now", () => {
 test("joining a recruit says why it is not possible", () => {
   const group = { ...hero("Hobgoblin"), type: "Stronnik", selectedNumber: 3, number: 15, cost: 20, exp: 2 };
   const p = post([group], { treasury: 20, recruitBudgetLocked: true, recruitBudget: 7 });
-  render(<ExperiencedRecruits post={p} update={() => {}} army={{ maxModels: 15 }} />);
-  fireEvent.change(screen.getByLabelText("Dołącz rekruta do istniejącej grupy"), { target: { value: "Hobgoblin" } });
-  expect(screen.getByRole("button", { name: "Dołącz rekruta" }).disabled).toBe(true);
-  expect(screen.getByText("Brakuje 4 zk (w skarbcu 20 zk).")).toBeTruthy();
+  expect(groupRecruitQuote(p, group, group).problem).toBe("Brakuje 4 zk (w skarbcu 20 zk).");
 });
