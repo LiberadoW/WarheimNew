@@ -182,6 +182,7 @@ export const toBattle = ({ savedList, play, owner, game, opponentName, opponentL
     result: winner === "draw" ? "draw" : winner === owner ? "win" : winner ? "loss" : "loss",
     round: Math.max(1, play?.round || 1),
     // Games recorded before snapshots existed fall back to the current list.
+    ownPrestigeBefore: game.before?.[owner]?.prestige ?? savedList.prestige ?? null,
     opponentModels: opponentBefore.models,
     opponentOut: opponentBefore.out,
     opponentPrestige: opponentBefore.prestige,

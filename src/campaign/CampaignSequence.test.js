@@ -3,6 +3,8 @@ import { render, screen, fireEvent, within, waitFor, cleanup } from "@testing-li
 import CampaignManager from "./CampaignManager";
 import useCampaignDraft from "./useCampaignDraft";
 import * as R from "./rules";
+import { explorationRules } from "./company";
+import { toBattle } from "../campaignHub/gamePlay";
 
 const OWNER = "sequence-qa";
 const hero = (extra = {}) => ({
@@ -51,6 +53,33 @@ function completeRemaining() {
 }
 beforeEach(() => localStorage.clear());
 afterEach(() => { cleanup(); jest.restoreAllMocks(); });
+
+test.each([[49, 1], [51, 2]])(
+  "a recorded prestige difference of %i gives %i exploration dice with one resting hero",
+  (difference, explorationDice) => {
+    const { units, battle } = toBattle({
+      savedList: {
+        prestige: 40,
+        armyList: [hero(), hero({ uniqueId: "resting", campaignModelStatus: [{ skip: 1 }] })],
+      },
+      play: {},
+      owner: "a",
+      game: {
+        id: "round-2", players: ["a", "b"], result: { winner: "b" },
+        before: { a: { prestige: 100 }, b: { prestige: 100 + difference, models: 2, out: 0 } },
+      },
+      campaignName: "Kampania zimowa",
+    });
+    const { state } = setup(units, { campaign: { activeBattle: battle } }, false);
+    expect(screen.getByText(/Prestiż Twojej kompanii: 100/)).toBeTruthy();
+    click("Rozpocznij sekwencję po potyczce");
+    const active = state.draft.campaignNotes.campaign.activeBattle;
+    expect(active.ownPrestige).toBe(100);
+    expect(active.post.underdog?.diff ?? null).toBe(difference === 49 ? null : difference);
+    expect(explorationRules(active, active.post).count).toBe(explorationDice);
+    expect(R.availabilityHeroes(active.post)).toHaveLength(2);
+  },
+);
 
 test("injuries, a group casualty, an absent hero and an animal survive resume and finalize exactly once", async () => {
   const units = [hero(), hero({ uniqueId:"group", unitName:"Stronnicy", type:"Stronnik", exp:0,

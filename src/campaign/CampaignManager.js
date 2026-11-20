@@ -534,6 +534,7 @@ export default function CampaignManager({
   };
   const battle = campaign.activeBattle;
   const post = battle?.post;
+  const ownPrestigeBefore = battle?.ownPrestigeBefore ?? (battle?.stage === 0 ? safePrestige(unitList) : null);
   const setCampaign = (next) =>
     setCampaignNotes((current) => ({ ...current, campaign: next }));
   const setBattle = (next) => setCampaign({ ...campaign, activeBattle: next });
@@ -594,7 +595,7 @@ export default function CampaignManager({
       if (!b.gameName.trim())
         return { battle: b, error: "Wpisz nazwę potyczki." };
       const started = R.beginPostBattle(
-        { ...b, ownPrestige: safePrestige(unitList) ?? 0 },
+        { ...b, ownPrestige: b.ownPrestigeBefore ?? safePrestige(unitList) ?? 0 },
         unitList,
         campaignNotes,
         army,
@@ -1126,10 +1127,10 @@ export default function CampaignManager({
                   />
                 </label>
                 <p className="campaign-source wide">
-                  Prestiż Twojej kompanii: {safePrestige(unitList) ?? "?"}
+                  Prestiż Twojej kompanii: {ownPrestigeBefore ?? "?"}
                   {(() => {
                     const b = R.underdogBonus(
-                      safePrestige(unitList),
+                      ownPrestigeBefore,
                       battle.opponentPrestige,
                     );
                     return b
