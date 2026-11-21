@@ -17,6 +17,7 @@ import {
   increment,
   onSnapshot,
   query,
+  runTransaction,
   serverTimestamp,
   setDoc,
   updateDoc,
@@ -26,6 +27,8 @@ import {
 import { db } from "../Database/database";
 import { normalizeRosterNames } from "../Data.js/RulebookNames";
 import { companySnapshot, gameEvents } from "./gamePlay";
+import { alreadyHasGift, CHAOS_GIFTS, chaosTakedowns } from "./chaosGifts";
+import { sum, validDice } from "../campaign/rules";
 
 // No 0/O, 1/I/L: codes are read aloud and typed on phones.
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
@@ -200,25 +203,30 @@ export const markSequenceDone = (campaignId, gameId, uid, entryId) =>
 // The result also freezes both companies as they were before the fight, so
 // each player's sequence sees the opponent's numbers from the game itself.
 export async function recordResult(campaignId, gameId, result, user) {
-  const game = (await getDoc(doc(db, "campaigns", campaignId, "games", gameId))).data() || {};
-  const players = game.players || [];
-  const lists = await Promise.all(
-    players.map((uid) => getDoc(doc(db, "campaigns", campaignId, "lists", uid))),
-  );
-  // A result recorded again (after "Cofnij wynik") keeps the first models and
-  // prestige: a player may have settled and re-uploaded in between.
-  const before = Object.fromEntries(
-    players.map((uid, i) => {
-      const now = companySnapshot(lists[i].data(), game.play, uid);
-      const first = game.before?.[uid];
-      return [uid, first ? { ...now, models: first.models, prestige: first.prestige } : now];
-    }),
-  );
-  return updateGame(campaignId, gameId, {
-    status: "done",
-    result: { ...result, recordedBy: user.uid },
-    playedAt: serverTimestamp(),
-    before,
+  const ref = doc(db, "campaigns", campaignId, "games", gameId);
+  return runTransaction(db, async (transaction) => {
+    const game = (await transaction.get(ref)).data();
+    if (!game || game.status === "done") throw Error("Potyczka jest już zamknięta.");
+    if (chaosTakedowns(game.play).some((entry) => !game.play.chaosGifts?.[entry.id]))
+      throw Error("Rozstrzygnij rzuty na Dary Chaosu przed zakończeniem gry.");
+    const players = game.players || [];
+    const lists = await Promise.all(
+      players.map((uid) => transaction.get(doc(db, "campaigns", campaignId, "lists", uid))),
+    );
+    // "Cofnij wynik" keeps the first roster size and prestige.
+    const before = Object.fromEntries(
+      players.map((uid, i) => {
+        const now = companySnapshot(lists[i].data(), game.play, uid);
+        const first = game.before?.[uid];
+        return [uid, first ? { ...now, models: first.models, prestige: first.prestige } : now];
+      }),
+    );
+    transaction.update(ref, {
+      status: "done",
+      result: { ...result, recordedBy: user.uid },
+      playedAt: serverTimestamp(),
+      before,
+    });
   });
 }
 
@@ -279,29 +287,65 @@ const logId = () =>
 
 // A model taken out of action, optionally by another model (which gets the
 // kill). Both changes and the log line are written together.
-export const recordTakedown = (campaignId, gameId, { victim, killer, round, text }) => {
-  const entry = { id: logId(), type: "takedown", round, victim, killer: killer || null, text };
+export const recordTakedown = (campaignId, gameId, { victim, killer, round, text, eyeOfChaos }) => {
+  const entry = { id: logId(), type: "takedown", round, victim, killer: killer || null, text,
+    ...(eyeOfChaos ? { eyeOfChaos } : {}),
+  };
   const changes = {
     [`${unitPath(victim.owner, victim.unitId)}.out.${victim.index}`]: true,
     "play.log": arrayUnion(entry),
   };
   if (killer?.counts)
     changes[`${unitPath(killer.owner, killer.unitId)}.kills`] = increment(1);
-  return updateGame(campaignId, gameId, changes);
+  const ref = doc(db, "campaigns", campaignId, "games", gameId);
+  return runTransaction(db, async (transaction) => {
+    const game = (await transaction.get(ref)).data();
+    if (!game || game.status === "done") throw Error("Potyczka jest już zamknięta.");
+    const model = game.play?.units?.[victim.owner]?.[victim.unitId];
+    if (model?.out?.[victim.index] || model?.absent?.[victim.index])
+      throw Error("Ten model jest już wyłączony z akcji albo nieobecny.");
+    transaction.update(ref, changes);
+  });
 };
+
+export function recordChaosGift(campaignId, gameId, entryId, dice) {
+  if (!validDice(dice, 2)) throw Error("Rzuć 2K6 na Dary Chaosu.");
+  const result = sum(dice);
+  const ref = doc(db, "campaigns", campaignId, "games", gameId);
+  return runTransaction(db, async (transaction) => {
+    const game = (await transaction.get(ref)).data();
+    if (!game || game.status === "done") throw Error("Potyczka jest już zamknięta.");
+    const play = game.play;
+    const entry = chaosTakedowns(play).find((item) => item.id === entryId);
+    if (!entry) throw Error("Brakuje wpisu wyłączenia z akcji.");
+    if (play.chaosGifts?.[entryId]) throw Error("Ten rzut został już zapisany.");
+    if (alreadyHasGift(play, entry, result)) throw Error(`Bohater ma już dar „${CHAOS_GIFTS[result].name}”. Rzuć ponownie.`);
+    transaction.update(ref, { [`play.chaosGifts.${entryId}`]: { dice, result } });
+  });
+}
 
 export const addLogEntry = (campaignId, gameId, entry) =>
   updateGame(campaignId, gameId, { "play.log": arrayUnion({ id: logId(), ...entry }) });
 
 // Removing a takedown also gives the model back and takes the kill away.
 export const removeLogEntry = (campaignId, gameId, entry) => {
-  const changes = { "play.log": arrayRemove(entry) };
-  if (entry.type === "takedown") {
-    changes[`${unitPath(entry.victim.owner, entry.victim.unitId)}.out.${entry.victim.index}`] = deleteField();
-    if (entry.killer?.counts)
-      changes[`${unitPath(entry.killer.owner, entry.killer.unitId)}.kills`] = increment(-1);
-  }
-  return updateGame(campaignId, gameId, changes);
+  if (entry.type !== "takedown")
+    return updateGame(campaignId, gameId, { "play.log": arrayRemove(entry) });
+  const ref = doc(db, "campaigns", campaignId, "games", gameId);
+  return runTransaction(db, async (transaction) => {
+    const game = (await transaction.get(ref)).data();
+    if (!game || game.status === "done") throw Error("Potyczka jest już zamknięta.");
+    const saved = game.play?.log?.find((item) => item.id === entry.id && item.type === "takedown");
+    if (!saved) return;
+    const { victim, killer } = saved;
+    const changes = {
+      "play.log": arrayRemove(saved),
+      [`${unitPath(victim.owner, victim.unitId)}.out.${victim.index}`]: deleteField(),
+    };
+    if (saved.eyeOfChaos) changes[`play.chaosGifts.${saved.id}`] = deleteField();
+    if (killer?.counts) changes[`${unitPath(killer.owner, killer.unitId)}.kills`] = increment(-1);
+    transaction.update(ref, changes);
+  });
 };
 
 export const updateCampaignSettings = (campaignId, settings) =>

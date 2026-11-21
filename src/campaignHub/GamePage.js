@@ -9,6 +9,8 @@ import { normalizeSpecialRules } from "../Components/CampaignPoints";
 import { getDefaultCampaignNotes } from "../layouts/App";
 import { ScenarioDetails } from "./ScenarioPicker";
 import RandomEventRoller from "./RandomEventRoller";
+import ChaosGiftsPanel from "./ChaosGiftsPanel";
+import { chaosTakedowns, eyeOfChaos, withChaosGifts } from "./chaosGifts";
 import SequenceHistory from "./SequenceHistory";
 import { canReopen, reopenSequence, unpack } from "../campaign/sequenceStore";
 import WeatherRoller, { weatherHints } from "./WeatherRoller";
@@ -38,6 +40,7 @@ import {
   describeError,
   getMySavedLists,
   recordResult,
+  recordChaosGift,
   recordTakedown,
   removeLogEntry,
   setArmourDamage,
@@ -266,12 +269,14 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
   const v = victims.find((m) => m.key === victim);
   const killers = all.filter((m) => v && m.owner !== v.owner && !["absent", "unavailable"].includes(modelState(play, m.owner, m.unit, m.index)));
   const k = killers.find((m) => m.key === killer);
+  const chaos = eyeOfChaos(k, v);
 
   return (
     <form
       className="game-takedown"
       onSubmit={(e) => {
         e.preventDefault();
+        if (!v) return;
         const vk = parseModelKey(victim);
         const kk = k ? parseModelKey(killer) : null;
         run(() =>
@@ -279,6 +284,7 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
             round,
             victim: vk,
             killer: kk && { ...kk, counts: isHero(k.unit) },
+            ...(chaos ? { eyeOfChaos: chaos } : {}),
             text: k
               ? `${k.label} (${k.side.name}) wyłącza z akcji: ${v.label} (${v.side.name})`
               : `${v.label} (${v.side.name}) zostaje wyłączony z akcji`,
@@ -319,6 +325,7 @@ const TakedownForm = ({ sides, play, round, run, ids }) => {
       <button className="button" disabled={!v}>
         Zapisz
       </button>
+      {chaos && <p className="hub-muted">Oko Chaosu · po zapisie wykonaj rzut 2K6 na Dary Chaosu.</p>}
     </form>
   );
 };
@@ -548,6 +555,7 @@ export const GameScreen = ({
   };
 
   const log = [...(play.log || [])].reverse();
+  const pendingChaos = chaosTakedowns(play).some((entry) => !play.chaosGifts?.[entry.id]);
 
   return (
     <div className="hub-page game-page">
@@ -649,6 +657,7 @@ export const GameScreen = ({
           <TakedownForm sides={sides} play={play} round={round} run={run} ids={ids} />
         </section>
       )}
+      <ChaosGiftsPanel play={play} canEdit={canEdit} onSave={(entryId, dice) => run(() => recordChaosGift(id, gameId, entryId, dice))} />
 
       {done && isPlayer && (game.optionalRules || []).includes("ZDARZENIA LOSOWE") && (
         <RandomEventRoller
@@ -698,7 +707,7 @@ export const GameScreen = ({
           <section key={s.owner} className={`hub-card game-side${view === i ? " is-shown" : ""}`}>
             {s.list && (
               <MagicPanel
-                units={withGameMagic(s.list.armyList, play, s.owner)}
+                units={withGameMagic(s.list.armyList, play, s.owner).map((u) => done ? u : withChaosGifts(u, play, s.owner))}
                 isActive={(u) =>
                   Array.from({ length: modelCount(u) }, (_, k) => modelState(play, s.owner, u, k)).some((st) => st === "in")
                 }
@@ -714,7 +723,9 @@ export const GameScreen = ({
               {s.name}
               {s.list && <span className="hub-muted"> · {s.list.armyName}</span>}
             </h3>
-            <CompanyPanel owner={s.owner} name={s.name} list={s.list} play={play} canEdit={canEdit} run={run} ids={ids} onRule={setRule} armourRule={armourRule} />
+            <CompanyPanel owner={s.owner} name={s.name}
+              list={s.list && !done ? { ...s.list, armyList: (s.list.armyList || []).map((u) => withChaosGifts(u, play, s.owner)) } : s.list}
+              play={play} canEdit={canEdit} run={run} ids={ids} onRule={setRule} armourRule={armourRule} />
           </section>
         ))}
       </div>
@@ -820,6 +831,7 @@ export const GameScreen = ({
             className="hub-result-form"
             onSubmit={(e) => {
               e.preventDefault();
+              if (pendingChaos || !result.winner) return;
               run(
                 () => recordResult(id, gameId, { winner: result.winner, notes: result.notes.trim(), rounds: round }, user),
                 "Zapisano wynik gry.",
@@ -840,7 +852,8 @@ export const GameScreen = ({
               Notatki
               <textarea rows={2} value={result.notes} onChange={(e) => setResult({ ...result, notes: e.target.value })} />
             </label>
-            <button className="button" disabled={!result.winner}>
+            {pendingChaos && <p className="hub-muted">Rozstrzygnij rzuty na Dary Chaosu przed zakończeniem gry.</p>}
+            <button className="button" disabled={!result.winner || pendingChaos}>
               Zakończ grę (runda {round})
             </button>
           </form>

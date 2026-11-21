@@ -1,10 +1,10 @@
-import { recordResult } from "./campaignService";
-import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { recordChaosGift, recordResult, recordTakedown, removeLogEntry } from "./campaignService";
+import { arrayRemove, deleteField, doc, getDoc, increment, runTransaction, serverTimestamp, updateDoc } from "firebase/firestore";
 
 jest.mock("../Database/database", () => ({ db: {} }));
 jest.mock("firebase/firestore", () => {
   const names = ["arrayRemove", "arrayUnion", "collection", "deleteDoc", "deleteField", "getDocs",
-    "increment", "onSnapshot", "query", "setDoc", "where", "writeBatch"];
+    "increment", "onSnapshot", "query", "runTransaction", "setDoc", "where", "writeBatch"];
   return {
     ...Object.fromEntries(names.map((n) => [n, jest.fn()])),
     doc: jest.fn((db, ...path) => path.join("/")),
@@ -25,6 +25,7 @@ beforeEach(() => {
   doc.mockImplementation((db, ...path) => path.join("/"));
   updateDoc.mockImplementation(() => Promise.resolve());
   serverTimestamp.mockImplementation(() => "now");
+  runTransaction.mockImplementation((db, operation) => operation({ get: getDoc, update: updateDoc }));
 });
 
 test("recording a result freezes both companies before anyone settles", async () => {
@@ -48,4 +49,67 @@ test("a result recorded again keeps the first prestige and models", async () => 
   ));
   await recordResult("c1", "g1", { winner: "b" }, { uid: "b" });
   expect(updateDoc.mock.calls[0][1].before.b).toEqual({ models: 3, out: 1, prestige: 70 });
+});
+
+const takedown = (id) => ({
+  id, type: "takedown",
+  killer: { owner: "a", unitId: "hero", counts: true },
+  victim: { owner: "b", unitId: "target", index: 0 },
+  eyeOfChaos: { hero: "Bohater", target: "Cel", held: [] },
+});
+
+test("the game result waits for all triggered Eye of Chaos rolls", async () => {
+  const play = { log: [takedown("pending")] };
+  getDoc.mockImplementation(docs({ players: ["a", "b"], play }, {}));
+  await expect(recordResult("c1", "g1", { winner: "a" }, { uid: "a" })).rejects.toThrow(/Dary Chaosu/);
+  expect(updateDoc).not.toHaveBeenCalled();
+  play.chaosGifts = { pending: { dice: [3, 4], result: 7 } };
+  await recordResult("c1", "g1", { winner: "a" }, { uid: "a" });
+  expect(updateDoc).toHaveBeenCalledTimes(1);
+});
+
+function transactionFor(play) {
+  const transaction = {
+    get: jest.fn().mockResolvedValue({ data: () => ({ status: "playing", play }) }),
+    update: jest.fn(),
+  };
+  runTransaction.mockImplementation((db, operation) => operation(transaction));
+  return transaction;
+}
+
+test("persisted gifts are unique per hero and each takedown has only one result", async () => {
+  const log = [takedown("previous"), takedown("pending")];
+  const play = { log, chaosGifts: { previous: { dice: [2, 2], result: 4 } } };
+  const transaction = transactionFor(play);
+  await expect(recordChaosGift("c1", "g1", "pending", [1, 3])).rejects.toThrow(/ma już dar/);
+  expect(transaction.update).not.toHaveBeenCalled();
+  await recordChaosGift("c1", "g1", "pending", [3, 4]);
+  expect(transaction.update).toHaveBeenCalledWith("campaigns/c1/games/g1", {
+    "play.chaosGifts.pending": { dice: [3, 4], result: 7 },
+  });
+  play.chaosGifts.pending = { dice: [3, 4], result: 7 };
+  await expect(recordChaosGift("c1", "g1", "pending", [3, 3])).rejects.toThrow(/już zapisany/);
+  expect(transaction.update).toHaveBeenCalledTimes(1);
+});
+
+test("a second write cannot take out the same model, and undo removes its gift with the PD", async () => {
+  const entry = takedown("taken");
+  const play = { log: [entry], units: { b: { target: { out: { 0: true } } } } };
+  const transaction = transactionFor(play);
+  await expect(recordTakedown("c1", "g1", entry)).rejects.toThrow(/już wyłączony/);
+  expect(transaction.update).not.toHaveBeenCalled();
+  arrayRemove.mockReturnValue("remove takedown");
+  deleteField.mockReturnValue("delete field");
+  increment.mockReturnValue("decrement");
+  await removeLogEntry("c1", "g1", entry);
+  expect(increment).toHaveBeenCalledWith(-1);
+  expect(transaction.update).toHaveBeenCalledWith("campaigns/c1/games/g1", {
+    "play.log": "remove takedown",
+    "play.units.b.target.out.0": "delete field",
+    "play.units.a.hero.kills": "decrement",
+    "play.chaosGifts.taken": "delete field",
+  });
+  play.log = [];
+  await removeLogEntry("c1", "g1", entry);
+  expect(transaction.update).toHaveBeenCalledTimes(1);
 });

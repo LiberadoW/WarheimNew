@@ -15,6 +15,7 @@ import {
 } from "./gamePlay";
 import GamePage from "./GamePage";
 import * as service from "./campaignService";
+import { eyeOfChaos, withChaosGifts } from "./chaosGifts";
 
 const heroes = armies["Cyrkowcy z Ligii Ostermarku"].heroes;
 const unit = (name, extra = {}) => ({ ...createUnit(heroes, name), ...extra });
@@ -46,6 +47,17 @@ describe("game state", () => {
       "Cyrkowiec #2",
       "Cyrkowiec #3",
     ]);
+  });
+
+  test.each(["Duży cel (wierzchem)", "Wielkolud"])("an eligible hero rolls against a henchman with %s", (rule) => {
+    const attacker = {
+      owner: "a", label: "Herszt", unit: { ...mecenas, rules: ["Oko Chaosu"] },
+      side: { list: { armyType: "Cyrkowcy z Ligii Ostermarku" } },
+    };
+    const victim = { owner: "b", label: "Cel", unit: { ...cyrkowcy, rules: [rule] } };
+    expect(eyeOfChaos(attacker, victim)).toMatchObject({ hero: "Herszt", target: "Cel" });
+    expect(eyeOfChaos(attacker, { ...victim, unit: cyrkowcy })).toBeNull();
+    expect(eyeOfChaos({ ...attacker, unit: { ...attacker.unit, type: "Stronnik" } }, victim)).toBeNull();
   });
 
   test("optional-rule PD: heroes, mages, and Nagła śmierć only after 6 rounds", () => {
@@ -119,6 +131,7 @@ jest.mock("./campaignService", () => {
     watchGame: jest.fn(),
     watchCampaignLists: jest.fn(),
     recordTakedown: jest.fn(() => Promise.resolve()),
+    recordChaosGift: jest.fn(() => Promise.resolve()),
     addLogEntry: jest.fn(() => Promise.resolve()),
     setModelState: jest.fn(() => Promise.resolve()),
     changeCounter: jest.fn(() => Promise.resolve()),
@@ -133,10 +146,10 @@ describe("game screen", () => {
   const campaign = { id: "c1", name: "Jesień", ownerId: "a", members: ["a", "b"], memberNames: { a: "Ania", b: "Bartek" } };
   const listB = { armyName: "Banda B", armyType: "Cyrkowcy z Ligii Ostermarku", armyList: [unit("Szarlatan", { uniqueId: "sz" })], prestige: 30 };
   const listA = { armyName: "Banda A", armyType: "Cyrkowcy z Ligii Ostermarku", armyList: armyA, prestige: 80 };
-  const setup = (game, extra = {}) => {
+  const setup = (game, extra = {}, lists = { a: listA, b: listB }) => {
     service.watchCampaign.mockImplementation((id, cb) => { cb(campaign); return () => {}; });
     service.watchGame.mockImplementation((id, gid, cb) => { cb(game); return () => {}; });
-    service.watchCampaignLists.mockImplementation((id, cb) => { cb({ a: listA, b: listB }); return () => {}; });
+    service.watchCampaignLists.mockImplementation((id, cb) => { cb(lists); return () => {}; });
     const setters = { setUnitList: jest.fn(), setArmy: jest.fn(), setArmyName: jest.fn(), setCampaignNotes: jest.fn() };
     render(
       <AuthContext.Provider value={{ currentUser: { user: { uid: "a" } } }}>
@@ -173,6 +186,60 @@ describe("game screen", () => {
       killer: { owner: "a", unitId: "m1", index: 0, counts: true },
       text: "Mecenas (Ania) wyłącza z akcji: Szarlatan (Bartek)",
     });
+  });
+
+  const chaosLog = (id) => ({
+    id, type: "takedown", round: 3, text: "Mecenas wyłącza z akcji Szarlatana",
+    killer: { owner: "a", unitId: "m1", index: 0 },
+    eyeOfChaos: { hero: "Mecenas", target: "Szarlatan", held: [] },
+  });
+
+  test("a campaign hero with the company rule triggers Oko Chaosu against a hero", async () => {
+    setup(baseGame, {}, { a: { ...listA, armyType: "Kult Ducha Chaosu" }, b: listB });
+    fireEvent.change(screen.getByLabelText("Wyłączony z akcji"), { target: { value: "b|sz|0" } });
+    fireEvent.change(screen.getByLabelText("Przez"), { target: { value: "a|m1|0" } });
+    expect(screen.getByText(/po zapisie wykonaj rzut 2K6/)).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Zapisz" }));
+    await waitFor(() => expect(service.recordTakedown).toHaveBeenCalledWith("c1", "g1", expect.objectContaining({
+      eyeOfChaos: { hero: "Mecenas", target: "Szarlatan", held: [] },
+    })));
+  });
+
+  test("a pending Eye of Chaos roll survives reopening the game and a duplicate must be rerolled", () => {
+    setup({ ...baseGame, play: {
+      ...baseGame.play, log: [chaosLog("first"), chaosLog("pending")],
+      chaosGifts: { first: { dice: [1, 2], result: 3 } },
+    } });
+    const panel = within(screen.getByRole("region", { name: "Oko Chaosu" }));
+    const enter = (a, b) => {
+      fireEvent.change(panel.getByLabelText("Dary Chaosu, kość 1"), { target: { value: String(a) } });
+      fireEvent.change(panel.getByLabelText("Dary Chaosu, kość 2"), { target: { value: String(b) } });
+    };
+    enter(1, 2);
+    expect(panel.queryByRole("button", { name: "Zapisz wynik Darów Chaosu" })).toBeNull();
+    fireEvent.click(panel.getByRole("button", { name: "Rzuć ponownie" }));
+    enter(2, 4);
+    fireEvent.click(panel.getByRole("button", { name: "Zapisz wynik Darów Chaosu" }));
+    expect(service.recordChaosGift).toHaveBeenCalledWith("c1", "g1", "pending", [2, 4]);
+  });
+
+  test("gift stats are capped and never change the roster handed to the post-battle sequence", () => {
+    const hero = { ...mecenas, stats: { Początkowa: [4, 3, 3, 3, 10, 1, 3, 1, 2] } };
+    const play = {
+      log: [chaosLog("wt"), chaosLog("cp"), chaosLog("fear")],
+      chaosGifts: {
+        wt: { result: 3 }, cp: { result: 12 }, fear: { result: 10 },
+      },
+    };
+    const affected = withChaosGifts(hero, play, "a");
+    expect(affected.stats.Aktualna).toEqual([4, 3, 3, 3, 10, 1, 3, 1, 2]);
+    expect(affected.rules).toEqual(expect.arrayContaining(["Głupota", "Strach"]));
+    const { units } = toBattle({
+      savedList: { armyList: [hero] }, play, owner: "a", game: baseGame, opponentList: listB,
+    });
+    expect(units[0].stats).toEqual(hero.stats);
+    expect(units[0].rules).toEqual(hero.rules);
+    expect(withChaosGifts(hero, { ...play, log: [] }, "a")).toBe(hero);
   });
 
   test("a typed K66 shows the random event from the scenario's table", () => {
