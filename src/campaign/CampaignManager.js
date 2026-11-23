@@ -526,6 +526,13 @@ export default function CampaignManager({
   onFinish,
 }) {
   const [error, setError] = useState("");
+  const errorRef = useRef(null);
+  useEffect(() => {
+    if (error) {
+      errorRef.current?.scrollIntoView?.({ block: "center", behavior: "instant" });
+      errorRef.current?.focus({ preventScroll: true });
+    }
+  }, [error]);
   const [saving, setSaving] = useState(false);
   // The last saved sequence, shown until the next skirmish starts.
   const [finished, setFinished] = useState(null);
@@ -710,7 +717,7 @@ export default function CampaignManager({
     <section ref={panel} tabIndex={-1} className="campaign" aria-label="Prowadzenie kampanii">
       {!battle && <h2>Kampania</h2>}
       {!battle && error && (
-        <p role="alert" className="campaign-error">
+        <p ref={errorRef} tabIndex={-1} role="alert" className="campaign-error">
           {error}
         </p>
       )}
@@ -892,7 +899,7 @@ export default function CampaignManager({
             )}
           </div>
           {error && (
-            <p role="alert" className="campaign-error">
+            <p ref={errorRef} tabIndex={-1} role="alert" className="campaign-error">
               {error}
             </p>
           )}
