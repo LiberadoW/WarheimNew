@@ -1568,7 +1568,7 @@ export const equipmentCapacity = (unit, item) => {
     return "Limit 5 przedmiotów ekwipunku specjalnego.";
   return null;
 };
-export const equipItem = (unit, item, quote) => {
+export const equipItem = (unit, item, quote, validateOnly = false) => {
   const name =
     Object.keys(unit.equipmentList || {}).find((name) =>
       itemBaseNames(item).some((base) => aliases(name).includes(base)),
@@ -1611,12 +1611,13 @@ export const equipItem = (unit, item, quote) => {
       )
     )
       throw Error("Model ma już przedmiot z tej grupy pancerza.");
+    if (validateOnly) return;
     unit.equipmentList = {
       ...unit.equipmentList,
       [name]: [quote.basePrice, rawCategory, ...(group ? [group] : [])],
     };
     unit.optionalEquipment = [...(unit.optionalEquipment || []), name];
-  } else
+  } else if (!validateOnly)
     unit.customEquipment = [
       ...(unit.customEquipment || []),
       {
@@ -1626,6 +1627,7 @@ export const equipItem = (unit, item, quote) => {
         price: quote.basePrice,
       },
     ];
+  if (validateOnly) return;
   unit.campaignEquipment = [
     ...(unit.campaignEquipment || []),
     {
@@ -1792,7 +1794,7 @@ export const purchaseTotal = (quote, quantity) => {
   return sum(values);
 };
 
-export const buyItem = (
+export const validatePurchase = (
   post,
   unitId,
   item,
@@ -1803,6 +1805,7 @@ export const buyItem = (
   const unit = post.units.find((u) => u.uniqueId === unitId);
   if (post.tradeClosed)
     throw Error("Handel w tej sekwencji został zakończony.");
+  if (!toInventory && !unit) throw Error("Odbiorcy nie ma już w rozpisce.");
   const permission = equipmentPermission(unit, item, armyName);
   if (!toInventory && unit?.campaignNewRecruit && item.availability > 0)
     throw Error(
@@ -1834,11 +1837,14 @@ export const buyItem = (
   if (quantity < 1) throw Error("Nie można kupować dla poległej postaci.");
   if (quantity > 1 && (post.armyRules || []).some((r) => baseName(r) === "podatek") && !quote.unitPrices)
     throw Error("Dla grupy wykonaj osobny rzut na podatek za każdą sztukę.");
+  if (quote.quantity != null && quote.quantity !== quantity)
+    throw Error(`Zapisano cenę za ${quote.quantity} szt., a teraz potrzeba ${quantity} szt.`);
   const total = purchaseTotal(quote, quantity);
   if (post.treasury < total)
     throw Error("Za mało złotych koron w skarbcu.");
+  let token;
   if (item.availability > 0) {
-    const token = post.availability?.find((t) => t.id === quote.tokenId);
+    token = post.availability?.find((t) => t.id === quote.tokenId);
     if (
       !token ||
       !token.locked ||
@@ -1846,6 +1852,14 @@ export const buyItem = (
       availabilityValue(token, item) < item.availability
     )
       throw Error("Brak niewykorzystanego wyniku dostępności.");
+  }
+  if (!toInventory) equipItem(unit, item, quote, true);
+  return { unit, quantity, total, token };
+};
+
+export const buyItem = (post, unitId, item, quote, armyName, toInventory = false) => {
+  const { unit, quantity, total, token } = validatePurchase(post, unitId, item, quote, armyName, toInventory);
+  if (token) {
     token.used = true;
     token.usedFor = item.name;
   }

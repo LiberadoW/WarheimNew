@@ -14,7 +14,7 @@ import {
   giantArmourBlocked,
 } from "./trading";
 import DiceInput from "./DiceInput";
-import { obligationText, purchaseObligations } from "./trading";
+import { hasPurchaseRoll, obligationText, openPurchaseQuotes, tradeRecipientLabel } from "./trading";
 import Reference from "./Reference";
 import {
   catalog,
@@ -25,6 +25,7 @@ import {
   validDice,
   modelCount,
   buyItem,
+  validatePurchase,
   purchaseTotal,
   log,
   uid,
@@ -337,7 +338,7 @@ export function AvailabilityPool({ post, update, compact = false, title = "Pula 
     </section>
   );
 }
-function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }) {
+function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack, obligation }) {
   const key = `${item.id}:${toInventory ? "inventory" : unit?.uniqueId}`;
   const quote = post.quotes[key];
   // Rolls belong to the item and its recipient (a character or the stash):
@@ -350,7 +351,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
   const [token, setToken] = useState("");
   const [repeatOf, setRepeatOf] = useState(null);
   const completed = quote?.used && quote.id !== repeatOf;
-  const saved = quote && !quote.used ? quote : null;
+  const saved = quote && !quote.used && (!quote.committed || hasPurchaseRoll(quote)) ? quote : null;
   const dice = saved?.dice || draftDice;
   const discountRoll = saved?.discountRoll || draftDiscount;
   // Flat rolls from older drafts cover only the first item, never the group.
@@ -359,7 +360,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
   if (!taxRolls[0]?.length && saved?.taxRoll) taxRolls = [saved.taxRoll, ...taxRolls.slice(1)];
   const count = priceDiceCount(item.price), discounts = discountDice(post, item);
   const quantity = toInventory ? 1 : livingCount(unit || {});
-  const recipient = toInventory ? "Skarbiec kompanii" : (unit?.unitDisplayName || unit?.unitName || "Brak postaci");
+  const recipient = toInventory ? "Skarbiec kompanii" : unit ? tradeRecipientLabel(post, unit) : "Brak postaci";
   const reason = toInventory ? null : !unit ? "Wybierz postać, dla której kupujesz ekwipunek." : giantArmourBlocked(unit, item) || equipmentPermission(unit, item, armyName) || equipmentCapacity(unit, item);
   const priceUnit = toInventory ? null : unit;
   const base = (count === 0 || validDice(dice, count)) ? basePriceOf(item, dice, priceUnit) : null;
@@ -375,20 +376,33 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
     : priceReady ? Array.from({ length: quantity }, (_, i) => quotePrice(post, item, dice, discountRoll, { taxRoll: taxRolls[i], unit: priceUnit })) : null;
   const total = unitPrices?.length === quantity ? sum(unitPrices) : null;
   const availabilityReady = !item.availability || tokens.some(t=>t.id === tokenId);
+  const candidate = total == null ? null : {
+    itemId: item.id, price: unitPrices[0], unitPrices, quantity, discountRoll,
+    taxRolls: taxes ? taxRolls : [], chemicalKind: chemicalKind(item),
+    basePrice: Number(item.price.match(/^\d+/)?.[0] || 0), dice, tokenId,
+  };
+  let purchaseIssue = "";
+  if (candidate && availabilityReady && !reason && !completed && !post.tradeClosed) {
+    try {
+      validatePurchase({ ...post, treasury: Infinity }, unit?.uniqueId, item,
+        saved && !legacyGroupTax ? saved : candidate, armyName, toInventory);
+    } catch (error) {
+      purchaseIssue = error.message;
+    }
+  }
   // A finished roll is binding: it is saved at once and, if affordable, must
   // be bought before anything else (and before another character rolls).
-  const committable = !saved && !completed && !reason && priceReady && availabilityReady && total != null;
+  const committable = !obligation && !saved && !completed && !reason && !purchaseIssue &&
+    !post.tradeClosed && priceReady && availabilityReady && candidate && hasPurchaseRoll(candidate);
   useEffect(() => {
     if (!committable) return;
     update((p) => {
-      if (p.quotes[key] && !p.quotes[key].used) return;
-      p.quotes[key] = { id: uid(), itemId: item.id, price: unitPrices[0], unitPrices, quantity,
-        discountRoll, taxRolls: taxes ? taxRolls : [], chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
-        dice, tokenId, used: false, committed: true, itemName: item.name, recipient };
+      if (p.quotes[key] && !p.quotes[key].used && hasPurchaseRoll(p.quotes[key])) return;
+      p.quotes[key] = { ...candidate, id: uid(), used: false, committed: true, itemName: item.name, recipient };
       log(p,"price",`${item.name} (${recipient}): ${total} zk za ${quantity} szt. (kości: ${dice.join(",") || "cena stała"}${taxes ? `; podatek ${taxRolls.map((r, i) => `szt. ${i + 1}: ${r.join("+")}`).join("; ")}` : ""}${giantArmour(priceUnit, item) ? "; wielkolud x2" : ""})`);
     });
   }, [committable]); // eslint-disable-line react-hooks/exhaustive-deps
-  const otherObligation = purchaseObligations(post).find((o) => o.key !== key);
+  const otherObligation = obligation && obligation.key !== key ? obligation : null;
   if (otherObligation && !completed)
     return (
       <article className="campaign-purchase" aria-label={`Zakup: ${item.name}`}>
@@ -452,13 +466,11 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
           <div className="campaign-purchase-total">
             <div><span>Do zapłaty</span><strong>{total == null ? "Ustal wynik rzutu" : `${total} zk`}</strong>
               <small>{quantity > 1 && total != null ? `${unitPrices.join(" + ")} zk · ` : ""}W skarbcu: {post.treasury} zk</small></div>
-            <button className="button" disabled={!priceReady || total == null || !availabilityReady || total > post.treasury || post.tradeClosed}
+            <button className="button" disabled={!priceReady || total == null || !availabilityReady || total > post.treasury || post.tradeClosed || !!purchaseIssue}
               onClick={()=>update(p=>{
                 if ((p.quotes[key]?.id || null) !== (quote?.id || null)) throw Error("Zakup został już rozliczony.");
                 if (!saved || legacyGroupTax) {
-                  p.quotes[key] = { id: uid(), itemId: item.id, price: unitPrices[0], unitPrices, quantity,
-                    discountRoll, taxRolls: taxes ? taxRolls : [], chemicalKind: chemicalKind(item), basePrice: Number(item.price.match(/^\d+/)?.[0] || 0),
-                    dice, tokenId, used: false };
+                  p.quotes[key] = { ...candidate, id: uid(), used: false };
                   log(p,"price",`${item.name}: ${total} zk za ${quantity} szt. (kości: ${dice.join(",") || "cena stała"}${taxes ? `; podatek ${taxRolls.map((r, i) => `szt. ${i + 1}: ${r.join("+")}`).join("; ")}` : ""}${giantArmour(priceUnit, item) ? "; wielkolud x2" : ""})`);
                 }
                 buyItem(p,unit?.uniqueId,item,p.quotes[key],armyName,toInventory);
@@ -466,6 +478,7 @@ function CatalogItem({ item, unit, post, update, armyName, toInventory, onBack }
               {total == null ? "Kup przedmiot" : `Kup za ${total} zk`}
             </button>
           </div>
+          {purchaseIssue && <p className="campaign-error">{purchaseIssue}</p>}
           {total != null && total > post.treasury && <p className="campaign-error">Brakuje {total-post.treasury} zk do zakupu.</p>}
         </>
       )}
@@ -597,7 +610,29 @@ export default function Trade({ post, update, army, commonOnly = false }) {
   const shown = catalog.filter(i=>(!category || i.category===category) && normal(i.name).includes(normal(query)) &&
     (all || inventory || (!equipmentPermission(unit,i,army.name) && !giantArmourBlocked(unit,i))) &&
     (!commonOnly || !i.availability));
-  const selected = catalog.find(i=>i.id === selectedId);
+  const selected = catalog.find(i=>i.id === selectedId && (!commonOnly || !i.availability));
+  const openQuotes = openPurchaseQuotes(post, army.name);
+  const obligation = openQuotes.find((quote) => !quote.issue && quote.total <= post.treasury);
+  const requiresRareTrade = commonOnly && catalog.some((item) => item.id === obligation?.itemId && item.availability > 0);
+  const isCurrentPurchase = obligation?.key === `${selectedId}:${inventory ? "inventory" : unitId}` && !selling;
+  const resumePurchase = () => update((p) => {
+    p.rollDrafts = {
+      ...p.rollDrafts,
+      "trade-mode": "buy",
+      "trade-selected": obligation.itemId,
+      "trade-inventory": obligation.recipientId === "inventory",
+      "trade-recipient": obligation.recipientId,
+    };
+  });
+  const dismissQuote = (key) => update((p) => {
+    const obsolete = openPurchaseQuotes(p, army.name).find((quote) => quote.key === key && quote.issue);
+    if (!obsolete) return;
+    for (const attempt of new Set(["first", p.quotes[key].id || "first"])) {
+      for (const kind of ["price", "discount", "tax"]) delete p.rollDrafts?.[`${kind}:${key}:${attempt}`];
+    }
+    delete p.quotes[key];
+    log(p, "price", `Usunięto nieaktualną cenę. ${obligationText(obsolete)}. ${obsolete.issue}`);
+  });
   const heading = useRef(null), previousSelection = useRef(selectedId);
   useEffect(()=>{
     if (previousSelection.current !== selectedId) {
@@ -613,6 +648,22 @@ export default function Trade({ post, update, army, commonOnly = false }) {
       </div>
       {commonOnly && <p className="campaign-source">Krok 9: nowi rekruci i pozostali drużynnicy mogą kupić przedmioty powszechne. Rzadkie kupujesz w kroku 7.</p>}
       {post.tradeClosed && <p>Handel z taborytami zakończony, wynik kradzieży zapisany.</p>}
+      {obligation && (
+        <div className="campaign-card">
+          <strong>Rozpoczęty zakup</strong>
+          <p>{obligationText(obligation)}{obligation.quantity ? ` · ${obligation.quantity} szt.` : ""}. Zapisany rzut ceny i stan skarbca pozwalają dokończyć ten zakup.</p>
+          {requiresRareTrade ? <p>Wróć do kroku „Handel i dostępność”, żeby kupić ten rzadki przedmiot.</p> :
+            !isCurrentPurchase && <button type="button" className="button" onClick={resumePurchase}>Przejdź do zakupu</button>}
+        </div>
+      )}
+      {openQuotes.filter((quote) => quote.issue).map((quote) => (
+        <div className="campaign-card" key={quote.key}>
+          <strong>Zapisana cena · {obligationText(quote)}</strong>
+          <p>{quote.issue} Możesz kontynuować sekwencję.</p>
+          {!post.tradeClosed && <button type="button" className="button button-secondary button-small"
+            onClick={() => dismissQuote(quote.key)}>Usuń nieaktualną cenę</button>}
+        </div>
+      ))}
       <fieldset disabled={post.tradeClosed}>
         {!commonOnly && !selected && (
           <div className="campaign-mode-switch" role="tablist" aria-label="Rodzaj handlu">
@@ -641,18 +692,18 @@ export default function Trade({ post, update, army, commonOnly = false }) {
               if(e.target.value !== "inventory") setUnitId(e.target.value);
               setSelected("");
             }}>
-              {post.units.filter(u=>!u.campaignModelStatus?.every(s=>s.dead)).map(u=><option key={u.uniqueId} value={u.uniqueId}>{u.unitDisplayName || u.unitName}{modelCount(u)>1 ? ` · ${modelCount(u)} modele` : ""}</option>)}
+              {post.units.filter(u=>!u.campaignModelStatus?.every(s=>s.dead)).map(u=><option key={u.uniqueId} value={u.uniqueId}>{tradeRecipientLabel(post, u)}{livingCount(u)>1 ? ` · ${livingCount(u)} modele` : ""}</option>)}
               <option value="inventory">Skarbiec kompanii</option>
             </select>
           </label>
-          <p className="campaign-muted">{inventory ? "Przedmioty do późniejszego przydziału." : unit && modelCount(unit)>1 ? `Kupujesz komplet dla ${modelCount(unit)} modeli.` : "Ekwipunek z listy wybranej postaci."}</p>
+          <p className="campaign-muted">{inventory ? "Przedmioty do późniejszego przydziału." : unit && livingCount(unit)>1 ? `Kupujesz komplet dla ${livingCount(unit)} modeli.` : "Ekwipunek z listy wybranej postaci."}</p>
           {!inventory && unit && (() => {
             const carried = GEAR_FIELDS.flatMap((f) => (unit[f] || []).map((e) => (typeof e === "string" ? e : e.name)));
             return <p className="campaign-source">Ma teraz: {carried.length ? carried.join(", ") : "nic"}</p>;
           })()}
         </div>
         {selected ? <CatalogItem key={`${selected.id}:${unitId}:${inventory}`} item={selected} unit={unit}
-          post={post} update={update} armyName={army.name} toInventory={inventory} onBack={()=>setSelected("")} /> : (
+          post={post} update={update} armyName={army.name} toInventory={inventory} obligation={obligation} onBack={()=>setSelected("")} /> : (
           <>
             <h4 className="campaign-shop-step">{commonOnly ? "2. Wybierz przedmiot" : "3. Wybierz przedmiot"}</h4>
             <div className="campaign-shop-filters">
@@ -686,7 +737,7 @@ export default function Trade({ post, update, army, commonOnly = false }) {
         {post.effects?.strigosTheftPending && <section className="campaign-card">
           <h3>Zakończenie handlu ze Strigosem</h3><p>50% zniżki. Po wszystkich zakupach rzuć K6: na 5+ tracisz całe złoto i wszystkie łupy. Zatwierdzenie zamyka handel.</p>
           <DiceInput label="Strigos: kradzież po handlu" value={theftDice} onChange={setTheftDice} />
-          <button className="button" disabled={!validDice(theftDice,1)} onClick={()=>update(p=>settleStrigos(p,theftDice))}>Zakończ handel z taborytami</button>
+          <button className="button" disabled={!!obligation || !validDice(theftDice,1)} onClick={()=>update(p=>settleStrigos(p,theftDice,army.name))}>Zakończ handel z taborytami</button>
         </section>}
       </fieldset>
     </section>

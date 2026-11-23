@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {render,screen,fireEvent,within,cleanup} from "@testing-library/react";
 import Trade from "./Trade";
 import * as R from "./rules";
+import { purchaseObligations } from "./trading";
 const unit = {uniqueId:"h",unitName:"Herszt",type:"Bohater",selectedNumber:1,cost:55,exp:20,rules:[],
   equipmentList:{Miecz:[10,0],Sztylet:[2,0]},startingEquipment:["Sztylet"],optionalEquipment:[],
   stats:{Początkowa:[4,4,4,3,3,2,4,1,8],Maksymalna:[5,6,6,4,4,3,6,4,9]}};
@@ -205,12 +206,52 @@ test("an affordable rolled price must be bought before anything else",()=>{
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
   expect(screen.getByText(/Najpierw kup Miecz dla: Herszt za 16 zk/)).toBeTruthy();
   expect(screen.queryByLabelText(tax)).toBeNull();
-  click("← Wróć do przedmiotów");change("Postać","h");
-  change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");click("Kup za 16 zk");
+  click("Przejdź do zakupu");
+  expect(screen.getByLabelText("Postać").value).toBe("h");
+  click("Kup za 16 zk");
   expect(state.post.treasury).toBe(84);
   click("Wróć do listy");change("Postać","h2");
   change("Szukaj przedmiotu","Miecz");click("Wybierz: Miecz");
   expect(screen.getByLabelText(tax).value).toBe("");
+});
+test("an old 15 zk fixed-price armour quote cannot block a group that needs three pieces", () => {
+  const item = R.catalog.find((entry) => entry.name === "Średni pancerz");
+  const key = `${item.id}:h`;
+  const { state } = setup({
+    unitName: "Kultysta", type: "Stronnik", selectedNumber: 3,
+    equipmentList: { ...unit.equipmentList, Średni: [15, 2, "Zbroja"] },
+  }, 27, [], {
+    quotes: { [key]: { id: "old", itemId: item.id, committed: true, price: 15, quantity: 1, unitPrices: [15], dice: [] } },
+    rollDrafts: { "trade-selected": item.id },
+  });
+  expect(purchaseObligations(state.post, army.name)).toEqual([]);
+  expect(screen.getByText(/Zapisano cenę bez rzutu/)).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Kup za 45 zk" }).disabled).toBe(true);
+  click("Usuń nieaktualną cenę");
+  expect(state.post.quotes).toEqual({});
+  expect(state.post.treasury).toBe(27);
+  expect(state.post.journal.at(-1).text).toMatch(/Średni pancerz dla: Kultysta za 15 zk/);
+});
+
+test("older simultaneous obligations can be resumed one by one for identically named recipients", () => {
+  const item = R.catalog.find((entry) => entry.name === "Miecz");
+  const makeQuote = (id) => ({
+    id, itemId: item.id, committed: true, price: 16, quantity: 1, unitPrices: [16],
+    dice: [], taxRolls: [[6]],
+  });
+  const { state } = setup({}, 50, [{ ...R.clone(unit), uniqueId: "other" }], {
+    armyRules: ["Podatek"],
+    quotes: { [`${item.id}:other`]: makeQuote("first"), [`${item.id}:h`]: makeQuote("second") },
+  });
+  expect(screen.getByText(/Miecz dla: Herszt · nr 2 za 16 zk/)).toBeTruthy();
+  click("Przejdź do zakupu");
+  expect(screen.getByLabelText("Postać").value).toBe("other");
+  click("Kup za 16 zk");
+  click("Przejdź do zakupu");
+  expect(screen.getByLabelText("Postać").value).toBe("h");
+  click("Kup za 16 zk");
+  expect(state.post.treasury).toBe(18);
+  expect(purchaseObligations(state.post, army.name)).toEqual([]);
 });
 test("the availability bribe is on view before rolling and costs 2K6 gold",()=>{
   const {state}=setup();

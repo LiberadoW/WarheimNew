@@ -1,5 +1,6 @@
 import * as R from "./rules";
 import { companyLevel } from "./company";
+import { livingCount } from "./effects";
 export const chemicalKind = (item) =>
   /\(trucizna\)/i.test(item.name)
     ? "poison"
@@ -82,11 +83,12 @@ export function quotePrice(post, item, baseDice, discountRoll, extra = {}) {
     ) + (tax ? R.sum(extra.taxRoll) : 0)
   );
 }
-export function settleStrigos(post, dice) {
+export function settleStrigos(post, dice, armyName) {
   if (!post.effects?.strigosTheftPending || post.tradeClosed)
     throw Error("Brak oczekującego handlu ze Strigosem.");
   if (!R.validDice(dice, 1))
     throw Error("Wykonaj rzut K6 po zakończeniu handlu.");
+  if (purchaseObligations(post, armyName).length) throw Error("Najpierw dokończ rozpoczęty zakup.");
   if (dice[0] >= 5) {
     post.treasury = 0;
     post.loot = 0;
@@ -105,8 +107,40 @@ export function settleStrigos(post, dice) {
 // is bought or the trade step is left. Rolling again with another character
 // to get a cheaper price is not allowed.
 export const quoteTotal = (q) => R.sum(Array.isArray(q?.unitPrices) && q.unitPrices.length ? q.unitPrices : [Number(q?.price) || 0]);
-export const purchaseObligations = (post) =>
+export const hasPurchaseRoll = (quote) =>
+  [quote.dice, quote.discountRoll, quote.taxRoll, quote.taxRolls].flat(Infinity)
+    .some((die) => Number.isInteger(die) && die >= 1 && die <= 6);
+
+export function tradeRecipientLabel(post, unit) {
+  const name = R.label(unit);
+  const matches = post.units.filter((candidate) => R.label(candidate) === name && livingCount(candidate) > 0);
+  const index = matches.indexOf(unit);
+  return matches.length > 1 && index >= 0 ? `${name} · nr ${index + 1}` : name;
+}
+
+export const openPurchaseQuotes = (post, armyName = "") =>
   Object.entries(post.quotes || {})
-    .filter(([, q]) => q?.committed && !q.used && quoteTotal(q) <= post.treasury)
-    .map(([key, q]) => ({ key, itemName: q.itemName || "przedmiot", recipient: q.recipient || "", total: quoteTotal(q) }));
+    .filter(([, q]) => q?.committed && !q.used)
+    .map(([key, quote]) => {
+      const item = R.catalog.find((entry) => entry.id === quote.itemId);
+      const prefix = `${quote.itemId}:`;
+      const recipientId = key.startsWith(prefix) ? key.slice(prefix.length) : "";
+      const toInventory = recipientId === "inventory";
+      const unit = toInventory ? null : post.units.find((entry) => entry.uniqueId === recipientId);
+      const recipient = toInventory ? "Skarbiec kompanii" : unit ? tradeRecipientLabel(post, unit) : quote.recipient || "nieznany odbiorca";
+      let issue = "";
+      try {
+        if (!item) throw Error("Przedmiotu nie ma już w katalogu.");
+        if (!hasPurchaseRoll(quote)) throw Error("Zapisano cenę bez rzutu. Samo otwarcie przedmiotu nie zobowiązuje do zakupu.");
+        const restriction = !toInventory && unit && giantArmourBlocked(unit, item);
+        if (restriction) throw Error(restriction);
+        R.validatePurchase({ ...post, treasury: Infinity }, recipientId, item, quote, armyName, toInventory);
+      } catch (error) {
+        issue = error.message;
+      }
+      return { key, itemId: quote.itemId, itemName: item?.name || quote.itemName || "przedmiot", recipientId, recipient,
+        quantity: quote.quantity ?? quote.unitPrices?.length, total: quoteTotal(quote), issue };
+    });
+export const purchaseObligations = (post, armyName) =>
+  openPurchaseQuotes(post, armyName).filter((quote) => !quote.issue && quote.total <= post.treasury);
 export const obligationText = (o) => `${o.itemName}${o.recipient ? ` dla: ${o.recipient}` : ""} za ${o.total} zk`;
