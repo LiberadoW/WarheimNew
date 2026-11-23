@@ -5,6 +5,7 @@ import RosterView from "../campaignHub/RosterView";
 import { countModels, plural } from "../campaignHub/roster";
 import { normalizeRosterNames } from "../Data.js/RulebookNames";
 import { isAdminEmail, loadAllLists } from "./admin";
+import DiagnosticCopy from "./DiagnosticCopy";
 import "../styles/CampaignHub.css";
 
 const when = (ts) =>
@@ -14,36 +15,50 @@ const when = (ts) =>
 const AdminPage = () => {
   const { currentUser } = useContext(AuthContext);
   const email = currentUser?.user?.email;
+  const uid = currentUser?.user?.uid;
   const [allowed, setAllowed] = useState(null);
   const [players, setPlayers] = useState(null);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(null);
   const [error, setError] = useState("");
+  const [diagnostic, setDiagnostic] = useState(null);
 
   useEffect(() => {
-    isAdminEmail(email).then(setAllowed);
-  }, [email]);
+    let live = true;
+    isAdminEmail(email).then((verified) => {
+      if (live) setAllowed({ email, uid, verified });
+    });
+    return () => { live = false; };
+  }, [email, uid]);
+  const verified = allowed?.email === email && allowed?.uid === uid ? allowed?.verified : undefined;
   useEffect(() => {
-    if (!allowed) return;
+    setDiagnostic(null);
+    setPlayers(null);
+    setError("");
+    if (!verified) return;
+    let live = true;
     loadAllLists()
-      .then(setPlayers)
-      .catch((e) =>
-        setError(
+      .then((lists) => { if (live) setPlayers(lists); })
+      .catch((e) => {
+        if (live) setError(
           e?.code === "permission-denied"
             ? "Baza odmówiła dostępu: wgraj nowe reguły Firestore (firestore.rules) w konsoli Firebase."
             : `Nie udało się wczytać rozpisek: ${e?.message || e}`,
-        ),
-      );
-  }, [allowed]);
+        );
+      });
+    return () => { live = false; };
+  }, [verified, uid, email]);
 
-  if (allowed === null) return <div className="hub-page">Wczytywanie…</div>;
-  if (!allowed)
+  if (verified === undefined) return <div className="hub-page">Wczytywanie…</div>;
+  if (!verified)
     return (
       <div className="hub-page">
         <p className="hub-error" role="alert">Ta strona jest dostępna tylko dla administratora.</p>
         <Link to="/">Wróć</Link>
       </div>
     );
+  if (diagnostic)
+    return <DiagnosticCopy list={diagnostic.list} player={diagnostic.player} onClose={() => setDiagnostic(null)} />;
   const q = query.trim().toLowerCase();
   const shown = (players || []).filter(
     (p) =>
@@ -110,6 +125,13 @@ const AdminPage = () => {
                             onClick={() => setOpen(open === key ? null : key)}
                           >
                             {open === key ? "Ukryj" : "Pokaż rozpiskę"}
+                          </button>
+                          <button
+                            type="button"
+                            className="button button-secondary button-small"
+                            onClick={() => setDiagnostic({ list, player: p.name || `Gracz ${p.uid.slice(0, 6)}` })}
+                          >
+                            Otwórz w trybie diagnostycznym
                           </button>
                         </div>
                         {open === key && <RosterView armyList={list.armyList || []} notes={list.campaignNotes} title={list.armyName} />}
